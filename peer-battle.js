@@ -91,7 +91,7 @@ window.NetworkBattle=(()=>{
    default:throw error('Неизвестное действие.');
   }
   candidate.revision++;candidate.match.updatedAt=new Date().toISOString();
-  persistAuthority(candidate,[...seen,key].slice(-1000));renderPacket();broadcast().catch(connectionError);
+  persistAuthority(candidate,[...seen,key]);renderPacket();broadcast().catch(connectionError);
   return domain.packet(authority,userId,{live:true,knownReferences:body.knownReferences});
  }
  function connectionError(e){connected=false;link?.close();failRequests();refreshControls();if(e)console.warn('Direct battle: connection interrupted');}
