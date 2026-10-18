@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="MCP Companion">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>MCP Companion · Турниры, коллекция и ростеры</title>
+  <link rel="stylesheet" href="app.css?v=4a552376d62d">
+  <link rel="stylesheet" href="battle.css?v=f35144625a1a">
+  <link rel="stylesheet" href="battle-map.css?v=774da3cdf8ea"><link rel="stylesheet" href="network.css?v=366b52db25b8">
+  <link rel="stylesheet" href="theme.css?v=819edf834623"><link rel="stylesheet" href="tournaments/style.css?v=833683438626">
+  <link rel="stylesheet" href="card-viewer.css?v=a7e6adfd6ff2">
+  <link rel="stylesheet" href="game-card-viewer.css?v=9426569bc9ae">
+</head>
+<body>
+  <header class="review"><span><strong>MCP COMPANION</strong> <small>Турниры · коллекция · ростеры</small></span></header>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="./"><span class="brand-mark">MCP</span><span>COMPANION<small>За столом и между играми</small></span></a>
+      <nav aria-label="Разделы приложения"><button disabled class="nav-item" data-action="tournaments"><span>00</span>Турниры</button><button disabled class="nav-item selected" data-action="all"><span>01</span>Персонажи</button><button disabled class="nav-item" data-action="mine"><span>03</span>Моя коллекция</button><button disabled class="nav-item" data-action="rosters"><span>04</span>Ростеры</button><button disabled class="nav-item" data-action="battle"><span>08</span>Бой</button><button class="mobile-data quiet" data-action="data">Данные</button></nav>
+      <div class="sidebar-bottom"><small>Локальная версия · данные на этом устройстве</small><button data-action="data">Данные и экспорт</button><a href="https://www.jarvis-protocol.com/characters" target="_blank" rel="noopener">Данные · Jarvis Protocol ↗</a><small id="source-date"></small></div>
+    </aside>
+    <main>
+      <section id="catalog-screen">
+      <div class="heading"><div><span class="eyebrow">01 / Каталог</span><h1 id="page-title">Персонажи</h1><p>Найти персонажа, посмотреть карту, отметить модель в коллекции.</p></div><span class="stage-label">На этом устройстве</span></div>
+      <div class="catalog-tools"><label class="search-label"><span class="sr-only">Поиск по имени или alter ego</span><input id="search" type="search" placeholder="Имя персонажа или alter ego…" autocomplete="off"><kbd>/</kbd></label><div class="filter-row"><label>Аффилиация<select id="affiliation" aria-label="Аффилиация"><option value="">Все аффилиации</option></select></label><label>Threat<select id="threat" aria-label="Threat"><option value="">Любой Threat</option></select></label><label class="check only-owned"><input id="only-owned" type="checkbox">Есть у меня</label><button class="quiet" data-action="reset">Сбросить</button></div></div>
+      <div class="list-heading"><span id="result" role="status" aria-live="polite">Загружаем каталог…</span><span class="column-note">Персонаж / версия <span>Threat</span><span>Коллекция</span></span></div>
+      <div id="characters" class="character-list" aria-label="Персонажи"></div>
+      <footer class="catalog-footer">Игровые версии и формы показаны отдельно. Тексты карт — на английском, как в Jarvis.</footer>
+      </section>
+      <section id="rosters-screen" hidden aria-label="Ростеры"></section>
+      <section id="battle-screen" hidden aria-label="Бой"></section><section id="tournaments-screen" hidden aria-label="Турнирный архив">
+    <section class="at-intro">
+      <div><p class="at-eyebrow">ТУРНИРНЫЙ АРХИВ / 2026</p><h1>Турнирные ростеры</h1><p class="at-intro-copy">Выбери персонажа или игрока и посмотри турнирные составы со всеми результатами — от побед до поражений.</p></div>
+      <div class="at-snapshot-counts" aria-label="Состав архива"><div><strong id="at-total-rosters">—</strong><span>ростеров</span></div><div><strong id="at-total-events">—</strong><span>событий</span></div><div><strong id="at-total-characters">—</strong><span>персонажей</span></div></div>
+    </section>
+<section class="at-affiliation-bar" aria-label="Фильтр турниров по аффилиациям">
+  <div class="at-affiliation-heading"><strong>Аффилиации турнира</strong><small>Можно выбрать несколько</small></div>
+  <button id="at-affiliation-picker" class="at-affiliation-picker" type="button" aria-haspopup="dialog" aria-controls="at-affiliation-dialog"><span id="at-affiliation-label">Все аффилиации</span><span aria-hidden="true">⌄</span></button>
+  <dialog id="at-affiliation-dialog" class="at-affiliation-dialog" aria-labelledby="at-affiliation-title">
+    <div class="at-affiliation-dialog-head"><div><p class="at-eyebrow">ВСЕ ВЫСТУПЛЕНИЯ</p><h2 id="at-affiliation-title">Аффилиации</h2></div><button id="at-affiliation-close" type="button" aria-label="Закрыть выбор аффилиаций">×</button></div>
+    <p class="at-affiliation-description">Баллы по всем оценённым выступлениям архива, включая неудачные результаты. Среднее сглажено одним нулевым выступлением; при менее четырёх выступлениях — 0. Выбери одну или несколько аффилиаций: баллы персонажей и ростеры будут показаны для любой из выбранных.</p>
+    <div class="at-affiliation-tools"><label>Сортировка <select id="at-affiliation-sort" aria-label="Сортировка аффилиаций"><option value="points">По общим баллам</option><option value="average">По средним баллам</option><option value="name">По алфавиту</option></select></label><button id="at-affiliation-clear" type="button" disabled>Сбросить</button></div>
+    <div class="at-affiliation-columns" aria-hidden="true"><span>№</span><span>Аффилиация / выступления</span><span>Всего</span><span>Ср. сглаж.</span></div>
+    <div id="at-affiliation-options" class="at-affiliation-options" role="group" aria-label="Аффилиации ростеров"></div>
+    <div class="at-affiliation-dialog-foot"><span id="at-affiliation-selected-count" role="status" aria-live="polite">Все аффилиации</span><button id="at-affiliation-done" type="button">Готово</button></div>
+  </dialog>
+  <div id="at-affiliation-chips" class="at-affiliation-chips" aria-label="Выбранные аффилиации" hidden></div>
+</section>
+<section class="at-affiliation-bar at-player-bar" aria-label="Фильтр турниров по игроку">
+  <div class="at-affiliation-heading"><strong>Игрок турнира</strong><small>Выбери игрока или смотри всех</small></div>
+  <button id="at-player-picker" class="at-affiliation-picker" type="button" aria-haspopup="dialog" aria-controls="at-player-dialog"><span id="at-player-label">Все игроки</span><span aria-hidden="true">⌄</span></button>
+  <div id="at-player-actions" class="at-player-actions" hidden><button id="at-player-all" type="button" hidden>Все ростеры игрока</button><button id="at-player-clear" type="button" disabled>Сбросить игрока</button></div>
+  <dialog id="at-player-dialog" class="at-affiliation-dialog at-player-dialog" aria-labelledby="at-player-title">
+    <div class="at-affiliation-dialog-head"><div><p class="at-eyebrow">ИГРОКИ / ТУРНИРНЫЙ АРХИВ</p><h2 id="at-player-title">Выбрать игрока</h2></div><button id="at-player-close" type="button" aria-label="Закрыть выбор игрока">×</button></div>
+    <p id="at-player-score-scope" class="at-affiliation-description">Баллы и выступления — за весь архив игрока. Среднее сглажено; до 2 оценённых выступлений — 0.</p>
+    <label class="at-search-box at-player-search"><input id="at-player-search" type="search" placeholder="Имя, ID, страна или аффилиация…" aria-label="Поиск игрока" autocomplete="off"></label>
+    <div class="at-affiliation-tools at-player-tools"><label>Аффилиация <select id="at-player-affiliation" aria-label="Аффилиация игроков"><option value="">Все аффилиации</option></select></label><label>Страна <select id="at-player-country" aria-label="Страна игрока"><option value="">Все страны</option></select></label><label>Сортировка <select id="at-player-sort" aria-label="Сортировка игроков"><option value="points">По общим баллам</option><option value="average">По средним баллам</option><option value="name">По имени</option><option value="affiliation">По аффилиациям</option></select></label></div>
+    <p class="at-player-sort-note">Страна — из флага игрока в Longshanks. Метки показывают аффилиации за весь архив. При выборе аффилиации баллы, среднее и число выступлений считаются только по ней; сортировка по баллам использует эти же значения.</p>
+    <div class="at-player-columns" aria-hidden="true"><span>№</span><span>Игрок / аффилиации</span><span>Всего</span><span>Ср. сглаж.</span></div>
+    <div id="at-player-options" class="at-player-options" role="group" aria-label="Игроки турниров"></div>
+    <button id="at-player-more" class="at-player-more" type="button" hidden>Показать ещё игроков</button>
+    <div class="at-affiliation-dialog-foot"><span id="at-player-status" role="status" aria-live="polite">Все игроки</span><button id="at-player-done" type="button">Готово</button></div>
+  </dialog>
+</section>
+<section class="at-collection-bar"><div><strong>Общая коллекция</strong><p id="at-collection-status" role="status"></p></div><div class="at-collection-actions"><button id="at-available-rosters" type="button">Ростеры из моих персонажей</button><button type="button" data-action="mine">Изменить коллекцию</button></div><small>Сравниваются версии персонажей. Тактики и кризисы в проверку наличия не входят.</small></section>    <div class="at-archive-layout">
+      <aside class="at-character-panel" aria-label="Выбор персонажа">
+        <div class="at-panel-top"><h2>Персонажи <span id="at-character-total"></span></h2><label class="at-search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="at-character-search" type="search" placeholder="Имя или alter ego…" autocomplete="off" aria-label="Поиск персонажа"></label>
+        <div class="at-character-toolbar"><label class="at-checkbox"><input id="at-only-used" type="checkbox"> Только с ростерами</label><select id="at-character-sort" aria-label="Сортировка персонажей"><option value="points">По общим баллам</option><option value="average">По средним баллам</option><option value="frequency">Частые сначала</option><option value="name">По имени</option></select></div></div>
+        <div id="at-character-list" class="at-character-list" aria-label="Персонажи"></div>
+        <div class="at-sidebar-foot"><span class="at-tiny-square"></span><span>Справа — всего и среднее за выступление</span></div>
+      </aside>
+      <section class="at-results-panel" aria-label="Ростеры выбранного персонажа">
+        <div id="at-character-overview" class="at-character-overview"></div>
+        <div class="at-results-toolbar"><label class="at-search-box at-result-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="at-result-search" type="search" placeholder="Игрок, турнир, affiliation…" aria-label="Поиск среди ростеров"></label><label class="at-select-box"><span>Сортировка</span><select id="at-result-sort" aria-label="Сортировка ростеров"><option value="recent">Новые сначала</option><option value="wins">Больше побед</option><option value="player">По игроку</option></select></label></div>
+        <div class="at-results-heading"><p id="at-result-count" aria-live="polite"></p><span>W / L / D</span></div>
+        <div id="at-roster-list" class="at-roster-list"></div>
+        <button id="at-show-more" class="at-show-more" type="button" hidden>Показать ещё</button>
+      </section>
+    </div>
+    <details class="at-about-data at-score-method"><summary>Как считаются баллы <span>Победы +5% · поражения в минус</span></summary><div>
+      <p>Баллы за завершённое выступление зависят от W/L/D, размера поля и места. При большем числе поражений, чем побед, балл всегда отрицательный. Ничьи дают 0. При равных победах и поражениях есть небольшой плюс за победы.</p>
+      <p><b>R = W − L + min(0,05 × W; 0,5)</b>. Пока побед не больше 10, это 1,05 × W − L. Ограничение бонуса половиной победы сохраняет минус и в длинных лигах. Например: 2/3 → −0,90; 3/3 → +0,15; 4/2 → +2,20 до турнирных множителей.</p>
+      <p><b>F = √(log₂(max(N, 2)) / log₂(16))</b> — положительный вес размера поля. При 16 участниках F = 1; рост плавный. Для doubles N — число пар.</p>
+      <p><b>k̄ = k + (t − 1)/2; z = (N + 1 − 2k̄)/(N − 1)</b>, где k — место, t — число игроков с этим местом. При N = 1 принимаем z = 0. <b>P = 1 + 0,25 × sign(R) × z</b>. Множитель места лежит между 0,75 и 1,25: более высокое место улучшает и положительный, и отрицательный балл.</p>
+      <p><b>B = 100 × R × F × P</b>. Множители положительные, поэтому они сохраняют знак R. Это пробная система; размеры поля и места не заменяют рейтинг конкретных соперников.</p>
+      <p>Если у одного игрока за событие M вариантов списка, каждый получает вклад B/M и вес 1/M. Сумма персонажа или аффилиации — сумма подходящих вкладов. Один ростер учитывается в объединении выбранных аффилиаций один раз.</p>
+      <p><b>Сглаженное среднее = Σ(B/M) / (Σ(1/M) + 1)</b>. Единица — условное нулевое выступление: при одинаковом положительном качестве большая выборка получает чуть более высокую оценку. Среднее игрока считается от 2 разных оценённых выступлений; у персонажей и аффилиаций — от 4. Ниже своего порога среднее равно 0. Продолжающиеся события не увеличивают ни сумму, ни вес.</p>
+      <p>Сумма и среднее персонажа считаются внутри выбранных аффилиаций ростеров. В командных событиях используются индивидуальные результаты; doubles явно отмечены как результаты пары. Основной этап и плейофф показаны отдельно. Среднее баллов не является винрейтом.</p>
+      <p id="at-scoring-coverage"></p>
+    </div></details>
+    <details class="at-about-data"><summary>Что входит в архив <span>Рейтинговые · офлайн · все результаты</span></summary><div><p id="at-archive-summary"></p><p id="at-coverage-note"></p><p id="at-data-period"></p><details id="at-unindexed-lists"><summary>Листы без распознанного состава</summary><div id="at-unindexed-content"></div></details><a id="at-source-results" href="https://mcp.longshanks.org/events/history/" target="_blank" rel="noopener noreferrer">События на Longshanks ↗</a></div></details>
+    <footer><span>MCP ROSTER ATLAS</span><span>Выбор персонажа → турнирные составы</span></footer>
+  </section>
+    </main>
+  </div>
+  <dialog id="character-dialog" class="character-dialog" aria-label="Карточка персонажа"><div id="character-content"></div></dialog>
+  <dialog id="roster-dialog" class="small-dialog" aria-label="Ростеры"><div id="roster-content"></div></dialog>
+  <dialog id="data-dialog" class="small-dialog" aria-label="Данные прототипа"><div id="data-content"></div></dialog>
+  <dialog id="roster-picker-dialog" class="roster-picker-dialog" aria-label="Добавление в ростер"><div id="roster-picker-content"></div></dialog>
+  <dialog id="roster-action-dialog" class="small-dialog" aria-label="Действия с ростерами"><div id="roster-action-content"></div></dialog>
+  <dialog id="game-card-dialog" class="game-card-dialog" aria-label="Игровая карта"><div id="game-card-content"></div></dialog>
+  <dialog id="battle-dialog" class="battle-dialog" aria-label="Партия"><div id="battle-dialog-content"></div></dialog>
+  <dialog id="battle-picker-dialog" class="roster-picker-dialog" aria-label="Выбор для партии"><div id="battle-picker-content"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="local-mode.js?v=d0c6f7742b17"></script>
+  <script src="app.js?v=d73202d508e2"></script>
+  <script src="card-art.js?v=c87011602492"></script>
+  <script src="card-layout.js?v=31a514f562d8"></script>
+  <script src="card-renderer.js?v=92df7b198a7d"></script>
+  <script src="card-conditions.js?v=fb247e987176"></script>
+  <script src="card-viewer.js?v=1ced8951d553"></script>
+  <script src="game-card-data.js?v=b11e3b0f7290"></script>
+  <script src="game-card-renderer.js?v=602b64f04958"></script>
+  <script src="game-card-viewer.js?v=903f4d6da9ef"></script>
+  <script src="rosters.js?v=0a379b1e096a"></script>
+  <script src="battle-core.js?v=858fb7ef346b"></script>
+  <script src="battle-card-summary.js?v=165a35d81d66"></script>
+  <script src="power-phase.js?v=c4ffff07e1f9"></script>
+  <script src="battle-character-state.js?v=43fa03c2c53c"></script>
+  <script src="map-geometry.js?v=68c1c33327a9"></script>
+  <script src="battle-map.js?v=cc5225b843a2"></script>
+  <script src="tournaments/data.js?v=fbfcc2bf5fb5"></script><script src="tournaments/core.js?v=5fb28fbf8cdd"></script><script src="tournaments/collection-core.js?v=2a23f569cedc"></script><script src="tournament-import.js?v=9bafdb51ba50"></script><script src="tournaments/app.js?v=22ffddbca95d"></script>
+  <script src="battle.js?v=70339bd8f97c"></script>
+
+</body>
+</html>

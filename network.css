@@ -1,0 +1,174 @@
+.account-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line, #333);
+  overflow-wrap: anywhere;
+}
+.account-box small {
+  font-size: 11px;
+}
+.account-box button {
+  align-self: flex-start;
+}
+.sync-error {
+  color: #a85f13;
+}
+.network-home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px;
+  margin: 0 0 28px;
+  border: 1px solid var(--line, #39433f);
+  border-radius: 16px;
+  background: linear-gradient(110deg, #e6f0ff, #f5f9ff);
+}
+.network-home h2 {
+  margin: 8px 0;
+}
+.network-home p {
+  margin: 0;
+  color: var(--muted, #9ca9a2);
+}
+.network-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--line, #35473f);
+  border-radius: 12px;
+  background: #edf5ff;
+}
+.network-strip small {
+  margin-left: auto;
+  color: var(--muted, #abb9b1);
+}
+.network-connection {
+  color: #15835e;
+  font-size: 12px;
+}
+.network-connection.offline {
+  color: #9a6614;
+}
+.room-code {
+  font-family: monospace;
+  font-size: 21px;
+  letter-spacing: 3px;
+  margin-left: 8px;
+}
+.network-opponent h2 {
+  margin: 10px 0 16px;
+}
+.network-squad-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 24px 0;
+}
+.network-squad-preview > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.network-squad-preview small {
+  display: block;
+  color: var(--muted, #9ca9a2);
+}
+#network-room-form {
+  display: grid;
+  gap: 20px;
+}
+#network-form-error {
+  color: #a85f13;
+  margin: 0;
+}
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 20% 10%, #dae8ff, transparent 60%), #eef3f9;
+}
+.login-panel {
+  width: min(100%, 500px);
+  padding: 42px;
+  border: 1px solid #c6d7ec;
+  border-radius: 24px;
+  background: #ffffffed;
+  box-shadow: 0 24px 100px #23436614;
+}
+.login-panel .brand {
+  margin-bottom: 54px;
+}
+.login-panel h1 {
+  font-size: 36px;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin: 12px 0 20px;
+}
+.login-panel p {
+  line-height: 1.65;
+  color: #65748b;
+}
+.google-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #ffffff;
+  color: #243e68;
+  border-radius: 10px;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-weight: 650;
+  margin-top: 30px;
+}
+.google-login[aria-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+.login-panel .notice {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  margin-top: 26px;
+}
+.login-panel > .eyebrow {
+  color: #2563eb;
+}
+@media (max-width: 700px) {
+  .network-home {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  .network-strip {
+    gap: 10px;
+  }
+  .network-strip small {
+    margin-left: 0;
+    width: 100%;
+  }
+  .login-panel {
+    padding: 26px;
+  }
+  .login-panel h1 {
+    font-size: 30px;
+  }
+  .room-code {
+    font-size: 18px;
+  }
+}
+
+.google-login {
+  border: 1px solid #b5c9e7;
+  box-shadow: 0 2px 8px #23436610;
+}
+.google-login:hover {
+  background: #f0f6ff;
+}

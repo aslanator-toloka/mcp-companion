@@ -1,0 +1,54 @@
+@font-face{font-family:CardAgency;src:url('assets/stat-cards/fonts/c4b75e86987cd49959b7.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:CardName;src:url('assets/stat-cards/fonts/40d4ac08d263bfaa5eba.ttf') format('truetype');font-display:swap}
+@font-face{font-family:CardRules;src:url('assets/stat-cards/fonts/94dc208a513342c14523.otf') format('opentype');font-display:swap}
+@font-face{font-family:CardRules;src:url('assets/stat-cards/fonts/0e7294dce6bfadf04e74.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:CardNumbers;src:url('assets/stat-cards/fonts/4882108720027312fee5.ttf') format('truetype');font-weight:700;font-display:swap}
+.character-dialog,.battle-dialog:has(.stat-card-viewer){width:min(1248px,calc(100vw - 24px));max-height:96dvh}
+.character-dialog .detail-head{padding:8px 18px;z-index:5}.character-dialog .detail-top{margin:0;gap:12px;align-items:center}.character-dialog .detail-head .avatar.large{width:32px;height:36px}.character-dialog .detail-head .eyebrow,.character-dialog .detail-head .tags,.character-dialog .detail-head .detail-name>p{display:none}.character-dialog .detail-head .detail-name h2{font-size:17px;line-height:1.2}.character-dialog .detail-head .check{margin-left:auto;flex-shrink:0}.character-dialog .detail-top .close{margin-left:0}.character-dialog .detail-body{padding:14px 16px 20px}
+.stat-card-controls{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}.stat-card-controls .side-switch{display:flex;flex-wrap:wrap;gap:6px;margin:0}.stat-card-controls button{font-size:12px;min-height:34px;padding:6px 12px}
+.stat-card-surface{overflow-x:auto;overscroll-behavior-x:contain;padding:0 0 2px;max-width:100%}
+.sc-card-stage{position:relative;margin:0 auto;overflow:hidden;border-radius:20px;isolation:isolate}
+.sc-card,.sc-card *{box-sizing:border-box}
+.sc-card{--sc-paper:#fff;--sc-ink:#101721;position:absolute;left:0;top:0;width:1200px;height:800px;transform-origin:top left;background:linear-gradient(135deg,#e8eef6,#c9d7eb 40%,#e5ebf5);border-radius:24px;overflow:hidden;color:var(--sc-ink);font:22px/20.8px CardRules,'Arial Narrow',sans-serif;text-align:left;text-size-adjust:none}
+.sc-injured{background:linear-gradient(135deg,#dbe5f4,#b4c7e2 40%,#e4ebf5)}
+.sc-art{position:absolute;left:0;bottom:0;z-index:0}.sc-art-illustration{width:100%;flex:0 1 auto;min-height:auto}.sc-art img{display:block;width:auto;max-width:100%;height:auto;object-fit:fill}.sc-art img[hidden]{display:none}.sc-art-none{display:none}.sc-art-canvas{max-width:1200px;display:flex;flex-direction:column;overflow:hidden}.sc-art-canvas .sc-art-illustration{width:auto}.sc-art-classic{width:312.8px;height:546px;display:flex;flex-direction:column;justify-content:center;overflow:visible}.sc-art-spacer{height:48px;flex:0 1 auto}.sc-art-grunt{max-width:550px;height:950px;display:flex;align-items:center}.sc-art-grunt .sc-art-illustration{width:auto}
+
+.sc-character-panel{position:absolute;left:17px;top:16px;width:281px;height:248px;border-radius:24px;padding:16px 7px;background:var(--sc-paper);box-shadow:0 2px 5px #0f172a24;z-index:1}
+.sc-identity{text-align:center;height:74px;display:flex;flex-direction:column;justify-content:center;gap:2px}.sc-card .sc-identity h3{font:40px/40px CardName,'Arial Narrow',sans-serif;letter-spacing:3px;text-transform:uppercase;color:inherit;margin:0}.sc-card .sc-identity p{font:24px/24px CardAgency,sans-serif;font-variant:small-caps;letter-spacing:1px;color:inherit;margin:0}
+.sc-defenses{display:flex;justify-content:center;gap:4px;margin:5px 0}.sc-vitals{display:grid;grid-template-columns:104px 104px;justify-content:center;gap:4px 7px}.sc-stat{display:flex;align-items:center;position:relative;background:var(--sc-ink);color:#fff;border-radius:25px;height:44px;flex:1;min-width:0}.sc-stat b{font:700 26px/1 CardNumbers,sans-serif;text-align:center;flex:1;padding:0 6px 0 2px}.sc-defenses .sc-stat{height:44px;max-width:86px}
+.sc-icon{display:inline-block;vertical-align:-.2em;width:1.09em;height:1.09em;object-fit:contain;margin:0}.sc-badge-icon{width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:var(--sc-ink)}.sc-stat .sc-badge-icon{border:2px solid var(--sc-ink)}
+.sc-rules-panel{position:absolute;left:313px;top:16px;width:870px;height:766px;border-radius:24px;background:var(--sc-paper);padding:20px 16px;z-index:1;box-shadow:0 2px 5px #0f172a24}
+.sc-rules-content{display:flex;flex-direction:column;gap:20px;transform-origin:top left;width:100%;min-height:100%}
+.sc-ability{margin:0;min-width:0;flex-shrink:0}.sc-attack-heading,.sc-power-heading{display:flex;align-items:center;gap:6px;min-height:40px}
+.sc-ability-heading{display:flex;align-items:center;gap:6px;flex:1;min-width:0;background:var(--sc-ink);border-radius:25px;height:34px;color:#fff}.sc-ability-heading .sc-badge-icon{align-self:center;width:44px;height:44px;flex-basis:44px}
+.sc-card .sc-ability-heading h4{font:700 28px/30px CardAgency,'Arial Narrow',sans-serif;font-variant:small-caps;white-space:nowrap;letter-spacing:.3px;margin:0;padding:0 10px 0 0;color:inherit;flex:1}
+.sc-attack-stats{display:flex;align-items:center;gap:12px;margin:0 8px 0 0;min-width:180px}.sc-attack-stats>div{display:flex;align-items:center;gap:1px}.sc-attack-stats dt{display:flex;align-items:center}.sc-attack-stats .sc-icon{width:36px;height:36px}.sc-attack-stats dd{font:700 24px/1 CardNumbers,sans-serif;white-space:nowrap;margin:0;min-width:15px}
+.sc-power-cost{display:flex;align-items:center;gap:5px;background:var(--sc-ink);color:#fff;border-radius:25px;padding-right:10px;height:36px;min-width:61px}.sc-power-cost .sc-icon{filter:invert(1);width:36px;height:36px}.sc-power-cost b{font:700 24px/1 CardNumbers,sans-serif}
+.sc-rules{margin:2px 0 0;padding:0 0 0 33px;list-style:disc}.sc-rules li{padding-left:3px;margin:0 0 5px}.sc-rules li:last-child{margin-bottom:0}.sc-power-body{margin:2px 0 0 43px}.sc-card strong{font-weight:700}.sc-rule-option{display:block;margin:4px 0;padding-left:14px;position:relative}.sc-rule-option:before{content:'•';position:absolute;left:0}.sc-reference{text-decoration:underline dotted #737e8d;text-underline-offset:3px}.sc-token{font:700 .8em system-ui,sans-serif}
+.sc-credit{position:absolute;bottom:14px;left:18px;max-width:280px;font:10px/1.2 system-ui,sans-serif;color:#253a55;text-shadow:0 1px #fff}
+.sc-grunt{width:550px;height:950px}.sc-grunt .sc-art-none{display:none}.sc-grunt .sc-character-panel{top:45px;left:40px;width:475px;height:200px;background:none;box-shadow:none;padding:0}.sc-grunt .sc-identity{border-radius:24px;background:var(--sc-paper);height:75px}.sc-grunt .sc-stats{margin:16px auto 0;display:flex;flex-direction:column-reverse}.sc-grunt .sc-defenses{width:260px;align-self:center}.sc-grunt .sc-vitals{display:flex;width:320px;align-self:center}.sc-grunt .sc-rules-panel{top:265px;left:40px;width:475px;height:620px;padding:12px 15px}.sc-grunt .sc-attack-stats{gap:4px;min-width:140px;margin-right:0}.sc-grunt .sc-attack-stats .sc-icon{width:28px;height:28px}.sc-grunt .sc-ability-heading h4{font-size:25px;letter-spacing:0}.sc-grunt .sc-ability-heading .sc-badge-icon{width:36px;height:36px;flex-basis:36px}.sc-grunt .sc-credit{bottom:28px;max-width:470px}
+.sc-errata{margin:12px 0 0;border:1px solid #d4dde5;border-radius:10px;padding:12px 16px;font-size:14px}.sc-errata summary{cursor:pointer;font-weight:700}.sc-errata>div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;margin-top:10px}.sc-errata time{color:#64748b}.sc-errata p{margin:0}.sc-unavailable{padding:24px}.stat-card-view-note{font-size:12px;color:#64748b;margin-top:12px}.character-dialog .detail-section.roster-memberships{margin-top:24px}
+@media(max-width:600px){.character-dialog .detail-head{padding:8px 12px}.character-dialog .detail-top{gap:7px;flex-wrap:wrap}.character-dialog .detail-head .avatar.large{display:none}.character-dialog .detail-head .detail-name{flex:1;min-width:0}.character-dialog .detail-head .detail-name h2{font-size:15px}.character-dialog .detail-head .check{font-size:10px;margin:0}.character-dialog .detail-body{padding:12px 8px}.stat-card-controls button{font-size:11px}.sc-card-stage{margin-left:0;border-radius:14px}.sc-errata>div{grid-template-columns:1fr;gap:5px}}
+
+.sc-rules,.sc-power-body{word-spacing:-.5px}
+
+.sc-grunt.sc-art-only .sc-art-grunt{display:flex}.sc-grunt.sc-art-only .sc-character-panel{height:75px}.sc-grunt.sc-art-only .sc-identity{background:#ffffffe0}
+
+.sc-art-status[hidden]{display:none}.sc-art-status{margin:0;padding:20px;color:#64748b;font:14px/1.4 system-ui,sans-serif;text-align:center}.sc-art-failed{min-width:200px}.sc-art-failed .sc-art-spacer{display:none}
+
+.sc-condition-reference{all:unset;display:inline;font:inherit;line-height:inherit;color:inherit;cursor:pointer;text-decoration:underline dotted #737e8d;text-underline-offset:3px;touch-action:manipulation}
+.sc-condition-reference:focus-visible{outline:2px solid #3b82f6;outline-offset:2px;border-radius:2px}
+.sc-condition-dialog{border:0;border-radius:0;padding:0;background:transparent;color:#fff;box-shadow:none;width:min(340px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto}
+.sc-condition-dialog::backdrop{background:#000b}
+.sc-condition-description{position:relative;text-align:center;padding:16px 20px 22px;font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.sc-condition-description .sc-condition-token{display:block;width:160px;height:160px;object-fit:contain;margin:0 auto 2px}
+.sc-condition-description h2{font:700 16px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:0;margin:0 0 2px;color:#fff}
+.sc-condition-description p{margin:0;color:#fff}.sc-condition-description .sc-icon{filter:invert(1);width:1.1em;height:1.1em}
+.sc-condition-description .sc-condition-close{position:absolute;right:0;top:0;padding:0;width:36px;height:36px;min-height:36px;display:grid;place-items:center;border:0;background:transparent;color:#fff;font:24px/1 sans-serif;border-radius:50%;cursor:pointer}
+.sc-condition-description .sc-condition-close:hover{background:#ffffff26}.sc-condition-description .sc-condition-close:focus-visible{outline:2px solid #9fc5ff;outline-offset:-2px}
+
+/* Live overlays for battle viewers; catalogue cards retain printed values. */
+.sc-stat-changed b,.sc-card .sc-live-changed,.sc-cost-changed b{color:#f87171}
+.sc-card .sc-live-changed{text-decoration:underline;text-decoration-color:#fca5a5;text-underline-offset:4px}
+.battle-character-dialog .sc-stat[data-stat=stamina] b{font-size:21px;letter-spacing:-.5px}
+.sc-stat-changed,.sc-cost-changed{box-shadow:0 0 0 2px #ef4444}
