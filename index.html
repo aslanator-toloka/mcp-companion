@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <title>MCP Companion · Турниры, коллекция и ростеры</title>
-  <link rel="stylesheet" href="app.css?v=4a552376d62d">
+  <link rel="stylesheet" href="app.css?v=879ffd392c04">
   <link rel="stylesheet" href="battle.css?v=f35144625a1a">
   <link rel="stylesheet" href="battle-map.css?v=774da3cdf8ea"><link rel="stylesheet" href="network.css?v=034e23cc457c">
   <link rel="stylesheet" href="theme.css?v=819edf834623"><link rel="stylesheet" href="tournaments/style.css?v=833683438626">
@@ -18,13 +18,14 @@
   <link rel="stylesheet" href="game-card-viewer.css?v=9426569bc9ae">
 </head>
 <body>
-  <header class="review"><span><strong>MCP COMPANION</strong> <small>Турниры · коллекция · ростеры</small></span></header>
+  <header class="review"><button id="sidebar-toggle" class="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Свернуть меню" title="Свернуть меню"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path class="sidebar-toggle-arrow" d="m16 9-3 3 3 3"/></svg></button><span><strong>MCP COMPANION</strong> <small>Турниры · коллекция · ростеры</small></span></header>
   <div class="shell">
-    <aside class="sidebar">
+    <aside id="app-sidebar" class="sidebar">
       <a class="brand" href="./"><span class="brand-mark">MCP</span><span>COMPANION<small>За столом и между играми</small></span></a>
       <nav aria-label="Разделы приложения"><button disabled class="nav-item" data-action="tournaments"><span>00</span>Турниры</button><button disabled class="nav-item selected" data-action="all"><span>01</span>Персонажи</button><button disabled class="nav-item" data-action="mine"><span>03</span>Моя коллекция</button><button disabled class="nav-item" data-action="rosters"><span>04</span>Ростеры</button><button disabled class="nav-item" data-action="battle"><span>08</span>Бой</button><button class="mobile-data quiet" data-action="data">Данные</button></nav>
       <div class="sidebar-bottom"><small>Локальная версия · данные на этом устройстве</small><button data-action="data">Данные и экспорт</button><a href="https://www.jarvis-protocol.com/characters" target="_blank" rel="noopener">Данные · Jarvis Protocol ↗</a><small id="source-date"></small></div>
     </aside>
+    <script src="sidebar.js?v=096d9fa3e5f7"></script>
     <main>
       <section id="catalog-screen">
       <div class="heading"><div><span class="eyebrow">01 / Каталог</span><h1 id="page-title">Персонажи</h1><p>Найти персонажа, посмотреть карту, отметить модель в коллекции.</p></div><span class="stage-label">На этом устройстве</span></div>
