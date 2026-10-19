@@ -8,6 +8,9 @@
   const acts=character.slug==='hulkbuster'?['hulkbuster','iron-man']:[character.actAs||character.slug];
   return acts.some(id=>(req.mandatory_character||[]).includes(id)||(req.optional_character||[]).includes(id)||(req.mandatory_character_with_alter_ego||[]).includes(id+'|'+character.alterEgo))||(req.mandatory_alter_ego||[]).includes(character.alterEgo)||(req.optional_alter_ego||[]).includes(character.alterEgo);
  }
+ function owners(card,catalog){
+  return [...new Set(catalog.filter(c=>!c.isGrunt&&related(card,c)).map(c=>c.name))];
+ }
  function textSections(text){
   const out={tactics:[],crises:[],known:{tactics:false,crises:false},expected:{tactics:null,crises:null}};let section=null;
   for(let line of String(text||'').split(/\r?\n/)){
@@ -34,6 +37,7 @@
  }
  function create({archive,catalog,cardLists,core,resolveCard}){
   const data=core.scoreData(archive),scopeCache=new Map(),inventory=new Map(),unresolved=new Map();
+  const cardOwners=new Map(cardLists.tactics.map(c=>[c.slug,owners(c,catalog)]));
   for(const c of data.characters)for(const slug of c.inventoryIds||[c.id]){if(!inventory.has(slug))inventory.set(slug,new Set());inventory.get(slug).add(c.id);}
   for(const c of catalog)if(!inventory.has(c.slug))inventory.set(c.slug,new Set([c.slug]));
   const resolvedMaps={};
@@ -74,7 +78,7 @@
    }
    const result={cards,total:cohort.length,covered:usable.length,excluded:cohort.length-usable.length,totalWeight};scopeCache.set(cacheKey,result);return result;
   }
-  return {statistics,related,coverage:()=>({rosters:indexed.length,tactics:indexed.filter(r=>r.resolved.tactics.complete).length,crises:indexed.filter(r=>r.resolved.crises.complete).length,unresolved:[...unresolved].sort((a,b)=>b[1]-a[1])})};
+  return {statistics,related,owners:slug=>cardOwners.get(slug)||[],coverage:()=>({rosters:indexed.length,tactics:indexed.filter(r=>r.resolved.tactics.complete).length,crises:indexed.filter(r=>r.resolved.crises.complete).length,unresolved:[...unresolved].sort((a,b)=>b[1]-a[1])})};
  }
- const api={related,textSections,variants,create};if(typeof module==='object'&&module.exports)module.exports=api;else root.RosterCardInsights=api;
+ const api={related,owners,textSections,variants,create};if(typeof module==='object'&&module.exports)module.exports=api;else root.RosterCardInsights=api;
 })(typeof window==='object'?window:globalThis);

@@ -41,3 +41,6 @@
 .picker-card-stats .card-pick-rate{color:#1d4ed8}
 .picker-card-stats b{font-weight:650}
 @media(max-width:700px){.selected-row:has(.selected-row-actions){flex-wrap:wrap}.selected-row-actions{width:100%}.selected-row-actions>.quiet{font-size:10px}.card-insight-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.card-insight-controls>label:last-child{grid-column:1/-1}.card-insight-controls select{font-size:12px}.card-insights-dialog .picker-results{min-height:80px}.picker-card-stats{font-size:9px;gap:2px 7px}.related-card-switch{font-size:10px}}
+
+.picker-card-owners{display:block;margin-top:3px;font-size:11px;font-weight:500;line-height:1.5;color:#365479}
+@media(max-width:700px){.picker-card-owners{font-size:10px}}
