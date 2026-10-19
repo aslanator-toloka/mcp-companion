@@ -18,3 +18,26 @@
 .sidebar[hidden]{display:none}
 .sidebar-is-collapsed main{max-width:none}
 @media(max-width:700px){.review small{display:none}}
+
+.selected-row-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-shrink:0}
+.selected-row-actions>.quiet{font-size:11px;padding:7px 9px;white-space:nowrap}
+.selected-row-actions>.character-card-picker{color:#2563eb;border-color:#b8cfee}
+.card-insights-dialog[open]{display:flex;flex-direction:column;height:min(880px,calc(100dvh - 24px));max-height:calc(100dvh - 24px)}
+.card-insights-dialog #roster-picker-content{display:flex;flex-direction:column;min-height:0;height:100%;overflow:auto}
+.card-insights-dialog .dialog-heading,.card-insights-dialog .picker-tools,.card-insights-dialog .picker-summary,.card-insights-dialog .picker-footer{flex-shrink:0}
+.card-insights-dialog .picker-results{flex:1;min-height:90px;max-height:none}
+.card-insight-tools{margin-top:12px;padding-top:10px;border-top:1px solid #dce5ef}
+.card-insight-tools>strong{font-size:11px;font-weight:600;color:#365479}
+.card-insight-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:7px}
+.card-insight-controls label{display:flex;flex-direction:column;gap:4px;min-width:0;font-size:10px;color:#61738c}
+.card-insight-controls select{width:100%;min-width:0;height:40px;border:1px solid #c3d3e7;border-radius:5px;padding:6px 8px;background:#fff;color:#253e60;font-size:11px}
+.related-card-switch{margin-top:9px;font-size:11px}
+.card-insight-coverage{font-size:10px;line-height:1.5;color:#61738c;margin:9px 0 3px}
+.card-insight-method{font-size:10px;color:#61738c;line-height:1.6}
+.card-insight-method summary{cursor:pointer}
+.card-insight-method p{margin:5px 0}
+.picker-card-stats{display:flex;flex-wrap:wrap;align-items:center;gap:3px 9px;font-size:10px;line-height:1.7;color:#61738c;margin-top:5px}
+.picker-card-stats>span{white-space:nowrap}
+.picker-card-stats .card-pick-rate{color:#1d4ed8}
+.picker-card-stats b{font-weight:650}
+@media(max-width:700px){.selected-row:has(.selected-row-actions){flex-wrap:wrap}.selected-row-actions{width:100%}.selected-row-actions>.quiet{font-size:10px}.card-insight-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.card-insight-controls>label:last-child{grid-column:1/-1}.card-insight-controls select{font-size:12px}.card-insights-dialog .picker-results{min-height:80px}.picker-card-stats{font-size:9px;gap:2px 7px}.related-card-switch{font-size:10px}}

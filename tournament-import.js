@@ -11,14 +11,17 @@
     'Daughter of Thanos':'Daughters of Thanos',
     'Heavy Ordnance':'Heavy Ordinance'
   }).map(([a,b])=>[key(a),key(b)]));
+  function resolveCard(name,rows){
+    const wanted=aliases[key(name)]||key(name);
+    return rows.find(c=>key(c.name)===wanted||key(c.slug)===wanted);
+  }
   function draft(roster,characterMap,owned,catalog,cardLists){
     const a=root.AtlasCollectionCore.availability(roster,characterMap,new Set(owned));
     const known=new Set(catalog.map(c=>c.slug)),unresolved=[];
     const characters=a.entries.map(e=>e.inventoryId).filter(id=>known.has(id));
     a.entries.forEach(e=>{if(!known.has(e.inventoryId))unresolved.push('Персонаж: '+e.name);});
     function cards(kind){return [...new Set(roster[kind].flatMap(name=>{
-      const wanted=aliases[key(name)]||key(name);
-      const match=cardLists[kind].find(c=>key(c.name)===wanted||key(c.slug)===wanted);
+      const match=resolveCard(name,cardLists[kind]);
       if(!match){unresolved.push((kind==='tactics'?'Тактика: ':'Кризис: ')+name);return [];}
       return [match.slug];
     }))];}
@@ -30,6 +33,6 @@
         unresolved,incomplete:!roster.inventoryComplete,rawText:roster.rawText||'',
         gems:roster.characters.filter(c=>c.gems?.length).map(c=>({name:c.name,gems:c.gems}))}};
   }
-  const api={key,draft};
+  const api={key,draft,resolveCard};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.TournamentImport=api;
 })(typeof window==='undefined'?globalThis:window);
