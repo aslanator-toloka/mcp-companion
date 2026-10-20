@@ -9,8 +9,11 @@
 .stat-card-surface{overflow-x:auto;overscroll-behavior-x:contain;padding:0 0 2px;max-width:100%}
 .sc-card-stage{position:relative;margin:0 auto;overflow:hidden;border-radius:20px;isolation:isolate}
 .sc-card,.sc-card *{box-sizing:border-box}
-.sc-card{--sc-paper:#fff;--sc-ink:#101721;position:absolute;left:0;top:0;width:1200px;height:800px;transform-origin:top left;background:linear-gradient(135deg,#e8eef6,#c9d7eb 40%,#e5ebf5);border-radius:24px;overflow:hidden;color:var(--sc-ink);font:22px/20.8px CardRules,'Arial Narrow',sans-serif;text-align:left;text-size-adjust:none}
-.sc-injured{background:linear-gradient(135deg,#dbe5f4,#b4c7e2 40%,#e4ebf5)}
+.sc-card{--sc-paper:#fff;--sc-ink:#101721;position:absolute;left:0;top:0;width:1200px;height:800px;transform-origin:top left;background:#d7e3ef url('assets/card-backgrounds/healthy-2023.png') center top/100% auto no-repeat;border-radius:24px;overflow:hidden;color:var(--sc-ink);font:22px/20.8px CardRules,'Arial Narrow',sans-serif;text-align:left;text-size-adjust:none}
+.sc-injured{background-image:url('assets/card-backgrounds/injured-2023.png')}
+.sc-card[data-card-template="classic"]{background-image:url('assets/card-backgrounds/healthy-classic.png')}
+.sc-injured[data-card-template="classic"]{background-image:url('assets/card-backgrounds/injured-classic.png')}
+.sc-card[data-card-template="grunt"]{background-image:url('assets/card-backgrounds/grunt.png')}
 .sc-art{position:absolute;left:0;bottom:0;z-index:0}.sc-art-illustration{width:100%;flex:0 1 auto;min-height:auto}.sc-art img{display:block;width:auto;max-width:100%;height:auto;object-fit:fill}.sc-art img[hidden]{display:none}.sc-art-none{display:none}.sc-art-canvas{max-width:1200px;display:flex;flex-direction:column;overflow:hidden}.sc-art-canvas .sc-art-illustration{width:auto}.sc-art-classic{width:312.8px;height:546px;display:flex;flex-direction:column;justify-content:center;overflow:visible}.sc-art-spacer{height:48px;flex:0 1 auto}.sc-art-grunt{max-width:550px;height:950px;display:flex;align-items:center}.sc-art-grunt .sc-art-illustration{width:auto}
 
 .sc-character-panel{position:absolute;left:17px;top:16px;width:281px;height:248px;border-radius:24px;padding:16px 7px;background:var(--sc-paper);box-shadow:0 2px 5px #0f172a24;z-index:1}
