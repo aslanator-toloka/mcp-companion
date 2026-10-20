@@ -14941,7 +14941,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "alien-ship-crashes-in-downtown",
@@ -14969,7 +14972,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "assault-ships-make-sweeping-search",
@@ -14996,7 +15002,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "black-bird-crash-retrieve-exotic-wildlife",
@@ -15024,7 +15033,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "black-bird-crash-secure-cargo",
@@ -15051,7 +15063,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "cerero-locates-dangerous-mutants",
@@ -15079,7 +15094,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "cosmic-invasion-black-order-descends-on-earth",
@@ -15106,7 +15124,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "cosmic-invasion-black-order-descends-on-earth-ca09",
@@ -15133,7 +15154,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "deadline-to-destruction",
@@ -15160,7 +15184,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "deadly-legacy-virus-cured-ca09",
@@ -15188,7 +15215,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "deadly-legacy-virus-cured",
@@ -15216,7 +15246,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "xmen",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "deadly-meteors-mutate-civilians-ca09",
@@ -15243,7 +15276,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "deadly-meteors-mutate-civilians",
@@ -15270,7 +15306,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "demons-downtown-has-our-comeuppance-come-due-ca09",
@@ -15297,7 +15336,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "demons-downtown-has-our-comeuppance-come-due",
@@ -15324,7 +15366,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "evidence-of-experimental-soldiers-exposed",
@@ -15353,7 +15398,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "fear-grips-world-as-worthy-terrorize-cities",
@@ -15381,7 +15429,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "fear-grips-world-as-worthy-terrorize-cities-ca09",
@@ -15409,7 +15460,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "gamma-wave-sweeps-across-midwest-ca09",
@@ -15437,7 +15491,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "gamma-wave-sweeps-across-midwest",
@@ -15465,7 +15522,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "guardians-save-shiar-empress-in-style",
@@ -15493,7 +15553,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "infinity-formula-goes-missing-ca09",
@@ -15520,7 +15583,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "infinity-formula-goes-missing",
@@ -15547,7 +15613,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "inhumans-deploy-advanced-weaponry",
@@ -15575,7 +15644,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "intrusions-open-across-city-as-seals-collapse",
@@ -15602,7 +15674,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "nyc",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "intrusions-open-across-city-as-seals-collapse-ca09",
@@ -15629,7 +15704,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "jailbreak-leads-to-mass-mutant-escape",
@@ -15658,7 +15736,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "lockdown-security-systems-stymie-breakout",
@@ -15686,7 +15767,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "malfunction-simulation-gone-wrong",
@@ -15713,7 +15797,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "mayor-fisk-vows-to-find-missing-witnesses-ca09",
@@ -15741,7 +15828,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "mayor-fisk-vows-to-find-missing-witnesses",
@@ -15769,7 +15859,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "mkraan-crystal-gets-heroes-home",
@@ -15797,7 +15890,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "mutant-extremists-target-us-senators",
@@ -15825,7 +15921,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "xmen",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "mutant-extremists-target-us-senators-ca09",
@@ -15853,7 +15952,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "mutant-madman-turns-city-into-lethal-amusement-park-ca09",
@@ -15881,7 +15983,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "mutant-madman-turns-city-into-lethal-amusement-park",
@@ -15909,7 +16014,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "xmen",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "mystic-wakandan-herb-fact-or-fiction",
@@ -15938,7 +16046,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "new-tech-from-the-armory",
@@ -15966,7 +16077,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "panic-grips-city-as-evacuation-efforts-continue",
@@ -15995,7 +16109,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "paranoia-pummels-populace",
@@ -16024,7 +16141,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "portals-overrun-city-with-spider-people-ca09",
@@ -16051,7 +16171,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "portals-overrun-city-with-spider-people",
@@ -16078,7 +16201,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "power-overload-factory-goes-up-in-flames",
@@ -16106,7 +16232,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "research-station-attacked-ca09",
@@ -16134,7 +16263,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "research-station-attacked",
@@ -16162,7 +16294,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "xmen",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "riots-spark-over-extremis-30",
@@ -16189,7 +16324,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "riots-spark-over-extremis-30-ca09",
@@ -16216,7 +16354,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "salvaged-supplies-fuel-resistance-efforts",
@@ -16245,7 +16386,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "scientific-samples-found-in-discovered-universe",
@@ -16274,7 +16418,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "sentinel-schematics-sabotaged",
@@ -16303,7 +16450,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "ship-security-breached-in-royal-rescue",
@@ -16331,7 +16481,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "sinkholes-open-across-city",
@@ -16358,7 +16511,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "skrulls-infiltrate-world-leadership",
@@ -16385,7 +16541,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "skrulls-infiltrate-world-leadership-ca09",
@@ -16412,7 +16571,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "spider-infected-invade-manhattan",
@@ -16440,7 +16602,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "spider-infected-invade-manhattan-ca09",
@@ -16468,7 +16633,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "strike-team-secures-shield-relay",
@@ -16496,7 +16664,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "struggle-for-the-cube-continues",
@@ -16524,7 +16695,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "struggle-for-the-cube-continues-ca09",
@@ -16552,7 +16726,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "super-powered-scoundrels-form-sinister-syndicate",
@@ -16579,7 +16756,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "xmen",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "super-powered-scoundrels-form-sinister-syndicate-ca09",
@@ -16606,7 +16786,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "surprise-assault-mutant-homes-destroyed",
@@ -16634,7 +16817,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "survivors-search-for-safe-shelters",
@@ -16661,7 +16847,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "sword-establishes-base-on-moons-blue-area-ca09",
@@ -16689,7 +16878,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "sword-establishes-base-on-moons-blue-area",
@@ -16717,7 +16909,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "xmen",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "terrigen-canisters-fuel-doomsday-device",
@@ -16745,7 +16940,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "terrigen-clouds-sweep-over-city",
@@ -16772,7 +16970,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "the-montesi-formula-found-ca09",
@@ -16800,7 +17001,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "damage_control",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "the-montesi-formula-found",
@@ -16828,7 +17032,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": "spidey",
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "rotated",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": "2026-06-12"
     },
     {
       "slug": "unexpected-guests-crash-royal-wedding",
@@ -16856,7 +17063,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "wedding-party-targeted-in-terrible-attack",
@@ -16884,7 +17094,10 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": null,
+      "challengerRotatesOutOn": null
     },
     {
       "slug": "x-men-infiltrate-secret-weapons-facility",
@@ -16913,7 +17126,14 @@
       "extendedTimelineStatus": "legal",
       "setSymbol": null,
       "latestSetSymbol": null,
-      "requirementsItems": null
+      "requirementsItems": null,
+      "challengerStatus": "legal",
+      "challengerRotatesInOn": "2026-06-12",
+      "challengerRotatesOutOn": null
     }
-  ]
+  ],
+  "challengerSource": {
+    "url": "https://www.jarvis-protocol.com/api/crisis_cards",
+    "fetchedAt": "2026-10-20T07:47:56.788389+00:00"
+  }
 }
