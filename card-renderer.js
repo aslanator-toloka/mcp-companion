@@ -40,26 +40,45 @@
     return `<article class="sc-ability sc-superpower sc-${escape(p.type)}"><header class="sc-power-heading"><div class="sc-ability-heading">${icon('badge-'+p.type,true)}<h4>${escape(p.name)}</h4></div>${cost!==null&&cost!==undefined?`<span class="sc-power-cost${change?.cost?.changed?' sc-cost-changed':''}" aria-label="Power: ${escape(cost)}" ${change?.cost?.changed?`title="${escape(change.cost.reason)}"`:''}>${icon('power')}<b>${escape(cost)}</b></span>`:''}</header>${p.body?'<div class="sc-power-body">'+rule(p.body)+'</div>':''}</article>`;
   }
   function safeArt(value){try{const url=new URL(value,String(value).startsWith('/artworks/')?'https://d15s9aja3f2wkq.cloudfront.net':'https://www.jarvis-protocol.com');return url.protocol==='https:'&&['www.jarvis-protocol.com','d15s9aja3f2wkq.cloudfront.net'].includes(url.hostname)?url.href:'';}catch{return '';}}
+  function skinAsset(value){
+    return typeof value==='string'&&/^assets\/card-skins\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.(?:png|webp|jpe?g|svg)$/.test(value)?value:'';
+  }
+  function skinFor(slug,form=0,skins=root.MCP_CARD_SKINS||{}){
+    const skin=skins[slug];return skin&&Number(skin.form||0)===form?skin:null;
+  }
+  function skinNameMarkup(name,skin){
+    if(!skin)return `<h3 data-name-font="35">${escape(name)}</h3>`;
+    const style=['noir','comic','classic'].includes(skin.style)?skin.style:'classic';
+    const lines=Array.isArray(skin.lines)&&skin.lines.length?skin.lines:[skin.text||name];
+    return `<h3 class="sc-name-styled sc-name-${style}" aria-label="${escape(skin.text||name)}">${lines.slice(0,3).map(line=>`<span>${escape(line)}</span>`).join('')}</h3>`;
+  }
   function artMarkup(mode,image,fallback,name,settings={}){
     if(mode==='none'||!image)return '<div class="sc-art sc-art-none"></div>';
     const frame=settings.frame||{},dimensions=Object.entries(frame).filter(([key,value])=>['left','bottom','width','height','maxWidth'].includes(key)&&Number.isFinite(value)).map(([key,value])=>(key==='maxWidth'?'max-width':key)+':'+value+'px').join(';');
     const img=`<img src="${escape(image)}" ${fallback&&fallback!==image?`data-card-fallback="${escape(fallback)}"`:''} alt="${escape(name)}" decoding="async">`;
     return `<div class="sc-art sc-art-${mode}" style="${dimensions}"><div class="sc-art-illustration">${img}</div>${mode==='classic'?`<div class="sc-art-spacer" style="height:${Number.isFinite(settings.bottomSpacer)?settings.bottomSpacer:48}px"></div>`:''}<p class="sc-art-status" role="status" hidden>Иллюстрация недоступна в источнике.</p></div>`;
   }
-  function render({slug,detail,form=0,side='front',character={},art={},layout=root.MCP_CARD_LAYOUT||{},battle=null}){
+  function render({slug,detail,form=0,side='front',character={},art={},layout=root.MCP_CARD_LAYOUT||{},battle=null,skins=root.MCP_CARD_SKINS||{},skinLayers={}}){
     const card=form===1?detail?.secondStatCard:detail?.statCard;
     const metrics=layout[slug]?.[form]?.[side]||{};
     const sourceFace=side==='back'?card?.backSide:card?.frontSide,artOnly=!sourceFace&&metrics.art?.mode==='grunt';
     const face=sourceFace||(artOnly?{type:'artwork'}:null);
     if(!card||!face)return '<div class="sc-unavailable" role="status">Эта сторона карточки недоступна.</div>';
+    const skin=skinFor(slug,form,skins);
+    const nameSkin=skinLayers.name!==false?skin?.name:null;
+    const background=skinLayers.background!==false?skinAsset(skin?.background?.src):'';
+    const characterSkin=skinLayers.character!==false?skin?.character?.[side]:null;
+    const alternativeImage=skinAsset(characterSkin?.src);
     const name=face.nameOverride||card.name||character.name||slug;
     const image=safeArt(metrics.art?.url||art[slug]?.[form]?.[side]||face.artworkUrl||face.fallbackArtworkUrl||'');
     const fallback=safeArt(art[slug]?.[form]?.front||face.fallbackArtworkUrl||(artOnly?card.frontSide?.fallbackArtworkUrl:'')||'');
     const injured=face.type==='injured',powers=sorted(face.superPowers),attacks=sorted(face.attacks);
     const width=character.isGrunt?550:1200,height=character.isGrunt?950:800;
     const mode=metrics.art?.mode||(character.isGrunt?'none':card.template==='2023'?'canvas':'classic');
-    return `<div class="sc-card-stage" data-native-width="${width}" data-native-height="${height}"><article class="sc-card ${injured?'sc-injured':'sc-healthy'} ${character.isGrunt?'sc-grunt':''} ${artOnly?'sc-art-only':''}" aria-label="${escape(name)} · ${artOnly?'Artwork':injured?'Injured':'Healthy'}" lang="en">${artMarkup(mode,image,fallback,name,metrics.art)}<aside class="sc-character-panel"><div class="sc-identity"><h3 data-name-font="${metrics.nameSize||35}">${escape(name)}</h3>${card.alterEgo?'<p>'+escape(card.alterEgo)+'</p>':''}</div>${artOnly?'':`<div class="sc-stats"><div class="sc-defenses">${pill('physical',face.physicalDefense,'Physical',battle?.stats.physical)}${pill('energy',face.energyDefense,'Energy',battle?.stats.energy)}${pill('mystic',face.mysticDefense,'Mystic',battle?.stats.mystic)}</div><div class="sc-vitals">${pill('stamina',face.stamina,'Stamina',battle?.stats.stamina)}${!character.isGrunt?pill('threat',face.threatLevel,'Threat'):''}${pill('size',face.size,'Size')}${pill('speed',face.speed,'Speed',battle?.stats.speed)}</div></div>`}</aside>${artOnly?'':`<div class="sc-rules-panel"><div class="sc-rules-content" data-rule-leading="${metrics.lineHeight||20.8}">${attacks.map((a,i)=>attack(a,battle?.attacks[i])).join('')}${powers.map((p,i)=>power(p,battle?.powers[i])).join('')}</div></div>`}<footer class="sc-credit">© MARVEL © AMG · ${escape((side==='back'&&card.secondSideArtist)||card.artist||'')}</footer></article></div>${card.erratas?.length?'<details class="sc-errata"><summary>Обновления правил · '+card.erratas.length+'</summary>'+card.erratas.map(e=>'<div><time>'+escape(e.createdOn)+'</time><p>'+rule(e.body)+'</p></div>').join('')+'</details>':''}`;
+    const identity=nameSkin?skinNameMarkup(name,nameSkin):`<h3 data-name-font="${metrics.nameSize||35}">${escape(name)}</h3>`;
+    const illustration=alternativeImage?artMarkup('alternative',alternativeImage,image,name,{frame:{left:0,bottom:24,width:313,height:500,...characterSkin.frame}}):artMarkup(mode,image,fallback,name,metrics.art);
+    return `<div class="sc-card-stage" data-native-width="${width}" data-native-height="${height}"><article class="sc-card ${injured?'sc-injured':'sc-healthy'} ${character.isGrunt?'sc-grunt':''} ${artOnly?'sc-art-only':''}" aria-label="${escape(name)} · ${artOnly?'Artwork':injured?'Injured':'Healthy'}" lang="en">${background?`<img class="sc-skin-background" src="${escape(background)}" alt="" aria-hidden="true" decoding="async">`:''}${illustration}<aside class="sc-character-panel"><div class="sc-identity${nameSkin?' sc-identity-alternative':''}">${identity}${card.alterEgo?'<p>'+escape(card.alterEgo)+'</p>':''}</div>${artOnly?'':`<div class="sc-stats"><div class="sc-defenses">${pill('physical',face.physicalDefense,'Physical',battle?.stats.physical)}${pill('energy',face.energyDefense,'Energy',battle?.stats.energy)}${pill('mystic',face.mysticDefense,'Mystic',battle?.stats.mystic)}</div><div class="sc-vitals">${pill('stamina',face.stamina,'Stamina',battle?.stats.stamina)}${!character.isGrunt?pill('threat',face.threatLevel,'Threat'):''}${pill('size',face.size,'Size')}${pill('speed',face.speed,'Speed',battle?.stats.speed)}</div></div>`}</aside>${artOnly?'':`<div class="sc-rules-panel"><div class="sc-rules-content" data-rule-leading="${metrics.lineHeight||20.8}">${attacks.map((a,i)=>attack(a,battle?.attacks[i])).join('')}${powers.map((p,i)=>power(p,battle?.powers[i])).join('')}</div></div>`}<footer class="sc-credit">© MARVEL © AMG · ${escape((side==='back'&&card.secondSideArtist)||card.artist||'')}</footer></article></div>${card.erratas?.length?'<details class="sc-errata"><summary>Обновления правил · '+card.erratas.length+'</summary>'+card.erratas.map(e=>'<div><time>'+escape(e.createdOn)+'</time><p>'+rule(e.body)+'</p></div>').join('')+'</details>':''}`;
 
   }
-  const api={render,rule,icon,safeArt,artMarkup,attack,power};if(typeof module==='object'&&module.exports)module.exports=api;root.MCPCardRenderer=api;
+  const api={render,rule,icon,safeArt,artMarkup,attack,power,skinAsset,skinFor};if(typeof module==='object'&&module.exports)module.exports=api;root.MCPCardRenderer=api;
 })(typeof window==='object'?window:globalThis);

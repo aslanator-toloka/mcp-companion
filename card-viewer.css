@@ -52,3 +52,14 @@
 .sc-card .sc-live-changed{text-decoration:underline;text-decoration-color:#fca5a5;text-underline-offset:4px}
 .battle-character-dialog .sc-stat[data-stat=stamina] b{font-size:21px;letter-spacing:-.5px}
 .sc-stat-changed,.sc-cost-changed{box-shadow:0 0 0 2px #ef4444}
+
+/* Optional independent visual layers. No gameplay fields are overridden. */
+.stat-card-skin-controls{border:1px solid #d6deeb;border-radius:10px;padding:6px 10px;margin:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
+.stat-card-skin-controls legend{padding:0 4px;font-size:10px;color:#63738a}.stat-card-skin-controls .check{font-size:11px;gap:5px;margin:0}.stat-card-skin-controls input{width:15px;height:15px}.stat-card-skin-controls label:has(input:disabled){opacity:.45}.stat-card-skin-controls button{min-height:26px;padding:3px 6px;font-size:10px}
+.sc-skin-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;z-index:0}
+.sc-art-alternative{display:flex;align-items:center;justify-content:center}.sc-art-alternative .sc-art-illustration{width:100%;height:100%}.sc-art-alternative img{width:100%;height:100%;object-fit:contain}
+.sc-identity-alternative{border-radius:12px;background:#141922;color:#f3ead8;padding:2px 4px}.sc-identity-alternative p{font-size:16px!important;line-height:18px!important;letter-spacing:.3px!important}
+.sc-card .sc-identity h3.sc-name-styled{margin:0;font-family:CardName,'Arial Narrow',sans-serif;letter-spacing:2px;font-size:26px;line-height:26px;white-space:normal}
+.sc-name-styled span{display:block}.sc-card .sc-identity h3.sc-name-noir{font-family:CardAgency,'Arial Narrow',sans-serif;font-weight:700;letter-spacing:7px;text-shadow:2px 2px 0 #7c2535;transform:skew(-5deg);font-size:42px;line-height:38px}.sc-name-noir span:first-child:not(:last-child){font-size:16px;line-height:16px;letter-spacing:5px;text-shadow:none}.sc-card .sc-identity h3.sc-name-comic{font-style:italic;font-weight:bold;text-shadow:2px 2px #ad303b}
+.sc-card:has(.sc-skin-background) .sc-credit{color:#f3ead8;text-shadow:0 1px 2px #000}
+.stat-card-controls{align-items:center}
