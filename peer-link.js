@@ -97,5 +97,5 @@
   }
   close(){if(this.closed)return;this.closed=true;this.parts.clear();this.channel?.close();this.pc.close();this.onState('closed');}
  }
- root.MCPPeerLink={Link,decode};
+ root.MCPPeerLink={Link,decode};if(typeof module==='object'&&module.exports)module.exports=root.MCPPeerLink;
 })(typeof window==='object'?window:globalThis);

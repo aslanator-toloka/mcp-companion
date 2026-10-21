@@ -1,16 +1,24 @@
+import { observer } from "mobx-react-lite";
+import { catalog, library, actions } from "./stores/index.js";
 import React, { memo } from "react";
-import { Avatar, OwnedCheckbox, Markup } from "./common.jsx";
+import { Avatar, OwnedCheckbox } from "./common.jsx";
 import { CharacterBoxes } from "./purchases.jsx";
-const CharacterRow = memo(function CharacterRow({
+const CharacterRow = observer(function CharacterRow({
   character: c,
   owned,
   boxOwned,
 }) {
+  owned = library.owned.has(c.slug);
+  boxOwned = library.boxOwned.has(c.slug);
   return (
     <div className="character-row">
       <button
         className="row-open"
         data-action="character"
+        onClick={(event) => {
+          event.stopPropagation();
+          actions.openCharacter(c.slug);
+        }}
         data-slug={c.slug}
         aria-label={`Открыть карточку ${c.name}, ${c.alterEgo}`}
       >
@@ -45,7 +53,9 @@ const CharacterRow = memo(function CharacterRow({
     </div>
   );
 });
-export function CatalogList({ items, onlyOwned }) {
+export const CatalogList = observer(function CatalogList() {
+  const items = catalog.filtered.map((character) => ({ character })),
+    onlyOwned = catalog.onlyOwned;
   return items.length ? (
     items.map((item) => <CharacterRow key={item.character.slug} {...item} />)
   ) : (
@@ -56,15 +66,23 @@ export function CatalogList({ items, onlyOwned }) {
           ? "Отметьте свои модели в каталоге или измените остальные фильтры."
           : "Попробуйте другое имя или снимите фильтры."}
       </p>
-      <button data-action="reset">Показать всех персонажей</button>
+      <button
+        data-action="reset"
+        onClick={(event) => {
+          event.stopPropagation();
+          catalog.reset();
+        }}
+      >
+        Показать всех персонажей
+      </button>
     </div>
   );
-}
+});
 export function CharacterDetail({
   character: c,
   owned,
   boxOwned,
-  cardMarkup,
+  card,
   boxes,
   boxError,
   rosters,
@@ -98,6 +116,10 @@ export function CharacterDetail({
           <button
             className="quiet close"
             data-action="close-character"
+            onClick={(event) => {
+              event.stopPropagation();
+              catalog.close();
+            }}
             aria-label="Закрыть карточку"
           >
             ×
@@ -105,12 +127,20 @@ export function CharacterDetail({
         </div>
       </header>
       <div className="detail-body">
-        <Markup html={cardMarkup} />
+        {card}
         <CharacterBoxes items={boxes} error={boxError} />
         <section className="detail-section roster-memberships">
           <div className="section-title">
             <h3>В моих ростерах</h3>
-            <button data-action="pick-roster">Добавить в ростер +</button>
+            <button
+              data-action="pick-roster"
+              onClick={(event) => {
+                event.stopPropagation();
+                actions.pickRoster();
+              }}
+            >
+              Добавить в ростер +
+            </button>
           </div>
           {rosters.length ? (
             rosters.map((r) => (
@@ -119,6 +149,10 @@ export function CharacterDetail({
                 className="roster-link"
                 data-action="view-roster"
                 data-id={r.id}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  actions.openRoster(r.id);
+                }}
               >
                 <span>
                   <strong>{r.name}</strong>

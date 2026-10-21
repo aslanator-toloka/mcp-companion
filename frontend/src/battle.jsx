@@ -1,5 +1,32 @@
+import { BattleMapView } from "./map.jsx";
+import { observer } from "mobx-react-lite";
+import { battle as b, catalog, actions } from "./stores/index.js";
+import { Rule } from "./cards.jsx";
+import {
+  TacticStrip,
+  BattleSetup,
+  BattlePickerModal,
+  BattleDialogModal,
+} from "./battle-extra.jsx";
+import { PeerHome, PeerHeader } from "./peer.jsx";
 import React, { memo } from "react";
-import { Avatar, Control, Markup } from "./common.jsx";
+import { Avatar, Control } from "./common.jsx";
+const counterAction = (action, a, delta) =>
+  action === "score"
+    ? b.score(a["data-side"], Number(delta))
+    : b.counter(
+        a["data-id"],
+        action === "objective-counter" ? "objectives" : a["data-field"],
+        Number(delta),
+      );
+const battleToolbar = {
+  round: () => b.openDialog("round"),
+  power: () => b.openDialog("power"),
+  map: () => actions.openBattleMap(),
+  missions: () => b.openDialog("missions"),
+  log: () => b.openDialog("log"),
+  finish: () => b.openDialog("finish"),
+};
 const iconLabels = {
   physical: "Physical",
   energy: "Energy",
@@ -26,7 +53,7 @@ const Icon = memo(function Icon({ name, badge = false }) {
     />
   );
 });
-function Counter({
+export function Counter({
   value,
   label,
   action,
@@ -42,6 +69,10 @@ function Counter({
         {...attributes}
         aria-label={"Уменьшить " + label}
         disabled={minusDisabled}
+        onClick={(event) => {
+          event.stopPropagation();
+          counterAction(action, attributes, "-1");
+        }}
       >
         −
       </button>
@@ -52,13 +83,17 @@ function Counter({
         {...attributes}
         aria-label={"Увеличить " + label}
         disabled={plusDisabled}
+        onClick={(event) => {
+          event.stopPropagation();
+          counterAction(action, attributes, "1");
+        }}
       >
         +
       </button>
     </div>
   );
 }
-const StateCycle = memo(function StateCycle({
+export const StateCycle = memo(function StateCycle({
   fighter: f,
   plan,
   disabled,
@@ -74,6 +109,10 @@ const StateCycle = memo(function StateCycle({
       aria-label={`Состояние ${f.name}: ${plan.label}. Переключить в ${plan.nextLabel}`}
       title={`${plan.label} → ${plan.nextLabel}. Отмена — кнопкой ↶`}
       disabled={disabled}
+      onClick={(event) => {
+        event.stopPropagation();
+        b.cycle(f.id);
+      }}
     >
       <span>
         {plan.label}
@@ -143,12 +182,44 @@ const Ability = memo(function Ability({ ability: a }) {
         <EnergyBadge energy={a.energy} />
       </summary>
       <div className="fighter-ability-description" lang="en">
-        <Markup
-          html={
-            a.bodyMarkup ||
-            '<p class="muted">У этой атаки нет дополнительных эффектов.</p>'
-          }
-        />
+        {a.kind === "attack" ? (
+          a.steps?.length ? (
+            <ul className="fighter-attack-rules">
+              {a.steps.map((text, i) => (
+                <li key={i}>
+                  <Rule text={text} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="muted">У этой атаки нет дополнительных эффектов.</p>
+          )
+        ) : a.body ? (
+          <p>
+            <Rule text={a.body} />
+          </p>
+        ) : (
+          <>
+            {b.domain.Summary.keywords(a.name).map((item, i) => (
+              <p key={i}>
+                <strong>{item.name}</strong>
+                {item.body && (
+                  <>
+                    {" "}
+                    — <Rule text={item.body} />
+                  </>
+                )}
+              </p>
+            ))}
+            <a
+              href="https://www.atomicmassgames.com/mcp-rules/"
+              target="_blank"
+              rel="noopener"
+            >
+              Core Rules · keywords ↗
+            </a>
+          </>
+        )}
       </div>
     </details>
   );
@@ -180,6 +251,10 @@ const Fighter = memo(function Fighter({ model }) {
           data-bt="fighter-card"
           data-id={f.id}
           aria-label={"Карточка " + f.name}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.fighterCard(f.id);
+          }}
         >
           <Avatar character={character} />
         </button>
@@ -264,6 +339,10 @@ const Fighter = memo(function Fighter({ model }) {
           data-bt="conditions"
           data-id={f.id}
           disabled={readonly}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.openDialog("conditions", f.id);
+          }}
         >
           Состояния +
         </button>
@@ -285,6 +364,10 @@ const Fighter = memo(function Fighter({ model }) {
         data-bt="activate"
         data-id={f.id}
         disabled={readonly || f.status !== "ready"}
+        onClick={(event) => {
+          event.stopPropagation();
+          b.activate(f.id);
+        }}
       >
         {f.status !== "ready"
           ? "Не может активироваться"
@@ -315,7 +398,15 @@ const Fighter = memo(function Fighter({ model }) {
         </div>
       )}
       <div className="fighter-bottom">
-        <button className="quiet" data-bt="fighter-card" data-id={f.id}>
+        <button
+          className="quiet"
+          data-bt="fighter-card"
+          data-id={f.id}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.fighterCard(f.id);
+          }}
+        >
           Карточка ↗
         </button>
         {(forms.length || reverse.length) > 0 && (
@@ -326,6 +417,10 @@ const Fighter = memo(function Fighter({ model }) {
                 <Control
                   as="select"
                   data-battle-fighter-form={f.id}
+                  onChange={(event) => {
+                    event.stopPropagation();
+                    b.changeForm(f.id, Number(event.target.value));
+                  }}
                   aria-label={"Форма в бою " + f.name}
                   value={String(f.form)}
                   disabled={readonly}
@@ -344,6 +439,10 @@ const Fighter = memo(function Fighter({ model }) {
                 <Control
                   as="select"
                   data-battle-fighter-face={f.id}
+                  onChange={(event) => {
+                    event.stopPropagation();
+                    b.changeForm(f.id, null, event.target.value);
+                  }}
                   aria-label={"Сторона в бою " + f.name}
                   value={f.face}
                   disabled={readonly}
@@ -364,6 +463,10 @@ const Fighter = memo(function Fighter({ model }) {
           data-bt="objectives"
           data-id={f.id}
           disabled={readonly}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.openDialog("objectives", f.id);
+          }}
         >
           Изменить
         </button>
@@ -397,7 +500,15 @@ const MatchTile = memo(function MatchTile({ match: m, portraits }) {
             ? `${m.mine.fighters.length} бойцов выбрано`
             : `Раунд ${m.round} · ${m.score.mine} : ${m.score.opponent}`}
         </span>
-        <button className={done ? "" : "primary"} data-bt="open" data-id={m.id}>
+        <button
+          className={done ? "" : "primary"}
+          data-bt="open"
+          data-id={m.id}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.open(m.id);
+          }}
+        >
           {preparing
             ? "Продолжить подготовку"
             : done
@@ -408,10 +519,10 @@ const MatchTile = memo(function MatchTile({ match: m, portraits }) {
     </article>
   );
 });
-export function BattleHome({ pending, history, networkMarkup, readError }) {
+export function BattleHome({ pending, history, readError }) {
   return (
     <>
-      <Markup html={networkMarkup} />
+      <PeerHome />
       <div className="heading">
         <div>
           <span className="eyebrow">08 / Бой</span>
@@ -422,6 +533,10 @@ export function BattleHome({ pending, history, networkMarkup, readError }) {
           className="primary"
           data-bt="choose-roster"
           disabled={readError}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.chooseRoster();
+          }}
         >
           Новый бой +
         </button>
@@ -445,7 +560,14 @@ export function BattleHome({ pending, history, networkMarkup, readError }) {
             Выберите свой ростер, отметьте бойцов и начните. Противника можно
             добавить позже.
           </p>
-          <button className="primary" data-bt="choose-roster">
+          <button
+            className="primary"
+            data-bt="choose-roster"
+            onClick={(event) => {
+              event.stopPropagation();
+              b.chooseRoster();
+            }}
+          >
             Выбрать ростер →
           </button>
         </div>
@@ -471,9 +593,7 @@ export function BattlePlay({
   teamSide,
   ownSide,
   labels,
-  networkMarkup,
   fighters,
-  tacticsMarkup,
   canUndo,
   network,
 }) {
@@ -494,12 +614,16 @@ export function BattlePlay({
           showingMine ? "Показать отряд противника" : "Показать мой отряд"
         }
         title={showingMine ? "Показать отряд противника" : "Показать мой отряд"}
+        onClick={(event) => {
+          event.stopPropagation();
+          b.selectTeam(teamSide === "mine" ? "opponent" : "mine");
+        }}
       >
         <span className={showingMine ? "current" : ""}>Я</span>
         <span aria-hidden="true">⇄</span>
         <span className={!showingMine ? "current" : ""}>Противник</span>
       </button>
-      <Markup html={networkMarkup} />
+      <PeerHeader />
       <div className="heading">
         <div>
           <span className="eyebrow">
@@ -512,7 +636,15 @@ export function BattlePlay({
             {readonly ? " · снимок на момент завершения" : ""}
           </p>
         </div>
-        <button data-bt="home">← К партиям</button>
+        <button
+          data-bt="home"
+          onClick={(event) => {
+            event.stopPropagation();
+            b.home();
+          }}
+        >
+          ← К партиям
+        </button>
       </div>
       <div className="battle-dashboard">
         <div className="round-label">
@@ -537,6 +669,10 @@ export function BattlePlay({
           <Control
             as="select"
             id="battle-priority"
+            onChange={(event) => {
+              event.stopPropagation();
+              b.setPriority(event.target.value);
+            }}
             value={m.priority}
             disabled={readonly}
           >
@@ -549,6 +685,10 @@ export function BattlePlay({
           className="quiet battle-undo"
           data-bt="undo"
           disabled={readonly || !canUndo}
+          onClick={(event) => {
+            event.stopPropagation();
+            b.undo();
+          }}
         >
           ↶ Отмена
         </button>
@@ -573,6 +713,10 @@ export function BattlePlay({
             }
             data-bt={action}
             disabled={readonly && ["round", "power", "finish"].includes(action)}
+            onClick={(event) => {
+              event.stopPropagation();
+              battleToolbar[action]();
+            }}
           >
             {label}
           </button>
@@ -587,6 +731,10 @@ export function BattlePlay({
             data-side={side}
             className={teamSide === side ? "selected" : ""}
             key={side}
+            onClick={(event) => {
+              event.stopPropagation();
+              b.selectTeam(side);
+            }}
           >
             {labels[side]}
             <span>{m[side].fighters.length}</span>
@@ -605,7 +753,15 @@ export function BattlePlay({
           </p>
         </div>
         {(teamSide === "opponent" || network) && !readonly && (
-          <button data-bt="pick" data-side={teamSide} data-kind="characters">
+          <button
+            data-bt="pick"
+            data-side={teamSide}
+            data-kind="characters"
+            onClick={(event) => {
+              event.stopPropagation();
+              b.openPicker(teamSide, "characters");
+            }}
+          >
             Изменить состав +
           </button>
         )}
@@ -628,6 +784,10 @@ export function BattlePlay({
                 data-bt="pick"
                 data-side="opponent"
                 data-kind="characters"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  b.openPicker(teamSide, "characters");
+                }}
               >
                 Выбрать бойцов и карты +
               </button>
@@ -638,12 +798,20 @@ export function BattlePlay({
       <div className="section-title battle-tactics-title">
         <h3>Тактики · {team.tactics.filter((t) => !t.played).length} в руке</h3>
         {(teamSide === "opponent" || network) && !readonly && (
-          <button data-bt="pick" data-side={teamSide} data-kind="tactics">
+          <button
+            data-bt="pick"
+            data-side={teamSide}
+            data-kind="tactics"
+            onClick={(event) => {
+              event.stopPropagation();
+              b.openPicker(teamSide, "tactics");
+            }}
+          >
             Изменить карты +
           </button>
         )}
       </div>
-      <Markup html={tacticsMarkup} />
+      <TacticStrip team={team} side={teamSide} readonly={readonly} />
       <p className="battle-rule-note">
         HP, энергию, цели и эффекты меняете вы. Повреждение не начисляет энергию
         автоматически. Изменения партии сохраняются сразу; ↶ отменяет последнюю
@@ -652,3 +820,35 @@ export function BattlePlay({
     </>
   );
 }
+
+export const BattleWorkspace = observer(function BattleWorkspace() {
+  const m = b.current;
+  if (b.view === "home" || !m) {
+    const tile = (match) => ({
+      match,
+      portraits: match.mine.fighters
+        .slice(0, 6)
+        .map((f) => catalog.byId.get(f.slug)),
+    });
+    return (
+      <BattleHome
+        pending={b.rows.filter((m) => m.status !== "finished").map(tile)}
+        history={b.rows.filter((m) => m.status === "finished").map(tile)}
+        readError={b.readError}
+      />
+    );
+  }
+  if (b.view === "map") return <BattleMapView />;
+  if (m.status === "preparing") return <BattleSetup />;
+  return (
+    <BattlePlay
+      match={m}
+      teamSide={b.team}
+      ownSide={b.ownSide}
+      labels={{ mine: b.label("mine"), opponent: b.label("opponent") }}
+      network={b.activeNetwork}
+      fighters={m[b.team].fighters.map((f) => b.model(m, f))}
+      canUndo={b.canUndo}
+    />
+  );
+});

@@ -15,32 +15,6 @@
     stagger:{name:'Stagger',body:'Your first action when activating must be Shake, and that action must remove Stagger.'},
     stun:{name:'Stun',body:'Whenever a single effect would grant more than 1 |!power|, gain just 1 |!power| from that effect.'}
   });
-  function descriptionMarkup(slug,format){
-    if(!Object.hasOwn(definitions,slug))return '';
-    const item=definitions[slug];
-    return `<div class="sc-condition-description" lang="en"><button type="button" class="sc-condition-close" aria-label="Закрыть описание состояния">×</button><img class="sc-condition-token" src="assets/conditions/${slug}.png" alt="" width="160" height="160"><h2 id="sc-condition-title">${item.name}</h2><p id="sc-condition-body">${format(item.body)}</p></div>`;
-  }
-  const api={definitions,descriptionMarkup};root.MCPCardConditions=api;
+  const api={definitions};root.MCPCardConditions=api;
   if(typeof module==='object'&&module.exports)module.exports=api;
-  if(typeof document==='undefined')return;
-  const dialog=document.createElement('dialog');dialog.id='sc-condition-dialog';dialog.className='sc-condition-dialog';dialog.setAttribute('aria-labelledby','sc-condition-title');dialog.setAttribute('aria-describedby','sc-condition-body');
-  document.body.append(dialog);
-  let trigger=null;
-  dialog.addEventListener('close',()=>{
-    const previous=trigger;trigger=null;
-    previous?.setAttribute('aria-expanded','false');
-    if(previous?.isConnected&&!previous.closest('dialog:not([open])'))previous.focus({preventScroll:true});
-  });
-  dialog.addEventListener('click',event=>{
-    if(event.target.closest('.sc-condition-close')||event.target===dialog)dialog.close();
-  });
-  document.addEventListener('click',event=>{
-    const button=event.target.closest('[data-card-condition]');if(!button)return;
-    const slug=button.dataset.cardCondition;if(!Object.hasOwn(definitions,slug))return;
-    event.preventDefault();
-    trigger?.setAttribute('aria-expanded','false');trigger=button;
-    MCPReact.html(dialog,descriptionMarkup(slug,root.MCPCardRenderer.rule));
-    trigger.setAttribute('aria-expanded','true');
-    if(!dialog.open)dialog.showModal();
-  });
 })(typeof window==='object'?window:globalThis);

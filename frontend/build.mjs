@@ -3,9 +3,7 @@ import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
 const root = path.dirname(fileURLToPath(import.meta.url));
-const appRoot = fs.existsSync(path.join(root, "../app/index.html"))
-  ? path.join(root, "../app")
-  : path.join(root, "..");
+const appRoot = path.join(root, "..");
 await build({
   entryPoints: [path.join(root, "src/main.jsx")],
   outfile: path.join(appRoot, "react-ui.js"),
@@ -18,8 +16,8 @@ await build({
 });
 const licenses = path.join(appRoot, "assets/licenses");
 fs.mkdirSync(licenses, { recursive: true });
-for (const name of ["react", "react-dom"])
+for (const name of ["react", "react-dom", "mobx", "mobx-react-lite"])
   fs.copyFileSync(
-    path.join(root, "node_modules", name, "LICENSE"),
+    path.join(root, "../node_modules", name, "LICENSE"),
     path.join(licenses, name + ".txt"),
   );

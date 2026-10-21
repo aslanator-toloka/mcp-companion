@@ -1,17 +1,24 @@
 # MCP Companion
 
-Static edition for GitHub Pages: character cards, collection, rosters, tournament archive and local battle tracker. No Google account or backend required. Collection, rosters and matches are saved in this browser. Use **Данные → Экспорт JSON / Импорт JSON** for backups and moving between devices or site addresses.
+[Open the app](https://aslanator-toloka.github.io/mcp-companion/).
 
-Direct two-player battles on the same Wi-Fi use WebRTC DataChannel: the creator is the authority, players exchange an invitation and an answer manually. There is no account, signalling server, STUN or TURN service. Updates are sent immediately; a full snapshot is sent every 10 seconds. After a reload use the saved room to exchange new connection texts. The legacy Node multiplayer service is not part of this edition. Artwork may load from the original Jarvis CDN. This build does not promise offline access.
+Native React + MobX companion for Marvel Crisis Protocol: character/tactic/crisis cards, collection, boxes and wishlist, roster builder, tournament archive and local/direct multiplayer battles. Data lives in this browser; use **Данные → Экспорт JSON / Импорт JSON** for backups and device transfers. No Google account or backend is required.
 
-## Publishing
+## Develop and verify
 
-GitHub Pages publishes the root of the main branch. An empty .nojekyll disables Jekyll. All runtime paths are relative to the project URL.
+Node.js 22 or newer. From a clean clone:
 
-## React UI
+```sh
+npm ci
+npm run build
+npm test
+npx playwright install chromium
+npm run test:e2e
+npm run serve
+```
 
-Interactive views use a locally bundled React production runtime. Reviewable JSX and the pinned npm lockfile are in frontend/. To rebuild the published checkout, run npm ci --prefix frontend and npm run build --prefix frontend. Rule-card, SVG and auxiliary form formats use a keyed React adapter. Business rules, saved-data schemas and WebRTC authority remain in their existing domain modules.
+The local URL is http://127.0.0.1:4173/mcp-companion/. All UI and stores are in `frontend/src`; root pure domain modules are shared with tests. One root npm workspace lockfile pins React 19.3.1, MobX 7.1.0 and mobx-react-lite 5.1.0. Build scripts emit the production bundle and hash entry URLs. GitHub Pages publishes the checked-in root of main. [Architecture and verification](docs/REACT-UI.md).
 
-## Data credits
+Two-player battles use WebRTC DataChannel, a browser-hosted authority and manual invitation/answer exchange. There is no signaling, STUN or TURN service. Changes are sent immediately, with a full snapshot every 10 seconds. After reload exchange new connection texts for the saved room. Direct connectivity depends on browser/network permissions and Wi-Fi peer access; two physical iPads remain a manual test.
 
-Rules, character and card data: Jarvis Protocol / Atomic Mass Games. Tournament snapshot: Longshanks. Marvel characters and artwork belong to their respective owners.
+Artwork, layouts and rules originate from Jarvis Protocol / Atomic Mass Games; tournament snapshot from Longshanks. Marvel characters/art belong to their respective owners. This static publication does not promise offline operation.

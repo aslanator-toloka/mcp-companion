@@ -1,3 +1,14 @@
+import { observer } from "mobx-react-lite";
+import { useEffect, useRef } from "react";
+import {
+  rosters,
+  library,
+  catalog,
+  ui,
+  actions,
+  battle,
+} from "./stores/index.js";
+import { cardStatus } from "./stores/rosters.js";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
 const Options = ({ names, empty }) => (
@@ -26,7 +37,15 @@ const RosterTile = memo(function RosterTile({
         </span>
         <span className="tag">{status}</span>
       </div>
-      <button className="roster-title" data-rs="edit" data-id={r.id}>
+      <button
+        className="roster-title"
+        data-rs="edit"
+        data-id={r.id}
+        onClick={(event) => {
+          event.stopPropagation();
+          rosters.open(r.id);
+        }}
+      >
         {r.name}
       </button>
       <div className="roster-portraits">
@@ -56,13 +75,32 @@ const RosterTile = memo(function RosterTile({
         </span>
       </div>
       <div className="actions roster-tile-actions">
-        <button className="primary" data-rs="edit" data-id={r.id}>
+        <button
+          className="primary"
+          data-rs="edit"
+          data-id={r.id}
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.open(r.id);
+          }}
+        >
           Открыть ростер →
         </button>
-        <button data-bt="prepare" data-roster={r.id}>
+        <button
+          data-bt="prepare"
+          data-roster={r.id}
+          onClick={() => battle.prepare(r.id)}
+        >
           Бой →
         </button>
-        <button data-rs="duplicate" data-id={r.id}>
+        <button
+          data-rs="duplicate"
+          data-id={r.id}
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.duplicate(r.id);
+          }}
+        >
           Копия
         </button>
         <button
@@ -70,6 +108,10 @@ const RosterTile = memo(function RosterTile({
           data-rs="delete"
           data-id={r.id}
           aria-label={"Удалить ростер " + r.name}
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.remove(r.id);
+          }}
         >
           ×
         </button>
@@ -77,7 +119,13 @@ const RosterTile = memo(function RosterTile({
     </article>
   );
 });
-export function RosterList({ items, filters, affiliations, groups, total }) {
+export const RosterList = observer(function RosterList({
+  items,
+  filters,
+  affiliations,
+  groups,
+  total,
+}) {
   return (
     <>
       <div className="heading">
@@ -87,8 +135,23 @@ export function RosterList({ items, filters, affiliations, groups, total }) {
           <p>Сохранённые составы, карты и группы для разных планов игры.</p>
         </div>
         <div className="actions">
-          <button data-rs="groups">Группы</button>
-          <button className="primary" data-rs="new">
+          <button
+            data-rs="groups"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.showGroups();
+            }}
+          >
+            Группы
+          </button>
+          <button
+            className="primary"
+            data-rs="new"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.open();
+            }}
+          >
             Новый ростер +
           </button>
         </div>
@@ -102,6 +165,10 @@ export function RosterList({ items, filters, affiliations, groups, total }) {
             value={filters.query}
             placeholder="Найти ростер по названию…"
             autoComplete="off"
+            onChange={(event) => {
+              event.stopPropagation();
+              rosters.setFilter("query", event.target.value);
+            }}
           />
         </label>
         <div className="filter-row roster-filters">
@@ -112,6 +179,10 @@ export function RosterList({ items, filters, affiliations, groups, total }) {
               id="roster-affiliation"
               aria-label="Аффилиация ростера"
               value={filters.affiliation}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setFilter("affiliation", event.target.value);
+              }}
             >
               <Options names={affiliations} empty="Все аффилиации" />
             </Control>
@@ -123,6 +194,10 @@ export function RosterList({ items, filters, affiliations, groups, total }) {
               id="roster-group"
               aria-label="Группа ростера"
               value={filters.group}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setFilter("group", event.target.value);
+              }}
             >
               <option value="">Все группы</option>
               <option value="__none">Без группы</option>
@@ -138,10 +213,21 @@ export function RosterList({ items, filters, affiliations, groups, total }) {
               id="roster-owned"
               type="checkbox"
               checked={filters.owned}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setFilter("owned", event.target.checked);
+              }}
             />
             Все модели есть
           </label>
-          <button className="quiet" data-rs="reset-filters">
+          <button
+            className="quiet"
+            data-rs="reset-filters"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.resetFilters();
+            }}
+          >
             Сбросить
           </button>
         </div>
@@ -166,14 +252,21 @@ export function RosterList({ items, filters, affiliations, groups, total }) {
               ? "Измените запрос или снимите фильтры."
               : "Выберите персонажей и карты, дайте составу название и сохраните его."}
           </p>
-          <button className="primary" data-rs={total ? "reset-filters" : "new"}>
+          <button
+            className="primary"
+            data-rs={total ? "reset-filters" : "new"}
+            onClick={(event) => {
+              event.stopPropagation();
+              total ? rosters.resetFilters() : rosters.open();
+            }}
+          >
             {total ? "Сбросить фильтры" : "Создать ростер +"}
           </button>
         </div>
       )}
     </>
   );
-}
+});
 const SelectedItem = memo(function SelectedItem({ item, kind }) {
   const { slug, character: c, card, status, affiliated } = item;
   return (
@@ -183,6 +276,7 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
           <button
             className="selected-character"
             data-action="character"
+            onClick={() => actions.openCharacter(slug)}
             data-slug={slug}
           >
             <Avatar character={c} />
@@ -201,6 +295,10 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
               data-rs="character-cards"
               data-slug={slug}
               aria-label={"Добавить карты " + c.name}
+              onClick={(event) => {
+                event.stopPropagation();
+                rosters.openPicker("tactics", slug);
+              }}
             >
               Добавить карты
             </button>
@@ -210,6 +308,10 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
               data-kind={kind}
               data-slug={slug}
               aria-label={"Убрать " + c.name + " из ростера"}
+              onClick={(event) => {
+                event.stopPropagation();
+                rosters.removeItem(kind, slug);
+              }}
             >
               Убрать ×
             </button>
@@ -222,6 +324,10 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
             data-rs="card"
             data-kind={kind}
             data-slug={slug}
+            onClick={(event) => {
+              event.stopPropagation();
+              actions.showGameCard(kind, slug);
+            }}
           >
             <span className="card-symbol">
               {kind === "tactics" ? "TT" : card?.type === "Secure" ? "S" : "E"}
@@ -241,6 +347,10 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
             data-rs="remove-item"
             data-kind={kind}
             data-slug={slug}
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.removeItem(kind, slug);
+            }}
           >
             Убрать ×
           </button>
@@ -249,7 +359,7 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
     </div>
   );
 });
-export function RosterEditor({
+export const RosterEditor = observer(function RosterEditor({
   roster: r,
   saved,
   conflict,
@@ -270,7 +380,15 @@ export function RosterEditor({
           <h1>{saved ? "Редактировать ростер" : "Новый ростер"}</h1>
           <p>Правки применятся после нажатия «Сохранить ростер».</p>
         </div>
-        <button data-rs="back">← К ростерам</button>
+        <button
+          data-rs="back"
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.navigate();
+          }}
+        >
+          ← К ростерам
+        </button>
       </div>
       {source && (
         <div className="notice">
@@ -297,6 +415,10 @@ export function RosterEditor({
               value={r.name}
               maxLength={100}
               placeholder="Например: Web Warriors · контроль"
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setField("name", event.target.value);
+              }}
             />
           </label>
           <label className="field">
@@ -306,12 +428,18 @@ export function RosterEditor({
               id="editor-affiliation"
               aria-label="Основная аффилиация"
               value={r.affiliation}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setField("affiliation", event.target.value);
+              }}
             >
               <Options names={affiliations} empty="Без основной аффилиации" />
             </Control>
           </label>
         </div>
-        <div id="editor-error" className="editor-error" role="alert" />
+        <div id="editor-error" className="editor-error" role="alert">
+          {rosters.error}
+        </div>
         <div className="editor-groups">
           <span className="field-label">Группы</span>
           <div className="group-checks">
@@ -321,12 +449,23 @@ export function RosterEditor({
                   type="checkbox"
                   data-editor-group={g.id}
                   checked={r.groups.includes(g.id)}
+                  onChange={(event) => {
+                    event.stopPropagation();
+                    rosters.setGroup(g.id, event.target.checked);
+                  }}
                 />
                 {g.name}
               </label>
             ))}
             {!groups.length && <span className="muted">Групп пока нет</span>}
-            <button className="quiet" data-rs="new-group">
+            <button
+              className="quiet"
+              data-rs="new-group"
+              onClick={(event) => {
+                event.stopPropagation();
+                rosters.groupForm();
+              }}
+            >
               + Новая группа
             </button>
           </div>
@@ -359,6 +498,10 @@ export function RosterEditor({
             data-rs="tab"
             data-tab={id}
             className={tab === id ? "selected" : ""}
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.setTab(id);
+            }}
           >
             {label}
             <span>{r[id].length}</span>
@@ -373,7 +516,15 @@ export function RosterEditor({
               ? "Team Tactics"
               : "Secure и Extract"}
         </h3>
-        <button data-rs="pick">+ Добавить</button>
+        <button
+          data-rs="pick"
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.openPicker();
+          }}
+        >
+          + Добавить
+        </button>
       </div>
       {items.length ? (
         <div className="selected-items">
@@ -393,7 +544,14 @@ export function RosterEditor({
           <p>
             Добавьте позиции из каталога. Неполный ростер тоже можно сохранить.
           </p>
-          <button data-rs="pick" className="primary">
+          <button
+            data-rs="pick"
+            className="primary"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.openPicker();
+            }}
+          >
             + Добавить
           </button>
         </div>
@@ -413,26 +571,59 @@ export function RosterEditor({
         <div className="actions">
           {saved && (
             <>
-              <button data-bt="prepare-editor">Начать бой →</button>
-              <button className="quiet" data-rs="duplicate" data-id={r.id}>
+              <button data-bt="prepare-editor" onClick={battle.prepareEditor}>
+                Начать бой →
+              </button>
+              <button
+                className="quiet"
+                data-rs="duplicate"
+                data-id={r.id}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  rosters.duplicate(r.id);
+                }}
+              >
                 Копия
               </button>
-              <button className="quiet" data-rs="delete" data-id={r.id}>
+              <button
+                className="quiet"
+                data-rs="delete"
+                data-id={r.id}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  rosters.remove(r.id);
+                }}
+              >
                 Удалить
               </button>
             </>
           )}
         </div>
         <div className="actions">
-          <button data-rs="back">Отмена</button>
-          <button className="primary" data-rs="save">
+          <button
+            data-rs="back"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.navigate();
+            }}
+          >
+            Отмена
+          </button>
+          <button
+            className="primary"
+            data-rs="save"
+            onClick={(event) => {
+              event.stopPropagation();
+              if (rosters.save()) actions.showRosterList();
+            }}
+          >
             Сохранить ростер
           </button>
         </div>
       </div>
     </>
   );
-}
+});
 const CardStats = memo(function CardStats({ stats, covered }) {
   if (!stats || !covered)
     return (
@@ -486,6 +677,10 @@ function CardInsights({
             id="roster-picker-stats-affiliation"
             aria-label="Аффилиация для статистики карт"
             value={p.statsAffiliation}
+            onChange={(event) => {
+              event.stopPropagation();
+              rosters.setPicker("statsAffiliation", event.target.value);
+            }}
           >
             <Options names={affiliations} empty="Все аффилиации" />
           </Control>
@@ -497,6 +692,10 @@ function CardInsights({
             id="roster-picker-stats-character"
             aria-label="Персонаж для статистики карт"
             value={p.statsCharacter}
+            onChange={(event) => {
+              event.stopPropagation();
+              rosters.setPicker("statsCharacter", event.target.value);
+            }}
           >
             <option value="">Любой персонаж</option>
             <CharacterOptions characters={characters} />
@@ -509,6 +708,10 @@ function CardInsights({
             id="roster-picker-sort"
             aria-label="Сортировка карт"
             value={p.sort}
+            onChange={(event) => {
+              event.stopPropagation();
+              rosters.setPicker("sort", event.target.value);
+            }}
           >
             {[
               ["popularity", "По популярности"],
@@ -529,6 +732,10 @@ function CardInsights({
             type="checkbox"
             id="roster-picker-related"
             checked={p.relatedOnly}
+            onChange={(event) => {
+              event.stopPropagation();
+              rosters.setPicker("relatedOnly", event.target.checked);
+            }}
           />
           Только связанные карты: {relatedName || "персонажа"}
         </label>
@@ -570,6 +777,10 @@ const PickerRow = memo(
             data-pick-kind={kind}
             value={c.slug}
             checked={chosen}
+            onChange={(event) => {
+              event.stopPropagation();
+              rosters.choose(kind, c.slug, event.target.checked);
+            }}
           />
           {!isCard ? (
             <Avatar character={c} />
@@ -608,6 +819,12 @@ const PickerRow = memo(
           data-kind={isCard ? kind : undefined}
           data-slug={c.slug}
           aria-label={"Посмотреть " + c.name}
+          onClick={(event) => {
+            event.stopPropagation();
+            isCard
+              ? actions.showGameCard(kind, c.slug)
+              : actions.openCharacter(c.slug);
+          }}
         >
           ↗
         </button>
@@ -626,7 +843,7 @@ const PickerRow = memo(
       : true) &&
     (a.item.owners || []).join("|") === (b.item.owners || []).join("|"),
 );
-export function RosterPicker({
+export const RosterPicker = observer(function RosterPicker({
   picker: p,
   items,
   coverage,
@@ -651,6 +868,10 @@ export function RosterPicker({
           className="quiet close"
           data-rs="close-picker"
           aria-label="Закрыть добавление"
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.closePicker();
+          }}
         >
           ×
         </button>
@@ -663,6 +884,10 @@ export function RosterPicker({
           value={p.query}
           placeholder="Поиск по началу слова…"
           aria-label="Поиск для добавления"
+          onChange={(event) => {
+            event.stopPropagation();
+            rosters.setPicker("query", event.target.value);
+          }}
         />
         <div className="picker-filters">
           {kind !== "crises" ? (
@@ -673,6 +898,10 @@ export function RosterPicker({
                 isCard ? "Аффилиация карты" : "Аффилиация для добавления"
               }
               value={p.affiliation}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setPicker("affiliation", event.target.value);
+              }}
             >
               <Options
                 names={affiliations}
@@ -685,6 +914,10 @@ export function RosterPicker({
               id="roster-picker-type"
               aria-label="Тип кризиса"
               value={p.type}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setPicker("type", event.target.value);
+              }}
             >
               <option value="">Secure и Extract</option>
               <option value="Secure">Secure</option>
@@ -697,6 +930,10 @@ export function RosterPicker({
               id="roster-picker-character"
               aria-label="Персонаж карты"
               value={p.relatedOnly ? p.relatedTo : ""}
+              onChange={(event) => {
+                event.stopPropagation();
+                rosters.setPicker("relatedTo", event.target.value);
+              }}
             >
               <option value="">Персонаж карты: любой</option>
               <CharacterOptions characters={characters} />
@@ -708,6 +945,10 @@ export function RosterPicker({
                 id="roster-picker-challenger"
                 type="checkbox"
                 checked={p.challenger}
+                onChange={(event) => {
+                  event.stopPropagation();
+                  rosters.setPicker("challenger", event.target.checked);
+                }}
               />
               Только Challenger
             </label>
@@ -718,6 +959,10 @@ export function RosterPicker({
                 id="roster-picker-owned"
                 type="checkbox"
                 checked={p.owned}
+                onChange={(event) => {
+                  event.stopPropagation();
+                  rosters.setPicker("owned", event.target.checked);
+                }}
               />
               Есть у меня
             </label>
@@ -727,6 +972,10 @@ export function RosterPicker({
                 id="roster-picker-available"
                 type="checkbox"
                 checked={p.available}
+                onChange={(event) => {
+                  event.stopPropagation();
+                  rosters.setPicker("available", event.target.checked);
+                }}
               />
               Доступные в Standard
             </label>
@@ -769,10 +1018,338 @@ export function RosterPicker({
       </div>
       <div className="picker-footer">
         <span>Правки сохранятся вместе с ростером.</span>
-        <button className="primary" data-rs="close-picker">
+        <button
+          className="primary"
+          data-rs="close-picker"
+          onClick={(event) => {
+            event.stopPropagation();
+            rosters.closePicker();
+          }}
+        >
           Готово
         </button>
       </div>
     </>
   );
+});
+
+const countText = (r) =>
+  `${count(r.characters.length, "персонаж", "персонажа", "персонажей")} · ${count(r.tactics.length, "тактика", "тактики", "тактик")} · Secure ${rosters.crisisCount(r, "Secure")} / Extract ${rosters.crisisCount(r, "Extraction")}`;
+export const RosterWorkspace = observer(function RosterWorkspace() {
+  if (rosters.draft) {
+    const r = rosters.draft,
+      tab = rosters.tab;
+    return (
+      <RosterEditor
+        roster={r}
+        saved={rosters.records.some((s) => s.id === r.id)}
+        conflict={rosters.conflict}
+        groups={rosters.groups}
+        affiliations={rosters.affiliations}
+        tab={tab}
+        items={r[tab].map((slug) =>
+          tab === "characters"
+            ? {
+                slug,
+                character: catalog.byId.get(slug),
+                status: library.status(slug),
+                affiliated: catalog.byId
+                  .get(slug)
+                  ?.affiliations.some((a) => a.name === r.affiliation),
+              }
+            : {
+                slug,
+                card: rosters.card(tab, slug),
+                status: cardStatus(rosters.card(tab, slug)),
+              },
+        )}
+        notes={rosters.notes}
+        secure={rosters.crisisCount(r, "Secure")}
+        extract={rosters.crisisCount(r, "Extraction")}
+      />
+    );
+  }
+  return (
+    <RosterList
+      items={rosters.visible.map((r) => ({
+        roster: r,
+        status:
+          r.characters.length === 10 &&
+          r.tactics.length === 10 &&
+          rosters.crisisCount(r, "Secure") === 5 &&
+          rosters.crisisCount(r, "Extraction") === 5
+            ? "Укомплектован"
+            : "Черновик",
+        subtitle: countText(r),
+        missing: rosters.missing(r),
+        portraits: r.characters
+          .slice(0, 6)
+          .map((slug) => catalog.byId.get(slug)),
+        groups: r.groups.map(
+          (id) =>
+            rosters.groups.find((g) => g.id === id) || { id, name: "Группа" },
+        ),
+      }))}
+      filters={rosters.filters}
+      affiliations={rosters.affiliations}
+      groups={rosters.groups}
+      total={rosters.records.length}
+    />
+  );
+});
+function Modal({ id, className, label, open, onClose, children }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (open && !el.open) el.showModal();
+    else if (!open && el.open) el.close();
+  }, [open]);
+  return (
+    <dialog
+      ref={ref}
+      id={id}
+      className={className}
+      aria-label={label}
+      onClose={onClose}
+    >
+      {children}
+    </dialog>
+  );
 }
+export const RosterPickerModal = observer(function RosterPickerModal() {
+  const p = rosters.picker,
+    kind = p?.kind,
+    coverage = rosters.coverage;
+  const title = p?.relatedOnly
+    ? `Карты персонажа · ${catalog.byId.get(p.relatedTo)?.name || ""}`
+    : kind === "characters"
+      ? "Добавить персонажей"
+      : kind === "tactics"
+        ? "Добавить тактики"
+        : "Добавить кризисы";
+  return (
+    <Modal
+      id="roster-picker-dialog"
+      className={
+        "roster-picker-dialog" +
+        (p && kind !== "characters" ? " card-insights-dialog" : "")
+      }
+      label="Добавление в ростер"
+      open={!!p}
+      onClose={rosters.closePicker}
+    >
+      <div id="roster-picker-content">
+        {p && rosters.draft && (
+          <RosterPicker
+            picker={p}
+            items={rosters.pickerItems}
+            coverage={
+              coverage
+                ? {
+                    covered: coverage.covered,
+                    total: coverage.total,
+                    excluded: coverage.excluded,
+                  }
+                : null
+            }
+            affiliations={rosters.affiliations}
+            archiveAffiliations={rosters.archiveAffiliations}
+            characters={catalog.rows.filter((c) => !c.isGrunt)}
+            relatedName={catalog.byId.get(p.relatedTo)?.name}
+            title={title}
+            selectedCount={rosters.draft[kind].length}
+            error={rosters.cardError}
+          />
+        )}
+      </div>
+    </Modal>
+  );
+});
+export const RosterActionModal = observer(function RosterActionModal() {
+  const d = rosters.dialog;
+  return (
+    <Modal
+      id="roster-action-dialog"
+      className="small-dialog"
+      label="Действия с ростерами"
+      open={!!d}
+      onClose={() => {
+        if (!rosters.dialog) return;
+        rosters.closeDialog();
+      }}
+    >
+      <div id="roster-action-content">
+        {d && (
+          <>
+            <div className="dialog-heading">
+              <div>
+                <h2>{d.title}</h2>
+                <p>{d.description}</p>
+              </div>
+              <button
+                className="quiet close"
+                data-rs="close-action"
+                aria-label="Закрыть окно"
+                onClick={rosters.closeDialog}
+              >
+                ×
+              </button>
+            </div>
+            {d.type === "leave" && (
+              <div className="actions">
+                <button
+                  className="primary"
+                  data-rs="save-leave"
+                  onClick={() => rosters.leaveWith(true)}
+                >
+                  Сохранить и выйти
+                </button>
+                <button
+                  data-rs="discard-leave"
+                  onClick={() => rosters.leaveWith(false)}
+                >
+                  Выйти без сохранения
+                </button>
+                <button
+                  className="quiet"
+                  data-rs="close-action"
+                  onClick={rosters.closeDialog}
+                >
+                  Продолжить редактирование
+                </button>
+              </div>
+            )}
+            {d.type === "conflict" && (
+              <div className="actions">
+                <button data-rs="reload-editor" onClick={rosters.reloadDraft}>
+                  Открыть актуальный
+                </button>
+                <button
+                  className="primary"
+                  data-rs="force-save"
+                  onClick={rosters.forceSave}
+                >
+                  Сохранить мои правки
+                </button>
+                <button data-rs="close-action" onClick={rosters.closeDialog}>
+                  Отмена
+                </button>
+              </div>
+            )}
+            {d.type === "delete" && (
+              <div className="actions">
+                <button data-rs="close-action" onClick={rosters.closeDialog}>
+                  Отмена
+                </button>
+                <button
+                  className="primary"
+                  data-rs="confirm-delete"
+                  onClick={() => rosters.confirmRemove(d.id)}
+                >
+                  Удалить ростер
+                </button>
+              </div>
+            )}
+            {d.type === "groups" && (
+              <>
+                {rosters.groups.length ? (
+                  rosters.groups.map((g) => (
+                    <div key={g.id} className="group-row">
+                      <span>
+                        <strong>{g.name}</strong>
+                        <small>
+                          {count(
+                            rosters.records.filter((r) =>
+                              r.groups.includes(g.id),
+                            ).length,
+                            "ростер",
+                            "ростера",
+                            "ростеров",
+                          )}
+                        </small>
+                      </span>
+                      <div className="actions">
+                        <button
+                          data-rs="rename-group"
+                          onClick={() => rosters.groupForm(g.id)}
+                        >
+                          Название
+                        </button>
+                        <button
+                          className="quiet"
+                          data-rs="delete-group"
+                          aria-label={"Удалить группу " + g.name}
+                          onClick={() => rosters.removeGroup(g.id)}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="muted">Групп ещё нет.</p>
+                )}
+                <div className="actions">
+                  <button
+                    className="primary"
+                    data-rs="new-group"
+                    onClick={() => rosters.groupForm()}
+                  >
+                    + Новая группа
+                  </button>
+                </div>
+              </>
+            )}
+            {d.type === "group" && (
+              <form
+                id="roster-group-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  rosters.saveGroup();
+                }}
+              >
+                <label className="field">
+                  Название группы
+                  <input
+                    name="name"
+                    maxLength={60}
+                    required
+                    value={d.name}
+                    onChange={(e) => rosters.editGroupName(e.target.value)}
+                    placeholder="Название группы"
+                  />
+                </label>
+                <div className="actions">
+                  <button className="primary" type="submit">
+                    {d.id ? "Сохранить название" : "Создать группу"}
+                  </button>
+                  <button
+                    type="button"
+                    data-rs="close-action"
+                    onClick={rosters.closeDialog}
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            )}
+            {d.type === "delete-group" && (
+              <div className="actions">
+                <button data-rs="groups" onClick={rosters.showGroups}>
+                  Отмена
+                </button>
+                <button
+                  className="primary"
+                  data-rs="confirm-delete-group"
+                  onClick={() => rosters.confirmRemoveGroup(d.id)}
+                >
+                  Удалить группу
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </Modal>
+  );
+});

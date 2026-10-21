@@ -1,4 +1,6 @@
-import React, { memo } from "react";
+import { observer } from "mobx-react-lite";
+import { library, purchases, catalog, actions } from "./stores/index.js";
+import React, { memo, useState } from "react";
 import { Avatar, CollectionStatus, Control } from "./common.jsx";
 const summary = (set) =>
   (set.characters || [])
@@ -6,10 +8,12 @@ const summary = (set) =>
     .join(" · ") ||
   (set.missing ? "Нет данных о составе набора" : "Без миниатюр персонажей");
 const BoxImage = memo(function BoxImage({ set, large = false }) {
-  return set.image ? (
+  const [failed, setFailed] = useState(false);
+  return set.image && !failed ? (
     <img
       className={"box-set-image" + (large ? " large" : "")}
       src={set.image}
+      onError={() => setFailed(true)}
       alt={`Коробка ${set.name} · ${set.code}`}
       loading={large ? undefined : "lazy"}
       decoding="async"
@@ -20,13 +24,21 @@ const BoxImage = memo(function BoxImage({ set, large = false }) {
     </span>
   );
 });
-export const BoxActions = memo(function BoxActions({ set, planned, bought }) {
+export const BoxActions = observer(function BoxActions({ set }) {
+  const planned =
+      library.wishlist.has(set.code) && !library.bought.has(set.code),
+    bought = library.bought.has(set.code);
   return (
     <div className="box-set-actions">
       <button
         type="button"
         className={"purchase-wishlist-button" + (planned ? " is-planned" : "")}
         data-wishlist-code={set.code}
+        onClick={(event) => {
+          event.stopPropagation();
+          if (!library.toggleWishlist(set.code) && library.error)
+            actions.notify(library.error);
+        }}
         disabled={bought}
         title={bought ? "Набор уже куплен" : undefined}
         aria-pressed={planned}
@@ -38,6 +50,11 @@ export const BoxActions = memo(function BoxActions({ set, planned, bought }) {
         type="button"
         className={"purchase-bought-button" + (bought ? " is-purchased" : "")}
         data-purchased-code={set.code}
+        onClick={(event) => {
+          event.stopPropagation();
+          if (!library.togglePurchased(set.code) && library.error)
+            actions.notify(library.error);
+        }}
         aria-pressed={bought}
         aria-label={`${bought ? "Снять отметку купленного набора" : "Отметить набор купленным"}: ${set.name}`}
       >
@@ -61,6 +78,10 @@ export const BoxTile = memo(function BoxTile({
         className="box-set-open"
         type="button"
         data-box-code={set.code}
+        onClick={(event) => {
+          event.stopPropagation();
+          actions.openBoxSet(set.code);
+        }}
         aria-label={"Посмотреть набор " + set.code}
       >
         <div className="box-set-cover">
@@ -84,7 +105,15 @@ export function CharacterBoxes({ items, error }) {
     <section className="detail-section character-box-sets">
       <div className="section-title">
         <h3>В каких наборах</h3>
-        <button className="quiet" type="button" data-action="purchases">
+        <button
+          className="quiet"
+          type="button"
+          data-action="purchases"
+          onClick={(event) => {
+            event.stopPropagation();
+            actions.navigate("purchases");
+          }}
+        >
           Запланированные покупки →
         </button>
       </div>
@@ -133,6 +162,10 @@ export function PurchasesPage({
               key={id}
               type="button"
               data-purchase-tab={id}
+              onClick={(event) => {
+                event.stopPropagation();
+                purchases.setTab(id);
+              }}
               aria-pressed={tab === id}
               className={tab === id ? "selected" : ""}
             >
@@ -146,6 +179,10 @@ export function PurchasesPage({
             id="purchase-search"
             type="search"
             value={query}
+            onChange={(event) => {
+              event.stopPropagation();
+              purchases.setQuery(event.target.value);
+            }}
             placeholder="Название, код набора или персонаж…"
           />
         </label>
@@ -153,7 +190,11 @@ export function PurchasesPage({
       {error && (
         <p className="notice">
           {error}{" "}
-          <button type="button" data-box-retry>
+          <button
+            type="button"
+            data-box-retry
+            onClick={() => actions.retryBoxes()}
+          >
             Повторить
           </button>
         </p>
@@ -182,7 +223,15 @@ export function PurchasesPage({
               : "Отмечайте наборы в карточках персонажей или откройте весь каталог наборов."}
           </p>
           {!query && (
-            <button type="button" className="primary" data-purchase-tab="all">
+            <button
+              type="button"
+              className="primary"
+              data-purchase-tab="all"
+              onClick={(event) => {
+                event.stopPropagation();
+                purchases.setTab("all");
+              }}
+            >
               Выбрать наборы →
             </button>
           )}
@@ -191,7 +240,8 @@ export function PurchasesPage({
     </>
   );
 }
-const BoxMember = memo(function BoxMember({ item, character, status }) {
+const BoxMember = observer(function BoxMember({ item, character }) {
+  const status = library.status(item.slug);
   const content = (
     <>
       {character ? (
@@ -219,6 +269,10 @@ const BoxMember = memo(function BoxMember({ item, character, status }) {
       type="button"
       className="box-set-member"
       data-action="catalog-character"
+      onClick={(event) => {
+        event.stopPropagation();
+        actions.openCatalogCharacter(item.slug);
+      }}
       data-slug={item.slug}
     >
       {content}
@@ -239,6 +293,10 @@ export function BoxDetail({ set, planned, bought, members }) {
           type="button"
           className="quiet close"
           data-box-close
+          onClick={(event) => {
+            event.stopPropagation();
+            actions.closeBoxSet();
+          }}
           aria-label="Закрыть набор"
         >
           ×
@@ -271,3 +329,30 @@ export function BoxDetail({ set, planned, bought, members }) {
     </>
   );
 }
+
+export const ConnectedPurchases = observer(function ConnectedPurchases() {
+  return (
+    <PurchasesPage
+      items={purchases.filtered.map((set) => ({ set }))}
+      count={library.wishlist.size}
+      boughtCount={library.bought.size}
+      total={purchases.rows.length}
+      tab={purchases.tab}
+      query={purchases.query}
+      error={purchases.error}
+    />
+  );
+});
+export const ConnectedBoxDetail = observer(function ConnectedBoxDetail() {
+  if (!purchases.selected) return null;
+  const set = purchases.box(purchases.selected);
+  return (
+    <BoxDetail
+      set={set}
+      members={set.characters.map((item) => ({
+        item,
+        character: catalog.byId.get(item.slug),
+      }))}
+    />
+  );
+});

@@ -1,6 +1,7 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Control, number, count } from "./common.jsx";
-import { MarkupSlot } from "./markup.jsx";
+import { observer } from "mobx-react-lite";
+import { tournaments as t, actions } from "./stores/index.js";
 const mean = (value) => (value === null ? "—" : number(value));
 const initials = (name) =>
   name
@@ -38,6 +39,10 @@ const ArchiveCharacter = memo(function ArchiveCharacter({
         data-character={c.id}
         aria-pressed={selected}
         aria-label={`${c.name} (${c.alterEgo}), всего ${number(c.points)} баллов, среднее ${mean(c.average)}, ${count(c.count, "ростер", "ростера", "ростеров")}, аффилиейшены: ${c.affiliations.join(", ") || "не указаны в каталоге"}`}
+        onClick={(event) => {
+          event.stopPropagation();
+          t.chooseCharacter(c.id, false);
+        }}
       >
         <span className="at-row-index" aria-hidden="true">
           {index + 1}
@@ -76,6 +81,10 @@ const ArchiveCharacter = memo(function ArchiveCharacter({
         data-slug={(c.inventoryIds || [c.id])[0]}
         aria-label={"Открыть " + c.name + " в разделе Персонажи"}
         title="В раздел Персонажи"
+        onClick={(event) => {
+          event.stopPropagation();
+          actions.openCatalogCharacter((c.inventoryIds || [c.id])[0]);
+        }}
       >
         ↗
       </button>
@@ -115,6 +124,7 @@ export function TournamentAffiliations({ rows, selected }) {
         type="checkbox"
         value={a.name}
         checked={selected.includes(a.name)}
+        onChange={(event) => t.toggleAffiliation(a.name, event.target.checked)}
       />
       <span className="at-affiliation-name">
         <strong>{a.name}</strong>
@@ -153,6 +163,7 @@ export function TournamentPlayers({ rows, selected }) {
           name="at-player-choice"
           value={p.id}
           checked={selected === p.id}
+          onChange={() => t.choosePlayer(p.id)}
         />
         <span className="at-player-name">
           <strong>{p.name}</strong>
@@ -214,6 +225,10 @@ function CatalogArrow({ slug, name }) {
       data-slug={slug}
       aria-label={"Открыть " + name + " в разделе Персонажи"}
       title="Открыть карточку в Персонажах"
+      onClick={(event) => {
+        event.stopPropagation();
+        actions.openCatalogCharacter(slug);
+      }}
     >
       ↗
     </button>
@@ -258,12 +273,17 @@ function Placement({ row: r }) {
     </div>
   );
 }
-const TournamentRosterCard = memo(function TournamentRosterCard({
+const TournamentRosterCard = observer(function TournamentRosterCard({
   row: r,
   availability: a,
 }) {
+  const [open, setOpen] = useState(false);
   return (
-    <details className="at-roster-card" data-roster={r.id}>
+    <details
+      className="at-roster-card"
+      data-roster={r.id}
+      onToggle={(event) => setOpen(event.currentTarget.open)}
+    >
       <summary className="at-roster-summary">
         <span className="at-rank-mark" aria-hidden="true">
           {r.wins}W
@@ -323,7 +343,9 @@ const TournamentRosterCard = memo(function TournamentRosterCard({
           ⌄
         </span>
       </summary>
-      <MarkupSlot className="at-roster-body" />
+      <div className="at-roster-body">
+        {open && <TournamentRosterBody {...t.body(r)} />}
+      </div>
     </details>
   );
 });
@@ -369,7 +391,14 @@ export function TournamentRosterBody({
         </p>
       )}
       <div className="at-roster-actions">
-        <button type="button" data-tournament-import={r.id}>
+        <button
+          type="button"
+          data-tournament-import={r.id}
+          onClick={(event) => {
+            event.stopPropagation();
+            actions.openTournamentDraft(r);
+          }}
+        >
           Открыть в моём билдере →
         </button>
       </div>
@@ -410,6 +439,10 @@ export function TournamentRosterBody({
                   className="at-co-chip"
                   data-character={c.entry.id}
                   type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    t.chooseCharacter(c.entry.id, true);
+                  }}
                 >
                   {c.info.name}
                 </button>
@@ -440,6 +473,10 @@ export function TournamentRosterBody({
                             className="at-roster-character-button"
                             data-character={c.entry.id}
                             type="button"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              t.chooseCharacter(c.entry.id, true);
+                            }}
                           >
                             {c.info.name}
                           </button>
@@ -665,6 +702,10 @@ export function TournamentOverview({
               data-action="catalog-character"
               data-slug={inventorySlug}
               type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                actions.openCatalogCharacter(inventorySlug);
+              }}
             >
               В «Персонажи» ↗
             </button>
@@ -676,6 +717,10 @@ export function TournamentOverview({
           type="button"
           id="at-share-character"
           aria-label="Скопировать ссылку на персонажа"
+          onClick={(event) => {
+            event.stopPropagation();
+            t.share();
+          }}
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path
@@ -747,6 +792,10 @@ export function TournamentOverview({
               className="at-co-chip"
               type="button"
               data-character={p.id}
+              onClick={(event) => {
+                event.stopPropagation();
+                t.chooseCharacter(p.id, true);
+              }}
             >
               {p.name}
               <small>{p.count}</small>
