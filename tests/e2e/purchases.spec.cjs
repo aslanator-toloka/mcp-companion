@@ -88,7 +88,7 @@ test("tournament arrow opens catalog; box contents, wishlist, reload, tabs and J
     await expect(page.locator('nav [data-action="all"]')).toHaveClass(
       /selected/,
     );
-    await expect(page.locator("#character-dialog h2")).toHaveText(
+    await expect(page.locator("#character-dialog .detail-name h2")).toHaveText(
       "Spider-Man Noir",
     );
     const set = page.locator('#character-dialog [data-box-set="CP170"]');
@@ -168,7 +168,7 @@ test("tournament arrow opens catalog; box contents, wishlist, reload, tabs and J
     await box
       .locator('[data-action="catalog-character"][data-slug="silk"]')
       .click();
-    await expect(page.locator("#character-dialog h2")).toHaveText("Silk");
+    await expect(page.locator("#character-dialog .detail-name h2")).toHaveText("Silk");
     await expect(box).not.toBeVisible();
     await page
       .getByRole("button", { name: "Закрыть карточку", exact: true })
