@@ -1,3 +1,4 @@
+import { CharacterTactics } from "./character-tactics.jsx";
 import { observer } from "mobx-react-lite";
 import { catalog, library, actions } from "./stores/index.js";
 import React, { memo } from "react";
@@ -128,6 +129,7 @@ export function CharacterDetail({
       </header>
       <div className="detail-body">
         {card}
+        <CharacterTactics character={c} />
         <CharacterBoxes items={boxes} error={boxError} />
         <section className="detail-section roster-memberships">
           <div className="section-title">

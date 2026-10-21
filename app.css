@@ -44,3 +44,10 @@
 
 .picker-card-owners{display:block;margin-top:3px;font-size:11px;font-weight:500;line-height:1.5;color:#365479}
 @media(max-width:700px){.picker-card-owners{font-size:10px}}
+
+/* Personal tactics use the same native card renderer as the roster/battle viewer. */
+.character-tactics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:18px;align-items:start}
+.character-tactic-preview{min-width:0;max-width:360px;padding:12px;border:1px solid var(--line,#cbdcf2);border-radius:12px;background:var(--panel,#fff)}
+.character-tactic-open{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:0 0 10px;border:0;background:transparent;color:inherit;min-height:34px}
+.character-tactic-open strong{font-size:13px}.character-tactic-open span{color:#2563eb;font-size:20px}
+.character-tactic-status{display:block;margin-top:10px;color:var(--muted,#62768e);font-size:11px}
