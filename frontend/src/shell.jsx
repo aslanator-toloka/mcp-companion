@@ -14,7 +14,7 @@ export const Navigation = observer(function Navigation() {
     ["purchases", "09", "Запланированные покупки"],
   ];
   const selected =
-    ui.screen === "catalog" ? (ui.mine ? "mine" : "all") : ui.screen;
+    ui.screen === "catalog" ? (catalog.onlyOwned ? "mine" : "all") : ui.screen;
   return (
     <nav aria-label="Разделы приложения">
       {items.map(([id, index, label]) => (

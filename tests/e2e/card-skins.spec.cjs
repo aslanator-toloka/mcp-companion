@@ -89,11 +89,9 @@ test("Noir skin layers are independent, persist, restore the original, and never
     await expect(name).toBeChecked();
     await expect(background).toBeChecked();
     await page.reload();
-    await page.locator("#search").fill("Spider-Man Noir");
-    await page
-      .locator(
-        '#characters [data-action="character"][data-slug="spider-man-noir"]',
-      )
+    await expect(viewer.locator(".sc-injured")).toBeVisible();
+    await viewer
+      .getByRole("button", { name: "Healthy · здоров", exact: true })
       .click();
     await expect(name).toBeChecked();
     await expect(background).toBeChecked();

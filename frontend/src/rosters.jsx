@@ -1110,7 +1110,9 @@ function Modal({ id, className, label, open, onClose, children }) {
       id={id}
       className={className}
       aria-label={label}
-      onClose={onClose}
+      onClose={(event) => {
+        if (!event.currentTarget.open) onClose?.(event);
+      }}
     >
       {children}
     </dialog>

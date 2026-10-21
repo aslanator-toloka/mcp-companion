@@ -19,7 +19,8 @@ function ArchiveDialog({ openState, children, ...props }) {
     <dialog
       {...props}
       ref={ref}
-      onClose={() => {
+      onClose={(event) => {
+        if (event.currentTarget.open) return;
         if (t.dialog) t.closeDialog();
       }}
       onClick={(e) => {

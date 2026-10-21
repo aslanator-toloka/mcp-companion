@@ -445,7 +445,9 @@ const RenameDialog = observer(function RenameDialog() {
     <dialog
       ref={ref}
       className="small-dialog"
-      onClose={() => s.setField("renaming", false)}
+      onClose={(event) => {
+        if (!event.currentTarget.open) s.setField("renaming", false);
+      }}
     >
       <form
         id="map-pin-form"

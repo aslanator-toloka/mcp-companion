@@ -264,7 +264,6 @@ export class TournamentStore {
     this.playerMode = this.selectedPlayer !== null && !this.collectionMode;
     this.limit = 20;
     if (this.selectedPlayer !== null || allRosters) this.resultQuery = "";
-    this.updateRoute();
   }
   chooseCharacter(id, clearSearch = false) {
     if (!this.index.characters.has(id)) return;
@@ -274,21 +273,12 @@ export class TournamentStore {
     this.collectionMode = false;
     this.playerMode = false;
     if (clearSearch) this.characterQuery = "";
-    this.updateRoute();
   }
   chooseCollection() {
     this.collectionMode = true;
     this.playerMode = false;
     this.limit = 20;
     this.resultQuery = "";
-    this.updateRoute();
-  }
-  updateRoute() {
-    const params = new URLSearchParams();
-    if (this.collectionMode) params.set("collection", "ready");
-    else if (!this.playerMode) params.set("character", this.selected);
-    if (this.selectedPlayer !== null) params.set("player", this.selectedPlayer);
-    history.replaceState(null, "", "#" + params.toString());
   }
   applyRoute(params) {
     if (!this.data) return;

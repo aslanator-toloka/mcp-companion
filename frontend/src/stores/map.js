@@ -103,7 +103,6 @@ export class MapStore {
       this.zoom = 1;
     }
     this.battle.setLocation("view", "map");
-    this.ui.actions.scrollTop?.();
     this.updateCoordinates();
   }
   back() {
@@ -111,7 +110,6 @@ export class MapStore {
       "view",
       this.match.status === "preparing" ? "setup" : "play",
     );
-    this.ui.actions.scrollTop?.();
   }
   setField(name, value) {
     this[name] = value;

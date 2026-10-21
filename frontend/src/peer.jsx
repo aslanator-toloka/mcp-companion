@@ -232,7 +232,8 @@ export const PeerModal = observer(function PeerModal() {
       id="peer-connect-dialog"
       className="battle-dialog peer-connect-dialog"
       ref={ref}
-      onClose={() => {
+      onClose={(event) => {
+        if (event.currentTarget.open) return;
         if (p.dialog) p.close();
       }}
     >

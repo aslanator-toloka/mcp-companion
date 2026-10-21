@@ -207,7 +207,7 @@ test("native local battle: stable fighter DOM, conditions, red live stats, portr
   await expect(dialog.locator(".battle-log")).toContainText("Начат раунд 2");
   await dialog.locator('[data-bt="close-dialog"]').click();
   await page.reload();
-  await page.locator('[data-bt="open"][data-id="local-match"]').click();
+  await expect(page).toHaveURL(/match=local-match/);
   await expect(page.locator(".round-label b")).toHaveText("2");
   await page.locator('[data-bt="finish"]').click();
   await dialog.locator('[data-bt="confirm-finish"]').click();
@@ -280,8 +280,8 @@ test("native SVG map: selection, distances, coordinate validation, pointer drag,
   await expect(pin).toHaveCount(1);
   await expect(svg.locator("[data-map-key]")).toHaveCount(10);
   await page.reload();
-  await page.locator('[data-bt="open"][data-id="local-match"]').click();
-  await page.locator('[data-bt="map"]').click();
+  await expect(page).toHaveURL(/view=map/);
+  await expect(svg).toBeVisible();
   await expect(pin).toHaveCount(1);
   await page.locator('[data-ma="zoom-in"]').click();
   await expect(page.locator(".map-zoom")).toContainText("150%");

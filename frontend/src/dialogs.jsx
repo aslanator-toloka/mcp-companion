@@ -34,7 +34,9 @@ export function Dialog({
       id={id}
       className={className}
       aria-label={label}
-      onClose={onClose}
+      onClose={(event) => {
+        if (!event.currentTarget.open) onClose?.(event);
+      }}
     >
       {children}
     </dialog>

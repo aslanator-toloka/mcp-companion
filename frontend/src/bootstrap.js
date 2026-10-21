@@ -1,4 +1,6 @@
-import { runInAction } from "mobx";
+import { reaction } from "mobx";
+import { BrowserNavigation } from "./navigation/history.js";
+import { createRoutes } from "./navigation/routes.js";
 import Core from "../../battle-core.js";
 import Geometry from "../../map-geometry.js";
 import Phase from "../../power-phase.js";
@@ -27,7 +29,7 @@ import {
   ui,
 } from "./stores/index.js";
 const KEY = "mcp-companion-catalog-v1";
-const initialRoute = location.hash;
+let navigation;
 const json = async (path) => {
   const r = await fetch(path);
   if (!r.ok) throw Error("Не удалось загрузить " + path);
@@ -49,14 +51,6 @@ function route(screen, onlyOwned = false, keepDraft = false) {
   if (!keepDraft) rosters.reset();
   ui.activate(screen, onlyOwned);
   if (screen === "catalog") catalog.reset(onlyOwned);
-  if (screen === "tournaments") tournaments.updateRoute();
-  else
-    history.replaceState(
-      null,
-      "",
-      "#screen=" + (screen === "catalog" && onlyOwned ? "mine" : screen),
-    );
-  window.scrollTo(0, 0);
 }
 function navigate(action) {
   if (!ui.ready) return;
@@ -246,8 +240,6 @@ ui.configure({
   },
   catalogMode: (mine) => {
     ui.activate(ui.screen, mine);
-    if (ui.screen === "catalog")
-      history.replaceState(null, "", "#screen=" + (mine ? "mine" : "catalog"));
   },
   showData: () => ui.setDataDialog("main"),
   pickRoster: () => ui.setMembership(true),
@@ -374,12 +366,24 @@ export async function initialize() {
     ui.setReady(
       "Снимок " + new Date(catalog.fetchedAt).toLocaleDateString("ru-RU"),
     );
-    const params = new URLSearchParams(initialRoute.slice(1)),
-      screen = params.get("screen");
-    if (screen === "mine") route("catalog", true);
-    else if (["catalog", "rosters", "battle", "purchases"].includes(screen))
-      route(screen);
-    else route("tournaments");
+    const routes = createRoutes({
+      library,
+      catalog,
+      purchases,
+      rosters,
+      tournaments,
+      cardViews,
+      battle,
+      peer,
+      map,
+      ui,
+    });
+    navigation = new BrowserNavigation({ window, ...routes });
+    navigation.start();
+    reaction(
+      () => ({ hash: routes.read(), prompt: rosters.dialog?.type }),
+      () => navigation.schedule(),
+    );
     if (!started) {
       started = true;
       installBrowserEvents();
@@ -389,24 +393,6 @@ export async function initialize() {
   }
 }
 function installBrowserEvents() {
-  window.addEventListener("hashchange", () => {
-    const params = new URLSearchParams(location.hash.slice(1));
-    rosters.requestLeave(() => {
-      if (
-        params.has("character") ||
-        params.has("collection") ||
-        params.has("player")
-      ) {
-        tournaments.applyRoute(params);
-        route("tournaments");
-      } else {
-        const screen = params.get("screen");
-        if (screen === "mine") route("catalog", true);
-        else if (["catalog", "rosters", "battle", "purchases"].includes(screen))
-          route(screen);
-      }
-    });
-  });
   window.addEventListener("storage", (event) => {
     if (!event.newValue) return;
     try {
@@ -422,6 +408,7 @@ function installBrowserEvents() {
     }
   });
   window.addEventListener("beforeunload", (event) => {
+    navigation?.saveCurrent();
     if (rosters.dirty) {
       event.preventDefault();
       event.returnValue = "";

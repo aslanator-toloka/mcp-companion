@@ -27,7 +27,7 @@ This repository is the source of truth. Install dependencies with `npm ci` in th
 
 Existing localStorage keys and JSON export shape remain compatible. Old owned-only libraries become manual ownership; wishlist/purchased/group fields default appropriately. Export omits unsaved drafts/UI. Import validates the library and optional battles before writing, restores previous keys if a write fails, then publishes accepted snapshots. This is rollback across localStorage keys, not a database transaction across browser tabs. Malformed library saves block incidental writes until an explicit valid restore; their original raw value is preserved.
 
-Cross-tab updates enter store actions. Browser hash changes respect the dirty-roster prompt. WebRTC lifecycle listeners handle background/return/close; view effects dispose resize, font and keyboard subscriptions. Saved direct rooms still require a fresh invitation/answer after reload. Tests use real RTC loopback on one machine; two physical iPads and a long real game remain manual validation.
+Cross-tab updates enter store actions. A single history module maps navigable views to URLs and handles Back/Forward, direct links, scroll and the dirty-roster prompt. See [NAVIGATION.md](NAVIGATION.md). WebRTC lifecycle listeners handle background/return/close; view effects dispose resize, font and keyboard subscriptions. Saved direct rooms still require a fresh invitation/answer after reload. Tests use real RTC loopback on one machine; two physical iPads and a long real game remain manual validation.
 
 ## Verification
 

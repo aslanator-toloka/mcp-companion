@@ -1062,7 +1062,9 @@ function CardModal({
       className={className}
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
-      onClose={onClose}
+      onClose={(event) => {
+        if (!event.currentTarget.open) onClose?.(event);
+      }}
     >
       {children}
     </dialog>
