@@ -4,6 +4,14 @@ import {
   observableRef,
   runInAction,
 } from "mobx";
+import {
+  defaultFilters,
+  normalizeFilters,
+  compactFilters,
+  matchesFilters,
+  sortCharacters,
+  blankAttack,
+} from "../catalog-filters.js";
 export const words = (value) =>
   String(value || "")
     .normalize("NFKD")
@@ -24,6 +32,8 @@ export class CatalogStore {
   affiliation = "";
   threat = "";
   onlyOwned = false;
+  filters = defaultFilters();
+  filtersOpen = false;
   details = observable.map({}, { deep: false });
   requests = new Map();
   constructor(library, fetcher = (...args) => fetch(...args)) {
@@ -37,6 +47,7 @@ export class CatalogStore {
         library: false,
         fetcher: false,
         requests: false,
+        filters: observableRef,
       },
       { autoBind: true },
     );
@@ -86,14 +97,98 @@ export class CatalogStore {
     this.ready = false;
   }
   setFilter(name, value) {
-    if (["query", "affiliation", "threat", "onlyOwned"].includes(name))
+    if (name === "affiliation")
+      this.filters = { ...this.filters, affiliations: [] };
+    if (name === "threat")
+      this.filters = { ...this.filters, minThreat: "", maxThreat: "" };
+    if (name === "onlyOwned" && value)
+      this.filters = { ...this.filters, missing: false };
+    if (
+      ["query", "affiliation", "threat", "onlyOwned", "filtersOpen"].includes(
+        name,
+      )
+    )
       this[name] = value;
+  }
+  replaceFilters(value) {
+    this.filters = normalizeFilters(value);
+    if (this.activeFilterCount) this.filtersOpen = true;
+    if (this.filters.missing) this.onlyOwned = false;
+  }
+  setAdvanced(name, value) {
+    this.filters = normalizeFilters({ ...this.filters, [name]: value });
+    if (["minThreat", "maxThreat"].includes(name)) this.threat = "";
+    if (name === "missing" && value) this.onlyOwned = false;
+  }
+  toggleAdvanced(name, value) {
+    const selected = this.filters[name];
+    this.setAdvanced(
+      name,
+      selected.includes(value)
+        ? selected.filter((v) => v !== value)
+        : [...selected, value],
+    );
+  }
+  toggleAffiliation(name) {
+    const selected = this.selectedAffiliations;
+    this.affiliation = "";
+    this.setAdvanced(
+      "affiliations",
+      selected.includes(name)
+        ? selected.filter((v) => v !== name)
+        : [...selected, name],
+    );
+  }
+  get selectedAffiliations() {
+    return this.filters.affiliations.length
+      ? this.filters.affiliations
+      : this.affiliation
+        ? [this.affiliation]
+        : [];
+  }
+  updateAttack(id, name, value) {
+    this.setAdvanced(
+      "attacks",
+      this.filters.attacks.map((a) =>
+        a.id === id ? { ...a, [name]: value } : a,
+      ),
+    );
+  }
+  addAttack() {
+    this.setAdvanced("attacks", [
+      ...this.filters.attacks,
+      blankAttack(Math.max(...this.filters.attacks.map((a) => a.id)) + 1),
+    ]);
+  }
+  removeAttack(id) {
+    this.setAdvanced(
+      "attacks",
+      this.filters.attacks.length === 1
+        ? [blankAttack(id)]
+        : this.filters.attacks.filter((a) => a.id !== id),
+    );
+  }
+  get activeFilterCount() {
+    return Object.entries(compactFilters(this.filters)).reduce(
+      (n, [key, value]) =>
+        n +
+        (["sort", "descending", "allAttacks", "allAffiliations"].includes(key)
+          ? 0
+          : Array.isArray(value)
+            ? value.length
+            : 1),
+      0,
+    );
+  }
+  get tags() {
+    return [...new Set(this.rows.flatMap((c) => c.tags || []))].sort();
   }
   reset(onlyOwned = false) {
     this.query = "";
     this.affiliation = "";
     this.threat = "";
     this.onlyOwned = onlyOwned;
+    this.filters = defaultFilters();
   }
   get affiliations() {
     return [
@@ -106,17 +201,20 @@ export class CatalogStore {
     ].sort((a, b) => a - b);
   }
   get filtered() {
-    const query = words(this.query);
-    return this.rows.filter((c) => {
-      const name = words(c.name + " " + (c.alterEgo || ""));
-      return (
-        query.every((q) => name.some((w) => w.startsWith(q))) &&
-        (!this.affiliation ||
-          c.affiliations.some((a) => a.name === this.affiliation)) &&
-        (!this.threat || String(c.threatLevel) === this.threat) &&
-        (!this.onlyOwned || this.library.owned.has(c.slug))
-      );
-    });
+    return sortCharacters(
+      this.rows.filter((c) =>
+        matchesFilters(c, this.filters, {
+          query: this.query,
+          affiliation: this.affiliation,
+          threat: this.threat,
+          onlyOwned: this.onlyOwned,
+          owned:
+            (this.onlyOwned || this.filters.missing) &&
+            this.library.owned.has(c.slug),
+        }),
+      ),
+      this.filters,
+    );
   }
   async detail(slug) {
     if (this.details.has(slug)) return this.details.get(slug);

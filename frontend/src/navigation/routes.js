@@ -1,4 +1,5 @@
 import { runInAction } from "mobx";
+import { encodeFilters, decodeFilters } from "../catalog-filters.js";
 const bool = (v) => v === "1",
   one = (v, values, fallback) => (values.includes(v) ? v : fallback);
 const positive = (v, fallback, max = 10000) =>
@@ -94,6 +95,7 @@ export function createRoutes(s) {
       put("q", catalog.query);
       put("affiliation", catalog.affiliation);
       put("threat", catalog.threat);
+      put("filters", encodeFilters(catalog.filters));
     }
     if (ui.screen === "purchases") {
       put("tab", purchases.tab, "wishlist");
@@ -267,6 +269,7 @@ export function createRoutes(s) {
         catalog.setFilter("query", p.get("q") || "");
         catalog.setFilter("affiliation", p.get("affiliation") || "");
         catalog.setFilter("threat", p.get("threat") || "");
+        catalog.replaceFilters(decodeFilters(p.get("filters")));
       }
       if (screen === "purchases") {
         purchases.setTab(

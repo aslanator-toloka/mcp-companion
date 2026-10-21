@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog, library, ui, actions } from "./stores/index.js";
 import { CatalogList } from "./catalog.jsx";
+import { CatalogFilters } from "./catalog-filters.jsx";
 import { ConnectedPurchases, ConnectedBoxDetail } from "./purchases.jsx";
 import { StaticShell } from "./shell-static.jsx";
 export const Navigation = observer(function Navigation() {
@@ -100,11 +101,13 @@ export const CatalogPanel = observer(function CatalogPanel() {
       </div>
       <div className="catalog-tools">
         <label className="search-label">
-          <span className="sr-only">Поиск по имени или alter ego</span>
+          <span className="sr-only">
+            Поиск по имени, alter ego, аффилиации или тегу
+          </span>
           <input
             id="search"
             type="search"
-            placeholder="Имя персонажа или alter ego…"
+            placeholder="Имя, alter ego, аффилиация или #тег…"
             autoComplete="off"
             value={catalog.query}
             disabled={!ui.ready}
@@ -124,7 +127,11 @@ export const CatalogPanel = observer(function CatalogPanel() {
                 f("affiliation", e);
               }}
             >
-              <option value="">Все аффилиации</option>
+              <option value="">
+                {catalog.filters.affiliations.length
+                  ? `В панели выбрано: ${catalog.filters.affiliations.length}`
+                  : "Все аффилиации"}
+              </option>
               {catalog.affiliations.map((a) => (
                 <option key={a} value={a}>
                   {a}
@@ -176,6 +183,7 @@ export const CatalogPanel = observer(function CatalogPanel() {
             Сбросить
           </button>
         </div>
+        <CatalogFilters />
       </div>
       <div className="list-heading">
         <span id="result" role="status" aria-live="polite">
@@ -185,7 +193,7 @@ export const CatalogPanel = observer(function CatalogPanel() {
               ? "Загружаем каталог…"
               : catalog.onlyOwned
                 ? "Модели с отметкой «Есть у меня»"
-                : `${catalog.filtered.length} записей · по алфавиту`}
+                : `${catalog.filtered.length} записей${catalog.filters.sort === "name" ? " · по алфавиту" : ""}`}
         </span>
         <span className="column-note">
           Персонаж / версия <span>Threat</span>

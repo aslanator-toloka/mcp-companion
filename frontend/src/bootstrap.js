@@ -30,8 +30,8 @@ import {
 } from "./stores/index.js";
 const KEY = "mcp-companion-catalog-v1";
 let navigation;
-const json = async (path) => {
-  const r = await fetch(path);
+const json = async (path, options) => {
+  const r = await fetch(path, options);
   if (!r.ok) throw Error("Не удалось загрузить " + path);
   return r.json();
 };
@@ -254,7 +254,7 @@ ui.configure({
 let started = false;
 export async function initialize() {
   try {
-    const data = await json("data/catalog.json");
+    const data = await json("data/catalog.json", { cache: "no-cache" });
     data.characters.sort(
       (a, b) =>
         a.name.localeCompare(b.name, "en") ||
