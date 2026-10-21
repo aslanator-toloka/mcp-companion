@@ -1,0 +1,4246 @@
+{
+  "source": "https://www.jarvis-protocol.com",
+  "fetchedAt": "2026-10-21T09:48:16.848843+00:00",
+  "sets": [
+    {
+      "code": "CA09",
+      "name": "2023 Crisis Pack",
+      "type": "card_pack",
+      "releaseDate": "2023-10-13",
+      "characters": [],
+      "image": "assets/box-sets/ca09.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA09",
+      "imageError": null
+    },
+    {
+      "code": "CP162",
+      "name": "Abomination & Wrecking Crew",
+      "type": "character_pack",
+      "releaseDate": "2024-11-08",
+      "characters": [
+        {
+          "slug": "abomination",
+          "name": "Abomination",
+          "amount": 1
+        },
+        {
+          "slug": "the-wrecking-crew",
+          "name": "The Wrecking Crew",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp162.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP162",
+      "imageError": null
+    },
+    {
+      "code": "CP191",
+      "name": "Adam Warlock, Moondragon & Quasar",
+      "type": "character_pack",
+      "releaseDate": "2026-02-13",
+      "characters": [
+        {
+          "slug": "adam-warlock",
+          "name": "Adam Warlock",
+          "amount": 1
+        },
+        {
+          "slug": "moondragon",
+          "name": "Moondragon",
+          "amount": 1
+        },
+        {
+          "slug": "quasar",
+          "name": "Quasar",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp191.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP191",
+      "imageError": null
+    },
+    {
+      "code": "CP100",
+      "name": "Agent Venom & Spider-Woman",
+      "type": "character_pack",
+      "releaseDate": "2023-02-10",
+      "characters": [
+        {
+          "slug": "agent-venom",
+          "name": "Agent Venom",
+          "amount": 1
+        },
+        {
+          "slug": "spider-woman",
+          "name": "Spider-Woman",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp100.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP100",
+      "imageError": null
+    },
+    {
+      "code": "CP37",
+      "name": "Amazing Spider-Man & Black Cat",
+      "type": "character_pack",
+      "releaseDate": "2021-06-24",
+      "characters": [
+        {
+          "slug": "amazing-spider-man",
+          "name": "Amazing Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "black-cat",
+          "name": "Black Cat",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp37.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP37",
+      "imageError": null
+    },
+    {
+      "code": "MCP26",
+      "name": "America Chavez, Kate Bishop & Patriot",
+      "type": "character_pack",
+      "releaseDate": null,
+      "characters": [],
+      "image": "assets/box-sets/mcp26.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP26",
+      "imageError": null
+    },
+    {
+      "code": "CP152",
+      "name": "Angel & Archangel",
+      "type": "character_pack",
+      "releaseDate": "2024-09-27",
+      "characters": [
+        {
+          "slug": "angel",
+          "name": "Angel",
+          "amount": 1
+        },
+        {
+          "slug": "archangel",
+          "name": "Archangel",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp152.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP152",
+      "imageError": null
+    },
+    {
+      "code": "CP28",
+      "name": "Angela & Enchantress",
+      "type": "character_pack",
+      "releaseDate": "2021-01-22",
+      "characters": [
+        {
+          "slug": "angela",
+          "name": "Angela",
+          "amount": 1
+        },
+        {
+          "slug": "enchantress",
+          "name": "Enchantress",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp28.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP28",
+      "imageError": null
+    },
+    {
+      "code": "CP26",
+      "name": "Ant-Man & Wasp",
+      "type": "character_pack",
+      "releaseDate": "2020-09-12",
+      "characters": [
+        {
+          "slug": "ant-man",
+          "name": "Ant-Man",
+          "amount": 1
+        },
+        {
+          "slug": "wasp",
+          "name": "Wasp",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp26.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP26",
+      "imageError": null
+    },
+    {
+      "code": "CP107",
+      "name": "Apocalypse",
+      "type": "character_pack",
+      "releaseDate": "2024-09-27",
+      "characters": [
+        {
+          "slug": "apocalypse",
+          "name": "Apocalypse",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp107.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP107",
+      "imageError": null
+    },
+    {
+      "code": "CP106",
+      "name": "Asgardian Shrine Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-08-02",
+      "characters": [],
+      "image": "assets/box-sets/cp106.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP106",
+      "imageError": null
+    },
+    {
+      "code": "CP138",
+      "name": "Asgardians Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2022-07-08",
+      "characters": [
+        {
+          "slug": "hela-queen-of-hel",
+          "name": "Hela, Queen of Hel",
+          "amount": 1
+        },
+        {
+          "slug": "loki-god-of-mischief",
+          "name": "Loki, God of Mischief",
+          "amount": 1
+        },
+        {
+          "slug": "thor-prince-of-asgard",
+          "name": "Thor, Prince of Asgard",
+          "amount": 1
+        },
+        {
+          "slug": "valkyrie",
+          "name": "Valkyrie",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp138.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP138",
+      "imageError": null
+    },
+    {
+      "code": "MCP64",
+      "name": "Asgardians Starter Set",
+      "type": "starter_pack",
+      "releaseDate": "2026-07-31",
+      "characters": [
+        {
+          "slug": "thor-hero-of-midgard",
+          "name": "Thor, Hero of Midgard",
+          "amount": 1
+        },
+        {
+          "slug": "lady-sif",
+          "name": "Lady Sif",
+          "amount": 1
+        },
+        {
+          "slug": "loki-prince-of-lies",
+          "name": "Loki, Prince of Lies",
+          "amount": 1
+        },
+        {
+          "slug": "mighty-thor",
+          "name": "The Mighty Thor",
+          "amount": 1
+        },
+        {
+          "slug": "valkyrie-and-elendil",
+          "name": "Valkyrie and Elendil",
+          "amount": 1
+        },
+        {
+          "slug": "warriors-three",
+          "name": "Warriors Three",
+          "amount": 1
+        },
+        {
+          "slug": "enchantress",
+          "name": "Enchantress",
+          "amount": 1
+        },
+        {
+          "slug": "angela",
+          "name": "Angela",
+          "amount": 1
+        },
+        {
+          "slug": "heimdall-the-all-seeing",
+          "name": "Heimdall, The All-Seeing",
+          "amount": 1
+        },
+        {
+          "slug": "skurge-the-executioner",
+          "name": "Skurge, The Executioner",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp64.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP64",
+      "imageError": null
+    },
+    {
+      "code": "CP173",
+      "name": "Avalanche, Exodus & Lady Mastermind",
+      "type": "character_pack",
+      "releaseDate": "2025-06-13",
+      "characters": [
+        {
+          "slug": "avalanche",
+          "name": "Avalanche",
+          "amount": 1
+        },
+        {
+          "slug": "exodus",
+          "name": "Exodus",
+          "amount": 1
+        },
+        {
+          "slug": "lady-mastermind",
+          "name": "Lady Mastermind",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp173.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP173",
+      "imageError": null
+    },
+    {
+      "code": "CP141",
+      "name": "Avengers Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2024-05-10",
+      "characters": [
+        {
+          "slug": "black-widow",
+          "name": "Black Widow",
+          "amount": 1
+        },
+        {
+          "slug": "captain-america",
+          "name": "Captain America",
+          "amount": 1
+        },
+        {
+          "slug": "captain-marvel",
+          "name": "Captain Marvel",
+          "amount": 1
+        },
+        {
+          "slug": "iron-man",
+          "name": "Iron Man",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp141.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP141",
+      "imageError": null
+    },
+    {
+      "code": "MCP22",
+      "name": "Avengers Brains & Brawn",
+      "type": "character_pack",
+      "releaseDate": "2026-10-09",
+      "characters": [
+        {
+          "slug": "hulk",
+          "name": "Hulk",
+          "amount": 1
+        },
+        {
+          "slug": "hulkbuster",
+          "name": "Hulkbuster",
+          "amount": 1
+        },
+        {
+          "slug": "vision",
+          "name": "Vision",
+          "amount": 1
+        },
+        {
+          "slug": "winter-soldier",
+          "name": "Winter Soldier",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp22.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP22",
+      "imageError": null
+    },
+    {
+      "code": "CP76",
+      "name": "Baron Strucker & Arnim Zola",
+      "type": "character_pack",
+      "releaseDate": "2022-09-09",
+      "characters": [
+        {
+          "slug": "arnim-zola",
+          "name": "Arnim Zola",
+          "amount": 1
+        },
+        {
+          "slug": "baron-strucker",
+          "name": "Baron Strucker",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp76.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP76",
+      "imageError": null
+    },
+    {
+      "code": "MCP09",
+      "name": "Bastion, Nimrod & Omega Sentinel",
+      "type": "character_pack",
+      "releaseDate": "2026-05-22",
+      "characters": [
+        {
+          "slug": "bastion",
+          "name": "Bastion",
+          "amount": 1
+        },
+        {
+          "slug": "nimrod",
+          "name": "Nimrod, the Hunter",
+          "amount": 1
+        },
+        {
+          "slug": "omega-sentinel",
+          "name": "Omega Sentinel",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp09.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP09",
+      "imageError": null
+    },
+    {
+      "code": "CP95",
+      "name": "Battle for Asgard Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-08-02",
+      "characters": [],
+      "image": "assets/box-sets/cp95.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP95",
+      "imageError": null
+    },
+    {
+      "code": "CP130",
+      "name": "Beta Ray Bill & Ulik",
+      "type": "character_pack",
+      "releaseDate": "2023-02-10",
+      "characters": [
+        {
+          "slug": "beta-ray-bill",
+          "name": "Beta Ray Bill",
+          "amount": 1
+        },
+        {
+          "slug": "ulik",
+          "name": "Ulik",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp130.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP130",
+      "imageError": null
+    },
+    {
+      "code": "CP112",
+      "name": "Bishop & Nightcrawler",
+      "type": "character_pack",
+      "releaseDate": "2024-03-01",
+      "characters": [
+        {
+          "slug": "bishop",
+          "name": "Bishop",
+          "amount": 1
+        },
+        {
+          "slug": "nightcrawler",
+          "name": "Nightcrawler",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp112.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP112",
+      "imageError": null
+    },
+    {
+      "code": "CP34",
+      "name": "Black Bolt & Medusa",
+      "type": "character_pack",
+      "releaseDate": "2021-02-12",
+      "characters": [
+        {
+          "slug": "black-bolt",
+          "name": "Black Bolt",
+          "amount": 1
+        },
+        {
+          "slug": "medusa",
+          "name": "Medusa",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp34.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP34",
+      "imageError": null
+    },
+    {
+      "code": "CP19",
+      "name": "Black Dwarf & Ebony Maw",
+      "type": "character_pack",
+      "releaseDate": "2020-06-29",
+      "characters": [
+        {
+          "slug": "black-dwarf",
+          "name": "Black Dwarf",
+          "amount": 1
+        },
+        {
+          "slug": "ebony-maw",
+          "name": "Ebony Maw",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp19.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP19",
+      "imageError": null
+    },
+    {
+      "code": "CP159",
+      "name": "Black Order Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2022-06-10",
+      "characters": [
+        {
+          "slug": "black-dwarf",
+          "name": "Black Dwarf",
+          "amount": 1
+        },
+        {
+          "slug": "corvus-glaive",
+          "name": "Corvus Glaive",
+          "amount": 1
+        },
+        {
+          "slug": "ebony-maw",
+          "name": "Ebony Maw",
+          "amount": 1
+        },
+        {
+          "slug": "proxima-midnight",
+          "name": "Proxima Midnight",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp159.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP159",
+      "imageError": null
+    },
+    {
+      "code": "CP07",
+      "name": "Black Panther & Killmonger",
+      "type": "character_pack",
+      "releaseDate": "2019-12-13",
+      "characters": [
+        {
+          "slug": "black-panther",
+          "name": "Black Panther",
+          "amount": 1
+        },
+        {
+          "slug": "killmonger",
+          "name": "Killmonger",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp07.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP07",
+      "imageError": null
+    },
+    {
+      "code": "CP158",
+      "name": "Black Panther Chosen of Bast & Namor the Submariner",
+      "type": "character_pack",
+      "releaseDate": "2024-07-12",
+      "characters": [
+        {
+          "slug": "black-panther-chosen-of-bast",
+          "name": "Black Panther, Chosen of Bast",
+          "amount": 1
+        },
+        {
+          "slug": "namor-the-submariner",
+          "name": "Namor, the Sub-Mariner",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp158.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP158",
+      "imageError": null
+    },
+    {
+      "code": "CP81",
+      "name": "Black Swan & Supergiant",
+      "type": "character_pack",
+      "releaseDate": "2022-06-09",
+      "characters": [
+        {
+          "slug": "black-swan",
+          "name": "Black Swan",
+          "amount": 1
+        },
+        {
+          "slug": "supergiant",
+          "name": "Supergiant",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp81.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP81",
+      "imageError": null
+    },
+    {
+      "code": "MCP24",
+      "name": "Blackheart, Jack O‘Lantern & Orb",
+      "type": "character_pack",
+      "releaseDate": "2026-12-18",
+      "characters": [],
+      "image": "assets/box-sets/mcp24.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP24",
+      "imageError": null
+    },
+    {
+      "code": "CP48",
+      "name": "Blade & Moon Knight",
+      "type": "character_pack",
+      "releaseDate": "2021-09-09",
+      "characters": [
+        {
+          "slug": "blade",
+          "name": "Blade",
+          "amount": 1
+        },
+        {
+          "slug": "moon-knight",
+          "name": "Moon Knight",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp48.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP48",
+      "imageError": null
+    },
+    {
+      "code": "CP129",
+      "name": "Blue Marvel & Spectrum",
+      "type": "character_pack",
+      "releaseDate": "2026-01-09",
+      "characters": [
+        {
+          "slug": "blue-marvel",
+          "name": "Blue Marvel",
+          "amount": 1
+        },
+        {
+          "slug": "spectrum",
+          "name": "Spectrum",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp129.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP129",
+      "imageError": null
+    },
+    {
+      "code": "CP140",
+      "name": "Brotherhood of Mutants Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2022-12-09",
+      "characters": [
+        {
+          "slug": "magneto",
+          "name": "Magneto",
+          "amount": 1
+        },
+        {
+          "slug": "mystique",
+          "name": "Mystique",
+          "amount": 1
+        },
+        {
+          "slug": "sabretooth",
+          "name": "Sabretooth",
+          "amount": 1
+        },
+        {
+          "slug": "toad",
+          "name": "Toad",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp140.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP140",
+      "imageError": null
+    },
+    {
+      "code": "CP30",
+      "name": "Bullseye & Daredevil",
+      "type": "character_pack",
+      "releaseDate": "2020-10-23",
+      "characters": [
+        {
+          "slug": "bullseye",
+          "name": "Bullseye",
+          "amount": 1
+        },
+        {
+          "slug": "daredevil",
+          "name": "Daredevil",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp30.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP30",
+      "imageError": null
+    },
+    {
+      "code": "CP142",
+      "name": "Cabal Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2024-05-10",
+      "characters": [
+        {
+          "slug": "baron-zemo",
+          "name": "Baron Zemo",
+          "amount": 1
+        },
+        {
+          "slug": "crossbones",
+          "name": "Crossbones",
+          "amount": 1
+        },
+        {
+          "slug": "red-skull",
+          "name": "Red Skull",
+          "amount": 1
+        },
+        {
+          "slug": "ultron",
+          "name": "Ultron",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp142.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP142",
+      "imageError": null
+    },
+    {
+      "code": "CP47",
+      "name": "Cable & Domino",
+      "type": "character_pack",
+      "releaseDate": "2021-06-10",
+      "characters": [
+        {
+          "slug": "cable",
+          "name": "Cable",
+          "amount": 1
+        },
+        {
+          "slug": "domino",
+          "name": "Domino",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp47.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP47",
+      "imageError": null
+    },
+    {
+      "code": "MCP05",
+      "name": "Captain America & The Avengers",
+      "type": "character_pack",
+      "releaseDate": "2026-10-23",
+      "characters": [
+        {
+          "slug": "captain-america-sam-wilson",
+          "name": "Captain America",
+          "amount": 1
+        },
+        {
+          "slug": "war-machine",
+          "name": "War Machine",
+          "amount": 1
+        },
+        {
+          "slug": "ant-man",
+          "name": "Ant-Man",
+          "amount": 1
+        },
+        {
+          "slug": "she-hulk",
+          "name": "She-Hulk",
+          "amount": 1
+        },
+        {
+          "slug": "wasp",
+          "name": "Wasp",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp05.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP05",
+      "imageError": null
+    },
+    {
+      "code": "CP77",
+      "name": "Captain America & The Original Human Torch",
+      "type": "character_pack",
+      "releaseDate": "2022-09-09",
+      "characters": [
+        {
+          "slug": "steve-rogers-captain-america",
+          "name": "Steve Rogers, Captain America",
+          "amount": 1
+        },
+        {
+          "slug": "the-original-human-torch",
+          "name": "The Original Human Torch",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp77.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP77",
+      "imageError": null
+    },
+    {
+      "code": "CP38",
+      "name": "Captain America & War Machine",
+      "type": "character_pack",
+      "releaseDate": "2021-07-08",
+      "characters": [
+        {
+          "slug": "captain-america-sam-wilson",
+          "name": "Captain America",
+          "amount": 1
+        },
+        {
+          "slug": "war-machine",
+          "name": "War Machine",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp38.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP38",
+      "imageError": null
+    },
+    {
+      "code": "CA10",
+      "name": "Card Pack 2022",
+      "type": "card_pack",
+      "releaseDate": "2022-06-10",
+      "characters": [],
+      "image": "assets/box-sets/ca10.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA10",
+      "imageError": null
+    },
+    {
+      "code": "CP57",
+      "name": "Colossus & Magik",
+      "type": "character_pack",
+      "releaseDate": "2022-02-11",
+      "characters": [
+        {
+          "slug": "colossus",
+          "name": "Colossus",
+          "amount": 1
+        },
+        {
+          "slug": "magik",
+          "name": "Magik",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp57.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP57",
+      "imageError": null
+    },
+    {
+      "code": "CP221",
+      "name": "Convocation Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-09-05",
+      "characters": [
+        {
+          "slug": "ancient-one",
+          "name": "Ancient One",
+          "amount": 1
+        },
+        {
+          "slug": "baron-mordo",
+          "name": "Baron Mordo",
+          "amount": 1
+        },
+        {
+          "slug": "clea",
+          "name": "Clea",
+          "amount": 1
+        },
+        {
+          "slug": "doctor-strange-sorcerer-supreme",
+          "name": "Doctor Strange, Sorcerer Supreme",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp221.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP221",
+      "imageError": null
+    },
+    {
+      "code": "CP01",
+      "name": "Core Set",
+      "type": "other",
+      "releaseDate": "2019-11-15",
+      "characters": [
+        {
+          "slug": "baron-zemo",
+          "name": "Baron Zemo",
+          "amount": 1
+        },
+        {
+          "slug": "black-widow",
+          "name": "Black Widow",
+          "amount": 1
+        },
+        {
+          "slug": "captain-america",
+          "name": "Captain America",
+          "amount": 1
+        },
+        {
+          "slug": "captain-marvel",
+          "name": "Captain Marvel",
+          "amount": 1
+        },
+        {
+          "slug": "crossbones",
+          "name": "Crossbones",
+          "amount": 1
+        },
+        {
+          "slug": "doctor-octopus",
+          "name": "Doctor Octopus",
+          "amount": 1
+        },
+        {
+          "slug": "iron-man",
+          "name": "Iron Man",
+          "amount": 1
+        },
+        {
+          "slug": "red-skull",
+          "name": "Red Skull",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man",
+          "name": "Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "ultron",
+          "name": "Ultron",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp01.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP01",
+      "imageError": null
+    },
+    {
+      "code": "CP15",
+      "name": "Corvus Glaive & Proxima Midnight",
+      "type": "character_pack",
+      "releaseDate": "2020-08-01",
+      "characters": [
+        {
+          "slug": "corvus-glaive",
+          "name": "Corvus Glaive",
+          "amount": 1
+        },
+        {
+          "slug": "proxima-midnight",
+          "name": "Proxima Midnight",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp15.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP15",
+      "imageError": null
+    },
+    {
+      "code": "CP90",
+      "name": "Cosmic Ghost Rider",
+      "type": "character_pack",
+      "releaseDate": "2023-07-14",
+      "characters": [
+        {
+          "slug": "cosmic-ghost-rider",
+          "name": "Cosmic Ghost Rider",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp90.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP90",
+      "imageError": null
+    },
+    {
+      "code": "CP187",
+      "name": "Cosmic Motherlode",
+      "type": "terrain_pack",
+      "releaseDate": "2026-08-28",
+      "characters": [],
+      "image": "assets/box-sets/cp187.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP187",
+      "imageError": null
+    },
+    {
+      "code": "CP22",
+      "name": "Cosmic Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2022-07-17",
+      "characters": [],
+      "image": "assets/box-sets/cp22.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP22",
+      "imageError": null
+    },
+    {
+      "code": "CP44",
+      "name": "Crashed Sentinel Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2022-06-29",
+      "characters": [],
+      "image": "assets/box-sets/cp44.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP44",
+      "imageError": null
+    },
+    {
+      "code": "CP214",
+      "name": "Criminal Syndicate Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-07-18",
+      "characters": [
+        {
+          "slug": "modok",
+          "name": "M.O.D.O.K.",
+          "amount": 1
+        },
+        {
+          "slug": "kingpin",
+          "name": "Kingpin",
+          "amount": 1
+        },
+        {
+          "slug": "hood",
+          "name": "Hood",
+          "amount": 1
+        },
+        {
+          "slug": "bullseye",
+          "name": "Bullseye",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp214.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP214",
+      "imageError": null
+    },
+    {
+      "code": "MCP20",
+      "name": "Criminal Underworld",
+      "type": "character_pack",
+      "releaseDate": "2026-10-09",
+      "characters": [
+        {
+          "slug": "shadowland-daredevil",
+          "name": "Shadowland Daredevil",
+          "amount": 1
+        },
+        {
+          "slug": "elektra",
+          "name": "Elektra",
+          "amount": 1
+        },
+        {
+          "slug": "hand-ninjas-grunts",
+          "name": "Hand Ninjas",
+          "amount": 1
+        },
+        {
+          "slug": "klaw",
+          "name": "Klaw",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp20.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP20",
+      "imageError": null
+    },
+    {
+      "code": "CP88",
+      "name": "Crimson Dynamo & Darkstar",
+      "type": "character_pack",
+      "releaseDate": "2022-08-30",
+      "characters": [
+        {
+          "slug": "crimson-dynamo",
+          "name": "Crimson Dynamo",
+          "amount": 1
+        },
+        {
+          "slug": "darkstar",
+          "name": "Darkstar",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp88.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP88",
+      "imageError": null
+    },
+    {
+      "code": "CP35",
+      "name": "Crystal & Lockjaw",
+      "type": "character_pack",
+      "releaseDate": "2021-02-12",
+      "characters": [
+        {
+          "slug": "crystal",
+          "name": "Crystal",
+          "amount": 1
+        },
+        {
+          "slug": "lockjaw",
+          "name": "Lockjaw",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp35.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP35",
+      "imageError": null
+    },
+    {
+      "code": "CP41",
+      "name": "Cyclops & Storm",
+      "type": "character_pack",
+      "releaseDate": "2020-11-13",
+      "characters": [
+        {
+          "slug": "cyclops",
+          "name": "Cyclops",
+          "amount": 1
+        },
+        {
+          "slug": "storm",
+          "name": "Storm",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp41.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP41",
+      "imageError": null
+    },
+    {
+      "code": "MCP12",
+      "name": "Dark Dimension Incursion",
+      "type": "terrain_pack",
+      "releaseDate": "2026-07-24",
+      "characters": [],
+      "image": "assets/box-sets/mcp12.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP12",
+      "imageError": null
+    },
+    {
+      "code": "CP185",
+      "name": "Dark Future Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-09-27",
+      "characters": [],
+      "image": "assets/box-sets/cp185.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP185",
+      "imageError": null
+    },
+    {
+      "code": "CP45",
+      "name": "Deadpool & Bob, Agent of Hydra",
+      "type": "character_pack",
+      "releaseDate": "2021-06-10",
+      "characters": [
+        {
+          "slug": "bob-agent-of-hydra",
+          "name": "Bob, Agent of Hydra",
+          "amount": 1
+        },
+        {
+          "slug": "deadpool",
+          "name": "Deadpool",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp45.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP45",
+      "imageError": null
+    },
+    {
+      "code": "CP219",
+      "name": "Defenders Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-08-22",
+      "characters": [
+        {
+          "slug": "doctor-strange",
+          "name": "Doctor Strange",
+          "amount": 1
+        },
+        {
+          "slug": "luke-cage",
+          "name": "Luke Cage",
+          "amount": 1
+        },
+        {
+          "slug": "daredevil",
+          "name": "Daredevil",
+          "amount": 1
+        },
+        {
+          "slug": "wong",
+          "name": "Wong",
+          "amount": 1
+        },
+        {
+          "slug": "iron-fist",
+          "name": "Iron Fist",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp219.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP219",
+      "imageError": null
+    },
+    {
+      "code": "CP02",
+      "name": "Dice Pack",
+      "type": "other",
+      "releaseDate": "2019-11-15",
+      "characters": [],
+      "image": "assets/box-sets/cp02.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP02",
+      "imageError": null
+    },
+    {
+      "code": "CP269",
+      "name": "Dice Pack",
+      "type": "other",
+      "releaseDate": "2025-04-18",
+      "characters": [],
+      "image": "assets/box-sets/cp269.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP269",
+      "imageError": null
+    },
+    {
+      "code": "MCP11",
+      "name": "Dimensional Terror",
+      "type": "terrain_pack",
+      "releaseDate": "2026-07-24",
+      "characters": [],
+      "image": "assets/box-sets/mcp11.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP11",
+      "imageError": null
+    },
+    {
+      "code": "CP67",
+      "name": "Doctor Strange & Clea",
+      "type": "character_pack",
+      "releaseDate": "2021-09-09",
+      "characters": [
+        {
+          "slug": "clea",
+          "name": "Clea",
+          "amount": 1
+        },
+        {
+          "slug": "doctor-strange-sorcerer-supreme",
+          "name": "Doctor Strange, Sorcerer Supreme",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp67.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP67",
+      "imageError": null
+    },
+    {
+      "code": "CP23",
+      "name": "Doctor Strange & Wong",
+      "type": "character_pack",
+      "releaseDate": "2020-09-11",
+      "characters": [
+        {
+          "slug": "doctor-strange",
+          "name": "Doctor Strange",
+          "amount": 1
+        },
+        {
+          "slug": "wong",
+          "name": "Wong",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp23.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP23",
+      "imageError": null
+    },
+    {
+      "code": "CP65",
+      "name": "Doctor Voodoo & Hood",
+      "type": "character_pack",
+      "releaseDate": "2021-09-09",
+      "characters": [
+        {
+          "slug": "doctor-voodoo",
+          "name": "Doctor Voodoo",
+          "amount": 1
+        },
+        {
+          "slug": "hood",
+          "name": "Hood",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp65.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP65",
+      "imageError": null
+    },
+    {
+      "code": "CK09",
+      "name": "Domain of the Dread Dormammu Organized Play Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2021-11-12",
+      "characters": [],
+      "image": "assets/box-sets/ck09.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK09",
+      "imageError": null
+    },
+    {
+      "code": "CP33",
+      "name": "Dormammu",
+      "type": "ultimate_encounter",
+      "releaseDate": "2021-09-09",
+      "characters": [
+        {
+          "slug": "dormammu",
+          "name": "Dormammu",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp33.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP33",
+      "imageError": null
+    },
+    {
+      "code": "CP217",
+      "name": "Dormammu Ultimate Encounter",
+      "type": "ultimate_encounter",
+      "releaseDate": "2026-03-27",
+      "characters": [
+        {
+          "slug": "dormammu",
+          "name": "Dormammu",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp217.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP217",
+      "imageError": null
+    },
+    {
+      "code": "CP20",
+      "name": "Drax & Ronan the Accuser",
+      "type": "character_pack",
+      "releaseDate": "2020-06-11",
+      "characters": [
+        {
+          "slug": "drax-the-destroyer",
+          "name": "Drax the Destroyer",
+          "amount": 1
+        },
+        {
+          "slug": "ronan-the-accuser",
+          "name": "Ronan the Accuser",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp20.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP20",
+      "imageError": null
+    },
+    {
+      "code": "CP143",
+      "name": "Earth's Mightiest Core Set",
+      "type": "other",
+      "releaseDate": "2023-10-13",
+      "characters": [
+        {
+          "slug": "baron-helmut-zemo",
+          "name": "Baron Helmut Zemo",
+          "amount": 1
+        },
+        {
+          "slug": "captain-america-first-avenger",
+          "name": "Captain America, First Avenger",
+          "amount": 1
+        },
+        {
+          "slug": "captain-marvel-cosmic-avenger",
+          "name": "Captain Marvel, Cosmic Avenger",
+          "amount": 1
+        },
+        {
+          "slug": "crossbones-merciless-merc",
+          "name": "Crossbones, Merciless Merc",
+          "amount": 1
+        },
+        {
+          "slug": "doc-ock-sinister-scientist",
+          "name": "Doc Ock, Sinister Scientist",
+          "amount": 1
+        },
+        {
+          "slug": "invincible-iron-man",
+          "name": "Invincible Iron Man",
+          "amount": 1
+        },
+        {
+          "slug": "red-skull-master-of-the-world",
+          "name": "Red Skull, Master of the World",
+          "amount": 1
+        },
+        {
+          "slug": "spectacular-spider-man",
+          "name": "Spectacular Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "the-black-widow",
+          "name": "The Black Widow",
+          "amount": 1
+        },
+        {
+          "slug": "ultron-drones-grunts",
+          "name": "Ultron Drones",
+          "amount": 1
+        },
+        {
+          "slug": "ultron-metal-tyrant",
+          "name": "Ultron, Metal Tyrant",
+          "amount": 1
+        },
+        {
+          "slug": "winter-soldier-operative",
+          "name": "Winter Soldier, Operative",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp143.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP143",
+      "imageError": null
+    },
+    {
+      "code": "CP168",
+      "name": "Echo, Ronin & Tigra",
+      "type": "character_pack",
+      "releaseDate": "2025-10-03",
+      "characters": [
+        {
+          "slug": "echo",
+          "name": "Echo",
+          "amount": 1
+        },
+        {
+          "slug": "ronin",
+          "name": "Ronin",
+          "amount": 1
+        },
+        {
+          "slug": "tigra",
+          "name": "Tigra",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp168.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP168",
+      "imageError": null
+    },
+    {
+      "code": "CP156",
+      "name": "Electro & Sandman & Shocker & Vulture",
+      "type": "character_pack",
+      "releaseDate": "2024-05-17",
+      "characters": [
+        {
+          "slug": "electro",
+          "name": "Electro",
+          "amount": 1
+        },
+        {
+          "slug": "sandman",
+          "name": "Sandman",
+          "amount": 1
+        },
+        {
+          "slug": "shocker",
+          "name": "Shocker",
+          "amount": 1
+        },
+        {
+          "slug": "vulture",
+          "name": "Vulture",
+          "amount": 1
+        },
+        {
+          "slug": "sand-construct-1-grunts",
+          "name": "Sand Construct",
+          "amount": 1
+        },
+        {
+          "slug": "sand-construct-2-grunts",
+          "name": "Sand Construct",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp156.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP156",
+      "imageError": null
+    },
+    {
+      "code": "CP186",
+      "name": "Elsa Bloodstone & Man-Thing",
+      "type": "character_pack",
+      "releaseDate": "2025-01-31",
+      "characters": [
+        {
+          "slug": "elsa-bloodstone",
+          "name": "Elsa Bloodstone",
+          "amount": 1
+        },
+        {
+          "slug": "man-thing",
+          "name": "Man-Thing",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp186.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP186",
+      "imageError": null
+    },
+    {
+      "code": "CP103",
+      "name": "Emma Frost & Psylocke",
+      "type": "character_pack",
+      "releaseDate": "2023-03-10",
+      "characters": [
+        {
+          "slug": "emma-frost",
+          "name": "Emma Frost",
+          "amount": 1
+        },
+        {
+          "slug": "psylocke",
+          "name": "Psylocke",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp103.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP103",
+      "imageError": null
+    },
+    {
+      "code": "CP16",
+      "name": "Gamora & Nebula",
+      "type": "character_pack",
+      "releaseDate": "2020-04-24",
+      "characters": [
+        {
+          "slug": "gamora",
+          "name": "Gamora",
+          "amount": 1
+        },
+        {
+          "slug": "nebula",
+          "name": "Nebula",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp16.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP16",
+      "imageError": null
+    },
+    {
+      "code": "CP27",
+      "name": "Ghost Rider",
+      "type": "character_pack",
+      "releaseDate": "2020-09-12",
+      "characters": [
+        {
+          "slug": "ghost-rider",
+          "name": "Ghost Rider",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp27.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP27",
+      "imageError": null
+    },
+    {
+      "code": "CP21",
+      "name": "Green Goblin",
+      "type": "character_pack",
+      "releaseDate": "2020-08-14",
+      "characters": [
+        {
+          "slug": "green-goblin",
+          "name": "Green Goblin",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp21.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP21",
+      "imageError": null
+    },
+    {
+      "code": "CP222",
+      "name": "Guardians of the Galaxy Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-03-28",
+      "characters": [
+        {
+          "slug": "star-lord",
+          "name": "Star-Lord",
+          "amount": 1
+        },
+        {
+          "slug": "groot",
+          "name": "Groot",
+          "amount": 1
+        },
+        {
+          "slug": "rocket-raccoon",
+          "name": "Rocket Raccoon",
+          "amount": 1
+        },
+        {
+          "slug": "cosmic-ghost-rider",
+          "name": "Cosmic Ghost Rider",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp222.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP222",
+      "imageError": null
+    },
+    {
+      "code": "MCP65",
+      "name": "Guardians of the Galaxy Starter Set",
+      "type": "starter_pack",
+      "releaseDate": "2026-07-24",
+      "characters": [
+        {
+          "slug": "star-lord",
+          "name": "Star-Lord",
+          "amount": 1
+        },
+        {
+          "slug": "groot",
+          "name": "Groot",
+          "amount": 1
+        },
+        {
+          "slug": "drax-the-destroyer",
+          "name": "Drax the Destroyer",
+          "amount": 1
+        },
+        {
+          "slug": "gamora",
+          "name": "Gamora",
+          "amount": 1
+        },
+        {
+          "slug": "nebula",
+          "name": "Nebula",
+          "amount": 1
+        },
+        {
+          "slug": "cosmic-ghost-rider",
+          "name": "Cosmic Ghost Rider",
+          "amount": 1
+        },
+        {
+          "slug": "ronan-the-accuser",
+          "name": "Ronan the Accuser",
+          "amount": 1
+        },
+        {
+          "slug": "nova",
+          "name": "Nova",
+          "amount": 1
+        },
+        {
+          "slug": "yondu",
+          "name": "Yondu",
+          "amount": 1
+        },
+        {
+          "slug": "rocket-raccoon",
+          "name": "Rocket Raccoon",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp65.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP65",
+      "imageError": null
+    },
+    {
+      "code": "CP155",
+      "name": "Gwenom & Scarlet-Spider",
+      "type": "character_pack",
+      "releaseDate": "2024-05-17",
+      "characters": [
+        {
+          "slug": "gwenom",
+          "name": "Gwenom",
+          "amount": 1
+        },
+        {
+          "slug": "scarlet-spider",
+          "name": "Scarlet Spider",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp155.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP155",
+      "imageError": null
+    },
+    {
+      "code": "MCP21",
+      "name": "Hard to Hit",
+      "type": "character_pack",
+      "releaseDate": "2026-08-21",
+      "characters": [
+        {
+          "slug": "silver-sable",
+          "name": "Silver Sable",
+          "amount": 1
+        },
+        {
+          "slug": "shang-chi",
+          "name": "Shang-Chi",
+          "amount": 1
+        },
+        {
+          "slug": "namor-the-submariner",
+          "name": "Namor, the Sub-Mariner",
+          "amount": 1
+        },
+        {
+          "slug": "black-panther-chosen-of-bast",
+          "name": "Black Panther, Chosen of Bast",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp21.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP21",
+      "imageError": null
+    },
+    {
+      "code": "CP24",
+      "name": "Hawkeye & Black Widow Agent of S.H.I.E.L.D.",
+      "type": "character_pack",
+      "releaseDate": "2020-05-07",
+      "characters": [
+        {
+          "slug": "black-widow-agent-of-shield",
+          "name": "Black Widow, Agent of S.H.I.E.L.D.",
+          "amount": 1
+        },
+        {
+          "slug": "hawkeye",
+          "name": "Hawkeye",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp24.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP24",
+      "imageError": null
+    },
+    {
+      "code": "CP102",
+      "name": "Heimdall & Skurge",
+      "type": "character_pack",
+      "releaseDate": "2022-08-07",
+      "characters": [
+        {
+          "slug": "heimdall-the-all-seeing",
+          "name": "Heimdall, The All-Seeing",
+          "amount": 1
+        },
+        {
+          "slug": "skurge-the-executioner",
+          "name": "Skurge, The Executioner",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp102.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP102",
+      "imageError": null
+    },
+    {
+      "code": "CK14",
+      "name": "Hel to Play Game Night Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2022-06-17",
+      "characters": [],
+      "image": "assets/box-sets/ck14.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK14",
+      "imageError": null
+    },
+    {
+      "code": "CP04",
+      "name": "Hulk",
+      "type": "character_pack",
+      "releaseDate": "2019-11-15",
+      "characters": [
+        {
+          "slug": "hulk",
+          "name": "Hulk",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp04.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP04",
+      "imageError": null
+    },
+    {
+      "code": "CP52",
+      "name": "Hulkbuster",
+      "type": "character_pack",
+      "releaseDate": "2022-01-15",
+      "characters": [
+        {
+          "slug": "hulkbuster",
+          "name": "Hulkbuster",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp52.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP52",
+      "imageError": null
+    },
+    {
+      "code": "MCP25",
+      "name": "Hulkling, Speed & Wiccan",
+      "type": "character_pack",
+      "releaseDate": null,
+      "characters": [],
+      "image": "assets/box-sets/mcp25.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP25",
+      "imageError": null
+    },
+    {
+      "code": "CP178",
+      "name": "Hydra Power Station Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2023-01-13",
+      "characters": [],
+      "image": "assets/box-sets/cp178.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP178",
+      "imageError": null
+    },
+    {
+      "code": "CP78",
+      "name": "Hydra Tank Terrain & Ultimate Encounter",
+      "type": "terrain_and_ultimate_encounter",
+      "releaseDate": "2023-01-13",
+      "characters": [],
+      "image": "assets/box-sets/cp78.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP78",
+      "imageError": null
+    },
+    {
+      "code": "CP179",
+      "name": "Hydra Turret Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2023-01-13",
+      "characters": [],
+      "image": "assets/box-sets/cp179.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP179",
+      "imageError": null
+    },
+    {
+      "code": "CP96",
+      "name": "Iceman & Shadowcat",
+      "type": "character_pack",
+      "releaseDate": "2024-03-01",
+      "characters": [
+        {
+          "slug": "iceman",
+          "name": "Iceman",
+          "amount": 1
+        },
+        {
+          "slug": "shadowcat",
+          "name": "Shadowcat",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp96.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP96",
+      "imageError": null
+    },
+    {
+      "code": "CP180",
+      "name": "Icons of Bast Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-02-09",
+      "characters": [],
+      "image": "assets/box-sets/cp180.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP180",
+      "imageError": null
+    },
+    {
+      "code": "CK06",
+      "name": "Infinity War Organized Play Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2021-03-12",
+      "characters": [],
+      "image": "assets/box-sets/ck06.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK06",
+      "imageError": null
+    },
+    {
+      "code": "CP166",
+      "name": "Inhuman Royal Court",
+      "type": "character_pack",
+      "releaseDate": "2025-03-14",
+      "characters": [
+        {
+          "slug": "gorgon",
+          "name": "Gorgon",
+          "amount": 1
+        },
+        {
+          "slug": "karnak",
+          "name": "Karnak",
+          "amount": 1
+        },
+        {
+          "slug": "king-black-bolt",
+          "name": "King Black Bolt",
+          "amount": 1
+        },
+        {
+          "slug": "maximus-the-mad",
+          "name": "Maximus the Mad",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp166.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP166",
+      "imageError": null
+    },
+    {
+      "code": "CP218",
+      "name": "Inhumans Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-01-23",
+      "characters": [
+        {
+          "slug": "black-bolt",
+          "name": "Black Bolt",
+          "amount": 1
+        },
+        {
+          "slug": "medusa",
+          "name": "Medusa",
+          "amount": 1
+        },
+        {
+          "slug": "lockjaw",
+          "name": "Lockjaw",
+          "amount": 1
+        },
+        {
+          "slug": "crystal",
+          "name": "Crystal",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp218.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP218",
+      "imageError": null
+    },
+    {
+      "code": "CP154",
+      "name": "Iron Lad, Iron Monger, Kang the Conqueror & Rescue",
+      "type": "character_pack",
+      "releaseDate": "2026-03-06",
+      "characters": [
+        {
+          "slug": "rescue",
+          "name": "Rescue",
+          "amount": 1
+        },
+        {
+          "slug": "iron-lad",
+          "name": "Iron Lad",
+          "amount": 1
+        },
+        {
+          "slug": "iron-monger",
+          "name": "Iron Monger",
+          "amount": 1
+        },
+        {
+          "slug": "kang-the-conqueror",
+          "name": "Kang the Conqueror",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp154.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP154",
+      "imageError": null
+    },
+    {
+      "code": "CP53",
+      "name": "Jean Grey & Cassandra Nova",
+      "type": "character_pack",
+      "releaseDate": "2021-07-08",
+      "characters": [
+        {
+          "slug": "cassandra-nova",
+          "name": "Cassandra Nova",
+          "amount": 1
+        },
+        {
+          "slug": "jean-grey",
+          "name": "Jean Grey",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp53.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP53",
+      "imageError": null
+    },
+    {
+      "code": "CP56",
+      "name": "Juggernaut",
+      "type": "character_pack",
+      "releaseDate": "2022-02-11",
+      "characters": [
+        {
+          "slug": "juggernaut",
+          "name": "Juggernaut",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp56.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP56",
+      "imageError": null
+    },
+    {
+      "code": "CK18",
+      "name": "Just the Parker Luck Game Night Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2023-02-10",
+      "characters": [],
+      "image": "assets/box-sets/ck18.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK18",
+      "imageError": null
+    },
+    {
+      "code": "CP59",
+      "name": "Kingdom of Wakanda Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-02-09",
+      "characters": [],
+      "image": "assets/box-sets/cp59.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP59",
+      "imageError": null
+    },
+    {
+      "code": "CP29",
+      "name": "Kingpin",
+      "type": "character_pack",
+      "releaseDate": "2020-10-23",
+      "characters": [
+        {
+          "slug": "kingpin",
+          "name": "Kingpin",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp29.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP29",
+      "imageError": null
+    },
+    {
+      "code": "CP116",
+      "name": "Klaw & M‘Baku",
+      "type": "character_pack",
+      "releaseDate": "2023-07-14",
+      "characters": [
+        {
+          "slug": "klaw",
+          "name": "Klaw",
+          "amount": 1
+        },
+        {
+          "slug": "mbaku",
+          "name": "M‘Baku",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp116.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP116",
+      "imageError": null
+    },
+    {
+      "code": "CP58",
+      "name": "Lizard & Kraven",
+      "type": "character_pack",
+      "releaseDate": "2021-06-24",
+      "characters": [
+        {
+          "slug": "kraven-the-hunter",
+          "name": "Kraven the Hunter",
+          "amount": 1
+        },
+        {
+          "slug": "lizard",
+          "name": "Lizard",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp58.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP58",
+      "imageError": null
+    },
+    {
+      "code": "CP12",
+      "name": "Loki & Hela",
+      "type": "character_pack",
+      "releaseDate": "2020-01-31",
+      "characters": [
+        {
+          "slug": "hela-queen-of-hel",
+          "name": "Hela, Queen of Hel",
+          "amount": 1
+        },
+        {
+          "slug": "loki-god-of-mischief",
+          "name": "Loki, God of Mischief",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp12.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP12",
+      "imageError": null
+    },
+    {
+      "code": "CP49",
+      "name": "Luke Cage & Iron Fist",
+      "type": "character_pack",
+      "releaseDate": "2021-06-10",
+      "characters": [
+        {
+          "slug": "iron-fist",
+          "name": "Iron Fist",
+          "amount": 1
+        },
+        {
+          "slug": "luke-cage",
+          "name": "Luke Cage",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp49.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP49",
+      "imageError": null
+    },
+    {
+      "code": "CP05",
+      "name": "M.O.D.O.K.",
+      "type": "character_pack",
+      "releaseDate": "2019-11-15",
+      "characters": [
+        {
+          "slug": "modok",
+          "name": "M.O.D.O.K.",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp05.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP05",
+      "imageError": null
+    },
+    {
+      "code": "CP145",
+      "name": "M.O.D.O.K. Scientist Supreme",
+      "type": "character_pack",
+      "releaseDate": "2023-04-14",
+      "characters": [
+        {
+          "slug": "modok-scientist-supreme",
+          "name": "M.O.D.O.K. Scientist Supreme",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp145.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP145",
+      "imageError": null
+    },
+    {
+      "code": "CP42",
+      "name": "Magneto & Toad",
+      "type": "character_pack",
+      "releaseDate": "2020-11-13",
+      "characters": [
+        {
+          "slug": "magneto",
+          "name": "Magneto",
+          "amount": 1
+        },
+        {
+          "slug": "toad",
+          "name": "Toad",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp42.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP42",
+      "imageError": null
+    },
+    {
+      "code": "CP93",
+      "name": "Malekith",
+      "type": "character_pack",
+      "releaseDate": "2022-08-12",
+      "characters": [
+        {
+          "slug": "malekith-the-accursed",
+          "name": "Malekith The Accursed",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp93.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP93",
+      "imageError": null
+    },
+    {
+      "code": "MCP15",
+      "name": "Members of the Brotherhood",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-09-18",
+      "characters": [
+        {
+          "slug": "scarlet-witch",
+          "name": "Scarlet Witch",
+          "amount": 1
+        },
+        {
+          "slug": "pyro",
+          "name": "Pyro",
+          "amount": 1
+        },
+        {
+          "slug": "quicksilver",
+          "name": "Quicksilver",
+          "amount": 1
+        },
+        {
+          "slug": "the-blob",
+          "name": "The Blob",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp15.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP15",
+      "imageError": null
+    },
+    {
+      "code": "CP66",
+      "name": "Mephisto",
+      "type": "character_pack",
+      "releaseDate": "2024-11-08",
+      "characters": [
+        {
+          "slug": "mephisto-lord-of-temptation",
+          "name": "Mephisto, Lord of Temptation",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp66.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP66",
+      "imageError": null
+    },
+    {
+      "code": "CK51",
+      "name": "Mephisto Convention Exclusive",
+      "type": "character_pack",
+      "releaseDate": "2026-03-28",
+      "characters": [
+        {
+          "slug": "mephisto-convention-exclusive",
+          "name": "Mephisto, Lord of Temptation",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/ck51.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK51",
+      "imageError": null
+    },
+    {
+      "code": "CP220",
+      "name": "Midnight Sons Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-05-02",
+      "characters": [
+        {
+          "slug": "blade",
+          "name": "Blade",
+          "amount": 1
+        },
+        {
+          "slug": "doctor-voodoo",
+          "name": "Doctor Voodoo",
+          "amount": 1
+        },
+        {
+          "slug": "ghost-rider",
+          "name": "Ghost Rider",
+          "amount": 1
+        },
+        {
+          "slug": "moon-knight",
+          "name": "Moon Knight",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp220.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP220",
+      "imageError": null
+    },
+    {
+      "code": "CP91",
+      "name": "Mighty Thor, Lady Sif, Thor, Hero of Midgard & Loki, Prince of Lies",
+      "type": "character_pack",
+      "releaseDate": "2024-08-02",
+      "characters": [
+        {
+          "slug": "mighty-thor",
+          "name": "The Mighty Thor",
+          "amount": 1
+        },
+        {
+          "slug": "lady-sif",
+          "name": "Lady Sif",
+          "amount": 1
+        },
+        {
+          "slug": "thor-hero-of-midgard",
+          "name": "Thor, Hero of Midgard",
+          "amount": 1
+        },
+        {
+          "slug": "loki-prince-of-lies",
+          "name": "Loki, Prince of Lies",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp91.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP91",
+      "imageError": null
+    },
+    {
+      "code": "MCP08",
+      "name": "Mirage, Havok, Jubilee & Multiple Man",
+      "type": "character_pack",
+      "releaseDate": "2026-10-30",
+      "characters": [
+        {
+          "slug": "jubilee",
+          "name": "Jubilee",
+          "amount": 1
+        },
+        {
+          "slug": "mirage",
+          "name": "Mirage",
+          "amount": 1
+        },
+        {
+          "slug": "havok",
+          "name": "Havok",
+          "amount": 1
+        },
+        {
+          "slug": "multiple-man",
+          "name": "Multiple Man",
+          "amount": 1
+        },
+        {
+          "slug": "multiple-man-duplicates-grunts",
+          "name": "Multiple Man Duplicates",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp08.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP08",
+      "imageError": null
+    },
+    {
+      "code": "CP46",
+      "name": "Mister Sinister",
+      "type": "character_pack",
+      "releaseDate": "2021-05-14",
+      "characters": [
+        {
+          "slug": "mister-sinister",
+          "name": "Mister Sinister",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp46.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP46",
+      "imageError": null
+    },
+    {
+      "code": "CA14",
+      "name": "Mojo Ball Scenario Pack",
+      "type": "scenario_pack",
+      "releaseDate": "2024-07-12",
+      "characters": [],
+      "image": "assets/box-sets/ca14.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA14",
+      "imageError": null
+    },
+    {
+      "code": "CP245",
+      "name": "Monsters Unleashed Character Pack",
+      "type": "character_pack",
+      "releaseDate": "2024-11-01",
+      "characters": [
+        {
+          "slug": "dracula",
+          "name": "Dracula",
+          "amount": 1
+        },
+        {
+          "slug": "frankensteins-monster",
+          "name": "Frankenstein‘s Monster",
+          "amount": 1
+        },
+        {
+          "slug": "werewolf-by-night",
+          "name": "Werewolf by Night",
+          "amount": 1
+        },
+        {
+          "slug": "nkantu-the-living-mummy",
+          "name": "N‘Kantu, the Living Mummy",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp245.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP245",
+      "imageError": null
+    },
+    {
+      "code": "CP64",
+      "name": "Mordo & Ancient One",
+      "type": "character_pack",
+      "releaseDate": "2021-09-09",
+      "characters": [
+        {
+          "slug": "ancient-one",
+          "name": "Ancient One",
+          "amount": 1
+        },
+        {
+          "slug": "baron-mordo",
+          "name": "Baron Mordo",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp64.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP64",
+      "imageError": null
+    },
+    {
+      "code": "CA11",
+      "name": "Movement & Range Tool Pack",
+      "type": "other",
+      "releaseDate": "2023-10-13",
+      "characters": [],
+      "image": "assets/box-sets/ca11.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA11",
+      "imageError": null
+    },
+    {
+      "code": "CP03",
+      "name": "Movement & Range Tool Pack",
+      "type": "other",
+      "releaseDate": "2019-11-15",
+      "characters": [],
+      "image": "assets/box-sets/cp03.jpg",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP03",
+      "imageError": null
+    },
+    {
+      "code": "CP62",
+      "name": "Ms. Marvel",
+      "type": "character_pack",
+      "releaseDate": "2022-01-15",
+      "characters": [
+        {
+          "slug": "ms-marvel",
+          "name": "Ms. Marvel",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp62.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP62",
+      "imageError": null
+    },
+    {
+      "code": "CK08",
+      "name": "Mutant Masterworks Organized Play Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2021-06-11",
+      "characters": [],
+      "image": "assets/box-sets/ck08.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK08",
+      "imageError": null
+    },
+    {
+      "code": "CP50",
+      "name": "Mysterio & Carnage",
+      "type": "character_pack",
+      "releaseDate": "2021-06-24",
+      "characters": [
+        {
+          "slug": "carnage",
+          "name": "Carnage",
+          "amount": 1
+        },
+        {
+          "slug": "mysterio",
+          "name": "Mysterio",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp50.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP50",
+      "imageError": null
+    },
+    {
+      "code": "CP43",
+      "name": "Mystique & Beast",
+      "type": "character_pack",
+      "releaseDate": "2020-11-13",
+      "characters": [
+        {
+          "slug": "beast",
+          "name": "Beast",
+          "amount": 1
+        },
+        {
+          "slug": "mystique",
+          "name": "Mystique",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp43.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP43",
+      "imageError": null
+    },
+    {
+      "code": "CP55",
+      "name": "Nick Fury & S.H.I.E.L.D. Agents",
+      "type": "character_pack",
+      "releaseDate": "2022-03-26",
+      "characters": [
+        {
+          "slug": "nick-fury",
+          "name": "Nick Fury",
+          "amount": 1
+        },
+        {
+          "slug": "shield-agents-grunts",
+          "name": "S.H.I.E.L.D. Agents",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp55.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP55",
+      "imageError": null
+    },
+    {
+      "code": "CP75",
+      "name": "Nick Fury, Sr & Howling Commandos",
+      "type": "character_pack",
+      "releaseDate": "2022-09-09",
+      "characters": [
+        {
+          "slug": "nick-fury-and-the-howling-commandos",
+          "name": "Nick Fury & The Howling Commandos",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp75.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP75",
+      "imageError": null
+    },
+    {
+      "code": "MCA01",
+      "name": "Night of the Goblin",
+      "type": "mcp_alliances",
+      "releaseDate": "2026-09-04",
+      "characters": [
+        {
+          "slug": "black-cat-night-of-the-goblin",
+          "name": "Black Cat",
+          "amount": 1
+        },
+        {
+          "slug": "ghost-spider-night-of-the-goblin",
+          "name": "Ghost-Spider",
+          "amount": 1
+        },
+        {
+          "slug": "green-goblin-night-of-the-goblin",
+          "name": "Green Goblin",
+          "amount": 1
+        },
+        {
+          "slug": "spectacular-spider-man-night-of-the-goblin",
+          "name": "Spectacular Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man-miles-morales-night-of-the-goblin",
+          "name": "Spider-Man",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mca01.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCA01",
+      "imageError": null
+    },
+    {
+      "code": "CP126",
+      "name": "Nova & Yondu",
+      "type": "character_pack",
+      "releaseDate": "2025-01-31",
+      "characters": [
+        {
+          "slug": "nova",
+          "name": "Nova",
+          "amount": 1
+        },
+        {
+          "slug": "yondu",
+          "name": "Yondu",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp126.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP126",
+      "imageError": null
+    },
+    {
+      "code": "CP36",
+      "name": "NYC Apartment Building Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2021-11-10",
+      "characters": [],
+      "image": "assets/box-sets/cp36.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP36",
+      "imageError": null
+    },
+    {
+      "code": "CPE06",
+      "name": "NYC City Block Terrain Collection",
+      "type": "terrain_pack",
+      "releaseDate": "2025-10-31",
+      "characters": [],
+      "image": "assets/box-sets/cpe06.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE06",
+      "imageError": null
+    },
+    {
+      "code": "CP14",
+      "name": "NYC Commercial Truck Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2020-02-14",
+      "characters": [],
+      "image": "assets/box-sets/cp14.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP14",
+      "imageError": null
+    },
+    {
+      "code": "CP31",
+      "name": "NYC Construction Site Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2020-10-09",
+      "characters": [],
+      "image": "assets/box-sets/cp31.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP31",
+      "imageError": null
+    },
+    {
+      "code": "CP06",
+      "name": "NYC Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2019-11-15",
+      "characters": [],
+      "image": "assets/box-sets/cp06.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP06",
+      "imageError": null
+    },
+    {
+      "code": "CP54",
+      "name": "Omega Red",
+      "type": "character_pack",
+      "releaseDate": "2021-07-08",
+      "characters": [
+        {
+          "slug": "omega-red",
+          "name": "Omega Red",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp54.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP54",
+      "imageError": null
+    },
+    {
+      "code": "MCP07",
+      "name": "Onslaught",
+      "type": "character_pack",
+      "releaseDate": "2026-09-25",
+      "characters": [
+        {
+          "slug": "onslaught",
+          "name": "Onslaught",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp07.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP07",
+      "imageError": null
+    },
+    {
+      "code": "CA23",
+      "name": "Operation: Zero Tolerance",
+      "type": "character_and_crisis_card_pack",
+      "releaseDate": "2026-06-12",
+      "characters": [
+        {
+          "slug": "prime-sentinel-1",
+          "name": "Prime Sentinel",
+          "amount": 1
+        },
+        {
+          "slug": "prime-sentinel-2",
+          "name": "Prime Sentinel",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/ca23.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA23",
+      "imageError": null
+    },
+    {
+      "code": "CP83",
+      "name": "Phoenix & Phoenix Unleashed",
+      "type": "character_pack",
+      "releaseDate": "2025-06-13",
+      "characters": [
+        {
+          "slug": "phoenix",
+          "name": "Phoenix",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp83.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP83",
+      "imageError": null
+    },
+    {
+      "code": "CP151",
+      "name": "Professor X & Shadow King",
+      "type": "character_pack",
+      "releaseDate": "2024-03-01",
+      "characters": [
+        {
+          "slug": "professor-x",
+          "name": "Professor X",
+          "amount": 1
+        },
+        {
+          "slug": "shadow-king",
+          "name": "Shadow King",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp151.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP151",
+      "imageError": null
+    },
+    {
+      "code": "CP169",
+      "name": "Prowler, Spider-Man 2099 & Ultimate Spider-Man",
+      "type": "character_pack",
+      "releaseDate": "2025-10-03",
+      "characters": [
+        {
+          "slug": "prowler",
+          "name": "Prowler",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man-2099",
+          "name": "Spider-Man 2099",
+          "amount": 1
+        },
+        {
+          "slug": "ultimate-spider-man",
+          "name": "Ultimate Spider-Man",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp169.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP169",
+      "imageError": null
+    },
+    {
+      "code": "CP32",
+      "name": "Punisher & Taskmaster",
+      "type": "character_pack",
+      "releaseDate": "2020-09-10",
+      "characters": [
+        {
+          "slug": "punisher",
+          "name": "Punisher",
+          "amount": 1
+        },
+        {
+          "slug": "taskmaster",
+          "name": "Taskmaster",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp32.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP32",
+      "imageError": null
+    },
+    {
+      "code": "CP72",
+      "name": "Quinjet Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2022-03-11",
+      "characters": [],
+      "image": "assets/box-sets/cp72.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP72",
+      "imageError": null
+    },
+    {
+      "code": "CP74",
+      "name": "Red Skull & Hydra Troopers",
+      "type": "character_pack",
+      "releaseDate": "2022-10-14",
+      "characters": [
+        {
+          "slug": "hydra-troopers-grunts",
+          "name": "Hydra Troopers",
+          "amount": 1
+        },
+        {
+          "slug": "red-skull-master-of-hydra",
+          "name": "Red Skull, Master of Hydra",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp74.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP74",
+      "imageError": null
+    },
+    {
+      "code": "CP194",
+      "name": "Rejuvenation Chamber Ultimate Encounter",
+      "type": "terrain_pack",
+      "releaseDate": "2024-09-27",
+      "characters": [],
+      "image": "assets/box-sets/cp194.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP194",
+      "imageError": null
+    },
+    {
+      "code": "CP98",
+      "name": "Rhino",
+      "type": "character_pack",
+      "releaseDate": "2023-01-13",
+      "characters": [
+        {
+          "slug": "rhino",
+          "name": "Rhino",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp98.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP98",
+      "imageError": null
+    },
+    {
+      "code": "CPE04",
+      "name": "Rival Panels: Battle for the Throne",
+      "type": "character_pack",
+      "releaseDate": "2024-02-02",
+      "characters": [
+        {
+          "slug": "king-tchalla",
+          "name": "King T‘Challa",
+          "amount": 1
+        },
+        {
+          "slug": "killmonger-usurper",
+          "name": "Killmonger, Usurper",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cpe04.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE04",
+      "imageError": null
+    },
+    {
+      "code": "CPE01",
+      "name": "Rival Panels: Spider-Man vs. Doctor Octopus",
+      "type": "character_pack",
+      "releaseDate": "2021-12-10",
+      "characters": [
+        {
+          "slug": "rival-panel-doctor-octopus",
+          "name": "Doctor Octopus",
+          "amount": 1
+        },
+        {
+          "slug": "rival-panel-spider-man",
+          "name": "Spider-Man",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cpe01.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE01",
+      "imageError": null
+    },
+    {
+      "code": "CPE03",
+      "name": "Rival Panels: Weapon X Program",
+      "type": "rival_panels",
+      "releaseDate": "2022-12-09",
+      "characters": [
+        {
+          "slug": "logan-the-wolverine",
+          "name": "Logan, the Wolverine",
+          "amount": 1
+        },
+        {
+          "slug": "sabretooth-apex-predator",
+          "name": "Sabretooth, Apex Predator",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cpe03.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE03",
+      "imageError": null
+    },
+    {
+      "code": "CP17",
+      "name": "Rocket & Groot",
+      "type": "character_pack",
+      "releaseDate": "2020-03-13",
+      "characters": [
+        {
+          "slug": "groot",
+          "name": "Groot",
+          "amount": 1
+        },
+        {
+          "slug": "rocket-raccoon",
+          "name": "Rocket Raccoon",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp17.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP17",
+      "imageError": null
+    },
+    {
+      "code": "CP60",
+      "name": "Rogue & Gambit",
+      "type": "character_pack",
+      "releaseDate": "2022-02-11",
+      "characters": [
+        {
+          "slug": "gambit",
+          "name": "Gambit",
+          "amount": 1
+        },
+        {
+          "slug": "rogue",
+          "name": "Rogue",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp60.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP60",
+      "imageError": null
+    },
+    {
+      "code": "MCP03",
+      "name": "S.H.I.E.L.D. Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-05-22",
+      "characters": [
+        {
+          "slug": "nick-fury",
+          "name": "Nick Fury",
+          "amount": 1
+        },
+        {
+          "slug": "shield-agents-grunts",
+          "name": "S.H.I.E.L.D. Agents",
+          "amount": 1
+        },
+        {
+          "slug": "black-widow-agent-of-shield",
+          "name": "Black Widow, Agent of S.H.I.E.L.D.",
+          "amount": 1
+        },
+        {
+          "slug": "hawkeye",
+          "name": "Hawkeye",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp03.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP03",
+      "imageError": null
+    },
+    {
+      "code": "CP68",
+      "name": "Sanctum Sanctorum Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2021-12-10",
+      "characters": [],
+      "image": "assets/box-sets/cp68.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP68",
+      "imageError": null
+    },
+    {
+      "code": "CP63",
+      "name": "Scarlet Witch & Quicksilver",
+      "type": "character_pack",
+      "releaseDate": "2021-05-06",
+      "characters": [
+        {
+          "slug": "quicksilver",
+          "name": "Quicksilver",
+          "amount": 1
+        },
+        {
+          "slug": "scarlet-witch",
+          "name": "Scarlet Witch",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp63.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP63",
+      "imageError": null
+    },
+    {
+      "code": "CP160",
+      "name": "Sentinel Prime MK4",
+      "type": "character_pack",
+      "releaseDate": "2022-10-14",
+      "characters": [
+        {
+          "slug": "sentinel-prime-mk4",
+          "name": "Sentinel Prime MK4",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp160.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP160",
+      "imageError": null
+    },
+    {
+      "code": "CP236",
+      "name": "Sentinels Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-02-27",
+      "characters": [
+        {
+          "slug": "sentinel-prime-mk4",
+          "name": "Sentinel Prime MK4",
+          "amount": 1
+        },
+        {
+          "slug": "cassandra-nova",
+          "name": "Cassandra Nova",
+          "amount": 1
+        },
+        {
+          "slug": "sentinel-mk4",
+          "name": "Sentinel MK4",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp236.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP236",
+      "imageError": null
+    },
+    {
+      "code": "CP51",
+      "name": "Sentinels MK4",
+      "type": "character_pack",
+      "releaseDate": "2022-10-14",
+      "characters": [
+        {
+          "slug": "sentinel-mk4",
+          "name": "Sentinel MK4",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp51.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP51",
+      "imageError": null
+    },
+    {
+      "code": "CK07",
+      "name": "Separation Anxiety Organized Play Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2021-07-23",
+      "characters": [],
+      "image": "assets/box-sets/ck07.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK07",
+      "imageError": null
+    },
+    {
+      "code": "CP79",
+      "name": "Shadowland Daredevil & Elektra",
+      "type": "character_pack",
+      "releaseDate": "2022-03-26",
+      "characters": [
+        {
+          "slug": "elektra",
+          "name": "Elektra",
+          "amount": 1
+        },
+        {
+          "slug": "hand-ninjas-grunts",
+          "name": "Hand Ninjas",
+          "amount": 1
+        },
+        {
+          "slug": "shadowland-daredevil",
+          "name": "Shadowland Daredevil",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp79.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP79",
+      "imageError": null
+    },
+    {
+      "code": "CP69",
+      "name": "Shang-Chi & Silver Sable",
+      "type": "character_pack",
+      "releaseDate": "2024-07-12",
+      "characters": [
+        {
+          "slug": "shang-chi",
+          "name": "Shang-Chi",
+          "amount": 1
+        },
+        {
+          "slug": "silver-sable",
+          "name": "Silver Sable",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp69.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP69",
+      "imageError": null
+    },
+    {
+      "code": "CP39",
+      "name": "She-Hulk",
+      "type": "character_pack",
+      "releaseDate": "2021-01-09",
+      "characters": [
+        {
+          "slug": "she-hulk",
+          "name": "She-Hulk",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp39.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP39",
+      "imageError": null
+    },
+    {
+      "code": "CP110",
+      "name": "Shrine to En Sabah Nur Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-09-27",
+      "characters": [],
+      "image": "assets/box-sets/cp110.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP110",
+      "imageError": null
+    },
+    {
+      "code": "CP08",
+      "name": "Shuri & Okoye",
+      "type": "character_pack",
+      "releaseDate": "2019-12-13",
+      "characters": [
+        {
+          "slug": "okoye",
+          "name": "Okoye",
+          "amount": 1
+        },
+        {
+          "slug": "shuri",
+          "name": "Shuri",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp08.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP08",
+      "imageError": null
+    },
+    {
+      "code": "CP170",
+      "name": "Silk, Spider-Man Noir & Spider-Ham",
+      "type": "character_pack",
+      "releaseDate": "2025-10-03",
+      "characters": [
+        {
+          "slug": "silk",
+          "name": "Silk",
+          "amount": 1
+        },
+        {
+          "slug": "spider-ham",
+          "name": "Spider-Ham",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man-noir",
+          "name": "Spider-Man Noir",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp170.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP170",
+      "imageError": null
+    },
+    {
+      "code": "CP61",
+      "name": "Sin & Viper",
+      "type": "character_pack",
+      "releaseDate": "2021-05-06",
+      "characters": [
+        {
+          "slug": "sin",
+          "name": "Sin",
+          "amount": 1
+        },
+        {
+          "slug": "viper",
+          "name": "Viper",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp61.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP61",
+      "imageError": null
+    },
+    {
+      "code": "CP148",
+      "name": "Spider-Foes Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2024-05-10",
+      "characters": [
+        {
+          "slug": "doctor-octopus",
+          "name": "Doctor Octopus",
+          "amount": 1
+        },
+        {
+          "slug": "green-goblin",
+          "name": "Green Goblin",
+          "amount": 1
+        },
+        {
+          "slug": "kraven-the-hunter",
+          "name": "Kraven the Hunter",
+          "amount": 1
+        },
+        {
+          "slug": "lizard",
+          "name": "Lizard",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp148.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP148",
+      "imageError": null
+    },
+    {
+      "code": "CP272",
+      "name": "Spider-Foes Starter Pack",
+      "type": "starter_pack",
+      "releaseDate": "2025-12-05",
+      "characters": [
+        {
+          "slug": "green-goblin",
+          "name": "Green Goblin",
+          "amount": 1
+        },
+        {
+          "slug": "rhino",
+          "name": "Rhino",
+          "amount": 1
+        },
+        {
+          "slug": "mysterio",
+          "name": "Mysterio",
+          "amount": 1
+        },
+        {
+          "slug": "carnage",
+          "name": "Carnage",
+          "amount": 1
+        },
+        {
+          "slug": "electro",
+          "name": "Electro",
+          "amount": 1
+        },
+        {
+          "slug": "sandman",
+          "name": "Sandman",
+          "amount": 1
+        },
+        {
+          "slug": "shocker",
+          "name": "Shocker",
+          "amount": 1
+        },
+        {
+          "slug": "vulture",
+          "name": "Vulture",
+          "amount": 1
+        },
+        {
+          "slug": "lizard",
+          "name": "Lizard",
+          "amount": 1
+        },
+        {
+          "slug": "kraven-the-hunter",
+          "name": "Kraven the Hunter",
+          "amount": 1
+        },
+        {
+          "slug": "sand-construct-1-grunts",
+          "name": "Sand Construct",
+          "amount": 1
+        },
+        {
+          "slug": "sand-construct-2-grunts",
+          "name": "Sand Construct",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp272.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP272",
+      "imageError": null
+    },
+    {
+      "code": "CP10",
+      "name": "Spider-Man & Ghost Spider",
+      "type": "character_pack",
+      "releaseDate": "2020-08-14",
+      "characters": [
+        {
+          "slug": "ghost-spider",
+          "name": "Ghost-Spider",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man-miles-morales",
+          "name": "Spider-Man",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp10.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP10",
+      "imageError": null
+    },
+    {
+      "code": "CP137",
+      "name": "Squirrel Girl & Gwenpool",
+      "type": "character_pack",
+      "releaseDate": "2023-05-12",
+      "characters": [
+        {
+          "slug": "squirrel-girl",
+          "name": "Squirrel Girl",
+          "amount": 1
+        },
+        {
+          "slug": "gwenpool",
+          "name": "Gwenpool",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp137.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP137",
+      "imageError": null
+    },
+    {
+      "code": "CP18",
+      "name": "Star-Lord",
+      "type": "character_pack",
+      "releaseDate": "2020-03-13",
+      "characters": [
+        {
+          "slug": "star-lord",
+          "name": "Star-Lord",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp18.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP18",
+      "imageError": null
+    },
+    {
+      "code": "CP153",
+      "name": "Sunspot & Warlock",
+      "type": "character_pack",
+      "releaseDate": "2024-09-13",
+      "characters": [
+        {
+          "slug": "sunspot",
+          "name": "Sunspot",
+          "amount": 1
+        },
+        {
+          "slug": "warlock",
+          "name": "Warlock",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp153.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP153",
+      "imageError": null
+    },
+    {
+      "code": "CP25",
+      "name": "Thanos",
+      "type": "character_pack",
+      "releaseDate": "2020-07-10",
+      "characters": [
+        {
+          "slug": "thanos-the-mad-titan",
+          "name": "Thanos, The Mad Titan",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp25.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP25",
+      "imageError": null
+    },
+    {
+      "code": "MCP23",
+      "name": "Thanos",
+      "type": "ultimate_encounter",
+      "releaseDate": "2026-11-13",
+      "characters": [
+        {
+          "slug": "thanos-the-mad-titan",
+          "name": "Thanos, The Mad Titan",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp23.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP23",
+      "imageError": null
+    },
+    {
+      "code": "CP82",
+      "name": "The Blob & Pyro",
+      "type": "character_pack",
+      "releaseDate": "2022-12-09",
+      "characters": [
+        {
+          "slug": "pyro",
+          "name": "Pyro",
+          "amount": 1
+        },
+        {
+          "slug": "the-blob",
+          "name": "The Blob",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp82.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP82",
+      "imageError": null
+    },
+    {
+      "code": "CP223",
+      "name": "The Galaxy‘s Deadliest",
+      "type": "character_pack",
+      "releaseDate": "2025-03-28",
+      "characters": [
+        {
+          "slug": "gamora",
+          "name": "Gamora",
+          "amount": 1
+        },
+        {
+          "slug": "nebula",
+          "name": "Nebula",
+          "amount": 1
+        },
+        {
+          "slug": "ronan-the-accuser",
+          "name": "Ronan the Accuser",
+          "amount": 1
+        },
+        {
+          "slug": "drax-the-destroyer",
+          "name": "Drax the Destroyer",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp223.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP223",
+      "imageError": null
+    },
+    {
+      "code": "CP144",
+      "name": "The Immortal Hulk",
+      "type": "character_pack",
+      "releaseDate": "2023-04-14",
+      "characters": [
+        {
+          "slug": "the-immortal-hulk",
+          "name": "The Immortal Hulk",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp144.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP144",
+      "imageError": null
+    },
+    {
+      "code": "MCP17",
+      "name": "The Leader, Red Hulk & Sensational She-Hulk",
+      "type": "character_pack",
+      "releaseDate": "2026-11-13",
+      "characters": [
+        {
+          "slug": "the-leader",
+          "name": "The Leader",
+          "amount": 1
+        },
+        {
+          "slug": "red-hulk",
+          "name": "Red Hulk",
+          "amount": 1
+        },
+        {
+          "slug": "sensational-she-hulk",
+          "name": "Sensational She-Hulk",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp17.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP17",
+      "imageError": null
+    },
+    {
+      "code": "CP11",
+      "name": "Thor & Valkyrie",
+      "type": "character_pack",
+      "releaseDate": "2020-01-31",
+      "characters": [
+        {
+          "slug": "thor-prince-of-asgard",
+          "name": "Thor, Prince of Asgard",
+          "amount": 1
+        },
+        {
+          "slug": "valkyrie",
+          "name": "Valkyrie",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp11.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP11",
+      "imageError": null
+    },
+    {
+      "code": "CPE05",
+      "name": "Tomb of Dracula Terrain Pack",
+      "type": "terrain_pack",
+      "releaseDate": "2024-11-01",
+      "characters": [],
+      "image": "assets/box-sets/cpe05.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE05",
+      "imageError": null
+    },
+    {
+      "code": "WEB01",
+      "name": "Ultimate Encounter: All Will Be Metal",
+      "type": "ultimate_encounter",
+      "releaseDate": "2019-12-19",
+      "characters": [],
+      "image": "assets/box-sets/web01.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/WEB01",
+      "imageError": null
+    },
+    {
+      "code": "WEB02",
+      "name": "Ultimate Encounter: The Incredible Hulk",
+      "type": "ultimate_encounter",
+      "releaseDate": "2020-03-30",
+      "characters": [],
+      "image": "assets/box-sets/web02.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/WEB02",
+      "imageError": null
+    },
+    {
+      "code": "MCP13",
+      "name": "Uncanny Telepaths & Telekinetics",
+      "type": "character_pack",
+      "releaseDate": "2026-08-21",
+      "characters": [
+        {
+          "slug": "jean-grey",
+          "name": "Jean Grey",
+          "amount": 1
+        },
+        {
+          "slug": "psylocke",
+          "name": "Psylocke",
+          "amount": 1
+        },
+        {
+          "slug": "professor-x",
+          "name": "Professor X",
+          "amount": 1
+        },
+        {
+          "slug": "emma-frost",
+          "name": "Emma Frost",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp13.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP13",
+      "imageError": null
+    },
+    {
+      "code": "CP139",
+      "name": "Uncanny X-Men Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2022-11-11",
+      "characters": [
+        {
+          "slug": "beast",
+          "name": "Beast",
+          "amount": 1
+        },
+        {
+          "slug": "cyclops",
+          "name": "Cyclops",
+          "amount": 1
+        },
+        {
+          "slug": "storm",
+          "name": "Storm",
+          "amount": 1
+        },
+        {
+          "slug": "wolverine",
+          "name": "Wolverine",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp139.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP139",
+      "imageError": null
+    },
+    {
+      "code": "CK10",
+      "name": "Unstoppable Colossus Game Night Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2022-02-11",
+      "characters": [],
+      "image": "assets/box-sets/ck10.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK10",
+      "imageError": null
+    },
+    {
+      "code": "CP89",
+      "name": "Ursa Major & Red Guardian",
+      "type": "character_pack",
+      "releaseDate": "2022-08-30",
+      "characters": [
+        {
+          "slug": "red-guardian",
+          "name": "Red Guardian",
+          "amount": 1
+        },
+        {
+          "slug": "ursa-major",
+          "name": "Ursa Major",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp89.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP89",
+      "imageError": null
+    },
+    {
+      "code": "CP94",
+      "name": "Valkyrie and Elendil & Warriors Three",
+      "type": "character_pack",
+      "releaseDate": "2026-02-13",
+      "characters": [
+        {
+          "slug": "valkyrie-and-elendil",
+          "name": "Valkyrie and Elendil",
+          "amount": 1
+        },
+        {
+          "slug": "warriors-three",
+          "name": "Warriors Three",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp94.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP94",
+      "imageError": null
+    },
+    {
+      "code": "CP09",
+      "name": "Venom",
+      "type": "character_pack",
+      "releaseDate": "2019-12-13",
+      "characters": [
+        {
+          "slug": "venom",
+          "name": "Venom",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp09.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP09",
+      "imageError": null
+    },
+    {
+      "code": "CK05",
+      "name": "Vibranium Heist Organized Play Kit",
+      "type": "ultimate_encounter",
+      "releaseDate": "2020-10-09",
+      "characters": [],
+      "image": "assets/box-sets/ck05.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK05",
+      "imageError": null
+    },
+    {
+      "code": "CP13",
+      "name": "Vision & Winter Soldier",
+      "type": "character_pack",
+      "releaseDate": "2020-03-06",
+      "characters": [
+        {
+          "slug": "vision",
+          "name": "Vision",
+          "amount": 1
+        },
+        {
+          "slug": "winter-soldier",
+          "name": "Winter Soldier",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp13.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP13",
+      "imageError": null
+    },
+    {
+      "code": "CP147",
+      "name": "Wakanda Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2023-03-10",
+      "characters": [
+        {
+          "slug": "black-panther",
+          "name": "Black Panther",
+          "amount": 1
+        },
+        {
+          "slug": "killmonger",
+          "name": "Killmonger",
+          "amount": 1
+        },
+        {
+          "slug": "shuri",
+          "name": "Shuri",
+          "amount": 1
+        },
+        {
+          "slug": "okoye",
+          "name": "Okoye",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp147.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP147",
+      "imageError": null
+    },
+    {
+      "code": "CA13",
+      "name": "War of Kings",
+      "type": "character_and_crisis_card_pack",
+      "releaseDate": "2025-03-14",
+      "characters": [
+        {
+          "slug": "gladiator",
+          "name": "Gladiator",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/ca13.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA13",
+      "imageError": null
+    },
+    {
+      "code": "CP225",
+      "name": "Warriors of Asgard Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-08-22",
+      "characters": [
+        {
+          "slug": "skurge-the-executioner",
+          "name": "Skurge, The Executioner",
+          "amount": 1
+        },
+        {
+          "slug": "enchantress",
+          "name": "Enchantress",
+          "amount": 1
+        },
+        {
+          "slug": "angela",
+          "name": "Angela",
+          "amount": 1
+        },
+        {
+          "slug": "heimdall-the-all-seeing",
+          "name": "Heimdall, The All-Seeing",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp225.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP225",
+      "imageError": null
+    },
+    {
+      "code": "CP109",
+      "name": "Weapon X & Maverick",
+      "type": "character_pack",
+      "releaseDate": "2024-09-13",
+      "characters": [
+        {
+          "slug": "maverick",
+          "name": "Maverick",
+          "amount": 1
+        },
+        {
+          "slug": "weapon-x",
+          "name": "Weapon X",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp109.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP109",
+      "imageError": null
+    },
+    {
+      "code": "MCP27",
+      "name": "Weapon X Program",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-11-13",
+      "characters": [
+        {
+          "slug": "weapon-x",
+          "name": "Weapon X",
+          "amount": 1
+        },
+        {
+          "slug": "logan-the-wolverine",
+          "name": "Logan, the Wolverine",
+          "amount": 1
+        },
+        {
+          "slug": "deadpool",
+          "name": "Deadpool",
+          "amount": 1
+        },
+        {
+          "slug": "maverick",
+          "name": "Maverick",
+          "amount": 1
+        },
+        {
+          "slug": "sabretooth-apex-predator",
+          "name": "Sabretooth, Apex Predator",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp27.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP27",
+      "imageError": null
+    },
+    {
+      "code": "CP146",
+      "name": "Web Warriors Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2023-01-13",
+      "characters": [
+        {
+          "slug": "ghost-spider",
+          "name": "Ghost-Spider",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man",
+          "name": "Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "spider-man-miles-morales",
+          "name": "Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "venom",
+          "name": "Venom",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp146.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP146",
+      "imageError": null
+    },
+    {
+      "code": "CP234",
+      "name": "Web-Swinging Heroes Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2025-09-26",
+      "characters": [
+        {
+          "slug": "spider-woman",
+          "name": "Spider-Woman",
+          "amount": 1
+        },
+        {
+          "slug": "agent-venom",
+          "name": "Agent Venom",
+          "amount": 1
+        },
+        {
+          "slug": "amazing-spider-man",
+          "name": "Amazing Spider-Man",
+          "amount": 1
+        },
+        {
+          "slug": "black-cat",
+          "name": "Black Cat",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp234.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP234",
+      "imageError": null
+    },
+    {
+      "code": "MCP19",
+      "name": "Winter Guard Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-08-21",
+      "characters": [
+        {
+          "slug": "red-guardian",
+          "name": "Red Guardian",
+          "amount": 1
+        },
+        {
+          "slug": "ursa-major",
+          "name": "Ursa Major",
+          "amount": 1
+        },
+        {
+          "slug": "darkstar",
+          "name": "Darkstar",
+          "amount": 1
+        },
+        {
+          "slug": "crimson-dynamo",
+          "name": "Crimson Dynamo",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp19.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP19",
+      "imageError": null
+    },
+    {
+      "code": "CP40",
+      "name": "Wolverine & Sabretooth",
+      "type": "character_pack",
+      "releaseDate": "2020-11-13",
+      "characters": [
+        {
+          "slug": "sabretooth",
+          "name": "Sabretooth",
+          "amount": 1
+        },
+        {
+          "slug": "wolverine",
+          "name": "Wolverine",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp40.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP40",
+      "imageError": null
+    },
+    {
+      "code": "CP71",
+      "name": "X-23 & Honey Badger",
+      "type": "character_pack",
+      "releaseDate": "2022-02-11",
+      "characters": [
+        {
+          "slug": "honey-badger",
+          "name": "Honey Badger",
+          "amount": 1
+        },
+        {
+          "slug": "x-23",
+          "name": "X-23",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp71.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP71",
+      "imageError": null
+    },
+    {
+      "code": "MCP14",
+      "name": "X-Fiends & Foes",
+      "type": "character_pack",
+      "releaseDate": "2026-11-13",
+      "characters": [
+        {
+          "slug": "omega-red",
+          "name": "Omega Red",
+          "amount": 1
+        },
+        {
+          "slug": "mister-sinister",
+          "name": "Mister Sinister",
+          "amount": 1
+        },
+        {
+          "slug": "juggernaut",
+          "name": "Juggernaut",
+          "amount": 1
+        },
+        {
+          "slug": "shadow-king",
+          "name": "Shadow King",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/mcp14.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP14",
+      "imageError": null
+    },
+    {
+      "code": "CP224",
+      "name": "X-Force Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-02-13",
+      "characters": [
+        {
+          "slug": "cable",
+          "name": "Cable",
+          "amount": 1
+        },
+        {
+          "slug": "domino",
+          "name": "Domino",
+          "amount": 1
+        },
+        {
+          "slug": "honey-badger",
+          "name": "Honey Badger",
+          "amount": 1
+        },
+        {
+          "slug": "x-23",
+          "name": "X-23",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp224.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP224",
+      "imageError": null
+    },
+    {
+      "code": "CP271",
+      "name": "X-Men Starter Pack",
+      "type": "starter_pack",
+      "releaseDate": "2025-12-05",
+      "characters": [
+        {
+          "slug": "cyclops",
+          "name": "Cyclops",
+          "amount": 1
+        },
+        {
+          "slug": "storm",
+          "name": "Storm",
+          "amount": 1
+        },
+        {
+          "slug": "wolverine",
+          "name": "Wolverine",
+          "amount": 1
+        },
+        {
+          "slug": "beast",
+          "name": "Beast",
+          "amount": 1
+        },
+        {
+          "slug": "sabretooth",
+          "name": "Sabretooth",
+          "amount": 1
+        },
+        {
+          "slug": "magneto",
+          "name": "Magneto",
+          "amount": 1
+        },
+        {
+          "slug": "toad",
+          "name": "Toad",
+          "amount": 1
+        },
+        {
+          "slug": "mystique",
+          "name": "Mystique",
+          "amount": 1
+        },
+        {
+          "slug": "rogue",
+          "name": "Rogue",
+          "amount": 1
+        },
+        {
+          "slug": "gambit",
+          "name": "Gambit",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp271.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP271",
+      "imageError": null
+    },
+    {
+      "code": "CP226",
+      "name": "Xavier's Students Affiliation Pack",
+      "type": "affiliation_pack",
+      "releaseDate": "2026-01-23",
+      "characters": [
+        {
+          "slug": "colossus",
+          "name": "Colossus",
+          "amount": 1
+        },
+        {
+          "slug": "magik",
+          "name": "Magik",
+          "amount": 1
+        },
+        {
+          "slug": "bishop",
+          "name": "Bishop",
+          "amount": 1
+        },
+        {
+          "slug": "nightcrawler",
+          "name": "Nightcrawler",
+          "amount": 1
+        }
+      ],
+      "image": "assets/box-sets/cp226.png",
+      "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP226",
+      "imageError": null
+    }
+  ]
+}

@@ -5,7 +5,7 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;'
 let storageKey = 'mcp-companion-catalog-v1';
 const normalize = value => String(value || '').normalize('NFKD').replace(/\p{Diacritic}/gu,'').toLowerCase().trim();
 const searchWords = value => normalize(value).match(/[\p{L}\p{N}]+/gu) || [];
-let catalog, characters, state = {version:1,owned:[],rosters:[],groups:[]};
+let catalog, characters, state = {version:1,owned:[],rosters:[],groups:[],wishlist:[]};
 let screen='catalog';
 let selectedSlug = null, selectedSide = 'healthy', selectedForm = 0, cardRequest = 0;
 let rosterMode = null, rosterViewId = null, toastTimer, searchTimer, initialized=false;
@@ -22,7 +22,7 @@ function persist() {
   catch {toast('Браузер не сохранил изменения. Экспортируйте данные.');return false;}
 }
 function dataOnly(value) {
-  return {version:1,owned:value.owned,rosters:value.rosters.map(normalizeRosterRecord),groups:value.groups||[]};
+  return {version:1,owned:value.owned,rosters:value.rosters.map(normalizeRosterRecord),groups:value.groups||[],wishlist:wishlistCodes(value.wishlist||[])};
 }
 function isOwned(slug) {return state.owned.includes(slug);}
 function avatar(c,large=false) {
@@ -80,7 +80,7 @@ function renderCharacter(error='') {
   else {
     content=statCardViewerMarkup('catalog',c.slug,detail,selectedForm,selectedSide==='injured'?'back':'front');
   }
-  $('#character-content').innerHTML=head+`<div class="detail-body">${content}<section class="detail-section roster-memberships"><div class="section-title"><h3>В моих ростерах</h3><button data-action="pick-roster">Добавить в ростер +</button></div>${myRostersMarkup(c.slug)}</section><div class="source-line"><a href="${esc(c.sourceUrl)}" target="_blank" rel="noopener">Карточка на Jarvis ↗</a><span>Данные Jarvis · ${new Date(catalog.fetchedAt).toLocaleDateString('ru-RU')}</span></div></div>`;
+  $('#character-content').innerHTML=head+`<div class="detail-body">${content}${characterBoxSetsMarkup(c)}<section class="detail-section roster-memberships"><div class="section-title"><h3>В моих ростерах</h3><button data-action="pick-roster">Добавить в ростер +</button></div>${myRostersMarkup(c.slug)}</section><div class="source-line"><a href="${esc(c.sourceUrl)}" target="_blank" rel="noopener">Карточка на Jarvis ↗</a><span>Данные Jarvis · ${new Date(catalog.fetchedAt).toLocaleDateString('ru-RU')}</span></div></div>`;
 }
 async function openCharacter(slug,reset=true) {
   if(!characters.has(slug))return;
@@ -116,7 +116,7 @@ function showRoster(id) {
   openRosterEditor(id);
 }
 function showData() {
-  $('#data-content').innerHTML=`<div class="dialog-heading"><div><h2>Данные приложения</h2><p>${window.Account?.enabled?'Коллекция, ростеры, группы и локальные партии сохраняются в аккаунте на сервере. Сетевые партии хранятся отдельно и доступны обоим игрокам.':'Коллекция, ростеры, группы и партии хранятся в этом браузере.'}</p></div><button class="quiet close" data-action="close-data" aria-label="Закрыть данные">×</button></div><p style="font-size:12px">Полные карты и портреты загружены из Jarvis. Для переноса из локальной версии используйте её экспорт JSON и импорт здесь.</p><div class="actions" style="margin-top:20px"><button class="primary" data-action="export">Экспорт JSON</button><button data-action="import">Импорт JSON</button></div><input id="import-file" type="file" accept="application/json" hidden><p class="notice">Экспорт включает только отметки наличия, данные ростеров, группы и партии. Несохранённые правки и состояние интерфейса не экспортируются.</p>`;
+  $('#data-content').innerHTML=`<div class="dialog-heading"><div><h2>Данные приложения</h2><p>${window.Account?.enabled?'Коллекция, ростеры, группы и локальные партии сохраняются в аккаунте на сервере. Сетевые партии хранятся отдельно и доступны обоим игрокам.':'Коллекция, ростеры, группы и партии хранятся в этом браузере.'}</p></div><button class="quiet close" data-action="close-data" aria-label="Закрыть данные">×</button></div><p style="font-size:12px">Полные карты и портреты загружены из Jarvis. Для переноса из локальной версии используйте её экспорт JSON и импорт здесь.</p><div class="actions" style="margin-top:20px"><button class="primary" data-action="export">Экспорт JSON</button><button data-action="import">Импорт JSON</button></div><input id="import-file" type="file" accept="application/json" hidden><p class="notice">Экспорт включает отметки наличия, ростеры, группы, запланированные покупки и партии. Несохранённые правки и состояние интерфейса не экспортируются.</p>`;
   $('#data-dialog').showModal();
 }
 function exportData() {
@@ -130,11 +130,14 @@ function validate(data) {
   const ids=new Set();
   data.rosters.forEach(r=>{if(typeof r.id!=='string'||ids.has(r.id)||typeof r.name!=='string'||(r.affiliation!==undefined&&typeof r.affiliation!=='string')||!Array.isArray(r.characters)||r.characters.some(slug=>!characters.has(slug)))throw new Error('Не удалось прочитать ростеры.');ids.add(r.id);});
   validateRosterPayload(data);
+  validateWishlist(data.wishlist);
 }
 document.addEventListener('click',event=>{
   const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action;
-  if(!initialized&&['all','mine','rosters','battle','tournaments'].includes(action))return;
+  if(!initialized&&['all','mine','rosters','battle','tournaments','purchases','catalog-character'].includes(action))return;
   if(action==='character')openCharacter(button.dataset.slug);
+  else if(action==='catalog-character')openCatalogCharacter(button.dataset.slug);
+  else if(action==='purchases')navigatePurchases();
   else if(action==='all')navigateCatalog(false);
   else if(action==='mine')navigateCatalog(true);
   else if(action==='rosters')navigateRosters();
@@ -160,16 +163,16 @@ document.addEventListener('change',async event=>{
     const slug=input.dataset.owned;state.owned=input.checked?[...new Set([...state.owned,slug])]:state.owned.filter(s=>s!==slug);persist();renderList();
     if($('#character-dialog').open){const scroll=$('#character-dialog').scrollTop;renderCharacter();$('#character-dialog').scrollTop=scroll;}
     if(!$('#character-dialog').open)document.getElementById('owned-'+slug)?.focus();
-    refreshRosters();
+    refreshRosters();refreshPurchases();if($('#box-set-dialog').open)renderBoxSetDetail();
   }
   else if(input.dataset.roster){const roster=state.rosters.find(r=>r.id===input.dataset.roster);roster.characters=input.checked?[...new Set([...roster.characters,selectedSlug])]:roster.characters.filter(s=>s!==selectedSlug);roster.updatedAt=new Date().toISOString();syncRosterMembership(roster.id,selectedSlug,input.checked);persist();renderCharacter();refreshRosters();}
   else if(['affiliation','threat','only-owned'].includes(input.id))renderList();
   else if(input.id==='import-file'){
     const file=input.files[0];if(!file)return;
-    try{const imported=JSON.parse(await file.text());validate(imported);if(imported.battles)validateBattleData(imported.battles);$('#data-content').innerHTML=`<div class="dialog-heading"><h2>Восстановить данные?</h2></div><p style="font-size:12px">Коллекция, ростеры и группы будут заменены содержимым файла. Если файл содержит партии, они тоже будут восстановлены.</p><div class="actions" style="margin-top:20px"><button id="confirm-import" class="primary">Восстановить</button><button data-action="close-data">Отмена</button></div>`;$('#confirm-import').onclick=()=>{
+    try{const imported=JSON.parse(await file.text());validate(imported);if(imported.battles)validateBattleData(imported.battles);$('#data-content').innerHTML=`<div class="dialog-heading"><h2>Восстановить данные?</h2></div><p style="font-size:12px">Коллекция, ростеры, группы и запланированные покупки будут заменены содержимым файла. В старых файлах без вишлиста список покупок будет пустым. Если файл содержит партии, они тоже будут восстановлены.</p><div class="actions" style="margin-top:20px"><button id="confirm-import" class="primary">Восстановить</button><button data-action="close-data">Отмена</button></div>`;$('#confirm-import').onclick=()=>{
       if(imported.battles&&!replaceBattleData(imported.battles))return;
       state=dataOnly(imported);state.owned=[...new Set(state.owned)];
-      persist();renderList();if(selectedSlug)renderCharacter();resetRosterWorkspace();refreshRosters();if(screen==='battle'){battleView='home';battleMatchId=null;renderBattle();}$('#data-dialog').close();toast('Данные восстановлены');
+      persist();renderList();refreshPurchases();if(selectedSlug)renderCharacter();resetRosterWorkspace();refreshRosters();if(screen==='battle'){battleView='home';battleMatchId=null;renderBattle();}$('#data-dialog').close();toast('Данные восстановлены');
     };}
     catch(error){toast(error.message||'Не удалось прочитать файл.');}
   }
@@ -195,7 +198,7 @@ window.addEventListener('storage',event=>{
     state=dataOnly(saved);
     renderList();
     window.Tournaments?.refresh();
-    refreshRosters(true);
+    refreshRosters(true);refreshPurchases();
     if(selectedSlug&&$('#character-dialog').open){const scroll=$('#character-dialog').scrollTop;renderCharacter();$('#character-dialog').scrollTop=scroll;}
     if($('#roster-dialog').open&&rosterMode==='view'){
       if(state.rosters.some(r=>r.id===rosterViewId)){
@@ -214,7 +217,7 @@ async function boot() {
     const response=await fetch('data/catalog.json');if(!response.ok)throw new Error('Источник недоступен');catalog=await response.json();
     catalog.characters.sort((a,b)=>a.name.localeCompare(b.name,'en')||String(a.alterEgo||'').localeCompare(String(b.alterEgo||''),'en'));
     characters=new Map(catalog.characters.map(c=>[c.slug,c]));
-    await initRosterData();
+    await Promise.all([initRosterData(),initBoxSetData()]);
     const serverAccount=await window.Account?.init();
     if(!serverAccount)loadBattleData();
     await initBattleMapData();
@@ -227,10 +230,10 @@ async function boot() {
       pruneLegacy=Object.prototype.hasOwnProperty.call(saved,'ui')||Object.prototype.hasOwnProperty.call(saved,'characterViews')||!Array.isArray(saved.groups)||saved.rosters.some(r=>!Array.isArray(r.tactics)||!Array.isArray(r.crises)||!Array.isArray(r.groups));
     }else if(!window.Account?.enabled){const old=localStorage.getItem('mcp-roster-atlas-collection-v1');if(old){const saved=JSON.parse(old);if(Array.isArray(saved.owned)&&saved.owned.every(id=>typeof id==='string')){state.owned=[...new Set(saved.owned.filter(id=>characters.has(id)))];migrateOwned=true;}}}}
     catch{toast('Сохранение не удалось прочитать. Исходная запись не изменена.');}
-    initialized=true;if(window.Account?.enabled){window.NetworkBattle.list().catch(e=>toast(e.message));window.Account.flush().catch(e=>toast(e.message));}if(pruneLegacy||migrateOwned)persist();resetFilters();document.querySelectorAll('.nav-item').forEach(button=>button.disabled=false);window.Tournaments?.boot();requestAnimationFrame(()=>window.scrollTo(0,0));
+    initialized=true;updatePurchaseBadge();if(window.Account?.enabled){window.NetworkBattle.list().catch(e=>toast(e.message));window.Account.flush().catch(e=>toast(e.message));}if(pruneLegacy||migrateOwned)persist();resetFilters();document.querySelectorAll('.nav-item').forEach(button=>button.disabled=false);window.Tournaments?.boot();requestAnimationFrame(()=>window.scrollTo(0,0));
   }catch(error){$('#result').textContent='Каталог недоступен';$('#characters').innerHTML='<div class="empty"><h3>Не удалось загрузить каталог</h3><p>'+esc(error.message||'Проверьте локальный сервер и попробуйте ещё раз.')+'</p><button id="retry-load">Повторить</button></div>';$('#retry-load').onclick=boot;}
 }
 
 window.MCPNotify=toast;
-function showTournaments(){screen="tournaments";rosterDraft=null;for(const id of ["catalog-screen","rosters-screen","battle-screen"])$("#"+id).hidden=true;$("#tournaments-screen").hidden=false;window.Tournaments.activate();updateNavigation();window.Tournaments.refresh();window.scrollTo(0,0);}
-function openTournamentDraft(roster){if(!roster||!initialized)return;requestLeave(()=>{for(const d of document.querySelectorAll("dialog[open]"))d.close();const draft=TournamentImport.draft(roster,AtlasCore.createIndex(ROSTER_ATLAS).characters,state.owned,catalog.characters,rosterCards);rosterDraft=normalizeRosterRecord({...draft,id:crypto.randomUUID()});rosterBase="";rosterWasSaved=false;rosterConflict=false;editorTab="characters";screen="rosters";for(const id of ["catalog-screen","battle-screen","tournaments-screen"])$("#"+id).hidden=true;$("#rosters-screen").hidden=false;renderRosterEditor();updateNavigation();window.scrollTo(0,0);});}
+function showTournaments(){screen="tournaments";rosterDraft=null;for(const id of ["catalog-screen","rosters-screen","battle-screen","purchases-screen"])$("#"+id).hidden=true;$("#tournaments-screen").hidden=false;window.Tournaments.activate();updateNavigation();window.Tournaments.refresh();window.scrollTo(0,0);}
+function openTournamentDraft(roster){if(!roster||!initialized)return;requestLeave(()=>{for(const d of document.querySelectorAll("dialog[open]"))d.close();const draft=TournamentImport.draft(roster,AtlasCore.createIndex(ROSTER_ATLAS).characters,state.owned,catalog.characters,rosterCards);rosterDraft=normalizeRosterRecord({...draft,id:crypto.randomUUID()});rosterBase="";rosterWasSaved=false;rosterConflict=false;editorTab="characters";screen="rosters";for(const id of ["catalog-screen","battle-screen","tournaments-screen","purchases-screen"])$("#"+id).hidden=true;$("#rosters-screen").hidden=false;renderRosterEditor();updateNavigation();window.scrollTo(0,0);});}

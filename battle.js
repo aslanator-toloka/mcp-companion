@@ -44,7 +44,7 @@ function editMatch(label,mutate){
   }catch(error){toast(error.message);return false;}
 }
 function showBattleScreen(){
-  screen='battle';$('#tournaments-screen').hidden=true;rosterDraft=null;$('#catalog-screen').hidden=true;$('#rosters-screen').hidden=true;$('#battle-screen').hidden=false;
+  screen='battle';$('#purchases-screen').hidden=true;$('#tournaments-screen').hidden=true;rosterDraft=null;$('#catalog-screen').hidden=true;$('#rosters-screen').hidden=true;$('#battle-screen').hidden=false;
   updateNavigation();renderBattle();window.scrollTo(0,0);
 }
 function navigateBattle(){requestLeave(()=>{battleView='home';battleMatchId=null;showBattleScreen();window.NetworkBattle?.list().catch(e=>toast(e.message));});}

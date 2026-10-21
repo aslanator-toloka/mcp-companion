@@ -43,10 +43,10 @@ function affOptions(selected='',empty='Без основной аффилиац�
 function groupOptions(selected=''){
   return '<option value="">Все группы</option><option value="__none" '+(selected==='__none'?'selected':'')+'>Без группы</option>'+(state.groups||[]).map(g=>`<option value="${esc(g.id)}" ${selected===g.id?'selected':''}>${esc(g.name)}</option>`).join('');
 }
-function updateNavigation(){if(screen!=='tournaments')history.replaceState(null,'','#screen='+(screen==='catalog'&&$('#only-owned').checked?'mine':screen));document.querySelectorAll('.nav-item').forEach(button=>button.classList.toggle('selected',button.dataset.action===(screen==='tournaments'?'tournaments':screen==='battle'?'battle':screen==='rosters'?'rosters':$('#only-owned').checked?'mine':'all')));}
-function showCatalog(only=false){screen='catalog';$('#tournaments-screen').hidden=true;$('#battle-screen').hidden=true;$('#catalog-screen').hidden=false;$('#rosters-screen').hidden=true;rosterDraft=null;resetFilters(only);updateNavigation();window.scrollTo(0,0);}
+function updateNavigation(){if(screen!=='tournaments')history.replaceState(null,'','#screen='+(screen==='catalog'&&$('#only-owned').checked?'mine':screen));document.querySelectorAll('.nav-item').forEach(button=>button.classList.toggle('selected',button.dataset.action===(screen==='tournaments'?'tournaments':screen==='battle'?'battle':screen==='rosters'?'rosters':screen==='purchases'?'purchases':$('#only-owned').checked?'mine':'all')));}
+function showCatalog(only=false){screen='catalog';$('#purchases-screen').hidden=true;$('#tournaments-screen').hidden=true;$('#battle-screen').hidden=true;$('#catalog-screen').hidden=false;$('#rosters-screen').hidden=true;rosterDraft=null;resetFilters(only);updateNavigation();window.scrollTo(0,0);}
 function navigateCatalog(only=false){requestLeave(()=>showCatalog(only));}
-function showRosterList(){screen='rosters';$('#tournaments-screen').hidden=true;$('#battle-screen').hidden=true;rosterDraft=null;$('#catalog-screen').hidden=true;$('#rosters-screen').hidden=false;renderRosterList();updateNavigation();window.scrollTo(0,0);}
+function showRosterList(){screen='rosters';$('#purchases-screen').hidden=true;$('#tournaments-screen').hidden=true;$('#battle-screen').hidden=true;rosterDraft=null;$('#catalog-screen').hidden=true;$('#rosters-screen').hidden=false;renderRosterList();updateNavigation();window.scrollTo(0,0);}
 function navigateRosters(){requestLeave(showRosterList);}
 function isRosterDirty(){return rosterDraft&&JSON.stringify(rosterDraft)!==rosterBase;}
 function requestLeave(next){
@@ -78,7 +78,7 @@ function openRosterEditor(id){
     if(id&&!r){toast('Ростер больше не существует.');return;}
     rosterDraft=r?normalizeRosterRecord(r):normalizeRosterRecord({id:crypto.randomUUID(),name:'',affiliation:'',characters:[]});
     rosterBase=JSON.stringify(rosterDraft);rosterWasSaved=!!r;rosterConflict=false;editorTab='characters';
-    screen='rosters';$('#tournaments-screen').hidden=true;$('#battle-screen').hidden=true;$('#catalog-screen').hidden=true;$('#rosters-screen').hidden=false;renderRosterEditor();updateNavigation();window.scrollTo(0,0);
+    screen='rosters';$('#purchases-screen').hidden=true;$('#tournaments-screen').hidden=true;$('#battle-screen').hidden=true;$('#catalog-screen').hidden=true;$('#rosters-screen').hidden=false;renderRosterEditor();updateNavigation();window.scrollTo(0,0);
   });
 }
 function rosterNotes(r){
