@@ -1,6 +1,7 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-10-12T11:05:38.109249+00:00",
+  "fetchedAt": "2026-10-21T21:40:14.371Z",
+  "searchMetadataUpdatedAt": "2026-10-21T21:40:14.371Z",
   "characters": [
     {
       "slug": "abomination",
@@ -16,6 +17,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP162"
       ],
@@ -59,12 +61,21 @@
             "2025"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/abomination",
       "portrait": "assets/avatars/abomination.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -97,6 +108,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP191"
       ],
@@ -137,13 +149,12 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "cosmic-awareness"
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/adam-warlock",
       "portrait": "assets/avatars/adam-warlock.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -171,6 +182,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP100",
         "CP234"
@@ -221,6 +233,16 @@
           "isLeaderWithTeamTactics": false
         },
         {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
+        },
+        {
           "name": "Web Warriors",
           "slug": "web-warriors",
           "isLeader": false,
@@ -235,7 +257,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/agent-venom",
       "portrait": "assets/avatars/agent-venom.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -268,6 +289,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP37",
         "CP234"
@@ -324,7 +346,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/amazing-spider-man",
       "portrait": "assets/avatars/amazing-spider-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -352,6 +373,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP64",
         "CP221"
@@ -390,7 +412,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Defenders",
@@ -407,7 +429,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ancient-one",
       "portrait": "assets/avatars/ancient-one.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -440,6 +461,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP152"
       ],
@@ -498,7 +520,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/angel",
       "portrait": "assets/avatars/angel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -526,6 +547,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP28",
         "CP225",
@@ -590,7 +612,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/angela",
       "portrait": "assets/avatars/angela.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -623,6 +644,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": "tiny",
+      "secondFormBaseSize": 35,
       "boxSets": [
         "CP26",
         "MCP05"
@@ -669,7 +691,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ant-man",
       "portrait": "assets/avatars/ant-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 35,
       "attacks": [
         {
           "type": "physical",
@@ -702,6 +723,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP107"
       ],
@@ -755,7 +777,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/apocalypse",
       "portrait": "assets/avatars/apocalypse.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -783,6 +804,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP152"
       ],
@@ -846,7 +868,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/archangel",
       "portrait": "assets/avatars/archangel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -874,6 +895,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP76"
       ],
@@ -930,7 +952,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/arnim-zola",
       "portrait": "assets/avatars/arnim-zola.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -958,6 +979,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP173"
       ],
@@ -992,7 +1014,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/avalanche",
       "portrait": "assets/avatars/avalanche.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1020,6 +1041,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -1072,7 +1094,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-helmut-zemo",
       "portrait": "assets/avatars/baron-helmut-zemo.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1105,6 +1126,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP64",
         "CP221"
@@ -1137,7 +1159,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Cabal",
@@ -1154,7 +1176,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-mordo",
       "portrait": "assets/avatars/baron-mordo.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -1187,6 +1208,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP76"
       ],
@@ -1209,7 +1231,7 @@
         "bald",
         "errataed"
       ],
-      "version": 1786695285,
+      "version": 1792050382,
       "releaseDate": "2022-09-09",
       "actAs": "baron-strucker",
       "affiliations": [
@@ -1239,7 +1261,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-strucker",
       "portrait": "assets/avatars/baron-strucker.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -1267,6 +1288,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP142"
@@ -1315,7 +1337,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-zemo",
       "portrait": "assets/avatars/baron-zemo.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1343,6 +1364,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP09"
       ],
@@ -1379,7 +1401,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/bastion",
       "portrait": "assets/avatars/bastion.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -1407,6 +1428,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP43",
         "CP139",
@@ -1482,7 +1504,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/beast",
       "portrait": "assets/avatars/beast.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1510,6 +1531,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP130"
       ],
@@ -1567,7 +1589,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/beta-ray-bill",
       "portrait": "assets/avatars/beta-ray-bill.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1600,6 +1621,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP112",
         "CP226"
@@ -1659,7 +1681,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/bishop",
       "portrait": "assets/avatars/bishop.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -1687,6 +1708,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP34",
         "CP218"
@@ -1734,7 +1756,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-bolt",
       "portrait": "assets/avatars/black-bolt.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -1767,6 +1788,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP37",
         "CP234"
@@ -1847,7 +1869,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-cat",
       "portrait": "assets/avatars/black-cat.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1875,6 +1896,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP19",
         "CP159"
@@ -1911,7 +1933,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-dwarf",
       "portrait": "assets/avatars/black-dwarf.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -1939,6 +1960,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP07",
         "CP147"
@@ -1988,7 +2010,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-panther",
       "portrait": "assets/avatars/black-panther.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -2016,6 +2037,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP158",
         "MCP21"
@@ -2097,7 +2119,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-panther-chosen-of-bast",
       "portrait": "assets/avatars/black-panther-chosen-of-bast.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -2125,6 +2146,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP81"
       ],
@@ -2164,7 +2186,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-swan",
       "portrait": "assets/avatars/black-swan.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -2197,6 +2218,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP141"
@@ -2276,7 +2298,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-widow",
       "portrait": "assets/avatars/black-widow.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -2309,6 +2330,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP24",
         "MCP03"
@@ -2374,7 +2396,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/black-widow-agent-of-shield",
       "portrait": "assets/avatars/black-widow-agent-of-shield.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -2407,6 +2428,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP48",
         "CP220"
@@ -2475,7 +2497,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/blade",
       "portrait": "assets/avatars/blade.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -2508,6 +2529,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP129"
       ],
@@ -2557,7 +2579,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/blue-marvel",
       "portrait": "assets/avatars/blue-marvel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -2585,6 +2606,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP45"
       ],
@@ -2628,7 +2650,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/bob-agent-of-hydra",
       "portrait": "assets/avatars/bob-agent-of-hydra.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -2656,6 +2677,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP30",
         "CP214"
@@ -2700,12 +2722,21 @@
             "extended"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/bullseye",
       "portrait": "assets/avatars/bullseye.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -2733,6 +2764,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP47",
         "CP224"
@@ -2828,7 +2860,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/cable",
       "portrait": "assets/avatars/cable.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -2839,6 +2870,79 @@
           "type": "mystic",
           "range": "A2",
           "strength": "7"
+        }
+      ]
+    },
+    {
+      "slug": "captain-america",
+      "name": "Captain America",
+      "alterEgo": "Steve Rogers",
+      "threatLevel": 4,
+      "stamina": 6,
+      "speed": "M",
+      "size": 2,
+      "baseSize": 35,
+      "physicalDefense": 4,
+      "energyDefense": 4,
+      "mysticDefense": 3,
+      "isGrunt": false,
+      "secondFormSlug": null,
+      "secondFormBaseSize": null,
+      "boxSets": [
+        "CP01",
+        "CP141"
+      ],
+      "tags": [
+        "digitalUpdate2026August",
+        "digitalUpdate2021",
+        "leaderNatural",
+        "physicalR4",
+        "push",
+        "gainer",
+        "noLos",
+        "noCover",
+        "extraAtk",
+        "throwCharacter3",
+        "costReduction",
+        "bodyguardMinder",
+        "defBuff",
+        "blanks",
+        "errataed"
+      ],
+      "version": 1786695285,
+      "releaseDate": "2019-11-15",
+      "actAs": "captain-america",
+      "affiliations": [
+        {
+          "name": "Avengers",
+          "slug": "avengers",
+          "isLeader": true,
+          "timelines": [
+            "standard",
+            "extended",
+            "2026"
+          ],
+          "isLeaderWithTeamTactics": false
+        }
+      ],
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america",
+      "portrait": "assets/avatars/captain-america.png",
+      "cardAvailable": true,
+      "attacks": [
+        {
+          "type": "physical",
+          "range": "2",
+          "strength": "5"
+        },
+        {
+          "type": "physical",
+          "range": "4",
+          "strength": "5"
+        },
+        {
+          "type": "physical",
+          "range": "2",
+          "strength": "6"
         }
       ]
     },
@@ -2856,6 +2960,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP38",
         "MCP05"
@@ -2910,7 +3015,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america-sam-wilson",
       "portrait": "assets/avatars/captain-america-sam-wilson.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -2920,79 +3024,6 @@
         {
           "type": "physical",
           "range": "3",
-          "strength": "6"
-        }
-      ]
-    },
-    {
-      "slug": "captain-america",
-      "name": "Captain America",
-      "alterEgo": "Steve Rogers",
-      "threatLevel": 4,
-      "stamina": 6,
-      "speed": "M",
-      "size": 2,
-      "baseSize": 35,
-      "physicalDefense": 4,
-      "energyDefense": 4,
-      "mysticDefense": 3,
-      "isGrunt": false,
-      "secondFormSlug": null,
-      "boxSets": [
-        "CP01",
-        "CP141"
-      ],
-      "tags": [
-        "digitalUpdate2026August",
-        "digitalUpdate2021",
-        "leaderNatural",
-        "physicalR4",
-        "push",
-        "gainer",
-        "noLos",
-        "noCover",
-        "extraAtk",
-        "throwCharacter3",
-        "costReduction",
-        "bodyguardMinder",
-        "defBuff",
-        "blanks",
-        "errataed"
-      ],
-      "version": 1786695285,
-      "releaseDate": "2019-11-15",
-      "actAs": "captain-america",
-      "affiliations": [
-        {
-          "name": "Avengers",
-          "slug": "avengers",
-          "isLeader": true,
-          "timelines": [
-            "standard",
-            "extended",
-            "2026"
-          ],
-          "isLeaderWithTeamTactics": false
-        }
-      ],
-      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america",
-      "portrait": "assets/avatars/captain-america.png",
-      "cardAvailable": true,
-      "secondFormBaseSize": null,
-      "attacks": [
-        {
-          "type": "physical",
-          "range": "2",
-          "strength": "5"
-        },
-        {
-          "type": "physical",
-          "range": "4",
-          "strength": "5"
-        },
-        {
-          "type": "physical",
-          "range": "2",
           "strength": "6"
         }
       ]
@@ -3011,6 +3042,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -3060,7 +3092,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america-first-avenger",
       "portrait": "assets/avatars/captain-america-first-avenger.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -3083,6 +3114,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP141"
@@ -3137,7 +3169,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-marvel",
       "portrait": "assets/avatars/captain-marvel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -3170,6 +3201,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": "binary",
+      "secondFormBaseSize": 35,
       "boxSets": [
         "CP143"
       ],
@@ -3246,7 +3278,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-marvel-cosmic-avenger",
       "portrait": "assets/avatars/captain-marvel-cosmic-avenger.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 35,
       "attacks": [
         {
           "type": "energy",
@@ -3284,6 +3315,7 @@
       "mysticDefense": 1,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP50",
         "CP272"
@@ -3324,7 +3356,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/carnage",
       "portrait": "assets/avatars/carnage.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -3352,6 +3383,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP53",
         "CP236"
@@ -3435,7 +3467,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/cassandra-nova",
       "portrait": "assets/avatars/cassandra-nova.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -3468,6 +3499,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP67",
         "CP221"
@@ -3506,7 +3538,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Defenders",
@@ -3523,7 +3555,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/clea",
       "portrait": "assets/avatars/clea.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -3551,6 +3582,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP57",
         "CP226"
@@ -3631,7 +3663,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/colossus",
       "portrait": "assets/avatars/colossus.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -3659,6 +3690,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP15",
         "CP159"
@@ -3697,13 +3729,12 @@
             "extended",
             "2025"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "first-of-the-black-order"
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/corvus-glaive",
       "portrait": "assets/avatars/corvus-glaive.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -3736,6 +3767,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP90",
         "CP222",
@@ -3797,7 +3829,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/cosmic-ghost-rider",
       "portrait": "assets/avatars/cosmic-ghost-rider.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -3825,6 +3856,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP88",
         "MCP19"
@@ -3869,7 +3901,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/crimson-dynamo",
       "portrait": "assets/avatars/crimson-dynamo.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -3897,6 +3928,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP142"
@@ -3948,12 +3980,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/crossbones",
       "portrait": "assets/avatars/crossbones.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -3981,6 +4022,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -4041,12 +4083,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/crossbones-merciless-merc",
       "portrait": "assets/avatars/crossbones-merciless-merc.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -4074,6 +4125,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP35",
         "CP218"
@@ -4128,7 +4180,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/crystal",
       "portrait": "assets/avatars/crystal.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -4166,6 +4217,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP41",
         "CP139",
@@ -4211,7 +4263,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/cyclops",
       "portrait": "assets/avatars/cyclops.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -4239,6 +4290,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP30",
         "CP219"
@@ -4294,7 +4346,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/daredevil",
       "portrait": "assets/avatars/daredevil.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -4327,6 +4378,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP88",
         "MCP19"
@@ -4365,7 +4417,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/darkstar",
       "portrait": "assets/avatars/darkstar.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -4393,6 +4444,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP45",
         "MCP27"
@@ -4444,6 +4496,16 @@
           "isLeaderWithTeamTactics": false
         },
         {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
+        },
+        {
           "name": "Weapon X",
           "slug": "weapon-x",
           "isLeader": false,
@@ -4469,7 +4531,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/deadpool",
       "portrait": "assets/avatars/deadpool.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -4507,6 +4568,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -4551,7 +4613,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/doc-ock-sinister-scientist",
       "portrait": "assets/avatars/doc-ock-sinister-scientist.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -4584,6 +4645,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP148"
@@ -4623,7 +4685,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-octopus",
       "portrait": "assets/avatars/doctor-octopus.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -4651,6 +4712,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP23",
         "CP219"
@@ -4708,7 +4770,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Midnight Sons",
@@ -4725,7 +4787,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-strange",
       "portrait": "assets/avatars/doctor-strange.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -4753,6 +4814,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP67",
         "CP221"
@@ -4801,7 +4863,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Defenders",
@@ -4818,7 +4880,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-strange-sorcerer-supreme",
       "portrait": "assets/avatars/doctor-strange-sorcerer-supreme.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -4851,6 +4912,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP65",
         "CP220"
@@ -4886,7 +4948,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Avengers",
@@ -4913,7 +4975,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-voodoo",
       "portrait": "assets/avatars/doctor-voodoo.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -4941,6 +5002,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP47",
         "CP224"
@@ -5013,7 +5075,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/domino",
       "portrait": "assets/avatars/domino.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -5046,6 +5107,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP33",
         "CP217"
@@ -5091,7 +5153,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/dormammu",
       "portrait": "assets/avatars/dormammu.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -5119,6 +5180,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP245"
       ],
@@ -5154,7 +5216,7 @@
             "extended",
             "2025"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "thralls-of-dracula"
         },
         {
           "name": "Cabal",
@@ -5171,7 +5233,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/dracula",
       "portrait": "assets/avatars/dracula.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -5204,6 +5265,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP20",
         "CP223",
@@ -5243,7 +5305,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/drax-the-destroyer",
       "portrait": "assets/avatars/drax-the-destroyer.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -5276,6 +5337,7 @@
       "mysticDefense": 6,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP19",
         "CP159"
@@ -5298,7 +5360,7 @@
         "gemBearerSpace",
         "errataed"
       ],
-      "version": 1786695285,
+      "version": 1792097960,
       "releaseDate": "2020-06-29",
       "actAs": "ebony-maw",
       "affiliations": [
@@ -5317,7 +5379,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ebony-maw",
       "portrait": "assets/avatars/ebony-maw.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -5345,6 +5406,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP168"
       ],
@@ -5394,7 +5456,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/echo",
       "portrait": "assets/avatars/echo.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -5427,6 +5488,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP156",
         "CP272"
@@ -5474,7 +5536,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/electro",
       "portrait": "assets/avatars/electro.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -5502,6 +5563,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP79",
         "MCP20"
@@ -5552,12 +5614,21 @@
             "2024"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/elektra",
       "portrait": "assets/avatars/elektra.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -5585,6 +5656,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP186"
       ],
@@ -5641,7 +5713,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/elsa-bloodstone",
       "portrait": "assets/avatars/elsa-bloodstone.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -5669,6 +5740,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": "diamond",
+      "secondFormBaseSize": 35,
       "boxSets": [
         "CP103",
         "MCP13"
@@ -5710,7 +5782,7 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "my-hellfire-club"
         },
         {
           "name": "Brotherhood of Mutants",
@@ -5746,7 +5818,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/emma-frost",
       "portrait": "assets/avatars/emma-frost.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 35,
       "attacks": [
         {
           "type": "mystic",
@@ -5784,6 +5855,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP28",
         "CP225",
@@ -5840,7 +5912,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/enchantress",
       "portrait": "assets/avatars/enchantress.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -5868,6 +5939,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP173"
       ],
@@ -5910,7 +5982,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/exodus",
       "portrait": "assets/avatars/exodus.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -5943,6 +6014,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP245"
       ],
@@ -5981,7 +6053,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/frankensteins-monster",
       "portrait": "assets/avatars/frankensteins-monster.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6009,6 +6080,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP60",
         "CP271"
@@ -6073,7 +6145,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gambit",
       "portrait": "assets/avatars/gambit.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6106,6 +6177,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP16",
         "CP223",
@@ -6159,7 +6231,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gamora",
       "portrait": "assets/avatars/gamora.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6187,6 +6258,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP27",
         "CP220"
@@ -6234,12 +6306,21 @@
             "extended"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ghost-rider",
       "portrait": "assets/avatars/ghost-rider.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -6272,6 +6353,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP10",
         "CP146"
@@ -6308,7 +6390,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ghost-spider",
       "portrait": "assets/avatars/ghost-spider.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6341,6 +6422,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CA13"
       ],
@@ -6368,7 +6450,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gladiator",
       "portrait": "assets/avatars/gladiator.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6401,6 +6482,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP166"
       ],
@@ -6439,7 +6521,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gorgon",
       "portrait": "assets/avatars/gorgon.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6472,6 +6553,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP21",
         "CP148",
@@ -6533,7 +6615,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/green-goblin",
       "portrait": "assets/avatars/green-goblin.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6566,6 +6647,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP17",
         "CP222",
@@ -6600,7 +6682,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/groot",
       "portrait": "assets/avatars/groot.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6628,6 +6709,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP155"
       ],
@@ -6667,7 +6749,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gwenom",
       "portrait": "assets/avatars/gwenom.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6695,6 +6776,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP137"
       ],
@@ -6759,7 +6841,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gwenpool",
       "portrait": "assets/avatars/gwenpool.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6792,6 +6873,7 @@
       "mysticDefense": 2,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP79",
         "MCP20"
@@ -6814,7 +6896,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hand-ninjas-grunts",
       "portrait": "assets/avatars/hand-ninjas-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6837,6 +6918,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP08"
       ],
@@ -6882,7 +6964,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/havok",
       "portrait": "assets/avatars/havok.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -6910,6 +6991,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP24",
         "MCP03"
@@ -6974,7 +7056,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hawkeye",
       "portrait": "assets/avatars/hawkeye.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -6997,6 +7078,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP102",
         "CP225",
@@ -7039,7 +7121,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/heimdall-the-all-seeing",
       "portrait": "assets/avatars/heimdall-the-all-seeing.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -7067,6 +7148,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP12",
         "CP138"
@@ -7108,7 +7190,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hela-queen-of-hel",
       "portrait": "assets/avatars/hela-queen-of-hel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -7141,6 +7222,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP71",
         "CP224"
@@ -7224,7 +7306,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/honey-badger",
       "portrait": "assets/avatars/honey-badger.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -7252,6 +7333,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": "possessed",
+      "secondFormBaseSize": 35,
       "boxSets": [
         "CP65",
         "CP214"
@@ -7299,12 +7381,21 @@
             "extended"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hood",
       "portrait": "assets/avatars/hood.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 35,
       "attacks": [
         {
           "type": "mystic",
@@ -7342,6 +7433,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP04",
         "MCP22"
@@ -7399,7 +7491,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hulk",
       "portrait": "assets/avatars/hulk.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -7432,6 +7523,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": "iron-man-hulkbuster",
+      "secondFormBaseSize": 35,
       "boxSets": [
         "CP52",
         "MCP22"
@@ -7485,7 +7577,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hulkbuster",
       "portrait": "assets/avatars/hulkbuster.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 35,
       "attacks": [
         {
           "type": "energy",
@@ -7518,6 +7609,7 @@
       "mysticDefense": 2,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP74"
       ],
@@ -7536,7 +7628,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hydra-troopers-grunts",
       "portrait": "assets/avatars/hydra-troopers-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -7559,6 +7650,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP96"
       ],
@@ -7610,7 +7702,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/iceman",
       "portrait": "assets/avatars/iceman.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -7638,6 +7729,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -7690,7 +7782,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/invincible-iron-man",
       "portrait": "assets/avatars/invincible-iron-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -7723,6 +7814,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP49",
         "CP219"
@@ -7779,12 +7871,21 @@
             "extended"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-fist",
       "portrait": "assets/avatars/iron-fist.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -7817,6 +7918,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP154"
       ],
@@ -7843,7 +7945,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-lad",
       "portrait": "assets/avatars/iron-lad.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -7876,6 +7977,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP141"
@@ -7936,7 +8038,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-man",
       "portrait": "assets/avatars/iron-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -7969,6 +8070,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP154"
       ],
@@ -8009,12 +8111,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-monger",
       "portrait": "assets/avatars/iron-monger.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -8042,6 +8153,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP53",
         "MCP13"
@@ -8085,7 +8197,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/jean-grey",
       "portrait": "assets/avatars/jean-grey.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -8113,6 +8224,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP08"
       ],
@@ -8145,7 +8257,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/jubilee",
       "portrait": "assets/avatars/jubilee.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8173,6 +8284,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP56",
         "MCP14"
@@ -8211,7 +8323,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/juggernaut",
       "portrait": "assets/avatars/juggernaut.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -8239,6 +8350,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP154"
       ],
@@ -8285,7 +8397,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/kang-the-conqueror",
       "portrait": "assets/avatars/kang-the-conqueror.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8318,6 +8429,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP166"
       ],
@@ -8353,7 +8465,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/karnak",
       "portrait": "assets/avatars/karnak.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -8381,6 +8492,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP07",
         "CP147"
@@ -8401,7 +8513,7 @@
         "atkReroll",
         "errataed"
       ],
-      "version": 1786695285,
+      "version": 1792153260,
       "releaseDate": "2019-12-13",
       "actAs": "killmonger",
       "affiliations": [
@@ -8428,6 +8540,16 @@
           "isLeaderWithTeamTactics": false
         },
         {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
+        },
+        {
           "name": "Wakanda",
           "slug": "wakanda",
           "isLeader": false,
@@ -8441,7 +8563,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/killmonger",
       "portrait": "assets/avatars/killmonger.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8469,6 +8590,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CPE04"
       ],
@@ -8517,7 +8639,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/killmonger-usurper",
       "portrait": "assets/avatars/killmonger-usurper.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8550,6 +8671,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP166"
       ],
@@ -8598,7 +8720,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/king-black-bolt",
       "portrait": "assets/avatars/king-black-bolt.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8626,6 +8747,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP29",
         "CP214"
@@ -8691,7 +8813,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/kingpin",
       "portrait": "assets/avatars/kingpin.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -8724,6 +8845,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CPE04"
       ],
@@ -8775,7 +8897,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/king-tchalla",
       "portrait": "assets/avatars/king-tchalla.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8803,6 +8924,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP116",
         "MCP20"
@@ -8854,12 +8976,21 @@
             "2024"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/klaw",
       "portrait": "assets/avatars/klaw.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -8887,6 +9018,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP58",
         "CP148",
@@ -8934,7 +9066,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/kraven-the-hunter",
       "portrait": "assets/avatars/kraven-the-hunter.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -8962,6 +9093,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP173"
       ],
@@ -9012,7 +9144,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/lady-mastermind",
       "portrait": "assets/avatars/lady-mastermind.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -9040,6 +9171,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP91",
         "MCP64"
@@ -9080,7 +9212,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/lady-sif",
       "portrait": "assets/avatars/lady-sif.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9108,6 +9239,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP58",
         "CP148",
@@ -9145,7 +9277,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/lizard",
       "portrait": "assets/avatars/lizard.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9173,6 +9304,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP35",
         "CP218"
@@ -9210,7 +9342,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/lockjaw",
       "portrait": "assets/avatars/lockjaw.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9233,6 +9364,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CPE03",
         "MCP27"
@@ -9267,7 +9399,7 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "are-you-sure-you-want-to-remember"
         },
         {
           "name": "Uncanny X-Men",
@@ -9284,7 +9416,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/logan-the-wolverine",
       "portrait": "assets/avatars/logan-the-wolverine.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9312,6 +9443,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP12",
         "CP138"
@@ -9366,7 +9498,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/loki-god-of-mischief",
       "portrait": "assets/avatars/loki-god-of-mischief.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9399,6 +9530,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP91",
         "MCP64"
@@ -9450,7 +9582,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/loki-prince-of-lies",
       "portrait": "assets/avatars/loki-prince-of-lies.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -9478,6 +9609,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP49",
         "CP219"
@@ -9529,12 +9661,21 @@
             "extended"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/luke-cage",
       "portrait": "assets/avatars/luke-cage.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9562,6 +9703,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP57",
         "CP226"
@@ -9600,7 +9742,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "New Mutants",
@@ -9610,7 +9752,7 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "new-mutants"
         },
         {
           "name": "Defenders",
@@ -9648,7 +9790,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/magik",
       "portrait": "assets/avatars/magik.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -9681,6 +9822,7 @@
       "mysticDefense": 6,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP42",
         "CP140",
@@ -9743,7 +9885,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/magneto",
       "portrait": "assets/avatars/magneto.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9771,6 +9912,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP93"
       ],
@@ -9824,7 +9966,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/malekith-the-accursed",
       "portrait": "assets/avatars/malekith-the-accursed.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -9857,6 +9998,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP186"
       ],
@@ -9904,7 +10046,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/man-thing",
       "portrait": "assets/avatars/man-thing.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -9932,6 +10073,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP109",
         "MCP27"
@@ -9970,7 +10112,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/maverick",
       "portrait": "assets/avatars/maverick.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -10003,6 +10144,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP166"
       ],
@@ -10043,7 +10185,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/maximus-the-mad",
       "portrait": "assets/avatars/maximus-the-mad.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -10071,6 +10212,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP116"
       ],
@@ -10120,7 +10262,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mbaku",
       "portrait": "assets/avatars/mbaku.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -10148,6 +10289,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP34",
         "CP218"
@@ -10186,7 +10328,7 @@
             "extended",
             "2025"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "inhuman-queen"
         },
         {
           "name": "A-Force",
@@ -10203,7 +10345,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/medusa",
       "portrait": "assets/avatars/medusa.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -10231,6 +10372,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP66"
       ],
@@ -10268,7 +10410,7 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "devils-reckoning"
         },
         {
           "name": "Cabal",
@@ -10295,7 +10437,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mephisto-lord-of-temptation",
       "portrait": "assets/avatars/mephisto-lord-of-temptation.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -10328,6 +10469,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP08"
       ],
@@ -10381,7 +10523,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mirage",
       "portrait": "assets/avatars/mirage.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -10409,6 +10550,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP46",
         "MCP14"
@@ -10472,7 +10614,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mister-sinister",
       "portrait": "assets/avatars/mister-sinister.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -10500,6 +10641,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP05",
         "CP214"
@@ -10546,12 +10688,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/modok",
       "portrait": "assets/avatars/modok.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -10579,6 +10730,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP145"
       ],
@@ -10628,12 +10780,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/modok-scientist-supreme",
       "portrait": "assets/avatars/modok-scientist-supreme.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -10661,6 +10822,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP191"
       ],
@@ -10721,7 +10883,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/moondragon",
       "portrait": "assets/avatars/moondragon.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -10749,6 +10910,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP48",
         "CP220"
@@ -10811,7 +10973,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/moon-knight",
       "portrait": "assets/avatars/moon-knight.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -10844,6 +11005,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": "embiggened",
+      "secondFormBaseSize": 65,
       "boxSets": [
         "CP62"
       ],
@@ -10893,7 +11055,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ms-marvel",
       "portrait": "assets/avatars/ms-marvel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 65,
       "attacks": [
         {
           "type": "physical",
@@ -10921,6 +11082,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP08"
       ],
@@ -10966,7 +11128,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/multiple-man",
       "portrait": "assets/avatars/multiple-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -10994,6 +11155,7 @@
       "mysticDefense": 1,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP08"
       ],
@@ -11011,7 +11173,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/multiple-man-duplicates-grunts",
       "portrait": "assets/avatars/multiple-man-duplicates-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11034,6 +11195,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP50",
         "CP272"
@@ -11094,7 +11256,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mysterio",
       "portrait": "assets/avatars/mysterio.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -11122,6 +11283,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP43",
         "CP140",
@@ -11196,7 +11358,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mystique",
       "portrait": "assets/avatars/mystique.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11224,6 +11385,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP158",
         "MCP21"
@@ -11263,7 +11425,7 @@
             "2024",
             "2025"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-invaders"
         },
         {
           "name": "Defenders",
@@ -11281,7 +11443,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/namor-the-submariner",
       "portrait": "assets/avatars/namor-the-submariner.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11309,6 +11470,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP16",
         "CP223",
@@ -11360,7 +11522,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nebula",
       "portrait": "assets/avatars/nebula.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11393,6 +11554,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP55",
         "MCP03"
@@ -11433,7 +11595,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nick-fury",
       "portrait": "assets/avatars/nick-fury.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11466,6 +11627,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP75"
       ],
@@ -11503,7 +11665,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nick-fury-and-the-howling-commandos",
       "portrait": "assets/avatars/nick-fury-and-the-howling-commandos.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11536,6 +11697,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP112",
         "CP226"
@@ -11573,7 +11735,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nightcrawler",
       "portrait": "assets/avatars/nightcrawler.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11595,12 +11756,13 @@
       "stamina": 7,
       "speed": "S",
       "size": 4,
-      "baseSize": 65,
+      "baseSize": 50,
       "physicalDefense": 4,
       "energyDefense": 4,
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP09"
       ],
@@ -11626,7 +11788,7 @@
         "immuneToPoison",
         "bald"
       ],
-      "version": 1787221851,
+      "version": 1792010398,
       "releaseDate": "2026-05-22",
       "actAs": "nimrod",
       "affiliations": [
@@ -11644,7 +11806,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nimrod",
       "portrait": "assets/avatars/nimrod.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11677,6 +11838,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP245"
       ],
@@ -11713,7 +11875,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nkantu-the-living-mummy",
       "portrait": "assets/avatars/nkantu-the-living-mummy.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11741,6 +11902,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP126",
         "MCP65"
@@ -11785,7 +11947,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nova",
       "portrait": "assets/avatars/nova.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -11818,6 +11979,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP08",
         "CP147"
@@ -11866,7 +12028,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/okoye",
       "portrait": "assets/avatars/okoye.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11899,6 +12060,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP54",
         "MCP14"
@@ -11971,7 +12133,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/omega-red",
       "portrait": "assets/avatars/omega-red.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -11999,6 +12160,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP09"
       ],
@@ -12041,7 +12203,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/omega-sentinel",
       "portrait": "assets/avatars/omega-sentinel.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -12069,6 +12230,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "MCP07"
       ],
@@ -12110,7 +12272,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/onslaught",
       "portrait": "assets/avatars/onslaught.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -12143,6 +12304,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": "phoenix-unleashed",
+      "secondFormBaseSize": 65,
       "boxSets": [
         "CP83"
       ],
@@ -12195,7 +12357,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/phoenix",
       "portrait": "assets/avatars/phoenix.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 65,
       "attacks": [
         {
           "type": "energy",
@@ -12233,6 +12394,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CA23"
       ],
@@ -12265,7 +12427,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/prime-sentinel-2",
       "portrait": "assets/avatars/prime-sentinel-2.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -12293,6 +12454,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CA23"
       ],
@@ -12324,7 +12486,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/prime-sentinel-1",
       "portrait": "assets/avatars/prime-sentinel-1.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -12352,6 +12513,7 @@
       "mysticDefense": 6,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP151",
         "MCP13"
@@ -12390,7 +12552,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/professor-x",
       "portrait": "assets/avatars/professor-x.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -12423,6 +12584,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP169"
       ],
@@ -12476,7 +12638,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/prowler",
       "portrait": "assets/avatars/prowler.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -12509,6 +12670,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP15",
         "CP159"
@@ -12551,7 +12713,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/proxima-midnight",
       "portrait": "assets/avatars/proxima-midnight.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -12584,6 +12745,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP103",
         "MCP13"
@@ -12659,7 +12821,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/psylocke",
       "portrait": "assets/avatars/psylocke.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -12692,6 +12853,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP32"
       ],
@@ -12726,12 +12888,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/punisher",
       "portrait": "assets/avatars/punisher.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -12759,6 +12930,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP82",
         "MCP15"
@@ -12795,7 +12967,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/pyro",
       "portrait": "assets/avatars/pyro.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -12828,6 +12999,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP191"
       ],
@@ -12868,7 +13040,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/quasar",
       "portrait": "assets/avatars/quasar.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -12896,6 +13067,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP63",
         "MCP15"
@@ -12963,7 +13135,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/quicksilver",
       "portrait": "assets/avatars/quicksilver.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -12991,6 +13162,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP89",
         "MCP19"
@@ -13027,7 +13199,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/red-guardian",
       "portrait": "assets/avatars/red-guardian.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13038,6 +13209,77 @@
           "type": "physical",
           "range": "4",
           "strength": "4"
+        }
+      ]
+    },
+    {
+      "slug": "red-hulk",
+      "name": "Red Hulk",
+      "alterEgo": "Thaddeus Ross",
+      "threatLevel": 5,
+      "stamina": 8,
+      "speed": "S",
+      "size": 4,
+      "baseSize": 65,
+      "physicalDefense": 4,
+      "energyDefense": 4,
+      "mysticDefense": 3,
+      "isGrunt": false,
+      "secondFormSlug": null,
+      "secondFormBaseSize": null,
+      "boxSets": [
+        "MCP17"
+      ],
+      "tags": [
+        "leaderNatural",
+        "physicalR2",
+        "incinerate",
+        "wilds",
+        "energyR2",
+        "area",
+        "atkBuff",
+        "push",
+        "powerGen",
+        "placeSelf",
+        "propagate",
+        "friendlyFire",
+        "selfHarm",
+        "throwCharacter4",
+        "throwTerrain4",
+        "throwEverything4",
+        "atkMod",
+        "greaterPowerPhase",
+        "immuneToIncinerate",
+        "immuneToPoison"
+      ],
+      "version": 1791841660,
+      "releaseDate": "2026-11-13",
+      "actAs": "red-hulk",
+      "affiliations": [
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": true,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
+        }
+      ],
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/red-hulk",
+      "portrait": "assets/avatars/red-hulk.png",
+      "cardAvailable": true,
+      "attacks": [
+        {
+          "type": "physical",
+          "range": "2",
+          "strength": "6"
+        },
+        {
+          "type": "energy",
+          "range": "A2",
+          "strength": "7"
         }
       ]
     },
@@ -13055,6 +13297,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP142"
@@ -13107,7 +13350,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/red-skull",
       "portrait": "assets/avatars/red-skull.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13140,6 +13382,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP74"
       ],
@@ -13194,7 +13437,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/red-skull-master-of-hydra",
       "portrait": "assets/avatars/red-skull-master-of-hydra.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13222,6 +13464,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -13276,7 +13519,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/red-skull-master-of-the-world",
       "portrait": "assets/avatars/red-skull-master-of-the-world.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -13304,6 +13546,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP154"
       ],
@@ -13364,7 +13607,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/rescue",
       "portrait": "assets/avatars/rescue.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -13392,6 +13634,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP98",
         "CP272"
@@ -13436,7 +13679,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/rhino",
       "portrait": "assets/avatars/rhino.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13459,6 +13701,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP17",
         "CP222",
@@ -13497,7 +13740,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/rocket-raccoon",
       "portrait": "assets/avatars/rocket-raccoon.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -13525,6 +13767,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP60",
         "CP271"
@@ -13577,7 +13820,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/rogue",
       "portrait": "assets/avatars/rogue.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13605,6 +13847,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP20",
         "CP223",
@@ -13658,7 +13901,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ronan-the-accuser",
       "portrait": "assets/avatars/ronan-the-accuser.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13691,6 +13933,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP168"
       ],
@@ -13741,7 +13984,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ronin",
       "portrait": "assets/avatars/ronin.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13774,6 +14016,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP40",
         "CP140",
@@ -13853,7 +14096,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sabretooth",
       "portrait": "assets/avatars/sabretooth.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13881,6 +14123,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CPE03",
         "MCP27"
@@ -13936,7 +14179,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sabretooth-apex-predator",
       "portrait": "assets/avatars/sabretooth-apex-predator.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -13964,6 +14206,7 @@
       "mysticDefense": 1,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP156",
         "CP272"
@@ -13986,7 +14229,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sand-construct-1-grunts",
       "portrait": "assets/avatars/sand-construct-1-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14009,6 +14251,7 @@
       "mysticDefense": 1,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP156",
         "CP272"
@@ -14031,7 +14274,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sand-construct-2-grunts",
       "portrait": "assets/avatars/sand-construct-2-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14054,6 +14296,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP156",
         "CP272"
@@ -14103,7 +14346,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sandman",
       "portrait": "assets/avatars/sandman.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14136,6 +14378,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP155"
       ],
@@ -14176,7 +14419,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/scarlet-spider",
       "portrait": "assets/avatars/scarlet-spider.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14209,6 +14451,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP63",
         "MCP15"
@@ -14242,7 +14485,7 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "A-Force",
@@ -14292,7 +14535,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/scarlet-witch",
       "portrait": "assets/avatars/scarlet-witch.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -14301,6 +14543,63 @@
         },
         {
           "type": "mystic",
+          "range": "3",
+          "strength": "8"
+        }
+      ]
+    },
+    {
+      "slug": "sensational-she-hulk",
+      "name": "Sensational She-Hulk",
+      "alterEgo": "Jennifer Walters",
+      "threatLevel": 4,
+      "stamina": 7,
+      "speed": "M",
+      "size": 3,
+      "baseSize": 50,
+      "physicalDefense": 4,
+      "energyDefense": 4,
+      "mysticDefense": 3,
+      "isGrunt": false,
+      "secondFormSlug": null,
+      "secondFormBaseSize": null,
+      "boxSets": [
+        "MCP17"
+      ],
+      "tags": [
+        "physicalR2",
+        "gainer",
+        "stun",
+        "wilds",
+        "physicalR3",
+        "throwCharacter4",
+        "stagger",
+        "throwTerrain3",
+        "counter",
+        "chipDamage",
+        "criticals",
+        "atkReroll",
+        "defReroll",
+        "blocks",
+        "powerGen",
+        "greaterPowerPhase",
+        "immuneToPoison"
+      ],
+      "version": 1791841661,
+      "releaseDate": "2026-11-13",
+      "actAs": "sensational-she-hulk",
+      "affiliations": [],
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sensational-she-hulk",
+      "portrait": "assets/avatars/sensational-she-hulk.png",
+      "cardAvailable": true,
+      "attacks": [
+        {
+          "type": "physical",
+          "range": "2",
+          "strength": "6"
+        },
+        {
+          "type": "physical",
           "range": "3",
           "strength": "8"
         }
@@ -14320,6 +14619,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP51",
         "CP236"
@@ -14367,7 +14667,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sentinel-mk4",
       "portrait": "assets/avatars/sentinel-mk4.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -14400,6 +14699,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP160",
         "CP236"
@@ -14448,7 +14748,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sentinel-prime-mk4",
       "portrait": "assets/avatars/sentinel-prime-mk4.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -14476,6 +14775,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP96"
       ],
@@ -14523,7 +14823,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shadowcat",
       "portrait": "assets/avatars/shadowcat.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14556,6 +14855,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP151",
         "MCP14"
@@ -14606,7 +14906,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shadow-king",
       "portrait": "assets/avatars/shadow-king.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -14634,6 +14933,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP79",
         "MCP20"
@@ -14676,7 +14976,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shadowland-daredevil",
       "portrait": "assets/avatars/shadowland-daredevil.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14714,6 +15013,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP69",
         "MCP21"
@@ -14770,7 +15070,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shang-chi",
       "portrait": "assets/avatars/shang-chi.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14803,6 +15102,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP39",
         "MCP05"
@@ -14884,7 +15184,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/she-hulk",
       "portrait": "assets/avatars/she-hulk.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14912,6 +15211,7 @@
       "mysticDefense": 1,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP55",
         "MCP03"
@@ -14930,7 +15230,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shield-agents-grunts",
       "portrait": "assets/avatars/shield-agents-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -14953,6 +15252,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP156",
         "CP272"
@@ -15000,7 +15300,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shocker",
       "portrait": "assets/avatars/shocker.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15028,6 +15327,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP08",
         "CP147"
@@ -15077,7 +15377,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shuri",
       "portrait": "assets/avatars/shuri.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -15105,6 +15404,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP170"
       ],
@@ -15147,7 +15447,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/silk",
       "portrait": "assets/avatars/silk.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15180,6 +15479,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP69",
         "MCP21"
@@ -15241,7 +15541,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/silver-sable",
       "portrait": "assets/avatars/silver-sable.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15269,6 +15568,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP61"
       ],
@@ -15327,7 +15627,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sin",
       "portrait": "assets/avatars/sin.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15355,6 +15654,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP102",
         "CP225",
@@ -15405,7 +15705,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/skurge-the-executioner",
       "portrait": "assets/avatars/skurge-the-executioner.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15433,6 +15732,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -15480,7 +15780,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spectacular-spider-man",
       "portrait": "assets/avatars/spectacular-spider-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15513,6 +15812,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP129"
       ],
@@ -15557,7 +15857,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spectrum",
       "portrait": "assets/avatars/spectrum.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15590,6 +15889,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP170"
       ],
@@ -15626,7 +15926,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-ham",
       "portrait": "assets/avatars/spider-ham.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15659,6 +15958,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP10",
         "CP146"
@@ -15699,7 +15999,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man-miles-morales",
       "portrait": "assets/avatars/spider-man-miles-morales.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15727,6 +16026,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP146"
@@ -15777,7 +16077,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man",
       "portrait": "assets/avatars/spider-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15810,6 +16109,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP169"
       ],
@@ -15855,7 +16155,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man-2099",
       "portrait": "assets/avatars/spider-man-2099.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15888,6 +16187,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP170"
       ],
@@ -15922,7 +16222,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man-noir",
       "portrait": "assets/avatars/spider-man-noir.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -15950,6 +16249,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP100",
         "CP234"
@@ -16034,7 +16334,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-woman",
       "portrait": "assets/avatars/spider-woman.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -16062,6 +16361,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP137"
       ],
@@ -16110,7 +16410,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/squirrel-girl",
       "portrait": "assets/avatars/squirrel-girl.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -16138,6 +16437,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP18",
         "CP222",
@@ -16182,7 +16482,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/star-lord",
       "portrait": "assets/avatars/star-lord.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -16210,6 +16509,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP77"
       ],
@@ -16239,7 +16539,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-invaders"
         },
         {
           "name": "Mighty Avengers",
@@ -16256,7 +16556,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/steve-rogers-captain-america",
       "portrait": "assets/avatars/steve-rogers-captain-america.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -16284,6 +16583,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP41",
         "CP139",
@@ -16361,7 +16661,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/storm",
       "portrait": "assets/avatars/storm.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -16394,6 +16693,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP153"
       ],
@@ -16451,7 +16751,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sunspot",
       "portrait": "assets/avatars/sunspot.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -16479,6 +16778,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP81"
       ],
@@ -16520,7 +16820,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/supergiant",
       "portrait": "assets/avatars/supergiant.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "mystic",
@@ -16548,6 +16847,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP32"
       ],
@@ -16609,12 +16909,21 @@
             "2025"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/taskmaster",
       "portrait": "assets/avatars/taskmaster.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -16647,6 +16956,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP25",
         "MCP23"
@@ -16696,7 +17006,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/thanos-the-mad-titan",
       "portrait": "assets/avatars/thanos-the-mad-titan.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -16724,6 +17033,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -16782,12 +17092,21 @@
             "2026"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/the-black-widow",
       "portrait": "assets/avatars/the-black-widow.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -16820,6 +17139,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP82",
         "MCP15"
@@ -16868,7 +17188,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/the-blob",
       "portrait": "assets/avatars/the-blob.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -16896,6 +17215,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP144"
       ],
@@ -16946,7 +17266,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/the-immortal-hulk",
       "portrait": "assets/avatars/the-immortal-hulk.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -16957,6 +17276,75 @@
           "type": "physical",
           "range": "3",
           "strength": "10"
+        }
+      ]
+    },
+    {
+      "slug": "the-leader",
+      "name": "The Leader",
+      "alterEgo": "Samuel Sterns",
+      "threatLevel": 3,
+      "stamina": 6,
+      "speed": "M",
+      "size": 3,
+      "baseSize": 50,
+      "physicalDefense": 3,
+      "energyDefense": 4,
+      "mysticDefense": 4,
+      "isGrunt": false,
+      "secondFormSlug": null,
+      "secondFormBaseSize": null,
+      "boxSets": [
+        "MCP17"
+      ],
+      "tags": [
+        "leaderNatural",
+        "mysticR4",
+        "gainer",
+        "powerCut",
+        "powerDrain",
+        "wilds",
+        "physicalR3",
+        "extraMove",
+        "bleed",
+        "shock",
+        "slow",
+        "stun",
+        "powerGen",
+        "advanceOtherAllied",
+        "throwCharacter3",
+        "still",
+        "damping",
+        "immuneToPoison"
+      ],
+      "version": 1792012469,
+      "releaseDate": "2026-11-13",
+      "actAs": "the-leader",
+      "affiliations": [
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": true,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
+        }
+      ],
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-leader",
+      "portrait": "assets/avatars/the-leader.png",
+      "cardAvailable": true,
+      "attacks": [
+        {
+          "type": "mystic",
+          "range": "4",
+          "strength": "5"
+        },
+        {
+          "type": "physical",
+          "range": "3",
+          "strength": "7"
         }
       ]
     },
@@ -16974,6 +17362,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP91",
         "MCP64"
@@ -17029,7 +17418,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/mighty-thor",
       "portrait": "assets/avatars/mighty-thor.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17057,6 +17445,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP77"
       ],
@@ -17096,7 +17485,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/the-original-human-torch",
       "portrait": "assets/avatars/the-original-human-torch.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -17124,6 +17512,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP162"
       ],
@@ -17169,12 +17558,21 @@
             "extended"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/the-wrecking-crew",
       "portrait": "assets/avatars/the-wrecking-crew.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17207,6 +17605,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP91",
         "MCP64"
@@ -17251,7 +17650,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/thor-hero-of-midgard",
       "portrait": "assets/avatars/thor-hero-of-midgard.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -17279,6 +17677,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP11",
         "CP138"
@@ -17339,7 +17738,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/thor-prince-of-asgard",
       "portrait": "assets/avatars/thor-prince-of-asgard.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17372,6 +17770,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP168"
       ],
@@ -17421,7 +17820,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/tigra",
       "portrait": "assets/avatars/tigra.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17449,6 +17847,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP42",
         "CP140",
@@ -17498,7 +17897,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/toad",
       "portrait": "assets/avatars/toad.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17526,6 +17924,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP130"
       ],
@@ -17571,7 +17970,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ulik",
       "portrait": "assets/avatars/ulik.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17599,6 +17997,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP169"
       ],
@@ -17642,7 +18041,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ultimate-spider-man",
       "portrait": "assets/avatars/ultimate-spider-man.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17675,6 +18073,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP01",
         "CP142"
@@ -17716,7 +18115,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron",
       "portrait": "assets/avatars/ultron.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17749,6 +18147,7 @@
       "mysticDefense": 2,
       "isGrunt": true,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -17773,7 +18172,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron-drones-grunts",
       "portrait": "assets/avatars/ultron-drones-grunts.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -17796,6 +18194,7 @@
       "mysticDefense": 5,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -17840,7 +18239,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron-metal-tyrant",
       "portrait": "assets/avatars/ultron-metal-tyrant.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -17868,6 +18266,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP89",
         "MCP19"
@@ -17904,7 +18303,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ursa-major",
       "portrait": "assets/avatars/ursa-major.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -17932,6 +18330,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP11",
         "CP138"
@@ -17994,7 +18393,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/valkyrie",
       "portrait": "assets/avatars/valkyrie.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18022,6 +18420,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP94",
         "MCP64"
@@ -18062,7 +18461,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/valkyrie-and-elendil",
       "portrait": "assets/avatars/valkyrie-and-elendil.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18095,6 +18493,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP09",
         "CP146"
@@ -18146,7 +18545,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/venom",
       "portrait": "assets/avatars/venom.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18174,6 +18572,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP61"
       ],
@@ -18222,12 +18621,21 @@
             "2025"
           ],
           "isLeaderWithTeamTactics": false
+        },
+        {
+          "name": "Intelligencia",
+          "slug": "intelligencia",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/viper",
       "portrait": "assets/avatars/viper.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18260,6 +18668,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP13",
         "MCP22"
@@ -18304,7 +18713,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/vision",
       "portrait": "assets/avatars/vision.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -18332,6 +18740,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP156",
         "CP272"
@@ -18381,7 +18790,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/vulture",
       "portrait": "assets/avatars/vulture.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18409,6 +18817,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP153"
       ],
@@ -18460,7 +18869,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/warlock",
       "portrait": "assets/avatars/warlock.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18493,6 +18901,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP38",
         "MCP05"
@@ -18539,7 +18948,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/war-machine",
       "portrait": "assets/avatars/war-machine.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18572,6 +18980,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP94",
         "MCP64"
@@ -18615,7 +19024,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/warriors-three",
       "portrait": "assets/avatars/warriors-three.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18648,6 +19056,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": "tiny",
+      "secondFormBaseSize": 35,
       "boxSets": [
         "CP26",
         "MCP05"
@@ -18694,7 +19103,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/wasp",
       "portrait": "assets/avatars/wasp.png",
       "cardAvailable": true,
-      "secondFormBaseSize": 35,
       "attacks": [
         {
           "type": "physical",
@@ -18727,6 +19135,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP109",
         "MCP27"
@@ -18761,13 +19170,12 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "are-you-sure-you-want-to-remember"
         }
       ],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/weapon-x",
       "portrait": "assets/avatars/weapon-x.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18800,6 +19208,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP245"
       ],
@@ -18837,7 +19246,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/werewolf-by-night",
       "portrait": "assets/avatars/werewolf-by-night.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18865,6 +19273,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP13",
         "MCP22"
@@ -18903,7 +19312,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/winter-soldier",
       "portrait": "assets/avatars/winter-soldier.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -18931,6 +19339,7 @@
       "mysticDefense": 4,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP143"
       ],
@@ -19008,6 +19417,16 @@
           "isLeaderWithTeamTactics": false
         },
         {
+          "name": "Thunderbolts",
+          "slug": "thunderbolts",
+          "isLeader": false,
+          "timelines": [
+            "standard",
+            "extended"
+          ],
+          "isLeaderWithTeamTactics": false
+        },
+        {
           "name": "Winter Guard",
           "slug": "winter-guard",
           "isLeader": false,
@@ -19022,7 +19441,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/winter-soldier-operative",
       "portrait": "assets/avatars/winter-soldier-operative.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -19055,6 +19473,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP40",
         "CP139",
@@ -19154,7 +19573,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/wolverine",
       "portrait": "assets/avatars/wolverine.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -19182,6 +19600,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP23",
         "CP219"
@@ -19213,7 +19632,7 @@
             "extended",
             "2026"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "the-bar-with-no-doors"
         },
         {
           "name": "Defenders",
@@ -19242,7 +19661,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/wong",
       "portrait": "assets/avatars/wong.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -19265,6 +19683,7 @@
       "mysticDefense": 2,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP71",
         "CP224"
@@ -19296,7 +19715,7 @@
             "standard",
             "extended"
           ],
-          "isLeaderWithTeamTactics": true
+          "isLeaderWithTeamTactics": "are-you-sure-you-want-to-remember"
         },
         {
           "name": "New Mutants",
@@ -19336,7 +19755,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/x-23",
       "portrait": "assets/avatars/x-23.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "physical",
@@ -19364,6 +19782,7 @@
       "mysticDefense": 3,
       "isGrunt": false,
       "secondFormSlug": null,
+      "secondFormBaseSize": null,
       "boxSets": [
         "CP126",
         "MCP65"
@@ -19404,7 +19823,6 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/yondu",
       "portrait": "assets/avatars/yondu.png",
       "cardAvailable": true,
-      "secondFormBaseSize": null,
       "attacks": [
         {
           "type": "energy",
@@ -19418,6 +19836,5 @@
         }
       ]
     }
-  ],
-  "searchMetadataUpdatedAt": "2026-10-21T20:51:26.008Z"
+  ]
 }

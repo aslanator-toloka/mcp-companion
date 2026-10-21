@@ -1,0 +1,1674 @@
+{
+  "characters": {
+    "abomination": {
+      "aliases": [
+        "Abomination",
+        "Abomination (Emil Blonsky)",
+        "abomination"
+      ]
+    },
+    "adam-warlock": {
+      "aliases": [
+        "Adam Warlock",
+        "Adam Warlock (Adam Warlock)",
+        "adam-warlock"
+      ]
+    },
+    "agent-venom": {
+      "aliases": [
+        "Agent Venom",
+        "Agent Venom (Flash Thompson)",
+        "agent-venom"
+      ]
+    },
+    "amazing-spider-man": {
+      "aliases": [
+        "Amazing Spider-Man",
+        "Amazing Spider-Man (Peter Parker)",
+        "amazing-spider-man"
+      ]
+    },
+    "ancient-one": {
+      "aliases": [
+        "Ancient One",
+        "Ancient One (Ancient One)",
+        "ancient-one"
+      ]
+    },
+    "angel": {
+      "aliases": [
+        "Angel",
+        "Angel (Warren Worthington III)",
+        "angel"
+      ]
+    },
+    "angela": {
+      "aliases": [
+        "Angela",
+        "Angela (Aldrif Odinsdottir)",
+        "angela"
+      ]
+    },
+    "ant-man": {
+      "aliases": [
+        "Ant-Man",
+        "Ant-Man (Scott Lang)",
+        "ant-man"
+      ]
+    },
+    "apocalypse": {
+      "aliases": [
+        "Apocalypse",
+        "Apocalypse (En Sabah Nur)",
+        "apocalypse"
+      ]
+    },
+    "archangel": {
+      "aliases": [
+        "Archangel",
+        "Archangel (Warren Worthington III)",
+        "archangel"
+      ]
+    },
+    "arnim-zola": {
+      "aliases": [
+        "Arnim Zola",
+        "Arnim Zola (Arnim Zola)",
+        "arnim-zola"
+      ]
+    },
+    "avalanche": {
+      "aliases": [
+        "Avalanche",
+        "Avalanche (Dominikos Petrakis)",
+        "avalanche"
+      ]
+    },
+    "baron-helmut-zemo": {
+      "aliases": [
+        "Baron Helmut Zemo",
+        "Baron Helmut Zemo (Helmut Zemo)",
+        "baron-helmut-zemo"
+      ]
+    },
+    "baron-mordo": {
+      "aliases": [
+        "Baron Mordo",
+        "Baron Mordo (Karl Amadeus Mordo)",
+        "baron-mordo"
+      ]
+    },
+    "baron-strucker": {
+      "aliases": [
+        "Baron Strucker",
+        "Baron Strucker (Wolfgang von Strucker)",
+        "baron-strucker"
+      ]
+    },
+    "baron-zemo": {
+      "aliases": [
+        "Baron Zemo",
+        "Baron Zemo (Helmut Zemo)",
+        "baron-zemo"
+      ]
+    },
+    "bastion": {
+      "aliases": [
+        "Bastion",
+        "Bastion (Sebastion Gilberti)",
+        "bastion"
+      ]
+    },
+    "beast": {
+      "aliases": [
+        "Beast",
+        "Beast (Henry McCoy)",
+        "beast"
+      ]
+    },
+    "beta-ray-bill": {
+      "aliases": [
+        "Beta Ray Bill",
+        "Beta Ray Bill (Bill)",
+        "beta-ray-bill"
+      ]
+    },
+    "bishop": {
+      "aliases": [
+        "Bishop",
+        "Bishop (Lucas Bishop)",
+        "bishop"
+      ]
+    },
+    "black-bolt": {
+      "aliases": [
+        "Black Bolt",
+        "Black Bolt (Blackagar Boltagon)",
+        "black-bolt"
+      ]
+    },
+    "black-cat": {
+      "aliases": [
+        "Black Cat",
+        "Black Cat (Felicia Hardy)",
+        "black-cat",
+        "black-cat-night-of-the-goblin"
+      ]
+    },
+    "black-dwarf": {
+      "aliases": [
+        "Black Dwarf",
+        "Black Dwarf (Black Dwarf)",
+        "black-dwarf"
+      ]
+    },
+    "black-panther": {
+      "aliases": [
+        "Black Panther",
+        "Black Panther (T‘Challa)",
+        "black-panther"
+      ]
+    },
+    "black-panther-chosen-of-bast": {
+      "aliases": [
+        "Black Panther, Chosen of Bast",
+        "Black Panther, Chosen of Bast (T‘Challa)",
+        "black-panther-chosen-of-bast"
+      ]
+    },
+    "black-swan": {
+      "aliases": [
+        "Black Swan",
+        "Black Swan (Black Swan)",
+        "black-swan"
+      ]
+    },
+    "black-widow": {
+      "aliases": [
+        "Black Widow",
+        "Black Widow (Natasha Romanoff)",
+        "black-widow"
+      ]
+    },
+    "black-widow-agent-of-shield": {
+      "aliases": [
+        "Black Widow, Agent of S.H.I.E.L.D.",
+        "Black Widow, Agent of S.H.I.E.L.D. (Natasha Romanoff)",
+        "black-widow-agent-of-shield"
+      ]
+    },
+    "blade": {
+      "aliases": [
+        "Blade",
+        "Blade (Eric Brooks)",
+        "blade"
+      ]
+    },
+    "blue-marvel": {
+      "aliases": [
+        "Blue Marvel",
+        "Blue Marvel (Adam Brashear)",
+        "blue-marvel"
+      ]
+    },
+    "bob-agent-of-hydra": {
+      "aliases": [
+        "Bob, Agent of Hydra",
+        "Bob, Agent of Hydra (Robert Dobalina)",
+        "bob-agent-of-hydra"
+      ]
+    },
+    "bullseye": {
+      "aliases": [
+        "Bullseye",
+        "Bullseye (Benjamin Poindexter)",
+        "bullseye"
+      ]
+    },
+    "cable": {
+      "aliases": [
+        "Cable",
+        "Cable (Nathan Summers)",
+        "cable"
+      ]
+    },
+    "captain-america": {
+      "aliases": [
+        "Captain America",
+        "Captain America (Steve Rogers)",
+        "captain-america"
+      ]
+    },
+    "captain-america-first-avenger": {
+      "aliases": [
+        "Captain America, First Avenger",
+        "Captain America, First Avenger (Steve Rogers)",
+        "captain-america-first-avenger"
+      ]
+    },
+    "captain-america-sam-wilson": {
+      "aliases": [
+        "Captain America",
+        "Captain America (Sam Wilson)",
+        "captain-america-sam-wilson"
+      ]
+    },
+    "captain-marvel": {
+      "aliases": [
+        "Captain Marvel",
+        "Captain Marvel (Carol Danvers)",
+        "captain-marvel"
+      ]
+    },
+    "captain-marvel-cosmic-avenger": {
+      "aliases": [
+        "Captain Marvel, Cosmic Avenger",
+        "Captain Marvel, Cosmic Avenger (Carol Danvers)",
+        "captain-marvel-cosmic-avenger"
+      ]
+    },
+    "carnage": {
+      "aliases": [
+        "Carnage",
+        "Carnage (Cletus Kasady)",
+        "carnage"
+      ]
+    },
+    "cassandra-nova": {
+      "aliases": [
+        "Cassandra Nova",
+        "Cassandra Nova (Cassandra Nova Xavier)",
+        "cassandra-nova"
+      ]
+    },
+    "clea": {
+      "aliases": [
+        "Clea",
+        "Clea (Clea Strange)",
+        "clea"
+      ]
+    },
+    "colossus": {
+      "aliases": [
+        "Colossus",
+        "Colossus (Piotr Rasputin)",
+        "colossus"
+      ]
+    },
+    "corvus-glaive": {
+      "aliases": [
+        "Corvus Glaive",
+        "Corvus Glaive (Corvus Glaive)",
+        "corvus-glaive"
+      ]
+    },
+    "cosmic-ghost-rider": {
+      "aliases": [
+        "Cosmic Ghost Rider",
+        "Cosmic Ghost Rider (Frank Castle)",
+        "cosmic-ghost-rider"
+      ]
+    },
+    "crimson-dynamo": {
+      "aliases": [
+        "Crimson Dynamo",
+        "Crimson Dynamo (Dimitri Bukharin)",
+        "crimson-dynamo"
+      ]
+    },
+    "crossbones": {
+      "aliases": [
+        "Crossbones",
+        "Crossbones (Brock Rumlow)",
+        "crossbones"
+      ]
+    },
+    "crossbones-merciless-merc": {
+      "aliases": [
+        "Crossbones, Merciless Merc",
+        "Crossbones, Merciless Merc (Brock Rumlow)",
+        "crossbones-merciless-merc"
+      ]
+    },
+    "crystal": {
+      "aliases": [
+        "Crystal",
+        "Crystal (Crystalia Amaquelin)",
+        "crystal"
+      ]
+    },
+    "cyclops": {
+      "aliases": [
+        "Cyclops",
+        "Cyclops (Scott Summers)",
+        "cyclops"
+      ]
+    },
+    "daredevil": {
+      "aliases": [
+        "Daredevil",
+        "Daredevil (Matt Murdock)",
+        "daredevil"
+      ]
+    },
+    "darkstar": {
+      "aliases": [
+        "Darkstar",
+        "Darkstar (Laynia Petrovna)",
+        "darkstar"
+      ]
+    },
+    "deadpool": {
+      "aliases": [
+        "Deadpool",
+        "Deadpool (Wade Wilson)",
+        "deadpool"
+      ]
+    },
+    "doc-ock-sinister-scientist": {
+      "aliases": [
+        "Doc Ock, Sinister Scientist",
+        "Doc Ock, Sinister Scientist (Otto Octavius)",
+        "doc-ock-sinister-scientist"
+      ]
+    },
+    "doctor-octopus": {
+      "aliases": [
+        "Doctor Octopus",
+        "Doctor Octopus (Otto Octavius)",
+        "doctor-octopus",
+        "rival-panel-doctor-octopus"
+      ]
+    },
+    "doctor-strange": {
+      "aliases": [
+        "Doctor Strange",
+        "Doctor Strange (Stephen Vincent Strange)",
+        "doctor-strange"
+      ]
+    },
+    "doctor-strange-sorcerer-supreme": {
+      "aliases": [
+        "Doctor Strange, Sorcerer Supreme",
+        "Doctor Strange, Sorcerer Supreme (Stephen Vincent Strange)",
+        "doctor-strange-sorcerer-supreme"
+      ]
+    },
+    "doctor-voodoo": {
+      "aliases": [
+        "Doctor Voodoo",
+        "Doctor Voodoo (Jericho Drumm)",
+        "doctor-voodoo"
+      ]
+    },
+    "domino": {
+      "aliases": [
+        "Domino",
+        "Domino (Neena Thurman)",
+        "domino"
+      ]
+    },
+    "dormammu": {
+      "aliases": [
+        "Dormammu",
+        "Dormammu (Dormammu)",
+        "dormammu"
+      ]
+    },
+    "dracula": {
+      "aliases": [
+        "Dracula",
+        "Dracula (Vlad Dracula)",
+        "dracula"
+      ]
+    },
+    "drax-the-destroyer": {
+      "aliases": [
+        "Drax the Destroyer",
+        "Drax the Destroyer (Drax)",
+        "drax-the-destroyer"
+      ]
+    },
+    "ebony-maw": {
+      "aliases": [
+        "Ebony Maw",
+        "Ebony Maw (Ebony Maw)",
+        "ebony-maw"
+      ]
+    },
+    "echo": {
+      "aliases": [
+        "Echo",
+        "Echo (Maya Lopez)",
+        "echo"
+      ]
+    },
+    "electro": {
+      "aliases": [
+        "Electro",
+        "Electro (Max Dillon)",
+        "electro"
+      ]
+    },
+    "elektra": {
+      "aliases": [
+        "Elektra",
+        "Elektra (Elektra Natchios)",
+        "elektra"
+      ]
+    },
+    "elsa-bloodstone": {
+      "aliases": [
+        "Elsa Bloodstone",
+        "Elsa Bloodstone (Elsa Bloodstone)",
+        "elsa-bloodstone"
+      ]
+    },
+    "emma-frost": {
+      "aliases": [
+        "Emma Frost",
+        "Emma Frost (Emma Frost)",
+        "emma-frost"
+      ]
+    },
+    "enchantress": {
+      "aliases": [
+        "Enchantress",
+        "Enchantress (Amora)",
+        "enchantress"
+      ]
+    },
+    "exodus": {
+      "aliases": [
+        "Exodus",
+        "Exodus (Bennet du Paris)",
+        "exodus"
+      ]
+    },
+    "frankensteins-monster": {
+      "aliases": [
+        "Frankenstein‘s Monster",
+        "Frankenstein‘s Monster (Adam)",
+        "frankensteins-monster"
+      ]
+    },
+    "gambit": {
+      "aliases": [
+        "Gambit",
+        "Gambit (Remy LeBeau)",
+        "gambit"
+      ]
+    },
+    "gamora": {
+      "aliases": [
+        "Gamora",
+        "Gamora (Gamora)",
+        "gamora"
+      ]
+    },
+    "ghost-rider": {
+      "aliases": [
+        "Ghost Rider",
+        "Ghost Rider (Johnathon Blaze)",
+        "ghost-rider"
+      ]
+    },
+    "ghost-spider": {
+      "aliases": [
+        "Ghost-Spider",
+        "Ghost-Spider (Gwen Stacy)",
+        "ghost-spider",
+        "ghost-spider-night-of-the-goblin"
+      ]
+    },
+    "gladiator": {
+      "aliases": [
+        "Gladiator",
+        "Gladiator (Kallark)",
+        "gladiator"
+      ]
+    },
+    "gorgon": {
+      "aliases": [
+        "Gorgon",
+        "Gorgon (Gorgon Petragon)",
+        "gorgon"
+      ]
+    },
+    "green-goblin": {
+      "aliases": [
+        "Green Goblin",
+        "Green Goblin (Norman Osborn)",
+        "green-goblin",
+        "green-goblin-night-of-the-goblin"
+      ]
+    },
+    "groot": {
+      "aliases": [
+        "Groot",
+        "Groot (I Am Groot)",
+        "groot"
+      ]
+    },
+    "gwenom": {
+      "aliases": [
+        "Gwenom",
+        "Gwenom (Gwen Stacy)",
+        "gwenom"
+      ]
+    },
+    "gwenpool": {
+      "aliases": [
+        "Gwenpool",
+        "Gwenpool (Gwendolyn Poole)",
+        "gwenpool"
+      ]
+    },
+    "hand-ninjas-grunts": {
+      "aliases": [
+        "Hand Ninjas",
+        "hand-ninjas-grunts"
+      ]
+    },
+    "havok": {
+      "aliases": [
+        "Havok",
+        "Havok (Alexander Summers)",
+        "havok"
+      ]
+    },
+    "hawkeye": {
+      "aliases": [
+        "Hawkeye",
+        "Hawkeye (Clinton Barton)",
+        "hawkeye"
+      ]
+    },
+    "heimdall-the-all-seeing": {
+      "aliases": [
+        "Heimdall, The All-Seeing",
+        "Heimdall, The All-Seeing (Heimdall)",
+        "heimdall-the-all-seeing"
+      ]
+    },
+    "hela-queen-of-hel": {
+      "aliases": [
+        "Hela, Queen of Hel",
+        "Hela, Queen of Hel (Hela)",
+        "hela-queen-of-hel"
+      ]
+    },
+    "honey-badger": {
+      "aliases": [
+        "Honey Badger",
+        "Honey Badger (Gabrielle Kinney)",
+        "honey-badger"
+      ]
+    },
+    "hood": {
+      "aliases": [
+        "Hood",
+        "Hood (Parker Robbins)",
+        "hood"
+      ]
+    },
+    "hulk": {
+      "aliases": [
+        "Hulk",
+        "Hulk (Bruce Banner)",
+        "hulk"
+      ]
+    },
+    "hulkbuster": {
+      "aliases": [
+        "Hulkbuster",
+        "Hulkbuster (Tony Stark)",
+        "hulkbuster"
+      ]
+    },
+    "hydra-troopers-grunts": {
+      "aliases": [
+        "Hydra Troopers",
+        "hydra-troopers-grunts"
+      ]
+    },
+    "iceman": {
+      "aliases": [
+        "Iceman",
+        "Iceman (Bobby Drake)",
+        "iceman"
+      ]
+    },
+    "invincible-iron-man": {
+      "aliases": [
+        "Invincible Iron Man",
+        "Invincible Iron Man (Tony Stark)",
+        "invincible-iron-man"
+      ]
+    },
+    "iron-fist": {
+      "aliases": [
+        "Iron Fist",
+        "Iron Fist (Danny Rand)",
+        "iron-fist"
+      ]
+    },
+    "iron-lad": {
+      "aliases": [
+        "Iron Lad",
+        "Iron Lad (Nathaniel Richards)",
+        "iron-lad"
+      ]
+    },
+    "iron-man": {
+      "aliases": [
+        "Iron Man",
+        "Iron Man (Tony Stark)",
+        "iron-man"
+      ]
+    },
+    "iron-monger": {
+      "aliases": [
+        "Iron Monger",
+        "Iron Monger (Obadiah Stane)",
+        "iron-monger"
+      ]
+    },
+    "jean-grey": {
+      "aliases": [
+        "Jean Grey",
+        "Jean Grey (Jean Grey)",
+        "jean-grey"
+      ]
+    },
+    "jubilee": {
+      "aliases": [
+        "Jubilee",
+        "Jubilee (Jubilation Lee)",
+        "jubilee"
+      ]
+    },
+    "juggernaut": {
+      "aliases": [
+        "Juggernaut",
+        "Juggernaut (Cain Marko)",
+        "juggernaut"
+      ]
+    },
+    "kang-the-conqueror": {
+      "aliases": [
+        "Kang the Conqueror",
+        "Kang the Conqueror (Nathaniel Richards)",
+        "kang-the-conqueror"
+      ]
+    },
+    "karnak": {
+      "aliases": [
+        "Karnak",
+        "Karnak (Karnak Mander-Azur)",
+        "karnak"
+      ]
+    },
+    "killmonger": {
+      "aliases": [
+        "Killmonger",
+        "Killmonger (N‘Jadaka)",
+        "killmonger"
+      ]
+    },
+    "killmonger-usurper": {
+      "aliases": [
+        "Killmonger, Usurper",
+        "Killmonger, Usurper (N‘Jadaka)",
+        "killmonger-usurper"
+      ]
+    },
+    "king-black-bolt": {
+      "aliases": [
+        "King Black Bolt",
+        "King Black Bolt (Blackagar Boltagon)",
+        "king-black-bolt"
+      ]
+    },
+    "king-tchalla": {
+      "aliases": [
+        "King T‘Challa",
+        "King T‘Challa (T‘Challa)",
+        "king-tchalla"
+      ]
+    },
+    "kingpin": {
+      "aliases": [
+        "Kingpin",
+        "Kingpin (Wilson Fisk)",
+        "kingpin"
+      ]
+    },
+    "klaw": {
+      "aliases": [
+        "Klaw",
+        "Klaw (Ulysses Klaw)",
+        "klaw"
+      ]
+    },
+    "kraven-the-hunter": {
+      "aliases": [
+        "Kraven the Hunter",
+        "Kraven the Hunter (Sergei Nikolaevich Kravinoff)",
+        "kraven-the-hunter"
+      ]
+    },
+    "lady-mastermind": {
+      "aliases": [
+        "Lady Mastermind",
+        "Lady Mastermind (Regan Wyngarde)",
+        "lady-mastermind"
+      ]
+    },
+    "lady-sif": {
+      "aliases": [
+        "Lady Sif",
+        "Lady Sif (Sif)",
+        "lady-sif"
+      ]
+    },
+    "lizard": {
+      "aliases": [
+        "Lizard",
+        "Lizard (Curtis Connors)",
+        "lizard"
+      ]
+    },
+    "lockjaw": {
+      "aliases": [
+        "Lockjaw",
+        "Lockjaw (Lockjaw)",
+        "lockjaw"
+      ]
+    },
+    "logan-the-wolverine": {
+      "aliases": [
+        "Logan, the Wolverine",
+        "Logan, the Wolverine (James Logan Howlett)",
+        "logan-the-wolverine"
+      ]
+    },
+    "loki-god-of-mischief": {
+      "aliases": [
+        "Loki, God of Mischief",
+        "Loki, God of Mischief (Loki Laufeyson)",
+        "loki-god-of-mischief"
+      ]
+    },
+    "loki-prince-of-lies": {
+      "aliases": [
+        "Loki, Prince of Lies",
+        "Loki, Prince of Lies (Loki Laufeyson)",
+        "loki-prince-of-lies"
+      ]
+    },
+    "luke-cage": {
+      "aliases": [
+        "Luke Cage",
+        "Luke Cage (Carl Lucas)",
+        "luke-cage"
+      ]
+    },
+    "magik": {
+      "aliases": [
+        "Magik",
+        "Magik (Illyana Rasputin)",
+        "magik"
+      ]
+    },
+    "magneto": {
+      "aliases": [
+        "Magneto",
+        "Magneto (Max Eisenhardt)",
+        "magneto"
+      ]
+    },
+    "malekith-the-accursed": {
+      "aliases": [
+        "Malekith The Accursed",
+        "Malekith The Accursed (Malekith)",
+        "malekith-the-accursed"
+      ]
+    },
+    "man-thing": {
+      "aliases": [
+        "Man-Thing",
+        "Man-Thing (Theodore Sallis)",
+        "man-thing"
+      ]
+    },
+    "maverick": {
+      "aliases": [
+        "Maverick",
+        "Maverick (Christoph Nord)",
+        "maverick"
+      ]
+    },
+    "maximus-the-mad": {
+      "aliases": [
+        "Maximus the Mad",
+        "Maximus the Mad (Maximus Boltagon)",
+        "maximus-the-mad"
+      ]
+    },
+    "mbaku": {
+      "aliases": [
+        "M‘Baku",
+        "M‘Baku (M‘Baku)",
+        "mbaku"
+      ]
+    },
+    "medusa": {
+      "aliases": [
+        "Medusa",
+        "Medusa (Medusalith Amaquelin-Boltagon)",
+        "medusa"
+      ]
+    },
+    "mephisto-lord-of-temptation": {
+      "aliases": [
+        "Mephisto, Lord of Temptation",
+        "Mephisto, Lord of Temptation (Mephisto)",
+        "mephisto-convention-exclusive",
+        "mephisto-lord-of-temptation"
+      ]
+    },
+    "mighty-thor": {
+      "aliases": [
+        "The Mighty Thor",
+        "The Mighty Thor (Jane Foster)",
+        "mighty-thor"
+      ]
+    },
+    "mirage": {
+      "aliases": [
+        "Mirage",
+        "Mirage (Danielle \"Dani\" Moonstar)",
+        "mirage"
+      ]
+    },
+    "mister-sinister": {
+      "aliases": [
+        "Mister Sinister",
+        "Mister Sinister (Nathaniel Essex)",
+        "mister-sinister"
+      ]
+    },
+    "modok": {
+      "aliases": [
+        "M.O.D.O.K.",
+        "M.O.D.O.K. (George Tarleton)",
+        "modok"
+      ]
+    },
+    "modok-scientist-supreme": {
+      "aliases": [
+        "M.O.D.O.K. Scientist Supreme",
+        "M.O.D.O.K. Scientist Supreme (George Tarleton)",
+        "modok-scientist-supreme"
+      ]
+    },
+    "moon-knight": {
+      "aliases": [
+        "Moon Knight",
+        "Moon Knight (Marc Spector)",
+        "moon-knight"
+      ]
+    },
+    "moondragon": {
+      "aliases": [
+        "Moondragon",
+        "Moondragon (Heather Douglas)",
+        "moondragon"
+      ]
+    },
+    "ms-marvel": {
+      "aliases": [
+        "Ms. Marvel",
+        "Ms. Marvel (Kamala Khan)",
+        "ms-marvel"
+      ]
+    },
+    "multiple-man": {
+      "aliases": [
+        "Multiple Man",
+        "multiple-man"
+      ]
+    },
+    "multiple-man-duplicates-grunts": {
+      "aliases": [
+        "Multiple Man Duplicates",
+        "multiple-man-duplicates-grunts"
+      ]
+    },
+    "mysterio": {
+      "aliases": [
+        "Mysterio",
+        "Mysterio (Quentin Beck)",
+        "mysterio"
+      ]
+    },
+    "mystique": {
+      "aliases": [
+        "Mystique",
+        "Mystique (Raven Darkhölme)",
+        "mystique"
+      ]
+    },
+    "namor-the-submariner": {
+      "aliases": [
+        "Namor, the Sub-Mariner",
+        "Namor, the Sub-Mariner (Namor McKenzie)",
+        "namor-the-submariner"
+      ]
+    },
+    "nebula": {
+      "aliases": [
+        "Nebula",
+        "Nebula (Nebula)",
+        "nebula"
+      ]
+    },
+    "nick-fury": {
+      "aliases": [
+        "Nick Fury",
+        "Nick Fury (Nicholas J. Fury, Junior)",
+        "nick-fury"
+      ]
+    },
+    "nick-fury-and-the-howling-commandos": {
+      "aliases": [
+        "Nick Fury & The Howling Commandos",
+        "Nick Fury & The Howling Commandos (Nicholas Fury, Sr., Timothy \"Dum Dum\" Dugan, Gabriel Jones)",
+        "nick-fury-and-the-howling-commandos"
+      ]
+    },
+    "nightcrawler": {
+      "aliases": [
+        "Nightcrawler",
+        "Nightcrawler (Kurt Wagner)",
+        "nightcrawler"
+      ]
+    },
+    "nimrod": {
+      "aliases": [
+        "Nimrod, the Hunter",
+        "Nimrod, the Hunter (Nimrod)",
+        "nimrod"
+      ]
+    },
+    "nkantu-the-living-mummy": {
+      "aliases": [
+        "N‘Kantu, the Living Mummy",
+        "N‘Kantu, the Living Mummy (N‘Kantu)",
+        "nkantu-the-living-mummy"
+      ]
+    },
+    "nova": {
+      "aliases": [
+        "Nova",
+        "Nova (Richard Rider)",
+        "nova"
+      ]
+    },
+    "okoye": {
+      "aliases": [
+        "Okoye",
+        "Okoye (Okoye)",
+        "okoye"
+      ]
+    },
+    "omega-red": {
+      "aliases": [
+        "Omega Red",
+        "Omega Red (Arkady Gregorivich Rossovich)",
+        "omega-red"
+      ]
+    },
+    "omega-sentinel": {
+      "aliases": [
+        "Omega Sentinel",
+        "Omega Sentinel (Karima Shapandar)",
+        "omega-sentinel"
+      ]
+    },
+    "onslaught": {
+      "aliases": [
+        "Onslaught",
+        "Onslaught (Max Eisenhardt; Charles Xavier)",
+        "onslaught"
+      ]
+    },
+    "phoenix": {
+      "aliases": [
+        "Phoenix",
+        "Phoenix (Jean Grey)",
+        "phoenix"
+      ]
+    },
+    "prime-sentinel-1": {
+      "aliases": [
+        "Prime Sentinel",
+        "Prime Sentinel (Prime Sentinel)",
+        "prime-sentinel-1",
+        "prime-sentinel-2"
+      ]
+    },
+    "professor-x": {
+      "aliases": [
+        "Professor X",
+        "Professor X (Charles Xavier)",
+        "professor-x"
+      ]
+    },
+    "prowler": {
+      "aliases": [
+        "Prowler",
+        "Prowler (Aaron Davis)",
+        "prowler"
+      ]
+    },
+    "proxima-midnight": {
+      "aliases": [
+        "Proxima Midnight",
+        "Proxima Midnight (Proxima Midnight)",
+        "proxima-midnight"
+      ]
+    },
+    "psylocke": {
+      "aliases": [
+        "Psylocke",
+        "Psylocke (Elizabeth Braddock)",
+        "psylocke"
+      ]
+    },
+    "punisher": {
+      "aliases": [
+        "Punisher",
+        "Punisher (Frank Castle)",
+        "punisher"
+      ]
+    },
+    "pyro": {
+      "aliases": [
+        "Pyro",
+        "Pyro (St. John Allerdyce)",
+        "pyro"
+      ]
+    },
+    "quasar": {
+      "aliases": [
+        "Quasar",
+        "Quasar (Phyla-Vell)",
+        "quasar"
+      ]
+    },
+    "quicksilver": {
+      "aliases": [
+        "Quicksilver",
+        "Quicksilver (Pietro Maximoff)",
+        "quicksilver"
+      ]
+    },
+    "red-guardian": {
+      "aliases": [
+        "Red Guardian",
+        "Red Guardian (Nikolai Krylenko)",
+        "red-guardian"
+      ]
+    },
+    "red-skull": {
+      "aliases": [
+        "Red Skull",
+        "Red Skull (Johann Schmidt)",
+        "red-skull"
+      ]
+    },
+    "red-skull-master-of-hydra": {
+      "aliases": [
+        "Red Skull, Master of Hydra",
+        "Red Skull, Master of Hydra (Johann Schmidt)",
+        "red-skull-master-of-hydra"
+      ]
+    },
+    "red-skull-master-of-the-world": {
+      "aliases": [
+        "Red Skull, Master of the World",
+        "Red Skull, Master of the World (Johann Schmidt)",
+        "red-skull-master-of-the-world"
+      ]
+    },
+    "rescue": {
+      "aliases": [
+        "Rescue",
+        "Rescue (Pepper Potts)",
+        "rescue"
+      ]
+    },
+    "rhino": {
+      "aliases": [
+        "Rhino",
+        "Rhino (Aleksei Sytsevich)",
+        "rhino"
+      ]
+    },
+    "rocket-raccoon": {
+      "aliases": [
+        "Rocket Raccoon",
+        "Rocket Raccoon (Rocket Raccoon)",
+        "rocket-raccoon"
+      ]
+    },
+    "rogue": {
+      "aliases": [
+        "Rogue",
+        "Rogue (Anna Marie LeBeau)",
+        "rogue"
+      ]
+    },
+    "ronan-the-accuser": {
+      "aliases": [
+        "Ronan the Accuser",
+        "Ronan the Accuser (Ronan the Accuser)",
+        "ronan-the-accuser"
+      ]
+    },
+    "ronin": {
+      "aliases": [
+        "Ronin",
+        "Ronin (Clinton Barton)",
+        "ronin"
+      ]
+    },
+    "sabretooth": {
+      "aliases": [
+        "Sabretooth",
+        "Sabretooth (Victor Creed)",
+        "sabretooth"
+      ]
+    },
+    "sabretooth-apex-predator": {
+      "aliases": [
+        "Sabretooth, Apex Predator",
+        "Sabretooth, Apex Predator (Victor Creed)",
+        "sabretooth-apex-predator"
+      ]
+    },
+    "sand-construct-2-grunts": {
+      "aliases": [
+        "Sand Construct",
+        "sand-construct-1-grunts",
+        "sand-construct-2-grunts"
+      ]
+    },
+    "sandman": {
+      "aliases": [
+        "Sandman",
+        "Sandman (Flint Marko)",
+        "sandman"
+      ]
+    },
+    "scarlet-spider": {
+      "aliases": [
+        "Scarlet Spider",
+        "Scarlet Spider (Ben Reilly)",
+        "scarlet-spider"
+      ]
+    },
+    "scarlet-witch": {
+      "aliases": [
+        "Scarlet Witch",
+        "Scarlet Witch (Wanda Maximoff)",
+        "scarlet-witch"
+      ]
+    },
+    "sentinel-mk4": {
+      "aliases": [
+        "Sentinel MK4",
+        "Sentinel MK4 (Sentinel MK4)",
+        "sentinel-mk4"
+      ]
+    },
+    "sentinel-prime-mk4": {
+      "aliases": [
+        "Sentinel Prime MK4",
+        "Sentinel Prime MK4 (Sentinel Prime MK4)",
+        "sentinel-prime-mk4"
+      ]
+    },
+    "shadow-king": {
+      "aliases": [
+        "Shadow King",
+        "Shadow King (Amahl Farouk)",
+        "shadow-king"
+      ]
+    },
+    "shadowcat": {
+      "aliases": [
+        "Shadowcat",
+        "Shadowcat (Katherine “Kitty“ Pryde)",
+        "shadowcat"
+      ]
+    },
+    "shadowland-daredevil": {
+      "aliases": [
+        "Shadowland Daredevil",
+        "Shadowland Daredevil (Matt Murdock)",
+        "shadowland-daredevil"
+      ]
+    },
+    "shang-chi": {
+      "aliases": [
+        "Shang-Chi",
+        "Shang-Chi (Zheng Shang-Chi)",
+        "shang-chi"
+      ]
+    },
+    "she-hulk": {
+      "aliases": [
+        "She-Hulk",
+        "She-Hulk (Jennifer Walters)",
+        "she-hulk"
+      ]
+    },
+    "shield-agents-grunts": {
+      "aliases": [
+        "S.H.I.E.L.D. Agents",
+        "shield-agents-grunts"
+      ]
+    },
+    "shocker": {
+      "aliases": [
+        "Shocker",
+        "Shocker (Herman Schultz)",
+        "shocker"
+      ]
+    },
+    "shuri": {
+      "aliases": [
+        "Shuri",
+        "Shuri (Shuri)",
+        "shuri"
+      ]
+    },
+    "silk": {
+      "aliases": [
+        "Silk",
+        "Silk (Cindy Moon)",
+        "silk"
+      ]
+    },
+    "silver-sable": {
+      "aliases": [
+        "Silver Sable",
+        "Silver Sable (Silvija Sablinova)",
+        "silver-sable"
+      ]
+    },
+    "sin": {
+      "aliases": [
+        "Sin",
+        "Sin (Sinthea Schmidt)",
+        "sin"
+      ]
+    },
+    "skurge-the-executioner": {
+      "aliases": [
+        "Skurge, The Executioner",
+        "Skurge, The Executioner (Skurge)",
+        "skurge-the-executioner"
+      ]
+    },
+    "spectacular-spider-man": {
+      "aliases": [
+        "Spectacular Spider-Man",
+        "Spectacular Spider-Man (Peter Parker)",
+        "spectacular-spider-man",
+        "spectacular-spider-man-night-of-the-goblin"
+      ]
+    },
+    "spectrum": {
+      "aliases": [
+        "Spectrum",
+        "Spectrum (Monica Rambeau)",
+        "spectrum"
+      ]
+    },
+    "spider-ham": {
+      "aliases": [
+        "Spider-Ham",
+        "Spider-Ham (Peter Porker)",
+        "spider-ham"
+      ]
+    },
+    "spider-man": {
+      "aliases": [
+        "Spider-Man",
+        "Spider-Man (Peter Parker)",
+        "rival-panel-spider-man",
+        "spider-man"
+      ]
+    },
+    "spider-man-2099": {
+      "aliases": [
+        "Spider-Man 2099",
+        "Spider-Man 2099 (Miguel O‘Hara)",
+        "spider-man-2099"
+      ]
+    },
+    "spider-man-miles-morales": {
+      "aliases": [
+        "Spider-Man",
+        "Spider-Man (Miles Morales)",
+        "spider-man-miles-morales",
+        "spider-man-miles-morales-night-of-the-goblin"
+      ]
+    },
+    "spider-man-noir": {
+      "aliases": [
+        "Spider-Man Noir",
+        "Spider-Man Noir (Peter Parker Earth-90214)",
+        "spider-man-noir"
+      ]
+    },
+    "spider-woman": {
+      "aliases": [
+        "Spider-Woman",
+        "Spider-Woman (Jessica Drew)",
+        "spider-woman"
+      ]
+    },
+    "squirrel-girl": {
+      "aliases": [
+        "Squirrel Girl",
+        "Squirrel Girl (Doreen Greene)",
+        "squirrel-girl"
+      ]
+    },
+    "star-lord": {
+      "aliases": [
+        "Star-Lord",
+        "Star-Lord (Peter Quill)",
+        "star-lord"
+      ]
+    },
+    "steve-rogers-captain-america": {
+      "aliases": [
+        "Steve Rogers, Captain America",
+        "Steve Rogers, Captain America (Steve Rogers)",
+        "steve-rogers-captain-america"
+      ]
+    },
+    "storm": {
+      "aliases": [
+        "Storm",
+        "Storm (Ororo Munroe)",
+        "storm"
+      ]
+    },
+    "sunspot": {
+      "aliases": [
+        "Sunspot",
+        "Sunspot (Roberto da Costa)",
+        "sunspot"
+      ]
+    },
+    "supergiant": {
+      "aliases": [
+        "Supergiant",
+        "Supergiant (Supergiant)",
+        "supergiant"
+      ]
+    },
+    "taskmaster": {
+      "aliases": [
+        "Taskmaster",
+        "Taskmaster (Anthony Masters)",
+        "taskmaster"
+      ]
+    },
+    "thanos-the-mad-titan": {
+      "aliases": [
+        "Thanos, The Mad Titan",
+        "Thanos, The Mad Titan (Thanos)",
+        "thanos-the-mad-titan"
+      ]
+    },
+    "the-black-widow": {
+      "aliases": [
+        "The Black Widow",
+        "The Black Widow (Natasha Romanoff)",
+        "the-black-widow"
+      ]
+    },
+    "the-blob": {
+      "aliases": [
+        "The Blob",
+        "The Blob (Fred Dukes)",
+        "the-blob"
+      ]
+    },
+    "the-immortal-hulk": {
+      "aliases": [
+        "The Immortal Hulk",
+        "The Immortal Hulk (Bruce Banner)",
+        "the-immortal-hulk"
+      ]
+    },
+    "the-original-human-torch": {
+      "aliases": [
+        "The Original Human Torch",
+        "The Original Human Torch (Jim Hammond)",
+        "the-original-human-torch"
+      ]
+    },
+    "the-wrecking-crew": {
+      "aliases": [
+        "The Wrecking Crew",
+        "The Wrecking Crew (Brian Calusky, Dirk Garthwaite, Eliot Franklin, Henry Camp)",
+        "the-wrecking-crew"
+      ]
+    },
+    "thor-hero-of-midgard": {
+      "aliases": [
+        "Thor, Hero of Midgard",
+        "Thor, Hero of Midgard (Thor Odinson)",
+        "thor-hero-of-midgard"
+      ]
+    },
+    "thor-prince-of-asgard": {
+      "aliases": [
+        "Thor, Prince of Asgard",
+        "Thor, Prince of Asgard (Thor Odinson)",
+        "thor-prince-of-asgard"
+      ]
+    },
+    "tigra": {
+      "aliases": [
+        "Tigra",
+        "Tigra (Greer Nelson)",
+        "tigra"
+      ]
+    },
+    "toad": {
+      "aliases": [
+        "Toad",
+        "Toad (Mortimer Toynbee)",
+        "toad"
+      ]
+    },
+    "ulik": {
+      "aliases": [
+        "Ulik",
+        "Ulik (Ulik)",
+        "ulik"
+      ]
+    },
+    "ultimate-spider-man": {
+      "aliases": [
+        "Ultimate Spider-Man",
+        "Ultimate Spider-Man (Miles Morales)",
+        "ultimate-spider-man"
+      ]
+    },
+    "ultron": {
+      "aliases": [
+        "Ultron",
+        "Ultron (Ultron)",
+        "ultron"
+      ]
+    },
+    "ultron-drones-grunts": {
+      "aliases": [
+        "Ultron Drones",
+        "Ultron Drones (Ultron Drones)",
+        "ultron-drones-grunts"
+      ]
+    },
+    "ultron-metal-tyrant": {
+      "aliases": [
+        "Ultron, Metal Tyrant",
+        "Ultron, Metal Tyrant (Ultron)",
+        "ultron-metal-tyrant"
+      ]
+    },
+    "ursa-major": {
+      "aliases": [
+        "Ursa Major",
+        "Ursa Major (Mikhail Ursus)",
+        "ursa-major"
+      ]
+    },
+    "valkyrie": {
+      "aliases": [
+        "Valkyrie",
+        "Valkyrie (Brunnhilde)",
+        "valkyrie"
+      ]
+    },
+    "valkyrie-and-elendil": {
+      "aliases": [
+        "Valkyrie and Elendil",
+        "Valkyrie and Elendil (Valkyrie)",
+        "valkyrie-and-elendil"
+      ]
+    },
+    "venom": {
+      "aliases": [
+        "Venom",
+        "Venom (Eddie Brock)",
+        "venom"
+      ]
+    },
+    "viper": {
+      "aliases": [
+        "Viper",
+        "Viper (Ophelia Sarkissian)",
+        "viper"
+      ]
+    },
+    "vision": {
+      "aliases": [
+        "Vision",
+        "Vision (Victor Shade)",
+        "vision"
+      ]
+    },
+    "vulture": {
+      "aliases": [
+        "Vulture",
+        "Vulture (Adrian Toomes)",
+        "vulture"
+      ]
+    },
+    "war-machine": {
+      "aliases": [
+        "War Machine",
+        "War Machine (James Rhodes)",
+        "war-machine"
+      ]
+    },
+    "warlock": {
+      "aliases": [
+        "Warlock",
+        "Warlock (Warlock)",
+        "warlock"
+      ]
+    },
+    "warriors-three": {
+      "aliases": [
+        "Warriors Three",
+        "Warriors Three (Fandral, Hogun, Volstagg)",
+        "warriors-three"
+      ]
+    },
+    "wasp": {
+      "aliases": [
+        "Wasp",
+        "Wasp (Janet Van Dyne)",
+        "wasp"
+      ]
+    },
+    "weapon-x": {
+      "aliases": [
+        "Weapon X",
+        "Weapon X (James Logan Howlett)",
+        "weapon-x"
+      ]
+    },
+    "werewolf-by-night": {
+      "aliases": [
+        "Werewolf by Night",
+        "Werewolf by Night (Jack Russel)",
+        "werewolf-by-night"
+      ]
+    },
+    "winter-soldier": {
+      "aliases": [
+        "Winter Soldier",
+        "Winter Soldier (James \"Bucky\" Barnes)",
+        "winter-soldier"
+      ]
+    },
+    "winter-soldier-operative": {
+      "aliases": [
+        "Winter Soldier, Operative",
+        "Winter Soldier, Operative (James \"Bucky\" Barnes)",
+        "winter-soldier-operative"
+      ]
+    },
+    "wolverine": {
+      "aliases": [
+        "Wolverine",
+        "Wolverine (James Logan Howlett)",
+        "wolverine"
+      ]
+    },
+    "wong": {
+      "aliases": [
+        "Wong",
+        "Wong (Wong)",
+        "wong"
+      ]
+    },
+    "x-23": {
+      "aliases": [
+        "X-23",
+        "X-23 (Laura Kinney)",
+        "x-23"
+      ]
+    },
+    "yondu": {
+      "aliases": [
+        "Yondu",
+        "Yondu (Yondu Udonta)",
+        "yondu"
+      ]
+    }
+  }
+}

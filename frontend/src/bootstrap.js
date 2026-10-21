@@ -30,7 +30,7 @@ import {
 } from "./stores/index.js";
 const KEY = "mcp-companion-catalog-v1";
 let navigation;
-const json = async (path, options) => {
+const json = async (path, options = { cache: "no-cache" }) => {
   const r = await fetch(path, options);
   if (!r.ok) throw Error("Не удалось загрузить " + path);
   return r.json();

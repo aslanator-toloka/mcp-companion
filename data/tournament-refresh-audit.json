@@ -1,0 +1,23 @@
+{
+  "source": "https://mcp.longshanks.org/events/",
+  "start": "2026-08-10",
+  "end": "2026-10-21",
+  "generated_at": "2026-10-21T21:37:01.892294+00:00",
+  "scope": "all_played_records",
+  "filters": {
+    "rated": "rated",
+    "irl": "on",
+    "list_required": 1,
+    "min_win": null,
+    "max_loss": null
+  },
+  "events": 244,
+  "results": 2470,
+  "roster_variants": 2520,
+  "zero_win_results": 243,
+  "four_plus_loss_results": 199,
+  "scored_results": 2454,
+  "provisional_results": 16,
+  "complete": true,
+  "errors": 0
+}

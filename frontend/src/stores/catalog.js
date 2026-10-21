@@ -222,6 +222,7 @@ export class CatalogStore {
       const request = (async () => {
         const response = await this.fetcher(
           "data/cards/" + encodeURIComponent(slug) + ".json",
+          { cache: "no-cache" },
         );
         if (!response.ok) throw Error("Полная карта недоступна.");
         const detail = await response.json();
