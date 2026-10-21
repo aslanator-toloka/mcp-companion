@@ -22,10 +22,10 @@
   const owned=()=>new Set(collection()?.owned||[]);
   const availability=r=>window.AtlasCollectionCore.availability(r,index.characters,owned());
   const readyRows=()=>data.rosters.filter(r=>availability(r).ready);
-  function ownershipTag(id){
+  function ownershipTag(id,ownedOverride){
     if(!collection())return '<small class="at-ownership-unknown">Наличие не подключено</small>';
-    const yes=(index.characters.get(id)?.inventoryIds||[id]).some(x=>owned().has(x));
-    return `<small class="at-ownership-tag ${yes?'at-owned':'at-missing'}">${yes?'✓ Есть у меня':'Нет в коллекции'}</small>`;
+    const status=characterCollectionStatus(index.characters.get(id)?.inventoryIds||[id],ownedOverride);
+    return `<small class="at-ownership-tag at-${status.kind}">${status.kind==='owned'?'✓ ':''}${escape(status.label)}</small>`;
   }
   function availabilityTag(r){
     if(!collection())return '';
@@ -133,7 +133,7 @@
     if(r.kind!=='encoded')return `${heading}<p class="at-text-note">${r.kind==='restricted'?'Содержимое списка недоступно в публичном просмотре.':'Текстовый лист. В поиск включены распознанные имена персонажей; полный оригинал — ниже.'}</p><div class="at-text-characters">${r.characterIds.map(id=>`<button class="at-co-chip" data-character="${escape(id)}" type="button">${escape(index.characters.get(id).name)}</button>${rosterCatalogArrow(index.characters.get(id))}${ownershipTag(id)}`).join('')}</div><pre class="at-raw-text">${escape(r.rawText)}</pre>`;
     const characterRows=r.characters.map((c,i)=>{
       const info=index.characters.get(c.id);
-      return `<li class="${c.id===selected?'at-selected':''}">${c.id?`<span class="at-roster-character-name"><button class="at-roster-character-button" data-character="${escape(c.id)}" type="button">${escape(info.name)}</button>${rosterCatalogArrow(info)}</span><small>${escape(info.alterEgo)}</small><small class="at-roster-character-affiliations">${affiliationNote(info)}</small>`:escape(c.name)}${collection()?`<small class="at-ownership-tag ${availability(r).entries[i].owned?'at-owned':'at-missing'}">${availability(r).entries[i].owned?'✓ Есть у меня':'Нет в коллекции'}</small>`:''}${c.gems.length?`<small class="at-gems">${escape(c.gems.join(' · '))}</small>`:''}</li>`;
+      return `<li class="${c.id===selected?'at-selected':''}">${c.id?`<span class="at-roster-character-name"><button class="at-roster-character-button" data-character="${escape(c.id)}" type="button">${escape(info.name)}</button>${rosterCatalogArrow(info)}</span><small>${escape(info.alterEgo)}</small><small class="at-roster-character-affiliations">${affiliationNote(info)}</small>`:escape(c.name)}${collection()?ownershipTag(c.id,availability(r).entries[i].owned):''}${c.gems.length?`<small class="at-gems">${escape(c.gems.join(' · '))}</small>`:''}</li>`;
     }).join('');
     return `${heading}<div class="at-roster-columns"><div class="at-roster-column"><h4>Персонажи <span>${r.characters.length}</span></h4><ul>${characterRows}</ul></div><div class="at-roster-column"><h4>Team tactics <span>${r.tactics.length}</span></h4><ul>${r.tactics.map(t=>`<li>${escape(t)}</li>`).join('')}</ul></div><div class="at-roster-column"><h4>Crises <span>${r.crises.length}</span></h4><ul>${r.crises.map(t=>`<li>${escape(t)}</li>`).join('')}</ul></div></div>${r.jarvisUrl?`<div class="at-roster-actions"><a href="${safeUrl(r.jarvisUrl)}" target="_blank" rel="noopener noreferrer">Открыть в Jarvis Protocol ↗</a></div>`:''}`;
   }
