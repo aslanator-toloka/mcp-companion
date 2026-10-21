@@ -129,6 +129,12 @@ export class RosterStore {
         ? [...new Set([...this.draft.groups, id])]
         : this.draft.groups.filter((g) => g !== id);
   }
+  syncMembership(saved, slug, include) {
+    if (this.draft?.id !== saved.id) return;
+    this.choose("characters", slug, include);
+    this.draft.updatedAt = saved.updatedAt;
+    this.base = JSON.stringify(normalizeRoster(saved));
+  }
   setTab(tab) {
     this.tab = tab;
   }

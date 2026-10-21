@@ -11,15 +11,23 @@ import {
 import { CharacterDetail } from "./catalog.jsx";
 import { ConnectedBoxDetail } from "./purchases.jsx";
 import { StatControls, StatSurface } from "./cards.jsx";
-export function Dialog({ id, className, label, open, onClose, children }) {
+export function Dialog({
+  id,
+  className,
+  label,
+  open,
+  resetKey,
+  onClose,
+  children,
+}) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
-    if (open && !el.open) {
-      el.showModal();
+    if (open) {
+      if (!el.open) el.showModal();
       el.scrollTop = 0;
     } else if (!open && el.open) el.close();
-  }, [open]);
+  }, [open, resetKey]);
   return (
     <dialog
       ref={ref}
@@ -80,6 +88,7 @@ export const CharacterModal = observer(function CharacterModal() {
       className="character-dialog"
       label="Карточка персонажа"
       open={!!c}
+      resetKey={catalog.selected}
       onClose={catalog.close}
     >
       <div id="character-content">

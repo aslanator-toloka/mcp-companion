@@ -170,7 +170,11 @@ function membership(id, slug, include) {
     save({ ...library.snapshot, rosters: records }) &&
     rosters.draft?.id === id
   )
-    rosters.choose("characters", slug, include);
+    rosters.syncMembership(
+      library.snapshot.rosters.find((r) => r.id === id),
+      slug,
+      include,
+    );
 }
 function createMembershipRoster(slug) {
   const name = ui.rosterName.trim();
