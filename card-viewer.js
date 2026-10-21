@@ -66,7 +66,14 @@ function scheduleNativeCards(){if(nativeCardFrame)return;nativeCardFrame=request
   document.querySelectorAll('.stat-card-viewer').forEach(el=>{if(!nativeCardObserved.has(el)){nativeCardObserved.add(el);nativeCardResize.observe(el);}});
   fitNativeCards();
 });}
-new MutationObserver(scheduleNativeCards).observe(document.documentElement,{childList:true,subtree:true});
+function cardViewMutation(records,selector){
+  return records.some(record=>{
+    const target=record.target.nodeType===1?record.target:record.target.parentElement;
+    if(target?.closest?.(selector))return true;
+    return [...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches?.(selector)||node.querySelector?.(selector)));
+  });
+}
+new MutationObserver(records=>{if(cardViewMutation(records,'.stat-card-viewer'))scheduleNativeCards();}).observe(document.documentElement,{childList:true,subtree:true});
 addEventListener('resize',scheduleNativeCards);document.fonts?.ready.then(scheduleNativeCards);document.fonts?.addEventListener('loadingdone',scheduleNativeCards);
 // An unavailable reverse-side illustration may use the known front illustration.
 // Rules, stats and side state always remain those of the selected face.
@@ -78,7 +85,7 @@ document.addEventListener('error',event=>{
 function setCardSkinLayers(v,el,values){
   try{const saved=JSON.parse(localStorage.getItem(cardSkinPreferenceKey)||'{}');saved[v.slug]={...cardSkinLayers(v.slug),...values};localStorage.setItem(cardSkinPreferenceKey,JSON.stringify(saved));}catch{return;}
   if(v.key==='battle'&&typeof showBattleFighterPreview==='function'&&battleDialogContext?.type==='fighter'){showBattleFighterPreview(v.form,v.side);return;}
-  el.innerHTML=statCardViewContent(v);fitNativeCards(el);
+  MCPReact.html(el,statCardViewContent(v));fitNativeCards(el);
 }
 document.addEventListener('change',event=>{
   const input=event.target,layer=input.dataset?.cardSkinLayer,el=input.closest?.('[data-card-view]');
@@ -98,6 +105,6 @@ document.addEventListener('click',event=>{
   }
   if(v.key==='catalog'){selectedForm=v.form;selectedSide=v.side==='back'?'injured':'healthy';}
   const action=button.dataset.cv,value=action==='side'?v.side:String(v.form);
-  el.innerHTML=statCardViewContent(v);fitNativeCards(el);
+  MCPReact.html(el,statCardViewContent(v));fitNativeCards(el);
   el.querySelector(`[data-cv="${action}"][data-${action}="${value}"]`)?.focus({preventScroll:true});
 });

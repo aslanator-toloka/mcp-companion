@@ -18,7 +18,7 @@ function toast(message) {
 }
 function persist() {
   if(!initialized)return false;
-  try {localStorage.setItem(storageKey,JSON.stringify(dataOnly(state)));window.Tournaments?.refresh();window.Account?.save();return true;}
+  try {localStorage.setItem(storageKey,JSON.stringify(dataOnly(state)));if(screen==='tournaments')window.Tournaments?.refresh();window.Account?.save();return true;}
   catch {toast('Браузер не сохранил изменения. Экспортируйте данные.');return false;}
 }
 function dataOnly(value) {
@@ -29,9 +29,7 @@ function avatar(c,large=false) {
   const initials=c.name.split(/[\s,-]+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('');
   return `<span class="avatar ${large?'large':''} ${c.portrait?'has-image':''}"><span class="initials" aria-hidden="true">${esc(initials)}</span>${c.portrait?`<img src="${esc(c.portrait)}" alt="Портрет ${esc(c.name)}" ${large?'':'loading="lazy"'} decoding="async">`:''}</span>`;
 }
-function ownLabel(slug,detail=false) {
-  return `<label class="check"><input type="checkbox" id="${detail?'detail-owned':'owned-'+slug}" data-owned="${esc(slug)}" ${isOwned(slug)?'checked':''} ${isBoxOwned(slug)?'disabled title="Входит в купленный набор. Отметка управляется в карточке набора."':''} aria-label="Есть у меня: ${esc(characters.get(slug).name)}"><span>Есть у меня</span></label>`;
-}
+
 function resultCharacters() {
   const terms=searchWords($('#search').value),aff=$('#affiliation').value,threat=$('#threat').value,only=$('#only-owned').checked;
   return catalog.characters.filter(c=>{
@@ -40,30 +38,20 @@ function resultCharacters() {
   });
 }
 function renderList() {
-  if(!catalog)return;
+  if(!catalog||screen!=='catalog')return;
   const rows=resultCharacters();
   $('#result').textContent=$('#only-owned').checked?'Модели с отметкой «Есть у меня»':`${rows.length} записей · по алфавиту`;
   $('#page-title').textContent=$('#only-owned').checked?'Моя коллекция':'Персонажи';
   updateNavigation();
-  $('#characters').innerHTML=rows.length?rows.map(c=>`<div class="character-row"><button class="row-open" data-action="character" data-slug="${esc(c.slug)}" aria-label="Открыть карточку ${esc(c.name)}, ${esc(c.alterEgo)}">${avatar(c)}<span class="row-copy"><strong>${esc(c.name)}</strong><span class="alter-ego">${esc(c.alterEgo||'Без alter ego')}${c.isGrunt?' · Grunt':''}</span><span class="affiliations">${c.affiliations.map(a=>`<span class="affiliation">${esc(a.name)}${a.isLeader?' <span class="leader-mark">· лидер</span>':''}</span>`).join('')||'<span>Без аффилиации</span>'}</span></span><span class="row-threat"><b>${esc(c.threatLevel??'—')}</b><small>THREAT</small></span></button><div class="owned-control ${isOwned(c.slug)?'owned':''}">${ownLabel(c.slug)}</div></div>`).join(''):`<div class="empty"><h3>${$('#only-owned').checked?'Здесь пока пусто':'Ничего не найдено'}</h3><p>${$('#only-owned').checked?'Отметьте свои модели в каталоге или измените остальные фильтры.':'Попробуйте другое имя или снимите фильтры.'}</p><button data-action="reset">Показать всех персонажей</button></div>`;
+  MCPReact.view($('#characters'),'CatalogList',{items:rows.map(character=>({character,owned:isOwned(character.slug),boxOwned:isBoxOwned(character.slug)})),onlyOwned:$('#only-owned').checked});
 }
 function resetFilters(only=false) {
   $('#search').value='';$('#affiliation').value='';$('#threat').value='';$('#only-owned').checked=only;renderList();
 }
-function formatRule(text) {
-  const tokens={power:'Power',damage:'Damage',wild:'Wild',critical:'Crit',crit:'Crit',failure:'Failure',hit:'Hit',block:'Block',blank:'Blank',size:'Size',range_small:'S',range_medium:'M',range_large:'L',physical:'Physical',energy:'Energy',mystic:'Mystic'};
-  return esc(String(text).replace(/\|<[^>]+>([^|]+)\|/g,'$1').replace(/\|§[^§]+§([^|]+)\|/g,'$1').replace(/\|\\\|/g,'\n')).replace(/\|!([^|]+)\|/g,(_,token)=>`<span class="rules-icon">${esc(tokens[token]||token.replaceAll('_',' '))}</span>`).replace(/\|\*([^|]+)\|/g,'<strong>$1</strong>').replaceAll('\n','<br>');
-}
-function actionsMarkup(face) {
-  return (face.attacks||[]).map(attack=>`<article class="ability"><div class="ability-head"><strong>${esc(attack.name)}</strong><small>${esc(attack.type)}</small></div><div class="ability-meta"><span class="tag">Range ${esc(attack.range)}</span><span class="tag">Strength ${esc(attack.strength)}</span><span class="tag">Power ${esc(attack.powerCost??0)}</span>${attack.form&&attack.form!=='normal'?`<span class="tag">${esc(attack.form)}</span>`:''}</div>${(attack.steps||[]).map(step=>`<p>${formatRule(step)}</p>`).join('')}</article>`).join('')||'<p class="muted">На этой стороне карты нет атак.</p>';
-}
-function powersMarkup(face) {
-  return (face.superPowers||[]).map(power=>`<article class="ability"><div class="ability-head"><strong>${esc(power.name)}</strong><small>${esc(power.type)}</small></div>${power.powerCost!=null?`<div class="ability-meta"><span class="tag">Power ${esc(power.powerCost)}</span></div>`:''}${power.form&&power.form!=='normal'?`<span class="tag">${esc(power.form)}</span>`:''}<p>${formatRule(power.body||'')}</p></article>`).join('')||'<p class="muted">На этой стороне карты нет суперспособностей.</p>';
-}
-function myRostersMarkup(slug) {
-  const list=state.rosters.filter(r=>r.characters.includes(slug));
-  return list.length?list.map(r=>`<button class="roster-link" data-action="view-roster" data-id="${esc(r.id)}"><span><strong>${esc(r.name)}</strong><small>${esc(r.affiliation||'Без выбранной аффилиации')}</small></span><span aria-hidden="true">→</span></button>`).join(''):'<div class="no-rosters">Пока ни в одном ростере.</div>';
-}
+
+
+
+
 function distinctBack(card) {
   if(!card?.backSide)return false;
   const fields=['type','nameOverride','stamina','speed','size','physicalDefense','energyDefense','mysticDefense','attacks','superPowers'];
@@ -73,14 +61,14 @@ function renderCharacter(error='') {
   if(!selectedSlug)return;
   const c=characters.get(selectedSlug),detail=cards.get(selectedSlug);
   const statCard=selectedForm===1?detail?.secondStatCard:detail?.statCard;
-  const head=`<header class="detail-head"><div class="detail-top">${avatar(c,true)}<div class="detail-name"><span class="eyebrow">02 / Карточка персонажа</span><h2>${esc(c.name)}</h2><p>${esc(c.alterEgo)}</p><div class="tags">${c.affiliations.map(a=>`<span class="tag">${esc(a.name)}${a.isLeader?' · лидер':''}</span>`).join('')}${c.isGrunt?'<span class="tag">Grunt</span>':''}</div></div>${ownLabel(c.slug,true)}<button class="quiet close" data-action="close-character" aria-label="Закрыть карточку">×</button></div></header>`;
+
   let content='';
   if(!detail&&!error)content='<div class="loading">Загружаем полную карту…</div>';
   else if(error||!statCard)content=`<div class="empty"><h3>Карточка пока не загрузилась</h3><p>${esc(error||'Полной карты нет в источнике.')}</p><div class="actions"><button data-action="retry-card">Повторить</button><a href="${esc(c.sourceUrl)}" target="_blank" rel="noopener">Открыть Jarvis ↗</a></div></div>`;
   else {
     content=statCardViewerMarkup('catalog',c.slug,detail,selectedForm,selectedSide==='injured'?'back':'front');
   }
-  $('#character-content').innerHTML=head+`<div class="detail-body">${content}${characterBoxSetsMarkup(c)}<section class="detail-section roster-memberships"><div class="section-title"><h3>В моих ростерах</h3><button data-action="pick-roster">Добавить в ростер +</button></div>${myRostersMarkup(c.slug)}</section><div class="source-line"><a href="${esc(c.sourceUrl)}" target="_blank" rel="noopener">Карточка на Jarvis ↗</a><span>Данные Jarvis · ${new Date(catalog.fetchedAt).toLocaleDateString('ru-RU')}</span></div></div>`;
+  MCPReact.view($('#character-content'),'CharacterDetail',{character:c,owned:isOwned(c.slug),boxOwned:isBoxOwned(c.slug),cardMarkup:content,boxes:(c.boxSets||[]).map(code=>boxSets.get(code)).filter(Boolean).map(boxViewModel),boxError:boxSetLoadError,rosters:state.rosters.filter(r=>r.characters.includes(c.slug)).map(r=>({id:r.id,name:r.name,affiliation:r.affiliation})),sourceDate:new Date(catalog.fetchedAt).toLocaleDateString('ru-RU')});
 }
 async function openCharacter(slug,reset=true) {
   if(!characters.has(slug))return;
@@ -108,7 +96,7 @@ async function openCharacter(slug,reset=true) {
 }
 function showRosterPicker(draft='') {
   rosterMode='picker';rosterViewId=null;
-  $('#roster-content').innerHTML=`<div class="dialog-heading"><div><h2>Добавить в ростер</h2><p>${esc(characters.get(selectedSlug).name)} · можно выбрать несколько.</p></div><button class="quiet close" data-action="close-roster" aria-label="Закрыть выбор ростеров">×</button></div>${state.rosters.length?state.rosters.map(r=>`<label class="check roster-pick"><input type="checkbox" data-roster="${esc(r.id)}" ${r.characters.includes(selectedSlug)?'checked':''}>${esc(r.name)}</label>`).join(''):'<p class="muted" style="font-size:12px">Сохранённых ростеров пока нет. Создайте первый.</p>'}<form id="create-roster" class="create-roster"><label class="field">Название нового ростера<input name="name" maxlength="100" placeholder="Например: Avengers · основной" required></label><div class="actions"><button class="primary" type="submit">Создать и добавить</button><button type="button" data-action="close-roster">Готово</button></div></form>`;
+  MCPReact.html($('#roster-content'),`<div class="dialog-heading"><div><h2>Добавить в ростер</h2><p>${esc(characters.get(selectedSlug).name)} · можно выбрать несколько.</p></div><button class="quiet close" data-action="close-roster" aria-label="Закрыть выбор ростеров">×</button></div>${state.rosters.length?state.rosters.map(r=>`<label class="check roster-pick"><input type="checkbox" data-roster="${esc(r.id)}" ${r.characters.includes(selectedSlug)?'checked':''}>${esc(r.name)}</label>`).join(''):'<p class="muted" style="font-size:12px">Сохранённых ростеров пока нет. Создайте первый.</p>'}<form id="create-roster" class="create-roster"><label class="field">Название нового ростера<input name="name" maxlength="100" placeholder="Например: Avengers · основной" required></label><div class="actions"><button class="primary" type="submit">Создать и добавить</button><button type="button" data-action="close-roster">Готово</button></div></form>`);
   if(!$('#roster-dialog').open)$('#roster-dialog').showModal();
   $('#create-roster input[name="name"]').value=draft;
 }
@@ -116,7 +104,7 @@ function showRoster(id) {
   openRosterEditor(id);
 }
 function showData() {
-  $('#data-content').innerHTML=`<div class="dialog-heading"><div><h2>Данные приложения</h2><p>${window.Account?.enabled?'Коллекция, ростеры, группы и локальные партии сохраняются в аккаунте на сервере. Сетевые партии хранятся отдельно и доступны обоим игрокам.':'Коллекция, ростеры, группы и партии хранятся в этом браузере.'}</p></div><button class="quiet close" data-action="close-data" aria-label="Закрыть данные">×</button></div><p style="font-size:12px">Полные карты и портреты загружены из Jarvis. Для переноса из локальной версии используйте её экспорт JSON и импорт здесь.</p><div class="actions" style="margin-top:20px"><button class="primary" data-action="export">Экспорт JSON</button><button data-action="import">Импорт JSON</button></div><input id="import-file" type="file" accept="application/json" hidden><p class="notice">Экспорт включает отметки наличия, ростеры, группы, запланированные и купленные наборы и партии. Несохранённые правки и состояние интерфейса не экспортируются.</p>`;
+  MCPReact.html($('#data-content'),`<div class="dialog-heading"><div><h2>Данные приложения</h2><p>${window.Account?.enabled?'Коллекция, ростеры, группы и локальные партии сохраняются в аккаунте на сервере. Сетевые партии хранятся отдельно и доступны обоим игрокам.':'Коллекция, ростеры, группы и партии хранятся в этом браузере.'}</p></div><button class="quiet close" data-action="close-data" aria-label="Закрыть данные">×</button></div><p style="font-size:12px">Полные карты и портреты загружены из Jarvis. Для переноса из локальной версии используйте её экспорт JSON и импорт здесь.</p><div class="actions" style="margin-top:20px"><button class="primary" data-action="export">Экспорт JSON</button><button data-action="import">Импорт JSON</button></div><input id="import-file" type="file" accept="application/json" hidden><p class="notice">Экспорт включает отметки наличия, ростеры, группы, запланированные и купленные наборы и партии. Несохранённые правки и состояние интерфейса не экспортируются.</p>`);
   $('#data-dialog').showModal();
 }
 function exportData() {
@@ -169,7 +157,7 @@ document.addEventListener('change',async event=>{
   else if(['affiliation','threat','only-owned'].includes(input.id))renderList();
   else if(input.id==='import-file'){
     const file=input.files[0];if(!file)return;
-    try{const imported=JSON.parse(await file.text());validate(imported);if(imported.battles)validateBattleData(imported.battles);$('#data-content').innerHTML=`<div class="dialog-heading"><h2>Восстановить данные?</h2></div><p style="font-size:12px">Коллекция, ростеры, группы, запланированные и купленные наборы будут заменены содержимым файла. В старых файлах без списков наборов эти списки будут пустыми. Если файл содержит партии, они тоже будут восстановлены.</p><div class="actions" style="margin-top:20px"><button id="confirm-import" class="primary">Восстановить</button><button data-action="close-data">Отмена</button></div>`;$('#confirm-import').onclick=()=>{
+    try{const imported=JSON.parse(await file.text());validate(imported);if(imported.battles)validateBattleData(imported.battles);MCPReact.html($('#data-content'),`<div class="dialog-heading"><h2>Восстановить данные?</h2></div><p style="font-size:12px">Коллекция, ростеры, группы, запланированные и купленные наборы будут заменены содержимым файла. В старых файлах без списков наборов эти списки будут пустыми. Если файл содержит партии, они тоже будут восстановлены.</p><div class="actions" style="margin-top:20px"><button id="confirm-import" class="primary">Восстановить</button><button data-action="close-data">Отмена</button></div>`);$('#confirm-import').onclick=()=>{
       if(imported.battles&&!replaceBattleData(imported.battles))return;
       state=dataOnly(imported);state.owned=[...new Set(state.owned)];
       persist();renderList();refreshPurchases();if(selectedSlug)renderCharacter();resetRosterWorkspace();refreshRosters();if(screen==='battle'){battleView='home';battleMatchId=null;renderBattle();}$('#data-dialog').close();toast('Данные восстановлены');
@@ -222,8 +210,8 @@ async function boot() {
     if(!serverAccount)loadBattleData();
     await initBattleMapData();
     const affiliations=[...new Set(catalog.characters.flatMap(c=>c.affiliations.map(a=>a.name)))].sort();
-    $('#affiliation').innerHTML='<option value="">Все аффилиации</option>'+affiliations.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('');
-    $('#threat').innerHTML='<option value="">Любой Threat</option>'+[...new Set(catalog.characters.map(c=>c.threatLevel).filter(v=>v!=null))].sort((a,b)=>a-b).map(n=>`<option value="${n}">${n}</option>`).join('');
+    MCPReact.html($('#affiliation'),'<option value="">Все аффилиации</option>'+affiliations.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join(''));
+    MCPReact.html($('#threat'),'<option value="">Любой Threat</option>'+[...new Set(catalog.characters.map(c=>c.threatLevel).filter(v=>v!=null))].sort((a,b)=>a-b).map(n=>`<option value="${n}">${n}</option>`).join(''));
     $('#source-date').textContent='Снимок '+new Date(catalog.fetchedAt).toLocaleDateString('ru-RU');
     let pruneLegacy=false,migrateOwned=false;
     try{const raw=localStorage.getItem(storageKey);if(raw){const saved=JSON.parse(raw);validate(saved);state=dataOnly(saved);
@@ -231,7 +219,7 @@ async function boot() {
     }else if(!window.Account?.enabled){const old=localStorage.getItem('mcp-roster-atlas-collection-v1');if(old){const saved=JSON.parse(old);if(Array.isArray(saved.owned)&&saved.owned.every(id=>typeof id==='string')){state.owned=[...new Set(saved.owned.filter(id=>characters.has(id)))];migrateOwned=true;}}}}
     catch{toast('Сохранение не удалось прочитать. Исходная запись не изменена.');}
     initialized=true;updatePurchaseBadge();if(window.Account?.enabled){window.NetworkBattle.list().catch(e=>toast(e.message));window.Account.flush().catch(e=>toast(e.message));}if(pruneLegacy||migrateOwned)persist();resetFilters();document.querySelectorAll('.nav-item').forEach(button=>button.disabled=false);window.Tournaments?.boot();requestAnimationFrame(()=>window.scrollTo(0,0));
-  }catch(error){$('#result').textContent='Каталог недоступен';$('#characters').innerHTML='<div class="empty"><h3>Не удалось загрузить каталог</h3><p>'+esc(error.message||'Проверьте локальный сервер и попробуйте ещё раз.')+'</p><button id="retry-load">Повторить</button></div>';$('#retry-load').onclick=boot;}
+  }catch(error){$('#result').textContent='Каталог недоступен';MCPReact.html($('#characters'),'<div class="empty"><h3>Не удалось загрузить каталог</h3><p>'+esc(error.message||'Проверьте локальный сервер и попробуйте ещё раз.')+'</p><button id="retry-load">Повторить</button></div>');$('#retry-load').onclick=boot;}
 }
 
 window.MCPNotify=toast;

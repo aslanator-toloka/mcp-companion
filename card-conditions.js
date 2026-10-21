@@ -39,7 +39,7 @@
     const slug=button.dataset.cardCondition;if(!Object.hasOwn(definitions,slug))return;
     event.preventDefault();
     trigger?.setAttribute('aria-expanded','false');trigger=button;
-    dialog.innerHTML=descriptionMarkup(slug,root.MCPCardRenderer.rule);
+    MCPReact.html(dialog,descriptionMarkup(slug,root.MCPCardRenderer.rule));
     trigger.setAttribute('aria-expanded','true');
     if(!dialog.open)dialog.showModal();
   });

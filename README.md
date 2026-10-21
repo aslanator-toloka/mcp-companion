@@ -8,6 +8,10 @@ Direct two-player battles on the same Wi-Fi use WebRTC DataChannel: the creator 
 
 GitHub Pages publishes the root of the main branch. An empty .nojekyll disables Jekyll. All runtime paths are relative to the project URL.
 
+## React UI
+
+Interactive views use a locally bundled React production runtime. Reviewable JSX and the pinned npm lockfile are in frontend/. To rebuild the published checkout, run npm ci --prefix frontend and npm run build --prefix frontend. Rule-card, SVG and auxiliary form formats use a keyed React adapter. Business rules, saved-data schemas and WebRTC authority remain in their existing domain modules.
+
 ## Data credits
 
 Rules, character and card data: Jarvis Protocol / Atomic Mass Games. Tournament snapshot: Longshanks. Marvel characters and artwork belong to their respective owners.

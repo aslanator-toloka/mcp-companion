@@ -7,7 +7,7 @@ function showNativeGameCard(c,kind,metadata=''){
 function renderNativeGameCard(){
   const {card:c,kind,metadata,side}=gameCardView;
   const source='https://www.jarvis-protocol.com/'+(kind==='tactics'?'team-tactics-cards/':'crisis-cards/')+(kind==='tactics'?c.cardFamily:c.slug);
-  document.getElementById('game-card-content').innerHTML=`<header class="gc-dialog-head"><div><strong>${esc(c.name)}</strong>${metadata?`<small>${esc(metadata)}</small>`:''}</div><button type="button" class="quiet close" data-rs="close-card" aria-label="Закрыть игровую карту">×</button></header><div class="gc-dialog-body"><div class="gc-controls side-switch" role="group" aria-label="Сторона игровой карты"><button type="button" data-game-side="front" aria-pressed="${side==='front'}" class="${side==='front'?'selected':''}">Лицевая сторона</button><button type="button" data-game-side="back" aria-pressed="${side==='back'}" class="${side==='back'?'selected':''}">Обратная сторона</button></div><div class="gc-surface">${MCPGameCardRenderer.render(c,kind,{side})}</div><div class="source-line"><a href="${esc(source)}" target="_blank" rel="noopener">Карта на Jarvis ↗</a></div></div>`;
+  MCPReact.html(document.getElementById('game-card-content'),`<header class="gc-dialog-head"><div><strong>${esc(c.name)}</strong>${metadata?`<small>${esc(metadata)}</small>`:''}</div><button type="button" class="quiet close" data-rs="close-card" aria-label="Закрыть игровую карту">×</button></header><div class="gc-dialog-body"><div class="gc-controls side-switch" role="group" aria-label="Сторона игровой карты"><button type="button" data-game-side="front" aria-pressed="${side==='front'}" class="${side==='front'?'selected':''}">Лицевая сторона</button><button type="button" data-game-side="back" aria-pressed="${side==='back'}" class="${side==='back'?'selected':''}">Обратная сторона</button></div><div class="gc-surface">${MCPGameCardRenderer.render(c,kind,{side})}</div><div class="source-line"><a href="${esc(source)}" target="_blank" rel="noopener">Карта на Jarvis ↗</a></div></div>`);
 }
 function fitNativeGameCards(root=document){
  root.querySelectorAll('.gc-stage').forEach(stage=>{
@@ -26,7 +26,7 @@ function fitNativeGameCards(root=document){
 }
 let gameCardFrame=0;
 function scheduleGameCards(){if(gameCardFrame)return;gameCardFrame=requestAnimationFrame(()=>{gameCardFrame=0;fitNativeGameCards();});}
-new MutationObserver(scheduleGameCards).observe(document.documentElement,{childList:true,subtree:true});
+new MutationObserver(records=>{if(cardViewMutation(records,'.gc-stage'))scheduleGameCards();}).observe(document.documentElement,{childList:true,subtree:true});
 addEventListener('resize',scheduleGameCards);document.fonts?.addEventListener('loadingdone',scheduleGameCards);
 document.addEventListener('click',event=>{
  const button=event.target.closest('[data-game-side]');if(!button||!gameCardView)return;

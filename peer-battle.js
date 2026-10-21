@@ -179,7 +179,7 @@ window.NetworkBattle=(()=>{
   }
  function peerDialog(title,body){
   let el=$('#peer-connect-dialog');if(!el){el=document.createElement('dialog');el.id='peer-connect-dialog';el.className='battle-dialog peer-connect-dialog';document.body.append(el);}
-  el.innerHTML=`<div class="dialog-heading"><h2>${esc(title)}</h2><button class="quiet" data-peer="close" aria-label="Закрыть подключение">×</button></div>${body}<p id="peer-form-error" role="alert" class="peer-error"></p>`;
+  MCPReact.html(el,`<div class="dialog-heading"><h2>${esc(title)}</h2><button class="quiet" data-peer="close" aria-label="Закрыть подключение">×</button></div>${body}<p id="peer-form-error" role="alert" class="peer-error"></p>`);
   if(!el.open)el.showModal();
  }
  function showPeerError(text){const el=$('#peer-form-error');if(el)el.textContent=text;else toast(text);}

@@ -64,19 +64,12 @@ function prepareMatch(rosterId){
     if(writeMatch(m))openMatch(m.id);
   });
 }
-function matchTile(m){
-  const done=m.status==='finished',preparing=m.status==='preparing';
-  return `<article class="match-tile"><div class="roster-tile-top"><span class="eyebrow">${preparing?'Подготовка':done?'Завершён':'Идёт бой'}</span><span class="tag">Threat ${m.threat}</span></div><h3>${esc(m.name)}</h3><p>${esc(m.opponent.name)} · ${new Date(m.updatedAt).toLocaleDateString('ru-RU')}</p><div class="roster-portraits">${m.mine.fighters.slice(0,6).map(f=>avatar(characters.get(f.slug))).join('')}</div><div class="match-tile-bottom"><span>${preparing?`${m.mine.fighters.length} бойцов выбрано`:`Раунд ${m.round} · ${m.score.mine} : ${m.score.opponent}`}</span><button class="${done?'':'primary'}" data-bt="open" data-id="${esc(m.id)}">${preparing?'Продолжить подготовку':done?'Посмотреть':'Продолжить бой →'}</button></div></article>`;
-}
-function battleHome(){
-  const pending=battleStore.matches.filter(m=>m.status!=='finished'&&!window.NetworkBattle?.isPeer?.(m.id)).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
-  const history=battleStore.matches.filter(m=>m.status==='finished'&&!window.NetworkBattle?.isPeer?.(m.id)).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
-  return `${typeof window!=='undefined'&&(window.Account?.enabled||window.NetworkBattle?.available?.())?NetworkBattle.home():''}<div class="heading"><div><span class="eyebrow">08 / Бой</span><h1>За столом</h1><p>Продолжить партию или собрать отряд для новой.</p></div><button class="primary" data-bt="choose-roster" ${battleReadError?'disabled':''}>Новый бой +</button></div>${battleReadError?'<div class="notice">Сохранение партий не удалось прочитать. Исходная запись не перезаписывается; восстановите резервный JSON через «Данные».</div>':''}${pending.length?`<div class="match-grid">${pending.map(matchTile).join('')}</div>`:'<div class="empty roster-empty"><h3>Пока нет незавершённых партий</h3><p>Выберите свой ростер, отметьте бойцов и начните. Противника можно добавить позже.</p><button class="primary" data-bt="choose-roster">Выбрать ростер →</button></div>'}<div class="section-title battle-history-title"><h3>История партий</h3><span class="muted">${history.length}</span></div>${history.length?`<div class="match-grid">${history.map(matchTile).join('')}</div>`:'<p class="muted">Здесь появятся завершённые партии.</p>'}`;
-}
+
+
 function battleDialog(title,description,body,context=null){
   $('#battle-dialog').classList.remove('battle-character-dialog');
   battleDialogContext=context;
-  $('#battle-dialog-content').innerHTML=`<div class="dialog-heading"><div><h2>${esc(title)}</h2><p>${esc(description)}</p></div><button class="quiet close" data-bt="close-dialog" aria-label="Закрыть окно партии">×</button></div>${body}`;
+  MCPReact.html($('#battle-dialog-content'),`<div class="dialog-heading"><div><h2>${esc(title)}</h2><p>${esc(description)}</p></div><button class="quiet close" data-bt="close-dialog" aria-label="Закрыть окно партии">×</button></div>${body}`);
   if(!$('#battle-dialog').open)$('#battle-dialog').showModal();
 }
 function chooseBattleRoster(){
@@ -134,83 +127,37 @@ function fighterImmunitiesMarkup(match,fighter){
   const list=PowerPhase.immunities(match,fighter);
   return `<div class="fighter-immunities"><span>Иммунен:</span>${list.length?list.map(name=>`<span class="tag">${esc(name==='Special Conditions'?'Все особые состояния':name)}</span>`).join(''):'<small>Нет</small>'}</div>`;
 }
-function fighterCardStatsMarkup(m,f){
-  const card=BattleCardSummary.describe(m,f);if(!card)return '';
-  return `<dl class="fighter-card-stats" aria-label="Характеристики текущей стороны карты">${[['speed','move','Move'],['physical','physical','Физическая защита'],['energy','energy','Энергетическая защита'],['mystic','mystic','Мистическая защита']].map(([icon,key,label])=>`<div data-fighter-stat="${key}" aria-label="${label}: ${esc(card.stats[key]??'—')}"><dt>${MCPCardRenderer.icon('badge-'+icon,true)}<span>${key==='move'?'Move':label.split(' ')[0]}</span></dt><dd>${esc(card.stats[key]??'—')}</dd></div>`).join('')}</dl>`;
-}
-function fighterAbilityEnergyMarkup(energy){
-  if(energy.kind==='none')return '';
-  if(energy.kind==='variable')return `<span class="fighter-energy-badge variable" aria-label="Переменная стоимость энергии: ${esc(energy.cost)}" title="Переменная стоимость — см. описание">${MCPCardRenderer.icon('power')}<b>${esc(energy.cost)}</b></span>`;
-  const missing=energy.missing>0,label=`Стоимость на карте: ${energy.cost} энергии. ${energy.cost===0?'Без затрат энергии.':missing?`Есть ${energy.power} из ${energy.cost}; не хватает энергии: ${energy.missing}.`:`Энергии хватает: есть ${energy.power}, нужно ${energy.cost}.`}`;
-  return `<span class="fighter-energy-badge ${missing?'missing':energy.cost?'enough':'free'}" data-energy-missing="${energy.missing}" aria-label="${label}" title="${label}">${MCPCardRenderer.icon('power')}<b>${missing?`${energy.power}/${energy.cost}`:energy.cost}</b></span>`;
-}
-function fighterAbilitiesMarkup(m,f){
-  const card=BattleCardSummary.describe(m,f);if(!card)return '';
-  return `<div class="fighter-abilities">${[['attack','Атаки'],['power','Способности']].map(([kind,label])=>{
-    const abilities=card.abilities.filter(a=>a.kind===kind);if(!abilities.length)return '';
-    return `<section class="fighter-ability-group" aria-label="${label} ${esc(f.name)}"><h4>${label}</h4>${abilities.map(a=>{
-      const body=a.kind==='attack'?(a.steps?.length?`<ul class="fighter-attack-rules">${a.steps.map(text=>`<li>${MCPCardRenderer.rule(text)}</li>`).join('')}</ul>`:''):a.body?`<p>${MCPCardRenderer.rule(a.body)}</p>`:fighterKeywordMarkup(a.name);
-      const stats=a.kind==='attack'?`<span class="fighter-attack-stats"><span title="Дальность" aria-label="Дальность: ${esc(a.range)}">${MCPCardRenderer.icon('range')}<b>${esc(a.range)}</b></span><span title="Сила атаки" aria-label="Сила атаки: ${esc(a.strength)}">${MCPCardRenderer.icon('strength')}<b>${esc(a.strength)}</b></span></span>`:'';
-      return `<details class="fighter-ability" id="ability-${esc(a.key)}" data-ability-name="${esc(a.name)}"><summary>${MCPCardRenderer.icon('badge-'+(a.kind==='attack'?'attack-':'')+a.type,true)}<span class="fighter-ability-name" lang="en" title="${esc(a.name)}">${esc(a.name)}</span>${stats}${fighterAbilityEnergyMarkup(a.energy)}</summary><div class="fighter-ability-description" lang="en">${body||'<p class="muted">У этой атаки нет дополнительных эффектов.</p>'}</div></details>`;
-    }).join('')}</section>`;
-  }).join('')}</div>`;
-}
+
+
+
 function fighterKeywordMarkup(name){
   return `${BattleCardSummary.keywords(name).map(item=>`<p><strong>${esc(item.name)}</strong>${item.body?` — ${MCPCardRenderer.rule(item.body)}`:''}</p>`).join('')}<a href="https://www.atomicmassgames.com/mcp-rules/" target="_blank" rel="noopener">Core Rules · keywords ↗</a>`;
 }
-function fighterMarkup(m,f,readonly){
-  return `<article class="battle-fighter ${f.acted?'acted':''} ${f.status!=='ready'?'unavailable':''}" data-fighter="${esc(f.id)}" data-status="${esc(f.status)}"><div class="fighter-heading"><button class="fighter-portrait" data-bt="fighter-card" data-id="${esc(f.id)}" aria-label="Карточка ${esc(f.name)}">${avatar(characters.get(f.slug))}</button><div class="fighter-name"><h3>${esc(f.name)}</h3><small>${esc(f.alterEgo)} · Threat ${f.threat}</small>${fighterStateControlMarkup(m,f,readonly)}</div></div>${fighterCardStatsMarkup(m,f)}<div class="fighter-counters"><div><span>HP · осталось / ${f.maxHp}</span>${miniCounter(f.hp,'HP '+f.name,'counter',`data-id="${esc(f.id)}" data-field="hp"`,readonly||f.hp===0,readonly||f.hp===f.maxHp)}</div><div><span>Энергия</span>${miniCounter(f.power,'энергию '+f.name,'counter',`data-id="${esc(f.id)}" data-field="power"`,readonly||f.power===0,readonly||f.power===10)}</div></div><div class="hpbar" aria-hidden="true"><i style="width:${100*f.hp/f.maxHp}%"></i></div>${f.hp===0&&f.status==='ready'?`<div class="fighter-zero"><span>HP закончились</span>${fighterStateControlMarkup(m,f,readonly,true)}</div>`:''}<div class="fighter-conditions">${f.conditions.length?f.conditions.map(c=>`<span class="tag">${esc(c)}</span>`).join(''):'<small>Без состояний</small>'}<button class="quiet" data-bt="conditions" data-id="${esc(f.id)}" ${readonly?'disabled':''}>Состояния +</button></div>${fighterImmunitiesMarkup(m,f)}<button class="activation ${f.acted?'selected':''}" data-bt="activate" data-id="${esc(f.id)}" ${readonly||f.status!=='ready'?'disabled':''}>${f.status!=='ready'?'Не может активироваться':f.acted?'✓ Походил · отменить':'○ Ещё не походил'}</button>${fighterAbilitiesMarkup(m,f)}<div class="fighter-bottom"><button class="quiet" data-bt="fighter-card" data-id="${esc(f.id)}">Карточка ↗</button>${fighterFormControlsMarkup(m,f,readonly)}<span>Цели ${f.objectives}</span><button class="quiet" data-bt="objectives" data-id="${esc(f.id)}" ${readonly?'disabled':''}>Изменить</button></div></article>`;
-}
-function battleSideSwitchMarkup(){
-  const ownSide=window.NetworkBattle?.ownSide()||'mine',showingMine=battleTeam===ownSide;
-  const target=battleTeam==='mine'?'opponent':'mine';
-  const label=showingMine?'Показать отряд противника':'Показать мой отряд';
-  return `<button id="battle-side-switch" class="battle-side-switch" data-bt="team" data-side="${target}" aria-label="${label}" title="${label}"><span class="${showingMine?'current':''}">Я</span><span aria-hidden="true">⇄</span><span class="${!showingMine?'current':''}">Противник</span></button>`;
-}
-function battlePlay(m){
-  const readonly=m.status==='finished',team=m[battleTeam],ready=team.fighters.filter(f=>f.status==='ready'&&!f.acted).length;
-  return `${battleSideSwitchMarkup()}${typeof window!=='undefined'&&window.NetworkBattle?.active()?NetworkBattle.header():''}<div class="heading"><div><span class="eyebrow">11 / ${readonly?'Завершённая партия':'Бой'}</span><h1>${esc(m.name)}</h1><p>${esc(m[window.NetworkBattle?.active()&&NetworkBattle.ownSide()==='opponent'?'mine':'opponent'].name)} · Threat ${m.threat}${readonly?' · снимок на момент завершения':''}</p></div><button data-bt="home">← К партиям</button></div><div class="battle-dashboard"><div class="round-label"><span>Раунд</span><b>${m.round}</b></div><div class="score-box"><span>${teamLabel('mine')} VP</span>${miniCounter(m.score.mine,teamLabel('mine')+' VP','score','data-side="mine"',readonly||m.score.mine===0,readonly)}</div><div class="score-box"><span>${teamLabel('opponent')} VP</span>${miniCounter(m.score.opponent,teamLabel('opponent')+' VP','score','data-side="opponent"',readonly||m.score.opponent===0,readonly)}</div><label class="field">Приоритет<select id="battle-priority" ${readonly?'disabled':''}>${priorityOptions(m.priority)}</select></label><button class="quiet battle-undo" data-bt="undo" ${readonly||!battleCanUndo(m)?'disabled':''}>↶ Отмена</button></div><div class="battle-toolbar"><button class="primary" data-bt="round" ${readonly?'disabled':''}>Следующий раунд →</button><button data-bt="power" ${readonly?'disabled':''}>Power Phase</button><button data-bt="map">Карта и расстояния</button><button data-bt="missions">Миссии и карты</button><button data-bt="log">Журнал</button><button class="quiet" data-bt="finish" ${readonly?'disabled':''}>Завершить</button></div><div class="battle-side-tabs" role="tablist" aria-label="Сторона боя">${['mine','opponent'].map(side=>`<button role="tab" aria-selected="${battleTeam===side}" data-bt="team" data-side="${side}" class="${battleTeam===side?'selected':''}">${teamLabel(side)}<span>${m[side].fighters.length}</span></button>`).join('')}</div><div class="section-title"><div><h3>${teamLabel(battleTeam)==='Мои'?'Мой отряд':esc(team.name)}</h3><p class="battle-small">${ready} могут походить · ${esc(team.affiliation||'Без аффилиации')}${team.leader?` · лидер ${esc(team.fighters.find(f=>f.id===team.leader)?.name||'—')}`:''}</p></div>${(battleTeam==='opponent'||window.NetworkBattle?.active())&&!readonly?`<button data-bt="pick" data-side="${battleTeam}" data-kind="characters">Изменить состав +</button>`:''}</div><div class="fighter-grid">${team.fighters.map(f=>fighterMarkup(m,f,readonly)).join('')||`<div class="empty roster-empty"><h3>Противник не указан</h3><p>Его счёт уже можно вести. Бойцов и карты добавьте, когда они станут известны.</p>${!readonly?'<button class="primary" data-bt="pick" data-side="opponent" data-kind="characters">Выбрать бойцов и карты +</button>':''}</div>`}</div><div class="section-title battle-tactics-title"><h3>Тактики · ${team.tactics.filter(t=>!t.played).length} в руке</h3>${(battleTeam==='opponent'||window.NetworkBattle?.active())&&!readonly?`<button data-bt="pick" data-side="${battleTeam}" data-kind="tactics">Изменить карты +</button>`:''}</div>${tacticsList(team,battleTeam,true,readonly)}<p class="battle-rule-note">HP, энергию, цели и эффекты меняете вы. Повреждение не начисляет энергию автоматически. Изменения партии сохраняются сразу; ↶ отменяет последнюю правку.</p>`;
-}
-// Patch the existing tree so counters, portraits, focus and expanded details survive
-// a shared-room update. Fighter IDs also keep cards stable when the squad changes.
-function patchBattleDOM(parent, desired){
-  const key=node=>node?.nodeType===1?(node.id?'id:'+node.id:node.hasAttribute('data-fighter')?'fighter:'+node.getAttribute('data-fighter'):null):null;
-  let cursor=parent.firstChild;
-  for(const next of [...desired.childNodes]){
-    const nextKey=key(next);
-    if(nextKey&&key(cursor)!==nextKey){
-      const existing=[...parent.childNodes].find(node=>key(node)===nextKey);
-      if(existing)parent.insertBefore(existing,cursor);
-      else parent.insertBefore(next.cloneNode(true),cursor);
-      cursor=cursor?.previousSibling||parent.lastChild;
-    }
-    if(!cursor){parent.append(next.cloneNode(true));continue;}
-    if(cursor.nodeType!==next.nodeType||cursor.nodeName!==next.nodeName||key(cursor)!==nextKey){
-      const replacement=next.cloneNode(true);parent.replaceChild(replacement,cursor);cursor=replacement;
-    }else if(cursor.nodeType!==1){
-      if(cursor.nodeValue!==next.nodeValue)cursor.nodeValue=next.nodeValue;
-    }else{
-      for(const attr of [...cursor.attributes])if(!next.hasAttribute(attr.name)&&!(cursor.nodeName==='DETAILS'&&attr.name==='open'))cursor.removeAttribute(attr.name);
-      for(const attr of [...next.attributes])if(cursor.getAttribute(attr.name)!==attr.value)cursor.setAttribute(attr.name,attr.value);
-      patchBattleDOM(cursor,next);
-      if(cursor instanceof HTMLInputElement){
-        if(cursor.type==='checkbox'||cursor.type==='radio')cursor.checked=next.checked;
-        else if(cursor!==document.activeElement&&cursor.value!==next.value)cursor.value=next.value;
-      }else if(cursor instanceof HTMLSelectElement)cursor.value=next.value;
-    }
-    cursor=cursor.nextSibling;
-  }
-  while(cursor){const next=cursor.nextSibling;cursor.remove();cursor=next;}
+
+
+
+const battleFighterViewCache=new Map();
+function battleFighterViewModel(m,f){
+  const key=m.id+':'+f.id,signature=JSON.stringify([f,m.status,BattleCore.face(m,f)]),previous=battleFighterViewCache.get(key);
+  if(previous?.signature===signature)return previous.model;
+  const detail=m.references[f.slug],face=f.form===1?detail?.secondStatCard:detail?.statCard,summary=BattleCardSummary.describe(m,f);
+  const model={fighter:f,character:characters.get(f.slug),readonly:m.status!=='active',plan:BattleCore.statusPlan(m,f),immunities:PowerPhase.immunities(m,f),forms:detail?.secondStatCard?[[0,detail.statCard],[1,detail.secondStatCard]].map(([value,c])=>({value:String(value),label:c.frontSide?.nameOverride||(value===0?'Основная':'Другая')})):[],reverse:face?.backSide?.type==='healthy'&&Number(face.backSide.stamina)>0?['front','back'].map(value=>({value,label:face[value+'Side']?.nameOverride||(value==='front'?'Основная':'Обратная')})):[],summary:summary?{...summary,abilities:summary.abilities.map(a=>({...a,bodyMarkup:a.kind==='attack'?(a.steps?.length?'<ul class="fighter-attack-rules">'+a.steps.map(text=>'<li>'+MCPCardRenderer.rule(text)+'</li>').join('')+'</ul>':''):a.body?'<p>'+MCPCardRenderer.rule(a.body)+'</p>':fighterKeywordMarkup(a.name)}))}:null};
+  battleFighterViewCache.set(key,{signature,model});if(battleFighterViewCache.size>100)battleFighterViewCache.delete(battleFighterViewCache.keys().next().value);return model;
 }
 function renderBattle(){
   if(screen!=='battle')return;
   const focused=typeof document!=='undefined'?document.activeElement:null;
   const editing=focused&&['battle-name','battle-threat'].includes(focused.id)?{id:focused.id,value:focused.value,start:focused.selectionStart,end:focused.selectionEnd}:null;
-  const m=currentMatch(),html=battleView==='home'||!m?battleHome():battleView==='map'?renderBattleMap(m):m.status==='preparing'?battleSetup(m):battlePlay(m);
-  if(m&&m.status!=='preparing'&&battleView!=='home'){
-    const template=document.createElement('template');template.innerHTML=html;patchBattleDOM($('#battle-screen'),template.content);
-  }else $('#battle-screen').innerHTML=html;
-  if(editing){const input=document.getElementById(editing.id);if(input){input.value=editing.value;input.focus();if(editing.start!==null)input.setSelectionRange(editing.start,editing.end);}}
+  const m=currentMatch();
+  if(battleView==='home'||!m){
+    const tile=match=>({match,portraits:match.mine.fighters.slice(0,6).map(f=>characters.get(f.slug))});
+    const matches=battleStore.matches.filter(match=>!window.NetworkBattle?.isPeer?.(match.id)).slice().sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+    MCPReact.view($('#battle-screen'),'BattleHome',{pending:matches.filter(m=>m.status!=='finished').map(tile),history:matches.filter(m=>m.status==='finished').map(tile),networkMarkup:window.Account?.enabled||window.NetworkBattle?.available?.()?NetworkBattle.home():'',readError:battleReadError});
+  }else if(battleView==='map')MCPReact.html($('#battle-screen'),renderBattleMap(m));
+  else if(m.status==='preparing')MCPReact.html($('#battle-screen'),battleSetup(m));
+  else MCPReact.view($('#battle-screen'),'BattlePlay',{match:m,teamSide:battleTeam,ownSide:window.NetworkBattle?.ownSide()||'mine',labels:{mine:teamLabel('mine'),opponent:teamLabel('opponent')},network:!!window.NetworkBattle?.active(),networkMarkup:window.NetworkBattle?.active()?NetworkBattle.header():'',fighters:m[battleTeam].fighters.map(f=>battleFighterViewModel(m,f)),tacticsMarkup:tacticsList(m[battleTeam],battleTeam,true,m.status==='finished'),canUndo:battleCanUndo(m)});
+
+  if(editing){const input=document.getElementById(editing.id);if(input){input.value=editing.value;input.focus({preventScroll:true});if(editing.start!==null)input.setSelectionRange(editing.start,editing.end);}}
 }
 async function battleDetail(slug){
   if(cards.has(slug))return cards.get(slug);
@@ -226,10 +173,10 @@ function renderBattlePicker(){
   if(p.mission)rows=rows.filter(c=>c.type===(p.mission==='secure'?'Secure':'Extraction'));
   rows=rows.filter(c=>searchWords(p.query).every(q=>searchWords(c.name+' '+(c.alterEgo||'')).some(w=>w.startsWith(q)))&&(!p.affiliation||(p.kind==='characters'?c.affiliations.some(a=>a.name===p.affiliation):c.affiliation?.name===p.affiliation))&&(!p.owned||isOwned(c.slug))&&(!p.available||['legal','restricted'].includes(c.standardTimelineStatus)));
   const title=p.mission?`Выбрать ${p.mission==='secure'?'Secure':'Extract'}`:teamLabel(p.side)==='Мои'?'Из моего ростера':'Бойцы и карты противника';
-  $('#battle-picker-content').innerHTML=`<div class="dialog-heading"><div><h2>${title}</h2><p>${p.mission?'Укажите реальную миссию партии. Можно выбрать карту любого игрока.':'Отмечайте несколько позиций подряд. Состав сохраняется сразу.'}</p></div><button class="quiet close" data-bt="close-picker" aria-label="Закрыть выбор для партии">×</button></div>${!p.mission?`<div class="editor-tabs">${[['characters','Персонажи'],['tactics','Тактики']].map(([id,label])=>`<button data-bt="picker-tab" data-kind="${id}" class="${p.kind===id?'selected':''}">${label}</button>`).join('')}</div>`:''}<div class="picker-tools"><input id="battle-picker-search" class="picker-search" type="search" placeholder="Поиск по началу слова…" aria-label="Поиск для партии" value="${esc(p.query)}"><div class="picker-filters">${p.kind!=='crises'?`<select id="battle-picker-aff" aria-label="Аффилиация для партии">${affOptions(p.affiliation,'Все аффилиации')}</select>`:''}${p.kind==='characters'?`<label class="check"><input id="battle-picker-owned" type="checkbox" ${p.owned?'checked':''}>Есть у меня</label>`:`<label class="check"><input id="battle-picker-available" type="checkbox" ${p.available?'checked':''}>Доступные в Standard</label>`}</div></div><div class="picker-summary"><span>${rows.length} найдено</span><span>${p.mission?'':`Threat ${matchThreat(m[p.side])} / ${m.threat} · тактики ${m[p.side].tactics.length} / 5`}</span></div><div class="picker-results">${rows.map(c=>{
+  MCPReact.html($('#battle-picker-content'),`<div class="dialog-heading"><div><h2>${title}</h2><p>${p.mission?'Укажите реальную миссию партии. Можно выбрать карту любого игрока.':'Отмечайте несколько позиций подряд. Состав сохраняется сразу.'}</p></div><button class="quiet close" data-bt="close-picker" aria-label="Закрыть выбор для партии">×</button></div>${!p.mission?`<div class="editor-tabs">${[['characters','Персонажи'],['tactics','Тактики']].map(([id,label])=>`<button data-bt="picker-tab" data-kind="${id}" class="${p.kind===id?'selected':''}">${label}</button>`).join('')}</div>`:''}<div class="picker-tools"><input id="battle-picker-search" class="picker-search" type="search" placeholder="Поиск по началу слова…" aria-label="Поиск для партии" value="${esc(p.query)}"><div class="picker-filters">${p.kind!=='crises'?`<select id="battle-picker-aff" aria-label="Аффилиация для партии">${affOptions(p.affiliation,'Все аффилиации')}</select>`:''}${p.kind==='characters'?`<label class="check"><input id="battle-picker-owned" type="checkbox" ${p.owned?'checked':''}>Есть у меня</label>`:`<label class="check"><input id="battle-picker-available" type="checkbox" ${p.available?'checked':''}>Доступные в Standard</label>`}</div></div><div class="picker-summary"><span>${rows.length} найдено</span><span>${p.mission?'':`Threat ${matchThreat(m[p.side])} / ${m.threat} · тактики ${m[p.side].tactics.length} / 5`}</span></div><div class="picker-results">${rows.map(c=>{
     const checked=p.mission?m[p.mission]?.slug===c.slug:p.kind==='characters'?m[p.side].fighters.some(f=>f.slug===c.slug):m[p.side].tactics.some(t=>t.slug===c.slug);
     return `<div class="picker-result ${checked?'chosen':''}"><label class="check picker-check"><input type="${p.mission?'radio':'checkbox'}" name="battle-mission" data-battle-pick="${esc(c.slug)}" ${checked?'checked':''} ${battleBusy?'disabled':''}>${p.kind==='characters'?avatar(c):`<span class="card-symbol">${p.kind==='tactics'?'TT':p.mission==='secure'?'S':'E'}</span>`}<span><strong>${esc(c.name)}</strong><small>${p.kind==='characters'?`${esc(c.alterEgo)} · Threat ${c.threatLevel} · ${isOwned(c.slug)?'Есть у меня':'Нет в коллекции'}`:p.kind==='tactics'?esc(c.affiliation?.name||'Без аффилиации'): `Threat ${c.threatLevel} · карта ${esc(c.setup||'—')}`}</small></span></label><button class="quiet" data-bt="picker-card" data-slug="${esc(c.slug)}" aria-label="Посмотреть ${esc(c.name)}">↗</button></div>`;
-  }).join('')||`<div class="empty"><p>${p.side==='mine'&&!p.query?'В ростере нет подходящих позиций. Добавьте их в редакторе ростера перед подготовкой новой партии.':'Ничего не найдено. Измените запрос или фильтры.'}</p></div>`}</div><div class="picker-footer"><span>${battleBusy?'Загружаем карту…':'Выбор сохраняется в этой партии.'}</span><button class="primary" data-bt="close-picker" ${battleBusy?'disabled':''}>Готово</button></div>`;
+  }).join('')||`<div class="empty"><p>${p.side==='mine'&&!p.query?'В ростере нет подходящих позиций. Добавьте их в редакторе ростера перед подготовкой новой партии.':'Ничего не найдено. Измените запрос или фильтры.'}</p></div>`}</div><div class="picker-footer"><span>${battleBusy?'Загружаем карту…':'Выбор сохраняется в этой партии.'}</span><button class="primary" data-bt="close-picker" ${battleBusy?'disabled':''}>Готово</button></div>`);
 }
 async function pickForBattle(slug,include){
   const p={...battlePicker},id=battleMatchId;if(!p||!currentMatch())return;
@@ -300,9 +247,9 @@ function renderBattleFighterCard(){
   const state=BattleCharacterState.describe(m,f),live=context.form===f.form&&context.side===f.face;
   const side=m.mine.fighters.some(item=>item.id===f.id)?'mine':'opponent';
   const html=`<div class="dialog-heading battle-character-heading"><div><h2>${esc(f.name)}</h2><p>${esc(f.alterEgo)} · ${esc(teamLabel(side))}</p></div><div class="battle-card-header-controls" data-card-view="battle">${statCardControlsMarkup({slug:f.slug,detail:m.references[f.slug],form:context.form,side:context.side})}</div><button class="quiet close" data-bt="close-dialog" aria-label="Закрыть окно партии">×</button></div>${battleFighterStatusMarkup(m,f,state)}<div class="battle-character-scroll"><div class="battle-character-view" data-fighter="${esc(f.id)}">${!live?'<div class="battle-card-preview-note"><span>Просмотр другой стороны или формы</span><button type="button" data-bt="fighter-current">К текущей карте</button></div>':''}${statCardViewerMarkup('battle',f.slug,m.references[f.slug],context.form,context.side,live?state:null,true)}<p class="stat-card-view-note">${live?'Красным — изменённые HP, характеристики и стоимость. Наведи на значение, чтобы увидеть причину.':'Здесь показаны печатные значения выбранной карты.'} Переворот для просмотра не меняет бойца.</p><div class="source-line"><a href="${esc(characters.get(f.slug).sourceUrl)}" target="_blank" rel="noopener">Карточка на Jarvis ↗</a></div></div></div>${battleFighterPortraits(m,f.id)}`;
-  const template=document.createElement('template');template.innerHTML=html;
+
   dialog.classList.add('battle-character-dialog');
-  patchBattleDOM(root,template.content);
+  MCPReact.html(root,html);
   if(!dialog.open)dialog.showModal();
   fitNativeCards(root);
   root.querySelector('.battle-character-scroll').scrollTop=scrollTop;
@@ -418,7 +365,7 @@ document.addEventListener('input',event=>{
   if(el.id==='battle-picker-search'){battlePicker.query=el.value;retainBattlePicker(el);}
   else if(el.id==='battle-threat'&&m?.status==='preparing'){
     const value=Number(el.value);
-    if(Number.isInteger(value)&&value>=1&&value<=99){editMatch('Лимит Threat изменён',next=>next.threat=value);$('#battle-threat').focus();}
+    if(Number.isInteger(value)&&value>=1&&value<=99&&value!==m.threat)editMatch('Лимит Threat изменён',next=>next.threat=value);
   }
   else if(m&&m.status==='preparing'&&['battle-name','battle-opponent-name'].includes(el.id)){
     const value=el.value;if(window.NetworkBattle?.active())return;
@@ -427,11 +374,11 @@ document.addEventListener('input',event=>{
 });
 document.addEventListener('change',async event=>{
   const el=event.target,m=currentMatch();
-  if(el.id==='battle-name'&&m?.status==='preparing'&&window.NetworkBattle?.active()){const value=el.value;editMatch('Название партии изменено',next=>next.name=value);}
+  if(el.id==='battle-name'&&m?.status==='preparing'&&window.NetworkBattle?.active()){const value=el.value;if(value!==m.name)editMatch('Название партии изменено',next=>next.name=value);}
   else if(el.id==='power-repeat')$('[data-bt="confirm-power"]').disabled=!el.checked;
   else if(el.id==='round-power')$('#round-power-preview').hidden=!el.checked;
   else if(el.dataset.battlePick)await pickForBattle(el.dataset.battlePick,el.checked);
-  else if(el.id==='battle-threat'){const value=Number(el.value);if(!Number.isInteger(value)||value<1||value>99){toast('Threat должен быть целым числом от 1 до 99.');renderBattle();}else editMatch('Лимит Threat изменён',next=>next.threat=value);}
+  else if(el.id==='battle-threat'){const value=Number(el.value);if(!Number.isInteger(value)||value<1||value>99){toast('Threat должен быть целым числом от 1 до 99.');renderBattle();}else if(value!==m.threat)editMatch('Лимит Threat изменён',next=>next.threat=value);}
   else if(el.dataset.battleFighterForm||el.dataset.battleFighterFace){
     const id=el.dataset.battleFighterForm||el.dataset.battleFighterFace,f=currentFighter(id);if(!f)return;
     const form=el.dataset.battleFighterForm?Number(el.value):null,selectedFace=el.dataset.battleFighterFace?el.value:null;
