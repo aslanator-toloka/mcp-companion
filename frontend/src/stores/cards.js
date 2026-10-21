@@ -4,10 +4,12 @@ import {
   observableRef,
   runInAction,
 } from "mobx";
+import { ruleReference } from "../rule-references.js";
 export class CardStore {
   layers = observable.map({}, { deep: false });
   game = null;
   condition = null;
+  reference = null;
   metadata = null;
   constructor(storage) {
     this.storage = storage;
@@ -57,5 +59,11 @@ export class CardStore {
   }
   closeCondition() {
     this.condition = null;
+  }
+  showReference(id) {
+    if (ruleReference(id)) this.reference = id;
+  }
+  closeReference() {
+    this.reference = null;
   }
 }

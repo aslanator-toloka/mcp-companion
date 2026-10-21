@@ -29,6 +29,7 @@ const overlayKeys = [
   "game",
   "game-side",
   "condition",
+  "reference",
   "data",
   "membership",
   "dialog",
@@ -204,6 +205,7 @@ export function createRoutes(s) {
       put("game-side", cards.game.side, "front");
     }
     put("condition", cards.condition);
+    put("reference", cards.reference);
     if (ui.dataDialog) put("data", true);
     if (peer.dialog && peer.dialog !== "loading")
       put("connect", peer.dialog === "choose" ? peer.form.mode : peer.dialog);
@@ -255,6 +257,7 @@ export function createRoutes(s) {
       map.setField("renaming", false);
       cards.closeGame();
       cards.closeCondition();
+      cards.closeReference();
       purchases.select(null);
       peer.close();
       ui.setMembership(false);
@@ -499,6 +502,7 @@ export function createRoutes(s) {
         }
       }
       if (p.has("condition")) cards.showCondition(p.get("condition"));
+      if (p.has("reference")) cards.showReference(p.get("reference"));
       if (bool(p.get("data"))) ui.setDataDialog("main");
       const connect = p.get("connect");
       if (["create", "join"].includes(connect))

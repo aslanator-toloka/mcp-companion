@@ -43,6 +43,7 @@ const closeTransient = () => {
   rosters.closeDialog();
   cardViews.closeGame();
   cardViews.closeCondition();
+  cardViews.closeReference();
   battle.closeDialog();
   battle.closePicker();
 };

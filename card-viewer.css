@@ -66,3 +66,15 @@
 .sc-name-styled span{display:block}.sc-card .sc-identity h3.sc-name-noir{font-family:CardAgency,'Arial Narrow',sans-serif;font-weight:700;letter-spacing:7px;text-shadow:2px 2px 0 #7c2535;transform:skew(-5deg);font-size:42px;line-height:38px}.sc-name-noir span:first-child:not(:last-child){font-size:16px;line-height:16px;letter-spacing:5px;text-shadow:none}.sc-card .sc-identity h3.sc-name-comic{font-style:italic;font-weight:bold;text-shadow:2px 2px #ad303b}
 .sc-card:has(.sc-skin-background) .sc-credit{color:#f3ead8;text-shadow:0 1px 2px #000}
 .stat-card-controls{align-items:center}
+
+/* Shared help for token artwork, annotations, map references and grunt cards. */
+.sc-reference-dialog{border:1px solid #cbd5e1;border-radius:16px;padding:18px;background:#fff;color:#23364f;width:min(380px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;box-sizing:border-box;--gc-accent:#56708f}
+.sc-reference-dialog::backdrop{background:#000b}
+.sc-reference-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.sc-reference-heading h2{font:700 20px/1.25 system-ui,sans-serif;margin:0;color:inherit}
+.sc-reference-heading>button{flex:none;width:36px;height:36px;padding:0;font-size:25px;line-height:1;border-radius:8px}
+.sc-reference-token{display:block;margin:12px auto;max-width:100%;height:auto}
+.sc-reference-note{font:16px/1.5 system-ui,sans-serif;overflow-wrap:anywhere}
+.sc-reference-character{width:min(900px,calc(100vw - 24px));padding:12px}
+.sc-reference-character .stat-card-viewer{margin:0}
+.sc-reference-dialog .gc-map{max-width:100%;height:auto}

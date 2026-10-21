@@ -4,10 +4,12 @@ import React, {
   useRef,
   useEffect,
   useState,
+  useMemo,
 } from "react";
 import { observer } from "mobx-react-lite";
 import { cardViews, catalog } from "./stores/index.js";
 import { fitNativeCards, fitNativeGameCards } from "./card-layout.js";
+import { annotationReference, ruleReference } from "./rule-references.js";
 const labels = {
   stamina: "Stamina",
   speed: "Speed",
@@ -90,7 +92,9 @@ export function Rule({ text, delimiter = "|", depth = 0 }) {
               {nested(part.slice(end + 1))}
             </ConditionReference>
           ) : (
-            <span className="sc-reference">{nested(part.slice(end + 1))}</span>
+            <RuleReference reference={"character:" + part.slice(1, end)}>
+              {nested(part.slice(end + 1))}
+            </RuleReference>
           );
       } else if (part[0] === "<") {
         const end = part.indexOf(">");
@@ -98,12 +102,56 @@ export function Rule({ text, delimiter = "|", depth = 0 }) {
           end < 0 ? (
             part
           ) : (
-            <span className="sc-reference">{nested(part.slice(end + 1))}</span>
+            <RuleReference reference={"token:" + part.slice(1, end)}>
+              {nested(part.slice(end + 1))}
+            </RuleReference>
           );
+      } else if (part[0] === "$") {
+        const match = part.match(/^\$([A-Z])-(.+)$/);
+        content = match ? (
+          <RuleReference reference={"map:" + match[1]}>
+            {nested(match[2])}
+          </RuleReference>
+        ) : (
+          part
+        );
+      } else if (part[0] === "=") {
+        const match = part.match(/^=([^=]+)=([^=]+)=([\s\S]+)$/);
+        const key =
+          match && annotationReference(match[2], match[3].replaceAll("&", "|"));
+        content = match ? (
+          <RuleReference reference={key ? "note:" + key : null}>
+            {nested(match[1])}
+          </RuleReference>
+        ) : (
+          part
+        );
       } else content = delimiter + part + delimiter;
       return <React.Fragment key={i}>{content}</React.Fragment>;
     });
 }
+export const RuleReference = observer(function RuleReference({
+  reference,
+  children,
+}) {
+  if (!ruleReference(reference)) return <span>{children}</span>;
+  return (
+    <button
+      type="button"
+      className="sc-condition-reference sc-rule-reference"
+      data-rule-reference={reference}
+      aria-haspopup="dialog"
+      aria-controls="sc-reference-dialog"
+      aria-expanded={cardViews.reference === reference}
+      onClick={(event) => {
+        event.stopPropagation();
+        cardViews.showReference(reference);
+      }}
+    >
+      {children}
+    </button>
+  );
+});
 export const ConditionReference = observer(function ConditionReference({
   condition,
   children,
@@ -1174,6 +1222,92 @@ export const ConditionModal = observer(function ConditionModal() {
             <Rule text={item.body} />
           </p>
         </div>
+      )}
+    </CardModal>
+  );
+});
+const ReferencedCharacter = observer(function ReferencedCharacter({ slug }) {
+  const [error, setError] = useState(""),
+    [attempt, retry] = useState(0);
+  const detail = catalog.details.get(slug);
+  const view = useMemo(
+    () => ({ key: "reference-" + slug, slug, detail, form: 0, side: "front" }),
+    [slug, detail],
+  );
+  useEffect(() => {
+    let active = true;
+    setError("");
+    catalog.detail(slug).catch((e) => {
+      if (active) setError(e.message);
+    });
+    return () => {
+      active = false;
+    };
+  }, [slug, attempt]);
+  if (error)
+    return (
+      <p role="alert">
+        {error} <button onClick={() => retry(attempt + 1)}>Повторить</button>
+      </p>
+    );
+  return detail ? (
+    <StatSurface view={view} />
+  ) : (
+    <p role="status">Загружаем карту…</p>
+  );
+});
+export const RuleReferenceModal = observer(function RuleReferenceModal() {
+  const item = ruleReference(cardViews.reference);
+  const name =
+    item?.type === "character"
+      ? catalog.byId.get(item.key)?.name || item.key
+      : item?.name;
+  return (
+    <CardModal
+      id="sc-reference-dialog"
+      className={
+        "sc-reference-dialog" +
+        (item?.type === "character" ? " sc-reference-character" : "")
+      }
+      labelledBy="sc-reference-title"
+      open={!!item}
+      onClose={cardViews.closeReference}
+    >
+      {item && (
+        <>
+          <header className="sc-reference-heading">
+            <h2 id="sc-reference-title">{name}</h2>
+            <button
+              type="button"
+              aria-label="Закрыть пояснение"
+              onClick={cardViews.closeReference}
+            >
+              ×
+            </button>
+          </header>
+          {item.type === "token" && item.src && (
+            <img
+              className="sc-reference-token"
+              src={item.src}
+              alt={name}
+              width={item.double ? 320 : 160}
+            />
+          )}
+          {item.body && (
+            <div className="sc-reference-note">
+              <Rule text={item.body} />
+            </div>
+          )}
+          {item.type === "map" && (
+            <CrisisDiagram
+              card={{ setup: item.key }}
+              data={cardViews.metadata?.game || {}}
+            />
+          )}
+          {item.type === "character" && (
+            <ReferencedCharacter key={item.key} slug={item.key} />
+          )}
+        </>
       )}
     </CardModal>
   );

@@ -1,0 +1,685 @@
+{
+  "source": "https://www.jarvis-protocol.com",
+  "bundle": "/assets/application.06a98b62492da1e4dd6d.js",
+  "tokens": {
+    "ambush": {
+      "name": "Ambush",
+      "src": "assets/rule-tokens/ambush.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/6921a0af77207505c4e0.png",
+      "body": null,
+      "double": false
+    },
+    "astral_incursion": {
+      "name": "Astral Incursion",
+      "src": "assets/rule-tokens/astral_incursion.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/5a8775918f64a7cb1162.png",
+      "body": null,
+      "double": false
+    },
+    "big_dumb_hero": {
+      "name": "Big Dumb Hero",
+      "src": "assets/rule-tokens/big_dumb_hero.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/9ff64a0c9b117e0d780a.png",
+      "body": null,
+      "double": false
+    },
+    "binary_form": {
+      "name": "Binary Form",
+      "src": "assets/rule-tokens/binary_form.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/c171b8327f1fb2e17bf1.png",
+      "body": null,
+      "double": false
+    },
+    "black_bifrost": {
+      "name": "Black Bifrost",
+      "src": "assets/rule-tokens/black_bifrost.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d2ccd55d70dc11bf8961.png",
+      "body": null,
+      "double": false
+    },
+    "bounty": {
+      "name": "Bounty",
+      "src": "assets/rule-tokens/bounty.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/a3af7d14d112cb34cf28.png",
+      "body": null,
+      "double": false
+    },
+    "brother_daniel": {
+      "name": "Brother Daniel",
+      "src": "assets/rule-tokens/brother_daniel.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/cefc5c4332b9017f6896.png",
+      "body": null,
+      "double": false
+    },
+    "camera": {
+      "name": "Camera",
+      "src": "assets/rule-tokens/camera.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/226e6f4d8097f38b7392.png",
+      "body": null,
+      "double": false
+    },
+    "captured_soul": {
+      "name": "Captured Soul",
+      "src": "assets/rule-tokens/captured_soul.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/ddf363146b2779b1566a.png",
+      "body": null,
+      "double": false
+    },
+    "captured_soul_living_mummy": {
+      "name": "Captured Soul Living Mummy",
+      "src": "assets/rule-tokens/captured_soul_living_mummy.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/c95738e50db950f927e5.png",
+      "body": null,
+      "double": false
+    },
+    "celestial_hammer": {
+      "name": "Celestial Hammer",
+      "src": "assets/rule-tokens/celestial_hammer.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/3805410a8ff37795d224.png",
+      "body": null,
+      "double": false
+    },
+    "chimichanga": {
+      "name": "Chimichanga",
+      "src": "assets/rule-tokens/chimichanga.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/03ce8871e74e0022e96f.png",
+      "body": null,
+      "double": false
+    },
+    "citizen": {
+      "name": "Citizen",
+      "src": "assets/rule-tokens/citizen.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/c680503a4e1c909de005.png",
+      "body": null,
+      "double": false
+    },
+    "confession": {
+      "name": "Confession",
+      "src": "assets/rule-tokens/confession.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/68beaaa5785f418d24ee.png",
+      "body": null,
+      "double": false
+    },
+    "confidence": {
+      "name": "Confidence",
+      "src": "assets/rule-tokens/confidence.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/5694954cc3f35b77d6ec.png",
+      "body": null,
+      "double": false
+    },
+    "console": {
+      "name": "Console",
+      "src": "assets/rule-tokens/console.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/4c62a93998b940276624.png",
+      "body": null,
+      "double": false
+    },
+    "corner_the_beast": {
+      "name": "Corner The Beast",
+      "src": "assets/rule-tokens/corner_the_beast.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/61a28302691a005b144b.png",
+      "body": null,
+      "double": false
+    },
+    "cosmic_cube_fragment": {
+      "name": "Cosmic Cube Fragment",
+      "src": "assets/rule-tokens/cosmic_cube_fragment.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/bfeb77d9839eab21fbb5.png",
+      "body": null,
+      "double": false
+    },
+    "cosmic_vault": {
+      "name": "Cosmic Vault",
+      "src": "assets/rule-tokens/cosmic_vault.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/88f8a269667064d24fb0.png",
+      "body": null,
+      "double": false
+    },
+    "dark_past": {
+      "name": "Dark Past",
+      "src": "assets/rule-tokens/dark_past.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/6c48534c40294a1fb301.png",
+      "body": null,
+      "double": false
+    },
+    "dark_portal": {
+      "name": "Dark Portal",
+      "src": "assets/rule-tokens/dark_portal.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/c46b6bd51093f2080b3a.png",
+      "body": null,
+      "double": false
+    },
+    "demolition_charge": {
+      "name": "Demolition Charge",
+      "src": "assets/rule-tokens/demolition_charge.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/bb7c93818ddb56331fa5.png",
+      "body": null,
+      "double": false
+    },
+    "devils_deal": {
+      "name": "Devils Deal",
+      "src": "assets/rule-tokens/devils_deal.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/b37beef0179004cedfed.png",
+      "body": null,
+      "double": false
+    },
+    "dossier": {
+      "name": "Dossier",
+      "src": "assets/rule-tokens/dossier.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/ad055d5bfa4cac703955.png",
+      "body": null,
+      "double": false
+    },
+    "electrostatic_pole": {
+      "name": "Electrostatic Pole",
+      "src": "assets/rule-tokens/electrostatic_pole.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/3880c62b45c457c7f871.png",
+      "body": null,
+      "double": false
+    },
+    "evac_point": {
+      "name": "Evac Point",
+      "src": "assets/rule-tokens/evac_point.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/a1ceab1e89c9b1ea2de9.png",
+      "body": null,
+      "double": false
+    },
+    "evidence": {
+      "name": "Evidence",
+      "src": "assets/rule-tokens/evidence.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/5e2f1d3045c35782c1b4.png",
+      "body": null,
+      "double": false
+    },
+    "experiment": {
+      "name": "Experiment",
+      "src": "assets/rule-tokens/experiment.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/ac5e7964de01feb4f800.png",
+      "body": null,
+      "double": false
+    },
+    "expert_tracker": {
+      "name": "Expert Tracker",
+      "src": "assets/rule-tokens/expert_tracker.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/751bb9e27403846e662c.png",
+      "body": null,
+      "double": false
+    },
+    "extract_asset": {
+      "name": "Extract Asset",
+      "src": "assets/rule-tokens/extract_asset.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/bc4598aeafcbdcce6ed2.png",
+      "body": null,
+      "double": false
+    },
+    "extract_civilian": {
+      "name": "Extract Civilian",
+      "src": "assets/rule-tokens/extract_civilian.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/fc1600bcbc6e303d863d.png",
+      "body": null,
+      "double": false
+    },
+    "extremis_console": {
+      "name": "Extremis Console",
+      "src": "assets/rule-tokens/extremis_console.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/7d86a8ec937f09c6d6e9.png",
+      "body": null,
+      "double": false
+    },
+    "flaming_portal": {
+      "name": "Flaming Portal",
+      "src": "assets/rule-tokens/flaming_portal.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/ae1ce1e874de19bc0604.png",
+      "body": null,
+      "double": false
+    },
+    "flare": {
+      "name": "Flare",
+      "src": "assets/rule-tokens/flare.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/115ad77f71d124cc44cb.png",
+      "body": null,
+      "double": false
+    },
+    "flare_sunspot": {
+      "name": "Flare Sunspot",
+      "src": "assets/rule-tokens/flare_sunspot.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/6bad46f0f129e2038c5a.png",
+      "body": null,
+      "double": false
+    },
+    "gadget": {
+      "name": "Gadget",
+      "src": "assets/rule-tokens/gadget.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d89538a9ed45250c0d76.png",
+      "body": null,
+      "double": false
+    },
+    "gamma_drain": {
+      "name": "Gamma Drain",
+      "src": "assets/rule-tokens/gamma_drain.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/860758a79e975b099d0b.png",
+      "body": null,
+      "double": false
+    },
+    "gamma_shelter": {
+      "name": "Gamma Shelter",
+      "src": "assets/rule-tokens/gamma_shelter.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/253555222b9a9612709b.png",
+      "body": null,
+      "double": false
+    },
+    "genetic_sample": {
+      "name": "Genetic Sample",
+      "src": "assets/rule-tokens/genetic_sample.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/3e9bc27161eddf69ff4e.png",
+      "body": null,
+      "double": false
+    },
+    "hardened_carapace": {
+      "name": "Hardened Carapace",
+      "src": "assets/rule-tokens/hardened_carapace.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d92acd18fc527d8c7e5c.png",
+      "body": null,
+      "double": false
+    },
+    "herb": {
+      "name": "Herb",
+      "src": "assets/rule-tokens/herb.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/c53b0faebf8a9a43bdd6.png",
+      "body": null,
+      "double": false
+    },
+    "herb-rival": {
+      "name": "Herb Rival",
+      "src": "assets/rule-tokens/herb-rival.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/6141e0f87307f0d0b03f.png",
+      "body": null,
+      "double": false
+    },
+    "immortality": {
+      "name": "Immortality",
+      "src": "assets/rule-tokens/immortality.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/a4e2e73c7e74d7a786ad.png",
+      "body": null,
+      "double": false
+    },
+    "inheritor_portal": {
+      "name": "Inheritor Portal",
+      "src": "assets/rule-tokens/inheritor_portal.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/664addacacaa905811ee.png",
+      "body": null,
+      "double": false
+    },
+    "inter_dimensional_bloodhound": {
+      "name": "Inter Dimensional Bloodhound",
+      "src": "assets/rule-tokens/inter_dimensional_bloodhound.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/292f607d32f7b88ede69.png",
+      "body": null,
+      "double": false
+    },
+    "jonathan": {
+      "name": "Jonathan",
+      "src": "assets/rule-tokens/jonathan.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/5233c5ef51a9facf493d.png",
+      "body": null,
+      "double": false
+    },
+    "kill_count": {
+      "name": "Kill Count",
+      "src": "assets/rule-tokens/kill_count.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/aeb9264c82119ab89b39.png",
+      "body": null,
+      "double": false
+    },
+    "legacy_cure": {
+      "name": "Legacy Cure",
+      "src": "assets/rule-tokens/legacy_cure.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/72ae584a5d1146a51877.png",
+      "body": null,
+      "double": false
+    },
+    "lmd": {
+      "name": "Lmd",
+      "src": "assets/rule-tokens/lmd.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/7da53eddebea70882064.png",
+      "body": null,
+      "double": true
+    },
+    "loaded": {
+      "name": "Loaded",
+      "src": "assets/rule-tokens/loaded.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/be1e3cd40ee7ef70a3f4.png",
+      "body": null,
+      "double": false
+    },
+    "magnetic_refraction": {
+      "name": "Magnetic Refraction",
+      "src": "assets/rule-tokens/magnetic_refraction.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/fd70098baba8efeecccf.png",
+      "body": null,
+      "double": false
+    },
+    "memory": {
+      "name": "Memory",
+      "src": "assets/rule-tokens/memory.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/cea0d74969e654e18d71.png",
+      "body": null,
+      "double": false
+    },
+    "mind_if_i_cut_in": {
+      "name": "Mind If I Cut In",
+      "src": "assets/rule-tokens/mind_if_i_cut_in.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/ae17a5655375924761a4.png",
+      "body": null,
+      "double": false
+    },
+    "mystic_portal": {
+      "name": "Mystic Portal",
+      "src": "assets/rule-tokens/mystic_portal.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/bba3987d88ddd3716d65.png",
+      "body": null,
+      "double": false
+    },
+    "mystic_ward": {
+      "name": "Mystic Ward",
+      "src": "assets/rule-tokens/mystic_ward.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d56cd93db43bffe0bfc6.png",
+      "body": null,
+      "double": false
+    },
+    "nanite": {
+      "name": "Nanite",
+      "src": "assets/rule-tokens/nanite.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/aea52d467035708efa9b.png",
+      "body": null,
+      "double": false
+    },
+    "obscuring_mist": {
+      "name": "Obscuring Mist",
+      "src": "assets/rule-tokens/obscuring_mist.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/c93ef75b85a46a9269a7.png",
+      "body": null,
+      "double": true
+    },
+    "obsession": {
+      "name": "Obsession",
+      "src": "assets/rule-tokens/obsession.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/11691d7a21e7ab9f447e.png",
+      "body": null,
+      "double": false
+    },
+    "origin_bomb": {
+      "name": "Origin Bomb",
+      "src": "assets/rule-tokens/origin_bomb.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/87c6730c91dc42abdd50.png",
+      "body": null,
+      "double": false
+    },
+    "phasing_double": {
+      "name": "Phasing",
+      "src": "assets/rule-tokens/phasing_double.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/e018f5f901b17af6663c.png",
+      "body": null,
+      "double": true
+    },
+    "phoenix": {
+      "name": "Phoenix",
+      "src": "assets/rule-tokens/phoenix.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/5b9fd2cb12d4857dbd95.png",
+      "body": null,
+      "double": false
+    },
+    "plasmatic_cloaking": {
+      "name": "Plasmatic Cloaking",
+      "src": "assets/rule-tokens/plasmatic_cloaking.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d6ef80cb732d74d3bdba.png",
+      "body": null,
+      "double": false
+    },
+    "power_core_double": {
+      "name": "Power Core",
+      "src": "assets/rule-tokens/power_core_double.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/b406942527fdf6b09723.png",
+      "body": null,
+      "double": true
+    },
+    "projection": {
+      "name": "Projection",
+      "src": "assets/rule-tokens/projection.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/4ea6826e3e245174b3ff.png",
+      "body": null,
+      "double": false
+    },
+    "projection-king": {
+      "name": "Projection King",
+      "src": "assets/rule-tokens/projection-king.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/51adea55b05faa942040.png",
+      "body": null,
+      "double": false
+    },
+    "psychosis": {
+      "name": "Psychosis",
+      "src": "assets/rule-tokens/psychosis.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/792531edf9274f4708a9.png",
+      "body": null,
+      "double": false
+    },
+    "punishment": {
+      "name": "Punishment",
+      "src": "assets/rule-tokens/punishment.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/eaf58d34039848fff477.png",
+      "body": null,
+      "double": false
+    },
+    "researcher": {
+      "name": "Researcher",
+      "src": "assets/rule-tokens/researcher.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/aa1b31f636c3c3abbecd.png",
+      "body": null,
+      "double": false
+    },
+    "seance": {
+      "name": "Seance",
+      "src": "assets/rule-tokens/seance.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/3738500b466a7d257fdb.png",
+      "body": null,
+      "double": false
+    },
+    "secure_point_of_interest": {
+      "name": "Secure Point Of Interest",
+      "src": "assets/rule-tokens/secure_point_of_interest.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/a3bc132b00207012c96a.png",
+      "body": null,
+      "double": false
+    },
+    "secure_target_of_opportunity": {
+      "name": "Secure Target Of Opportunity",
+      "src": "assets/rule-tokens/secure_target_of_opportunity.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/7cd73226753cd92ff1a0.png",
+      "body": null,
+      "double": false
+    },
+    "senator": {
+      "name": "Senator",
+      "src": "assets/rule-tokens/senator.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/51bbc35b0a2822afd585.png",
+      "body": null,
+      "double": false
+    },
+    "serum_canister": {
+      "name": "Serum Canister",
+      "src": "assets/rule-tokens/serum_canister.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/0b62f2507aefc040e36f.png",
+      "body": null,
+      "double": false
+    },
+    "sinister_traps": {
+      "name": "Sinister Traps",
+      "src": "assets/rule-tokens/sinister_traps.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/de12263ad60f900d8ea2.png",
+      "body": null,
+      "double": false
+    },
+    "skrull_agent": {
+      "name": "Skrull Agent",
+      "src": "assets/rule-tokens/skrull_agent.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/2c47ea431ad50b02c317.png",
+      "body": null,
+      "double": false
+    },
+    "spellbook": {
+      "name": "Spellbook",
+      "src": "assets/rule-tokens/spellbook.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/1dbb1ce9c90cf92cd1be.png",
+      "body": null,
+      "double": false
+    },
+    "spider_infected_double": {
+      "name": "Spider Infected",
+      "src": "assets/rule-tokens/spider_infected_double.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/753e09fcb0073ffec9a5.png",
+      "body": null,
+      "double": true
+    },
+    "stash": {
+      "name": "Stash",
+      "src": "assets/rule-tokens/stash.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/838721a6cb59e5bcc334.png",
+      "body": null,
+      "double": false
+    },
+    "street_smarts": {
+      "name": "Street Smarts",
+      "src": "assets/rule-tokens/street_smarts.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/da4bee6baaccd92dc3bc.png",
+      "body": null,
+      "double": false
+    },
+    "target": {
+      "name": "Target",
+      "src": "assets/rule-tokens/target.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/32f1132e3ed58a9f3282.png",
+      "body": null,
+      "double": false
+    },
+    "terrigen_mist_cloud": {
+      "name": "Terrigen Mist Cloud",
+      "src": "assets/rule-tokens/terrigen_mist_cloud.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d3f143147519e7bf6479.png",
+      "body": null,
+      "double": false
+    },
+    "the_grand_illusion": {
+      "name": "The Grand Illusion",
+      "src": "assets/rule-tokens/the_grand_illusion.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/e5cf263feb6b45686b3d.png",
+      "body": null,
+      "double": false
+    },
+    "timestream": {
+      "name": "Timestream",
+      "src": "assets/rule-tokens/timestream.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/dcdc6947843644a4b1fc.png",
+      "body": null,
+      "double": false
+    },
+    "tippy-toe": {
+      "name": "Tippy Toe",
+      "src": "assets/rule-tokens/tippy-toe.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/af29fe277b95fb8fc7d7.png",
+      "body": null,
+      "double": false
+    },
+    "trap": {
+      "name": "Trap",
+      "src": "assets/rule-tokens/trap.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/42cfcb17c9255a6813d4.png",
+      "body": null,
+      "double": false
+    },
+    "vendetta": {
+      "name": "Vendetta",
+      "src": "assets/rule-tokens/vendetta.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/030c54e2c0bc74dac14a.png",
+      "body": null,
+      "double": false
+    },
+    "vengeance": {
+      "name": "Vengeance",
+      "src": "assets/rule-tokens/vengeance.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/6436485fbe7483fd7c6a.png",
+      "body": null,
+      "double": false
+    },
+    "vessel": {
+      "name": "Vessel",
+      "src": "assets/rule-tokens/vessel.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/32bdac129b9431aeac1a.png",
+      "body": null,
+      "double": false
+    },
+    "vibranium_shielding": {
+      "name": "Vibranium Shielding",
+      "src": "assets/rule-tokens/vibranium_shielding.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/83763f6e36ae04c1b167.png",
+      "body": null,
+      "double": false
+    },
+    "wand_of_watoomb": {
+      "name": "Wand Of Watoomb",
+      "src": "assets/rule-tokens/wand_of_watoomb.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/00b5b9c0dd4e033ac2e8.png",
+      "body": null,
+      "double": false
+    },
+    "weakness": {
+      "name": "Weakness",
+      "src": null,
+      "source": null,
+      "body": "After an attack against this character is resolved or this character resolves an attack, it may use this superpower. Place a Weakness token on or move an existing Weakness token to the attacking or defending enemy character. This character may only have 1 Weakness token in play at a time.",
+      "double": false
+    },
+    "web_barrier": {
+      "name": "Web Barrier",
+      "src": "assets/rule-tokens/web_barrier.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/b6adf8b555e68ceb09dc.png",
+      "body": null,
+      "double": false
+    },
+    "winging_it": {
+      "name": "Winging It",
+      "src": "assets/rule-tokens/winging_it.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/84724b3154cd1122cf3a.png",
+      "body": null,
+      "double": false
+    },
+    "witness": {
+      "name": "Witness",
+      "src": "assets/rule-tokens/witness.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/5abbc38146ad7772e064.png",
+      "body": null,
+      "double": false
+    },
+    "worthy_deeds": {
+      "name": "Worthy Deeds",
+      "src": "assets/rule-tokens/worthy_deeds.png",
+      "source": "https://www.jarvis-protocol.com/assets/images/d381bac1798fa3b6c5ec.png",
+      "body": null,
+      "double": false
+    }
+  },
+  "annotations": {
+    "b57a06b4dd08": {
+      "label": "A character cannot Interact with a Cell while it is holding a Prisoner.",
+      "name": "Upcoming addition",
+      "body": "The following should be added a the near future|\\||*Interact (Prisoner)|: Pick up this Prisoner|\\|Source: https://forums.atomicmassgames.com/topic/19378-jailbreak-leads-to-mass-mutant-escape"
+    }
+  },
+  "characters": [
+    "hand-ninjas-grunts",
+    "hydra-troopers-grunts",
+    "sand-construct-1-grunts",
+    "shield-agents-grunts",
+    "ultron-drones-grunts"
+  ]
+}

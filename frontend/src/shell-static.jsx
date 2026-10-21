@@ -8,7 +8,7 @@ import {
 import { BattleWorkspace } from "./battle.jsx";
 import { BattlePickerModal, BattleDialogModal } from "./battle-extra.jsx";
 import { PeerModal } from "./peer.jsx";
-import { GameCardModal, ConditionModal } from "./cards.jsx";
+import { GameCardModal, ConditionModal, RuleReferenceModal } from "./cards.jsx";
 import { TournamentPanel } from "./tournament-panel.jsx";
 import {
   RosterWorkspace,
@@ -91,6 +91,7 @@ export const StaticShell = memo(function StaticShell() {
       <BattlePickerModal />
       <Toast />
       <ConditionModal />
+      <RuleReferenceModal />
       <PeerModal />
     </>
   );
