@@ -39,6 +39,8 @@ test("buying a box inside a scrolled character card retains scroll, focus and th
     const dialog = page.locator("#character-dialog"),
       buy = dialog.locator('[data-purchased-code="CP170"]');
     await expect(buy).toBeVisible();
+    await expect(dialog.locator(".sc-card")).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
     await buy.scrollIntoViewIfNeeded();
     await page.evaluate(() => {
       window.__cardBefore = document.querySelector(
@@ -234,6 +236,8 @@ test("navigating to another character resets detail scroll while in-place collec
     .click();
   const dialog = page.locator("#character-dialog");
   const set = dialog.locator('[data-box-code="CP170"]');
+  await expect(dialog.locator(".sc-card")).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
   await set.scrollIntoViewIfNeeded();
   expect(await dialog.evaluate((el) => el.scrollTop)).toBeGreaterThan(100);
   await set.click();
@@ -243,5 +247,6 @@ test("navigating to another character resets detail scroll while in-place collec
     )
     .click();
   await expect(dialog.locator("h2").first()).toHaveText("Silk");
+  await expect(dialog.locator(".sc-card")).toBeVisible();
   await expect.poll(() => dialog.evaluate((el) => el.scrollTop)).toBe(0);
 });
