@@ -121,3 +121,8 @@
 #tournaments-screen .at-roster-character-name{display:flex;align-items:center;gap:5px}
 #tournaments-screen .at-roster-catalog-arrow{display:inline-grid;place-items:center;flex-shrink:0;min-width:28px;min-height:28px;margin:0;padding:2px;border:0;border-radius:6px;background:transparent;color:#56799e;font-size:17px;line-height:1;vertical-align:middle}
 #tournaments-screen .at-roster-catalog-arrow:hover{background:#e8f1ff;color:#2563eb}
+
+#tournaments-screen .at-country-field{display:flex;flex-direction:column;gap:5px;flex:1 1 210px;min-width:0;font-size:11px;color:var(--muted)}
+#tournaments-screen .at-country-field select{width:100%;min-width:0;min-height:44px;padding:8px 10px;border:1px solid #bfd2ea;border-radius:8px;background:#f5f9ff;color:var(--ink);font:inherit;font-size:12px}
+#tournaments-screen .at-country-description{flex:1 0 100%;font-size:11px;color:var(--muted);line-height:1.5;margin:0}
+@media(max-width:700px){#tournaments-screen .at-country-field{flex-basis:100%}}

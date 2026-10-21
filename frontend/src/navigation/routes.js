@@ -157,6 +157,8 @@ export function createRoutes(s) {
       put("player-sort", t.playerSort, "points");
       put("player-affiliation", t.playerAffiliation);
       put("country", t.playerCountry);
+      put("event-country", t.eventCountry);
+      put("roster-country", t.rosterCountry);
       put("player-limit", t.playerLimit, 60);
       put("affiliation-sort", t.affiliationSort, "points");
       put("dialog", t.dialog);
@@ -357,6 +359,8 @@ export function createRoutes(s) {
           ["playerSort", "player-sort", "points"],
           ["playerAffiliation", "player-affiliation", ""],
           ["playerCountry", "country", ""],
+          ["eventCountry", "event-country", ""],
+          ["rosterCountry", "roster-country", ""],
           ["affiliationSort", "affiliation-sort", "points"],
         ])
           t.setField(field, p.get(key) || fallback);

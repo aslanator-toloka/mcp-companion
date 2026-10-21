@@ -119,7 +119,7 @@ const ArchiveSection1 = observer(function ArchiveSection1() {
         </div>
         <p className={"at-affiliation-description"}>
           {
-            "Баллы по всем оценённым выступлениям архива, включая неудачные результаты. Среднее сглажено одним нулевым выступлением; при менее четырёх выступлениях — 0. Выбери одну или несколько аффилиаций: баллы персонажей и ростеры будут показаны для любой из выбранных."
+            "Баллы по оценённым выступлениям с учётом выбранных стран, включая неудачные результаты. Среднее сглажено одним нулевым выступлением; при менее четырёх выступлениях — 0. Выбери одну или несколько аффилиаций: баллы персонажей и ростеры будут показаны для любой из выбранных."
           }
         </p>
         <div className={"at-affiliation-tools"}>
@@ -206,6 +206,70 @@ const ArchiveSection1 = observer(function ArchiveSection1() {
     </section>
   );
 });
+const TournamentCountries = observer(function TournamentCountries() {
+  return (
+    <section
+      className="at-affiliation-bar at-country-bar"
+      aria-label="Фильтр турниров по странам"
+    >
+      <div className="at-affiliation-heading">
+        <strong>Страны</strong>
+        <small>Турниры и игроки</small>
+      </div>
+      <label className="at-country-field">
+        Страна турнира
+        <select
+          id="at-event-country"
+          aria-label="Страна проведения турнира"
+          value={t.eventCountry}
+          onChange={(e) => t.setField("eventCountry", e.target.value)}
+        >
+          <option value="">Все страны турниров</option>
+          {t.geography.options.map((c) => (
+            <option key={c.code} value={c.code}>
+              {c.name} · {c.count} турниров
+            </option>
+          ))}
+          <option value="__unknown__">
+            Страна не указана · {t.geography.unknownEvents} турниров
+          </option>
+        </select>
+      </label>
+      <label className="at-country-field">
+        Страна игрока
+        <select
+          id="at-roster-country"
+          aria-label="Страна игрока в турнирах"
+          value={t.rosterCountry}
+          onChange={(e) => t.setField("rosterCountry", e.target.value)}
+        >
+          <option value="">Все страны игроков</option>
+          {t.countries.map(([code, c]) => (
+            <option key={code} value={code}>
+              {c.name} · {c.count} игроков
+            </option>
+          ))}
+          <option value="__unknown__">
+            Страна не указана ·{" "}
+            {t.allPlayers.filter((p) => !p.countryCode).length} игроков
+          </option>
+        </select>
+      </label>
+      <button
+        type="button"
+        className="quiet"
+        disabled={!t.eventCountry && !t.rosterCountry}
+        onClick={t.clearCountries}
+      >
+        Сбросить страны
+      </button>
+      <p className="at-country-description">
+        Оба фильтра применяются вместе к ростерам, баллам персонажей и
+        аффилиаций, а также результатам в выборе игрока.
+      </p>
+    </section>
+  );
+});
 const ArchiveSection2 = observer(function ArchiveSection2() {
   return (
     <section
@@ -284,7 +348,7 @@ const ArchiveSection2 = observer(function ArchiveSection2() {
         <p
           id={"at-player-score-scope"}
           className={"at-affiliation-description"}
-        >{`Баллы и выступления: ${t.playerAffiliation ? (t.playerAffiliation === "__none__" ? "без указанной аффилиации" : t.playerAffiliation) : "весь архив игрока"}. Среднее сглажено; до 2 оценённых выступлений в этой выборке — 0.`}</p>
+        >{`Баллы и выступления: ${t.playerAffiliation ? (t.playerAffiliation === "__none__" ? "без указанной аффилиации" : t.playerAffiliation) : "все аффилиации игрока"}. Учитываются выбранные страны турниров и игроков. Среднее сглажено; до 2 оценённых выступлений в этой выборке — 0.`}</p>
         <label className={"at-search-box at-player-search"}>
           <input
             id={"at-player-search"}
@@ -695,6 +759,7 @@ export const TournamentPanel = observer(function TournamentPanel() {
     <>
       {" "}
       <ArchiveSection0 />
+      <TournamentCountries />
       <ArchiveSection1 />
       <ArchiveSection2 />
       <ArchiveSection3 />

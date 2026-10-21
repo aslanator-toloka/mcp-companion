@@ -1,4 +1,5 @@
 import { makeAutoObservable, observable, observableRef } from "mobx";
+import { tournamentGeography } from "../tournament-countries.js";
 export class TournamentStore {
   data = null;
   index = null;
@@ -20,6 +21,9 @@ export class TournamentStore {
   playerSort = "points";
   playerAffiliation = "";
   playerCountry = "";
+  eventCountry = "";
+  rosterCountry = "";
+  geography = null;
   playerLimit = 60;
   dialog = null;
   constructor(library, ui) {
@@ -32,6 +36,7 @@ export class TournamentStore {
         index: false,
         core: false,
         collectionCore: false,
+        geography: false,
         library: false,
         ui: false,
       },
@@ -42,11 +47,24 @@ export class TournamentStore {
     this.index = core.createIndex(data);
     this.core = core;
     this.collectionCore = collectionCore;
+    this.geography = tournamentGeography(data);
     this.data = data;
     this.applyRoute(new URLSearchParams(location.hash.slice(1)));
   }
   get allPlayers() {
     return this.data ? this.core.playerList(this.index, "", "name") : [];
+  }
+  get countryRows() {
+    if (!this.data) return [];
+    if (!this.eventCountry && !this.rosterCountry) return this.data.rosters;
+    return this.data.rosters.filter((r) =>
+      this.geography.matches(r, this.eventCountry, this.rosterCountry),
+    );
+  }
+  get scopedIndex() {
+    if (!this.data || (!this.eventCountry && !this.rosterCountry))
+      return this.index;
+    return this.core.createIndex({ ...this.data, rosters: this.countryRows });
   }
   get playersById() {
     return new Map(this.allPlayers.map((p) => [p.id, p]));
@@ -63,14 +81,14 @@ export class TournamentStore {
   }
   get affiliationRows() {
     return this.data
-      ? this.core.affiliationList(this.index, this.affiliationSort)
+      ? this.core.affiliationList(this.scopedIndex, this.affiliationSort)
       : [];
   }
   get scopedCharacters() {
     return this.data
       ? this.core.scopedCharacters(
           this.data,
-          this.index,
+          this.scopedIndex,
           [...this.affiliations],
           this.selectedPlayer,
         )
@@ -89,7 +107,7 @@ export class TournamentStore {
   get playerRows() {
     return this.data
       ? this.core.playerList(
-          this.index,
+          this.scopedIndex,
           this.playerQuery,
           this.playerSort,
           this.playerAffiliation,
@@ -119,13 +137,13 @@ export class TournamentStore {
   }
   get readyRows() {
     return this.data
-      ? this.data.rosters.filter((r) => this.availability(r).ready)
+      ? this.countryRows.filter((r) => this.availability(r).ready)
       : [];
   }
   get rosterRows() {
     if (!this.data) return [];
     const rows = this.core.rosterList(
-      this.index,
+      this.scopedIndex,
       this.collectionMode || this.playerMode ? null : this.selected,
       this.resultQuery,
       this.resultSort,
@@ -141,8 +159,8 @@ export class TournamentStore {
     const rows = this.collectionMode
       ? this.readyRows
       : this.playerMode
-        ? this.data.rosters
-        : this.index.byCharacter.get(this.selected) || [];
+        ? this.countryRows
+        : this.scopedIndex.byCharacter.get(this.selected) || [];
     return this.core.scopeRows(rows, [], this.selectedPlayer).length;
   }
   get overview() {
@@ -175,21 +193,27 @@ export class TournamentStore {
         ...common,
         mode: "player",
         stats: this.core.playerStats(
-          this.index,
+          this.scopedIndex,
           this.selectedPlayer,
           affiliations,
-        ),
+        ) || {
+          ...this.playersById.get(this.selectedPlayer),
+          count: 0,
+          resultsCount: 0,
+          events: 0,
+          ...this.core.scoreSummary([], this.core.playerMinAppearances),
+        },
         profileAffiliations: this.playersById.get(this.selectedPlayer)
           .affiliationCounts,
       };
     const scope = this.core.scopeRows(
-        this.data.rosters,
+        this.countryRows,
         affiliations,
         this.selectedPlayer,
       ),
       character = this.index.characters.get(this.selected),
       stats = this.core.statistics(
-        this.index,
+        this.scopedIndex,
         this.selected,
         scope.length,
         affiliations,
@@ -233,9 +257,35 @@ export class TournamentStore {
     };
   }
   setField(name, value) {
+    if (
+      name === "eventCountry" &&
+      value &&
+      value !== "__unknown__" &&
+      !this.geography?.options.some((c) => c.code === value)
+    )
+      value = "";
+    if (
+      name === "rosterCountry" &&
+      value &&
+      value !== "__unknown__" &&
+      !this.countries.some(([code]) => code === value)
+    )
+      value = "";
     this[name] = value;
     if (name.startsWith("player")) this.playerLimit = 60;
-    if (["resultQuery", "resultSort"].includes(name)) this.limit = 20;
+    if (
+      ["resultQuery", "resultSort", "eventCountry", "rosterCountry"].includes(
+        name,
+      )
+    )
+      this.limit = 20;
+    if (["eventCountry", "rosterCountry"].includes(name)) this.playerLimit = 60;
+  }
+  clearCountries() {
+    this.eventCountry = "";
+    this.rosterCountry = "";
+    this.limit = 20;
+    this.playerLimit = 60;
   }
   toggleAffiliation(name, include) {
     include ? this.affiliations.add(name) : this.affiliations.delete(name);
