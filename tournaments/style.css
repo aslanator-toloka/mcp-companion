@@ -116,3 +116,8 @@
 #tournaments-screen .at-player-dialog .at-affiliation-dialog-foot>span{min-width:0;overflow-wrap:anywhere}
 #tournaments-screen .at-player-dialog .at-affiliation-dialog-foot>button{flex-shrink:0}
 @media(max-height:650px){#tournaments-screen .at-player-dialog{overflow:auto}#tournaments-screen .at-player-dialog .at-player-sort-note{display:none}#tournaments-screen .at-player-dialog .at-affiliation-dialog-foot{position:sticky;bottom:0;background:white}}
+
+/* Direct catalog navigation beside names inside expanded tournament lists. */
+#tournaments-screen .at-roster-character-name{display:flex;align-items:center;gap:5px}
+#tournaments-screen .at-roster-catalog-arrow{display:inline-grid;place-items:center;flex-shrink:0;min-width:28px;min-height:28px;margin:0;padding:2px;border:0;border-radius:6px;background:transparent;color:#56799e;font-size:17px;line-height:1;vertical-align:middle}
+#tournaments-screen .at-roster-catalog-arrow:hover{background:#e8f1ff;color:#2563eb}
