@@ -51,7 +51,6 @@ const CharacterRow = observer(function CharacterRow({
       </button>
       <div className={"owned-control" + (owned ? " owned" : "")}>
         <OwnedCheckbox character={c} owned={owned} boxOwned={boxOwned} />
-        <ModelProgress character={c} compact />
       </div>
     </div>
   );

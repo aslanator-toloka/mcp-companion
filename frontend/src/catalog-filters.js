@@ -1,3 +1,4 @@
+import { MODEL_STAGES } from "./model-progress.js";
 // Pure local search. A block's predicates must match the same printed attack.
 export const CONDITIONS = [
   "bleed",
@@ -71,6 +72,7 @@ export const defaultFilters = () => ({
   timeline: "extended",
   hideUnreleased: false,
   missing: false,
+  hobbyStage: "",
   sort: "name",
   descending: false,
 });
@@ -119,6 +121,9 @@ export function normalizeFilters(value) {
     f[key] = Array.isArray(value[key])
       ? [...new Set(value[key].filter((v) => values.includes(v)))]
       : [];
+  f.hobbyStage = f.missing
+    ? ""
+    : choice(value.hobbyStage, ["unset", ...MODEL_STAGES.map(([key]) => key)]);
   f.timeline = choice(
     value.timeline,
     ["standard", "extended", "2024", "2025", "2026"],
@@ -281,6 +286,7 @@ export function matchesFilters(
     affiliation = "",
     threat = "",
     owned = false,
+    modelStage = "",
     onlyOwned = false,
     now = new Date(),
   } = {},
@@ -347,6 +353,8 @@ export function matchesFilters(
   )
     return false;
   if ((onlyOwned && !owned) || (f.missing && owned)) return false;
+  if (f.hobbyStage && (!owned || f.hobbyStage !== (modelStage || "unset")))
+    return false;
   if (!f.tags.every((t) => tagMatches(c.tags || [], t))) return false;
   const blocks = f.attacks.filter(activeAttack);
   if (

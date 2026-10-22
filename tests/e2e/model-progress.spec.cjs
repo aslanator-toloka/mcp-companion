@@ -31,7 +31,7 @@ async function seed(page, data) {
     { key, data },
   );
 }
-test("owned models can advance and go back through stages in list/detail; reload and JSON export retain the stage and roster", async ({
+test("owned models edit stages only in detail; reload and JSON export retain the stage and roster", async ({
   page,
 }) => {
   await seed(page, {
@@ -40,12 +40,13 @@ test("owned models can advance and go back through stages in list/detail; reload
     rosters: [{ id: "old", name: "Saved", characters: ["wong"] }],
   });
   await page.goto(origin + "#screen=mine");
-  const select = page.locator('#characters [data-model-progress="wong"]');
-  await expect(select).toHaveValue("");
-  await select.selectOption("assembled");
+  await expect(page.locator("#characters [data-model-progress]")).toHaveCount(
+    0,
+  );
   await page.locator('#characters .row-open[data-slug="wong"]').click();
   const detail = page.locator('#character-dialog [data-model-progress="wong"]');
-  await expect(detail).toHaveValue("assembled");
+  await expect(detail).toHaveValue("");
+  await detail.selectOption("assembled");
   await detail.selectOption("primed");
   await detail.selectOption("painted");
   await page.reload();
@@ -54,7 +55,9 @@ test("owned models can advance and go back through stages in list/detail; reload
   await page
     .getByRole("button", { name: "Закрыть карточку", exact: true })
     .click();
-  await expect(select).toHaveValue("primed");
+  await expect(page.locator("#characters [data-model-progress]")).toHaveCount(
+    0,
+  );
   await page
     .getByRole("button", { name: "Данные и экспорт", exact: true })
     .click();
@@ -77,32 +80,40 @@ test("each model in a bought box has independent progress, syncs to another tab 
   });
   await page.goto(origin + "#screen=purchases&tab=purchased&box=CP170");
   const box = page.locator("#box-set-dialog");
-  await expect(box.locator("[data-model-progress]")).toHaveCount(3);
+  await expect(box.locator("[data-model-progress]")).toHaveCount(0);
   const other = await page.context().newPage();
   await other.goto(origin + "#screen=mine");
   await expect(other.locator("#search")).toBeEnabled();
-  await box.locator('[data-model-progress="silk"]').selectOption("primed");
-  await box
-    .locator('[data-model-progress="spider-man-noir"]')
-    .selectOption("painted");
-  await box
-    .locator('[data-model-progress="spider-ham"]')
-    .selectOption("assembled");
+  for (const [slug, stage] of [
+    ["silk", "primed"],
+    ["spider-man-noir", "painted"],
+    ["spider-ham", "assembled"],
+  ]) {
+    await other.locator(`#characters .row-open[data-slug="${slug}"]`).click();
+    await other
+      .locator(`#character-dialog [data-model-progress="${slug}"]`)
+      .selectOption(stage);
+    await other
+      .getByRole("button", { name: "Закрыть карточку", exact: true })
+      .click();
+    await expect
+      .poll(() =>
+        page.evaluate((slug) => MCPStores.library.hobby.get(slug), slug),
+      )
+      .toBe(stage);
+  }
+  await expect(other.locator("#characters [data-model-progress]")).toHaveCount(
+    0,
+  );
+  await box.locator('[data-purchased-code="CP170"]').click();
+  await expect(other.locator("#characters .row-open")).toHaveCount(0);
+  await box.locator('[data-purchased-code="CP170"]').click();
+  await expect(other.locator("#characters .row-open")).toHaveCount(3);
+  await other.locator('#characters .row-open[data-slug="silk"]').click();
   await expect(
-    other.locator('#characters [data-model-progress="silk"]'),
+    other.locator('#character-dialog [data-model-progress="silk"]'),
   ).toHaveValue("primed");
-  await expect(
-    other.locator('#characters [data-model-progress="spider-man-noir"]'),
-  ).toHaveValue("painted");
-  await box.locator('[data-purchased-code="CP170"]').click();
   await expect(box.locator("[data-model-progress]")).toHaveCount(0);
-  await box.locator('[data-purchased-code="CP170"]').click();
-  await expect(box.locator('[data-model-progress="silk"]')).toHaveValue(
-    "primed",
-  );
-  await expect(box.locator('[data-model-progress="spider-ham"]')).toHaveValue(
-    "assembled",
-  );
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: "previews/model-progress-box-mobile.png" });
   expect(
@@ -122,7 +133,8 @@ test("failed writes roll the selector back and never lose the previous hobby pro
     rosters: [],
   });
   await page.goto(origin + "#screen=mine");
-  const select = page.locator('#characters [data-model-progress="wong"]');
+  await page.locator('#characters .row-open[data-slug="wong"]').click();
+  const select = page.locator('#character-dialog [data-model-progress="wong"]');
   await expect(select).toHaveValue("assembled");
   await page.evaluate(() => {
     const original = Storage.prototype.setItem;

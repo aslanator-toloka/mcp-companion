@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog, library, ui, actions } from "./stores/index.js";
+import { MODEL_STAGES } from "./model-progress.js";
+import { count } from "./common.jsx";
 import { CatalogList } from "./catalog.jsx";
 import { CatalogFilters } from "./catalog-filters.jsx";
 import { ConnectedPurchases, ConnectedBoxDetail } from "./purchases.jsx";
@@ -158,6 +160,25 @@ export const CatalogPanel = observer(function CatalogPanel() {
               ))}
             </select>
           </label>
+          <label>
+            Этап модели
+            <select
+              id="model-stage"
+              aria-label="Этап модели"
+              value={catalog.filters.hobbyStage}
+              onChange={(e) =>
+                catalog.setAdvanced("hobbyStage", e.target.value)
+              }
+            >
+              <option value="">Любой этап</option>
+              <option value="unset">Без отметки (есть у меня)</option>
+              {MODEL_STAGES.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="check only-owned">
             <input
               id="only-owned"
@@ -191,9 +212,7 @@ export const CatalogPanel = observer(function CatalogPanel() {
             ? "Каталог недоступен"
             : !ui.ready
               ? "Загружаем каталог…"
-              : catalog.onlyOwned
-                ? "Модели с отметкой «Есть у меня»"
-                : `${catalog.filtered.length} записей${catalog.filters.sort === "name" ? " · по алфавиту" : ""}`}
+              : `${count(catalog.filtered.length, "запись", "записи", "записей")}${catalog.onlyOwned ? " · есть у меня" : ""}${catalog.filters.sort === "name" ? " · по алфавиту" : ""}`}
         </span>
         <span className="column-note">
           Персонаж / версия <span>Threat</span>

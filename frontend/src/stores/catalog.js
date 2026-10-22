@@ -116,7 +116,11 @@ export class CatalogStore {
     if (this.filters.missing) this.onlyOwned = false;
   }
   setAdvanced(name, value) {
-    this.filters = normalizeFilters({ ...this.filters, [name]: value });
+    this.filters = normalizeFilters({
+      ...this.filters,
+      ...(name === "hobbyStage" && value ? { missing: false } : {}),
+      [name]: value,
+    });
     if (["minThreat", "maxThreat"].includes(name)) this.threat = "";
     if (name === "missing" && value) this.onlyOwned = false;
   }
@@ -209,8 +213,13 @@ export class CatalogStore {
           threat: this.threat,
           onlyOwned: this.onlyOwned,
           owned:
-            (this.onlyOwned || this.filters.missing) &&
+            (this.onlyOwned ||
+              this.filters.missing ||
+              this.filters.hobbyStage) &&
             this.library.owned.has(c.slug),
+          modelStage: this.filters.hobbyStage
+            ? this.library.hobby.get(c.slug) || ""
+            : "",
         }),
       ),
       this.filters,

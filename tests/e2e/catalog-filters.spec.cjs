@@ -226,6 +226,7 @@ test("missing collection mode excludes owned models and switches off owned-only 
   await ready(page);
   await page.locator("#only-owned").check();
   await expect(rows(page)).toHaveCount(1);
+  await expect(page.locator("#result")).toHaveText(/^1 запись(?: ·|$)/);
   const other = await open(page, "Другие параметры");
   await other.getByLabel("Только отсутствующие в коллекции").check();
   await expect(page.locator("#only-owned")).not.toBeChecked();
@@ -252,4 +253,108 @@ test("missing collection mode excludes owned models and switches off owned-only 
   await expect.poll(() => slugs(page)).toEqual(expected);
   await page.reload();
   await expect.poll(() => slugs(page)).toEqual(expected);
+});
+
+test("stage filters match only owned models; every filter shows the actual count, and history and detail edits stay in sync", async ({
+  page,
+}) => {
+  const owned = ["wong", "hulk", "silk", "spider-ham", "black-cat"];
+  await page.addInitScript((owned) => {
+    const key = "mcp-companion-catalog-v1";
+    if (!localStorage.getItem(key))
+      localStorage.setItem(
+        key,
+        JSON.stringify({
+          version: 1,
+          owned,
+          rosters: [],
+          hobbyProgress: {
+            wong: "painted",
+            hulk: "primed",
+            silk: "assembled",
+            "doctor-strange": "painted",
+          },
+        }),
+      );
+  }, owned);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(origin + "#screen=catalog");
+  await expect(page.locator("#search")).toBeEnabled();
+  await expect(page.locator("#characters [data-model-progress]")).toHaveCount(
+    0,
+  );
+  const stage = page.getByLabel("Этап модели", { exact: true });
+  for (const [value, ids] of [
+    ["assembled", ["silk"]],
+    ["primed", ["hulk"]],
+    ["painted", ["wong"]],
+    ["unset", ["black-cat", "spider-ham"]],
+  ]) {
+    await stage.selectOption(value);
+    await expect.poll(() => slugs(page)).toEqual(ids);
+    await expect(page.locator("#result")).toHaveText(
+      new RegExp("^" + ids.length + " "),
+    );
+  }
+  await page.locator("#only-owned").check();
+  await expect(page.locator("#result")).toHaveText(/^2 записи · есть у меня/);
+  await page.locator("#search").fill("Spider-Ham");
+  await expect(rows(page)).toHaveCount(1);
+  await expect(page.locator("#result")).toHaveText(/^1 запись/);
+  await page.locator("#threat").selectOption("4");
+  await expect(rows(page)).toHaveCount(0);
+  await expect(page.locator("#result")).toHaveText(/^0 записей/);
+  await page
+    .locator('#catalog-screen .catalog-tools [data-action="reset"]')
+    .click();
+  await expect(rows(page)).toHaveCount(characters.length);
+  await expect(stage).toHaveValue("");
+  await expect(page.locator("#result")).toHaveText(
+    new RegExp("^" + characters.length + " "),
+  );
+  await stage.selectOption("painted");
+  const saved = page.url();
+  await stage.selectOption("primed");
+  await page.goBack();
+  await expect(stage).toHaveValue("painted");
+  await expect.poll(() => slugs(page)).toEqual(["wong"]);
+  await page.goForward();
+  await expect(stage).toHaveValue("primed");
+  await page.goto(saved);
+  await page.reload();
+  await expect(stage).toHaveValue("painted");
+  await expect.poll(() => slugs(page)).toEqual(["wong"]);
+  await rows(page).first().click();
+  await page
+    .locator('#character-dialog [data-model-progress="wong"]')
+    .selectOption("primed");
+  await expect(page.locator("#result")).toHaveText(/^0 записей/);
+  await page
+    .getByRole("button", { name: "Закрыть карточку", exact: true })
+    .click();
+  await stage.selectOption("primed");
+  await expect(rows(page)).toHaveCount(2);
+  await expect(page.locator("#result")).toHaveText(/^2 записи/);
+  const advanced = page.locator(".catalog-advanced");
+  if (!(await advanced.evaluate((e) => e.open)))
+    await advanced.locator(":scope > summary").click();
+  const other = await open(page, "Другие параметры");
+  await other.getByLabel("Только отсутствующие в коллекции").check();
+  await expect(stage).toHaveValue("");
+  await expect(rows(page)).toHaveCount(characters.length - owned.length);
+  await expect(page.locator("#result")).toHaveText(
+    new RegExp("^" + (characters.length - owned.length) + " "),
+  );
+  await stage.selectOption("primed");
+  await expect(
+    other.getByLabel("Только отсутствующие в коллекции"),
+  ).not.toBeChecked();
+  await expect(rows(page)).toHaveCount(2);
+  await page.locator("#catalog-screen .catalog-tools").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "previews/catalog-hobby-filter-mobile.png" });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
 });

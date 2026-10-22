@@ -210,3 +210,27 @@ test("search keeps dotted and apostrophized names usable alongside tags", () => 
   assert(F.searchMatches(character({ name: "M.O.D.O.K." }), "modok"));
   assert(F.searchMatches(character({ name: "M‘Baku" }), "M'Baku"));
 });
+
+test("hobby stages filter owned models only, round-trip in URL filters and reject invalid stages", () => {
+  const c = character();
+  for (const stage of ["assembled", "primed", "painted", "unset"]) {
+    const f = F.normalizeFilters({ hobbyStage: stage });
+    assert.equal(f.hobbyStage, stage);
+    assert.equal(F.decodeFilters(F.encodeFilters(f)).hobbyStage, stage);
+    const modelStage = stage === "unset" ? "" : stage;
+    assert(F.matchesFilters(c, f, { owned: true, modelStage }));
+    assert.equal(F.matchesFilters(c, f, { owned: false, modelStage }), false);
+    assert.equal(
+      F.matchesFilters(c, f, {
+        owned: true,
+        modelStage: stage === "painted" ? "primed" : "painted",
+      }),
+      false,
+    );
+  }
+  assert.equal(F.normalizeFilters({ hobbyStage: "bad" }).hobbyStage, "");
+  assert.equal(
+    F.normalizeFilters({ missing: true, hobbyStage: "painted" }).hobbyStage,
+    "",
+  );
+});
