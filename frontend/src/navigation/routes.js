@@ -114,6 +114,16 @@ export function createRoutes(s) {
             : "new:") + rosters.draft.id,
         );
         put("tab", rosters.tab, "characters");
+        if (rosters.squads.open) {
+          const options = rosters.squadOptions;
+          put("squads", true);
+          put("squad-min", options.min, 5);
+          put("squad-from", options.from, 15);
+          put("squad-to", options.to, 20);
+          put("squad-threat", options.threat, 17);
+          put("squad-limit", options.limit, 30);
+          for (const slug of options.required) p.append("squad-required", slug);
+        }
         if (rosters.picker) {
           put("pick", rosters.picker.kind);
           for (const [field, key] of Object.entries(pickerFields))
@@ -308,6 +318,17 @@ export function createRoutes(s) {
             else ui.notify("Ростер больше не существует.");
           }
           if (rosters.draft) {
+            rosters.squads = {
+              open: bool(p.get("squads")),
+              min: positive(p.get("squad-min"), 5, 10),
+              from: positive(p.get("squad-from"), 15, 99),
+              to: positive(p.get("squad-to"), 20, 99),
+              threat: positive(p.get("squad-threat"), 17, 99),
+              limit: positive(p.get("squad-limit"), 30, 1024),
+              required: [...new Set(p.getAll("squad-required"))].filter(
+                (slug) => rosters.draft.characters.includes(slug),
+              ),
+            };
             rosters.setTab(
               one(
                 p.get("tab"),

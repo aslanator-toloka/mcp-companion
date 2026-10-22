@@ -9,6 +9,7 @@ import {
   battle,
 } from "./stores/index.js";
 import { cardStatus } from "./stores/rosters.js";
+import { RosterSquads } from "./roster-squads.jsx";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
 const Options = ({ names, empty }) => (
@@ -485,6 +486,7 @@ export const RosterEditor = observer(function RosterEditor({
           Extract <b>{extract}</b> / 5
         </span>
       </div>
+      <RosterSquads />
       <div className="editor-tabs" role="tablist" aria-label="Состав ростера">
         {[
           ["characters", "Персонажи"],

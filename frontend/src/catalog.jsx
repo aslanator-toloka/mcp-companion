@@ -4,6 +4,7 @@ import { catalog, library, actions } from "./stores/index.js";
 import React, { memo } from "react";
 import { Avatar, OwnedCheckbox } from "./common.jsx";
 import { CharacterBoxes } from "./purchases.jsx";
+import { ModelProgress } from "./model-progress.jsx";
 const CharacterRow = observer(function CharacterRow({
   character: c,
   owned,
@@ -50,6 +51,7 @@ const CharacterRow = observer(function CharacterRow({
       </button>
       <div className={"owned-control" + (owned ? " owned" : "")}>
         <OwnedCheckbox character={c} owned={owned} boxOwned={boxOwned} />
+        <ModelProgress character={c} compact />
       </div>
     </div>
   );
@@ -108,12 +110,15 @@ export function CharacterDetail({
               {c.isGrunt && <span className="tag">Grunt</span>}
             </div>
           </div>
-          <OwnedCheckbox
-            character={c}
-            owned={owned}
-            boxOwned={boxOwned}
-            detail
-          />
+          <div className="detail-collection-controls">
+            <OwnedCheckbox
+              character={c}
+              owned={owned}
+              boxOwned={boxOwned}
+              detail
+            />
+            <ModelProgress character={c} compact />
+          </div>
           <button
             className="quiet close"
             data-action="close-character"

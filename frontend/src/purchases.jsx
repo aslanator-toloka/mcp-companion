@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { library, purchases, catalog, actions } from "./stores/index.js";
 import React, { memo, useState } from "react";
 import { Avatar, CollectionStatus, Control } from "./common.jsx";
+import { ModelProgress } from "./model-progress.jsx";
 const summary = (set) =>
   (set.characters || [])
     .map((c) => c.name + (c.amount > 1 ? " ×" + c.amount : ""))
@@ -264,7 +265,7 @@ const BoxMember = observer(function BoxMember({ item, character }) {
       {character && <span aria-hidden="true">↗</span>}
     </>
   );
-  return character ? (
+  const entry = character ? (
     <button
       type="button"
       className="box-set-member"
@@ -279,6 +280,12 @@ const BoxMember = observer(function BoxMember({ item, character }) {
     </button>
   ) : (
     <div className="box-set-member">{content}</div>
+  );
+  return (
+    <div className="box-set-member-row">
+      {entry}
+      <ModelProgress character={character} compact />
+    </div>
   );
 });
 export function BoxDetail({ set, planned, bought, members }) {

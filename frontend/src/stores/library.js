@@ -1,4 +1,5 @@
 import { makeAutoObservable, observable, observableRef } from "mobx";
+import { validModelStage } from "../model-progress.js";
 const unique = (value) => [...new Set(value || [])];
 function reconcile(map, values) {
   const next = new Set(values);
@@ -16,12 +17,14 @@ export class LibraryStore {
     wishlist: [],
     rosters: [],
     groups: [],
+    hobbyProgress: {},
   };
   owned = observable.map({}, { deep: false });
   boxOwned = observable.map({}, { deep: false });
   plannedCharacters = observable.map({}, { deep: false });
   bought = observable.map({}, { deep: false });
   wishlist = observable.map({}, { deep: false });
+  hobby = observable.map({}, { deep: false });
   boxes = new Map();
   characters = new Map();
   error = "";
@@ -59,7 +62,8 @@ export class LibraryStore {
   }
   normalize(value) {
     const purchasedSets = unique(value.purchasedSets),
-      manuallyOwned = unique(value.manuallyOwned ?? value.owned);
+      manuallyOwned = unique(value.manuallyOwned ?? value.owned),
+      progress = value.hobbyProgress === undefined ? {} : value.hobbyProgress;
     return {
       version: 1,
       manuallyOwned,
@@ -71,6 +75,10 @@ export class LibraryStore {
         ),
       ]),
       wishlist: unique(value.wishlist),
+      hobbyProgress:
+        progress && typeof progress === "object" && !Array.isArray(progress)
+          ? { ...progress }
+          : progress,
       rosters: value.rosters.map((r) => ({
         ...r,
         affiliation: r.affiliation || "",
@@ -94,6 +102,10 @@ export class LibraryStore {
     reconcile(this.plannedCharacters, this.boxCharacters(next.wishlist));
     reconcile(this.bought, next.purchasedSets);
     reconcile(this.wishlist, next.wishlist);
+    for (const slug of this.hobby.keys())
+      if (!Object.hasOwn(next.hobbyProgress, slug)) this.hobby.delete(slug);
+    for (const [slug, stage] of Object.entries(next.hobbyProgress))
+      if (this.hobby.get(slug) !== stage) this.hobby.set(slug, stage);
     this.error = "";
     return next;
   }
@@ -124,6 +136,18 @@ export class LibraryStore {
         ? unique([...manual, slug])
         : manual.filter((s) => s !== slug),
     });
+  }
+  setHobbyProgress(slug, stage) {
+    if (
+      !this.characters.has(slug) ||
+      !this.owned.has(slug) ||
+      (stage !== "" && !validModelStage(stage))
+    )
+      return false;
+    const hobbyProgress = { ...this.snapshot.hobbyProgress };
+    if (stage) hobbyProgress[slug] = stage;
+    else delete hobbyProgress[slug];
+    return this.commit({ ...this.snapshot, hobbyProgress });
   }
   toggleWishlist(code) {
     if (

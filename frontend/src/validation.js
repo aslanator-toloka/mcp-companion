@@ -1,3 +1,4 @@
+import { validModelStage } from "./model-progress.js";
 export function validateLibrary(data, characters) {
   if (
     data?.version !== 1 ||
@@ -7,6 +8,16 @@ export function validateLibrary(data, characters) {
     throw Error("Файл не подходит этому приложению.");
   if (data.owned.some((slug) => !characters.has(slug)))
     throw Error("В файле есть неизвестные персонажи.");
+  if (
+    data.hobbyProgress !== undefined &&
+    (!data.hobbyProgress ||
+      typeof data.hobbyProgress !== "object" ||
+      Array.isArray(data.hobbyProgress) ||
+      Object.entries(data.hobbyProgress).some(
+        ([slug, stage]) => !characters.has(slug) || !validModelStage(stage),
+      ))
+  )
+    throw Error("Некорректные этапы сборки и покраски моделей.");
   const ids = new Set();
   for (const r of data.rosters) {
     if (

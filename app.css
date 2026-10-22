@@ -86,3 +86,67 @@
 .catalog-sort-fields>label:first-child{display:flex;flex-direction:column;gap:5px;font-size:12px}
 .catalog-sort-fields select{min-height:42px;padding:8px;border:1px solid #cbd5e1;border-radius:6px;background:white;max-width:100%}
 @media(max-width:700px){.catalog-number-field{flex:1;max-width:none;min-width:80px}.catalog-filter-numbers{gap:8px}.catalog-choices>button{min-height:42px}.catalog-attack-filters{grid-template-columns:minmax(0,1fr)}.catalog-attack-filter{padding:10px}.catalog-sort-fields{align-items:stretch}.catalog-sort-fields>label:first-child{flex:1}.catalog-filter-check{min-height:32px}}
+
+/* Exhaustive squad combinations in the roster editor. */
+.squad-planner{border:1px solid #cbd5e1;border-radius:10px;margin:16px 0;background:#f8fafc;overflow:hidden}
+.squad-planner>summary{cursor:pointer;padding:14px 16px;font-weight:650;min-height:48px;user-select:none}
+.squad-planner>summary small{font-weight:400;color:#64748b;font-size:11px;margin-left:12px}
+.squad-planner-body{padding:0 16px 16px;min-width:0}
+.squad-settings{display:flex;flex-wrap:wrap;gap:12px;margin:4px 0 18px}
+.squad-number{display:flex;flex-direction:column;gap:6px;font-size:12px;flex:0 1 170px;min-width:0}
+.squad-number input{width:100%;min-width:0;min-height:42px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;padding:8px 10px}
+.squad-required{border:0;padding:0;margin:0;min-width:0}
+.squad-required legend{font-weight:600;font-size:13px;padding:0}
+.squad-required>p,.squad-explanation{font-size:12px;color:#64748b;margin:8px 0 12px;line-height:1.5}
+.squad-required-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px}
+.squad-required-options>label{display:flex;align-items:center;gap:8px;border:1px solid #dce5ef;border-radius:8px;padding:8px;cursor:pointer;background:white;min-width:0}
+.squad-required-options>label.is-required{border-color:#2563eb;background:#edf3ff}
+.squad-required-options input{flex:none;width:18px;height:18px;margin:0}
+.squad-required-options .avatar{width:34px;height:40px;flex:none}
+.squad-required-options>label>span:not(.avatar){flex:1;min-width:0}
+.squad-required-options strong{display:block;font-size:12px;overflow-wrap:anywhere}
+.squad-required-options small{display:block;font-size:10px;overflow-wrap:anywhere}
+.squad-required-options>label>b{font-size:11px;white-space:nowrap;flex:none}
+.squad-required>.quiet{font-size:12px;margin-top:8px}
+.squad-threats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.squad-threats>button{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1 0 100px;padding:8px 12px;background:white;border-color:#cbd5e1}
+.squad-threats>button span{font-size:11px;color:#64748b}
+.squad-threats>button[aria-pressed=true]{background:#1e40af;border-color:#1e40af;color:white}
+.squad-threats>button[aria-pressed=true] span{color:#dbeafe}
+.squad-result-count{font-size:13px;font-weight:600;margin:18px 0 10px}
+.squad-variants{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.squad-variants>li{border:1px solid #dce5ef;background:white;border-radius:8px;padding:10px 12px;min-width:0}
+.squad-variant-head{display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:8px}
+.squad-variant-head>span:last-child{margin-left:auto;color:#64748b;white-space:nowrap}
+.squad-row-number{display:grid;place-items:center;min-width:22px;height:22px;border-radius:4px;background:#f1f5f9;color:#64748b;font-size:11px}
+.squad-members{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.squad-members>button{display:inline-flex;align-items:center;gap:7px;padding:5px 8px;min-height:34px;font-size:12px;white-space:normal;text-align:left;border-color:#e2e8f0}
+.squad-members>button>b{font-size:11px;color:#64748b;flex:none}
+.squad-members>button.is-required{border-color:#93c5fd;background:#eff6ff}
+.squad-empty,.squad-error{padding:14px;border-radius:8px;font-size:12px;line-height:1.6;background:white;border:1px dashed #cbd5e1;color:#64748b}
+.squad-error{border-color:#e4bd82;background:#fff8eb;color:#7e541b}
+.squad-more{margin-top:12px;width:100%}
+@media(max-width:700px){.squad-planner>summary{padding:12px}.squad-planner>summary small{display:block;margin:5px 0 0 16px;font-size:10px}.squad-planner-body{padding:0 12px 12px}.squad-settings{gap:8px}.squad-number:first-child{flex-basis:100%}.squad-number{flex:1 1 100px}.squad-required-options{grid-template-columns:minmax(0,1fr)}.squad-threats>button{flex:1 0 80px}.squad-members>button{min-height:42px}.squad-variant-head{font-size:11px}}
+.squad-variants{max-height:560px;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-right:4px}
+@media(max-width:700px){.squad-variants{max-height:min(55dvh,500px)}}
+
+/* A model's hobby stage is independent of manual/box ownership. */
+.model-progress{display:flex;flex-direction:column;gap:5px;font-size:11px;color:#64748b;min-width:0}
+.model-progress select{width:100%;max-width:240px;min-height:44px;padding:7px 8px;border:1px solid #cbd5e1;border-radius:6px;background:white;color:#334155;font:inherit}
+.model-progress select[data-stage=assembled]{border-color:#94a3b8;background:#f1f5f9}
+.model-progress select[data-stage=primed]{border-color:#a78bfa;background:#f5f3ff;color:#6d28d9}
+.model-progress select[data-stage=painted]{border-color:#6cbf91;background:#effaf3;color:#216642}
+.detail-head>.model-progress{margin-top:12px;max-width:240px}
+.owned-control{width:110px;flex:0 0 110px;min-height:72px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.owned-control:has(.model-progress)>.check{min-height:20px;flex-direction:row;gap:5px}
+.owned-control .model-progress{width:100%}
+.owned-control .model-progress select{font-size:11px;padding:5px 4px}
+.box-set-member-row{display:flex;align-items:center;gap:10px;min-width:0}
+.box-set-member-row>.box-set-member{flex:1;min-width:0}
+.box-set-member-row>.model-progress{width:120px;flex:0 0 120px}
+@media(max-width:700px){.owned-control{min-width:110px;padding-left:6px}.owned-control .model-progress select{font-size:10px}.box-set-member-row{flex-wrap:wrap;gap:0;margin-bottom:8px}.box-set-member-row>.box-set-member{flex-basis:100%}.box-set-member-row>.model-progress{flex:0 1 180px;margin:0 0 8px 50px}}
+.owned-control .model-progress{min-height:44px;justify-content:center;gap:0}
+.detail-collection-controls{width:140px;flex:0 0 140px;min-height:72px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.detail-head .detail-collection-controls>.check{margin-top:0;min-height:20px}
+.detail-collection-controls .model-progress select{max-width:100%}
+@media(max-width:700px){#character-dialog .detail-top{display:grid;grid-template-columns:74px minmax(0,1fr) 40px;align-items:center}#character-dialog .detail-top>.avatar{grid-column:1;grid-row:1}#character-dialog .detail-name{grid-column:2;grid-row:1}#character-dialog .detail-top>.close{grid-column:3;grid-row:1}.detail-collection-controls{grid-column:1/-1;grid-row:2;width:100%;min-height:44px;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px}.detail-collection-controls>.model-progress{flex:1;max-width:180px}}

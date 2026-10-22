@@ -1,5 +1,10 @@
 import { makeAutoObservable, observableRef } from "mobx";
 import { words } from "./catalog.js";
+import {
+  defaultSquadPlanner,
+  squadSettings,
+  enumerateSquads,
+} from "../squad-planner.js";
 export const normalizeRoster = (r) => ({
   ...r,
   affiliation: r.affiliation || "",
@@ -31,6 +36,7 @@ export class RosterStore {
   cardError = "";
   insights = null;
   archiveAffiliations = [];
+  squads = defaultSquadPlanner();
   constructor(library, catalog, ui) {
     this.library = library;
     this.catalog = catalog;
@@ -117,6 +123,7 @@ export class RosterStore {
     this.conflict = false;
     this.picker = null;
     this.resetFilters();
+    this.squads = defaultSquadPlanner();
   }
   setField(name, value) {
     if (!this.draft) return;
@@ -177,6 +184,54 @@ export class RosterStore {
     this.conflict = false;
     this.tab = "characters";
     this.error = "";
+    this.squads = defaultSquadPlanner();
+  }
+  get squadOptions() {
+    return squadSettings(this.squads);
+  }
+  get squadCandidates() {
+    return this.draft
+      ? this.draft.characters.map((slug) =>
+          this.catalog.rows.find((c) => c.slug === slug),
+        )
+      : [];
+  }
+  get squadVariants() {
+    if (!this.draft || !this.squads.open) return null;
+    // Keep the expensive enumeration independent of the selected group/page.
+    return enumerateSquads(this.squadCandidates, {
+      min: this.squads.min,
+      from: this.squads.from,
+      to: this.squads.to,
+      required: this.squads.required,
+    });
+  }
+  setSquadField(name, value) {
+    if (
+      !this.draft ||
+      !["open", "min", "from", "to", "threat", "limit"].includes(name)
+    )
+      return;
+    this.squads[name] = value;
+    if (["min", "from", "to", "threat"].includes(name)) this.squads.limit = 30;
+  }
+  normalizeSquadField(name) {
+    if (["min", "from", "to"].includes(name))
+      this.squads[name] = this.squadOptions[name];
+  }
+  setSquadRequired(slug, include) {
+    if (!this.draft?.characters.includes(slug)) return;
+    this.squads.required = include
+      ? [...new Set([...this.squads.required, slug])]
+      : this.squads.required.filter((s) => s !== slug);
+    this.squads.limit = 30;
+  }
+  clearSquadRequired() {
+    this.squads.required = [];
+    this.squads.limit = 30;
+  }
+  moreSquads() {
+    this.squads.limit = Math.min(1024, this.squadOptions.limit + 30);
   }
   externalChanged() {
     if (!this.draft) return;
@@ -301,6 +356,12 @@ export class RosterStore {
       : this.draft[kind].filter((s) =>
           kind === "characters" ? s !== slug : this.canonical(kind, s) !== slug,
         );
+    if (kind === "characters") {
+      this.squads.required = this.squads.required.filter((s) =>
+        this.draft.characters.includes(s),
+      );
+      this.squads.limit = 30;
+    }
   }
   removeItem(kind, slug) {
     this.choose(kind, slug, false);
