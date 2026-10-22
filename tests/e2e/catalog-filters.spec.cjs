@@ -358,3 +358,106 @@ test("stage filters match only owned models; every filter shows the actual count
     ),
   ).toBe(true);
 });
+
+test("role icons filter any/all, compose with ownership and search, show counts and survive Back/Forward/reload on mobile", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const key = "mcp-companion-catalog-v1";
+    if (!localStorage.getItem(key))
+      localStorage.setItem(
+        key,
+        JSON.stringify({
+          version: 1,
+          owned: ["wong", "black-cat"],
+          rosters: [],
+        }),
+      );
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await ready(page);
+  const group = await open(page, "Роли"),
+    options = group.getByRole("group", { name: "Фильтр по ролям" });
+  const support = options.getByRole("button", {
+      name: "Поддержка",
+      exact: true,
+    }),
+    hunter = options.getByRole("button", {
+      name: "Охотник за носителями",
+      exact: true,
+    });
+  const assignments = require("../../data/character-roles.json").characters;
+  const expected = (ids, all = false) =>
+    characters
+      .filter((c) => {
+        const roles = assignments[c.slug]?.roles || [];
+        return all
+          ? ids.every((id) => roles.includes(id))
+          : ids.some((id) => roles.includes(id));
+      })
+      .map((c) => c.slug);
+  await expect(options).toHaveText("");
+  await support.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Поддержка");
+  await support.click();
+  await expect(support).toHaveAttribute("aria-pressed", "true");
+  await expect.poll(() => slugs(page)).toEqual(expected(["support"]));
+  await expect(page.locator("#result")).toHaveText(
+    new RegExp("^" + expected(["support"]).length + " "),
+  );
+  const saved = page.url();
+  await hunter.click();
+  await expect
+    .poll(() => slugs(page))
+    .toEqual(expected(["support", "extract-hunter"]));
+  await page.goBack();
+  await expect(hunter).toHaveAttribute("aria-pressed", "false");
+  await expect(support).toHaveAttribute("aria-pressed", "true");
+  await page.goForward();
+  await expect(hunter).toHaveAttribute("aria-pressed", "true");
+  await group.getByLabel("Все выбранные роли", { exact: true }).check();
+  await expect
+    .poll(() => slugs(page))
+    .toEqual(expected(["support", "extract-hunter"], true));
+  await expect(page.locator("#result")).toHaveText(/^0 записей/);
+  await group.getByLabel("Все выбранные роли", { exact: true }).uncheck();
+  await page.locator("#only-owned").check();
+  await expect.poll(() => slugs(page)).toEqual(["black-cat", "wong"]);
+  await expect(page.locator("#result")).toHaveText(/^2 записи · есть у меня/);
+  await page.locator("#search").fill("Wong");
+  await expect.poll(() => slugs(page)).toEqual(["wong"]);
+  await expect(page.locator("#result")).toHaveText(/^1 запись/);
+  await page.reload();
+  const restored = await open(page, "Роли");
+  await expect(
+    restored.getByRole("button", { name: "Поддержка", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect.poll(() => slugs(page)).toEqual(["wong"]);
+  await restored
+    .getByRole("button", { name: "Снять выбор ролей", exact: true })
+    .click();
+  await expect(page.locator("#only-owned")).toBeChecked();
+  await expect(page.locator("#search")).toHaveValue("Wong");
+  await expect(options.getByRole("button", { pressed: true })).toHaveCount(0);
+  await page.goto(saved);
+  await expect.poll(() => slugs(page)).toEqual(expected(["support"]));
+  await page
+    .locator('#catalog-screen .catalog-tools [data-action="reset"]')
+    .click();
+  await expect(rows(page)).toHaveCount(characters.length);
+  await expect(options.getByRole("button", { pressed: true })).toHaveCount(0);
+  const all = group.getByLabel("Все выбранные роли", { exact: true });
+  await expect(all).not.toBeChecked();
+  await support.click();
+  await page.keyboard.press("Escape");
+  await group.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "previews/catalog-role-filter-mobile.png" });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  expect(errors).toEqual([]);
+});

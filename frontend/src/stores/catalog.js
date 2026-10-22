@@ -176,7 +176,13 @@ export class CatalogStore {
     return Object.entries(compactFilters(this.filters)).reduce(
       (n, [key, value]) =>
         n +
-        (["sort", "descending", "allAttacks", "allAffiliations"].includes(key)
+        ([
+          "sort",
+          "descending",
+          "allAttacks",
+          "allAffiliations",
+          "allRoles",
+        ].includes(key)
           ? 0
           : Array.isArray(value)
             ? value.length

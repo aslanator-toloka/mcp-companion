@@ -1,13 +1,17 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { observer } from "mobx-react-lite";
-import { characterRoles, squadRoles } from "./character-roles.js";
+import {
+  CHARACTER_ROLES,
+  characterRoles,
+  squadRoles,
+} from "./character-roles.js";
 import { count } from "./common.jsx";
 
 function RoleGlyph({ icon }) {
   return <i className={"fa-solid fa-" + icon} aria-hidden="true" />;
 }
-function RoleBadge({ role, aggregate }) {
+function RoleBadge({ role, aggregate, pressed, onToggle }) {
   const [open, setOpen] = useState(false),
     [position, setPosition] = useState(null);
   const button = useRef(null),
@@ -83,9 +87,12 @@ function RoleBadge({ role, aggregate }) {
       <button
         ref={button}
         type="button"
-        className={"character-role role-" + role.id}
+        className={
+          "character-role role-" + role.id + (pressed ? " is-selected" : "")
+        }
         data-role-icon={role.id}
         aria-label={role.label}
+        aria-pressed={pressed}
         aria-describedby={open && position ? id : undefined}
         onPointerEnter={(e) => {
           if (e.pointerType !== "touch") show();
@@ -98,6 +105,7 @@ function RoleBadge({ role, aggregate }) {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          onToggle?.(role.id);
           show();
         }}
       >
@@ -111,7 +119,10 @@ function RoleBadge({ role, aggregate }) {
             id={id}
             ref={tooltip}
             role="tooltip"
-            className="character-role-tooltip"
+            className={
+              "character-role-tooltip" +
+              (onToggle ? " role-filter-tooltip" : "")
+            }
             style={position}
             onPointerEnter={cancelClose}
             onPointerLeave={deferHide}
@@ -174,3 +185,25 @@ export const RoleIcons = observer(function RoleIcons({
     </span>
   );
 });
+
+export function RoleFilterChoices({ selected, onToggle }) {
+  return (
+    <fieldset className="catalog-choice-field">
+      <legend>Роли персонажа</legend>
+      <div
+        className="character-roles role-filter-options"
+        role="group"
+        aria-label="Фильтр по ролям"
+      >
+        {CHARACTER_ROLES.map((r) => (
+          <RoleBadge
+            key={r.id}
+            role={{ ...r, members: [] }}
+            pressed={selected.includes(r.id)}
+            onToggle={onToggle}
+          />
+        ))}
+      </div>
+    </fieldset>
+  );
+}

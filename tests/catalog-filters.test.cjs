@@ -234,3 +234,44 @@ test("hobby stages filter owned models only, round-trip in URL filters and rejec
     "",
   );
 });
+
+test("role filters sanitize and round-trip selections, match any/all roles, retain conditional profiles and compose with other filters", () => {
+  const data = require("../data/catalog.json").characters;
+  const hero = (slug) => data.find((c) => c.slug === slug);
+  const f = F.normalizeFilters({ roles: ["support", "support", "unknown"] });
+  assert.deepEqual(f.roles, ["support"]);
+  assert(F.matchesFilters(hero("wong"), f));
+  assert.equal(F.matchesFilters(hero("hulk"), f), false);
+  assert.equal(F.matchesFilters(hero("hand-ninjas-grunts"), f), false);
+  assert.equal(F.matchesFilters(character({ slug: "unknown" }), f), false);
+  f.roles = ["support", "extract-hunter"];
+  assert(F.matchesFilters(hero("wong"), f));
+  assert(F.matchesFilters(hero("black-cat"), f));
+  f.allRoles = true;
+  assert.equal(F.matchesFilters(hero("wong"), f), false);
+  assert.equal(F.matchesFilters(hero("black-cat"), f), false);
+  f.roles = ["extract-hunter", "controller"];
+  assert(F.matchesFilters(hero("black-cat"), f));
+  f.minThreat = "4";
+  assert.equal(F.matchesFilters(hero("black-cat"), f), false);
+  f.minThreat = "";
+  assert.equal(
+    F.matchesFilters(hero("black-cat"), f, { onlyOwned: true, owned: false }),
+    false,
+  );
+  assert(
+    F.matchesFilters(hero("black-cat"), f, { onlyOwned: true, owned: true }),
+  );
+  const roundtrip = F.decodeFilters(F.encodeFilters(f));
+  assert.deepEqual(roundtrip.roles, ["extract-hunter", "controller"]);
+  assert.equal(roundtrip.allRoles, true);
+  assert(F.matchesFilters(hero("black-cat"), roundtrip));
+  assert(
+    F.matchesFilters(
+      hero("rhino"),
+      F.normalizeFilters({ roles: ["extract-hunter"] }),
+    ),
+  );
+  assert.deepEqual(F.normalizeFilters({ roles: "support" }).roles, []);
+  assert.equal(F.encodeFilters(F.defaultFilters()), "");
+});

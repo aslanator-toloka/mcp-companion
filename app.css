@@ -200,3 +200,8 @@
 .squad-variants .character-roles{margin:7px 0 9px}
 .picker-result>.character-roles{max-width:135px;flex-shrink:0}
 @media(max-width:700px){.character-row-main>.character-roles{padding-left:64px}.selected-character-main>.character-roles{padding-left:0}.picker-result{flex-wrap:wrap}.picker-result>.character-roles{flex-basis:100%;max-width:100%;order:3;padding-left:48px}.character-role{min-width:30px;min-height:30px;width:30px;height:30px}.character-roles.compact .character-role{min-width:28px;min-height:28px;width:28px;height:28px}}
+.role-filter-options{gap:7px;margin:7px 0 10px}
+.role-filter-options .character-role{width:36px;height:36px;min-width:36px;min-height:36px}
+.role-filter-options .character-role.is-selected{background:#255ade;color:#fff;border-color:#255ade;box-shadow:0 0 0 1px #255ade}
+.role-filter-options .character-role.is-selected:hover{background:#1e49b8}
+.role-filter-tooltip{pointer-events:none}

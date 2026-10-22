@@ -1,3 +1,4 @@
+import { CHARACTER_ROLES, roleProfile } from "./character-roles.js";
 import { MODEL_STAGES } from "./model-progress.js";
 // Pure local search. A block's predicates must match the same printed attack.
 export const CONDITIONS = [
@@ -56,6 +57,8 @@ export const blankAttack = (id = 1) => ({
 export const defaultFilters = () => ({
   affiliations: [],
   allAffiliations: false,
+  roles: [],
+  allRoles: false,
   leaders: false,
   minThreat: "",
   maxThreat: "",
@@ -95,7 +98,11 @@ export function normalizeFilters(value) {
   const f = defaultFilters();
   if (!value || typeof value !== "object" || Array.isArray(value)) return f;
   for (const key of ["affiliations", "tags"]) f[key] = list(value[key]);
+  f.roles = CHARACTER_ROLES.map((r) => r.id).filter((id) =>
+    list(value.roles).includes(id),
+  );
   for (const key of [
+    "allRoles",
     "allAffiliations",
     "leaders",
     "allAttacks",
@@ -291,6 +298,16 @@ export function matchesFilters(
     now = new Date(),
   } = {},
 ) {
+  if (f.roles?.length) {
+    const profile = roleProfile(c),
+      assigned = profile && !profile.grunt ? profile.roles : [];
+    if (
+      !(f.allRoles
+        ? f.roles.every((r) => assigned.includes(r))
+        : f.roles.some((r) => assigned.includes(r)))
+    )
+      return false;
+  }
   const timed = (c.affiliations || []).filter(
     (a) => !a.timelines || a.timelines.includes(f.timeline),
   );

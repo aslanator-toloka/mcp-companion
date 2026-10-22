@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog } from "./stores/index.js";
+import { RoleFilterChoices } from "./character-roles.jsx";
 import { CONDITIONS, TRAITS, EFFECTS, COMPARATORS } from "./catalog-filters.js";
 
 function Choices({ label, choices, selected, onToggle }) {
@@ -192,6 +193,24 @@ export const CatalogFilters = observer(function CatalogFilters() {
           Параметры разных разделов применяются вместе. Несколько значений в
           одной строке — любой из выбранных.
         </p>
+        <Group title="Роли" open>
+          <RoleFilterChoices
+            selected={f.roles}
+            onToggle={(id) => toggle("roles", id)}
+          />
+          <Check checked={f.allRoles} onChange={(v) => change("allRoles", v)}>
+            Все выбранные роли
+          </Check>
+          {f.roles.length > 0 && (
+            <button
+              type="button"
+              className="quiet"
+              onClick={() => change("roles", [])}
+            >
+              Снять выбор ролей
+            </button>
+          )}
+        </Group>
         <Group title="Аффилиации">
           <Choices
             label="Аффилиации персонажа"
