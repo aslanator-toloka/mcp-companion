@@ -1,0 +1,24 @@
+{
+  "library": "Font Awesome Free",
+  "version": "7.3.1",
+  "upstream": "https://github.com/FortAwesome/Font-Awesome/tree/7.3.1",
+  "implementation": "CSS + solid webfont; no runtime JS or CDN",
+  "sha256": {
+    "css/fontawesome.min.css": "405bfb2a5312e363b88650a68ed90b6c06c41d5cfa3cbf5c68251cafafb3c078",
+    "css/solid.min.css": "01219b97103029774a3e8cb1b22803490beec1df828895dfd9c5fd0d4798da25",
+    "webfonts/fa-solid-900.woff2": "82304d961ee43d49efa1227fc5d893ba77a69f2148bea7c1381d0f447793d760",
+    "LICENSE.txt": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced"
+  },
+  "roleIcons": {
+    "extract-runner": "person-running",
+    "extract-hunter": "crosshairs",
+    "secure-holder": "flag",
+    "secure-flipper": "arrows-rotate",
+    "brawler": "hand-fist",
+    "striker": "bolt",
+    "shooter": "bullseye",
+    "controller": "magnet",
+    "support": "hand-holding-heart",
+    "protector": "shield-halved"
+  }
+}

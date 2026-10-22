@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { rosters, catalog, actions } from "./stores/index.js";
+import { RoleIcons } from "./character-roles.jsx";
 import { Avatar, count } from "./common.jsx";
 
 const PlannerNumber = observer(function PlannerNumber({ field, label, max }) {
@@ -202,6 +203,13 @@ export const RosterSquads = observer(function RosterSquads() {
                             </strong>
                             <span>{squad.threat} Threat</span>
                           </div>
+                          <RoleIcons
+                            slugs={squad.slugs}
+                            tactics={rosters.draft?.tactics}
+                            context="squad"
+                            owner={squad.key}
+                            compact
+                          />
                           <div className="squad-members">
                             {squad.slugs.map((slug) => {
                               const c = catalog.byId.get(slug);

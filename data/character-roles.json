@@ -1,0 +1,1913 @@
+{
+  "version": 1,
+  "roles": [
+    {
+      "id": "extract-runner",
+      "label": "Курьер Extract",
+      "description": "Забирает жетоны Extract, сохраняет их и приносит очки.",
+      "icon": "person-running"
+    },
+    {
+      "id": "extract-hunter",
+      "label": "Охотник за носителями",
+      "description": "Отбирает Extract или заставляет носителя уронить жетон.",
+      "icon": "crosshairs"
+    },
+    {
+      "id": "secure-holder",
+      "label": "Держатель Secure",
+      "description": "Удерживает точку за счёт живучести, позиции или угрозы противнику.",
+      "icon": "flag"
+    },
+    {
+      "id": "secure-flipper",
+      "label": "Специалист по переключению точек",
+      "description": "Быстро меняет точки или надёжно взаимодействует с Secure.",
+      "icon": "arrows-rotate"
+    },
+    {
+      "id": "brawler",
+      "label": "Боец",
+      "description": "Ведёт затяжную драку в нужной зоне, сочетая урон и живучесть.",
+      "icon": "hand-fist"
+    },
+    {
+      "id": "striker",
+      "label": "Ударник",
+      "description": "Создаёт угрозу быстрого большого урона ключевой цели.",
+      "icon": "bolt"
+    },
+    {
+      "id": "shooter",
+      "label": "Стрелок",
+      "description": "Давит атаками с дистанции и помогает добивать цели.",
+      "icon": "bullseye"
+    },
+    {
+      "id": "controller",
+      "label": "Контроллер",
+      "description": "Сдвигает противника, накладывает состояния и ограничивает его действия.",
+      "icon": "magnet"
+    },
+    {
+      "id": "support",
+      "label": "Поддержка",
+      "description": "Помогает союзникам энергией, перемещением, лечением или перебросами.",
+      "icon": "hand-holding-heart"
+    },
+    {
+      "id": "protector",
+      "label": "Защитник",
+      "description": "Сохраняет ключевых союзников и мешает удобному выбору цели.",
+      "icon": "shield-halved"
+    }
+  ],
+  "characters": {
+    "abomination": {
+      "name": "Abomination",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "adam-warlock": {
+      "name": "Adam Warlock",
+      "roles": [
+        "shooter",
+        "controller",
+        "support"
+      ]
+    },
+    "agent-venom": {
+      "name": "Agent Venom",
+      "roles": [
+        "striker",
+        "shooter"
+      ]
+    },
+    "amazing-spider-man": {
+      "name": "Amazing Spider-Man",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "secure-flipper",
+        "controller"
+      ]
+    },
+    "ancient-one": {
+      "name": "Ancient One",
+      "roles": [
+        "brawler",
+        "controller"
+      ]
+    },
+    "angel": {
+      "name": "Angel",
+      "roles": [
+        "extract-runner",
+        "support",
+        "controller"
+      ]
+    },
+    "angela": {
+      "name": "Angela",
+      "roles": [
+        "extract-runner",
+        "striker"
+      ]
+    },
+    "ant-man": {
+      "name": "Ant-Man",
+      "roles": [
+        "extract-runner",
+        "secure-flipper"
+      ]
+    },
+    "apocalypse": {
+      "name": "Apocalypse",
+      "roles": [
+        "brawler",
+        "controller",
+        "support"
+      ]
+    },
+    "archangel": {
+      "name": "Archangel",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "arnim-zola": {
+      "name": "Arnim Zola",
+      "roles": [
+        "shooter",
+        "support"
+      ]
+    },
+    "avalanche": {
+      "name": "Avalanche",
+      "roles": [
+        "controller",
+        "secure-holder"
+      ]
+    },
+    "baron-helmut-zemo": {
+      "name": "Baron Helmut Zemo",
+      "roles": [
+        "brawler",
+        "support"
+      ]
+    },
+    "baron-mordo": {
+      "name": "Baron Mordo",
+      "roles": [
+        "shooter",
+        "support"
+      ]
+    },
+    "baron-strucker": {
+      "name": "Baron Strucker",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "support"
+      ]
+    },
+    "baron-zemo": {
+      "name": "Baron Zemo",
+      "roles": [
+        "striker",
+        "support"
+      ]
+    },
+    "bastion": {
+      "name": "Bastion",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "support"
+      ]
+    },
+    "beast": {
+      "name": "Beast",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "beta-ray-bill": {
+      "name": "Beta Ray Bill",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "bishop": {
+      "name": "Bishop",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "shooter"
+      ]
+    },
+    "black-bolt": {
+      "name": "Black Bolt",
+      "roles": [
+        "shooter",
+        "protector",
+        "support"
+      ],
+      "notes": {
+        "support": "Передача энергии союзникам доступна с лидерством King of the Inhumans."
+      },
+      "requires": {
+        "support": {
+          "leader": "black-bolt"
+        }
+      }
+    },
+    "black-cat": {
+      "name": "Black Cat",
+      "roles": [
+        "extract-runner",
+        "extract-hunter",
+        "controller"
+      ],
+      "notes": {
+        "extract-hunter": "Кража через Master Cat Burglar требует энергии и близкой дистанции."
+      }
+    },
+    "black-dwarf": {
+      "name": "Black Dwarf",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "protector"
+      ]
+    },
+    "black-panther": {
+      "name": "Black Panther",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "secure-flipper",
+        "controller"
+      ]
+    },
+    "black-panther-chosen-of-bast": {
+      "name": "Black Panther, Chosen of Bast",
+      "roles": [
+        "extract-runner",
+        "secure-flipper"
+      ]
+    },
+    "black-swan": {
+      "name": "Black Swan",
+      "roles": [
+        "brawler",
+        "striker"
+      ]
+    },
+    "black-widow": {
+      "name": "Black Widow",
+      "roles": [
+        "extract-runner"
+      ]
+    },
+    "black-widow-agent-of-shield": {
+      "name": "Black Widow, Agent of S.H.I.E.L.D.",
+      "roles": [
+        "extract-hunter",
+        "shooter"
+      ]
+    },
+    "blade": {
+      "name": "Blade",
+      "roles": [
+        "brawler",
+        "extract-runner"
+      ]
+    },
+    "blue-marvel": {
+      "name": "Blue Marvel",
+      "roles": [
+        "brawler",
+        "controller",
+        "protector"
+      ]
+    },
+    "bob-agent-of-hydra": {
+      "name": "Bob, Agent of Hydra",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "bullseye": {
+      "name": "Bullseye",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "cable": {
+      "name": "Cable",
+      "roles": [
+        "shooter",
+        "protector"
+      ]
+    },
+    "captain-america": {
+      "name": "Captain America",
+      "roles": [
+        "protector",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "captain-america-sam-wilson": {
+      "name": "Captain America",
+      "roles": [
+        "extract-runner",
+        "support"
+      ]
+    },
+    "captain-america-first-avenger": {
+      "name": "Captain America, First Avenger",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "captain-marvel": {
+      "name": "Captain Marvel",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "captain-marvel-cosmic-avenger": {
+      "name": "Captain Marvel, Cosmic Avenger",
+      "roles": [
+        "brawler",
+        "striker"
+      ]
+    },
+    "carnage": {
+      "name": "Carnage",
+      "roles": [
+        "striker"
+      ]
+    },
+    "cassandra-nova": {
+      "name": "Cassandra Nova",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "clea": {
+      "name": "Clea",
+      "roles": [
+        "support",
+        "controller"
+      ]
+    },
+    "colossus": {
+      "name": "Colossus",
+      "roles": [
+        "protector",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "corvus-glaive": {
+      "name": "Corvus Glaive",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "cosmic-ghost-rider": {
+      "name": "Cosmic Ghost Rider",
+      "roles": [
+        "shooter",
+        "striker",
+        "controller"
+      ],
+      "notes": {
+        "controller": "Контроль поддерживает атаку; персонаж не работает как обычный держатель целей."
+      }
+    },
+    "crimson-dynamo": {
+      "name": "Crimson Dynamo",
+      "roles": [
+        "protector",
+        "shooter",
+        "secure-holder"
+      ]
+    },
+    "crossbones": {
+      "name": "Crossbones",
+      "roles": [
+        "brawler"
+      ]
+    },
+    "crossbones-merciless-merc": {
+      "name": "Crossbones, Merciless Merc",
+      "roles": [
+        "brawler",
+        "shooter"
+      ]
+    },
+    "crystal": {
+      "name": "Crystal",
+      "roles": [
+        "extract-runner",
+        "shooter",
+        "controller"
+      ]
+    },
+    "cyclops": {
+      "name": "Cyclops",
+      "roles": [
+        "shooter",
+        "support"
+      ]
+    },
+    "daredevil": {
+      "name": "Daredevil",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "darkstar": {
+      "name": "Darkstar",
+      "roles": [
+        "support",
+        "protector"
+      ]
+    },
+    "deadpool": {
+      "name": "Deadpool",
+      "roles": [
+        "brawler",
+        "shooter"
+      ]
+    },
+    "doc-ock-sinister-scientist": {
+      "name": "Doc Ock, Sinister Scientist",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "doctor-octopus": {
+      "name": "Doctor Octopus",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "doctor-strange": {
+      "name": "Doctor Strange",
+      "roles": [
+        "shooter",
+        "support",
+        "protector",
+        "controller"
+      ]
+    },
+    "doctor-strange-sorcerer-supreme": {
+      "name": "Doctor Strange, Sorcerer Supreme",
+      "roles": [
+        "support",
+        "controller",
+        "shooter"
+      ]
+    },
+    "doctor-voodoo": {
+      "name": "Doctor Voodoo",
+      "roles": [
+        "extract-hunter",
+        "controller",
+        "secure-holder"
+      ]
+    },
+    "domino": {
+      "name": "Domino",
+      "roles": [
+        "striker",
+        "shooter"
+      ]
+    },
+    "dormammu": {
+      "name": "Dormammu",
+      "roles": [
+        "brawler",
+        "shooter",
+        "controller"
+      ]
+    },
+    "dracula": {
+      "name": "Dracula",
+      "roles": [
+        "striker",
+        "brawler",
+        "controller"
+      ]
+    },
+    "drax-the-destroyer": {
+      "name": "Drax the Destroyer",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "ebony-maw": {
+      "name": "Ebony Maw",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "echo": {
+      "name": "Echo",
+      "roles": [
+        "striker"
+      ]
+    },
+    "electro": {
+      "name": "Electro",
+      "roles": [
+        "shooter",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "elektra": {
+      "name": "Elektra",
+      "roles": [
+        "striker"
+      ]
+    },
+    "elsa-bloodstone": {
+      "name": "Elsa Bloodstone",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "emma-frost": {
+      "name": "Emma Frost",
+      "roles": [
+        "controller",
+        "secure-holder",
+        "protector"
+      ]
+    },
+    "enchantress": {
+      "name": "Enchantress",
+      "roles": [
+        "extract-hunter",
+        "controller",
+        "shooter"
+      ]
+    },
+    "exodus": {
+      "name": "Exodus",
+      "roles": [
+        "brawler",
+        "shooter",
+        "protector"
+      ]
+    },
+    "frankensteins-monster": {
+      "name": "Frankenstein‘s Monster",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "gambit": {
+      "name": "Gambit",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "gamora": {
+      "name": "Gamora",
+      "roles": [
+        "striker"
+      ]
+    },
+    "ghost-rider": {
+      "name": "Ghost Rider",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "ghost-spider": {
+      "name": "Ghost-Spider",
+      "roles": [
+        "extract-runner",
+        "controller",
+        "protector"
+      ]
+    },
+    "gladiator": {
+      "name": "Gladiator",
+      "roles": [
+        "striker",
+        "brawler",
+        "controller"
+      ]
+    },
+    "gorgon": {
+      "name": "Gorgon",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "protector"
+      ]
+    },
+    "green-goblin": {
+      "name": "Green Goblin",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "groot": {
+      "name": "Groot",
+      "roles": [
+        "secure-holder",
+        "controller",
+        "protector"
+      ],
+      "notes": {
+        "protector": "Защищает Rocket Raccoon благодаря Personal Bodyguard на карточке Ракеты."
+      },
+      "requires": {
+        "protector": {
+          "ally": "rocket-raccoon"
+        }
+      }
+    },
+    "gwenom": {
+      "name": "Gwenom",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "protector"
+      ]
+    },
+    "gwenpool": {
+      "name": "Gwenpool",
+      "roles": [
+        "striker",
+        "controller"
+      ]
+    },
+    "hand-ninjas-grunts": {
+      "name": "Hand Ninjas",
+      "roles": [],
+      "grunt": true
+    },
+    "havok": {
+      "name": "Havok",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "hawkeye": {
+      "name": "Hawkeye",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "heimdall-the-all-seeing": {
+      "name": "Heimdall, The All-Seeing",
+      "roles": [
+        "support",
+        "controller",
+        "protector"
+      ]
+    },
+    "hela-queen-of-hel": {
+      "name": "Hela, Queen of Hel",
+      "roles": [
+        "brawler"
+      ]
+    },
+    "honey-badger": {
+      "name": "Honey Badger",
+      "roles": [
+        "protector",
+        "support"
+      ]
+    },
+    "hood": {
+      "name": "Hood",
+      "roles": [
+        "shooter",
+        "support"
+      ],
+      "notes": {
+        "support": "Лечение союзников доступно в обычной форме."
+      }
+    },
+    "hulk": {
+      "name": "Hulk",
+      "roles": [
+        "striker",
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "hulkbuster": {
+      "name": "Hulkbuster",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "hydra-troopers-grunts": {
+      "name": "Hydra Troopers",
+      "roles": [],
+      "grunt": true
+    },
+    "iceman": {
+      "name": "Iceman",
+      "roles": [
+        "controller",
+        "support"
+      ]
+    },
+    "invincible-iron-man": {
+      "name": "Invincible Iron Man",
+      "roles": [
+        "shooter",
+        "secure-holder"
+      ]
+    },
+    "iron-fist": {
+      "name": "Iron Fist",
+      "roles": [
+        "striker",
+        "controller"
+      ]
+    },
+    "iron-lad": {
+      "name": "Iron Lad",
+      "roles": [
+        "shooter",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "iron-man": {
+      "name": "Iron Man",
+      "roles": [
+        "shooter",
+        "secure-holder"
+      ]
+    },
+    "iron-monger": {
+      "name": "Iron Monger",
+      "roles": [
+        "brawler",
+        "extract-hunter"
+      ]
+    },
+    "jean-grey": {
+      "name": "Jean Grey",
+      "roles": [
+        "shooter",
+        "controller",
+        "protector"
+      ]
+    },
+    "jubilee": {
+      "name": "Jubilee",
+      "roles": [
+        "shooter",
+        "support"
+      ]
+    },
+    "juggernaut": {
+      "name": "Juggernaut",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "kang-the-conqueror": {
+      "name": "Kang the Conqueror",
+      "roles": [
+        "shooter",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "karnak": {
+      "name": "Karnak",
+      "roles": [
+        "brawler",
+        "support",
+        "secure-holder"
+      ]
+    },
+    "killmonger": {
+      "name": "Killmonger",
+      "roles": [
+        "striker"
+      ]
+    },
+    "killmonger-usurper": {
+      "name": "Killmonger, Usurper",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "king-black-bolt": {
+      "name": "King Black Bolt",
+      "roles": [
+        "brawler",
+        "shooter",
+        "support"
+      ]
+    },
+    "kingpin": {
+      "name": "Kingpin",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "king-tchalla": {
+      "name": "King T‘Challa",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "klaw": {
+      "name": "Klaw",
+      "roles": [
+        "shooter",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "kraven-the-hunter": {
+      "name": "Kraven the Hunter",
+      "roles": [
+        "striker",
+        "support"
+      ]
+    },
+    "lady-mastermind": {
+      "name": "Lady Mastermind",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "lady-sif": {
+      "name": "Lady Sif",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "lizard": {
+      "name": "Lizard",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "lockjaw": {
+      "name": "Lockjaw",
+      "roles": [
+        "support"
+      ]
+    },
+    "logan-the-wolverine": {
+      "name": "Logan, the Wolverine",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "loki-god-of-mischief": {
+      "name": "Loki, God of Mischief",
+      "roles": [
+        "controller"
+      ]
+    },
+    "loki-prince-of-lies": {
+      "name": "Loki, Prince of Lies",
+      "roles": [
+        "controller",
+        "support"
+      ]
+    },
+    "luke-cage": {
+      "name": "Luke Cage",
+      "roles": [
+        "protector",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "magik": {
+      "name": "Magik",
+      "roles": [
+        "extract-runner",
+        "striker"
+      ]
+    },
+    "magneto": {
+      "name": "Magneto",
+      "roles": [
+        "shooter",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "malekith-the-accursed": {
+      "name": "Malekith The Accursed",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "man-thing": {
+      "name": "Man-Thing",
+      "roles": [
+        "secure-holder",
+        "controller",
+        "support"
+      ]
+    },
+    "maverick": {
+      "name": "Maverick",
+      "roles": [
+        "brawler",
+        "shooter"
+      ]
+    },
+    "maximus-the-mad": {
+      "name": "Maximus the Mad",
+      "roles": [
+        "controller",
+        "support"
+      ]
+    },
+    "mbaku": {
+      "name": "M‘Baku",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "medusa": {
+      "name": "Medusa",
+      "roles": [
+        "brawler",
+        "controller",
+        "support"
+      ]
+    },
+    "mephisto-lord-of-temptation": {
+      "name": "Mephisto, Lord of Temptation",
+      "roles": [
+        "brawler",
+        "controller",
+        "support"
+      ]
+    },
+    "mirage": {
+      "name": "Mirage",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "mister-sinister": {
+      "name": "Mister Sinister",
+      "roles": [
+        "brawler",
+        "controller",
+        "shooter"
+      ]
+    },
+    "modok": {
+      "name": "M.O.D.O.K.",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "modok-scientist-supreme": {
+      "name": "M.O.D.O.K. Scientist Supreme",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "moondragon": {
+      "name": "Moondragon",
+      "roles": [
+        "brawler",
+        "protector"
+      ]
+    },
+    "moon-knight": {
+      "name": "Moon Knight",
+      "roles": [
+        "shooter",
+        "secure-holder"
+      ]
+    },
+    "ms-marvel": {
+      "name": "Ms. Marvel",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "multiple-man": {
+      "name": "Multiple Man",
+      "roles": [
+        "extract-runner",
+        "secure-flipper"
+      ]
+    },
+    "multiple-man-duplicates-grunts": {
+      "name": "Multiple Man Duplicates",
+      "roles": [],
+      "grunt": true
+    },
+    "mysterio": {
+      "name": "Mysterio",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "mystique": {
+      "name": "Mystique",
+      "roles": [
+        "extract-runner",
+        "secure-flipper"
+      ]
+    },
+    "namor-the-submariner": {
+      "name": "Namor, the Sub-Mariner",
+      "roles": [
+        "extract-runner",
+        "extract-hunter",
+        "brawler",
+        "controller"
+      ]
+    },
+    "nebula": {
+      "name": "Nebula",
+      "roles": [
+        "striker"
+      ],
+      "notes": {
+        "striker": "Сфокусирована на атаке; не может удерживать Extract или Secure."
+      }
+    },
+    "nick-fury": {
+      "name": "Nick Fury",
+      "roles": [
+        "shooter",
+        "support"
+      ]
+    },
+    "nick-fury-and-the-howling-commandos": {
+      "name": "Nick Fury & The Howling Commandos",
+      "roles": [
+        "shooter",
+        "support"
+      ]
+    },
+    "nightcrawler": {
+      "name": "Nightcrawler",
+      "roles": [
+        "extract-runner",
+        "secure-flipper",
+        "striker"
+      ]
+    },
+    "nimrod": {
+      "name": "Nimrod, the Hunter",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "nkantu-the-living-mummy": {
+      "name": "N‘Kantu, the Living Mummy",
+      "roles": [
+        "secure-holder"
+      ]
+    },
+    "nova": {
+      "name": "Nova",
+      "roles": [
+        "brawler",
+        "controller",
+        "secure-flipper"
+      ]
+    },
+    "okoye": {
+      "name": "Okoye",
+      "roles": [
+        "protector"
+      ]
+    },
+    "omega-red": {
+      "name": "Omega Red",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "omega-sentinel": {
+      "name": "Omega Sentinel",
+      "roles": [
+        "extract-runner",
+        "secure-flipper",
+        "brawler"
+      ]
+    },
+    "onslaught": {
+      "name": "Onslaught",
+      "roles": [
+        "brawler",
+        "controller"
+      ]
+    },
+    "phoenix": {
+      "name": "Phoenix",
+      "roles": [
+        "shooter",
+        "controller",
+        "protector",
+        "support"
+      ]
+    },
+    "prime-sentinel-2": {
+      "name": "Prime Sentinel",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "prime-sentinel-1": {
+      "name": "Prime Sentinel",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "professor-x": {
+      "name": "Professor X",
+      "roles": [
+        "support",
+        "controller",
+        "protector"
+      ]
+    },
+    "prowler": {
+      "name": "Prowler",
+      "roles": [
+        "striker",
+        "secure-flipper"
+      ]
+    },
+    "proxima-midnight": {
+      "name": "Proxima Midnight",
+      "roles": [
+        "extract-runner",
+        "brawler"
+      ]
+    },
+    "psylocke": {
+      "name": "Psylocke",
+      "roles": [
+        "brawler",
+        "striker"
+      ]
+    },
+    "punisher": {
+      "name": "Punisher",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "pyro": {
+      "name": "Pyro",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "quasar": {
+      "name": "Quasar",
+      "roles": [
+        "brawler",
+        "shooter"
+      ]
+    },
+    "quicksilver": {
+      "name": "Quicksilver",
+      "roles": [
+        "extract-runner",
+        "secure-flipper",
+        "extract-hunter"
+      ],
+      "notes": {
+        "extract-runner": "Speedster сбрасывает удерживаемые жетоны: переносить их нужно другими перемещениями.",
+        "extract-hunter": "Кража доступна через тактику Can I Borrow That?; учитывай тип жетона."
+      },
+      "requires": {
+        "extract-hunter": {
+          "tactic": "can-i-borrow-that"
+        }
+      }
+    },
+    "red-guardian": {
+      "name": "Red Guardian",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "red-hulk": {
+      "name": "Red Hulk",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "red-skull": {
+      "name": "Red Skull",
+      "roles": [
+        "support",
+        "controller"
+      ]
+    },
+    "red-skull-master-of-hydra": {
+      "name": "Red Skull, Master of Hydra",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "red-skull-master-of-the-world": {
+      "name": "Red Skull, Master of the World",
+      "roles": [
+        "support",
+        "controller",
+        "shooter"
+      ]
+    },
+    "rescue": {
+      "name": "Rescue",
+      "roles": [
+        "protector",
+        "support"
+      ]
+    },
+    "rhino": {
+      "name": "Rhino",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "extract-runner",
+        "extract-hunter"
+      ],
+      "notes": {
+        "extract-hunter": "Кража через тактику This is a Robbery; без карты этой роли в составе нет."
+      },
+      "requires": {
+        "extract-hunter": {
+          "tactic": "this-is-a-robbery"
+        }
+      }
+    },
+    "rocket-raccoon": {
+      "name": "Rocket Raccoon",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "rogue": {
+      "name": "Rogue",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "ronan-the-accuser": {
+      "name": "Ronan the Accuser",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "ronin": {
+      "name": "Ronin",
+      "roles": [
+        "extract-runner",
+        "striker"
+      ]
+    },
+    "sabretooth": {
+      "name": "Sabretooth",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "sabretooth-apex-predator": {
+      "name": "Sabretooth, Apex Predator",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "sand-construct-1-grunts": {
+      "name": "Sand Construct",
+      "roles": [],
+      "grunt": true
+    },
+    "sand-construct-2-grunts": {
+      "name": "Sand Construct",
+      "roles": [],
+      "grunt": true
+    },
+    "sandman": {
+      "name": "Sandman",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "scarlet-spider": {
+      "name": "Scarlet Spider",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "scarlet-witch": {
+      "name": "Scarlet Witch",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "sensational-she-hulk": {
+      "name": "Sensational She-Hulk",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "sentinel-mk4": {
+      "name": "Sentinel MK4",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "sentinel-prime-mk4": {
+      "name": "Sentinel Prime MK4",
+      "roles": [
+        "shooter",
+        "controller",
+        "support"
+      ]
+    },
+    "shadowcat": {
+      "name": "Shadowcat",
+      "roles": [
+        "extract-runner",
+        "secure-flipper"
+      ],
+      "notes": {
+        "extract-runner": "Phase Rush стоит 2 энергии; учитывай ресурс на перемещение."
+      }
+    },
+    "shadow-king": {
+      "name": "Shadow King",
+      "roles": [
+        "shooter",
+        "controller"
+      ]
+    },
+    "shadowland-daredevil": {
+      "name": "Shadowland Daredevil",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "shang-chi": {
+      "name": "Shang-Chi",
+      "roles": [
+        "striker",
+        "brawler",
+        "controller"
+      ]
+    },
+    "she-hulk": {
+      "name": "She-Hulk",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "protector"
+      ]
+    },
+    "shield-agents-grunts": {
+      "name": "S.H.I.E.L.D. Agents",
+      "roles": [],
+      "grunt": true
+    },
+    "shocker": {
+      "name": "Shocker",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "shuri": {
+      "name": "Shuri",
+      "roles": [
+        "controller",
+        "support"
+      ]
+    },
+    "silk": {
+      "name": "Silk",
+      "roles": [
+        "extract-runner",
+        "secure-flipper",
+        "controller"
+      ]
+    },
+    "silver-sable": {
+      "name": "Silver Sable",
+      "roles": [
+        "shooter",
+        "support",
+        "protector"
+      ]
+    },
+    "sin": {
+      "name": "Sin",
+      "roles": [
+        "extract-hunter",
+        "shooter",
+        "controller"
+      ]
+    },
+    "skurge-the-executioner": {
+      "name": "Skurge, The Executioner",
+      "roles": [
+        "brawler",
+        "protector"
+      ]
+    },
+    "spectacular-spider-man": {
+      "name": "Spectacular Spider-Man",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "spectrum": {
+      "name": "Spectrum",
+      "roles": [
+        "extract-runner",
+        "shooter",
+        "controller"
+      ]
+    },
+    "spider-ham": {
+      "name": "Spider-Ham",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "spider-man-miles-morales": {
+      "name": "Spider-Man",
+      "roles": [
+        "extract-runner",
+        "extract-hunter",
+        "controller"
+      ]
+    },
+    "spider-man": {
+      "name": "Spider-Man",
+      "roles": [
+        "extract-runner",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "spider-man-2099": {
+      "name": "Spider-Man 2099",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "spider-man-noir": {
+      "name": "Spider-Man Noir",
+      "roles": [
+        "extract-runner",
+        "secure-holder"
+      ]
+    },
+    "spider-woman": {
+      "name": "Spider-Woman",
+      "roles": [
+        "extract-runner",
+        "extract-hunter",
+        "controller"
+      ]
+    },
+    "squirrel-girl": {
+      "name": "Squirrel Girl",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "star-lord": {
+      "name": "Star-Lord",
+      "roles": [
+        "shooter",
+        "support"
+      ],
+      "notes": {
+        "support": "Перебросы союзникам даёт лидерство Winging It."
+      },
+      "requires": {
+        "support": {
+          "leader": "star-lord"
+        }
+      }
+    },
+    "steve-rogers-captain-america": {
+      "name": "Steve Rogers, Captain America",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "support"
+      ]
+    },
+    "storm": {
+      "name": "Storm",
+      "roles": [
+        "support",
+        "controller",
+        "shooter"
+      ],
+      "notes": {
+        "support": "Перемещение и защитный переброс союзников доступны с лидерством X-Men Gold."
+      },
+      "requires": {
+        "support": {
+          "leader": "storm"
+        }
+      }
+    },
+    "sunspot": {
+      "name": "Sunspot",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "supergiant": {
+      "name": "Supergiant",
+      "roles": [
+        "secure-holder",
+        "protector"
+      ],
+      "notes": {
+        "secure-holder": "Устойчива к физическим атакам, но другие типы урона обходят Ethereal."
+      }
+    },
+    "taskmaster": {
+      "name": "Taskmaster",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "thanos-the-mad-titan": {
+      "name": "Thanos, The Mad Titan",
+      "roles": [
+        "secure-holder",
+        "controller",
+        "support"
+      ]
+    },
+    "the-black-widow": {
+      "name": "The Black Widow",
+      "roles": [
+        "extract-runner",
+        "striker"
+      ]
+    },
+    "the-blob": {
+      "name": "The Blob",
+      "roles": [
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "the-immortal-hulk": {
+      "name": "The Immortal Hulk",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "the-leader": {
+      "name": "The Leader",
+      "roles": [
+        "support",
+        "controller",
+        "secure-holder"
+      ]
+    },
+    "mighty-thor": {
+      "name": "The Mighty Thor",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "the-original-human-torch": {
+      "name": "The Original Human Torch",
+      "roles": [
+        "shooter",
+        "extract-hunter"
+      ]
+    },
+    "the-wrecking-crew": {
+      "name": "The Wrecking Crew",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "thor-hero-of-midgard": {
+      "name": "Thor, Hero of Midgard",
+      "roles": [
+        "striker",
+        "brawler",
+        "controller"
+      ]
+    },
+    "thor-prince-of-asgard": {
+      "name": "Thor, Prince of Asgard",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "tigra": {
+      "name": "Tigra",
+      "roles": [
+        "striker",
+        "brawler"
+      ]
+    },
+    "toad": {
+      "name": "Toad",
+      "roles": [
+        "extract-runner"
+      ]
+    },
+    "ulik": {
+      "name": "Ulik",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "ultimate-spider-man": {
+      "name": "Ultimate Spider-Man",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ],
+      "notes": {
+        "controller": "Контроль через атаки и контратаку; учитывай энергию, дальность и размер цели."
+      }
+    },
+    "ultron": {
+      "name": "Ultron",
+      "roles": [
+        "brawler",
+        "shooter"
+      ]
+    },
+    "ultron-drones-grunts": {
+      "name": "Ultron Drones",
+      "roles": [],
+      "grunt": true
+    },
+    "ultron-metal-tyrant": {
+      "name": "Ultron, Metal Tyrant",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "ursa-major": {
+      "name": "Ursa Major",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "valkyrie": {
+      "name": "Valkyrie",
+      "roles": [
+        "striker"
+      ]
+    },
+    "valkyrie-and-elendil": {
+      "name": "Valkyrie and Elendil",
+      "roles": [
+        "extract-runner",
+        "brawler",
+        "support"
+      ]
+    },
+    "venom": {
+      "name": "Venom",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "viper": {
+      "name": "Viper",
+      "roles": [
+        "extract-runner"
+      ]
+    },
+    "vision": {
+      "name": "Vision",
+      "roles": [
+        "brawler",
+        "secure-holder",
+        "controller"
+      ]
+    },
+    "vulture": {
+      "name": "Vulture",
+      "roles": [
+        "controller",
+        "secure-flipper"
+      ]
+    },
+    "warlock": {
+      "name": "Warlock",
+      "roles": [
+        "brawler",
+        "secure-holder"
+      ]
+    },
+    "war-machine": {
+      "name": "War Machine",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "warriors-three": {
+      "name": "Warriors Three",
+      "roles": [
+        "brawler"
+      ]
+    },
+    "wasp": {
+      "name": "Wasp",
+      "roles": [
+        "extract-runner",
+        "secure-flipper"
+      ]
+    },
+    "weapon-x": {
+      "name": "Weapon X",
+      "roles": [
+        "striker"
+      ],
+      "notes": {
+        "striker": "Роль атаки: не рассчитывай на перенос Extract."
+      }
+    },
+    "werewolf-by-night": {
+      "name": "Werewolf by Night",
+      "roles": [
+        "striker",
+        "brawler",
+        "controller"
+      ]
+    },
+    "winter-soldier": {
+      "name": "Winter Soldier",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "winter-soldier-operative": {
+      "name": "Winter Soldier, Operative",
+      "roles": [
+        "shooter"
+      ]
+    },
+    "wolverine": {
+      "name": "Wolverine",
+      "roles": [
+        "striker",
+        "brawler"
+      ],
+      "notes": {
+        "brawler": "На раненой стороне есть ограничения на работу с целями."
+      }
+    },
+    "wong": {
+      "name": "Wong",
+      "roles": [
+        "support"
+      ],
+      "notes": {
+        "support": "Передаёт энергию, лечит и снимает состояния; лечение требует действия."
+      }
+    },
+    "x-23": {
+      "name": "X-23",
+      "roles": [
+        "striker"
+      ]
+    },
+    "yondu": {
+      "name": "Yondu",
+      "roles": [
+        "shooter",
+        "extract-hunter"
+      ]
+    }
+  }
+}

@@ -176,3 +176,32 @@
 .at-character-frequency .at-adjusted-value { color: #3159a4; font-weight: 650; }
 .at-character-frequency .at-adjusted-value.at-negative { color: #bc3c43; }
 @media (max-width: 600px) { .at-adjusted-rating { padding: 12px; } .at-adjusted-character > .at-adjusted-value { font-size: 23px; } .at-adjusted-character { grid-template-columns: 100px minmax(0, 1fr); gap: 4px 12px; } .at-adjusted-character > span:last-child { min-height: 70px; } }
+
+/* Roles are icons only; explanations appear on hover, focus or touch. */
+.character-roles{display:flex;align-items:center;flex-wrap:wrap;gap:5px;max-width:100%;margin:7px 0;isolation:isolate}
+.character-role{display:inline-flex;align-items:center;justify-content:center;width:29px;height:29px;min-width:29px;min-height:29px;padding:4px;border:1px solid #d9e2ee;border-radius:7px;background:#f4f7fc;color:#496181;line-height:1;white-space:normal}
+.character-role:hover,.character-role:focus-visible{background:#e7effe;border-color:#92acd3;color:#214f9a}
+.character-roles.compact{gap:3px;margin:4px 0}
+.character-roles.compact .character-role{width:25px;height:25px;min-width:25px;min-height:25px;padding:3px}
+.character-role .fa-solid{display:block;flex:none;font-size:17px;line-height:1;width:19px;text-align:center}
+.character-role-tooltip{position:fixed;z-index:10000;box-sizing:border-box;padding:12px 14px;border:1px solid #c5d4e9;border-radius:10px;background:#fff;color:#263c59;box-shadow:0 8px 28px #142e5333;font:13px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-height:60vh;overflow:auto;text-align:left;white-space:normal}
+.character-role-tooltip>strong{display:block;font-weight:750;font-size:14px;margin-bottom:5px}
+.character-role-tooltip p{margin:0;color:#4b617f}
+.role-provider{margin-top:6px}
+.role-provider b,.role-provider span{display:block;font-size:12px}
+.role-provider span{color:#66758a}
+.role-provider:empty{display:none}
+.character-row-main,.selected-character-main{flex:1;min-width:0}
+.character-row-main>.row-open,.selected-character-main>.selected-character{width:100%}
+.character-row-main>.character-roles{padding-left:76px}
+.selected-character-main>.character-roles{padding-left:64px}
+.detail-name>.character-roles{margin-top:8px}
+.roster-summary+.character-roles{margin:8px 0 14px}
+.squad-variants .character-roles{margin:7px 0 9px}
+.picker-result>.character-roles{max-width:135px;flex-shrink:0}
+.at-character-entry{flex-wrap:wrap}
+.at-character-entry>.character-roles{flex-basis:100%;order:3;padding-left:46px;margin:0 8px 7px 0}
+.at-character-entry .character-roles.compact .character-role{min-height:22px;min-width:22px;width:22px;height:22px;padding:2px}
+@media(max-width:700px){.character-row-main>.character-roles{padding-left:64px}.selected-character-main>.character-roles{padding-left:0}.picker-result{flex-wrap:wrap}.picker-result>.character-roles{flex-basis:100%;max-width:100%;order:3;padding-left:48px}.character-role{min-width:30px;min-height:30px;width:30px;height:30px}.character-roles.compact .character-role{min-width:28px;min-height:28px;width:28px;height:28px}}
+
+#tournaments-screen .at-character-entry>.character-roles{grid-column:1/-1;min-width:0}

@@ -4,6 +4,7 @@ import { catalog, library, actions } from "./stores/index.js";
 import React, { memo } from "react";
 import { Avatar, OwnedCheckbox } from "./common.jsx";
 import { CharacterBoxes } from "./purchases.jsx";
+import { RoleIcons } from "./character-roles.jsx";
 import { ModelProgress } from "./model-progress.jsx";
 const CharacterRow = observer(function CharacterRow({
   character: c,
@@ -14,41 +15,46 @@ const CharacterRow = observer(function CharacterRow({
   boxOwned = library.boxOwned.has(c.slug);
   return (
     <div className="character-row">
-      <button
-        className="row-open"
-        data-action="character"
-        onClick={(event) => {
-          event.stopPropagation();
-          actions.openCharacter(c.slug);
-        }}
-        data-slug={c.slug}
-        aria-label={`Открыть карточку ${c.name}, ${c.alterEgo}`}
-      >
-        <Avatar character={c} />
-        <span className="row-copy">
-          <strong>{c.name}</strong>
-          <span className="alter-ego">
-            {c.alterEgo || "Без alter ego"}
-            {c.isGrunt ? " · Grunt" : ""}
+      <div className="character-row-main">
+        <button
+          className="row-open"
+          data-action="character"
+          onClick={(event) => {
+            event.stopPropagation();
+            actions.openCharacter(c.slug);
+          }}
+          data-slug={c.slug}
+          aria-label={`Открыть карточку ${c.name}, ${c.alterEgo}`}
+        >
+          <Avatar character={c} />
+          <span className="row-copy">
+            <strong>{c.name}</strong>
+            <span className="alter-ego">
+              {c.alterEgo || "Без alter ego"}
+              {c.isGrunt ? " · Grunt" : ""}
+            </span>
+            <span className="affiliations">
+              {c.affiliations.length ? (
+                c.affiliations.map((a) => (
+                  <span key={a.slug || a.name} className="affiliation">
+                    {a.name}
+                    {a.isLeader && (
+                      <span className="leader-mark"> · лидер</span>
+                    )}
+                  </span>
+                ))
+              ) : (
+                <span>Без аффилиации</span>
+              )}
+            </span>
           </span>
-          <span className="affiliations">
-            {c.affiliations.length ? (
-              c.affiliations.map((a) => (
-                <span key={a.slug || a.name} className="affiliation">
-                  {a.name}
-                  {a.isLeader && <span className="leader-mark"> · лидер</span>}
-                </span>
-              ))
-            ) : (
-              <span>Без аффилиации</span>
-            )}
+          <span className="row-threat">
+            <b>{c.threatLevel ?? "—"}</b>
+            <small>THREAT</small>
           </span>
-        </span>
-        <span className="row-threat">
-          <b>{c.threatLevel ?? "—"}</b>
-          <small>THREAT</small>
-        </span>
-      </button>
+        </button>
+        <RoleIcons slug={c.slug} compact />
+      </div>
       <div className={"owned-control" + (owned ? " owned" : "")}>
         <OwnedCheckbox character={c} owned={owned} boxOwned={boxOwned} />
       </div>
@@ -99,6 +105,7 @@ export function CharacterDetail({
             <span className="eyebrow">02 / Карточка персонажа</span>
             <h2>{c.name}</h2>
             <p>{c.alterEgo}</p>
+            <RoleIcons slug={c.slug} />
             <div className="tags">
               {c.affiliations.map((a) => (
                 <span className="tag" key={a.slug || a.name}>

@@ -1,3 +1,4 @@
+import { RoleIcons } from "./character-roles.jsx";
 import { BattleMapView } from "./map.jsx";
 import { observer } from "mobx-react-lite";
 import { battle as b, catalog, actions } from "./stores/index.js";
@@ -263,6 +264,7 @@ const Fighter = memo(function Fighter({ model }) {
           <small>
             {f.alterEgo} · Threat {f.threat}
           </small>
+          <RoleIcons slug={f.slug} compact />
           <StateCycle fighter={f} plan={plan} disabled={readonly} />
         </div>
       </div>
@@ -744,6 +746,15 @@ export function BattlePlay({
       <div className="section-title">
         <div>
           <h3>{labels[teamSide] === "Мои" ? "Мой отряд" : team.name}</h3>
+          <RoleIcons
+            slugs={team.fighters}
+            tactics={team.tactics}
+            leaderSlug={
+              team.fighters.find((f) => f.id === team.leader)?.slug || ""
+            }
+            context="squad"
+            owner={teamSide}
+          />
           <p className="battle-small">
             {ready} могут походить · {team.affiliation || "Без аффилиации"}
             {team.leader

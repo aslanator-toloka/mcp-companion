@@ -1,0 +1,1226 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-23",
+  "catalogFetchedAt": "2026-10-21T21:40:14.371Z",
+  "method": "Initial editorial multi-role classification from current local Jarvis stat cards; not a statistical rating or an automatic tag-to-role formula.",
+  "scope": "Printed character kit and forms. Explicit conditional assignments list their enabling tactic, ally or leadership. No speculative gem/leadership bonuses assigned globally.",
+  "referenceTaxonomy": "SG Protocol Battlefield Roles (2025) informed the vocabulary only; old character ratings not imported. See guides.md.",
+  "grunts": "Seven Grunt entries deliberately have no independent character roles and do not add providers to squad/roster summaries.",
+  "characters": {
+    "abomination": {
+      "cardVersion": 1780689538,
+      "cardSha256": "c8e545e2ef6abce5078daa7549173dd2d613fc31788aad03d0723c4fd13d75d2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/abomination"
+    },
+    "adam-warlock": {
+      "cardVersion": 1780732499,
+      "cardSha256": "11417396dea8ff0265aacd3ae49d6fc0114bbf1ebaf95bc8e571a73209b9f02c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/adam-warlock"
+    },
+    "agent-venom": {
+      "cardVersion": 1786695284,
+      "cardSha256": "60a6e3328f9a01fb2aad4209c9b5c79bc49caa5b6be556e4e950bdd4662e7034",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/agent-venom"
+    },
+    "amazing-spider-man": {
+      "cardVersion": 1786706665,
+      "cardSha256": "44a62c6f304c30a6686185f859d132cd3eb2fc596689d9f430830c897cbf0969",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/amazing-spider-man"
+    },
+    "ancient-one": {
+      "cardVersion": 1786695284,
+      "cardSha256": "fd527022e8e2906cd3788082215d5df4e4f344c96ca219660797474e73c99698",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ancient-one"
+    },
+    "angel": {
+      "cardVersion": 1786695285,
+      "cardSha256": "59cca022cacc83cc87f4710d438da2482339db6e13b26ddd148dc7e0bf830930",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/angel"
+    },
+    "angela": {
+      "cardVersion": 1786695284,
+      "cardSha256": "d911033671a6397a9ca070ea3adfe6864283c5aa90c06f6968985c8c9142d803",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/angela"
+    },
+    "ant-man": {
+      "cardVersion": 1786695284,
+      "cardSha256": "9e6c970dd1195e387b38d7bdb022880a82a503a5d7c205bb5ddee1a3d57b013d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ant-man"
+    },
+    "apocalypse": {
+      "cardVersion": 1786695285,
+      "cardSha256": "04d72ae7dff85a5d5070c12f4d794fa89b164e37cd9a8ff26944411a3d1d6fc8",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/apocalypse"
+    },
+    "archangel": {
+      "cardVersion": 1786695285,
+      "cardSha256": "679238d7e162567908488c435f1ff784c5bcc43eff166d8b2ff5a6e1e1e5161f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/archangel"
+    },
+    "arnim-zola": {
+      "cardVersion": 1786695285,
+      "cardSha256": "c5c50737d6733b5d298e1dd93c5f92a0411704998237011477686eb7d00a5e22",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/arnim-zola"
+    },
+    "avalanche": {
+      "cardVersion": 1786695285,
+      "cardSha256": "b67784fca35e981b8f8306e07a22fa6d8ac57329f61afe5b86680ad401c500d2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/avalanche"
+    },
+    "baron-helmut-zemo": {
+      "cardVersion": 1786695285,
+      "cardSha256": "dc2d41efe7ee764e13b630c7d4055bef5a8d7e752da170d56ff9f33d0b323085",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-helmut-zemo"
+    },
+    "baron-mordo": {
+      "cardVersion": 1786695285,
+      "cardSha256": "5977365dafce50825b0176d1f691108e1a732e025fabad545d42c8ea37acb19b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-mordo"
+    },
+    "baron-strucker": {
+      "cardVersion": 1792050382,
+      "cardSha256": "2be5150f25c3c63cbc3277878a3a2804fc18e6b821841426544a3ac930bff022",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-strucker"
+    },
+    "baron-zemo": {
+      "cardVersion": 1786695285,
+      "cardSha256": "ea7aedc17664ff28227f3adc6c28003bbe9b990261075220639f166e450ab8fa",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/baron-zemo"
+    },
+    "bastion": {
+      "cardVersion": 1777812650,
+      "cardSha256": "b53f9c784e2b39303c9d2db2606a089ef3c0dc9102d60a06043ccffd850c4378",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/bastion"
+    },
+    "beast": {
+      "cardVersion": 1761082165,
+      "cardSha256": "c411d8bddd8f2f41277820ad0f0c0a570c62184e01ebe7a408bd6f9a75d68163",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/beast"
+    },
+    "beta-ray-bill": {
+      "cardVersion": 1787214899,
+      "cardSha256": "361fc93e517cdca77289d396867425c1cfedb9a8f7750ce6576fe098163d439f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/beta-ray-bill"
+    },
+    "bishop": {
+      "cardVersion": 1786695285,
+      "cardSha256": "2995742969cbc2f4e8b9bc26b552397ce3d79ae68af433be92001e2ba0f26b07",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/bishop"
+    },
+    "black-bolt": {
+      "cardVersion": 1790683500,
+      "cardSha256": "e0ab09be3fb2da46d254c939c1ca6480c1d99398f0ad62ac305c5f098418fca1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-bolt"
+    },
+    "black-cat": {
+      "cardVersion": 1783357044,
+      "cardSha256": "cfff15f34e3306fd7db284da01ca2e5247f34fe6c74d6db1285b935d37ad28e4",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-cat"
+    },
+    "black-dwarf": {
+      "cardVersion": 1786695285,
+      "cardSha256": "36317b70b497736df59493ab4edee4da158ef616082843184d6dccfc9cec321f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-dwarf"
+    },
+    "black-panther": {
+      "cardVersion": 1786695285,
+      "cardSha256": "bb0c60e9a51a6635e1158165f0bf5e27626fdf51ee9f1cbb30f94f9eee0af244",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-panther"
+    },
+    "black-panther-chosen-of-bast": {
+      "cardVersion": 1786695285,
+      "cardSha256": "2e56774c3fc10fc5ac54a2101ecd38ee8a8699a06c22a59161298b28976d089d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-panther-chosen-of-bast"
+    },
+    "black-swan": {
+      "cardVersion": 1787214914,
+      "cardSha256": "1125d6a95a70aadc30386dc3856f448257cac1eabd7c1a4c1e9d041e19aa431e",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-swan"
+    },
+    "black-widow": {
+      "cardVersion": 1768250597,
+      "cardSha256": "9f18f0ee64a4917bfc927a84549c70632b6b65beebc3adb8ee1b57133de38834",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-widow"
+    },
+    "black-widow-agent-of-shield": {
+      "cardVersion": 1781520915,
+      "cardSha256": "12afb9f078153a5730823e767ba70bb70c7f75aa835feb655b99b25524c5a2bf",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/black-widow-agent-of-shield"
+    },
+    "blade": {
+      "cardVersion": 1786695285,
+      "cardSha256": "86734c26366448c27f02f947bd795be3e5f3dff834b6e16b2d665176df2f2a1d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/blade"
+    },
+    "blue-marvel": {
+      "cardVersion": 1786285526,
+      "cardSha256": "c38285b88aa549e44995c1dacfd9847da7cf212708a19e596de4178bd32eb76c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/blue-marvel"
+    },
+    "bob-agent-of-hydra": {
+      "cardVersion": 1780689544,
+      "cardSha256": "690a11466987401ef75e3e661fb3f7276f75c9c27da1d90f1b88fdd7f7298bf5",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/bob-agent-of-hydra"
+    },
+    "bullseye": {
+      "cardVersion": 1780689545,
+      "cardSha256": "1837a226cc128f8a564bf7a32f30d5a876c8c11588768c708f0209cc15bbb489",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/bullseye"
+    },
+    "cable": {
+      "cardVersion": 1786695285,
+      "cardSha256": "797dc6863cb4e23e6030702b5105e2033cbddd8c5c84a8488bb5598905b010d7",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/cable"
+    },
+    "captain-america": {
+      "cardVersion": 1786695285,
+      "cardSha256": "ba3640be859de6d9f9bd696896a497b965e78932039ad1bc0b1d264325281642",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america"
+    },
+    "captain-america-sam-wilson": {
+      "cardVersion": 1786706665,
+      "cardSha256": "0dd4bdc09b58bdfc5f7594dfd939b690a128492b3f1c6184ec775a1024e9f2f6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america-sam-wilson"
+    },
+    "captain-america-first-avenger": {
+      "cardVersion": 1786695285,
+      "cardSha256": "7607ffbc2d7a928e1804ec160a36063146c0f49201cd586514a9aeb3bfba407a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america-first-avenger"
+    },
+    "captain-marvel": {
+      "cardVersion": 1786695285,
+      "cardSha256": "fe9a13dfaecf7790e96827601316a3a6e5d86d62af767eeb174894a579251c32",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-marvel"
+    },
+    "captain-marvel-cosmic-avenger": {
+      "cardVersion": 1786695285,
+      "cardSha256": "0c239d99276907021c2e359e35f4bc56633c625a15a89b9ade54ea036d04fd07",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-marvel-cosmic-avenger"
+    },
+    "carnage": {
+      "cardVersion": 1747833461,
+      "cardSha256": "23e63745cba3a4151ae4a4c984d8d29c763bf5b82f854d6fa8aa137076f78f6e",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/carnage"
+    },
+    "cassandra-nova": {
+      "cardVersion": 1786695285,
+      "cardSha256": "d0c776ca6ac6a5f6c7ee6ee4e2c4eb84d3c366f4b84a1b1ad31daa5eca8d6cee",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/cassandra-nova"
+    },
+    "clea": {
+      "cardVersion": 1786695285,
+      "cardSha256": "793718930c4b1347201448c621a16d323c7a606bb35cc4b04e6ae0c64c14ced1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/clea"
+    },
+    "colossus": {
+      "cardVersion": 1786695285,
+      "cardSha256": "8729a596957315c5f5782574352198281b4aea89342293ac50ca36632cd01ad4",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/colossus"
+    },
+    "corvus-glaive": {
+      "cardVersion": 1786695285,
+      "cardSha256": "d2a3c91752de43d11c44ff2d6da2e4b494de0ca94672e24428353f9b47eb29d5",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/corvus-glaive"
+    },
+    "cosmic-ghost-rider": {
+      "cardVersion": 1786706665,
+      "cardSha256": "5621dc8e96951086a573729b0fcd5e8212ae2d9c9aaca10c479aa823e0624c03",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/cosmic-ghost-rider"
+    },
+    "crimson-dynamo": {
+      "cardVersion": 1790437524,
+      "cardSha256": "ef0ea19e908b1e893b9de9f8c83c2b56c8025dfd06ea2d938d0b3838c42d3907",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/crimson-dynamo"
+    },
+    "crossbones": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a36935f068e6324e5a65b4a3ccbae26b8604dbb15b84957c423c77edbed13f4a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/crossbones"
+    },
+    "crossbones-merciless-merc": {
+      "cardVersion": 1786695285,
+      "cardSha256": "248e6f97e4ba3b5da44422192dc4e77b0230bf6a6e56b7f327f0528d4cf47269",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/crossbones-merciless-merc"
+    },
+    "crystal": {
+      "cardVersion": 1786725729,
+      "cardSha256": "8534a0954e28778a3d73f4eb51ffd58e5884cf74c2dbcb4b5786732a7631577f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/crystal"
+    },
+    "cyclops": {
+      "cardVersion": 1786695285,
+      "cardSha256": "c0def7090586bfb8a5123db97e7f6a78ce4b623876100e6e366a67ddbccce659",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/cyclops"
+    },
+    "daredevil": {
+      "cardVersion": 1786695285,
+      "cardSha256": "0447ad4b5b5a52f293ec77678dcdc4e7867c3b0a9f9c39b5679a2b2a2dde7591",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/daredevil"
+    },
+    "darkstar": {
+      "cardVersion": 1790437525,
+      "cardSha256": "556e71ab6dc451d1c775c98427b2597b96ec68cc679c70ee4dafba330ad5ebcb",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/darkstar"
+    },
+    "deadpool": {
+      "cardVersion": 1786706665,
+      "cardSha256": "0c8bfd9d1f7abb5af4cc8c88e3ad3c52d4c6deae5d94a5f29641383983676fca",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/deadpool"
+    },
+    "doc-ock-sinister-scientist": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a905a8e1874bd784fbee4e32231bec3442fddf60ed737d2e56c3376abd42bd67",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/doc-ock-sinister-scientist"
+    },
+    "doctor-octopus": {
+      "cardVersion": 1786695285,
+      "cardSha256": "c6d2a6b5344a00944b1dcf697ff042f3df51260187e6c600df91bb9bfb8d99de",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-octopus"
+    },
+    "doctor-strange": {
+      "cardVersion": 1786695285,
+      "cardSha256": "34e3519860e8fc3a204d94c3e41701f70c37f172460d179753a24a97626c5cd1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-strange"
+    },
+    "doctor-strange-sorcerer-supreme": {
+      "cardVersion": 1786695285,
+      "cardSha256": "1b948ac25f096fc035f36d35ed77f315f6544c6d1b648da8043f5035757117a1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-strange-sorcerer-supreme"
+    },
+    "doctor-voodoo": {
+      "cardVersion": 1751710942,
+      "cardSha256": "3d9d36d7e7d7a584f7aaf3fe08f288285dd72e43a0d19cb8e28038507828db23",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/doctor-voodoo"
+    },
+    "domino": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4eaaeeb7d23c04c770571222cb5ffa98263677746ecbe67f8bf79714482a6f6d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/domino"
+    },
+    "dormammu": {
+      "cardVersion": 1786706665,
+      "cardSha256": "129d64d0f0c87cc9972ee45fd9517f3a047ab4521fbb54f094ff497f8641dcf1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/dormammu"
+    },
+    "dracula": {
+      "cardVersion": 1753605541,
+      "cardSha256": "40c5366d7e2d8b2ae8ba45a0086178982ad87f9e99a67bd433dce4d15e1a94c6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/dracula"
+    },
+    "drax-the-destroyer": {
+      "cardVersion": 1787072075,
+      "cardSha256": "35d897e69d04d37df93847805980c7adeb9648f9081cce288402690e01cce86b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/drax-the-destroyer"
+    },
+    "ebony-maw": {
+      "cardVersion": 1792097960,
+      "cardSha256": "c2e88c9155affe60df16ef5ca88cc4546111b7f436abbabc755961f00566fa0a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ebony-maw"
+    },
+    "echo": {
+      "cardVersion": 1786695285,
+      "cardSha256": "82312cfe1bc42ac474dc05b81624ac97778b2da15d5c868685b1609228044ddb",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/echo"
+    },
+    "electro": {
+      "cardVersion": 1786695285,
+      "cardSha256": "48c0c64cfed0e9bb470c706d62fd7f6cea463f09f3da5aa63cc2e14c750f81da",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/electro"
+    },
+    "elektra": {
+      "cardVersion": 1786695285,
+      "cardSha256": "679ae52472a98ea52d0f10fc4e999cddc2d7c892d10ea349f5c40c186e56d503",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/elektra"
+    },
+    "elsa-bloodstone": {
+      "cardVersion": 1786695285,
+      "cardSha256": "e9bee3c5ed023ca6f829cdb1b7db6eea8a006b00e21e51a2d9bd58d65ddf3569",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/elsa-bloodstone"
+    },
+    "emma-frost": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a1e625307c78e528b4e9570b5a3e75984eea850054fe34772b9fb8a94f348f47",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/emma-frost"
+    },
+    "enchantress": {
+      "cardVersion": 1786695285,
+      "cardSha256": "6103b0d1b1e98d7802a9c8c01635dfda9788770656296fac874dcc616f40a5df",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/enchantress"
+    },
+    "exodus": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a537af4529da9b429db8c4d2183aaec6aad7a84b5569dd14906a64fab2624c5a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/exodus"
+    },
+    "frankensteins-monster": {
+      "cardVersion": 1786695285,
+      "cardSha256": "2db35397167d8cd7a151f643d766806239d1032d06d5400d38b454842c839d5c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/frankensteins-monster"
+    },
+    "gambit": {
+      "cardVersion": 1786695285,
+      "cardSha256": "7ff5467834ac53c5283b16ed99dbb73e48293cb91bfeb764f067c75006e198a6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/gambit"
+    },
+    "gamora": {
+      "cardVersion": 1787785979,
+      "cardSha256": "5996ec045b0d1e5a0f8a5a44450aac32a22478fba7d974b3916adbf27242a2a6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/gamora"
+    },
+    "ghost-rider": {
+      "cardVersion": 1751702731,
+      "cardSha256": "bd5aea501080fd63cad9e7760ec58248c6d9a4f404d4def1674aa9efa4537bd5",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ghost-rider"
+    },
+    "ghost-spider": {
+      "cardVersion": 1786695285,
+      "cardSha256": "fa94fb2b248a6ceedb832648138fc6bd1bb3c16a8080baf3b880de21e47bf3a7",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ghost-spider"
+    },
+    "gladiator": {
+      "cardVersion": 1755085331,
+      "cardSha256": "795509a0b79bd1ae64e10573e8b0f9af9933543971a37618117b3b49dd704fac",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/gladiator"
+    },
+    "gorgon": {
+      "cardVersion": 1753605541,
+      "cardSha256": "7ada05711548102314e9023493400a94455153fe60045f04c784b3436af1dd7d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/gorgon"
+    },
+    "green-goblin": {
+      "cardVersion": 1786706665,
+      "cardSha256": "bda507f7b6ea8679110523e5c5f9ba164e8c92d9793f8094032735392298dde4",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/green-goblin"
+    },
+    "groot": {
+      "cardVersion": 1787785979,
+      "cardSha256": "69aaeab39e56d7381dfc94f69c645a614c5a5807725a7cc26fc8ff6d576886ce",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/groot"
+    },
+    "gwenom": {
+      "cardVersion": 1786695285,
+      "cardSha256": "3b45f65772b3a734fce2ed19c9eb907b1e0da80e319b19f077a84c329249e286",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/gwenom"
+    },
+    "gwenpool": {
+      "cardVersion": 1788638332,
+      "cardSha256": "87a954bdb53c8dde80f423d7f50a075278fc770680c4f7c57b936e0bf1d1d46c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/gwenpool"
+    },
+    "hand-ninjas-grunts": {
+      "cardVersion": 1786695285,
+      "cardSha256": "c2008e0571f541a30920bb282728ffda634a0874ed0e6bfd5475753957c46a32",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hand-ninjas-grunts"
+    },
+    "havok": {
+      "cardVersion": 1791329038,
+      "cardSha256": "f5286a0e3ae8cc2b87e477abb77760386de9d045b26b33bea727eb4408f2ddaa",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/havok"
+    },
+    "hawkeye": {
+      "cardVersion": 1781520915,
+      "cardSha256": "81b66b9cb150f4dc1392089bd05a4612b98982314a2fbe4ec79374993da8f8f1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hawkeye"
+    },
+    "heimdall-the-all-seeing": {
+      "cardVersion": 1786695285,
+      "cardSha256": "dd32c42c412413c78381eab50a0f1e037ba9ba57b21746bfe2d9d0497cb1ee65",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/heimdall-the-all-seeing"
+    },
+    "hela-queen-of-hel": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4c90237d4ac8f95bb46faad1b33c227c348eb4f3571fd228eb517daa48b1086a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hela-queen-of-hel"
+    },
+    "honey-badger": {
+      "cardVersion": 1786695285,
+      "cardSha256": "565072983d73a6158d8ba44b82ec2a6ec7b01588129f09d9e934300636fae0af",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/honey-badger"
+    },
+    "hood": {
+      "cardVersion": 1790437518,
+      "cardSha256": "2789c90096a0f4fc7f4c523dcc9ba0faaff888105839c2f4c26915632a1aa01f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hood"
+    },
+    "hulk": {
+      "cardVersion": 1786695285,
+      "cardSha256": "26a162f2862d75551b9eb475fab62e27f7d349f0fc552f316d4e26b553cf3707",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hulk"
+    },
+    "hulkbuster": {
+      "cardVersion": 1786695285,
+      "cardSha256": "521cf2b4bd52ee953450db3f87e43f69541dbaa3f70c7889e1bf4b9f9c6e1211",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hulkbuster"
+    },
+    "hydra-troopers-grunts": {
+      "cardVersion": 1786695285,
+      "cardSha256": "7c39094705c7aba376b086053b4766a57997f2fbc20efcc666244e29425b6d97",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/hydra-troopers-grunts"
+    },
+    "iceman": {
+      "cardVersion": 1786695285,
+      "cardSha256": "415f0a99397f36abd2dac3ca529b13a4106dbc5e16e401438a56187d6772ce24",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/iceman"
+    },
+    "invincible-iron-man": {
+      "cardVersion": 1786695285,
+      "cardSha256": "f80996ff0216ad00126c1efc21f59a0b44c927b663e250272a35bd5be290c4a3",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/invincible-iron-man"
+    },
+    "iron-fist": {
+      "cardVersion": 1786695285,
+      "cardSha256": "2f2b5db31a58e3c4e88e5df76a9105a6cec0e421cad19ade160f3a699af7a5d0",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-fist"
+    },
+    "iron-lad": {
+      "cardVersion": 1786695285,
+      "cardSha256": "9fcf3b0b82d6118872c8a78cfc3ea9ebf4a00ab7ff108f47a8f42d6b15bdfe2b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-lad"
+    },
+    "iron-man": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4e71d90eb9922a05633f71881314b46de4d2a09175f75d2cf4e6d20d3faa8163",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-man"
+    },
+    "iron-monger": {
+      "cardVersion": 1768833130,
+      "cardSha256": "ab192d78686d310c3abfa212bb751248024d356a45b07f177229b61448685d7f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-monger"
+    },
+    "jean-grey": {
+      "cardVersion": 1786695285,
+      "cardSha256": "cca83078306187c95e34e0b4b189767f2cead85751eab4d7f414cec690002769",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/jean-grey"
+    },
+    "jubilee": {
+      "cardVersion": 1791063114,
+      "cardSha256": "2d72c3df1e307aff3abf5b95a3b18e6d2b27145fad87d63e9adab3a2ee992506",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/jubilee"
+    },
+    "juggernaut": {
+      "cardVersion": 1747492452,
+      "cardSha256": "bec8ddd52d556283e8159da08eccedc7e87679f5f4fcd64323de1cc1104e7f54",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/juggernaut"
+    },
+    "kang-the-conqueror": {
+      "cardVersion": 1786695285,
+      "cardSha256": "d0f4af542fa2b6fe0021b3e777d58236f2ae2e71dafd5b177dfea5c503ae82ac",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/kang-the-conqueror"
+    },
+    "karnak": {
+      "cardVersion": 1791228614,
+      "cardSha256": "8b7fa581f3478fbfe4896621f02cf26060f3817ba0c8dd89660cb73dc8766c74",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/karnak"
+    },
+    "killmonger": {
+      "cardVersion": 1792153260,
+      "cardSha256": "ed16624b30d4e7b1e9f9a4a1ee9396562ac199a44507f167977854a9e0000a1b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/killmonger"
+    },
+    "killmonger-usurper": {
+      "cardVersion": 1790334750,
+      "cardSha256": "ecf8d6f3c87f6adf3e285f2dd1f765bac4ffec0d65776ceb983b37cf6a31c913",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/killmonger-usurper"
+    },
+    "king-black-bolt": {
+      "cardVersion": 1786695285,
+      "cardSha256": "0f6a5941c2f258bacaf4a2265bba20d96e0d0de6d612e6e19326d2285da2ca03",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/king-black-bolt"
+    },
+    "kingpin": {
+      "cardVersion": 1786695285,
+      "cardSha256": "5915b74effbf071f821f9d6e09db518460d7c7450ca288cfaa4474cfc9ef3fc6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/kingpin"
+    },
+    "king-tchalla": {
+      "cardVersion": 1786695285,
+      "cardSha256": "5de7a6871f4b611864a1deae8eea0225a611f2771845832a6135963efddd9cbd",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/king-tchalla"
+    },
+    "klaw": {
+      "cardVersion": 1786695285,
+      "cardSha256": "50abcb596086ccf0cd2e8a65273a1a2dced778dadbd87b936ac810c722c6fa3c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/klaw"
+    },
+    "kraven-the-hunter": {
+      "cardVersion": 1786695285,
+      "cardSha256": "cc8b6ccd0b72925967782f7f81a5ef6fdf127c0d6f3e0c438eeb977c603034b6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/kraven-the-hunter"
+    },
+    "lady-mastermind": {
+      "cardVersion": 1786695285,
+      "cardSha256": "f160292f4ddd96855d1dbfbeef8db5b4e7d12731b2cbefd715ae6051799068e1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/lady-mastermind"
+    },
+    "lady-sif": {
+      "cardVersion": 1786695285,
+      "cardSha256": "38bb90992ecd19e72c5d0b24f252e5c4d0eb9cb3c57dcf4fc1db074081326bce",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/lady-sif"
+    },
+    "lizard": {
+      "cardVersion": 1762291546,
+      "cardSha256": "feb175e6747e8123509f7ee8852adcb610830c31f2e613a1957f5b4d9138dcbb",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/lizard"
+    },
+    "lockjaw": {
+      "cardVersion": 1790430982,
+      "cardSha256": "82bc3ae26cb1f668ade121d7f3304050ea913b389b43ad691dfc2366c3f4ba47",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/lockjaw"
+    },
+    "logan-the-wolverine": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a9ad7c2b75aac84b34417c827c1bd8e6c8cfc3693a5eb3e146c3dd297c718016",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/logan-the-wolverine"
+    },
+    "loki-god-of-mischief": {
+      "cardVersion": 1788628852,
+      "cardSha256": "b8d17268652f92f7aeda851ad09743c563cd8b78fd9a005eb549c9d4ea127651",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/loki-god-of-mischief"
+    },
+    "loki-prince-of-lies": {
+      "cardVersion": 1781520914,
+      "cardSha256": "2585c4fefb645b315347c240bbb39d3aa901aef81fff7fdbba7b5c80ae154ba4",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/loki-prince-of-lies"
+    },
+    "luke-cage": {
+      "cardVersion": 1768250597,
+      "cardSha256": "7142c237c8aac7ba2dc788eaac7a2994cc79d67bfc9ab1eb2c9f04af39f23f4a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/luke-cage"
+    },
+    "magik": {
+      "cardVersion": 1786695285,
+      "cardSha256": "9a4c23ae2073e5c460c00930b011d028b9478fac5556708389b38f8d41c4ca69",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/magik"
+    },
+    "magneto": {
+      "cardVersion": 1786695285,
+      "cardSha256": "3cd1b4edcf4592e620bf097b1f13013764c4481135fda789cd5e145770156617",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/magneto"
+    },
+    "malekith-the-accursed": {
+      "cardVersion": 1786695285,
+      "cardSha256": "fc38ff9f4f467d9814dcd248fe9bd08ebe656f4f472ebc925eb2648f1a78219e",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/malekith-the-accursed"
+    },
+    "man-thing": {
+      "cardVersion": 1742248900,
+      "cardSha256": "6a3839eee9c4f2030cc2c491b4a3a59a871f520e2451d462182f5dfddf55cab3",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/man-thing"
+    },
+    "maverick": {
+      "cardVersion": 1786695285,
+      "cardSha256": "531d7b3f51891e2c09532c0b2157610724db6fc3e6cb0558448f0b7446ba2f3a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/maverick"
+    },
+    "maximus-the-mad": {
+      "cardVersion": 1788106078,
+      "cardSha256": "7e0144acc2c52fb325ca241118f6905c61d0cf14890feea52a00d351be622d5b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/maximus-the-mad"
+    },
+    "mbaku": {
+      "cardVersion": 1787072375,
+      "cardSha256": "1f52ee7b44f6c98442e372743a7d699b251c228e205768680bff36a9c048321b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mbaku"
+    },
+    "medusa": {
+      "cardVersion": 1786725729,
+      "cardSha256": "e7682eb3beb96e7edb741d6efbee5c5b37ba757b8f621f761bfdd7261e3ee2c2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/medusa"
+    },
+    "mephisto-lord-of-temptation": {
+      "cardVersion": 1787594886,
+      "cardSha256": "1d0071c314b7275605a484782d7d40d3bf744b3ad8e938322d4eaedca4b849eb",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mephisto-lord-of-temptation"
+    },
+    "mirage": {
+      "cardVersion": 1791329038,
+      "cardSha256": "ea4816930127ce57be7ea8e255e10b3278373c43c6d2b90c9ffd0acb230e3bd9",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mirage"
+    },
+    "mister-sinister": {
+      "cardVersion": 1788764807,
+      "cardSha256": "ccdc2fd5005225f8e1a2986b699c8ee856038050b46da24b7680fa3fb822d50d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mister-sinister"
+    },
+    "modok": {
+      "cardVersion": 1786695285,
+      "cardSha256": "939991b46de4dd3bf084766d3c2942538ca7df57b4644d5baff07a456ad2503d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/modok"
+    },
+    "modok-scientist-supreme": {
+      "cardVersion": 1786706665,
+      "cardSha256": "f1d6a8e92c45b3b2a9bcb9573ce253c1a90aacb4482d1c4b6f1e7d105f419ca0",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/modok-scientist-supreme"
+    },
+    "moondragon": {
+      "cardVersion": 1780689576,
+      "cardSha256": "1aa84cc6899acbb7c0ebd8ca99bf70d9e3ddc3da726a698ffa595fa5a5a015e8",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/moondragon"
+    },
+    "moon-knight": {
+      "cardVersion": 1786695285,
+      "cardSha256": "b2887a793a17467891967e248c831bd5ce7fcdce6648f1fc3be8a31473e9ac1f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/moon-knight"
+    },
+    "ms-marvel": {
+      "cardVersion": 1788691634,
+      "cardSha256": "534a8eb020a2e51405580e0dc7760d23f01de2a458a5c578d3ff01e2cef671dc",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ms-marvel"
+    },
+    "multiple-man": {
+      "cardVersion": 1791329037,
+      "cardSha256": "ce99516efcb2ff8cc940a74c8cc0542175b7deaf64381e0a1ec3d457c593afb2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/multiple-man"
+    },
+    "multiple-man-duplicates-grunts": {
+      "cardVersion": 1791590048,
+      "cardSha256": "63cad556959631c90ab99cac4b661666fa8c1dcbc3bae2e004e3f689df34193c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/multiple-man-duplicates-grunts"
+    },
+    "mysterio": {
+      "cardVersion": 1786695285,
+      "cardSha256": "9b9817b5b8676d13648c129e72480f2ca84cc1d7a12ec7997294bb24b10c4e5d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mysterio"
+    },
+    "mystique": {
+      "cardVersion": 1786706665,
+      "cardSha256": "6d61ba43d66c686f94ea185aea3d7090535a489250d5c31b540ee7c33af827f6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mystique"
+    },
+    "namor-the-submariner": {
+      "cardVersion": 1755085331,
+      "cardSha256": "aa0ea8c4cd8c6b2bafc6e8fac4c3092f186e757c63d3f2155d15a6a23bbea4cf",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/namor-the-submariner"
+    },
+    "nebula": {
+      "cardVersion": 1788628852,
+      "cardSha256": "9b794206cfe48210cf3779860df160fb6d3323dab5671bb01e9af0a7c00e13dd",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nebula"
+    },
+    "nick-fury": {
+      "cardVersion": 1781520915,
+      "cardSha256": "fb437fe74ef0d1be52c7dff8e06b05b99c800aa3e88c78e540d053f40f03a6e0",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nick-fury"
+    },
+    "nick-fury-and-the-howling-commandos": {
+      "cardVersion": 1786695285,
+      "cardSha256": "7ef5854437f6c2e8dbf269234e628cefb064eeb1933e0a62b24b0ff7d4a85c53",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nick-fury-and-the-howling-commandos"
+    },
+    "nightcrawler": {
+      "cardVersion": 1786695285,
+      "cardSha256": "6927b1ecf8c34693385847635adac1fbfca5d7923eb72b176362ffaec6367e0c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nightcrawler"
+    },
+    "nimrod": {
+      "cardVersion": 1792010398,
+      "cardSha256": "dba82126c26d7076ca91e8221baace99b470ee21b7cca44c40b038940fe710fc",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nimrod"
+    },
+    "nkantu-the-living-mummy": {
+      "cardVersion": 1753605541,
+      "cardSha256": "ac563fbf8b4b1bb5f3ec0a0bf397ceb20a13ae99135c66e89b6a569e35f2ca21",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nkantu-the-living-mummy"
+    },
+    "nova": {
+      "cardVersion": 1786695285,
+      "cardSha256": "218ea40adc59e7581a79c87aa00133e0ef7b49c1b3678b7350c5d6b9f573ae4f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nova"
+    },
+    "okoye": {
+      "cardVersion": 1741207463,
+      "cardSha256": "07f2cceb2e372d2a3bab0dd4ed317aa0ec64155d3922a13fda056520a9226ac3",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/okoye"
+    },
+    "omega-red": {
+      "cardVersion": 1786695285,
+      "cardSha256": "3d5d1641c7451254684cf40dc9779acb368589d6f15b3c971bd3bceeaf251739",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/omega-red"
+    },
+    "omega-sentinel": {
+      "cardVersion": 1788102484,
+      "cardSha256": "c4e8e0ba52c82187b17ab5d192e705a2e9f5870d956dcae8377def025aa99864",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/omega-sentinel"
+    },
+    "onslaught": {
+      "cardVersion": 1787121857,
+      "cardSha256": "92c405c00d47ec85e76b50c2b93fcd18115b076da123a75e8573ee3768edc64f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/onslaught"
+    },
+    "phoenix": {
+      "cardVersion": 1786695285,
+      "cardSha256": "30897fc62cd62d3bbbb2f35be1cb30bec29284425ff5f842c07d5ae86925bb4a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/phoenix"
+    },
+    "prime-sentinel-2": {
+      "cardVersion": 1782856007,
+      "cardSha256": "3c02d554903140bb3048224563e9cace183c10d7484289c57e439f5d36fbe4f8",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/prime-sentinel-2"
+    },
+    "prime-sentinel-1": {
+      "cardVersion": 1782856004,
+      "cardSha256": "bc32c20aeaee51187e3776beb26a87cb35da2d06411de0ed1514a568b00bf14e",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/prime-sentinel-1"
+    },
+    "professor-x": {
+      "cardVersion": 1786695285,
+      "cardSha256": "31865c279b297c08dcff099b60ac4a319b5bf6fe8f138e1ed9d7f4a8b56c0f15",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/professor-x"
+    },
+    "prowler": {
+      "cardVersion": 1786695285,
+      "cardSha256": "af58d08818a9ab89dbc170dd4243f37f1fabd00990cae36450559d590b64f568",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/prowler"
+    },
+    "proxima-midnight": {
+      "cardVersion": 1786797022,
+      "cardSha256": "ccb8cfbfb690088e458c430e982697b315b86a74c83ca0c4d86519d08b34164c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/proxima-midnight"
+    },
+    "psylocke": {
+      "cardVersion": 1786695285,
+      "cardSha256": "0ba093cc362bc3932008e6871cb2ab266be3e9281b938f1bc458c032dda7c59a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/psylocke"
+    },
+    "punisher": {
+      "cardVersion": 1786695285,
+      "cardSha256": "78c49f8adf3da5cb148b96a50b4ce703f4968fbf1bdaa41100757f90b1e83eeb",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/punisher"
+    },
+    "pyro": {
+      "cardVersion": 1786725729,
+      "cardSha256": "72d16d4ddc95fd9d148d7688e35cf1809b84a14f6f38e307cfc96b65b87443fd",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/pyro"
+    },
+    "quasar": {
+      "cardVersion": 1771060333,
+      "cardSha256": "d261ed6c43c7709c9814ad2fe61f5887f51801d10bc4e4f9c2f0ed3c8e7695f4",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/quasar"
+    },
+    "quicksilver": {
+      "cardVersion": 1786725729,
+      "cardSha256": "9845b19c13d5dd52f94864502d56fce811bb90f79dd7c63affd11b4e80f032f0",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/quicksilver"
+    },
+    "red-guardian": {
+      "cardVersion": 1790437526,
+      "cardSha256": "b2a3feb1e65b1ca5b074270c4ec724597452a87dbaad17214911c111992d031a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/red-guardian"
+    },
+    "red-hulk": {
+      "cardVersion": 1791841660,
+      "cardSha256": "aa99cccb9069ebeac83b1e04d9ac90bcb7c284531c25522720183563267b18b7",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/red-hulk"
+    },
+    "red-skull": {
+      "cardVersion": 1786695285,
+      "cardSha256": "9f9ac0fc801401f1d428d2d68392328453f677db53bf50dfb5efba0d94351b15",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/red-skull"
+    },
+    "red-skull-master-of-hydra": {
+      "cardVersion": 1786725729,
+      "cardSha256": "8addbf1dcefc8f823c7fcbae4385107aea5eea4cefa182df7d99d4a8cf792785",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/red-skull-master-of-hydra"
+    },
+    "red-skull-master-of-the-world": {
+      "cardVersion": 1786695285,
+      "cardSha256": "6048c894b4f4b67a302abf2da7f105319de69788d566a253387217b4827b11ac",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/red-skull-master-of-the-world"
+    },
+    "rescue": {
+      "cardVersion": 1780689585,
+      "cardSha256": "ee78d33ba859c30697c0cec96e82cba21ad631ad242d81094e716b738111db03",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/rescue"
+    },
+    "rhino": {
+      "cardVersion": 1762329541,
+      "cardSha256": "69da5f3f471cab14d660857660ff8d04d6ed9d7897e93d4b35933de761b34875",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/rhino"
+    },
+    "rocket-raccoon": {
+      "cardVersion": 1787785979,
+      "cardSha256": "95f43a39324cb5d254dfb585f2ca17ffab806788878574ae1e2a9446a87f5dfa",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/rocket-raccoon"
+    },
+    "rogue": {
+      "cardVersion": 1786695285,
+      "cardSha256": "fda2da73e2ef70d36eb6b7e37aeee153d4074f630fd29231e7d67de2e35c205c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/rogue"
+    },
+    "ronan-the-accuser": {
+      "cardVersion": 1786802814,
+      "cardSha256": "2a722e8927088238980e2f030e10182d96b70b3835170a742f6ba20ffc672f11",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ronan-the-accuser"
+    },
+    "ronin": {
+      "cardVersion": 1786695285,
+      "cardSha256": "b2fbe6cf602227eb1a8eab52c8142f01ffe4292ebbd76b01d368fde3992c2a5f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ronin"
+    },
+    "sabretooth": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4e508cf3983c6f625b43c5b4b96e3bc4266491150ea9de4cc8d95b4d917acf6c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sabretooth"
+    },
+    "sabretooth-apex-predator": {
+      "cardVersion": 1788696912,
+      "cardSha256": "c4c14659b69be1f99f45644aad904f90e2e213ebdfe2b14b18c14401c101b3f9",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sabretooth-apex-predator"
+    },
+    "sand-construct-1-grunts": {
+      "cardVersion": 1785702189,
+      "cardSha256": "f28285b93efcf83c07530a6edb323620cc1c3ac0f888ec59aa09eec334dcb6cf",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sand-construct-1-grunts"
+    },
+    "sand-construct-2-grunts": {
+      "cardVersion": 1785702191,
+      "cardSha256": "b9c192b2c6a3ec4aade2c01b2051f0cfbc2bf0b42a41581a3f7ef0534236f8b2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sand-construct-2-grunts"
+    },
+    "sandman": {
+      "cardVersion": 1786695285,
+      "cardSha256": "52cbad725e4649e80eb2b2740989445f3b052c1775b58197064db487ea9afa99",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sandman"
+    },
+    "scarlet-spider": {
+      "cardVersion": 1786695285,
+      "cardSha256": "779ecf49814c7728ca2a25569942598b741682114c58bb8a2bf5d58673fbfc0f",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/scarlet-spider"
+    },
+    "scarlet-witch": {
+      "cardVersion": 1791228615,
+      "cardSha256": "58b54339fd81aa7d4d2c8c451b256a02089b2c01ae6b8fe8ac19c9a1e0f023bd",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/scarlet-witch"
+    },
+    "sensational-she-hulk": {
+      "cardVersion": 1791841661,
+      "cardSha256": "2f12aa2fd659656416e02b00ee8ea11aa9ee63657ca695f6e3778dd3cdd3a42a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sensational-she-hulk"
+    },
+    "sentinel-mk4": {
+      "cardVersion": 1763497002,
+      "cardSha256": "d7a6efff796e542d1c88b78d477fba8e90845612d611e4cc06db27533b4158b7",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sentinel-mk4"
+    },
+    "sentinel-prime-mk4": {
+      "cardVersion": 1790423697,
+      "cardSha256": "4c733da5f53df915e7373401bb91d189b93090cf3f9ae653de100d06eb569f1d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sentinel-prime-mk4"
+    },
+    "shadowcat": {
+      "cardVersion": 1786695285,
+      "cardSha256": "0d4dc5af95c994a03d34cb17ac7cf3049722586878092d1ea9d0efa0ed4d8668",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shadowcat"
+    },
+    "shadow-king": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4e4997fd694cc1bb8ae78ec5a71196d148dcf96e002477505fe7a80f9e0b166a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shadow-king"
+    },
+    "shadowland-daredevil": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a5bdee216ea62f1a9e5830c8c2536d83ee569c7096cb33a7de3c95072020b719",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shadowland-daredevil"
+    },
+    "shang-chi": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4abd1948dd976c33a23a20edd3d86d266b93c341e5e6cf0592f1612921400232",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shang-chi"
+    },
+    "she-hulk": {
+      "cardVersion": 1786727411,
+      "cardSha256": "257d77aa4d01be652df42d85c381614862d03712c108b1b61c33196a2371bbf2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/she-hulk"
+    },
+    "shield-agents-grunts": {
+      "cardVersion": 1786402840,
+      "cardSha256": "45572b87586c1577c96cac8786b032e722a1fae41687f6460a7ddadfc9b231cc",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shield-agents-grunts"
+    },
+    "shocker": {
+      "cardVersion": 1786695285,
+      "cardSha256": "1333fff5546cef213def36f2431d85d2401ac9996dc58ebde5420a79032d1369",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shocker"
+    },
+    "shuri": {
+      "cardVersion": 1786695285,
+      "cardSha256": "e08f0d240d5fa8cdf61240b55582b761e3e28bf0641f755519c4482ddb5a7825",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/shuri"
+    },
+    "silk": {
+      "cardVersion": 1786695285,
+      "cardSha256": "1c10833603bd030f6c26bdbbf0dc570b6c23e32a66246e4a644de1c0131bd946",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/silk"
+    },
+    "silver-sable": {
+      "cardVersion": 1786695285,
+      "cardSha256": "57a001805183582304478a14211e3a859be2d8e509433c2b2d36b4b7cd0fd653",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/silver-sable"
+    },
+    "sin": {
+      "cardVersion": 1786695285,
+      "cardSha256": "bd861a0bfb9f97d6d4cb7b9bdb622b9e7524fe745647109bb9994b367f7d2ef3",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sin"
+    },
+    "skurge-the-executioner": {
+      "cardVersion": 1786695285,
+      "cardSha256": "89f00a048d7b295e4f74b74e52fb5199cd17cdc0fbc8d5971fbea18a452c8bcd",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/skurge-the-executioner"
+    },
+    "spectacular-spider-man": {
+      "cardVersion": 1783357075,
+      "cardSha256": "ebaab4dd88665b5addea5de0d0eb9ccef44b4c396e548d58084224599c5426cf",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spectacular-spider-man"
+    },
+    "spectrum": {
+      "cardVersion": 1786695285,
+      "cardSha256": "9d38fc083dc3029f13c943f52f076f39bcc6522612c229a0b790c90eba482f12",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spectrum"
+    },
+    "spider-ham": {
+      "cardVersion": 1786285530,
+      "cardSha256": "1aa0b3610733bcaab64a7d2348af5ae6adcf39eeec47893bc4da81d17cb68012",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-ham"
+    },
+    "spider-man-miles-morales": {
+      "cardVersion": 1783357070,
+      "cardSha256": "bf812fe57e8a2ca7a0c233c334f9b47b28b9cd790138415c843076490d4c3285",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man-miles-morales"
+    },
+    "spider-man": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a47bcd8e84e9ffdf35fef02842b5b6d705f050fbe1e400978ebe2ca4c036f815",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man"
+    },
+    "spider-man-2099": {
+      "cardVersion": 1786695285,
+      "cardSha256": "79fa282ba9b20b7a5d7fe165167b9f38c40ef9e80b6366c6171daae5a2f9d7ac",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man-2099"
+    },
+    "spider-man-noir": {
+      "cardVersion": 1786285531,
+      "cardSha256": "65e17b2b8ca97ec57a19222b2ddef0058b3207379c1b4718ffdb4e5681975e3d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-man-noir"
+    },
+    "spider-woman": {
+      "cardVersion": 1790421993,
+      "cardSha256": "75bec55a356d0aa4b1affbc986b2539b2bf32ca900cf2bf2327c2e914dff2aa0",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/spider-woman"
+    },
+    "squirrel-girl": {
+      "cardVersion": 1788703543,
+      "cardSha256": "c7c482c64990389e89a9b8862ffb25d85c198b59f7d53ba5fc9f06a5c7653e48",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/squirrel-girl"
+    },
+    "star-lord": {
+      "cardVersion": 1781520915,
+      "cardSha256": "badecc18044505847ab3c9463c2e27bc007e38a62a793185393fd809ba1eb00b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/star-lord"
+    },
+    "steve-rogers-captain-america": {
+      "cardVersion": 1788628852,
+      "cardSha256": "b804156e47974a0bfe38f249699cdef6fa5fe7e750ec52790eec97c1f226d233",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/steve-rogers-captain-america"
+    },
+    "storm": {
+      "cardVersion": 1786706665,
+      "cardSha256": "d8faf4101ef1c79bab0e9a08d04a283a2ca99063aee558a37d856e85e84e93a1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/storm"
+    },
+    "sunspot": {
+      "cardVersion": 1786695285,
+      "cardSha256": "cae2d166d34caa5758df3aa31bd37378ffd163493628ab7391f1f242cfc035bf",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/sunspot"
+    },
+    "supergiant": {
+      "cardVersion": 1788628852,
+      "cardSha256": "58a96236f428c9e3955c02459821b211be0a2419975afab8dab0992ba451c358",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/supergiant"
+    },
+    "taskmaster": {
+      "cardVersion": 1786695285,
+      "cardSha256": "1d068238333dd114441db1e4ba75d8142a8f34f9ec888bb92315f1bab70ced11",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/taskmaster"
+    },
+    "thanos-the-mad-titan": {
+      "cardVersion": 1760709168,
+      "cardSha256": "897addf0e334d4d4c0e1b5d6a522bc7178bb2e5e47943898893d40cf38caf15a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/thanos-the-mad-titan"
+    },
+    "the-black-widow": {
+      "cardVersion": 1786695285,
+      "cardSha256": "96871c8df41e939a5f996274d26ef880c7b914578513347bfc5fc5d35f89f385",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-black-widow"
+    },
+    "the-blob": {
+      "cardVersion": 1786695285,
+      "cardSha256": "10e96e2266209c0c0a7f34cd1c481eb88546abc19ce9ebd94926a7ca7a1878a4",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-blob"
+    },
+    "the-immortal-hulk": {
+      "cardVersion": 1786695285,
+      "cardSha256": "810319d299a9ae9ff0e268c388ce30c200dffee1ca9991e47326dbbc3c239193",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-immortal-hulk"
+    },
+    "the-leader": {
+      "cardVersion": 1792012469,
+      "cardSha256": "2b735f21bebf5e16f05d592060ffc6c4dfa8fe21e07b8a8afd7a4183aba15a30",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-leader"
+    },
+    "mighty-thor": {
+      "cardVersion": 1781520914,
+      "cardSha256": "8d85d26408d82cfff1d931fec88394dee5a9de04d2f9aa803a589e0a29e57a22",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/mighty-thor"
+    },
+    "the-original-human-torch": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a714c2e72b982b96476df1c17268d9b88660b3a712e4b5165f1b2695c4de634b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-original-human-torch"
+    },
+    "the-wrecking-crew": {
+      "cardVersion": 1786723716,
+      "cardSha256": "e2699c249854b03a6e057d300477725da3c4b5cf5ac9304ad5d2f76950eb93b2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/the-wrecking-crew"
+    },
+    "thor-hero-of-midgard": {
+      "cardVersion": 1786695285,
+      "cardSha256": "6fe8b6a7f574998749d92b94e8f640b02bbec0338252beedc0251bd018bbbf31",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/thor-hero-of-midgard"
+    },
+    "thor-prince-of-asgard": {
+      "cardVersion": 1787518623,
+      "cardSha256": "c9da83941abba43af33ac7bf119ae4b04521e72a29afe7765ebe5000da95883d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/thor-prince-of-asgard"
+    },
+    "tigra": {
+      "cardVersion": 1787837207,
+      "cardSha256": "aafef6d9e5dcd8d17e9cd04f37ad4fbee4d3b98e46a2970f20e70971b99a4e4a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/tigra"
+    },
+    "toad": {
+      "cardVersion": 1761082038,
+      "cardSha256": "b3d9d3e967f5ac3d338275e45ebe3456082b36dfd15ea77c3ba64496e8e39b47",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/toad"
+    },
+    "ulik": {
+      "cardVersion": 1787211858,
+      "cardSha256": "04fe46b159f736ac0cc99625adfe9f739190d7e0ccd18f220cdf9a1185b95429",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ulik"
+    },
+    "ultimate-spider-man": {
+      "cardVersion": 1786695285,
+      "cardSha256": "36e13c21ccfa411a1599e6364a88fb0dbaed3804f07004168ca93baa4c797f4c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ultimate-spider-man"
+    },
+    "ultron": {
+      "cardVersion": 1786695285,
+      "cardSha256": "ece767139195600af66f70907eef1321d36fc1f6f1b55ff0aae57bca29a01394",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron"
+    },
+    "ultron-drones-grunts": {
+      "cardVersion": 1785702201,
+      "cardSha256": "a464322109ea0a29a4a081b767d480fa129d5760afce88be505507ba07f3f5a2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron-drones-grunts"
+    },
+    "ultron-metal-tyrant": {
+      "cardVersion": 1786695285,
+      "cardSha256": "e847ae8165bd428a3a8c3556473aaa1bd8690879c6ff930734e395e0af8b4f99",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron-metal-tyrant"
+    },
+    "ursa-major": {
+      "cardVersion": 1786695285,
+      "cardSha256": "35810b3e6ba3017305bf928141ff67e3709c31fbe55b19453617f614177065ff",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/ursa-major"
+    },
+    "valkyrie": {
+      "cardVersion": 1786695285,
+      "cardSha256": "059f6f9b20903f597e5da48797f9c07e4d8bb5d262cd3f263d919e4f32afc9f6",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/valkyrie"
+    },
+    "valkyrie-and-elendil": {
+      "cardVersion": 1788107237,
+      "cardSha256": "efd6e6ef4d0937da99ef8c3829258a345c435768b251fdbfff032eb277531032",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/valkyrie-and-elendil"
+    },
+    "venom": {
+      "cardVersion": 1788628852,
+      "cardSha256": "5eda83062c35b2e22b95d17b166ab7454fd7b1426863e6f1f94581404d45be92",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/venom"
+    },
+    "viper": {
+      "cardVersion": 1786695285,
+      "cardSha256": "4e852bf815160e80bfed3d54784ff5c700544b43c037a6bbaba40328654ed9b8",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/viper"
+    },
+    "vision": {
+      "cardVersion": 1786695285,
+      "cardSha256": "bc459c8e650dc2f53d47af3ea4151ad36a311fb17eb06ac69ac4d17acfccbabf",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/vision"
+    },
+    "vulture": {
+      "cardVersion": 1786695285,
+      "cardSha256": "403f1984b7eeb84710fd7f557631c29ca4b3387573c799d9889adf21ecf1a35b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/vulture"
+    },
+    "warlock": {
+      "cardVersion": 1788299153,
+      "cardSha256": "3be40c7387b57de307ae727fa4e0bb73917cf1477b8b92be276e4526121c39b3",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/warlock"
+    },
+    "war-machine": {
+      "cardVersion": 1787228872,
+      "cardSha256": "23a4ada784a7c08587a3c78d82d122fafdebb46467fcde9b932faf149dc0acfa",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/war-machine"
+    },
+    "warriors-three": {
+      "cardVersion": 1786695285,
+      "cardSha256": "6b52f0c9b082b9f828410e342ef65716caafd7b5bffce39329c749a230c368b2",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/warriors-three"
+    },
+    "wasp": {
+      "cardVersion": 1786695285,
+      "cardSha256": "46e58a279e74956890c1af95016c54c9be546874fc4b6611aca3b1b47039166d",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/wasp"
+    },
+    "weapon-x": {
+      "cardVersion": 1780689523,
+      "cardSha256": "284865b35a477070096e7b0ea2211eb808203e91cb39403332c9c9fd9f879b56",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/weapon-x"
+    },
+    "werewolf-by-night": {
+      "cardVersion": 1786695285,
+      "cardSha256": "293476047d86d53b08a61b4a661de0b6699ff22a8bfd2eaea0f6bb6cf4b6614c",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/werewolf-by-night"
+    },
+    "winter-soldier": {
+      "cardVersion": 1786695285,
+      "cardSha256": "1bb5f8fb2c20ebc7f00c2af9eed55436d64c3a8db95533025ac7f52b92aae855",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/winter-soldier"
+    },
+    "winter-soldier-operative": {
+      "cardVersion": 1786695285,
+      "cardSha256": "a937c2b394c71debceb2d5754daf79bf12e1291d28c1b4e9fe237f983a090f53",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/winter-soldier-operative"
+    },
+    "wolverine": {
+      "cardVersion": 1786695285,
+      "cardSha256": "618cb8c01d1886e635e814075e0b1ac60fe116f5ce041f199dca3c93fb1bb228",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/wolverine"
+    },
+    "wong": {
+      "cardVersion": 1780689608,
+      "cardSha256": "fa0b956dfc9163adfcf95661b01ebfe6e96e9dd2e6d6773927ea3daa9e7c36e1",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/wong"
+    },
+    "x-23": {
+      "cardVersion": 1785407694,
+      "cardSha256": "6f13af359ef97ecd55e7b46ded446e6252ccf8444cdbec791496724c8a0e2295",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/x-23"
+    },
+    "yondu": {
+      "cardVersion": 1781520915,
+      "cardSha256": "6cc11bce108857475cba59a542e3fa81c1eee3594645c5233898d1395796c72a",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/yondu"
+    }
+  }
+}

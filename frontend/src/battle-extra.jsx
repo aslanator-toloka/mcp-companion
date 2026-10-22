@@ -1,3 +1,4 @@
+import { RoleIcons } from "./character-roles.jsx";
 import React, { useEffect, useRef, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 import {
@@ -91,23 +92,26 @@ export const Squad = observer(function Squad({ team, side }) {
     <div className="setup-squad">
       {team.fighters.map((f) => (
         <div key={f.id} className="setup-fighter">
-          <button
-            className="selected-character"
-            data-bt="fighter-card"
-            data-id={f.id}
-            onClick={() => b.fighterCard(f.id)}
-          >
-            <Avatar character={catalog.byId.get(f.slug)} />
-            <span>
-              <strong>{f.name}</strong>
-              <small>
-                {f.alterEgo} · Threat {f.threat}
-                {f.affiliations.some((a) => a.name === team.affiliation)
-                  ? " · Аффилирован"
-                  : ""}
-              </small>
-            </span>
-          </button>
+          <div className="selected-character-main">
+            <button
+              className="selected-character"
+              data-bt="fighter-card"
+              data-id={f.id}
+              onClick={() => b.fighterCard(f.id)}
+            >
+              <Avatar character={catalog.byId.get(f.slug)} />
+              <span>
+                <strong>{f.name}</strong>
+                <small>
+                  {f.alterEgo} · Threat {f.threat}
+                  {f.affiliations.some((a) => a.name === team.affiliation)
+                    ? " · Аффилирован"
+                    : ""}
+                </small>
+              </span>
+            </button>
+            <RoleIcons slug={f.slug} compact />
+          </div>
           <button
             className="quiet"
             data-bt="remove-fighter"
@@ -278,6 +282,13 @@ export const SetupTeam = observer(function SetupTeam({ side }) {
           : "Быстро выбрать бойцов и карты"}{" "}
         +
       </button>
+      <RoleIcons
+        slugs={team.fighters}
+        tactics={team.tactics}
+        leaderSlug={team.fighters.find((f) => f.id === team.leader)?.slug || ""}
+        context="squad"
+        owner={side}
+      />
       <Squad team={team} side={side} />
       <label className="field">
         Аффилиация отряда

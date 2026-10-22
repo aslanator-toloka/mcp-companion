@@ -9,6 +9,7 @@ import {
   battle,
 } from "./stores/index.js";
 import { cardStatus } from "./stores/rosters.js";
+import { RoleIcons } from "./character-roles.jsx";
 import { RosterSquads } from "./roster-squads.jsx";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
@@ -60,6 +61,12 @@ const RosterTile = memo(function RosterTile({
           <span className="muted">Персонажи ещё не выбраны</span>
         )}
       </div>
+      <RoleIcons
+        slugs={r.characters}
+        tactics={r.tactics}
+        context="roster"
+        owner={r.id}
+      />
       <p className="roster-subtitle">{subtitle}</p>
       <div className="roster-tags">
         {groups.map((g) => (
@@ -274,22 +281,25 @@ const SelectedItem = memo(function SelectedItem({ item, kind }) {
     <div className="selected-row">
       {kind === "characters" ? (
         <>
-          <button
-            className="selected-character"
-            data-action="character"
-            onClick={() => actions.openCharacter(slug)}
-            data-slug={slug}
-          >
-            <Avatar character={c} />
-            <span>
-              <strong>{c.name}</strong>
-              <small>{c.alterEgo}</small>
-              <span className="selected-meta">
-                Threat {c.threatLevel} · <CollectionStatus status={status} />
-                {affiliated ? " · Аффилирован" : ""}
+          <div className="selected-character-main">
+            <button
+              className="selected-character"
+              data-action="character"
+              onClick={() => actions.openCharacter(slug)}
+              data-slug={slug}
+            >
+              <Avatar character={c} />
+              <span>
+                <strong>{c.name}</strong>
+                <small>{c.alterEgo}</small>
+                <span className="selected-meta">
+                  Threat {c.threatLevel} · <CollectionStatus status={status} />
+                  {affiliated ? " · Аффилирован" : ""}
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
+            <RoleIcons slug={slug} compact />
+          </div>
           <div className="selected-row-actions">
             <button
               className="quiet character-card-picker"
@@ -486,6 +496,12 @@ export const RosterEditor = observer(function RosterEditor({
           Extract <b>{extract}</b> / 5
         </span>
       </div>
+      <RoleIcons
+        slugs={r.characters}
+        tactics={r.tactics}
+        context="roster"
+        owner={r.id}
+      />
       <RosterSquads />
       <div className="editor-tabs" role="tablist" aria-label="Состав ростера">
         {[
@@ -814,6 +830,7 @@ const PickerRow = memo(
             {isCard && <CardStats stats={stats} covered={covered} />}
           </span>
         </label>
+        {!isCard && <RoleIcons slug={c.slug} compact />}
         <button
           className="quiet"
           data-action={!isCard ? "character" : undefined}

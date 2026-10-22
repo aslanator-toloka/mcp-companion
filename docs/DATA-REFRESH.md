@@ -30,3 +30,17 @@ npm run test:e2e
 `prepare-tournament-data.py` uses `data/catalog.json` and the frozen spelling aliases in `data/character-aliases.json`; it preserves unresolved source text and never fabricates a character match. Scoring runs through `scripts/score-tournament-snapshot.cjs` and the exact core used by the React UI. Averages, weights and scoring formulas are unchanged. The source snapshot and audit stay outside the web root.
 
 JSON requests revalidate cached data. The build versions the JS/CSS and tournament snapshot URLs. Publishing changes no browser localStorage collection, wishlist, roster or battle records.
+
+### Character roles after a catalog refresh
+
+Role assignments live in `data/character-roles.json`; their internal card versions,
+checksums and source links are in `data/character-role-provenance.json`. Review new
+characters and any changed stat cards before updating that provenance. Do not
+silently approve old roles just by replacing checksums. `tests/character-roles.test.cjs`
+checks complete catalog coverage and pins the reviewed cards. The initial taxonomy,
+conditional roles and UI scope are documented in `guides.md`.
+
+Role icons use the vendored Font Awesome Free 7.3.1 CSS and solid WOFF2 in
+`assets/fontawesome/7.3.1/`, with the upstream license and SHA-256 manifest. No CDN
+or Font Awesome runtime JavaScript is used. If upgrading the library, validate all
+ten icon names and update the pinned paths and manifest together.
