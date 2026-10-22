@@ -1,0 +1,3087 @@
+{
+  "version": "player-adjusted-v1",
+  "archivePeriod": [
+    "2026-08-10",
+    "2026-10-21"
+  ],
+  "parameters": {
+    "version": "player-adjusted-v1",
+    "betweenWeight": 0.15,
+    "gamesPrior": 8,
+    "characterPenalty": 2,
+    "eventPenalty": 1,
+    "rosterSize": 10
+  },
+  "diagnostics": {
+    "performances": 2270,
+    "players": 1466,
+    "events": 233,
+    "excluded": {
+      "variants": 33,
+      "incomplete": 135,
+      "nonIndividual": 16,
+      "provisional": 16
+    },
+    "iterations": 42,
+    "residual": 3.847564491233325e-8
+  },
+  "validation": {
+    "cutoff": "2026-10-03",
+    "train": 1770,
+    "test": 500,
+    "knownPlayers": 268,
+    "adjustedWinFractionRMSE": 0.26961544110804814,
+    "skillOnlyWinFractionRMSE": 0.26987057098465334,
+    "note": "Chronological, whole events; win-fraction prediction is not validation of causal character effects. Baseline uses the same player/event model with character coefficients suppressed."
+  },
+  "bootstrap": {
+    "seed": 20261022,
+    "iterations": 100,
+    "unit": "player history",
+    "note": "90% empirical sampling ranges, not calibrated causal confidence intervals. Missing characters in a sample have estimate 0. Parameter choices fixed, not optimized on the holdout."
+  },
+  "estimates": [
+    {
+      "id": "modok",
+      "appearances": 21,
+      "players": 19,
+      "switchers": 9,
+      "permanent": 10,
+      "value": 6.322924811360753,
+      "bootstrap90": [
+        2.4110773128147236,
+        8.950377779389079
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "angel",
+      "appearances": 91,
+      "players": 72,
+      "switchers": 35,
+      "permanent": 37,
+      "value": 6.315087193314209,
+      "bootstrap90": [
+        3.1167998722024275,
+        8.99149198552248
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "deadpool",
+      "appearances": 109,
+      "players": 86,
+      "switchers": 24,
+      "permanent": 62,
+      "value": 6.238448804230907,
+      "bootstrap90": [
+        2.05637917486274,
+        8.629019605522194
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "spider-man-noir",
+      "appearances": 121,
+      "players": 91,
+      "switchers": 25,
+      "permanent": 66,
+      "value": 5.944863885043594,
+      "bootstrap90": [
+        2.022957241664398,
+        9.608687543050321
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "nick-fury",
+      "appearances": 140,
+      "players": 106,
+      "switchers": 46,
+      "permanent": 60,
+      "value": 5.798847657637576,
+      "bootstrap90": [
+        2.454370501952581,
+        8.264820979052487
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "okoye",
+      "appearances": 184,
+      "players": 141,
+      "switchers": 58,
+      "permanent": 83,
+      "value": 5.475323233814779,
+      "bootstrap90": [
+        2.573092781924957,
+        8.71098023822688
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "juggernaut",
+      "appearances": 242,
+      "players": 192,
+      "switchers": 84,
+      "permanent": 108,
+      "value": 5.157293560299092,
+      "bootstrap90": [
+        1.2708153449019826,
+        7.301066001731132
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "ghost-spider",
+      "appearances": 184,
+      "players": 137,
+      "switchers": 53,
+      "permanent": 84,
+      "value": 4.93713494085595,
+      "bootstrap90": [
+        2.460981867851368,
+        8.500065139948006
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "emma-frost",
+      "appearances": 391,
+      "players": 296,
+      "switchers": 96,
+      "permanent": 200,
+      "value": 4.868026779096011,
+      "bootstrap90": [
+        2.8417282397944184,
+        7.17269109740985
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "black-bolt",
+      "appearances": 47,
+      "players": 38,
+      "switchers": 11,
+      "permanent": 27,
+      "value": 4.663518679524911,
+      "bootstrap90": [
+        2.1773855171845966,
+        7.352224526167067
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "spider-man-2099",
+      "appearances": 128,
+      "players": 102,
+      "switchers": 35,
+      "permanent": 67,
+      "value": 4.640235828763969,
+      "bootstrap90": [
+        1.0118630089303113,
+        7.945530949539126
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "logan-the-wolverine",
+      "appearances": 105,
+      "players": 79,
+      "switchers": 39,
+      "permanent": 40,
+      "value": 4.61353052835636,
+      "bootstrap90": [
+        1.0865488340783687,
+        7.139592153761967
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "black-swan",
+      "appearances": 66,
+      "players": 56,
+      "switchers": 24,
+      "permanent": 32,
+      "value": 4.440602152015737,
+      "bootstrap90": [
+        0.5071154782437369,
+        7.096750925142844
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "spider-ham",
+      "appearances": 64,
+      "players": 55,
+      "switchers": 19,
+      "permanent": 36,
+      "value": 4.3581173624622025,
+      "bootstrap90": [
+        -1.3399146838686828,
+        7.781510361725879
+      ],
+      "signAgreement": 0.87
+    },
+    {
+      "id": "nick-fury-and-the-howling-commandos",
+      "appearances": 13,
+      "players": 11,
+      "switchers": 5,
+      "permanent": 6,
+      "value": 4.351354855354905,
+      "bootstrap90": [
+        -1.6619545410449548,
+        7.370477551725806
+      ],
+      "signAgreement": 0.85
+    },
+    {
+      "id": "man-thing",
+      "appearances": 113,
+      "players": 98,
+      "switchers": 32,
+      "permanent": 66,
+      "value": 4.319640300481568,
+      "bootstrap90": [
+        0.3001849912728641,
+        7.069811728195181
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "mister-sinister",
+      "appearances": 113,
+      "players": 98,
+      "switchers": 42,
+      "permanent": 56,
+      "value": 4.181630961082253,
+      "bootstrap90": [
+        0.4371011365829415,
+        7.985732067668712
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "lizard",
+      "appearances": 162,
+      "players": 128,
+      "switchers": 49,
+      "permanent": 79,
+      "value": 4.1780775816311335,
+      "bootstrap90": [
+        0.28995135809376504,
+        6.674514887935799
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "red-skull-master-of-hydra",
+      "appearances": 49,
+      "players": 36,
+      "switchers": 20,
+      "permanent": 16,
+      "value": 4.074164031687088,
+      "bootstrap90": [
+        1.1132216688459535,
+        7.103436629683286
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "quicksilver",
+      "appearances": 88,
+      "players": 71,
+      "switchers": 19,
+      "permanent": 52,
+      "value": 4.0607209392625325,
+      "bootstrap90": [
+        0.8061625765474358,
+        7.453170642792046
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "viper",
+      "appearances": 73,
+      "players": 58,
+      "switchers": 26,
+      "permanent": 32,
+      "value": 4.00754237521661,
+      "bootstrap90": [
+        -0.7560611213635334,
+        7.428721904350086
+      ],
+      "signAgreement": 0.89
+    },
+    {
+      "id": "spider-woman",
+      "appearances": 198,
+      "players": 158,
+      "switchers": 64,
+      "permanent": 94,
+      "value": 3.989190397855438,
+      "bootstrap90": [
+        0.4488273940418568,
+        5.9832232656331605
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "moondragon",
+      "appearances": 297,
+      "players": 219,
+      "switchers": 71,
+      "permanent": 148,
+      "value": 3.7766658562155975,
+      "bootstrap90": [
+        1.1976138153122406,
+        6.421007389161206
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "loki-prince-of-lies",
+      "appearances": 204,
+      "players": 159,
+      "switchers": 54,
+      "permanent": 105,
+      "value": 3.732754928028436,
+      "bootstrap90": [
+        -0.38533425206456623,
+        6.848908941058962
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "proxima-midnight",
+      "appearances": 118,
+      "players": 100,
+      "switchers": 47,
+      "permanent": 53,
+      "value": 3.615757451939785,
+      "bootstrap90": [
+        0.9879513023133699,
+        5.346299126232957
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "kraven-the-hunter",
+      "appearances": 85,
+      "players": 71,
+      "switchers": 23,
+      "permanent": 48,
+      "value": 3.600846927396719,
+      "bootstrap90": [
+        0.030258275848813573,
+        7.449957432706324
+      ],
+      "signAgreement": 0.95
+    },
+    {
+      "id": "lady-sif",
+      "appearances": 138,
+      "players": 106,
+      "switchers": 47,
+      "permanent": 59,
+      "value": 3.587019333301903,
+      "bootstrap90": [
+        0.11870934943494311,
+        6.678992692411938
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "kingpin",
+      "appearances": 196,
+      "players": 149,
+      "switchers": 57,
+      "permanent": 92,
+      "value": 3.4801378944427745,
+      "bootstrap90": [
+        0.2354272153096267,
+        7.8797647203390735
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "ultimate-spider-man",
+      "appearances": 413,
+      "players": 299,
+      "switchers": 112,
+      "permanent": 187,
+      "value": 3.4436384024897007,
+      "bootstrap90": [
+        1.3800255720015822,
+        5.948675176105482
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "blade",
+      "appearances": 75,
+      "players": 63,
+      "switchers": 13,
+      "permanent": 50,
+      "value": 3.440361973889009,
+      "bootstrap90": [
+        0.5224508739413662,
+        5.55781865237232
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "shuri",
+      "appearances": 169,
+      "players": 131,
+      "switchers": 62,
+      "permanent": 69,
+      "value": 3.2764195905653617,
+      "bootstrap90": [
+        0.8570584578164989,
+        5.843618124954346
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "mysterio",
+      "appearances": 228,
+      "players": 190,
+      "switchers": 66,
+      "permanent": 124,
+      "value": 3.1958636542164633,
+      "bootstrap90": [
+        -0.18114392777868407,
+        6.550112805778978
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "hulkbuster",
+      "appearances": 192,
+      "players": 154,
+      "switchers": 70,
+      "permanent": 84,
+      "value": 3.194242277940528,
+      "bootstrap90": [
+        -0.03606036514264189,
+        6.435046430153661
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "valkyrie-and-elendil",
+      "appearances": 146,
+      "players": 115,
+      "switchers": 42,
+      "permanent": 73,
+      "value": 3.032250826278381,
+      "bootstrap90": [
+        -1.9749702953237118,
+        6.6440740464801875
+      ],
+      "signAgreement": 0.84
+    },
+    {
+      "id": "bastion",
+      "appearances": 63,
+      "players": 54,
+      "switchers": 18,
+      "permanent": 36,
+      "value": 2.99109874717335,
+      "bootstrap90": [
+        -0.33889590555110083,
+        5.988812967596476
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "dracula",
+      "appearances": 136,
+      "players": 121,
+      "switchers": 46,
+      "permanent": 75,
+      "value": 2.8477792580202093,
+      "bootstrap90": [
+        -0.2322260006391845,
+        5.145198454540025
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "agent-venom",
+      "appearances": 165,
+      "players": 126,
+      "switchers": 48,
+      "permanent": 78,
+      "value": 2.8398274004708344,
+      "bootstrap90": [
+        0.32907180647206397,
+        5.563951557978024
+      ],
+      "signAgreement": 0.96
+    },
+    {
+      "id": "jubilee",
+      "appearances": 1,
+      "players": 1,
+      "switchers": 1,
+      "permanent": 0,
+      "value": 2.6880313838964423,
+      "bootstrap90": [
+        0,
+        5.159280439334836
+      ],
+      "signAgreement": 0.58
+    },
+    {
+      "id": "captain-america-sam-wilson",
+      "appearances": 165,
+      "players": 133,
+      "switchers": 54,
+      "permanent": 79,
+      "value": 2.6241983885920686,
+      "bootstrap90": [
+        -0.41481792543054274,
+        6.292049261891195
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "corvus-glaive",
+      "appearances": 116,
+      "players": 100,
+      "switchers": 49,
+      "permanent": 51,
+      "value": 2.580108530091779,
+      "bootstrap90": [
+        -0.29290248352893467,
+        4.875940379975818
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "nova",
+      "appearances": 175,
+      "players": 132,
+      "switchers": 40,
+      "permanent": 92,
+      "value": 2.553350331921361,
+      "bootstrap90": [
+        -0.9516365357956694,
+        5.506286103748314
+      ],
+      "signAgreement": 0.9
+    },
+    {
+      "id": "black-panther-chosen-of-bast",
+      "appearances": 98,
+      "players": 81,
+      "switchers": 28,
+      "permanent": 53,
+      "value": 2.541920694729499,
+      "bootstrap90": [
+        -1.3437192110498204,
+        5.577241790988982
+      ],
+      "signAgreement": 0.9
+    },
+    {
+      "id": "beast",
+      "appearances": 214,
+      "players": 170,
+      "switchers": 65,
+      "permanent": 105,
+      "value": 2.522002428269441,
+      "bootstrap90": [
+        -0.5805361648384235,
+        5.363424615264463
+      ],
+      "signAgreement": 0.9
+    },
+    {
+      "id": "archangel",
+      "appearances": 55,
+      "players": 47,
+      "switchers": 15,
+      "permanent": 32,
+      "value": 2.482178169519047,
+      "bootstrap90": [
+        -0.07495540184337622,
+        5.394383571618528
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "avalanche",
+      "appearances": 25,
+      "players": 21,
+      "switchers": 6,
+      "permanent": 15,
+      "value": 2.462749866343343,
+      "bootstrap90": [
+        -1.8730924345723476,
+        6.3891271697991625
+      ],
+      "signAgreement": 0.79
+    },
+    {
+      "id": "beta-ray-bill",
+      "appearances": 300,
+      "players": 237,
+      "switchers": 77,
+      "permanent": 160,
+      "value": 2.419690588947937,
+      "bootstrap90": [
+        0.1505853805351462,
+        5.561773518636692
+      ],
+      "signAgreement": 0.95
+    },
+    {
+      "id": "daredevil",
+      "appearances": 81,
+      "players": 64,
+      "switchers": 19,
+      "permanent": 45,
+      "value": 2.4160832365540963,
+      "bootstrap90": [
+        -1.4023562740597981,
+        6.383387896301642
+      ],
+      "signAgreement": 0.83
+    },
+    {
+      "id": "black-widow-agent-of-shield",
+      "appearances": 35,
+      "players": 28,
+      "switchers": 13,
+      "permanent": 15,
+      "value": 2.3756893288187007,
+      "bootstrap90": [
+        -2.0127386319019083,
+        5.4282169838484435
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "echo",
+      "appearances": 389,
+      "players": 294,
+      "switchers": 108,
+      "permanent": 186,
+      "value": 2.346867581254276,
+      "bootstrap90": [
+        -0.6950935472864025,
+        4.5407740911799745
+      ],
+      "signAgreement": 0.86
+    },
+    {
+      "id": "nebula",
+      "appearances": 283,
+      "players": 217,
+      "switchers": 72,
+      "permanent": 145,
+      "value": 2.285172712971744,
+      "bootstrap90": [
+        -0.7102520540851001,
+        4.772911733900127
+      ],
+      "signAgreement": 0.89
+    },
+    {
+      "id": "arnim-zola",
+      "appearances": 42,
+      "players": 36,
+      "switchers": 18,
+      "permanent": 18,
+      "value": 2.2850946781915553,
+      "bootstrap90": [
+        -2.311953504959592,
+        6.204683166555445
+      ],
+      "signAgreement": 0.79
+    },
+    {
+      "id": "yondu",
+      "appearances": 119,
+      "players": 94,
+      "switchers": 29,
+      "permanent": 65,
+      "value": 2.2595271339494234,
+      "bootstrap90": [
+        -1.643877008908375,
+        5.4090515796725205
+      ],
+      "signAgreement": 0.85
+    },
+    {
+      "id": "wolverine",
+      "appearances": 92,
+      "players": 80,
+      "switchers": 28,
+      "permanent": 52,
+      "value": 2.258321574788874,
+      "bootstrap90": [
+        -1.5572903415167951,
+        5.580408023143924
+      ],
+      "signAgreement": 0.83
+    },
+    {
+      "id": "iceman",
+      "appearances": 131,
+      "players": 92,
+      "switchers": 38,
+      "permanent": 54,
+      "value": 2.180539918254076,
+      "bootstrap90": [
+        -0.3277872912324332,
+        5.551462983583299
+      ],
+      "signAgreement": 0.89
+    },
+    {
+      "id": "storm",
+      "appearances": 186,
+      "players": 136,
+      "switchers": 54,
+      "permanent": 82,
+      "value": 2.1485976374831584,
+      "bootstrap90": [
+        -1.1627809524535584,
+        5.0412914320222075
+      ],
+      "signAgreement": 0.85
+    },
+    {
+      "id": "modok-scientist-supreme",
+      "appearances": 27,
+      "players": 23,
+      "switchers": 10,
+      "permanent": 13,
+      "value": 2.0666868509070593,
+      "bootstrap90": [
+        -1.8341845000765695,
+        4.502261912313454
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "rhino",
+      "appearances": 138,
+      "players": 109,
+      "switchers": 37,
+      "permanent": 72,
+      "value": 2.047909790789817,
+      "bootstrap90": [
+        -2.4918485635711543,
+        5.97168308864712
+      ],
+      "signAgreement": 0.78
+    },
+    {
+      "id": "sin",
+      "appearances": 106,
+      "players": 93,
+      "switchers": 39,
+      "permanent": 54,
+      "value": 2.045536661369806,
+      "bootstrap90": [
+        -0.695229847055,
+        4.3912660099708445
+      ],
+      "signAgreement": 0.89
+    },
+    {
+      "id": "captain-marvel-cosmic-avenger",
+      "appearances": 34,
+      "players": 33,
+      "switchers": 13,
+      "permanent": 20,
+      "value": 2.0308097823717484,
+      "bootstrap90": [
+        -2.1640184535099105,
+        5.801133453459096
+      ],
+      "signAgreement": 0.77
+    },
+    {
+      "id": "doctor-strange-sorcerer-supreme",
+      "appearances": 79,
+      "players": 58,
+      "switchers": 18,
+      "permanent": 40,
+      "value": 1.9877857272981359,
+      "bootstrap90": [
+        -1.329180620817469,
+        5.5356345233199145
+      ],
+      "signAgreement": 0.85
+    },
+    {
+      "id": "black-panther",
+      "appearances": 53,
+      "players": 42,
+      "switchers": 23,
+      "permanent": 19,
+      "value": 1.9677912293427964,
+      "bootstrap90": [
+        -2.6292877149522784,
+        4.769286725596781
+      ],
+      "signAgreement": 0.71
+    },
+    {
+      "id": "blue-marvel",
+      "appearances": 226,
+      "players": 176,
+      "switchers": 63,
+      "permanent": 113,
+      "value": 1.950567996291442,
+      "bootstrap90": [
+        -0.19266088893220826,
+        4.614538624647669
+      ],
+      "signAgreement": 0.91
+    },
+    {
+      "id": "winter-soldier",
+      "appearances": 26,
+      "players": 22,
+      "switchers": 8,
+      "permanent": 14,
+      "value": 1.8584591091766824,
+      "bootstrap90": [
+        -1.4536042136405523,
+        4.054378152220105
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "honey-badger",
+      "appearances": 164,
+      "players": 126,
+      "switchers": 40,
+      "permanent": 86,
+      "value": 1.8425177930882157,
+      "bootstrap90": [
+        -1.2342801838446358,
+        4.815934568262279
+      ],
+      "signAgreement": 0.76
+    },
+    {
+      "id": "ms-marvel",
+      "appearances": 25,
+      "players": 22,
+      "switchers": 9,
+      "permanent": 13,
+      "value": 1.8283873722162935,
+      "bootstrap90": [
+        0.4340410363645919,
+        4.176981538271749
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "doctor-voodoo",
+      "appearances": 138,
+      "players": 113,
+      "switchers": 38,
+      "permanent": 75,
+      "value": 1.8113690318808913,
+      "bootstrap90": [
+        -1.1506378022762735,
+        5.196980838306914
+      ],
+      "signAgreement": 0.79
+    },
+    {
+      "id": "quasar",
+      "appearances": 42,
+      "players": 39,
+      "switchers": 12,
+      "permanent": 27,
+      "value": 1.775726118592976,
+      "bootstrap90": [
+        -2.1156721983831583,
+        4.729855498536992
+      ],
+      "signAgreement": 0.78
+    },
+    {
+      "id": "the-blob",
+      "appearances": 100,
+      "players": 85,
+      "switchers": 23,
+      "permanent": 62,
+      "value": 1.764345891168233,
+      "bootstrap90": [
+        -1.677706973720048,
+        5.1409050830234015
+      ],
+      "signAgreement": 0.71
+    },
+    {
+      "id": "sunspot",
+      "appearances": 18,
+      "players": 12,
+      "switchers": 6,
+      "permanent": 6,
+      "value": 1.7072038888580978,
+      "bootstrap90": [
+        -2.0659264311263814,
+        4.935416085618359
+      ],
+      "signAgreement": 0.7
+    },
+    {
+      "id": "mirage",
+      "appearances": 1,
+      "players": 1,
+      "switchers": 1,
+      "permanent": 0,
+      "value": 1.6036190928055047,
+      "bootstrap90": [
+        0,
+        3.8121055790977425
+      ],
+      "signAgreement": 0.63
+    },
+    {
+      "id": "gorgon",
+      "appearances": 95,
+      "players": 77,
+      "switchers": 34,
+      "permanent": 43,
+      "value": 1.5327879964498576,
+      "bootstrap90": [
+        -2.3684558056813727,
+        5.462443589502846
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "maverick",
+      "appearances": 33,
+      "players": 25,
+      "switchers": 9,
+      "permanent": 16,
+      "value": 1.5251499443312317,
+      "bootstrap90": [
+        -1.7883711602378294,
+        4.33694834958752
+      ],
+      "signAgreement": 0.71
+    },
+    {
+      "id": "the-original-human-torch",
+      "appearances": 7,
+      "players": 6,
+      "switchers": 3,
+      "permanent": 3,
+      "value": 1.5152268733244023,
+      "bootstrap90": [
+        -2.571706528753166,
+        5.374960863279751
+      ],
+      "signAgreement": 0.71
+    },
+    {
+      "id": "gladiator",
+      "appearances": 29,
+      "players": 25,
+      "switchers": 14,
+      "permanent": 11,
+      "value": 1.4709144587834566,
+      "bootstrap90": [
+        -1.952577960421021,
+        5.280195038626646
+      ],
+      "signAgreement": 0.69
+    },
+    {
+      "id": "shocker",
+      "appearances": 48,
+      "players": 40,
+      "switchers": 12,
+      "permanent": 28,
+      "value": 1.4579632353348857,
+      "bootstrap90": [
+        -2.5398493230036574,
+        5.296856352993226
+      ],
+      "signAgreement": 0.66
+    },
+    {
+      "id": "iron-fist",
+      "appearances": 106,
+      "players": 92,
+      "switchers": 31,
+      "permanent": 61,
+      "value": 1.4478752138925262,
+      "bootstrap90": [
+        -2.0064925373862628,
+        4.58596888055733
+      ],
+      "signAgreement": 0.7
+    },
+    {
+      "id": "prime-sentinel",
+      "appearances": 44,
+      "players": 38,
+      "switchers": 13,
+      "permanent": 25,
+      "value": 1.4172764980062353,
+      "bootstrap90": [
+        -1.7948122730393294,
+        3.9270836952122816
+      ],
+      "signAgreement": 0.71
+    },
+    {
+      "id": "spectrum",
+      "appearances": 103,
+      "players": 84,
+      "switchers": 39,
+      "permanent": 45,
+      "value": 1.3903043494193528,
+      "bootstrap90": [
+        -2.462019638483499,
+        4.4404878560442755
+      ],
+      "signAgreement": 0.7
+    },
+    {
+      "id": "iron-man",
+      "appearances": 96,
+      "players": 77,
+      "switchers": 27,
+      "permanent": 50,
+      "value": 1.3125919441438647,
+      "bootstrap90": [
+        -2.6086325657811966,
+        5.160267704181329
+      ],
+      "signAgreement": 0.67
+    },
+    {
+      "id": "ronin",
+      "appearances": 34,
+      "players": 29,
+      "switchers": 14,
+      "permanent": 15,
+      "value": 1.3041033930619128,
+      "bootstrap90": [
+        -2.161915578933023,
+        5.846140763461345
+      ],
+      "signAgreement": 0.73
+    },
+    {
+      "id": "frankensteins-monster",
+      "appearances": 23,
+      "players": 21,
+      "switchers": 5,
+      "permanent": 16,
+      "value": 1.258687830471143,
+      "bootstrap90": [
+        -2.1534259609822524,
+        4.6666249772210415
+      ],
+      "signAgreement": 0.74
+    },
+    {
+      "id": "the-wrecking-crew",
+      "appearances": 33,
+      "players": 31,
+      "switchers": 13,
+      "permanent": 18,
+      "value": 1.1919193685416771,
+      "bootstrap90": [
+        -2.666229009312787,
+        4.658920563678245
+      ],
+      "signAgreement": 0.72
+    },
+    {
+      "id": "karnak",
+      "appearances": 33,
+      "players": 26,
+      "switchers": 8,
+      "permanent": 18,
+      "value": 1.1194750246998257,
+      "bootstrap90": [
+        -1.3615134344287831,
+        3.5754891850001393
+      ],
+      "signAgreement": 0.76
+    },
+    {
+      "id": "scarlet-witch",
+      "appearances": 122,
+      "players": 99,
+      "switchers": 30,
+      "permanent": 69,
+      "value": 1.1101860897028943,
+      "bootstrap90": [
+        -3.1127076651317185,
+        4.855385547135368
+      ],
+      "signAgreement": 0.63
+    },
+    {
+      "id": "crimson-dynamo",
+      "appearances": 32,
+      "players": 27,
+      "switchers": 10,
+      "permanent": 17,
+      "value": 1.0618134701253412,
+      "bootstrap90": [
+        -3.788187705668956,
+        4.064374762737712
+      ],
+      "signAgreement": 0.63
+    },
+    {
+      "id": "angela",
+      "appearances": 377,
+      "players": 294,
+      "switchers": 97,
+      "permanent": 197,
+      "value": 1.0298384339690214,
+      "bootstrap90": [
+        -1.9927020842433134,
+        3.462582945709436
+      ],
+      "signAgreement": 0.61
+    },
+    {
+      "id": "loki-god-of-mischief",
+      "appearances": 77,
+      "players": 63,
+      "switchers": 25,
+      "permanent": 38,
+      "value": 1.0047741352998762,
+      "bootstrap90": [
+        -3.4373888704562727,
+        6.082558083020635
+      ],
+      "signAgreement": 0.68
+    },
+    {
+      "id": "mystique",
+      "appearances": 122,
+      "players": 109,
+      "switchers": 35,
+      "permanent": 74,
+      "value": 0.8722533861190351,
+      "bootstrap90": [
+        -3.014460646967688,
+        4.332497377700413
+      ],
+      "signAgreement": 0.57
+    },
+    {
+      "id": "doctor-strange",
+      "appearances": 185,
+      "players": 154,
+      "switchers": 45,
+      "permanent": 109,
+      "value": 0.8707312872136738,
+      "bootstrap90": [
+        -2.246094773357216,
+        4.876166273003734
+      ],
+      "signAgreement": 0.65
+    },
+    {
+      "id": "shadowland-daredevil",
+      "appearances": 76,
+      "players": 63,
+      "switchers": 26,
+      "permanent": 37,
+      "value": 0.8545642928882815,
+      "bootstrap90": [
+        -3.2883497382437628,
+        4.825466734841064
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "warriors-three",
+      "appearances": 132,
+      "players": 99,
+      "switchers": 34,
+      "permanent": 65,
+      "value": 0.7058800951712869,
+      "bootstrap90": [
+        -2.05243271938692,
+        4.891893334812556
+      ],
+      "signAgreement": 0.67
+    },
+    {
+      "id": "tigra",
+      "appearances": 48,
+      "players": 39,
+      "switchers": 12,
+      "permanent": 27,
+      "value": 0.6711991809250347,
+      "bootstrap90": [
+        -3.145999274814834,
+        4.432155249263324
+      ],
+      "signAgreement": 0.57
+    },
+    {
+      "id": "ultron-metal-tyrant",
+      "appearances": 60,
+      "players": 50,
+      "switchers": 19,
+      "permanent": 31,
+      "value": 0.6373078195516274,
+      "bootstrap90": [
+        -3.6792623848551003,
+        4.397166716650612
+      ],
+      "signAgreement": 0.52
+    },
+    {
+      "id": "shadowcat",
+      "appearances": 76,
+      "players": 58,
+      "switchers": 15,
+      "permanent": 43,
+      "value": 0.5914317003208097,
+      "bootstrap90": [
+        -2.549896094173018,
+        3.9215490839293916
+      ],
+      "signAgreement": 0.68
+    },
+    {
+      "id": "mbaku",
+      "appearances": 45,
+      "players": 37,
+      "switchers": 16,
+      "permanent": 21,
+      "value": 0.5674419095636182,
+      "bootstrap90": [
+        -2.564855147682964,
+        3.4701174898289917
+      ],
+      "signAgreement": 0.54
+    },
+    {
+      "id": "ursa-major",
+      "appearances": 16,
+      "players": 13,
+      "switchers": 4,
+      "permanent": 9,
+      "value": 0.546460825140284,
+      "bootstrap90": [
+        -1.1684062523988368,
+        2.49486965407084
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "gwenpool",
+      "appearances": 32,
+      "players": 27,
+      "switchers": 9,
+      "permanent": 18,
+      "value": 0.5444747417321306,
+      "bootstrap90": [
+        -3.3558679917784837,
+        4.450021217671073
+      ],
+      "signAgreement": 0.46
+    },
+    {
+      "id": "shang-chi",
+      "appearances": 171,
+      "players": 143,
+      "switchers": 58,
+      "permanent": 85,
+      "value": 0.5348993006829124,
+      "bootstrap90": [
+        -3.026635329079502,
+        3.6502051549501653
+      ],
+      "signAgreement": 0.63
+    },
+    {
+      "id": "bullseye",
+      "appearances": 192,
+      "players": 156,
+      "switchers": 59,
+      "permanent": 97,
+      "value": 0.5105651483082329,
+      "bootstrap90": [
+        -2.5218403403716496,
+        3.3402892599712373
+      ],
+      "signAgreement": 0.47
+    },
+    {
+      "id": "toad",
+      "appearances": 419,
+      "players": 338,
+      "switchers": 116,
+      "permanent": 222,
+      "value": 0.5061213072660917,
+      "bootstrap90": [
+        -2.0529306507581353,
+        2.327389684846387
+      ],
+      "signAgreement": 0.57
+    },
+    {
+      "id": "malekith-the-accursed",
+      "appearances": 31,
+      "players": 29,
+      "switchers": 17,
+      "permanent": 12,
+      "value": 0.4996896896625412,
+      "bootstrap90": [
+        -5.250171219693165,
+        4.547625635371218
+      ],
+      "signAgreement": 0.48
+    },
+    {
+      "id": "elektra",
+      "appearances": 32,
+      "players": 27,
+      "switchers": 7,
+      "permanent": 20,
+      "value": 0.43273226157691785,
+      "bootstrap90": [
+        -3.634277808429926,
+        4.28983155137327
+      ],
+      "signAgreement": 0.51
+    },
+    {
+      "id": "rescue",
+      "appearances": 271,
+      "players": 210,
+      "switchers": 74,
+      "permanent": 136,
+      "value": 0.3632925423092966,
+      "bootstrap90": [
+        -1.544407869408964,
+        3.5632065306935106
+      ],
+      "signAgreement": 0.68
+    },
+    {
+      "id": "winter-soldier-operative",
+      "appearances": 60,
+      "players": 56,
+      "switchers": 14,
+      "permanent": 42,
+      "value": 0.34639545765560387,
+      "bootstrap90": [
+        -3.8921305864687783,
+        3.376241251220841
+      ],
+      "signAgreement": 0.51
+    },
+    {
+      "id": "invincible-iron-man",
+      "appearances": 80,
+      "players": 68,
+      "switchers": 29,
+      "permanent": 39,
+      "value": 0.2505499566984392,
+      "bootstrap90": [
+        -3.3454832279180335,
+        3.9597395409147036
+      ],
+      "signAgreement": 0.5
+    },
+    {
+      "id": "the-leader",
+      "appearances": 1,
+      "players": 1,
+      "switchers": 0,
+      "permanent": 1,
+      "value": 0.23621914891011922,
+      "bootstrap90": [
+        0,
+        0.8604538126719968
+      ],
+      "signAgreement": 0.62
+    },
+    {
+      "id": "omega-red",
+      "appearances": 216,
+      "players": 177,
+      "switchers": 78,
+      "permanent": 99,
+      "value": 0.21295121575934192,
+      "bootstrap90": [
+        -2.4390549775330355,
+        3.580925954308537
+      ],
+      "signAgreement": 0.58
+    },
+    {
+      "id": "vulture",
+      "appearances": 24,
+      "players": 22,
+      "switchers": 5,
+      "permanent": 17,
+      "value": 0.194419747324289,
+      "bootstrap90": [
+        -3.0543948425106415,
+        3.0440857420531002
+      ],
+      "signAgreement": 0.54
+    },
+    {
+      "id": "omega-sentinel",
+      "appearances": 228,
+      "players": 172,
+      "switchers": 75,
+      "permanent": 97,
+      "value": 0.13165055800583883,
+      "bootstrap90": [
+        -2.651458610049446,
+        3.5946109195851026
+      ],
+      "signAgreement": 0.64
+    },
+    {
+      "id": "bob-agent-of-hydra",
+      "appearances": 48,
+      "players": 39,
+      "switchers": 14,
+      "permanent": 25,
+      "value": 0.10093490803157128,
+      "bootstrap90": [
+        -3.027432908682479,
+        3.6031875593084663
+      ],
+      "signAgreement": 0.56
+    },
+    {
+      "id": "wasp",
+      "appearances": 31,
+      "players": 28,
+      "switchers": 14,
+      "permanent": 14,
+      "value": 0.03228155862137745,
+      "bootstrap90": [
+        -3.6813001985511233,
+        4.075737314341503
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "skurge-the-executioner",
+      "appearances": 30,
+      "players": 27,
+      "switchers": 10,
+      "permanent": 17,
+      "value": 0.0036369321330993556,
+      "bootstrap90": [
+        -3.6729596737941983,
+        3.3385949600667786
+      ],
+      "signAgreement": 0.48
+    },
+    {
+      "id": "domino",
+      "appearances": 147,
+      "players": 114,
+      "switchers": 37,
+      "permanent": 77,
+      "value": -0.003873823408925454,
+      "bootstrap90": [
+        -3.0784069961521716,
+        3.0706057535431617
+      ],
+      "signAgreement": 0.44
+    },
+    {
+      "id": "phoenix",
+      "appearances": 19,
+      "players": 16,
+      "switchers": 6,
+      "permanent": 10,
+      "value": -0.023279518767544242,
+      "bootstrap90": [
+        -2.506288156022524,
+        2.628315283693488
+      ],
+      "signAgreement": 0.46
+    },
+    {
+      "id": "captain-america",
+      "appearances": 74,
+      "players": 64,
+      "switchers": 26,
+      "permanent": 38,
+      "value": -0.10147738755238406,
+      "bootstrap90": [
+        -3.298189227319201,
+        2.6543054053978086
+      ],
+      "signAgreement": 0.57
+    },
+    {
+      "id": "elsa-bloodstone",
+      "appearances": 54,
+      "players": 49,
+      "switchers": 12,
+      "permanent": 37,
+      "value": -0.10296878847033429,
+      "bootstrap90": [
+        -4.938390954066623,
+        4.334529022535538
+      ],
+      "signAgreement": 0.48
+    },
+    {
+      "id": "baron-mordo",
+      "appearances": 24,
+      "players": 21,
+      "switchers": 9,
+      "permanent": 12,
+      "value": -0.1673589433861387,
+      "bootstrap90": [
+        -2.9736675801760684,
+        4.038197129362926
+      ],
+      "signAgreement": 0.52
+    },
+    {
+      "id": "black-cat",
+      "appearances": 359,
+      "players": 282,
+      "switchers": 98,
+      "permanent": 184,
+      "value": -0.17820627700488675,
+      "bootstrap90": [
+        -3.0593185948427966,
+        2.284722510889729
+      ],
+      "signAgreement": 0.56
+    },
+    {
+      "id": "drax-the-destroyer",
+      "appearances": 84,
+      "players": 71,
+      "switchers": 21,
+      "permanent": 50,
+      "value": -0.19161604573075597,
+      "bootstrap90": [
+        -3.761890851442548,
+        3.198406571204851
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "nightcrawler",
+      "appearances": 105,
+      "players": 85,
+      "switchers": 29,
+      "permanent": 56,
+      "value": -0.1954282217471079,
+      "bootstrap90": [
+        -3.8051377061188933,
+        3.5164092237367237
+      ],
+      "signAgreement": 0.49
+    },
+    {
+      "id": "darkstar",
+      "appearances": 11,
+      "players": 10,
+      "switchers": 2,
+      "permanent": 8,
+      "value": -0.20752321327494805,
+      "bootstrap90": [
+        -1.7484093283905318,
+        1.4176299917212858
+      ],
+      "signAgreement": 0.57
+    },
+    {
+      "id": "bishop",
+      "appearances": 50,
+      "players": 39,
+      "switchers": 13,
+      "permanent": 26,
+      "value": -0.23175135931331894,
+      "bootstrap90": [
+        -3.9073102971015587,
+        3.2270280489165755
+      ],
+      "signAgreement": 0.58
+    },
+    {
+      "id": "king-black-bolt",
+      "appearances": 49,
+      "players": 39,
+      "switchers": 14,
+      "permanent": 25,
+      "value": -0.2399972009110146,
+      "bootstrap90": [
+        -4.080023625565763,
+        3.0362411464227264
+      ],
+      "signAgreement": 0.53
+    },
+    {
+      "id": "crossbones",
+      "appearances": 10,
+      "players": 9,
+      "switchers": 6,
+      "permanent": 3,
+      "value": -0.2843267374473894,
+      "bootstrap90": [
+        -2.632585934891726,
+        2.8690636025815652
+      ],
+      "signAgreement": 0.51
+    },
+    {
+      "id": "ultron",
+      "appearances": 4,
+      "players": 4,
+      "switchers": 2,
+      "permanent": 2,
+      "value": -0.30749809942081535,
+      "bootstrap90": [
+        -2.249865596485942,
+        2.017105498137467
+      ],
+      "signAgreement": 0.58
+    },
+    {
+      "id": "clea",
+      "appearances": 239,
+      "players": 196,
+      "switchers": 88,
+      "permanent": 108,
+      "value": -0.3334980141578694,
+      "bootstrap90": [
+        -3.065322729141022,
+        2.2693016149827416
+      ],
+      "signAgreement": 0.65
+    },
+    {
+      "id": "red-guardian",
+      "appearances": 17,
+      "players": 13,
+      "switchers": 3,
+      "permanent": 10,
+      "value": -0.36242192408195323,
+      "bootstrap90": [
+        -1.8057251769411298,
+        1.219286861509628
+      ],
+      "signAgreement": 0.64
+    },
+    {
+      "id": "havok",
+      "appearances": 1,
+      "players": 1,
+      "switchers": 1,
+      "permanent": 0,
+      "value": -0.38945641592462416,
+      "bootstrap90": [
+        -1.0291194893841538,
+        0.0634666919441215
+      ],
+      "signAgreement": 0.55
+    },
+    {
+      "id": "multiple-man",
+      "appearances": 1,
+      "players": 1,
+      "switchers": 1,
+      "permanent": 0,
+      "value": -0.38945641592462416,
+      "bootstrap90": [
+        -1.0291194893841538,
+        0.0634666919441215
+      ],
+      "signAgreement": 0.55
+    },
+    {
+      "id": "captain-marvel",
+      "appearances": 16,
+      "players": 13,
+      "switchers": 8,
+      "permanent": 5,
+      "value": -0.4322411975991933,
+      "bootstrap90": [
+        -2.771294912657227,
+        1.4887113401792547
+      ],
+      "signAgreement": 0.7
+    },
+    {
+      "id": "klaw",
+      "appearances": 6,
+      "players": 6,
+      "switchers": 3,
+      "permanent": 3,
+      "value": -0.44636459893223174,
+      "bootstrap90": [
+        -4.900180435240052,
+        3.586877444474
+      ],
+      "signAgreement": 0.56
+    },
+    {
+      "id": "doctor-octopus",
+      "appearances": 14,
+      "players": 13,
+      "switchers": 4,
+      "permanent": 9,
+      "value": -0.4653150411692581,
+      "bootstrap90": [
+        -2.7153765050215917,
+        2.024259723895299
+      ],
+      "signAgreement": 0.71
+    },
+    {
+      "id": "maximus-the-mad",
+      "appearances": 26,
+      "players": 23,
+      "switchers": 5,
+      "permanent": 18,
+      "value": -0.48283941665312363,
+      "bootstrap90": [
+        -3.606714101209906,
+        2.0311600843042106
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "black-widow",
+      "appearances": 183,
+      "players": 152,
+      "switchers": 57,
+      "permanent": 95,
+      "value": -0.548680336569007,
+      "bootstrap90": [
+        -3.2477714689549924,
+        2.513982248030467
+      ],
+      "signAgreement": 0.58
+    },
+    {
+      "id": "professor-x",
+      "appearances": 74,
+      "players": 63,
+      "switchers": 18,
+      "permanent": 45,
+      "value": -0.5735750229828377,
+      "bootstrap90": [
+        -2.8941580586904694,
+        3.1977139582556005
+      ],
+      "signAgreement": 0.61
+    },
+    {
+      "id": "carnage",
+      "appearances": 58,
+      "players": 53,
+      "switchers": 14,
+      "permanent": 39,
+      "value": -0.6623591621950649,
+      "bootstrap90": [
+        -4.262066750934697,
+        3.17499824024918
+      ],
+      "signAgreement": 0.64
+    },
+    {
+      "id": "prowler",
+      "appearances": 257,
+      "players": 204,
+      "switchers": 72,
+      "permanent": 132,
+      "value": -0.6656374053313946,
+      "bootstrap90": [
+        -3.250850223119988,
+        2.5409227959447898
+      ],
+      "signAgreement": 0.57
+    },
+    {
+      "id": "abomination",
+      "appearances": 88,
+      "players": 74,
+      "switchers": 20,
+      "permanent": 54,
+      "value": -0.6818877691098143,
+      "bootstrap90": [
+        -4.108977160391915,
+        2.869164977006769
+      ],
+      "signAgreement": 0.67
+    },
+    {
+      "id": "warlock",
+      "appearances": 25,
+      "players": 19,
+      "switchers": 8,
+      "permanent": 11,
+      "value": -0.7991152201356775,
+      "bootstrap90": [
+        -3.511636840116654,
+        2.111983796710614
+      ],
+      "signAgreement": 0.65
+    },
+    {
+      "id": "killmonger-usurper",
+      "appearances": 53,
+      "players": 41,
+      "switchers": 18,
+      "permanent": 23,
+      "value": -0.8273185053723302,
+      "bootstrap90": [
+        -4.920786799031159,
+        1.8669592341492438
+      ],
+      "signAgreement": 0.68
+    },
+    {
+      "id": "crossbones-merciless-merc",
+      "appearances": 134,
+      "players": 117,
+      "switchers": 40,
+      "permanent": 77,
+      "value": -0.8363934437504802,
+      "bootstrap90": [
+        -3.5572042317822774,
+        2.527178940969084
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "medusa",
+      "appearances": 44,
+      "players": 38,
+      "switchers": 14,
+      "permanent": 24,
+      "value": -0.875743586372699,
+      "bootstrap90": [
+        -3.989364526500891,
+        1.101486181014856
+      ],
+      "signAgreement": 0.79
+    },
+    {
+      "id": "ancient-one",
+      "appearances": 33,
+      "players": 25,
+      "switchers": 11,
+      "permanent": 14,
+      "value": -0.9352572549167252,
+      "bootstrap90": [
+        -3.8359168867351316,
+        2.8651275296693393
+      ],
+      "signAgreement": 0.63
+    },
+    {
+      "id": "spider-man-miles-morales",
+      "appearances": 95,
+      "players": 80,
+      "switchers": 29,
+      "permanent": 51,
+      "value": -0.938242941168037,
+      "bootstrap90": [
+        -3.872884260608206,
+        2.9892830734917064
+      ],
+      "signAgreement": 0.7
+    },
+    {
+      "id": "moon-knight",
+      "appearances": 74,
+      "players": 63,
+      "switchers": 17,
+      "permanent": 46,
+      "value": -0.9400255029130666,
+      "bootstrap90": [
+        -3.619669756949458,
+        2.934190745049521
+      ],
+      "signAgreement": 0.55
+    },
+    {
+      "id": "spider-man",
+      "appearances": 11,
+      "players": 10,
+      "switchers": 3,
+      "permanent": 7,
+      "value": -1.0047622472641702,
+      "bootstrap90": [
+        -4.329370449217132,
+        2.0726479825676183
+      ],
+      "signAgreement": 0.7
+    },
+    {
+      "id": "red-hulk",
+      "appearances": 1,
+      "players": 1,
+      "switchers": 0,
+      "permanent": 1,
+      "value": -1.0257190446475712,
+      "bootstrap90": [
+        -2.4116012514147993,
+        0
+      ],
+      "signAgreement": 0.6
+    },
+    {
+      "id": "silk",
+      "appearances": 89,
+      "players": 66,
+      "switchers": 18,
+      "permanent": 48,
+      "value": -1.0476660885461437,
+      "bootstrap90": [
+        -4.5524771965209565,
+        3.5852380852507664
+      ],
+      "signAgreement": 0.67
+    },
+    {
+      "id": "enchantress",
+      "appearances": 92,
+      "players": 75,
+      "switchers": 35,
+      "permanent": 40,
+      "value": -1.0773713987724785,
+      "bootstrap90": [
+        -5.023586159090919,
+        3.482609222345659
+      ],
+      "signAgreement": 0.61
+    },
+    {
+      "id": "mephisto-lord-of-temptation",
+      "appearances": 94,
+      "players": 82,
+      "switchers": 37,
+      "permanent": 45,
+      "value": -1.0869406803714228,
+      "bootstrap90": [
+        -4.354847284204325,
+        2.464754595041315
+      ],
+      "signAgreement": 0.66
+    },
+    {
+      "id": "star-lord",
+      "appearances": 185,
+      "players": 138,
+      "switchers": 33,
+      "permanent": 105,
+      "value": -1.1172432062557838,
+      "bootstrap90": [
+        -3.764566288347952,
+        2.894994944497429
+      ],
+      "signAgreement": 0.63
+    },
+    {
+      "id": "valkyrie",
+      "appearances": 144,
+      "players": 114,
+      "switchers": 40,
+      "permanent": 74,
+      "value": -1.1274210202502097,
+      "bootstrap90": [
+        -5.05336992965829,
+        2.6651227449228676
+      ],
+      "signAgreement": 0.74
+    },
+    {
+      "id": "amazing-spider-man",
+      "appearances": 179,
+      "players": 137,
+      "switchers": 41,
+      "permanent": 96,
+      "value": -1.1473381049999452,
+      "bootstrap90": [
+        -4.373087863390635,
+        2.7129388871956364
+      ],
+      "signAgreement": 0.67
+    },
+    {
+      "id": "cable",
+      "appearances": 121,
+      "players": 97,
+      "switchers": 36,
+      "permanent": 61,
+      "value": -1.166050802574455,
+      "bootstrap90": [
+        -4.368759451371561,
+        2.3202516954249863
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "kang-the-conqueror",
+      "appearances": 34,
+      "players": 33,
+      "switchers": 14,
+      "permanent": 19,
+      "value": -1.3116835421477802,
+      "bootstrap90": [
+        -5.16470154030377,
+        2.8471280016540046
+      ],
+      "signAgreement": 0.72
+    },
+    {
+      "id": "colossus",
+      "appearances": 147,
+      "players": 124,
+      "switchers": 43,
+      "permanent": 81,
+      "value": -1.3822384464245885,
+      "bootstrap90": [
+        -4.351387768428984,
+        1.8436626875975106
+      ],
+      "signAgreement": 0.86
+    },
+    {
+      "id": "gambit",
+      "appearances": 226,
+      "players": 185,
+      "switchers": 57,
+      "permanent": 128,
+      "value": -1.3888845043269147,
+      "bootstrap90": [
+        -4.018061142176504,
+        0.6977318514968972
+      ],
+      "signAgreement": 0.87
+    },
+    {
+      "id": "cyclops",
+      "appearances": 92,
+      "players": 77,
+      "switchers": 21,
+      "permanent": 56,
+      "value": -1.39885887222479,
+      "bootstrap90": [
+        -4.241319372650007,
+        1.4753074286099046
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "iron-monger",
+      "appearances": 232,
+      "players": 181,
+      "switchers": 71,
+      "permanent": 110,
+      "value": -1.429821181033064,
+      "bootstrap90": [
+        -4.814748320617022,
+        2.242971091732321
+      ],
+      "signAgreement": 0.73
+    },
+    {
+      "id": "adam-warlock",
+      "appearances": 105,
+      "players": 81,
+      "switchers": 23,
+      "permanent": 58,
+      "value": -1.4693230475985535,
+      "bootstrap90": [
+        -4.679437478021638,
+        1.91777971877649
+      ],
+      "signAgreement": 0.79
+    },
+    {
+      "id": "baron-helmut-zemo",
+      "appearances": 90,
+      "players": 71,
+      "switchers": 23,
+      "permanent": 48,
+      "value": -1.4889011862195187,
+      "bootstrap90": [
+        -5.304339877733839,
+        2.2831336038219945
+      ],
+      "signAgreement": 0.72
+    },
+    {
+      "id": "ghost-rider",
+      "appearances": 62,
+      "players": 53,
+      "switchers": 20,
+      "permanent": 33,
+      "value": -1.5352148604628824,
+      "bootstrap90": [
+        -5.635647623075009,
+        1.804267308245985
+      ],
+      "signAgreement": 0.78
+    },
+    {
+      "id": "cassandra-nova",
+      "appearances": 63,
+      "players": 56,
+      "switchers": 23,
+      "permanent": 33,
+      "value": -1.6152947151063695,
+      "bootstrap90": [
+        -4.800366687336901,
+        1.920588899113619
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "crystal",
+      "appearances": 36,
+      "players": 30,
+      "switchers": 8,
+      "permanent": 22,
+      "value": -1.615331864048028,
+      "bootstrap90": [
+        -3.884724824618293,
+        1.4583097343437186
+      ],
+      "signAgreement": 0.8
+    },
+    {
+      "id": "scarlet-spider",
+      "appearances": 75,
+      "players": 57,
+      "switchers": 26,
+      "permanent": 31,
+      "value": -1.6722938960310227,
+      "bootstrap90": [
+        -5.26662775358456,
+        2.05185921780832
+      ],
+      "signAgreement": 0.69
+    },
+    {
+      "id": "captain-america-first-avenger",
+      "appearances": 57,
+      "players": 51,
+      "switchers": 18,
+      "permanent": 33,
+      "value": -1.6732933406147097,
+      "bootstrap90": [
+        -5.889505620542286,
+        2.3776414592709365
+      ],
+      "signAgreement": 0.76
+    },
+    {
+      "id": "doc-ock-sinister-scientist",
+      "appearances": 82,
+      "players": 67,
+      "switchers": 20,
+      "permanent": 47,
+      "value": -1.676039951172591,
+      "bootstrap90": [
+        -5.24062271860527,
+        1.630541376860553
+      ],
+      "signAgreement": 0.8
+    },
+    {
+      "id": "rogue",
+      "appearances": 126,
+      "players": 110,
+      "switchers": 32,
+      "permanent": 78,
+      "value": -1.7528800140060492,
+      "bootstrap90": [
+        -4.627531550233992,
+        1.5866119277255393
+      ],
+      "signAgreement": 0.76
+    },
+    {
+      "id": "heimdall-the-all-seeing",
+      "appearances": 62,
+      "players": 51,
+      "switchers": 20,
+      "permanent": 31,
+      "value": -1.7665410738890146,
+      "bootstrap90": [
+        -5.229942541613931,
+        2.0023771661082437
+      ],
+      "signAgreement": 0.8
+    },
+    {
+      "id": "exodus",
+      "appearances": 76,
+      "players": 70,
+      "switchers": 25,
+      "permanent": 45,
+      "value": -1.7832550930465252,
+      "bootstrap90": [
+        -5.056264150452968,
+        1.8368312710164851
+      ],
+      "signAgreement": 0.73
+    },
+    {
+      "id": "werewolf-by-night",
+      "appearances": 71,
+      "players": 62,
+      "switchers": 18,
+      "permanent": 44,
+      "value": -1.7847518048196551,
+      "bootstrap90": [
+        -5.030959370895958,
+        2.1053230004361017
+      ],
+      "signAgreement": 0.83
+    },
+    {
+      "id": "black-dwarf",
+      "appearances": 40,
+      "players": 39,
+      "switchers": 19,
+      "permanent": 20,
+      "value": -1.7937107520986306,
+      "bootstrap90": [
+        -4.92564247794108,
+        0.8781547878635068
+      ],
+      "signAgreement": 0.78
+    },
+    {
+      "id": "magik",
+      "appearances": 257,
+      "players": 194,
+      "switchers": 57,
+      "permanent": 137,
+      "value": -1.8031353967773274,
+      "bootstrap90": [
+        -5.090430905930251,
+        1.3281844628640092
+      ],
+      "signAgreement": 0.85
+    },
+    {
+      "id": "wong",
+      "appearances": 323,
+      "players": 258,
+      "switchers": 79,
+      "permanent": 179,
+      "value": -1.8377827374453326,
+      "bootstrap90": [
+        -4.457401580473096,
+        0.5081176441743902
+      ],
+      "signAgreement": 0.91
+    },
+    {
+      "id": "electro",
+      "appearances": 66,
+      "players": 59,
+      "switchers": 15,
+      "permanent": 44,
+      "value": -1.8413039312287036,
+      "bootstrap90": [
+        -5.218879278107039,
+        1.5309553235538258
+      ],
+      "signAgreement": 0.79
+    },
+    {
+      "id": "sandman",
+      "appearances": 37,
+      "players": 34,
+      "switchers": 8,
+      "permanent": 26,
+      "value": -1.8467844742399,
+      "bootstrap90": [
+        -5.113953189017538,
+        1.9783736406200367
+      ],
+      "signAgreement": 0.75
+    },
+    {
+      "id": "supergiant",
+      "appearances": 25,
+      "players": 22,
+      "switchers": 7,
+      "permanent": 15,
+      "value": -1.8713251995728892,
+      "bootstrap90": [
+        -4.8804737274970815,
+        0.5706815483586309
+      ],
+      "signAgreement": 0.86
+    },
+    {
+      "id": "hulk",
+      "appearances": 35,
+      "players": 33,
+      "switchers": 17,
+      "permanent": 16,
+      "value": -1.9024526648062214,
+      "bootstrap90": [
+        -5.869875323846586,
+        2.2151773827119308
+      ],
+      "signAgreement": 0.86
+    },
+    {
+      "id": "thor-prince-of-asgard",
+      "appearances": 81,
+      "players": 67,
+      "switchers": 18,
+      "permanent": 49,
+      "value": -1.9208105978714762,
+      "bootstrap90": [
+        -4.975535001639259,
+        1.4949008612368762
+      ],
+      "signAgreement": 0.77
+    },
+    {
+      "id": "gamora",
+      "appearances": 103,
+      "players": 86,
+      "switchers": 28,
+      "permanent": 58,
+      "value": -1.931830775788545,
+      "bootstrap90": [
+        -4.746086898845537,
+        1.151490717293975
+      ],
+      "signAgreement": 0.83
+    },
+    {
+      "id": "namor-the-submariner",
+      "appearances": 162,
+      "players": 131,
+      "switchers": 60,
+      "permanent": 71,
+      "value": -1.9417039754313483,
+      "bootstrap90": [
+        -6.04110103781486,
+        1.077731133670614
+      ],
+      "signAgreement": 0.84
+    },
+    {
+      "id": "thanos-the-mad-titan",
+      "appearances": 50,
+      "players": 44,
+      "switchers": 20,
+      "permanent": 24,
+      "value": -1.9701513540071995,
+      "bootstrap90": [
+        -4.365148009768525,
+        1.0522818441712725
+      ],
+      "signAgreement": 0.84
+    },
+    {
+      "id": "baron-strucker",
+      "appearances": 28,
+      "players": 23,
+      "switchers": 10,
+      "permanent": 13,
+      "value": -2.07258759456767,
+      "bootstrap90": [
+        -4.063863408295103,
+        0.5753629481391832
+      ],
+      "signAgreement": 0.92
+    },
+    {
+      "id": "lockjaw",
+      "appearances": 69,
+      "players": 59,
+      "switchers": 21,
+      "permanent": 38,
+      "value": -2.177210399130862,
+      "bootstrap90": [
+        -4.880406841370949,
+        0.6593252580422677
+      ],
+      "signAgreement": 0.88
+    },
+    {
+      "id": "king-tchalla",
+      "appearances": 96,
+      "players": 74,
+      "switchers": 37,
+      "permanent": 37,
+      "value": -2.2296877466302054,
+      "bootstrap90": [
+        -6.256004128714309,
+        1.828186093082857
+      ],
+      "signAgreement": 0.83
+    },
+    {
+      "id": "the-black-widow",
+      "appearances": 32,
+      "players": 26,
+      "switchers": 10,
+      "permanent": 16,
+      "value": -2.2419545480921426,
+      "bootstrap90": [
+        -6.273254260971919,
+        1.3628954761002228
+      ],
+      "signAgreement": 0.83
+    },
+    {
+      "id": "red-skull",
+      "appearances": 49,
+      "players": 44,
+      "switchers": 17,
+      "permanent": 27,
+      "value": -2.295566596354743,
+      "bootstrap90": [
+        -5.839785911351145,
+        1.1189177350397348
+      ],
+      "signAgreement": 0.8
+    },
+    {
+      "id": "onslaught",
+      "appearances": 33,
+      "players": 31,
+      "switchers": 19,
+      "permanent": 12,
+      "value": -2.3919818766870833,
+      "bootstrap90": [
+        -7.570214724435358,
+        2.1121310285952775
+      ],
+      "signAgreement": 0.81
+    },
+    {
+      "id": "hawkeye",
+      "appearances": 167,
+      "players": 131,
+      "switchers": 54,
+      "permanent": 77,
+      "value": -2.3997054041488823,
+      "bootstrap90": [
+        -4.706977721436358,
+        0.3764917734304391
+      ],
+      "signAgreement": 0.91
+    },
+    {
+      "id": "vision",
+      "appearances": 26,
+      "players": 21,
+      "switchers": 6,
+      "permanent": 15,
+      "value": -2.4027093843379834,
+      "bootstrap90": [
+        -4.900015823066581,
+        0.182953174139124
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "apocalypse",
+      "appearances": 40,
+      "players": 34,
+      "switchers": 12,
+      "permanent": 22,
+      "value": -2.4081895258503545,
+      "bootstrap90": [
+        -4.399678992796579,
+        0.6246245215957745
+      ],
+      "signAgreement": 0.87
+    },
+    {
+      "id": "psylocke",
+      "appearances": 140,
+      "players": 117,
+      "switchers": 46,
+      "permanent": 71,
+      "value": -2.4471765337373115,
+      "bootstrap90": [
+        -4.85301227475968,
+        0.886800955623928
+      ],
+      "signAgreement": 0.89
+    },
+    {
+      "id": "pyro",
+      "appearances": 127,
+      "players": 106,
+      "switchers": 29,
+      "permanent": 77,
+      "value": -2.5212676488183727,
+      "bootstrap90": [
+        -5.186251249451513,
+        1.4089310388065577
+      ],
+      "signAgreement": 0.81
+    },
+    {
+      "id": "sentinel-mk4",
+      "appearances": 61,
+      "players": 51,
+      "switchers": 18,
+      "permanent": 33,
+      "value": -2.5287255731062444,
+      "bootstrap90": [
+        -5.458626083368659,
+        0.4718277974635544
+      ],
+      "signAgreement": 0.9
+    },
+    {
+      "id": "red-skull-master-of-the-world",
+      "appearances": 73,
+      "players": 61,
+      "switchers": 23,
+      "permanent": 38,
+      "value": -2.589196174962186,
+      "bootstrap90": [
+        -7.154027555074123,
+        1.1727968755273512
+      ],
+      "signAgreement": 0.87
+    },
+    {
+      "id": "mighty-thor",
+      "appearances": 122,
+      "players": 96,
+      "switchers": 33,
+      "permanent": 63,
+      "value": -2.6165717280352245,
+      "bootstrap90": [
+        -7.642299681797751,
+        2.310179737015465
+      ],
+      "signAgreement": 0.81
+    },
+    {
+      "id": "silver-sable",
+      "appearances": 24,
+      "players": 23,
+      "switchers": 11,
+      "permanent": 12,
+      "value": -2.6710305918339152,
+      "bootstrap90": [
+        -5.0285555067948735,
+        2.5935011658791653
+      ],
+      "signAgreement": 0.73
+    },
+    {
+      "id": "nimrod",
+      "appearances": 34,
+      "players": 30,
+      "switchers": 11,
+      "permanent": 19,
+      "value": -2.686595997330792,
+      "bootstrap90": [
+        -5.532252951385808,
+        0.683847370497136
+      ],
+      "signAgreement": 0.9
+    },
+    {
+      "id": "steve-rogers-captain-america",
+      "appearances": 31,
+      "players": 25,
+      "switchers": 15,
+      "permanent": 10,
+      "value": -2.834468236253339,
+      "bootstrap90": [
+        -6.187450587798766,
+        2.634386222556202
+      ],
+      "signAgreement": 0.73
+    },
+    {
+      "id": "rocket-raccoon",
+      "appearances": 151,
+      "players": 124,
+      "switchers": 34,
+      "permanent": 90,
+      "value": -3.02417966778886,
+      "bootstrap90": [
+        -6.17239524611237,
+        0.45237937748235935
+      ],
+      "signAgreement": 0.92
+    },
+    {
+      "id": "ebony-maw",
+      "appearances": 44,
+      "players": 42,
+      "switchers": 20,
+      "permanent": 22,
+      "value": -3.0314601350056103,
+      "bootstrap90": [
+        -5.5139702025987845,
+        0.881003751218442
+      ],
+      "signAgreement": 0.88
+    },
+    {
+      "id": "luke-cage",
+      "appearances": 151,
+      "players": 124,
+      "switchers": 38,
+      "permanent": 86,
+      "value": -3.0627856414334573,
+      "bootstrap90": [
+        -5.525148085582467,
+        0.3315869233269018
+      ],
+      "signAgreement": 0.91
+    },
+    {
+      "id": "thor-hero-of-midgard",
+      "appearances": 128,
+      "players": 100,
+      "switchers": 34,
+      "permanent": 66,
+      "value": -3.1445733370598425,
+      "bootstrap90": [
+        -6.379539358605843,
+        0.8964449969945723
+      ],
+      "signAgreement": 0.91
+    },
+    {
+      "id": "x-23",
+      "appearances": 175,
+      "players": 134,
+      "switchers": 46,
+      "permanent": 88,
+      "value": -3.1646693085928184,
+      "bootstrap90": [
+        -6.173872010000065,
+        0.1973782921840611
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "groot",
+      "appearances": 76,
+      "players": 66,
+      "switchers": 18,
+      "permanent": 48,
+      "value": -3.17381890637336,
+      "bootstrap90": [
+        -6.808660255114589,
+        0.1381177596500194
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "war-machine",
+      "appearances": 25,
+      "players": 23,
+      "switchers": 8,
+      "permanent": 15,
+      "value": -3.4033010729412045,
+      "bootstrap90": [
+        -6.971112629729366,
+        0.2711106299385394
+      ],
+      "signAgreement": 0.92
+    },
+    {
+      "id": "ulik",
+      "appearances": 24,
+      "players": 18,
+      "switchers": 11,
+      "permanent": 7,
+      "value": -3.4436701908425946,
+      "bootstrap90": [
+        -7.916790352760622,
+        0.04163305513536315
+      ],
+      "signAgreement": 0.93
+    },
+    {
+      "id": "nkantu-the-living-mummy",
+      "appearances": 66,
+      "players": 56,
+      "switchers": 12,
+      "permanent": 44,
+      "value": -3.444145674565972,
+      "bootstrap90": [
+        -6.540582553728186,
+        0.6579191475403957
+      ],
+      "signAgreement": 0.9
+    },
+    {
+      "id": "sentinel-prime-mk4",
+      "appearances": 70,
+      "players": 58,
+      "switchers": 25,
+      "permanent": 33,
+      "value": -3.4723952523207173,
+      "bootstrap90": [
+        -6.337804423244664,
+        -0.24645735454390658
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "gwenom",
+      "appearances": 50,
+      "players": 43,
+      "switchers": 19,
+      "permanent": 24,
+      "value": -3.5146279022311404,
+      "bootstrap90": [
+        -7.433595759363996,
+        0.8197873079369332
+      ],
+      "signAgreement": 0.84
+    },
+    {
+      "id": "punisher",
+      "appearances": 18,
+      "players": 17,
+      "switchers": 5,
+      "permanent": 12,
+      "value": -3.5504250896618648,
+      "bootstrap90": [
+        -5.879868394527658,
+        -1.1486618270631184
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "iron-lad",
+      "appearances": 33,
+      "players": 30,
+      "switchers": 12,
+      "permanent": 18,
+      "value": -3.637023672273892,
+      "bootstrap90": [
+        -6.3995704029597285,
+        0.6105919483835659
+      ],
+      "signAgreement": 0.92
+    },
+    {
+      "id": "shadow-king",
+      "appearances": 37,
+      "players": 36,
+      "switchers": 19,
+      "permanent": 17,
+      "value": -3.6406492494207305,
+      "bootstrap90": [
+        -7.782939202956012,
+        1.6874193986440664
+      ],
+      "signAgreement": 0.89
+    },
+    {
+      "id": "weapon-x",
+      "appearances": 46,
+      "players": 35,
+      "switchers": 10,
+      "permanent": 25,
+      "value": -3.6457231821475005,
+      "bootstrap90": [
+        -6.053407642296248,
+        -0.20938370797929637
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "ronan-the-accuser",
+      "appearances": 29,
+      "players": 28,
+      "switchers": 12,
+      "permanent": 16,
+      "value": -3.7353646330451693,
+      "bootstrap90": [
+        -6.405442510107948,
+        -0.43432202077939513
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "squirrel-girl",
+      "appearances": 18,
+      "players": 13,
+      "switchers": 3,
+      "permanent": 10,
+      "value": -3.8680999965928797,
+      "bootstrap90": [
+        -7.276589151851688,
+        0.017992542650622844
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "ant-man",
+      "appearances": 55,
+      "players": 46,
+      "switchers": 21,
+      "permanent": 25,
+      "value": -3.913198929496356,
+      "bootstrap90": [
+        -6.760543349576055,
+        0.5218165928312596
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "jean-grey",
+      "appearances": 36,
+      "players": 29,
+      "switchers": 6,
+      "permanent": 23,
+      "value": -4.024454631705802,
+      "bootstrap90": [
+        -7.493608049495213,
+        -0.7576439372950826
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "sabretooth-apex-predator",
+      "appearances": 40,
+      "players": 32,
+      "switchers": 11,
+      "permanent": 21,
+      "value": -4.100542418521539,
+      "bootstrap90": [
+        -7.114504422196302,
+        -0.9414208628858677
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "hood",
+      "appearances": 49,
+      "players": 40,
+      "switchers": 15,
+      "permanent": 25,
+      "value": -4.151060896078402,
+      "bootstrap90": [
+        -7.661635113693147,
+        0.07509241592986825
+      ],
+      "signAgreement": 0.94
+    },
+    {
+      "id": "the-immortal-hulk",
+      "appearances": 51,
+      "players": 49,
+      "switchers": 11,
+      "permanent": 38,
+      "value": -4.3486903967613895,
+      "bootstrap90": [
+        -8.021220088563481,
+        -1.1046314255536662
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "she-hulk",
+      "appearances": 75,
+      "players": 61,
+      "switchers": 16,
+      "permanent": 45,
+      "value": -4.39388512755153,
+      "bootstrap90": [
+        -7.090724918149293,
+        -1.3963448861554066
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "green-goblin",
+      "appearances": 70,
+      "players": 60,
+      "switchers": 15,
+      "permanent": 45,
+      "value": -4.536762109926834,
+      "bootstrap90": [
+        -7.299373298052501,
+        -0.5131540559237457
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "venom",
+      "appearances": 106,
+      "players": 88,
+      "switchers": 36,
+      "permanent": 52,
+      "value": -4.564539892674085,
+      "bootstrap90": [
+        -8.37257101434774,
+        -0.8264682942520866
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "sabretooth",
+      "appearances": 57,
+      "players": 53,
+      "switchers": 18,
+      "permanent": 35,
+      "value": -4.742749964228237,
+      "bootstrap90": [
+        -8.523097555576792,
+        -2.1382587082109414
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "killmonger",
+      "appearances": 109,
+      "players": 88,
+      "switchers": 38,
+      "permanent": 50,
+      "value": -4.764733894581539,
+      "bootstrap90": [
+        -7.919672055084321,
+        -0.6482413209964094
+      ],
+      "signAgreement": 0.98
+    },
+    {
+      "id": "lady-mastermind",
+      "appearances": 36,
+      "players": 32,
+      "switchers": 13,
+      "permanent": 19,
+      "value": -4.832398880993089,
+      "bootstrap90": [
+        -7.569563236001933,
+        -1.1718245333298591
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "hela-queen-of-hel",
+      "appearances": 18,
+      "players": 13,
+      "switchers": 2,
+      "permanent": 11,
+      "value": -5.234926366763974,
+      "bootstrap90": [
+        -9.084616375813917,
+        -2.2360611784996447
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "cosmic-ghost-rider",
+      "appearances": 95,
+      "players": 73,
+      "switchers": 31,
+      "permanent": 42,
+      "value": -5.593846288004116,
+      "bootstrap90": [
+        -8.859950741920345,
+        -1.0153821601749198
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "baron-zemo",
+      "appearances": 101,
+      "players": 84,
+      "switchers": 44,
+      "permanent": 40,
+      "value": -5.621808129223601,
+      "bootstrap90": [
+        -9.061139113983865,
+        -1.3948377356418686
+      ],
+      "signAgreement": 0.97
+    },
+    {
+      "id": "dormammu",
+      "appearances": 45,
+      "players": 37,
+      "switchers": 17,
+      "permanent": 20,
+      "value": -5.701378787326606,
+      "bootstrap90": [
+        -8.859145240722999,
+        -1.0273874571132668
+      ],
+      "signAgreement": 0.99
+    },
+    {
+      "id": "taskmaster",
+      "appearances": 65,
+      "players": 53,
+      "switchers": 19,
+      "permanent": 34,
+      "value": -6.149875719392831,
+      "bootstrap90": [
+        -9.194883680922732,
+        -2.2857179994729067
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "magneto",
+      "appearances": 137,
+      "players": 117,
+      "switchers": 33,
+      "permanent": 84,
+      "value": -6.57628776280435,
+      "bootstrap90": [
+        -8.989560034210815,
+        -3.9021950556645173
+      ],
+      "signAgreement": 1
+    },
+    {
+      "id": "spectacular-spider-man",
+      "appearances": 174,
+      "players": 140,
+      "switchers": 61,
+      "permanent": 79,
+      "value": -7.328829113340864,
+      "bootstrap90": [
+        -9.893954527647717,
+        -3.4526180229787915
+      ],
+      "signAgreement": 1
+    }
+  ]
+}

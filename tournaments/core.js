@@ -97,7 +97,7 @@
     return data.characters.filter(c=>(!onlyUsed||c.count>0)&&(!q||normalize(c.name+' '+c.alterEgo+' '+c.id).includes(q)))
       .sort((a,b)=>sort==='average'?((b.average??-Infinity)-(a.average??-Infinity)||a.name.localeCompare(b.name)):
         sort==='points'?((b.points||0)-(a.points||0)||a.name.localeCompare(b.name)):
-        sort==='frequency'?(b.count-a.count||a.name.localeCompare(b.name)):(a.name.localeCompare(b.name)||a.alterEgo.localeCompare(b.alterEgo)));
+        sort==='frequency'?(b.count-a.count||a.name.localeCompare(b.name)):(a.name.localeCompare(b.name)||String(a.alterEgo||'').localeCompare(String(b.alterEgo||''))));
   }
   function rosterList(index,id,query='',sort='recent',affiliation='',playerId=null){
     const q=normalize(query);

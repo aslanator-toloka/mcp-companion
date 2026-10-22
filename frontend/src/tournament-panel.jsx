@@ -8,6 +8,7 @@ import {
   TournamentOverview,
   TournamentRosters,
 } from "./tournaments.jsx";
+import { CharacterRatingPanel } from "./character-rating.jsx";
 function ArchiveDialog({ openState, children, ...props }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -503,133 +504,139 @@ const ArchiveSection3 = observer(function ArchiveSection3() {
 });
 const ArchiveSection4 = observer(function ArchiveSection4() {
   return (
-    <div className={"at-archive-layout"}>
-      <aside className={"at-character-panel"} aria-label={"Выбор персонажа"}>
-        <div className={"at-panel-top"}>
-          <h2>
-            {"Персонажи "}
-            <span
-              id={"at-character-total"}
-            >{`${t.characterRows.length} / ${t.data.characters.length}`}</span>
-          </h2>
-          <label className={"at-search-box"}>
-            <svg viewBox={"0 0 24 24"} aria-hidden={"true"}>
-              <circle cx={"10.5"} cy={"10.5"} r={"6.5"} />
-              <path d={"m16 16 4 4"} />
-            </svg>
-            <input
-              id={"at-character-search"}
-              type={"search"}
-              placeholder={"Имя или alter ego…"}
-              autoComplete={"off"}
-              aria-label={"Поиск персонажа"}
-              value={t.characterQuery}
-              onChange={(e) => t.setField("characterQuery", e.target.value)}
-            />
-          </label>
-          <div className={"at-character-toolbar"}>
-            <label className={"at-checkbox"}>
+    <>
+      <CharacterRatingPanel />
+      <div className={"at-archive-layout"}>
+        <aside className={"at-character-panel"} aria-label={"Выбор персонажа"}>
+          <div className={"at-panel-top"}>
+            <h2>
+              {"Персонажи "}
+              <span
+                id={"at-character-total"}
+              >{`${t.characterRows.length} / ${t.data.characters.length}`}</span>
+            </h2>
+            <label className={"at-search-box"}>
+              <svg viewBox={"0 0 24 24"} aria-hidden={"true"}>
+                <circle cx={"10.5"} cy={"10.5"} r={"6.5"} />
+                <path d={"m16 16 4 4"} />
+              </svg>
               <input
-                id={"at-only-used"}
-                type={"checkbox"}
-                checked={t.onlyUsed}
-                onChange={(e) => t.setField("onlyUsed", e.target.checked)}
+                id={"at-character-search"}
+                type={"search"}
+                placeholder={"Имя или alter ego…"}
+                autoComplete={"off"}
+                aria-label={"Поиск персонажа"}
+                value={t.characterQuery}
+                onChange={(e) => t.setField("characterQuery", e.target.value)}
               />
-              {" Только с ростерами"}
             </label>
-            <select
-              id={"at-character-sort"}
-              aria-label={"Сортировка персонажей"}
-              value={t.characterSort}
-              onChange={(e) => t.setField("characterSort", e.target.value)}
-            >
-              <option value={"points"}>{"По общим баллам"}</option>
-              <option value={"average"}>{"По средним баллам"}</option>
-              <option value={"frequency"}>{"Частые сначала"}</option>
-              <option value={"name"}>{"По имени"}</option>
-            </select>
+            <div className={"at-character-toolbar"}>
+              <label className={"at-checkbox"}>
+                <input
+                  id={"at-only-used"}
+                  type={"checkbox"}
+                  checked={t.onlyUsed}
+                  onChange={(e) => t.setField("onlyUsed", e.target.checked)}
+                />
+                {" Только с ростерами"}
+              </label>
+              <select
+                id={"at-character-sort"}
+                aria-label={"Сортировка персонажей"}
+                value={t.characterSort}
+                onChange={(e) => t.setField("characterSort", e.target.value)}
+              >
+                <option value={"points"}>{"По общим баллам"}</option>
+                <option value={"average"}>{"По средним баллам"}</option>
+                <option value={"rating"}>
+                  {"По рейтингу с поправкой на игрока"}
+                </option>
+                <option value={"frequency"}>{"Частые сначала"}</option>
+                <option value={"name"}>{"По имени"}</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div
-          id={"at-character-list"}
-          className={"at-character-list"}
-          aria-label={"Персонажи"}
-        >
-          <TournamentCharacters
-            rows={t.characterRows}
-            selected={t.selected}
-            collectionMode={t.collectionMode}
-            playerMode={t.playerMode}
-          />
-        </div>
-        <div className={"at-sidebar-foot"}>
-          <span className={"at-tiny-square"} />
-          <span>{"Справа — всего и среднее за выступление"}</span>
-        </div>
-      </aside>
-      <section
-        className={"at-results-panel"}
-        aria-label={"Ростеры выбранного персонажа"}
-      >
-        <div id={"at-character-overview"} className={"at-character-overview"}>
-          {t.overview && <TournamentOverview {...t.overview} />}
-        </div>
-        <div className={"at-results-toolbar"}>
-          <label className={"at-search-box at-result-search"}>
-            <svg viewBox={"0 0 24 24"} aria-hidden={"true"}>
-              <circle cx={"10.5"} cy={"10.5"} r={"6.5"} />
-              <path d={"m16 16 4 4"} />
-            </svg>
-            <input
-              id={"at-result-search"}
-              type={"search"}
-              placeholder={"Игрок, турнир, affiliation…"}
-              aria-label={"Поиск среди ростеров"}
-              value={t.resultQuery}
-              onChange={(e) => t.setField("resultQuery", e.target.value)}
+          <div
+            id={"at-character-list"}
+            className={"at-character-list"}
+            aria-label={"Персонажи"}
+          >
+            <TournamentCharacters
+              rows={t.characterRows}
+              selected={t.selected}
+              collectionMode={t.collectionMode}
+              playerMode={t.playerMode}
             />
-          </label>
-          <label className={"at-select-box"}>
-            <span>{"Сортировка"}</span>
-            <select
-              id={"at-result-sort"}
-              aria-label={"Сортировка ростеров"}
-              value={t.resultSort}
-              onChange={(e) => t.setField("resultSort", e.target.value)}
-            >
-              <option value={"recent"}>{"Новые сначала"}</option>
-              <option value={"wins"}>{"Больше побед"}</option>
-              <option value={"player"}>{"По игроку"}</option>
-            </select>
-          </label>
-        </div>
-        <div className={"at-results-heading"}>
-          <p
-            id={"at-result-count"}
-            aria-live={"polite"}
-          >{`${t.rosterRows.length} ростеров${t.resultQuery || t.affiliations.size ? " из " + t.total : ""}`}</p>
-          <span>{"W / L / D"}</span>
-        </div>
-        <div id={"at-roster-list"} className={"at-roster-list"}>
-          <TournamentRosters
-            items={t.rosterRows
-              .slice(0, t.limit)
-              .map((row) => ({ row, availability: t.availability(row) }))}
-            total={t.total}
-            selectedPlayer={t.selectedPlayer}
-          />
-        </div>
-        <button
-          id={"at-show-more"}
-          className={"at-show-more"}
-          type={"button"}
-          onClick={() => {
-            t.moreRosters();
-          }}
-          hidden={t.rosterRows.length <= t.limit}
-        >{`Показать ещё ${Math.min(20, t.rosterRows.length - t.limit)} · осталось ${t.rosterRows.length - t.limit}`}</button>
-      </section>
-    </div>
+          </div>
+          <div className={"at-sidebar-foot"}>
+            <span className={"at-tiny-square"} />
+            <span>{"Справа — сумма, среднее и новый рейтинг R"}</span>
+          </div>
+        </aside>
+        <section
+          className={"at-results-panel"}
+          aria-label={"Ростеры выбранного персонажа"}
+        >
+          <div id={"at-character-overview"} className={"at-character-overview"}>
+            {t.overview && <TournamentOverview {...t.overview} />}
+          </div>
+          <div className={"at-results-toolbar"}>
+            <label className={"at-search-box at-result-search"}>
+              <svg viewBox={"0 0 24 24"} aria-hidden={"true"}>
+                <circle cx={"10.5"} cy={"10.5"} r={"6.5"} />
+                <path d={"m16 16 4 4"} />
+              </svg>
+              <input
+                id={"at-result-search"}
+                type={"search"}
+                placeholder={"Игрок, турнир, affiliation…"}
+                aria-label={"Поиск среди ростеров"}
+                value={t.resultQuery}
+                onChange={(e) => t.setField("resultQuery", e.target.value)}
+              />
+            </label>
+            <label className={"at-select-box"}>
+              <span>{"Сортировка"}</span>
+              <select
+                id={"at-result-sort"}
+                aria-label={"Сортировка ростеров"}
+                value={t.resultSort}
+                onChange={(e) => t.setField("resultSort", e.target.value)}
+              >
+                <option value={"recent"}>{"Новые сначала"}</option>
+                <option value={"wins"}>{"Больше побед"}</option>
+                <option value={"player"}>{"По игроку"}</option>
+              </select>
+            </label>
+          </div>
+          <div className={"at-results-heading"}>
+            <p
+              id={"at-result-count"}
+              aria-live={"polite"}
+            >{`${t.rosterRows.length} ростеров${t.resultQuery || t.affiliations.size ? " из " + t.total : ""}`}</p>
+            <span>{"W / L / D"}</span>
+          </div>
+          <div id={"at-roster-list"} className={"at-roster-list"}>
+            <TournamentRosters
+              items={t.rosterRows
+                .slice(0, t.limit)
+                .map((row) => ({ row, availability: t.availability(row) }))}
+              total={t.total}
+              selectedPlayer={t.selectedPlayer}
+            />
+          </div>
+          <button
+            id={"at-show-more"}
+            className={"at-show-more"}
+            type={"button"}
+            onClick={() => {
+              t.moreRosters();
+            }}
+            hidden={t.rosterRows.length <= t.limit}
+          >{`Показать ещё ${Math.min(20, t.rosterRows.length - t.limit)} · осталось ${t.rosterRows.length - t.limit}`}</button>
+        </section>
+      </div>
+    </>
   );
 });
 const ArchiveSection5 = observer(function ArchiveSection5() {

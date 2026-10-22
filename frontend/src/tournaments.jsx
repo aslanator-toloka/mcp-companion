@@ -2,6 +2,7 @@ import React, { memo, useState } from "react";
 import { Control, number, count } from "./common.jsx";
 import { observer } from "mobx-react-lite";
 import { tournaments as t, actions } from "./stores/index.js";
+import { RatingValue } from "./character-rating.jsx";
 const mean = (value) => (value === null ? "—" : number(value));
 const initials = (name) =>
   name
@@ -71,6 +72,9 @@ const ArchiveCharacter = memo(function ArchiveCharacter({
             title="Сглаженное среднее с одним нулевым выступлением; при менее 4 выступлениях — 0"
           >
             Ø {mean(c.average)}
+          </small>
+          <small>
+            <RatingValue rating={c.rating} compact />
           </small>
         </span>
       </button>

@@ -1,4 +1,11 @@
-import { makeAutoObservable, observable, observableRef } from "mobx";
+import {
+  makeAutoObservable,
+  observable,
+  observableRef,
+  runInAction,
+} from "mobx";
+import { prepareRatingRows } from "../character-rating.js";
+import { createCharacterRatingClient } from "../character-rating-client.js";
 import { tournamentGeography } from "../tournament-countries.js";
 export class TournamentStore {
   data = null;
@@ -26,6 +33,13 @@ export class TournamentStore {
   geography = null;
   playerLimit = 60;
   dialog = null;
+  rating = null;
+  ratingForKey = null;
+  ratingStatus = "idle";
+  ratingError = "";
+  ratingRequest = 0;
+  ratingCache = new Map();
+  ratingClient = createCharacterRatingClient();
   constructor(library, ui) {
     this.library = library;
     this.ui = ui;
@@ -37,6 +51,10 @@ export class TournamentStore {
         core: false,
         collectionCore: false,
         geography: false,
+        rating: observableRef,
+        ratingClient: false,
+        ratingCache: false,
+        ratingRequest: false,
         library: false,
         ui: false,
       },
@@ -44,6 +62,10 @@ export class TournamentStore {
     );
   }
   configure(data, core, collectionCore) {
+    this.ratingRequest++;
+    this.rating = null;
+    this.ratingStatus = "idle";
+    this.ratingCache.clear();
     this.index = core.createIndex(data);
     this.core = core;
     this.collectionCore = collectionCore;
@@ -94,15 +116,78 @@ export class TournamentStore {
         )
       : [];
   }
+  get ratingPrepared() {
+    return this.data ? prepareRatingRows(this.data) : { rows: [] };
+  }
+  get ratingKey() {
+    return JSON.stringify([
+      this.eventCountry,
+      this.rosterCountry,
+      [...this.affiliations].sort(),
+    ]);
+  }
+  get activeRating() {
+    return this.ratingForKey === this.ratingKey ? this.rating : null;
+  }
+  get ratingRows() {
+    return this.core.scopeRows(
+      this.ratingPrepared.rows.filter((r) =>
+        this.geography.matches(r, this.eventCountry, this.rosterCountry),
+      ),
+      [...this.affiliations],
+    );
+  }
+  async loadRating() {
+    if (!this.data) return;
+    const request = ++this.ratingRequest,
+      key = this.ratingKey;
+    this.rating = null;
+    this.ratingError = "";
+    this.ratingForKey = key;
+    if (this.ratingCache.has(key)) {
+      this.rating = this.ratingCache.get(key);
+      this.ratingStatus = "ready";
+      return;
+    }
+    this.ratingStatus = "loading";
+    try {
+      const result = await this.ratingClient({
+        characters: this.data.characters,
+        rosters: this.ratingRows,
+      });
+      runInAction(() => {
+        if (request !== this.ratingRequest || key !== this.ratingKey) return;
+        this.ratingCache.set(key, result);
+        if (this.ratingCache.size > 8)
+          this.ratingCache.delete(this.ratingCache.keys().next().value);
+        this.rating = result;
+        this.ratingStatus = "ready";
+      });
+    } catch (error) {
+      runInAction(() => {
+        if (request !== this.ratingRequest || key !== this.ratingKey) return;
+        this.ratingStatus = "error";
+        this.ratingError = error.message;
+      });
+    }
+  }
   get characterRows() {
-    return this.data
-      ? this.core.characterList(
-          { characters: this.scopedCharacters },
-          this.characterQuery,
-          this.onlyUsed,
-          this.characterSort,
+    if (!this.data) return [];
+    const rows = this.core
+      .characterList(
+        { characters: this.scopedCharacters },
+        this.characterQuery,
+        this.onlyUsed,
+        this.characterSort === "rating" ? "name" : this.characterSort,
+      )
+      .map((c) => ({ ...c, rating: this.activeRating?.ratings[c.id] }));
+    return this.characterSort === "rating"
+      ? rows.sort(
+          (a, b) =>
+            (b.rating?.value ?? -Infinity) - (a.rating?.value ?? -Infinity) ||
+            a.name.localeCompare(b.name),
         )
-      : [];
+      : rows;
   }
   get playerRows() {
     return this.data

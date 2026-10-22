@@ -159,3 +159,20 @@
 .squad-candidate.is-excluded strong{text-decoration:line-through}
 .squad-exclude[aria-pressed=true]{background:#fff1f2;border-color:#fda4af;color:#9f1239}
 @media(max-width:700px){.squad-required-options{grid-template-columns:minmax(0,1fr)}.squad-exclude{min-height:44px}}
+
+/* Player-adjusted rating stays separate from historical points. */
+.at-adjusted-rating { margin: 16px 0; padding: 16px 20px; border: 1px solid #cbdaf0; border-radius: 12px; background: #f7faff; color: #405878; }
+.at-adjusted-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; color: #203855; }
+.at-adjusted-heading > span { font-size: 11px; padding: 3px 7px; background: #e5edff; color: #3159a4; border-radius: 4px; }
+.at-adjusted-rating p { font-size: 13px; line-height: 1.5; margin: 7px 0; }
+.at-adjusted-rating summary { cursor: pointer; font-size: 13px; color: #3159a4; }
+.at-adjusted-character { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; gap: 4px 20px; margin: 10px 0; }
+.at-adjusted-character-name { grid-column: 1 / -1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 14px; }
+.at-adjusted-character > .at-adjusted-value { font-size: 26px; font-weight: 750; color: #2458a8; }
+.at-adjusted-character > span:last-child { font-size: 13px; min-height: 42px; display: flex; flex-direction: column; justify-content: center; }
+.at-adjusted-character em { display: block; font-size: 12px; color: #93600b; font-style: normal; }
+.at-adjusted-value { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.at-adjusted-value.at-negative { color: #bc3c43; }
+.at-character-frequency .at-adjusted-value { color: #3159a4; font-weight: 650; }
+.at-character-frequency .at-adjusted-value.at-negative { color: #bc3c43; }
+@media (max-width: 600px) { .at-adjusted-rating { padding: 12px; } .at-adjusted-character > .at-adjusted-value { font-size: 23px; } .at-adjusted-character { grid-template-columns: 100px minmax(0, 1fr); gap: 4px 12px; } .at-adjusted-character > span:last-child { min-height: 70px; } }
