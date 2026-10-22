@@ -24,7 +24,9 @@ export const RosterSquads = observer(function RosterSquads() {
   const result = rosters.squadVariants,
     group = result?.groups.find((g) => g.threat === options.threat);
   const candidates = rosters.squadCandidates.filter(Boolean),
-    required = new Set(plan.required);
+    required = new Set(plan.required),
+    excluded = new Set(plan.excluded),
+    available = candidates.filter((c) => !excluded.has(c.slug)).length;
   const list = useRef(null);
   const resetKey = JSON.stringify([
     rosters.draft?.id,
@@ -33,6 +35,7 @@ export const RosterSquads = observer(function RosterSquads() {
     options.to,
     options.threat,
     [...required].sort(),
+    [...excluded].sort(),
     candidates.map((c) => [c.slug, c.threatLevel, c.alterEgo]),
   ]);
   useLayoutEffect(() => {
@@ -46,7 +49,7 @@ export const RosterSquads = observer(function RosterSquads() {
     >
       <summary>
         <span>Варианты отряда</span>
-        <small>Threat · минимум персонажей · обязательные модели</small>
+        <small>Threat · минимум персонажей · закрепления и исключения</small>
       </summary>
       {plan.open && (
         <div className="squad-planner-body">
@@ -58,31 +61,49 @@ export const RosterSquads = observer(function RosterSquads() {
           <fieldset className="squad-required">
             <legend>Кого точно выставляю на стол</legend>
             <p>
-              Все отмеченные персонажи войдут в каждый вариант. Подбираются
-              только модели из текущего ростера.
+              Галочка — обязательно в каждом составе. «Исключить» — не
+              использовать в вариантах. Сам ростер не изменится.
             </p>
             {candidates.length ? (
               <div className="squad-required-options">
                 {candidates.map((c) => (
-                  <label
+                  <div
                     key={c.slug}
-                    className={required.has(c.slug) ? "is-required" : ""}
+                    className={
+                      "squad-candidate" +
+                      (required.has(c.slug) ? " is-required" : "") +
+                      (excluded.has(c.slug) ? " is-excluded" : "")
+                    }
                   >
-                    <input
-                      type="checkbox"
-                      checked={required.has(c.slug)}
-                      data-squad-required={c.slug}
-                      onChange={(e) =>
-                        rosters.setSquadRequired(c.slug, e.target.checked)
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={required.has(c.slug)}
+                        data-squad-required={c.slug}
+                        onChange={(e) =>
+                          rosters.setSquadRequired(c.slug, e.target.checked)
+                        }
+                      />
+                      <Avatar character={c} />
+                      <span>
+                        <strong>{c.name}</strong>
+                        <small>{c.alterEgo}</small>
+                      </span>
+                      <b>{c.threatLevel} Threat</b>
+                    </label>
+                    <button
+                      type="button"
+                      className="squad-exclude"
+                      data-squad-exclude={c.slug}
+                      aria-label={"Исключить из вариантов: " + c.name}
+                      aria-pressed={excluded.has(c.slug)}
+                      onClick={() =>
+                        rosters.setSquadExcluded(c.slug, !excluded.has(c.slug))
                       }
-                    />
-                    <Avatar character={c} />
-                    <span>
-                      <strong>{c.name}</strong>
-                      <small>{c.alterEgo}</small>
-                    </span>
-                    <b>{c.threatLevel} Threat</b>
-                  </label>
+                    >
+                      {excluded.has(c.slug) ? "Вернуть" : "Исключить"}
+                    </button>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -99,10 +120,20 @@ export const RosterSquads = observer(function RosterSquads() {
                 Снять все закрепления
               </button>
             )}
+            {excluded.size > 0 && (
+              <button
+                type="button"
+                className="quiet"
+                onClick={rosters.clearSquadExcluded}
+              >
+                Снять все исключения
+              </button>
+            )}
           </fieldset>
           <p className="squad-explanation">
             Составы сгруппированы по точной сумме Threat с карточек. В каждом —
             не меньше {options.min} персонажей и все закреплённые модели.
+            {excluded.size > 0 && ` Исключено: ${excluded.size}.`}
           </p>
           {result?.errors.length > 0 ? (
             <div className="squad-error" role="alert">
@@ -211,8 +242,10 @@ export const RosterSquads = observer(function RosterSquads() {
                 </>
               ) : (
                 <div className="squad-empty">
-                  {candidates.length < options.min
-                    ? `В ростере ${candidates.length} персонажей, а нужно минимум ${options.min}.`
+                  {available < options.min
+                    ? excluded.size
+                      ? `После исключений доступно ${available} персонажей, а нужно минимум ${options.min}.`
+                      : `В ростере ${candidates.length} персонажей, а нужно минимум ${options.min}.`
                     : `На ${options.threat} Threat составов с этими условиями нет. Попробуй другой Threat, уменьши минимум или сними часть закреплений.`}
                 </div>
               )}

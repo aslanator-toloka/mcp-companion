@@ -225,3 +225,64 @@ test("paging keeps the list and scroll; opening a character restores the same li
   await planner(page).locator(".squad-settings").scrollIntoViewIfNeeded();
   await page.screenshot({ path: "previews/squad-planner-desktop.png" });
 });
+test("excluded models stay in the roster but leave every variant; exclusion and pin switch cleanly and persist in history", async ({
+  page,
+}) => {
+  await seed(page);
+  await page.goto(
+    origin +
+      "#screen=rosters&roster=squad-web&squads=1&squad-required=amazing-spider-man&squad-required=ultimate-spider-man",
+  );
+  const root = planner(page),
+    exclude = root.locator('[data-squad-exclude="ghost-spider"]');
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+  await exclude.click();
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(5);
+  await expect(root.locator('[data-squad-member="ghost-spider"]')).toHaveCount(
+    0,
+  );
+  await expect(exclude).toHaveAttribute("aria-pressed", "true");
+  await expect(page).toHaveURL(/squad-excluded=ghost-spider/);
+  expect(
+    await page.evaluate(() =>
+      MCPStores.rosters.draft.characters.includes("ghost-spider"),
+    ),
+  ).toBe(true);
+  expect(await page.evaluate(() => MCPStores.rosters.dirty)).toBe(false);
+  await page.reload();
+  await expect(exclude).toHaveAttribute("aria-pressed", "true");
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(5);
+  await exclude.click();
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+  await page.goBack();
+  await expect(exclude).toHaveAttribute("aria-pressed", "true");
+  await page.goForward();
+  await expect(exclude).toHaveAttribute("aria-pressed", "false");
+  await root.locator('[data-squad-exclude="amazing-spider-man"]').click();
+  await expect(
+    root.locator('[data-squad-required="amazing-spider-man"]'),
+  ).not.toBeChecked();
+  await expect(
+    root.locator('[data-squad-member="amazing-spider-man"]'),
+  ).toHaveCount(0);
+  await lock(page, "amazing-spider-man");
+  await expect(
+    root.locator('[data-squad-exclude="amazing-spider-man"]'),
+  ).toHaveAttribute("aria-pressed", "false");
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+  await exclude.click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await root
+    .locator('[data-squad-exclude="ghost-spider"]')
+    .scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "previews/squad-exclusions-mobile.png" });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await root
+    .getByRole("button", { name: "Снять все исключения", exact: true })
+    .click();
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+});

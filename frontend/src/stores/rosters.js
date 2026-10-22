@@ -204,6 +204,7 @@ export class RosterStore {
       from: this.squads.from,
       to: this.squads.to,
       required: this.squads.required,
+      excluded: this.squads.excluded,
     });
   }
   setSquadField(name, value) {
@@ -224,10 +225,25 @@ export class RosterStore {
     this.squads.required = include
       ? [...new Set([...this.squads.required, slug])]
       : this.squads.required.filter((s) => s !== slug);
+    if (include)
+      this.squads.excluded = this.squads.excluded.filter((s) => s !== slug);
     this.squads.limit = 30;
   }
   clearSquadRequired() {
     this.squads.required = [];
+    this.squads.limit = 30;
+  }
+  setSquadExcluded(slug, include) {
+    if (!this.draft?.characters.includes(slug)) return;
+    this.squads.excluded = include
+      ? [...new Set([...this.squads.excluded, slug])]
+      : this.squads.excluded.filter((s) => s !== slug);
+    if (include)
+      this.squads.required = this.squads.required.filter((s) => s !== slug);
+    this.squads.limit = 30;
+  }
+  clearSquadExcluded() {
+    this.squads.excluded = [];
     this.squads.limit = 30;
   }
   moreSquads() {
@@ -358,6 +374,9 @@ export class RosterStore {
         );
     if (kind === "characters") {
       this.squads.required = this.squads.required.filter((s) =>
+        this.draft.characters.includes(s),
+      );
+      this.squads.excluded = this.squads.excluded.filter((s) =>
         this.draft.characters.includes(s),
       );
       this.squads.limit = 30;

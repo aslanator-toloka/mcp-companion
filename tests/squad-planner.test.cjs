@@ -173,3 +173,48 @@ test("planner state never dirties or edits a roster; removing a model clears its
   assert.deepEqual([...store.squads.required], []);
   assert.equal(store.squads.open, false);
 });
+test("exclusions remove models from every threat group, combine with locks and reject contradictory constraints", () => {
+  const r = P.enumerateSquads(models(), {
+    min: 5,
+    from: 15,
+    to: 20,
+    required: pinned,
+    excluded: ["ghost-spider"],
+  });
+  assert.deepEqual(r.errors, []);
+  assert.equal(r.groups.find((g) => g.threat === 17).squads.length, 5);
+  assert(
+    r.groups.every((g) =>
+      g.squads.every(
+        (s) =>
+          !s.slugs.includes("ghost-spider") &&
+          pinned.every((p) => s.slugs.includes(p)),
+      ),
+    ),
+  );
+  assert(
+    P.enumerateSquads(models(), { required: pinned, excluded: [pinned[0]] })
+      .errors.length,
+  );
+  assert(P.enumerateSquads(models(), { excluded: ["unknown"] }).errors.length);
+  assert.equal(P.enumerateSquads(models(), { excluded: slugs }).total, 0);
+  const store = new RosterStore(
+    { snapshot: { rosters: [], groups: [] } },
+    { rows: catalog, byId, affiliations: [] },
+    { actions: {}, notify: () => {} },
+  );
+  store.setDraft({ id: "x", name: "Test", characters: slugs });
+  store.setSquadField("open", true);
+  pinned.forEach((s) => store.setSquadRequired(s, true));
+  store.setSquadExcluded(pinned[0], true);
+  assert(!store.squads.required.includes(pinned[0]));
+  assert.equal(store.dirty, false);
+  store.setSquadRequired(pinned[0], true);
+  assert(!store.squads.excluded.includes(pinned[0]));
+  store.setSquadExcluded("ghost-spider", true);
+  store.removeItem("characters", "ghost-spider");
+  assert(!store.squads.excluded.includes("ghost-spider"));
+  store.setSquadExcluded("wong", true);
+  store.clearSquadExcluded();
+  assert.deepEqual([...store.squads.excluded], []);
+});

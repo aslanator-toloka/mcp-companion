@@ -123,6 +123,7 @@ export function createRoutes(s) {
           put("squad-threat", options.threat, 17);
           put("squad-limit", options.limit, 30);
           for (const slug of options.required) p.append("squad-required", slug);
+          for (const slug of options.excluded) p.append("squad-excluded", slug);
         }
         if (rosters.picker) {
           put("pick", rosters.picker.kind);
@@ -318,6 +319,9 @@ export function createRoutes(s) {
             else ui.notify("Ростер больше не существует.");
           }
           if (rosters.draft) {
+            const excluded = [...new Set(p.getAll("squad-excluded"))].filter(
+              (slug) => rosters.draft.characters.includes(slug),
+            );
             rosters.squads = {
               open: bool(p.get("squads")),
               min: positive(p.get("squad-min"), 5, 10),
@@ -326,8 +330,11 @@ export function createRoutes(s) {
               threat: positive(p.get("squad-threat"), 17, 99),
               limit: positive(p.get("squad-limit"), 30, 1024),
               required: [...new Set(p.getAll("squad-required"))].filter(
-                (slug) => rosters.draft.characters.includes(slug),
+                (slug) =>
+                  rosters.draft.characters.includes(slug) &&
+                  !excluded.includes(slug),
               ),
+              excluded,
             };
             rosters.setTab(
               one(

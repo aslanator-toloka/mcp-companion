@@ -6,6 +6,7 @@ export const defaultSquadPlanner = () => ({
   to: 20,
   threat: 17,
   required: [],
+  excluded: [],
   limit: 30,
 });
 const integer = (value, fallback, min, max) =>
@@ -31,6 +32,9 @@ export function squadSettings(value = {}) {
     required: Array.isArray(value.required)
       ? [...new Set(value.required.filter((s) => typeof s === "string"))]
       : [],
+    excluded: Array.isArray(value.excluded)
+      ? [...new Set(value.excluded.filter((s) => typeof s === "string"))]
+      : [],
     limit: integer(value.limit, 30, 1, 1024),
   };
 }
@@ -43,7 +47,7 @@ const copies = (c) =>
   ["prime-sentinel-1", "prime-sentinel-2"].includes(c.slug) ? 2 : 1;
 export function enumerateSquads(characters, options = {}) {
   const settings = squadSettings(options),
-    { min, from, to, required } = settings;
+    { min, from, to, required, excluded } = settings;
   const result = { groups: [], total: 0, errors: [], settings };
   if (from > to) {
     result.errors.push("Начало диапазона Threat должно быть не больше конца.");
@@ -81,6 +85,17 @@ export function enumerateSquads(characters, options = {}) {
     result.errors.push("Закреплённого персонажа больше нет в этом ростере.");
     return result;
   }
+  if (excluded.some((slug) => !seen.has(slug))) {
+    result.errors.push("Исключённого персонажа больше нет в этом ростере.");
+    return result;
+  }
+  const excludedSet = new Set(excluded);
+  if (required.some((slug) => excludedSet.has(slug))) {
+    result.errors.push(
+      "Персонаж не может быть одновременно закреплён и исключён.",
+    );
+    return result;
+  }
   const requiredSet = new Set(required),
     counts = new Map(),
     groupMap = new Map();
@@ -92,14 +107,12 @@ export function enumerateSquads(characters, options = {}) {
     if (index === candidates.length) {
       if (selected.length >= min && groupMap.has(total)) {
         const slugs = selected.map((c) => c.slug);
-        groupMap
-          .get(total)
-          .squads.push({
-            key: slugs.join("|"),
-            slugs,
-            threat: total,
-            count: slugs.length,
-          });
+        groupMap.get(total).squads.push({
+          key: slugs.join("|"),
+          slugs,
+          threat: total,
+          count: slugs.length,
+        });
         result.total++;
       }
       return;
@@ -110,7 +123,7 @@ export function enumerateSquads(characters, options = {}) {
     // All occupants of a repeated identity must permit its multiplicity.
     const allowed =
       !key || existing.length < Math.min(copies(c), ...existing.map(copies));
-    if (allowed) {
+    if (allowed && !excludedSet.has(c.slug)) {
       selected.push(c);
       if (key) counts.set(key, [...existing, c]);
       visit(index + 1, total + c.threatLevel);
