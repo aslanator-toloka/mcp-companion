@@ -199,9 +199,4 @@
 .roster-summary+.character-roles{margin:8px 0 14px}
 .squad-variants .character-roles{margin:7px 0 9px}
 .picker-result>.character-roles{max-width:135px;flex-shrink:0}
-.at-character-entry{flex-wrap:wrap}
-.at-character-entry>.character-roles{flex-basis:100%;order:3;padding-left:46px;margin:0 8px 7px 0}
-.at-character-entry .character-roles.compact .character-role{min-height:22px;min-width:22px;width:22px;height:22px;padding:2px}
 @media(max-width:700px){.character-row-main>.character-roles{padding-left:64px}.selected-character-main>.character-roles{padding-left:0}.picker-result{flex-wrap:wrap}.picker-result>.character-roles{flex-basis:100%;max-width:100%;order:3;padding-left:48px}.character-role{min-width:30px;min-height:30px;width:30px;height:30px}.character-roles.compact .character-role{min-width:28px;min-height:28px;width:28px;height:28px}}
-
-#tournaments-screen .at-character-entry>.character-roles{grid-column:1/-1;min-width:0}

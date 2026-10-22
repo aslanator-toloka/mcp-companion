@@ -1,4 +1,3 @@
-import { RoleIcons } from "./character-roles.jsx";
 import React, { memo, useState } from "react";
 import { Control, number, count } from "./common.jsx";
 import { observer } from "mobx-react-lite";
@@ -79,7 +78,6 @@ const ArchiveCharacter = memo(function ArchiveCharacter({
           </small>
         </span>
       </button>
-      <RoleIcons slug={(c.inventoryIds || [c.id])[0]} compact />
       <button
         type="button"
         className="at-character-catalog-arrow"
@@ -396,12 +394,6 @@ export function TournamentRosterBody({
           участника.
         </p>
       )}
-      <RoleIcons
-        slugs={characters.map((c) => c.inventorySlug)}
-        tactics={r.tactics}
-        context="roster"
-        owner={r.id}
-      />
       <div className="at-roster-actions">
         <button
           type="button"
@@ -721,7 +713,6 @@ export function TournamentOverview({
             >
               В «Персонажи» ↗
             </button>
-            <RoleIcons slug={inventorySlug} />
             <ProfileAffiliations affiliations={c.affiliations} />
           </div>
         </div>
