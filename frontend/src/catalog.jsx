@@ -1,6 +1,6 @@
 import { CharacterTactics } from "./character-tactics.jsx";
 import { observer } from "mobx-react-lite";
-import { catalog, library, actions, cardViews } from "./stores/index.js";
+import { catalog, library, actions } from "./stores/index.js";
 import React, { memo } from "react";
 import { Avatar, OwnedCheckbox } from "./common.jsx";
 import { CharacterBoxes } from "./purchases.jsx";
@@ -112,7 +112,7 @@ export function CharacterDetail({
                 aria-label="Калькулятор"
                 title="Калькулятор"
                 onClick={() =>
-                  cardViews.showCalculator(c.slug, {
+                  actions.openCalculator(c.slug, {
                     form: catalog.selectedForm,
                     side: catalog.selectedSide,
                   })

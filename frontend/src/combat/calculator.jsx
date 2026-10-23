@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { catalog, cardViews } from "../stores/index.js";
-import { Dialog } from "../dialogs.jsx";
+import { catalog, cardViews, ui } from "../stores/index.js";
 import { Avatar } from "../common.jsx";
 import { CONDITIONS, contextFields, immunities, profile } from "./profile.js";
 import { calculate } from "./client.js";
@@ -189,11 +188,16 @@ function RuleList({ label, entries }) {
     </div>
   );
 }
-function Direction({ value, first, second }) {
-  const attacker = value.attacker === first.slug ? first : second,
-    defender = value.defender === first.slug ? first : second;
+function Direction({ value, attacker, defender, index }) {
   return (
-    <section className="combat-direction" data-attacker={attacker.slug}>
+    <section
+      className="combat-direction"
+      data-attacker={attacker.slug}
+      data-combat-slot={index === 0 ? "first" : "second"}
+    >
+      <p className="eyebrow">
+        {index === 0 ? "Первый → Второй" : "Второй → Первый"}
+      </p>
       <h3>
         {attacker.name} <span aria-hidden="true">→</span> {defender.name}
       </h3>
@@ -264,32 +268,82 @@ function Direction({ value, first, second }) {
     </section>
   );
 }
+const CharacterPicker = observer(function CharacterPicker({
+  field,
+  label,
+  value,
+}) {
+  const [query, setQuery] = useState("");
+  const candidates = catalog.rows
+    .filter(
+      (c) =>
+        c.slug === value ||
+        `${c.name} ${c.alterEgo || ""}`
+          .toLowerCase()
+          .includes(query.toLowerCase()),
+    )
+    .sort(
+      (a, b) =>
+        a.name.localeCompare(b.name) ||
+        String(a.alterEgo || "").localeCompare(String(b.alterEgo || "")),
+    );
+  return (
+    <div className="combat-character-picker">
+      <label className="field">
+        {field === "source"
+          ? "Найти первого персонажа"
+          : "Найти второго персонажа"}
+        <input
+          type="search"
+          placeholder="Имя или alter ego"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </label>
+      <label className="field">
+        {label}
+        <select
+          aria-label={label}
+          value={value}
+          onChange={(e) => cardViews.setCalculator(field, e.target.value)}
+        >
+          <option value="">Выберите персонажа…</option>
+          {candidates.map((c) => (
+            <option key={c.slug} value={c.slug}>
+              {c.name} — {c.alterEgo || "Grunt"}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
+  );
+});
 const CalculatorContent = observer(function CalculatorContent({ config }) {
-  const [search, setSearch] = useState(""),
-    [loaded, setLoaded] = useState(null),
-    [result, setResult] = useState(null),
-    [error, setError] = useState(""),
+  const [outcome, setOutcome] = useState(null),
+    [failure, setFailure] = useState(null),
     [retry, setRetry] = useState(0);
   const first = catalog.byId.get(config.source),
     second = catalog.byId.get(config.opponent);
-  const serialized = JSON.stringify(config);
+  const firstDetail = catalog.details.get(config.source),
+    secondDetail = catalog.details.get(config.opponent);
+  const serialized = JSON.stringify(config),
+    result = outcome?.key === serialized ? outcome.value : null,
+    error = failure?.key === serialized ? failure.message : "";
   useEffect(() => {
     let live = true,
       job,
       timer;
-    setResult(null);
-    setError("");
-    setLoaded(null);
+    setOutcome(null);
+    setFailure(null);
     Promise.all([
-      catalog.detail(config.source),
+      first ? catalog.detail(config.source) : null,
       second ? catalog.detail(config.opponent) : null,
     ])
       .then(([a, b]) => {
         if (!live) return;
-        if (!a?.statCard || (second && !b?.statCard))
+        if ((first && !a?.statCard) || (second && !b?.statCard))
           throw Error("Не удалось загрузить полные карты");
-        setLoaded([a, b]);
-        if (!second) return;
+        if (!first || !second) return;
         timer = setTimeout(() => {
           try {
             job = calculate(
@@ -298,20 +352,20 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
               { distance: config.distance },
             );
             job.promise.then(
-              (r) => {
-                if (live) setResult(r);
+              (value) => {
+                if (live) setOutcome({ key: serialized, value });
               },
               (e) => {
-                if (live) setError(e.message);
+                if (live) setFailure({ key: serialized, message: e.message });
               },
             );
           } catch (e) {
-            if (live) setError(e.message);
+            if (live) setFailure({ key: serialized, message: e.message });
           }
         }, 150);
       })
       .catch((e) => {
-        if (live) setError(e.message);
+        if (live) setFailure({ key: serialized, message: e.message });
       });
     return () => {
       live = false;
@@ -319,91 +373,59 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
       job?.cancel();
     };
   }, [serialized, retry]);
-  if (!first) return null;
-  const candidates = catalog.rows
-    .filter(
-      (c) =>
-        c.slug === config.opponent ||
-        `${c.name} ${c.alterEgo}`.toLowerCase().includes(search.toLowerCase()),
-    )
-    .sort(
-      (a, b) =>
-        a.name.localeCompare(b.name) ||
-        String(a.alterEgo || "").localeCompare(String(b.alterEgo || "")),
-    );
   return (
     <>
-      <div className="dialog-heading">
+      <header className="heading">
         <div>
-          <span className="eyebrow">КАЛЬКУЛЯТОР АТАК</span>
-          <h2>{first.name}</h2>
-          <p>Средний прямой урон каждой атакой в обе стороны.</p>
+          <span className="eyebrow">07 / КАЛЬКУЛЯТОР</span>
+          <h1>Калькулятор атак</h1>
+          <p>
+            Выберите двух персонажей и сравните средний прямой урон каждой
+            атакой в обе стороны.
+          </p>
         </div>
-        <button
-          className="quiet close"
-          aria-label="Закрыть калькулятор"
-          onClick={cardViews.closeCalculator}
+      </header>
+      <label className="field combat-distance">
+        Дистанция
+        <select
+          aria-label="Дистанция"
+          value={config.distance}
+          onChange={(e) => cardViews.setCalculator("distance", e.target.value)}
         >
-          ×
-        </button>
-      </div>
-      <div className="combat-opponent-picker">
-        <label className="field">
-          Найти противника
-          <input
-            type="search"
-            placeholder="Имя или alter ego"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </label>
-        <label className="field">
-          Противник
-          <select
-            aria-label="Противник"
-            value={config.opponent}
-            onChange={(e) =>
-              cardViews.setCalculator("opponent", e.target.value)
-            }
-          >
-            <option value="">Выберите персонажа…</option>
-            {candidates.map((c) => (
-              <option value={c.slug} key={c.slug}>
-                {c.name} — {c.alterEgo || "Grunt"}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="field">
-          Дистанция
-          <select
-            aria-label="Дистанция"
-            value={config.distance}
-            onChange={(e) =>
-              cardViews.setCalculator("distance", e.target.value)
-            }
-          >
-            {[1, 2, 3, 4, 5].map((n) => (
-              <option key={n} value={n}>
-                Range {n}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <option key={n} value={n}>
+              Range {n}
+            </option>
+          ))}
+        </select>
+      </label>
       <div className="combat-characters">
-        <CharacterSettings
-          character={first}
-          detail={loaded?.[0]}
-          value={config.first}
-          onChange={(v) => cardViews.setCalculator("first", v)}
-        />
-        <CharacterSettings
-          character={second}
-          detail={loaded?.[1]}
-          value={config.second}
-          onChange={(v) => cardViews.setCalculator("second", v)}
-        />
+        <div role="group" aria-label="Первый персонаж: выбор и настройки">
+          <CharacterPicker
+            field="source"
+            label="Первый персонаж"
+            value={config.source}
+          />
+          <CharacterSettings
+            character={first}
+            detail={firstDetail}
+            value={config.first}
+            onChange={(v) => cardViews.setCalculator("first", v)}
+          />
+        </div>
+        <div role="group" aria-label="Второй персонаж: выбор и настройки">
+          <CharacterPicker
+            field="opponent"
+            label="Второй персонаж"
+            value={config.opponent}
+          />
+          <CharacterSettings
+            character={second}
+            detail={secondDetail}
+            value={config.second}
+            onChange={(v) => cardViews.setCalculator("second", v)}
+          />
+        </div>
       </div>
       <div className="combat-assumptions">
         <p>
@@ -424,15 +446,23 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
             Повторить расчёт
           </button>
         </div>
-      ) : second && !result ? (
+      ) : !first || !second ? (
+        <p className="empty">Выберите двух персонажей для сравнения.</p>
+      ) : !result ? (
         <p className="loading" role="status">
-          {loaded ? "Считаем броски и способности…" : "Загружаем карты…"}
+          {firstDetail && secondDetail
+            ? "Считаем броски и способности…"
+            : "Загружаем карты…"}
         </p>
-      ) : !second ? (
-        <p className="empty">Выберите любого персонажа для сравнения.</p>
       ) : (
-        result?.map((v, i) => (
-          <Direction key={i} value={v} first={first} second={second} />
+        result.map((value, index) => (
+          <Direction
+            key={index}
+            value={value}
+            index={index}
+            attacker={index === 0 ? first : second}
+            defender={index === 0 ? second : first}
+          />
         ))
       )}
       <details className="combat-method">
@@ -456,22 +486,14 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
     </>
   );
 });
-export const CalculatorModal = observer(function CalculatorModal() {
+export const CalculatorPage = observer(function CalculatorPage() {
+  // Unmount the worker-owning component on navigation; inputs remain in the store.
+  if (ui.screen !== "calculator") return null;
+  if (!ui.ready || !cardViews.calculator)
+    return <p className="loading">Загружаем калькулятор…</p>;
   return (
-    <Dialog
-      id="combat-calculator"
-      className="combat-dialog"
-      label="Калькулятор атак"
-      open={!!cardViews.calculator}
-      resetKey={cardViews.calculator?.source}
-      onClose={cardViews.closeCalculator}
-    >
-      {cardViews.calculator && (
-        <CalculatorContent
-          key={cardViews.calculator.source}
-          config={cardViews.calculator}
-        />
-      )}
-    </Dialog>
+    <div id="combat-calculator" className="combat-page">
+      <CalculatorContent config={cardViews.calculator} />
+    </div>
   );
 });

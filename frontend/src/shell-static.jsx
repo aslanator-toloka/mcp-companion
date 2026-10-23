@@ -1,4 +1,4 @@
-import { CalculatorModal } from "./combat/calculator.jsx";
+import { CalculatorPage } from "./combat/calculator.jsx";
 import { actions } from "./stores/index.js";
 import {
   CharacterModal,
@@ -70,6 +70,9 @@ export const StaticShell = memo(function StaticShell() {
           <Screen name="rosters" id="rosters-screen">
             <RosterWorkspace />
           </Screen>
+          <Screen name="calculator" id="calculator-screen">
+            <CalculatorPage />
+          </Screen>
           <Screen name="battle" id="battle-screen">
             <BattleWorkspace />
           </Screen>
@@ -94,7 +97,6 @@ export const StaticShell = memo(function StaticShell() {
       <ConditionModal />
       <RuleReferenceModal />
       <PeerModal />
-      <CalculatorModal />
     </>
   );
 });

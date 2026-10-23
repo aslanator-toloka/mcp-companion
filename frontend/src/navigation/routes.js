@@ -21,11 +21,6 @@ const pickerFields = {
   relatedOnly: "related",
 };
 const overlayKeys = [
-  "calculator",
-  "opponent",
-  "combat-a",
-  "combat-b",
-  "combat-range",
   "preview",
   "remove-side",
   "mission",
@@ -225,7 +220,7 @@ export function createRoutes(s) {
       put("game", cards.game.kind + ":" + cards.game.card.slug);
       put("game-side", cards.game.side, "front");
     }
-    if (cards.calculator) {
+    if (ui.screen === "calculator" && cards.calculator) {
       const c = cards.calculator;
       put("calculator", c.source);
       put("opponent", c.opponent);
@@ -265,6 +260,8 @@ export function createRoutes(s) {
   }
   function editorId(hash) {
     const p = new URLSearchParams(hash.slice(1));
+    // A valid legacy calculator link navigates away even if its old screen says rosters.
+    if (catalog.byId.has(p.get("calculator"))) return null;
     return p.get("screen") === "rosters"
       ? p.get("roster")?.replace(/^new:/, "")
       : null;
@@ -277,11 +274,23 @@ export function createRoutes(s) {
     let loaded;
     runInAction(() => {
       const requested = p.get("screen"),
-        screen = one(
-          requested,
-          ["catalog", "mine", "rosters", "tournaments", "battle", "purchases"],
-          "tournaments",
-        ),
+        legacyCalculator =
+          requested !== "calculator" && catalog.byId.has(p.get("calculator")),
+        screen = legacyCalculator
+          ? "calculator"
+          : one(
+              requested,
+              [
+                "catalog",
+                "mine",
+                "rosters",
+                "tournaments",
+                "battle",
+                "purchases",
+                "calculator",
+              ],
+              "tournaments",
+            ),
         oldDraft = rosters.draft;
       ui.activate(screen === "mine" ? "catalog" : screen, screen === "mine");
       const preserve = screen === "rosters" && oldDraft?.id === editorId(hash);
@@ -293,7 +302,6 @@ export function createRoutes(s) {
       b.closeDialog();
       map.setField("renaming", false);
       cards.closeGame();
-      cards.closeCalculator();
       cards.closeCondition();
       cards.closeReference();
       purchases.select(null);
@@ -520,7 +528,7 @@ export function createRoutes(s) {
           if (p.get("panel") === "choose-roster") b.openDialog("choose-roster");
         }
       }
-      const slug = p.get("card");
+      const slug = screen === "calculator" ? null : p.get("card");
       if (slug && catalog.byId.has(slug)) {
         loaded = catalog.open(slug, false);
         catalog.selectFace("form", p.get("form") === "1" ? 1 : 0);
@@ -532,6 +540,7 @@ export function createRoutes(s) {
       } else catalog.close();
       const box = p.get("box");
       if (
+        screen !== "calculator" &&
         box &&
         (purchases.byCode.has(box) ||
           s.library.wishlist.has(box) ||
@@ -539,7 +548,7 @@ export function createRoutes(s) {
       )
         purchases.select(box);
       const game = p.get("game");
-      if (game) {
+      if (game && screen !== "calculator") {
         const split = game.indexOf(":"),
           kind = game.slice(0, split),
           id = game.slice(split + 1);
@@ -560,8 +569,10 @@ export function createRoutes(s) {
         }
       }
       const calculatorSource = p.get("calculator");
-      if (catalog.byId.has(calculatorSource)) {
-        cards.showCalculator(calculatorSource);
+      if (screen === "calculator") {
+        cards.showCalculator(
+          catalog.byId.has(calculatorSource) ? calculatorSource : "",
+        );
         const opponent = p.get("opponent");
         if (catalog.byId.has(opponent))
           cards.setCalculator("opponent", opponent);

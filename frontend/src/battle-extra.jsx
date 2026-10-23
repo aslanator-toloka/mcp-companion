@@ -770,7 +770,7 @@ const FighterDetail = observer(function FighterDetail() {
         <button
           className="calculator-open"
           onClick={() => {
-            cardViews.showCalculator(f.slug, {
+            actions.openCalculator(f.slug, {
               form,
               side,
               damage: Math.max(0, f.maxHp - f.hp),

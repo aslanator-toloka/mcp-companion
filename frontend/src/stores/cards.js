@@ -36,7 +36,7 @@ export class CardStore {
       { autoBind: true },
     );
   }
-  showCalculator(source, face = {}) {
+  showCalculator(source = "", face = {}) {
     this.calculator = {
       source,
       opponent: "",
@@ -47,7 +47,13 @@ export class CardStore {
   }
   setCalculator(field, value) {
     if (!this.calculator) return;
-    if (field === "opponent")
+    if (field === "source")
+      this.calculator = {
+        ...this.calculator,
+        source: value,
+        first: initialState(value),
+      };
+    else if (field === "opponent")
       this.calculator = {
         ...this.calculator,
         opponent: value,
@@ -60,9 +66,6 @@ export class CardStore {
       };
     else if (["first", "second"].includes(field))
       this.calculator = { ...this.calculator, [field]: state(value) };
-  }
-  closeCalculator() {
-    this.calculator = null;
   }
   configure(metadata) {
     this.metadata = metadata;

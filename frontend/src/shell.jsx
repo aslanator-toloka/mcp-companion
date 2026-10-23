@@ -13,6 +13,7 @@ export const Navigation = observer(function Navigation() {
     ["all", "01", "Персонажи"],
     ["mine", "03", "Моя коллекция"],
     ["rosters", "04", "Ростеры"],
+    ["calculator", "07", "Калькулятор"],
     ["battle", "08", "Бой"],
     ["purchases", "09", "Запланированные покупки"],
   ];
@@ -273,6 +274,7 @@ export const Screen = observer(function Screen({ name, children, ...props }) {
         {
           catalog: "Персонажи",
           rosters: "Ростеры",
+          calculator: "Калькулятор атак",
           battle: "Бой",
           tournaments: "Турнирный архив",
           purchases: "Запланированные покупки",

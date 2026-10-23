@@ -164,10 +164,14 @@ test("native local battle: stable fighter DOM, conditions, red live stats, portr
   const savedBeforeCalculator = await page.evaluate(() =>
     localStorage.getItem("mcp-companion-battles-v1"),
   );
+  const battleLocation = await page.evaluate(() => ({
+    url: location.href,
+    index: history.state.mcpNavigation.index,
+  }));
   await dialog
     .getByRole("button", { name: "Калькулятор", exact: true })
     .click();
-  const calculator = page.getByRole("dialog", {
+  const calculator = page.getByRole("region", {
     name: "Калькулятор атак",
     exact: true,
   });
@@ -182,13 +186,17 @@ test("native local battle: stable fighter DOM, conditions, red live stats, portr
     calculator.getByRole("checkbox", { name: "root", exact: true }),
   ).toBeChecked();
   await calculator
-    .getByLabel("Противник", { exact: true })
+    .getByLabel("Второй персонаж", { exact: true })
     .selectOption("malekith-the-accursed");
   await expect(calculator.locator(".combat-direction")).toHaveCount(2, {
     timeout: 30000,
   });
   await calculator.getByLabel("Урон на Captain America").fill("3");
-  await calculator.getByRole("button", { name: "Закрыть калькулятор" }).click();
+  await page.evaluate(
+    (index) => history.go(index - history.state.mcpNavigation.index),
+    battleLocation.index,
+  );
+  await expect(page).toHaveURL(battleLocation.url);
   await expect(dialog).toBeVisible();
   expect(
     await page.evaluate(() => localStorage.getItem("mcp-companion-battles-v1")),

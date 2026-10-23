@@ -1,6 +1,6 @@
 # Character attack calculator
 
-Implemented 2026-10-23. Entry points: the catalog character detail and the battle fighter detail. The latter copies the displayed form/side, damage and conditions without editing the battle. Opponent, both faces/forms, distance and context live in hash navigation; Back/Forward and reload restore the comparison. No account, backend, tournament statistics or local-library writes are involved.
+Implemented 2026-10-23. Standalone «Калькулятор» tab at `#screen=calculator`, with independent search/selection for both characters. Catalog and battle-detail shortcuts navigate to this page and preselect the first character; the battle shortcut copies form/side, damage and conditions without editing the match. No character dialog remains underneath. Both identities, faces/forms, distance and context live in hash navigation; Back/Forward and reload restore the comparison. Valid old overlay URLs migrate to the standalone page. Changing one character resets only its own context, and tab navigation retains the last comparison. The same character may occupy both slots with independent state. Leaving cancels the worker, and entering from a dirty roster uses the existing unsaved-changes guard. No account, backend, tournament statistics or local-library writes are involved.
 
 ## Quantities and scenarios
 
@@ -38,9 +38,9 @@ There are explicit adapters for Cloak, Probability Manipulation, Empowered Gaunt
 
 ## Implementation and validation
 
-`frontend/src/combat/profile.js` normalizes the selected card face and context. `rules.js` compiles applicable effects. `engine.js` owns dice, resource and damage resolution. A bundled Blob Worker runs 60,000 reproducibly seeded trials per row/scenario; changing selection terminates stale work. No compute runs on the UI thread. `calculator.jsx` owns the transient React view; `CardStore` owns route-visible inputs. Library saves, battle state and tournament ratings are independent.
+`frontend/src/combat/profile.js` normalizes the selected card face and context. `rules.js` compiles applicable effects. `engine.js` owns dice, resource and damage resolution. A bundled Blob Worker runs 60,000 reproducibly seeded trials per row/scenario; changing selection terminates stale work. No compute runs on the UI thread. `calculator.jsx` mounts the calculator page only while its tab is active; `CardStore` owns route-visible inputs. Library saves, battle state and tournament ratings are independent.
 
-Tests include independent analytic one-die expectations, initial skull/critical timing, critical and modification bans, per-ability rerolls, power budgets, reductions/minimums, Pierce, full rerolls, damage caps and substitutions, type/range/context/immunity rules, and both faces/forms of the entire current catalog. Browser tests cover comparisons, mobile layout, retries, rapid selection/cancellation, nested dialogs and URL restoration.
+Tests include independent analytic one-die expectations, initial skull/critical timing, critical and modification bans, per-ability rerolls, power budgets, reductions/minimums, Pierce, full rerolls, damage caps and substitutions, type/range/context/immunity rules, and both faces/forms of the entire current catalog. Browser tests cover comparisons, mobile layout, retries, rapid selection/cancellation, independent and mirrored selections, page navigation from catalog/battle details, dirty-roster guards, legacy links and URL restoration.
 
 ## Primary rule sources (internal reference)
 

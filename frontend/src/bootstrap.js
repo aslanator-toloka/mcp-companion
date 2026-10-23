@@ -42,7 +42,6 @@ const closeTransient = () => {
   rosters.closePicker();
   rosters.closeDialog();
   cardViews.closeGame();
-  cardViews.closeCalculator();
   cardViews.closeCondition();
   cardViews.closeReference();
   battle.closeDialog();
@@ -53,6 +52,8 @@ function route(screen, onlyOwned = false, keepDraft = false) {
   if (!keepDraft) rosters.reset();
   ui.activate(screen, onlyOwned);
   if (screen === "catalog") catalog.reset(onlyOwned);
+  if (screen === "calculator" && !cardViews.calculator)
+    cardViews.showCalculator();
 }
 function navigate(action) {
   if (!ui.ready) return;
@@ -194,6 +195,11 @@ ui.configure({
   scrollTop: () => window.scrollTo(0, 0),
   navigate,
   openCharacter: catalog.open,
+  openCalculator: (slug = "", face = {}) =>
+    rosters.requestLeave(() => {
+      route("calculator");
+      cardViews.showCalculator(catalog.byId.has(slug) ? slug : "", face);
+    }),
   openCatalogCharacter: (slug) => {
     if (!catalog.byId.has(slug)) {
       ui.notify("Этой версии персонажа пока нет в каталоге.");
