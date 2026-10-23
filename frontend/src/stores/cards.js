@@ -4,6 +4,7 @@ import {
   observableRef,
   runInAction,
 } from "mobx";
+import { initialState, state } from "../combat/profile.js";
 import { ruleReference } from "../rule-references.js";
 export class CardStore {
   layers = observable.map({}, { deep: false });
@@ -11,6 +12,7 @@ export class CardStore {
   condition = null;
   reference = null;
   metadata = null;
+  calculator = null;
   constructor(storage) {
     this.storage = storage;
     try {
@@ -25,9 +27,42 @@ export class CardStore {
     } catch {}
     makeAutoObservable(
       this,
-      { storage: false, metadata: observableRef, game: observableRef },
+      {
+        storage: false,
+        metadata: observableRef,
+        game: observableRef,
+        calculator: observableRef,
+      },
       { autoBind: true },
     );
+  }
+  showCalculator(source, face = {}) {
+    this.calculator = {
+      source,
+      opponent: "",
+      first: state({ ...initialState(source), ...face }),
+      second: initialState(""),
+      distance: 2,
+    };
+  }
+  setCalculator(field, value) {
+    if (!this.calculator) return;
+    if (field === "opponent")
+      this.calculator = {
+        ...this.calculator,
+        opponent: value,
+        second: initialState(value),
+      };
+    else if (field === "distance")
+      this.calculator = {
+        ...this.calculator,
+        distance: Math.max(1, Math.min(5, Number(value) || 2)),
+      };
+    else if (["first", "second"].includes(field))
+      this.calculator = { ...this.calculator, [field]: state(value) };
+  }
+  closeCalculator() {
+    this.calculator = null;
   }
   configure(metadata) {
     this.metadata = metadata;

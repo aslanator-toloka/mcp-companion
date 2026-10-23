@@ -1,3 +1,4 @@
+import { initialState, state as combatState } from "../combat/profile.js";
 import { runInAction } from "mobx";
 import { encodeFilters, decodeFilters } from "../catalog-filters.js";
 const bool = (v) => v === "1",
@@ -20,6 +21,11 @@ const pickerFields = {
   relatedOnly: "related",
 };
 const overlayKeys = [
+  "calculator",
+  "opponent",
+  "combat-a",
+  "combat-b",
+  "combat-range",
   "preview",
   "remove-side",
   "mission",
@@ -219,6 +225,22 @@ export function createRoutes(s) {
       put("game", cards.game.kind + ":" + cards.game.card.slug);
       put("game-side", cards.game.side, "front");
     }
+    if (cards.calculator) {
+      const c = cards.calculator;
+      put("calculator", c.source);
+      put("opponent", c.opponent);
+      put("combat-range", c.distance, 2);
+      if (
+        JSON.stringify(c.first) !==
+        JSON.stringify(combatState(initialState(c.source)))
+      )
+        put("combat-a", JSON.stringify(c.first));
+      if (
+        JSON.stringify(c.second) !==
+        JSON.stringify(combatState(initialState(c.opponent)))
+      )
+        put("combat-b", JSON.stringify(c.second));
+    }
     put("condition", cards.condition);
     put("reference", cards.reference);
     if (ui.dataDialog) put("data", true);
@@ -271,6 +293,7 @@ export function createRoutes(s) {
       b.closeDialog();
       map.setField("renaming", false);
       cards.closeGame();
+      cards.closeCalculator();
       cards.closeCondition();
       cards.closeReference();
       purchases.select(null);
@@ -534,6 +557,22 @@ export function createRoutes(s) {
             cards.showGame(found, kind);
             cards.gameSide(one(p.get("game-side"), ["front", "back"], "front"));
           }
+        }
+      }
+      const calculatorSource = p.get("calculator");
+      if (catalog.byId.has(calculatorSource)) {
+        cards.showCalculator(calculatorSource);
+        const opponent = p.get("opponent");
+        if (catalog.byId.has(opponent))
+          cards.setCalculator("opponent", opponent);
+        cards.setCalculator("distance", p.get("combat-range") || 2);
+        for (const [key, field] of [
+          ["combat-a", "first"],
+          ["combat-b", "second"],
+        ]) {
+          try {
+            if (p.has(key)) cards.setCalculator(field, JSON.parse(p.get(key)));
+          } catch {}
         }
       }
       if (p.has("condition")) cards.showCondition(p.get("condition"));

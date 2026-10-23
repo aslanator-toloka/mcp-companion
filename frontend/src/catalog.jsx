@@ -1,6 +1,6 @@
 import { CharacterTactics } from "./character-tactics.jsx";
 import { observer } from "mobx-react-lite";
-import { catalog, library, actions } from "./stores/index.js";
+import { catalog, library, actions, cardViews } from "./stores/index.js";
 import React, { memo } from "react";
 import { Avatar, OwnedCheckbox } from "./common.jsx";
 import { CharacterBoxes } from "./purchases.jsx";
@@ -115,6 +115,18 @@ export function CharacterDetail({
               ))}
               {c.isGrunt && <span className="tag">Grunt</span>}
             </div>
+            <button
+              className="calculator-open"
+              onClick={() =>
+                cardViews.showCalculator(c.slug, {
+                  form: catalog.selectedForm,
+                  side: catalog.selectedSide,
+                })
+              }
+            >
+              <i className="fa-solid fa-calculator" aria-hidden="true" />{" "}
+              Калькулятор
+            </button>
           </div>
           <div className="detail-collection-controls">
             <OwnedCheckbox

@@ -11,6 +11,13 @@ const ratingWorker = await build({
   write: false,
   target: ["safari16", "chrome110"],
 });
+const combatWorker = await build({
+  entryPoints: [path.join(root, "src/combat/worker.js")],
+  bundle: true,
+  minify: true,
+  write: false,
+  target: ["safari16", "chrome110"],
+});
 await build({
   entryPoints: [path.join(root, "src/main.jsx")],
   outfile: path.join(appRoot, "react-ui.js"),
@@ -20,6 +27,7 @@ await build({
   target: ["safari16", "chrome110"],
   define: {
     "process.env.NODE_ENV": '"production"',
+    __COMBAT_WORKER__: JSON.stringify(combatWorker.outputFiles[0].text),
     __CHARACTER_RATING_WORKER__: JSON.stringify(
       ratingWorker.outputFiles[0].text,
     ),

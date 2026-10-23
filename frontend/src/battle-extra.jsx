@@ -767,6 +767,20 @@ const FighterDetail = observer(function FighterDetail() {
             {f.alterEgo} · {b.label(team)}
           </p>
         </div>
+        <button
+          className="calculator-open"
+          onClick={() => {
+            cardViews.showCalculator(f.slug, {
+              form,
+              side,
+              damage: Math.max(0, f.maxHp - f.hp),
+              conditions: f.conditions || [],
+            });
+          }}
+        >
+          <i className="fa-solid fa-calculator" aria-hidden="true" />{" "}
+          Калькулятор
+        </button>
         <div className="battle-card-header-controls" data-card-view="battle">
           <StatControls
             view={view}

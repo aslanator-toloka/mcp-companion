@@ -161,6 +161,38 @@ test("native local battle: stable fighter DOM, conditions, red live stats, portr
   await expect(
     dialog.locator(".battle-fighter-strip .battle-character-portrait"),
   ).toHaveCount(2);
+  const savedBeforeCalculator = await page.evaluate(() =>
+    localStorage.getItem("mcp-companion-battles-v1"),
+  );
+  await dialog
+    .getByRole("button", { name: "Калькулятор", exact: true })
+    .click();
+  const calculator = page.getByRole("dialog", {
+    name: "Калькулятор атак",
+    exact: true,
+  });
+  await expect(calculator.getByLabel("Урон на Captain America")).toHaveValue(
+    "1",
+  );
+  await calculator.locator(".combat-context summary").first().click();
+  await expect(
+    calculator.getByRole("checkbox", { name: "incinerate", exact: true }),
+  ).toBeChecked();
+  await expect(
+    calculator.getByRole("checkbox", { name: "root", exact: true }),
+  ).toBeChecked();
+  await calculator
+    .getByLabel("Противник", { exact: true })
+    .selectOption("malekith-the-accursed");
+  await expect(calculator.locator(".combat-direction")).toHaveCount(2, {
+    timeout: 30000,
+  });
+  await calculator.getByLabel("Урон на Captain America").fill("3");
+  await calculator.getByRole("button", { name: "Закрыть калькулятор" }).click();
+  await expect(dialog).toBeVisible();
+  expect(
+    await page.evaluate(() => localStorage.getItem("mcp-companion-battles-v1")),
+  ).toBe(savedBeforeCalculator);
   await dialog
     .locator('.battle-condition-chip[data-card-condition="slow"]')
     .click();
