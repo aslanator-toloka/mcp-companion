@@ -1,355 +1,58 @@
+// Exact finite-state probability model for the implemented single-attack policy.
+// Conditioning order: defense initial criticals -> attacker self modifications ->
+// attacker modified criticals -> defender self modifications -> opponent changes.
+// No draws, seeds, sampled confidence intervals, or probability cutoffs.
 import { attackVariants, clean } from "./profile.js";
 import { powerRules, attackRules } from "./rules.js";
-// Physical MCP d8: 2 blanks, 2 hits, 1 block, 1 wild, 1 critical, 1 failure.
-export const FACE = {
-  blank: 0,
-  hit: 1,
-  block: 2,
-  wild: 3,
-  critical: 4,
-  failure: 5,
-};
-const D8 = [0, 0, 1, 1, 2, 3, 4, 5];
-const PRE = new Set([
-  "dice",
-  "setDefense",
-  "blankSuccess",
-  "failureSuccess",
-  "enemyFailureSuccess",
-  "ronin",
-  "doubleWild",
-]);
-export function random(seed = 1) {
-  let s = seed >>> 0;
-  return () => {
-    s += 0x6d2b79f5;
-    let t = s;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-const die = (rng) => D8[Math.floor(rng() * 8)];
-const count = (roll, face) => {
-  let n = 0;
-  for (const d of roll) if (d.f === face) n++;
-  return n;
-};
-const flags = (effects) =>
-  Object.fromEntries(effects.filter((e) => !e.paid).map((e) => [e.kind, true]));
-function success(face, role, f) {
-  if (face === FACE.critical) return f.noCritSuccess ? 0 : 1;
-  if (face === FACE.wild) return f.noWildSuccess ? 0 : f.doubleWild ? 2 : 1;
-  if (face === (role === "attack" ? FACE.hit : FACE.block)) return 1;
-  if (
-    (face === FACE.blank && f.blankSuccess) ||
-    (face === FACE.failure && f.failureSuccess)
-  )
-    return 1;
-  return 0;
-}
-const total = (roll, role, f) =>
-  roll.reduce((n, d) => n + success(d.f, role, f), 0);
-const meanFace = (role, f) =>
-  D8.reduce((n, face) => n + success(face, role, f), 0) / 8;
-function pay(unit, e, amount = 1) {
-  if (e.paid && !e.variable && unit.used.has(e.name)) return true;
-  const cost = e.cost * amount + (e.paid ? unit.tax : 0);
-  if (cost > unit.power) return false;
-  unit.power -= cost;
-  if (e.paid && !e.variable) unit.used.add(e.name);
-  return true;
-}
-function prep(p, rules, power, tax, role) {
-  const u = {
-    ...p,
-    effects: rules.effects,
-    power,
-    tax: tax + (p.state.conditions.includes("root") ? 1 : 0),
-    used: new Set(),
-    f: flags(rules.effects),
-    bonus: 0,
-  };
-  for (const e of u.effects) {
-    if (
-      e.kind === "dice" ||
-      e.kind === "setDefense" ||
-      (e.paid && PRE.has(e.kind))
-    ) {
-      if (pay(u, e)) {
-        if (e.kind === "dice") u.bonus += e.amount;
-        else if (e.kind === "setDefense") u.override = e.amount;
-        else u.f[e.kind] = true;
-      }
-    }
-  }
-  if (u.state.conditions.includes("hex")) u.f.noCrit = true;
-  if (u.state.conditions.includes("shock") && role === "attack") u.bonus--;
-  if (u.state.conditions.includes("incinerate") && role === "defense")
-    u.bonus--;
-  return u;
-}
-export function rollPool(
-  n,
-  {
-    rng,
-    power = 0,
-    cloak = false,
-    cloakAll = false,
-    tax = 0,
-    critExtra = 1,
-    noCrit = false,
-  } = {},
-) {
-  const roll = Array.from({ length: Math.max(0, Math.min(60, n)) }, () => ({
-    f: die(rng),
-    rerolledBy: [],
-  }));
-  let spent = 0;
-  if ((cloak || cloakAll) && power >= (cloakAll ? 2 + tax : tax + 1)) {
-    const failures = roll.filter((d) => d.f === FACE.failure);
-    const used = cloakAll
-      ? failures.length
-      : Math.min(failures.length, Math.max(0, power - tax));
-    if (used) {
-      for (let i = 0; i < used; i++) failures[i].f = FACE.critical;
-      spent = cloakAll ? 2 + tax : used + tax;
-    }
-  }
-  // Only criticals in the original roll expand. Rerolls and added dice never expand.
-  const extra = noCrit ? 0 : count(roll, FACE.critical) * critExtra;
-  for (let i = 0; i < extra; i++) roll.push({ f: die(rng), rerolledBy: [] });
-  return { roll, spent };
-}
-function ownReroll(roll, u, role, effect, rng, max) {
-  if (u.f.banned) return;
-  const failures = u.f.failureAllowed || effect.failures;
-  const key = effect.name || "attack-special-reroll";
-  let candidates = roll.filter(
-    (d) => !d.rerolledBy.includes(key) && (d.f !== FACE.failure || failures),
-  );
-  if (effect.kind === "allReroll") {
-    if (
-      effect.conditional &&
-      count(roll, role === "attack" ? FACE.hit : FACE.block)
-    )
-      return;
-    // 'All' is indivisible: keep it unless the expected total improves.
-    if (
-      candidates.reduce((s, d) => s + success(d.f, role, u.f), 0) >=
-      candidates.length * meanFace(role, u.f)
-    )
-      return;
-  } else {
-    candidates = candidates.filter((d) => !success(d.f, role, u.f));
-    candidates.sort((a, b) => a.f - b.f);
-    candidates = candidates.slice(0, max);
-  }
-  if (!candidates.length) return;
-  if (effect.variable)
-    candidates = candidates.slice(
-      0,
-      Math.max(
-        0,
-        Math.min(effect.max || 99, u.power - (effect.paid ? u.tax : 0)),
-      ),
-    );
-  if (
-    !candidates.length ||
-    !pay(u, effect, effect.variable ? candidates.length : 1)
-  )
-    return;
-  for (const d of candidates) {
-    d.f = die(rng);
-    d.rerolledBy.push(key);
-  }
-}
-function modify(roll, otherRoll, u, role, attackRules, rng) {
-  if (u.f.banned) return;
-  if (role === "attack" && attackRules.reroll)
-    ownReroll(
-      roll,
-      u,
-      role,
-      { kind: "reroll", cost: 0, failures: attackRules.failures },
-      rng,
-      attackRules.reroll,
-    );
-  if (role === "attack" && attackRules.allReroll)
-    ownReroll(
-      roll,
-      u,
-      role,
-      { kind: "allReroll", cost: 0, failures: attackRules.failures },
-      rng,
-    );
-  // Fixed/free rerolls before variable paid rerolls avoid spending on the same die.
-  const effects = u.effects
-    .filter((e) =>
-      ["reroll", "allReroll", "rerollPerEnemyCrit"].includes(e.kind),
-    )
-    .sort((a, b) => a.cost - b.cost);
-  for (const e of effects)
-    ownReroll(
-      roll,
-      u,
-      role,
-      e,
-      rng,
-      e.kind === "rerollPerEnemyCrit"
-        ? count(otherRoll, FACE.critical)
-        : e.amount,
-    );
-  if (u.f.echo || u.f.ronin) {
-    let n = u.f.echo ? count(otherRoll, FACE.critical) : 0;
-    if (u.f.ronin) n += count(roll, FACE.critical) + count(roll, FACE.wild);
-    for (const d of roll)
-      if (
-        n &&
-        !success(d.f, role, u.f) &&
-        (d.f !== FACE.failure || u.f.failureAllowed)
-      ) {
-        d.f = role === "attack" ? FACE.hit : FACE.block;
-        n--;
-      }
-  }
-  for (const e of u.effects) {
-    if (e.kind === "hitToWild") {
-      const d = roll.find((d) => d.f === FACE.hit);
-      if (d && pay(u, e)) d.f = FACE.wild;
-    }
-  }
-  if (role === "defense" && u.cover) {
-    const d = roll.find(
-      (d) =>
-        !success(d.f, role, u.f) &&
-        (d.f !== FACE.failure || u.f.failureAllowed),
-    );
-    if (d) d.f = FACE.block;
-  }
-}
-function alterOpponent(roll, own, u, target, role, rng, aRules) {
-  if (role === "attack" && aRules.pierce.length) {
-    const wanted = aRules.pierce.map((s) => FACE[s]);
-    const available = own.map((d) => d.f);
-    if (
-      wanted.every((f) => {
-        const i = available.indexOf(f);
-        if (i < 0) return false;
-        available.splice(i, 1);
-        return true;
-      })
-    ) {
-      const value = (die) =>
-        success(die.f, "defense", target.f) -
-        success(FACE.blank, "defense", target.f) +
-        (die.f === FACE.wild &&
-        target.effects.some((e) => e.kind === "cancelWithWilds")
-          ? 1
-          : 0);
-      const d = roll
-        .filter(
-          (d) =>
-            [FACE.critical, FACE.wild, FACE.block].includes(d.f) &&
-            value(d) > 0,
-        )
-        .sort((a, b) => value(b) - value(a))[0];
-      if (d) d.f = FACE.blank;
-    }
-  }
-  for (const e of u.effects) {
-    if (e.kind === "opponentReroll") {
-      const candidates = roll
-        .filter(
-          (d) =>
-            !d.rerolledBy.includes(e.name) &&
-            success(d.f, role === "attack" ? "defense" : "attack", target.f),
-        )
-        .sort(
-          (a, b) =>
-            success(b.f, role === "attack" ? "defense" : "attack", target.f) -
-            success(a.f, role === "attack" ? "defense" : "attack", target.f),
-        )
-        .slice(0, e.amount);
-      if (candidates.length && pay(u, e))
-        for (const d of candidates) {
-          d.f = die(rng);
-          d.rerolledBy.push(e.name);
-        }
-    }
-    if (e.kind === "blankEnemyWilds" || e.kind === "cancelWithWilds") {
-      let candidates = roll.filter((d) =>
-        e.kind === "blankEnemyWilds"
-          ? d.f === FACE.wild
-          : [FACE.critical, FACE.wild, FACE.hit].includes(d.f),
-      );
-      candidates = candidates.slice(
-        0,
-        e.kind === "cancelWithWilds" ? count(own, FACE.wild) : e.amount,
-      );
-      if (e.variable)
-        candidates = candidates.slice(
-          0,
-          Math.max(0, u.power - (e.paid ? u.tax : 0)),
-        );
-      if (candidates.length && pay(u, e, e.variable ? candidates.length : 1))
-        for (const d of candidates) d.f = FACE.blank;
-    }
-  }
-}
-export function damageForRolls(aRoll, dRoll, a, d, r) {
-  let av = total(aRoll, "attack", a.f),
-    dv = total(dRoll, "defense", d.f);
-  if (a.f.addEnemyFailures || a.f.enemyFailures)
-    av += count(dRoll, FACE.failure);
-  if (d.f.enemyFailures) dv += count(aRoll, FACE.failure);
-  if (a.f.enemyFailureSuccess) dv += count(dRoll, FACE.failure);
-  if (!a.f.banned)
-    for (const e of a.effects)
-      if (
-        e.kind === "swapHits" &&
-        count(aRoll, FACE.block) > count(aRoll, FACE.hit) &&
-        pay(a, e)
-      )
-        av += count(aRoll, FACE.block) - count(aRoll, FACE.hit);
-  let damage = Math.max(0, av - dv);
-  if (r.noDamage) return 0;
-  if (r.cap !== null) damage = Math.min(r.cap, damage);
-  if (!a.f.noReduction)
-    for (const e of d.effects)
-      if (e.kind === "capDamage") damage = Math.min(e.amount, damage);
-  if (!a.f.noReduction)
-    for (const e of d.effects
-      .filter((e) => e.kind === "reduce")
-      .sort((a, b) => a.cost - b.cost)) {
-      if (damage > (e.minimum || 0) && pay(d, e))
-        damage = Math.max(e.minimum || 0, damage - e.amount);
-    }
-  return damage;
-}
-function trial(p, q, attack, ar, dr, r, distance, full, rng) {
+import {
+  initialRoll,
+  faceCount,
+  addState,
+  states,
+  project,
+  changeFaces,
+} from "./exact-dice.js";
+import {
+  FACE,
+  prepare,
+  pay,
+  power,
+  ownOperations,
+  opponentOperations,
+  bindRerollMasks,
+  needsEnemyCriticals,
+  partitions,
+  afterSelf,
+  groupBy,
+  reroll,
+  score,
+  total,
+} from "./exact-policy.js";
+export { FACE };
+const scenarioCache = new Map();
+function scenario(p, q, attack, ar, dr, r, distance, full) {
   const aTax = dr.effects.find((e) => e.kind === "taxEnemy")?.amount || 0,
     dTax = ar.effects.find((e) => e.kind === "taxEnemy")?.amount || 0;
-  let attackPower = full ? 10 - Number(attack.powerCost) : 0;
-  let defenseStat = q.defense[attack.type];
+  let amount = full ? 10 - Number(attack.powerCost) : 0,
+    defense = q.defense[attack.type];
   if (
     dr.effects.some((e) => e.kind === "smoke") &&
-    q.defense.mystic > defenseStat
+    q.defense.mystic > defense
   ) {
-    if (attackPower >= 2) attackPower -= 2;
-    else defenseStat = q.defense.mystic;
+    if (amount >= 2) amount -= 2;
+    else defense = q.defense.mystic;
   }
-  const a = prep(p, ar, attackPower, aTax, "attack"),
-    d = prep(q, dr, full ? 10 : 0, dTax, "defense");
-  a.f.banned = dr.effects.some((e) => e.kind === "banEnemyMod");
-  d.f.banned =
+  const a = prepare(p, ar, amount, aTax, "attack"),
+    d = prepare(q, dr, full ? 10 : 0, dTax, "defense");
+  a.flags.banned = dr.effects.some((e) => e.kind === "banEnemyMod");
+  d.flags.banned =
     r.banDefenseMod || ar.effects.some((e) => e.kind === "banEnemyMod");
-  a.f.noCrit ||= dr.effects.some((e) => e.kind === "banEnemyCrit");
-  d.f.noCrit ||=
+  a.flags.noCrit ||= dr.effects.some((e) => e.kind === "banEnemyCrit");
+  d.flags.noCrit ||=
     r.noDefenseCrit || ar.effects.some((e) => e.kind === "banEnemyCrit");
-  d.f.noCritSuccess = r.noDefenseCrit;
-  d.f.noWildSuccess = r.noDefenseWild;
-  a.f.doubleWild ||= r.doubleWild;
+  d.flags.noCritSuccess = r.noDefenseCrit;
+  d.flags.noWildSuccess = r.noDefenseWild;
+  a.flags.doubleWild ||= r.doubleWild;
   d.cover =
     q.state.cover &&
     distance > 2 &&
@@ -357,70 +60,446 @@ function trial(p, q, attack, ar, dr, r, distance, full, rng) {
     !p.powers.some((e) =>
       /defender does not benefit from Cover/i.test(clean(e.body)),
     );
-  let dice =
+  let na =
     Number(attack.strength) +
     r.bonus +
     a.bonus +
-    (r.enemyPowerBonus ? Math.min(5, d.power) : 0);
+    (r.enemyPowerBonus ? Math.min(5, power(d.resource)) : 0);
   if (r.extras) {
-    const spent = Math.min(r.extras, a.power);
-    a.power -= spent;
-    dice += spent;
+    const n = Math.min(r.extras, power(a.resource));
+    a.resource -= n;
+    na += n;
   }
-  if (
-    ar.effects.some((e) => e.kind === "moonKnight") &&
-    [FACE.hit, FACE.wild].includes(die(rng))
-  )
-    dice += 2;
-  const roll = (u, n, critExtra) => {
-    const cloak = u.effects.find(
-      (e) => e.kind === "cloak" || e.kind === "cloakAll",
-    );
-    const v = rollPool(n, {
-      rng,
-      power: u.power,
-      cloak: cloak?.kind === "cloak",
-      cloakAll: cloak?.kind === "cloakAll",
-      tax: u.tax,
-      critExtra,
-      noCrit: u.f.noCrit,
-    });
-    u.power -= v.spent;
-    return v.roll;
+  na = Math.max(1, na);
+  const nd =
+    defense === 0 && d.bonus === 0 && !d.override
+      ? 0
+      : Math.max(1, (d.override ?? defense) + d.bonus);
+  // After pools are created, unused power has no observable effect. Marginalize it.
+  const resourceKinds = new Set([
+    "cloak",
+    "cloakAll",
+    "reroll",
+    "allReroll",
+    "rerollPerEnemyCrit",
+    "opponentReroll",
+    "blankEnemyWilds",
+    "reduce",
+    "failureToWild",
+    "hitToWild",
+    "swapHits",
+  ]);
+  for (const unit of [a, d])
+    if (
+      !unit.effects.some(
+        (e) => resourceKinds.has(e.kind) && e.paid && (e.cost || unit.tax),
+      )
+    )
+      unit.resource = 0;
+  const ao = ownOperations(a, r),
+    do_ = ownOperations(d, r),
+    ax = opponentOperations(a),
+    dx = opponentOperations(d);
+  const ma = bindRerollMasks(ao, dx),
+    md = bindRerollMasks(do_, ax);
+  const needsA = needsEnemyCriticals(a, ao),
+    needsD = needsEnemyCriticals(d, do_);
+  const pa = partitions(a, ao, dx, d, r, {
+    postCrit: needsD,
+    incomingMask: ma,
+  });
+  const paFinal = needsD
+    ? partitions(a, ao, dx, d, r, { incomingMask: ma }).after
+    : pa.after;
+  const pd = partitions(d, do_, ax, a, r, {
+    initialCrit: needsA,
+    incomingMask: md,
+  });
+  return {
+    a,
+    d,
+    ao,
+    do_,
+    ax,
+    dx,
+    pa,
+    paFinal,
+    pd,
+    na,
+    nd,
+    needsA,
+    needsD,
+    r,
+    moon: a.effects.some((e) => e.kind === "moonKnight"),
   };
-  const aRoll = roll(a, Math.max(1, dice), r.critExtra),
-    dRoll = roll(
-      d,
-      defenseStat === 0 && d.bonus === 0 && !d.override
-        ? 0
-        : Math.max(1, (d.override ?? defenseStat) + d.bonus),
-      1,
+}
+function initialAttack(c) {
+  const regular = initialRoll(c.na, c.a, c.pa.before, {
+    critExtra: c.r.critExtra,
+  });
+  if (!c.moon) return regular;
+  const boosted = initialRoll(c.na + 2, c.a, c.pa.before, {
+      critExtra: c.r.critExtra,
+    }),
+    result = new Map();
+  for (const [distribution, weight] of [
+    [regular, 5 / 8],
+    [boosted, 3 / 8],
+  ])
+    for (const s of distribution)
+      addState(result, s.counts, s.resource, s.probability * weight);
+  return states(result);
+}
+function summary(state, p, unit, other, r, { pierce = false } = {}) {
+  const attack = unit.role === "attack";
+  const failNeeded = attack
+    ? other.flags.enemyFailures ||
+      unit.effects.some((e) => e.kind === "failureToWild")
+    : other.flags.enemyFailures ||
+      other.flags.addEnemyFailures ||
+      other.flags.enemyFailureSuccess;
+  const swap =
+    attack &&
+    !unit.flags.banned &&
+    unit.effects.some(
+      (e) => e.kind === "swapHits" && pay(unit.resource, e, unit) >= 0,
     );
-  modify(aRoll, dRoll, a, "attack", r, rng);
-  modify(dRoll, aRoll, d, "defense", r, rng);
-  alterOpponent(dRoll, aRoll, a, d, "attack", rng, r);
-  alterOpponent(aRoll, dRoll, d, a, "defense", rng, r);
-  // Undead Empowerment counts faces at the end of Modify Dice; it is not a modification.
+  let gain = 0;
+  if (pierce)
+    for (const face of [2, 3, 4])
+      if (faceCount(state, p, face))
+        gain = Math.max(
+          gain,
+          score(face, "defense", unit.flags) - score(0, "defense", unit.flags),
+        );
+  return {
+    resource: state.resource,
+    success: total(state, p, unit),
+    failures: failNeeded ? faceCount(state, p, 5) : 0,
+    wilds: attack && r.sap ? faceCount(state, p, 3) : 0,
+    swap: swap
+      ? Math.max(0, faceCount(state, p, 2) - faceCount(state, p, 1))
+      : 0,
+    gain,
+    trigger: state.trigger,
+    probability: state.probability,
+  };
+}
+function summaries(distribution, p, unit, other, r, pierce) {
+  const map = new Map();
+  for (const state of distribution) {
+    const s = summary(state, p, unit, other, r, { pierce });
+    const key = [
+      s.resource,
+      s.success,
+      s.failures,
+      s.wilds,
+      s.swap,
+      s.gain,
+      +s.trigger,
+    ].join(",");
+    const old = map.get(key);
+    if (old) old.probability += s.probability;
+    else map.set(key, s);
+  }
+  return [...map.values()];
+}
+function damage(sa, sd, c, pierce) {
+  const { a, d, r } = c;
+  let av = sa.success,
+    dv = sd.success,
+    af = sa.failures,
+    aw = sa.wilds,
+    ra = sa.resource,
+    rd = sd.resource;
   for (const e of a.effects)
-    if (e.kind === "failureToWild" && pay(a, e)) {
-      let n = e.amount;
-      for (const die of aRoll)
-        if (n && die.f === FACE.failure) {
-          die.f = FACE.wild;
-          n--;
+    if (e.kind === "failureToWild") {
+      const n = Math.min(e.amount, af),
+        paid = n ? pay(ra, e, a) : -1;
+      if (paid >= 0) {
+        ra = paid;
+        av += n * (score(3, "attack", a.flags) - score(5, "attack", a.flags));
+        af -= n;
+        aw += n;
+      }
+    }
+  if (a.flags.addEnemyFailures) {
+    av += sd.failures * score(5, "attack", a.flags);
+    af += sd.failures;
+  }
+  if (a.flags.enemyFailures) av += sd.failures;
+  if (d.flags.enemyFailures) dv += af;
+  if (a.flags.enemyFailureSuccess) dv += sd.failures;
+  if (pierce && c.r.pierce.length && sa.trigger) dv -= sd.gain;
+  if (!a.flags.banned && sa.swap)
+    for (const e of a.effects)
+      if (e.kind === "swapHits") {
+        const paid = pay(ra, e, a);
+        if (paid >= 0) {
+          ra = paid;
+          av += sa.swap;
+        }
+      }
+  if (r.sap) rd = rd - power(rd) + Math.max(0, power(rd) - aw);
+  let result = Math.max(0, av - dv);
+  if (r.noDamage) return 0;
+  if (r.cap !== null) result = Math.min(r.cap, result);
+  if (!a.flags.noReduction) {
+    for (const e of d.effects)
+      if (e.kind === "capDamage") result = Math.min(e.amount, result);
+    for (const e of d.effects
+      .filter((e) => e.kind === "reduce")
+      .sort((a, b) => a.cost - b.cost))
+      if (result > (e.minimum || 0)) {
+        const paid = pay(rd, e, d);
+        if (paid >= 0) {
+          rd = paid;
+          result = Math.max(e.minimum || 0, result - e.amount);
+        }
+      }
+  }
+  return result;
+}
+function stateKey(s) {
+  return s.resource + ":" + s.counts.join(",");
+}
+function mergeTransitions(values) {
+  const map = new Map();
+  for (const value of values) {
+    const key = value.resource + "/" + stateKey(value.roll);
+    const old = map.get(key);
+    if (old) old.probability += value.probability;
+    else map.set(key, value);
+  }
+  return [...map.values()];
+}
+function modifyOpponent(roll, ownWilds, resource, actor, target, p, e) {
+  if (e.kind === "opponentReroll") {
+    return reroll([{ ...roll, resource, probability: 1 }], actor, p, e, {
+      opponent: true,
+      target,
+    }).map((s) => ({
+      roll: { ...s, resource: roll.resource, probability: 1 },
+      resource: s.resource,
+      probability: s.probability,
+    }));
+  }
+  const forced = e.kind === "blankEnemyWilds";
+  const eligible = (f) =>
+    forced
+      ? f === 3
+      : [1, 3, 4].includes(f) &&
+        score(f, target.role, target.flags) >
+          score(0, target.role, target.flags);
+  let available = 0;
+  for (let i = 0; i < roll.counts.length; i++)
+    if (eligible(p.groups[i % p.width].face)) available += roll.counts[i];
+  let n = Math.min(available, forced ? e.amount : ownWilds);
+  if (e.variable)
+    n = Math.min(
+      n,
+      Math.max(
+        0,
+        Math.floor(
+          (power(resource) - (e.paid ? actor.tax : 0)) / (e.cost || 1),
+        ),
+      ),
+    );
+  const paid = n ? pay(resource, e, actor, e.variable ? n : 1) : -1;
+  if (paid < 0) return [{ roll, resource, probability: 1 }];
+  return [
+    {
+      roll: changeFaces(roll, p, {
+        eligible,
+        amount: n,
+        target: 0,
+        order: (f) => score(f, target.role, target.flags),
+      }),
+      resource: paid,
+      probability: 1,
+    },
+  ];
+}
+function changes(roll, ownWilds, resource, actor, target, p, ops) {
+  let current = [{ roll, resource, probability: 1 }];
+  for (const e of ops) {
+    const next = [];
+    for (const value of current)
+      for (const result of modifyOpponent(
+        value.roll,
+        ownWilds,
+        value.resource,
+        actor,
+        target,
+        p,
+        e,
+      ))
+        next.push({
+          ...result,
+          probability: result.probability * value.probability,
+        });
+    current = mergeTransitions(next);
+  }
+  return current;
+}
+function pierce(roll, c) {
+  const { d, pd } = c,
+    p = pd.after;
+  const benefit = (face) =>
+    score(face, "defense", d.flags) -
+    score(0, "defense", d.flags) +
+    (face === 3 && c.dx.some((e) => e.kind === "cancelWithWilds") ? 1 : 0);
+  return changeFaces(roll, p, {
+    eligible: (f) => [2, 3, 4].includes(f) && benefit(f) > 0,
+    amount: 1,
+    target: 0,
+    order: benefit,
+  });
+}
+function exactScenario(c) {
+  const first = initialAttack(c),
+    second = initialRoll(c.nd, c.d, c.pd.before);
+  // Keep the joint dependency rather than multiplying unconditional marginals.
+  const byDCrit = groupBy(second, (s) =>
+    c.needsA ? faceCount(s, c.pd.before, 4) : 0,
+  );
+  const histogram = [];
+  const simple = !c.ax.length && !c.dx.length;
+  const cacheA = new Map(),
+    cacheD = new Map(),
+    summaryA = new Map(),
+    summaryD = new Map();
+  const remember = (cache, key, fn) => {
+    if (cache.has(key)) return cache.get(key);
+    const result = fn();
+    if (cache.size < 10000) cache.set(key, result);
+    return result;
+  };
+  let combinations = 0;
+  for (const [dc, initialD] of byDCrit) {
+    const modifiedA = afterSelf(first, c.a, c.pa, c.ao, dc, c.r);
+    const byACrit = groupBy(modifiedA, (s) =>
+      c.needsD ? faceCount(s, c.pa.after, 4) : 0,
+    );
+    for (const [ac, groupA] of byACrit) {
+      const finalA = c.needsD
+        ? project(groupA, c.pa.after, c.paFinal, {
+            mask: c.pa.incomingMask,
+            trigger: (s) => s.trigger,
+          })
+        : groupA;
+      const finalD = afterSelf(initialD, c.d, c.pd, c.do_, ac, c.r);
+      if (simple) {
+        const as = summaries(finalA, c.paFinal, c.a, c.d, c.r, false),
+          ds = summaries(
+            finalD,
+            c.pd.after,
+            c.d,
+            c.a,
+            c.r,
+            !!c.r.pierce.length,
+          );
+        for (const sa of as)
+          for (const sd of ds) {
+            const result = damage(sa, sd, c, true);
+            histogram[result] =
+              (histogram[result] || 0) + sa.probability * sd.probability;
+          }
+        continue;
+      }
+      for (const sa of finalA)
+        for (const sd of finalD) {
+          if (++combinations > 10000000)
+            throw Error(
+              "Слишком много взаимодействующих состояний для точного расчёта этого сочетания",
+            );
+          const aw = c.ax.some((e) => e.kind === "cancelWithWilds")
+            ? faceCount(sa, c.paFinal, 3)
+            : 0;
+          const aKey =
+            stateKey(sd) + "/" + sa.resource + "/" + +sa.trigger + "/" + aw;
+          const afterA = remember(cacheA, aKey, () =>
+            changes(
+              sa.trigger && c.r.pierce.length
+                ? pierce({ ...sd, probability: 1 }, c)
+                : { ...sd, probability: 1 },
+              aw,
+              sa.resource,
+              c.a,
+              c.d,
+              c.pd.after,
+              c.ax,
+            ),
+          );
+          for (const da of afterA) {
+            const dw = c.dx.some((e) => e.kind === "cancelWithWilds")
+              ? faceCount(da.roll, c.pd.after, 3)
+              : 0;
+            const aRoll = { ...sa, resource: da.resource, probability: 1 };
+            const dKey = stateKey(aRoll) + "/" + da.roll.resource + "/" + dw;
+            const afterD = remember(cacheD, dKey, () =>
+              changes(aRoll, dw, da.roll.resource, c.d, c.a, c.paFinal, c.dx),
+            );
+            for (const ad of afterD) {
+              const dRoll = { ...da.roll, resource: ad.resource };
+              const asum = remember(summaryA, stateKey(ad.roll), () =>
+                summary(ad.roll, c.paFinal, c.a, c.d, c.r),
+              );
+              const dsum = remember(summaryD, stateKey(dRoll), () =>
+                summary(dRoll, c.pd.after, c.d, c.a, c.r),
+              );
+              const result = damage(asum, dsum, c, false);
+              histogram[result] =
+                (histogram[result] || 0) +
+                sa.probability *
+                  sd.probability *
+                  da.probability *
+                  ad.probability;
+            }
+          }
         }
     }
-  if (r.sap) d.power = Math.max(0, d.power - count(aRoll, FACE.wild));
-  return damageForRolls(aRoll, dRoll, a, d, r);
+  }
+  for (let i = 0; i < histogram.length; i++) histogram[i] ||= 0;
+  const mass = histogram.reduce((n, p) => n + p, 0);
+  if (!Number.isFinite(mass) || Math.abs(mass - 1) > 1e-9)
+    throw Error("Ошибка сохранения вероятности в точном расчёте");
+  // Correct floating-point summation drift only; every outcome has been retained.
+  const distribution = histogram.map((p) => p / mass);
+  return {
+    mean: distribution.reduce((n, p, damage) => n + damage * p, 0),
+    chance: distribution.slice(1).reduce((n, p) => n + p, 0),
+    distribution,
+    method: "exact",
+  };
 }
-export function simulateAttack(
-  p,
-  q,
-  attack,
-  { distance = 2, samples = 60000, seed = 93617 } = {},
-) {
+function cachedScenario(c) {
+  if (c.r.noDamage)
+    return { mean: 0, chance: 0, distribution: [1], method: "exact" };
+  const compact = (u) => ({
+    flags: u.flags,
+    resource: u.resource,
+    tax: u.tax,
+    cover: u.cover,
+    effects: u.effects,
+  });
+  const key = JSON.stringify({
+    a: compact(c.a),
+    d: compact(c.d),
+    na: c.na,
+    nd: c.nd,
+    r: c.r,
+    moon: c.moon,
+  });
+  if (scenarioCache.has(key)) return scenarioCache.get(key);
+  const value = exactScenario(c);
+  if (scenarioCache.size >= 64)
+    scenarioCache.delete(scenarioCache.keys().next().value);
+  scenarioCache.set(key, value);
+  return value;
+}
+export function calculateAttack(p, q, attack, { distance = 2 } = {}) {
   distance = Math.max(1, Math.min(5, Number(distance) || 2));
-  samples = Math.max(1, Math.min(500000, Math.floor(samples)));
   const ar = powerRules(p, q, attack, "attack", distance),
     dr = powerRules(q, p, attack, "defense", distance),
     r = attackRules(p, q, attack, distance);
@@ -428,17 +507,19 @@ export function simulateAttack(
   const stealth =
     q.powers.some((e) => /(?:^|, )Stealth(?:,|$)/.test(clean(e.name))) ||
     (q.slug === "omega-sentinel" && q.state.stance === "energy");
-  const ignoresStealth =
+  const ignores =
     /ignores.*Stealth/i.test(clean(attack.steps.join(" "))) ||
     p.powers.some((e) => /ignores (?:the )?Stealth/i.test(clean(e.body)));
   const unavailable =
-    !Number.isFinite(Number(attack.strength)) ||
-    !Number.isFinite(Number(attack.powerCost)) ||
+    !Number.isInteger(Number(attack.strength)) ||
+    Number(attack.strength) < 0 ||
+    !Number.isInteger(Number(attack.powerCost)) ||
+    Number(attack.powerCost) < 0 ||
     +attack.powerCost > 10
       ? "Переменная сила или цена атаки требует отдельного правила"
       : distance > reach
         ? "Вне дальности атаки"
-        : distance > 3 && stealth && !ignoresStealth
+        : distance > 3 && stealth && !ignores
           ? "Stealth: цель вне дальности 3"
           : null;
   const result = {
@@ -466,29 +547,10 @@ export function simulateAttack(
   for (const [key, full] of [
     ["base", false],
     ["full", true],
-  ]) {
-    const rng = random(seed);
-    let sum = 0,
-      sum2 = 0,
-      hit = 0;
-    for (let i = 0; i < samples; i++) {
-      const damage = trial(p, q, attack, ar, dr, r, distance, full, rng);
-      sum += damage;
-      sum2 += damage * damage;
-      if (damage) hit++;
-    }
-    const mean = sum / samples;
-    result[key] = {
-      mean,
-      error:
-        samples > 1
-          ? 1.96 *
-            Math.sqrt(Math.max(0, sum2 / samples - mean * mean) / samples)
-          : 0,
-      chance: hit / samples,
-      samples,
-    };
-  }
+  ])
+    result[key] = cachedScenario(
+      scenario(p, q, attack, ar, dr, r, distance, full),
+    );
   return result;
 }
 export function compare(p, q, options) {
@@ -499,7 +561,7 @@ export function compare(p, q, options) {
     attacker: attacker.slug,
     defender: defender.slug,
     attacks: attackVariants(attacker).map((a) =>
-      simulateAttack(attacker, defender, a, options),
+      calculateAttack(attacker, defender, a, options),
     ),
   }));
 }

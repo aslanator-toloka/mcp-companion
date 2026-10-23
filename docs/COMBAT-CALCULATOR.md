@@ -4,7 +4,7 @@ Implemented 2026-10-23. Standalone «Калькулятор» tab at `#screen=ca
 
 ## Quantities and scenarios
 
-Each row is **one attack roll against one target**, in both directions. The UI states this scope. Rows for flexible attack types are expanded by type. Beam and area attacks report damage to the selected target, not damage summed over a hypothetical squad. Output includes mean potential damage, probability of at least one damage, and an estimated 95% Monte Carlo error interval.
+Each row is **one attack roll against one target**, in both directions. The UI states this scope. Rows for flexible attack types are expanded by type. Beam and area attacks report damage to the selected target, not damage summed over a hypothetical squad. Output includes mean potential damage, probability of at least one damage, and the complete exact damage probability distribution. Displayed numbers are rounded; there is no sampling confidence interval.
 
 - No extra power: the printed attack price is covered; the attacker has zero after paying it, defender starts with zero. Free abilities still work.
 - Full power: both start with ten power. Printed attack price, preparatory buffs, superpower surcharges, dice manipulation and reductions spend that budget. It is renewed for each independent row. No power earned during/after the attack is credited.
@@ -33,14 +33,38 @@ There are explicit adapters for Cloak, Probability Manipulation, Empowered Gaunt
 - Ally/leadership/tactics/gem effects, other enemy auras, destroyed terrain, collisions, counterattacks, status damage on later turns, and additional generated attacks are excluded. Terrain-dependent dice bonuses are flagged on the affected row rather than silently treated as implemented.
 - Chronokinesis and Temporal Rewind jointly reroll both sides and are explicitly marked unsupported. Moving Tippy-Toe to the opponent is also flagged; the initial token on Squirrel Girl herself is supported.
 - Preparatory movement is assumed possible for a paid move/buff. Actual paths, LOS, action-count restrictions and collisions are not solved. State-dependent innate movement/previous-attack buffs require the relevant context toggle.
-- Dice policies favor immediate successes, not the downstream value of a trigger. Paid-ability ordering and unmodeled effects can create error much larger than the displayed sampling interval. That interval is labeled as sampling uncertainty only.
+- Dice policies favor immediate successes. The probabilities are exact for the declared fixed policy and implemented rules; they do not establish optimal play or rules completeness. Different choices of which dice to modify can change the result. Resource guards reject an oversized state space explicitly; they never replace it with samples or drop low-probability tails.
 - The known rule adapters do not prove universal coverage of arbitrary future card wording. Unknown relevant powers are marked as partial calculations. Tests walking every card establish compatibility/finite results, not rules completeness.
 
 ## Implementation and validation
 
-`frontend/src/combat/profile.js` normalizes the selected card face and context. `rules.js` compiles applicable effects. `engine.js` owns dice, resource and damage resolution. A bundled Blob Worker runs 60,000 reproducibly seeded trials per row/scenario; changing selection terminates stale work. No compute runs on the UI thread. `calculator.jsx` mounts the calculator page only while its tab is active; `CardStore` owns route-visible inputs. Library saves, battle state and tournament ratings are independent.
+`frontend/src/combat/profile.js` normalizes the selected card face and context. `rules.js` compiles applicable effects. `exact-dice.js` builds finite probability distributions and weighted transitions; `exact-policy.js` defines face equivalence, costs and dice choices; `engine.js` conditions the two rolls correctly and computes the final damage distribution. The bundled Blob Worker runs the exact calculation; changing selection terminates stale work. No calculation runs on the UI thread. `calculator.jsx` mounts the calculator page only while its tab is active; `CardStore` owns route-visible inputs. Library saves, battle state and tournament ratings are independent.
 
-Tests include independent analytic one-die expectations, initial skull/critical timing, critical and modification bans, per-ability rerolls, power budgets, reductions/minimums, Pierce, full rerolls, damage caps and substitutions, type/range/context/immunity rules, and both faces/forms of the entire current catalog. Browser tests cover comparisons, mobile layout, retries, rapid selection/cancellation, independent and mirrored selections, page navigation from catalog/battle details, dirty-roster guards, legacy links and URL restoration.
+## Exact calculation
+
+For ordinary independent rolls, with criticals adding only one non-expanding die, the single-original-die generating polynomials are
+
+\[
+F_A(z)=\tfrac12+\tfrac{7}{16}z+\tfrac1{16}z^2,\qquad
+F_D(z)=\tfrac58+\tfrac{21}{64}z+\tfrac3{64}z^2.
+\]
+
+With attack pool n and defense pool m, coefficients of \(F_A^n\) and \(F_D^m\) give success probabilities. Expected damage is \(\sum_{i,j}P(A=i)P(D=j)\max(0,i-j)\), followed by the actual caps and reductions. Applying the positive-part function only to the two means would be incorrect.
+
+For abilities the state includes the observable face counts, power remaining, and reroll-rule usage when that rule can appear again. Face classes merge only when every relevant later effect observes them identically. Unobserved results are marginalized, not discarded. Replacement rolls use multinomial coefficients with physical d8 face weights2,2,1,1,1,1. Initial criticals are compound outcomes; a bonus die never recursively adds another die.
+
+Cloak/Probability Manipulation transforms only initial failures and charges the available budget, including a Root/Loki tax once per activation. The compound transition may commute an initial critical's independent bonus dice with later initial dice because those bonus dice cannot activate Cloak. It retains the same joint distribution of all observable faces and power. Empowered Gauntlets pays once for all initial failures. Moon Knight's activation effect is an exact5/8 versus3/8 mixture.
+
+The engine preserves cross-roll dependence. It first groups initial defense outcomes by the critical count observed by the attacker's modifiers (Echo/Ultron), then groups the modified attack roll by the critical count observed by the defender. Opponent modifications resolve afterwards in order. Replacing these distributions with independent marginals would give an incorrect answer. Remaining equivalent states are merged after each phase; ordinary attacks collapse to very small success distributions.
+
+The output is \(P(D=k)\), its mean and \(1-P(D=0)\). Floating-point arithmetic remains subject to normal numerical rounding; there is no Monte Carlo error. Probability mass is validated before correcting numerical summation drift. No epsilon cutoff or low-probability pruning is used. State/cross-product and cache bounds protect browser resources; a bound produces an explicit error rather than an approximate number.
+
+Choices are deterministic: own rerolls select allowed zero-success faces; all-dice rerolls occur only when they improve expected own successes; opponent rerolls choose the highest-success faces. Ties use a fixed face order. Pierce prioritizes the greatest immediate defensive loss, including removal of a wild that could cancel an attacking success. Defensive cancellation prioritizes the greatest immediate success loss. These declared choices replace the previous simulator's incidental original-array tie order, so some means can differ beyond the old sampling noise. Joint all-dice powers still listed as unsupported are not silently approximated.
+
+The conversion also fixes typed defensive rerolls being applied offensively (Hulk Not Puny Banner and similar wording), attack-action rerolls being applied defensively (For Midgard), and preserves Dormammu's copied failure dice for Loki's subsequent opposing-failure count. Current card wording takes precedence over older wording in forum discussions.
+
+Validation uses two independent methods: closed-form polynomial convolution, including30-versus30 pools, and exhaustive ordered-face enumeration for small pools. The latter imports no production transition/partition/formula helpers and checks the whole damage distribution across Cloak budgets, taxes, reroll permissions and rule reuse, all-dice rerolls, cross-roll critical observations, Pierce, forced rerolls, absorption, caps/reduction, block substitution and paid face conversion. Other checks walk every current card face/form, require normalized nonnegative distributions, retain tiny tails, ban RNG calls, and cover browser history, cancellation, retries and ordinary page navigation. Development stress checks include maximum Kill Count,28-die Apocalypse attacks, doubled criticals and mutually coupled Echo/Strange matchups.
+
 
 ## Primary rule sources (internal reference)
 

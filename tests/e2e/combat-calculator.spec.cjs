@@ -328,3 +328,52 @@ test("calculator shortcut honors unsaved roster guard before leaving the charact
     ),
   ).toBe("Original roster");
 });
+
+test("calculator shows closed-form means and no sampling count, approximation mark or confidence interval", async ({
+  page,
+}) => {
+  await page.goto(origin + "#screen=calculator&calculator=wong&opponent=wong");
+  await complete(page);
+  const c = require("../../data/cards/wong.json").statCard.frontSide,
+    n = Number(c.attacks[0].strength),
+    m = Number(c.physicalDefense);
+  const convolve = (a, b) => {
+    const out = Array(a.length + b.length - 1).fill(0);
+    for (let i = 0; i < a.length; i++)
+      for (let j = 0; j < b.length; j++) out[i + j] += a[i] * b[j];
+    return out;
+  };
+  const raise = (p, n) => {
+    let out = [1];
+    while (n--) out = convolve(out, p);
+    return out;
+  };
+  const ap = raise([1 / 2, 7 / 16, 1 / 16], n),
+    dp = raise([5 / 8, 21 / 64, 3 / 64], m);
+  let mean = 0;
+  for (let i = 0; i < ap.length; i++)
+    for (let j = 0; j < dp.length; j++)
+      mean += ap[i] * dp[j] * Math.max(0, i - j);
+  const printed = mean.toLocaleString("ru-RU", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  const values = workspace(page).locator(".combat-outcome strong");
+  for (let i = 0; i < (await values.count()); i++)
+    await expect(values.nth(i)).toHaveText(printed);
+  await expect(workspace(page)).not.toContainText(
+    /60\s*000|95%|Погрешность|±|≈/,
+  );
+  await workspace(page).locator(".combat-method summary").click();
+  await expect(workspace(page).locator(".combat-method")).toContainText(
+    "Вероятности всех исходов",
+  );
+  await workspace(page)
+    .locator('[data-combat-slot="first"]')
+    .screenshot({ path: "previews/exact-calculator-result.png" });
+  await page.reload();
+  await complete(page);
+  await expect(
+    workspace(page).locator(".combat-outcome strong").first(),
+  ).toHaveText(printed);
+});

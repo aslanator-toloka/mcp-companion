@@ -384,17 +384,17 @@ export function powerRules(p, other, attack, role, distance) {
           b,
         );
       const attackOnly =
-        /when attacking|when making attacks|this character (?:makes an attack|attacks)|during (?:its|the next) attack|attack dice for each|while attacking|during the next.*attack|when this character is attacking/i.test(
+        /when attacking|when making attacks|when making (?:this|an) attack|attack (?:dice|rolls)|followed by an attack action|this character (?:makes an attack|attacks)|during (?:its|the next) attack|attack dice for each|while attacking|during the next.*attack|when this character is attacking/i.test(
           b,
         ) &&
         !/attack and defense|attack or defense|attacking or defending|attacks, during.*or defend/i.test(
           b,
         );
       const defenseOnly =
-        /(?:when|while) this character is defending|defense or dodge|defense rolls|when this character is targeted/.test(
+        /(?:when|while) this character is defending|defense or dodge|defense (?:dice|rolls)|when this character is targeted/i.test(
           b,
         ) &&
-        !/attack and defense|attack or defense|attacking or defending/.test(b);
+        !/attack and defense|attack or defense|attacking or defending/i.test(b);
       const objectiveOnly =
         /Interacting|Secure objective|Crisis Card/.test(b) &&
         !/Alternatively/.test(b);

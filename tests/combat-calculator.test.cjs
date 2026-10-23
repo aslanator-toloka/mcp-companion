@@ -2,8 +2,9 @@ const test = require("node:test"),
   assert = require("node:assert/strict"),
   fs = require("node:fs"),
   path = require("node:path");
-let E, P, R;
+let E, P, R, D;
 test.before(async () => {
+  D = await import("../frontend/src/combat/exact-dice.js");
   E = await import("../frontend/src/combat/engine.js");
   P = await import("../frontend/src/combat/profile.js");
   R = await import("../frontend/src/combat/rules.js");
@@ -45,9 +46,9 @@ const load = (slug, value = {}) => {
   return P.profile(c, d, { ...P.initialState(slug), ...value });
 };
 const attack = (p) => P.attackVariants(p)[0];
-const sim = (p, q, options = {}) =>
-  E.simulateAttack(p, q, attack(p), { samples: 100000, ...options });
-const near = (value, expected, tol = 0.013) =>
+const calc = (p, q, options = {}) =>
+  E.calculateAttack(p, q, attack(p), options);
+const near = (value, expected, tol = 1e-11) =>
   assert.ok(
     Math.abs(value - expected) <= tol,
     `${value} ≠ ${expected} ± ${tol}`,
@@ -61,15 +62,14 @@ const power = (name, body, cost = null, type = "innate") => ({
 test("physical d8 and nonrecursive criticals agree with an independently enumerated one-die expectation", () => {
   const p = unit(),
     q = unit();
-  const r = sim(p, q);
+  const r = calc(p, q);
   // P(hit/wild)=3/8; P(crit)=1/8 adds 1 + a fresh die's P(success)=4/8.
   near(r.base.mean, 3 / 8 + (1 / 8) * 1.5);
   assert.equal(r.base.mean, r.full.mean);
   near(r.base.chance, 0.5);
   near(
-    sim(unit({ attacks: [{ ...attack(p), strength: "4" }] }), q).base.mean,
+    calc(unit({ attacks: [{ ...attack(p), strength: "4" }] }), q).base.mean,
     2.25,
-    0.025,
   );
 });
 test("Cloak spends on initial failures before criticals, added criticals and failures do not expand", () => {
@@ -80,56 +80,65 @@ test("Cloak spends on initial failures before criticals, added criticals and fai
     "reactive",
   );
   const p = unit({ superPowers: [cloak] });
-  const r = sim(p, unit());
+  const r = calc(p, unit());
   near(r.base.mean, 0.5625);
   near(r.full.mean, 0.75);
-  const rolls = [7.5 / 8, 6.5 / 8];
-  let i = 0;
-  const exact = E.rollPool(1, { rng: () => rolls[i++], cloak: true, power: 1 });
-  assert.equal(exact.spent, 1);
-  assert.equal(exact.roll.length, 2);
-  assert(exact.roll.every((d) => d.f === E.FACE.critical));
+  const exact = D.initialRoll(
+    1,
+    { resource: 1, tax: 0, effects: [{ kind: "cloak" }], flags: {} },
+    D.partition((face) => face),
+  );
+  near(
+    exact.reduce((n, s) => n + s.probability, 0),
+    1,
+  );
+  assert(exact.every((s) => s.counts.reduce((n, v) => n + v, 0) <= 2));
+  near(
+    exact.find((s) => s.resource === 0 && s.counts[E.FACE.critical] === 2)
+      .probability,
+    1 / 64,
+  );
+  near(
+    exact.find((s) => s.resource === 0 && s.counts[E.FACE.failure] === 1)
+      .probability,
+    1 / 64,
+  );
 });
 test("an attack's price consumes the full scenario budget; ten-cost attack cannot also buy Cloak", () => {
   const p = load("malekith-the-accursed"),
     q = unit();
   const a = { ...attack(p), strength: "1", powerCost: 10 };
-  const r = E.simulateAttack(p, q, a);
+  const r = E.calculateAttack(p, q, a);
   assert.deepEqual(r.base, r.full);
 });
 test("Cloak remains available when Black Cat bans modifications and extra critical dice", () => {
   const p = load("malekith-the-accursed"),
     q = load("black-cat");
   q.defense = { physical: 0, energy: 0, mystic: 0 };
-  const r = E.simulateAttack(
-    p,
-    q,
-    { ...attack(p), strength: "1" },
-    { samples: 120000 },
-  );
+  const r = E.calculateAttack(p, q, { ...attack(p), strength: "1" }, {});
   near(r.base.mean, 0.5);
   near(r.full.mean, 0.625);
 });
-test("Spider-Sense respects damage type, modified dice stay single-use and criticals after a reroll do not explode", () => {
+test("Spider-Sense respects damage type, each reroll rule stays single-use and criticals after a reroll do not explode", () => {
   const p = unit({ attacks: [{ ...attack(unit()), strength: "6" }] }),
     q = load("spider-man");
-  const physical = sim(p, q),
-    energy = E.simulateAttack(p, q, { ...attack(p), type: "energy" }),
-    mystic = E.simulateAttack(p, q, { ...attack(p), type: "mystic" });
+  const physical = calc(p, q),
+    energy = E.calculateAttack(p, q, { ...attack(p), type: "energy" }),
+    mystic = E.calculateAttack(p, q, { ...attack(p), type: "mystic" });
   assert(physical.base.mean < mystic.base.mean);
-  near(physical.base.mean, energy.base.mean, 0.04);
+  near(physical.base.mean, energy.base.mean);
   const rr = unit({
     superPowers: [
       power("Test", "This character may reroll any number of its attack dice."),
     ],
   });
-  near(sim(rr, unit()).base.mean, 0.5625 + (0.375 + 0.125 * 0.375) * 0.5);
+  near(calc(rr, unit()).base.mean, 0.5625 + (0.375 + 0.125 * 0.375) * 0.5);
 });
 test("defender modifications are banned by Venom, while passive counting remains active", () => {
   const a = load("venom"),
     q = load("amazing-spider-man");
   const bare = { ...q, powers: [] };
-  near(sim(a, q).base.mean, sim(a, bare).base.mean, 0.001);
+  near(calc(a, q).base.mean, calc(a, bare).base.mean);
   const martial = unit({
     physicalDefense: "3",
     superPowers: [
@@ -140,7 +149,7 @@ test("defender modifications are banned by Venom, while passive counting remains
     ],
   });
   assert(
-    sim(a, martial).base.mean < sim(a, { ...martial, powers: [] }).base.mean,
+    calc(a, martial).base.mean < calc(a, { ...martial, powers: [] }).base.mean,
   );
 });
 test("defense buffs spend actual energy, type restrictions apply, and paid damage reduction differs from innate minimum one", () => {
@@ -151,9 +160,9 @@ test("defense buffs spend actual energy, type restrictions apply, and paid damag
     "2",
     "reactive",
   );
-  const r = sim(p, unit({ superPowers: [cap] }));
+  const r = calc(p, unit({ superPowers: [cap] }));
   assert(r.full.mean < r.base.mean);
-  const mystic = E.simulateAttack(p, unit({ superPowers: [cap] }), {
+  const mystic = E.calculateAttack(p, unit({ superPowers: [cap] }), {
     ...attack(p),
     type: "mystic",
   });
@@ -176,8 +185,8 @@ test("defense buffs spend actual energy, type restrictions apply, and paid damag
       ),
     ],
   });
-  const ri = sim(p, innate),
-    rp = sim(p, paid);
+  const ri = calc(p, innate),
+    rp = calc(p, paid);
   assert(ri.base.mean > rp.full.mean);
   assert.equal(ri.base.mean, ri.full.mean);
   near(rp.full.mean, 0.0625);
@@ -198,8 +207,8 @@ test("Pierce consumes exactly one successful defense symbol only with its comple
   const ar = R.attackRules(p, q, attack(p), 2);
   assert.deepEqual(ar.pierce, ["wild"]);
   assert(
-    sim(p, q).base.mean >
-      sim({ ...p, attacks: [{ ...attack(p), steps: [] }] }, q).base.mean,
+    calc(p, q).base.mean >
+      calc({ ...p, attacks: [{ ...attack(p), steps: [] }] }, q).base.mean,
   );
   assert.deepEqual(
     R.attackRules(
@@ -217,60 +226,61 @@ test("Pierce consumes exactly one successful defense symbol only with its comple
 test("attack caps, no-damage attacks, and inability to reduce Namor's damage are distinct", () => {
   const q = unit(),
     shuri = load("shuri"),
-    r = sim(shuri, q);
+    r = calc(shuri, q);
   assert(r.base.mean <= 1 && r.full.mean <= 1);
   const giant = load("supergiant");
   const a = P.attackVariants(giant).find(
     (a) => a.name === "Devastate Intellect",
   );
-  assert.equal(E.simulateAttack(giant, q, a).base.mean, 0);
+  assert.equal(E.calculateAttack(giant, q, a).base.mean, 0);
   const namor = load("namor-the-submariner"),
     iron = load("iron-man");
   const noArmor = { ...iron, powers: [] };
-  near(sim(namor, iron).base.mean, sim(namor, noArmor).base.mean, 0.001);
+  near(calc(namor, iron).base.mean, calc(namor, noArmor).base.mean);
 });
 test("health, previous attacks, token state, forms, stance and status conditions affect only applicable rules", () => {
   const h = load("hulk"),
     angry = load("hulk", { damage: 8 });
-  assert(sim(angry, unit()).base.mean > sim(h, unit()).base.mean + 0.9);
+  assert(calc(angry, unit()).base.mean > calc(h, unit()).base.mean + 0.9);
   const noir = load("spider-man-noir"),
     setup = load("spider-man-noir", { attacked: true });
-  assert(sim(setup, unit()).base.mean > sim(noir, unit()).base.mean + 1.5);
+  assert(calc(setup, unit()).base.mean > calc(noir, unit()).base.mean + 1.5);
   const shock = load("hulk", { conditions: ["shock"] });
-  assert(sim(shock, unit()).base.mean < sim(h, unit()).base.mean);
+  assert(calc(shock, unit()).base.mean < calc(h, unit()).base.mean);
   const hex = unit({}, { conditions: ["hex"] });
-  near(sim(hex, unit()).base.mean, 0.5);
+  near(calc(hex, unit()).base.mean, 0.5);
   const vision = load("vision"),
     phased = load("vision", { stance: "energy" });
   const p = unit({ attacks: [{ ...attack(unit()), strength: "7" }] });
-  assert(sim(p, vision).base.mean < sim(p, phased).base.mean);
+  assert(calc(p, vision).base.mean < calc(p, phased).base.mean);
   const voodoo = load("doctor-voodoo"),
     noBrother = load("doctor-voodoo", { special: false });
-  assert(sim(p, voodoo).base.mean < sim(p, noBrother).base.mean);
+  assert(calc(p, voodoo).base.mean < calc(p, noBrother).base.mean);
   const hood = load("hood", { form: 1 });
   assert.notEqual(hood.name, load("hood").name);
 });
 test("range, Stealth, cover, flexible attack types and no silent unknown strengths", () => {
   const p = unit(),
     q = load("black-cat");
-  assert.match(sim(p, q, { distance: 4 }).unavailable, /дальности/);
+  assert.match(calc(p, q, { distance: 4 }).unavailable, /дальности/);
   const long = { ...attack(p), range: "5" };
   assert.match(
-    E.simulateAttack(p, q, long, { distance: 4 }).unavailable,
+    E.calculateAttack(p, q, long, { distance: 4 }).unavailable,
     /Stealth/,
   );
   assert.match(
-    E.simulateAttack(p, unit(), { ...long, strength: "*" }).unavailable,
+    E.calculateAttack(p, unit(), { ...long, strength: "*" }).unavailable,
     /Переменная/,
   );
   const covered = unit({ physicalDefense: "3" }, { cover: true });
   assert.equal(
-    sim(p, covered).base.mean,
-    sim(p, { ...covered, state: { ...covered.state, cover: false } }).base.mean,
+    calc(p, covered).base.mean,
+    calc(p, { ...covered, state: { ...covered.state, cover: false } }).base
+      .mean,
   );
   assert(
-    sim(p, covered, { distance: 3 }).base.mean <
-      sim(
+    calc(p, covered, { distance: 3 }).base.mean <
+      calc(
         p,
         { ...covered, state: { ...covered.state, cover: false } },
         { distance: 3 },
@@ -284,8 +294,8 @@ test("range, Stealth, cover, flexible attack types and no silent unknown strengt
 test("fixed strategy is deterministic, both directions include every attack, warnings expose unsupported effects", () => {
   const p = load("malekith-the-accursed"),
     q = load("adam-warlock");
-  assert.deepEqual(sim(p, q, { samples: 2000 }), sim(p, q, { samples: 2000 }));
-  const result = E.compare(p, q, { samples: 100 });
+  assert.deepEqual(calc(p, q, {}), calc(p, q, {}));
+  const result = E.compare(p, q, {});
   assert.equal(result[0].attacks.length, p.attacks.length);
   assert.equal(result[1].attacks.length, q.attacks.length);
   assert(result[0].attacks[0].warnings.some((w) => /Chronokinesis/.test(w)));
@@ -298,7 +308,7 @@ test("all current card faces compile, produce finite nonnegative damage, and sho
       for (const side of ["front", "back"]) {
         const p = load(c.slug, { form, side });
         for (const a of P.attackVariants(p)) {
-          const r = E.simulateAttack(p, unit(), a, { samples: 8 });
+          const r = E.calculateAttack(p, unit(), a, {});
           assert(
             r.unavailable ||
               [r.base.mean, r.full.mean].every(
@@ -306,6 +316,21 @@ test("all current card faces compile, produce finite nonnegative damage, and sho
               ),
             `${c.slug}/${a.name}`,
           );
+          if (!r.unavailable)
+            for (const outcome of [r.base, r.full]) {
+              assert.equal(outcome.method, "exact");
+              assert.equal(Object.hasOwn(outcome, "error"), false);
+              assert.equal(Object.hasOwn(outcome, "samples"), false);
+              near(
+                outcome.distribution.reduce((n, p) => n + p, 0),
+                1,
+              );
+              assert(
+                outcome.distribution.every(
+                  (p) => Number.isFinite(p) && p >= 0 && p <= 1,
+                ),
+              );
+            }
           count++;
         }
       }
@@ -315,7 +340,7 @@ test("all current card faces compile, produce finite nonnegative damage, and sho
     (a) => a.name === "Automatic Pistol",
   );
   assert(
-    E.simulateAttack(widow, unit(), pistol, { samples: 10 }).notes.some((n) =>
+    E.calculateAttack(widow, unit(), pistol, {}).notes.some((n) =>
       /Дополнительные атаки/.test(n),
     ),
   );
@@ -326,7 +351,7 @@ test("Eye of Agamotto rerolls all eligible dice together; paid variable rerolls 
     "Eye of Agamotto",
     "This character can modify and reroll failure results. When this character is attacking, defending, or dodging, it may reroll all of its dice.",
   );
-  near(sim(unit({ superPowers: [eye] }), unit()).base.mean, 0.8125);
+  near(calc(unit({ superPowers: [eye] }), unit()).base.mean, 0.8125);
   const modok = load("modok"),
     zola = load("arnim-zola");
   for (const p of [modok, zola]) {
@@ -338,20 +363,20 @@ test("Eye of Agamotto rerolls all eligible dice together; paid variable rerolls 
 });
 test("paid blank-counting works while attacking Loki, and wilds count twice for Gambit without energy", () => {
   const loki = load("loki-god-of-mischief"),
-    r = sim(loki, unit());
+    r = calc(loki, unit());
   assert(r.full.mean > r.base.mean);
   const gambit = load("gambit");
   const bare = { ...gambit, powers: [] };
-  assert(sim(gambit, unit()).base.mean > sim(bare, unit()).base.mean);
+  assert(calc(gambit, unit()).base.mean > calc(bare, unit()).base.mean);
 });
 test("Mysterio switches to mystic defense unless the attacker can pay; Ethereal caps Supergiant's physical damage", () => {
   const p = unit({ attacks: [{ ...attack(unit()), strength: "7" }] }),
     q = load("mysterio");
-  const r = sim(p, q);
+  const r = calc(p, q);
   assert(r.full.mean > r.base.mean + 0.3);
   const giant = load("supergiant");
-  assert(sim(p, giant).base.mean <= 1);
-  const energy = E.simulateAttack(p, giant, { ...attack(p), type: "energy" });
+  assert(calc(p, giant).base.mean <= 1);
+  const energy = E.calculateAttack(p, giant, { ...attack(p), type: "energy" });
   assert(energy.base.mean > 1);
 });
 test("condition immunity and actual remaining stamina constrain combat context", () => {
@@ -362,12 +387,12 @@ test("condition immunity and actual remaining stamina constrain combat context",
 });
 test("2026 rules allow successive different reroll abilities, but never the same ability twice on one die", () => {
   const body = "This character may reroll any number of its attack dice.";
-  const single = sim(unit({ superPowers: [power("First", body)] }), unit());
-  const two = sim(
+  const single = calc(unit({ superPowers: [power("First", body)] }), unit());
+  const two = calc(
     unit({ superPowers: [power("First", body), power("Second", body)] }),
     unit(),
   );
-  const duplicate = sim(
+  const duplicate = calc(
     unit({ superPowers: [power("First", body), power("First", body)] }),
     unit(),
   );
@@ -380,13 +405,13 @@ test("Shock and Incinerate cannot reduce an existing dice pool below one", () =>
   const p = unit(),
     q = unit({ physicalDefense: "1" });
   assert.equal(
-    sim(p, q).base.mean,
-    sim(p, { ...q, state: { ...q.state, conditions: ["incinerate"] } }).base
+    calc(p, q).base.mean,
+    calc(p, { ...q, state: { ...q.state, conditions: ["incinerate"] } }).base
       .mean,
   );
   assert.equal(
-    sim(p, q).base.mean,
-    sim({ ...p, state: { ...p.state, conditions: ["shock"] } }, q).base.mean,
+    calc(p, q).base.mean,
+    calc({ ...p, state: { ...p.state, conditions: ["shock"] } }, q).base.mean,
   );
 });
 test("battle condition casing normalizes without mutating a saved fighter", () => {
@@ -410,5 +435,5 @@ test("Dormammu retains his self-attack clause even though the same power also me
   const effects = R.powerRules(p, q, attack(p), "attack", 2).effects;
   assert(effects.some((e) => e.kind === "failureSuccess"));
   assert(effects.some((e) => e.kind === "addEnemyFailures"));
-  assert(sim(p, q).base.mean > sim({ ...p, powers: [] }, q).base.mean + 0.5);
+  assert(calc(p, q).base.mean > calc({ ...p, powers: [] }, q).base.mean + 0.5);
 });
