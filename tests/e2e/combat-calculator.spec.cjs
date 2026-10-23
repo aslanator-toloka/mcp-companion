@@ -23,9 +23,27 @@ test.afterAll(async () => {
 const workspace = (page) =>
   page.getByRole("region", { name: "Калькулятор атак", exact: true });
 const first = (page) =>
-  workspace(page).getByLabel("Первый персонаж", { exact: true });
+  workspace(page).getByRole("combobox", {
+    name: "Первый персонаж",
+    exact: true,
+  });
 const second = (page) =>
-  workspace(page).getByLabel("Второй персонаж", { exact: true });
+  workspace(page).getByRole("combobox", {
+    name: "Второй персонаж",
+    exact: true,
+  });
+async function pick(page, input, slug) {
+  if (!slug) {
+    await input.locator("..").getByRole("button").click();
+    return;
+  }
+  const character = require("../../data/catalog.json").characters.find(
+    (c) => c.slug === slug,
+  );
+  await input.fill(character.name);
+  const inputId = await input.getAttribute("id");
+  await page.locator(`[id="${inputId}-${slug}"]`).click();
+}
 async function open(page, slug = "malekith-the-accursed") {
   await page.goto(origin + "#screen=catalog&card=" + slug);
   await page
@@ -41,6 +59,55 @@ async function complete(page) {
     timeout: 30000,
   });
 }
+test("one searchable combobox per character supports alter ego, keyboard selection, cancellation and history", async ({
+  page,
+}) => {
+  await page.goto(origin + "#screen=calculator&calculator=hulk&opponent=wong");
+  await expect(
+    workspace(page).locator(".combat-character-picker input"),
+  ).toHaveCount(2);
+  await expect(first(page)).toHaveValue("Hulk");
+  await first(page).click();
+  await page.keyboard.type("parker");
+  const options = workspace(page).locator(".combat-picker-menu [role=option]");
+  await expect(options.first()).toContainText("Parker");
+  await expect(options.filter({ hasText: /^Hulk/ })).toHaveCount(0);
+  const optionId = await options.first().getAttribute("id"),
+    slug = optionId.replace("combat-source-picker-", ""),
+    chosen = require("../../data/catalog.json").characters.find(
+      (c) => c.slug === slug,
+    );
+  await first(page).press("ArrowDown");
+  await first(page).press("ArrowUp");
+  await first(page).press("Enter");
+  await expect(first(page)).toHaveValue(chosen.name);
+  await expect(first(page)).toHaveAttribute("aria-expanded", "false");
+  await expect(page).toHaveURL(new RegExp("calculator=" + slug));
+  const selectedUrl = page.url();
+  await first(page).fill("nothing-matches-xyz");
+  await expect(workspace(page).getByText("Персонажи не найдены")).toBeVisible();
+  await expect(page).toHaveURL(selectedUrl);
+  await first(page).press("Escape");
+  await expect(first(page)).toHaveValue(chosen.name);
+  await first(page).fill("spider man");
+  await expect(options.first()).toContainText("Spider-Man");
+  await second(page).click();
+  await expect(first(page)).toHaveValue(chosen.name);
+  await expect(first(page)).toHaveAttribute("aria-expanded", "false");
+  await second(page).press("Escape");
+  await page.goBack();
+  await expect(first(page)).toHaveValue("Hulk");
+  await expect(second(page)).toHaveValue("Wong");
+  await page.setViewportSize({ width: 390, height: 844 });
+  await first(page).fill("parker");
+  await expect(options.first()).toBeVisible();
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  ).toBe(true);
+  await page.screenshot({ path: "previews/calculator-search-mobile.png" });
+});
 test("sidebar opens a real page with two independent selectors and no character/dialog underneath", async ({
   page,
 }) => {
@@ -57,8 +124,8 @@ test("sidebar opens a real page with two independent selectors and no character/
   await expect(second(page)).toHaveValue("");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.locator("#catalog-screen")).not.toBeVisible();
-  await second(page).selectOption("wong");
-  await first(page).selectOption("malekith-the-accursed");
+  await pick(page, second(page), "wong");
+  await pick(page, first(page), "malekith-the-accursed");
   await complete(page);
   const forward = workspace(page).locator('[data-combat-slot="first"]');
   await expect(forward.locator(".combat-attack")).toHaveCount(3);
@@ -76,8 +143,8 @@ test("sidebar opens a real page with two independent selectors and no character/
   await page.reload();
   await complete(page);
   await expect(page).toHaveURL(url);
-  await expect(first(page)).toHaveValue("malekith-the-accursed");
-  await expect(second(page)).toHaveValue("wong");
+  await expect(first(page)).toHaveValue("Malekith The Accursed");
+  await expect(second(page)).toHaveValue("Wong");
   await page.locator('nav [data-action="all"]').click();
   await expect(workspace(page)).not.toBeVisible();
   await page.goBack();
@@ -90,24 +157,21 @@ test("character shortcut preselects the first character, both picks and contexts
   page,
 }) => {
   await open(page, "hulk");
-  await expect(first(page)).toHaveValue("hulk");
+  await expect(first(page)).toHaveValue("Hulk");
   await expect(second(page)).toHaveValue("");
-  await workspace(page)
-    .getByLabel("Найти второго персонажа", { exact: true })
-    .fill("Hood");
-  await second(page).selectOption("hood");
+  await pick(page, second(page), "hood");
   await complete(page);
   await workspace(page).getByLabel("Форма Hood").selectOption("1");
   await complete(page);
   await workspace(page).getByLabel("Урон на Hulk").fill("8");
   await complete(page);
-  await first(page).selectOption("wong");
+  await pick(page, first(page), "wong");
   await complete(page);
   await expect(workspace(page).getByLabel("Урон на Wong")).toHaveValue("0");
   await expect(workspace(page).getByLabel("Форма Hood")).toHaveValue("1");
   await page.goBack();
   await complete(page);
-  await expect(first(page)).toHaveValue("hulk");
+  await expect(first(page)).toHaveValue("Hulk");
   await expect(workspace(page).getByLabel("Урон на Hulk")).toHaveValue("8");
   const mean = await workspace(page)
     .locator('[data-combat-slot="first"] .combat-outcome strong')
@@ -152,26 +216,20 @@ test("failed loads retry; both searches and rapid choices cancel stale work; mob
     fail ? route.fulfill({ status: 503, body: "offline" }) : route.continue(),
   );
   await open(page);
-  await second(page).selectOption("wong");
+  await pick(page, second(page), "wong");
   await expect(workspace(page).getByRole("alert")).toBeVisible();
   fail = false;
   await workspace(page)
     .getByRole("button", { name: "Повторить расчёт" })
     .click();
   await complete(page);
-  await workspace(page)
-    .getByLabel("Найти первого персонажа", { exact: true })
-    .fill("Spider-Man");
-  await first(page).selectOption("amazing-spider-man");
-  await workspace(page)
-    .getByLabel("Найти первого персонажа", { exact: true })
-    .fill("Black Cat");
-  await first(page).selectOption("black-cat");
+  await pick(page, first(page), "amazing-spider-man");
+  await pick(page, first(page), "black-cat");
   await complete(page);
   await expect(
     workspace(page).locator('[data-combat-slot="first"]'),
   ).toHaveAttribute("data-attacker", "black-cat");
-  await expect(second(page)).toHaveValue("wong");
+  await expect(second(page)).toHaveValue("Wong");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth + 1,
@@ -203,22 +261,22 @@ test("legacy URLs become a standalone page; invalid selections are sanitized, pa
   await expect(first(page)).toHaveValue("");
   await expect(second(page)).toHaveValue("");
   await expect(page).not.toHaveURL(/does-not-exist|opponent=/);
-  await first(page).selectOption("wong");
-  await second(page).selectOption("hulk");
+  await pick(page, first(page), "wong");
+  await pick(page, second(page), "hulk");
   await complete(page);
-  await first(page).selectOption("");
+  await pick(page, first(page), "");
   await expect(first(page)).toHaveValue("");
-  await expect(second(page)).toHaveValue("hulk");
+  await expect(second(page)).toHaveValue("Hulk");
   await page.goBack();
   await complete(page);
-  await expect(first(page)).toHaveValue("wong");
+  await expect(first(page)).toHaveValue("Wong");
 });
 test("same character can occupy both slots with independent damage; leaving during computation keeps the page closed", async ({
   page,
 }) => {
   await page.goto(origin + "#screen=calculator");
-  await first(page).selectOption("hulk");
-  await second(page).selectOption("hulk");
+  await pick(page, first(page), "hulk");
+  await pick(page, second(page), "hulk");
   await complete(page);
   const left = workspace(page).getByRole("group", {
     name: "Первый персонаж: выбор и настройки",
@@ -258,8 +316,8 @@ test("same character can occupy both slots with independent damage; leaving duri
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.locator('nav [data-action="calculator"]').click();
   await complete(page);
-  await expect(first(page)).toHaveValue("hulk");
-  await expect(second(page)).toHaveValue("hulk");
+  await expect(first(page)).toHaveValue("Hulk");
+  await expect(second(page)).toHaveValue("Hulk");
   await expect(
     workspace(page)
       .getByRole("group", {
@@ -318,7 +376,7 @@ test("calculator shortcut honors unsaved roster guard before leaving the charact
     .click();
   await page.locator('[data-rs="discard-leave"]').click();
   await expect(workspace(page)).toBeVisible();
-  await expect(first(page)).toHaveValue("hulk");
+  await expect(first(page)).toHaveValue("Hulk");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(
     await page.evaluate(

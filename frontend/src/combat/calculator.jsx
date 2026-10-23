@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog, cardViews, ui } from "../stores/index.js";
 import { Avatar } from "../common.jsx";
@@ -273,48 +273,160 @@ const CharacterPicker = observer(function CharacterPicker({
   label,
   value,
 }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(null),
+    [open, setOpen] = useState(false),
+    [active, setActive] = useState(0),
+    list = useRef(null);
+  const selected = catalog.byId.get(value),
+    id = `combat-${field}-picker`,
+    normalize = (text) =>
+      text
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}]+/gu, " ")
+        .trim(),
+    words = normalize(query || "")
+      .split(/\s+/)
+      .filter(Boolean);
   const candidates = catalog.rows
-    .filter(
-      (c) =>
-        c.slug === value ||
-        `${c.name} ${c.alterEgo || ""}`
-          .toLowerCase()
-          .includes(query.toLowerCase()),
-    )
+    .filter((c) => {
+      const text = normalize(`${c.name} ${c.alterEgo || ""}`);
+      return words.every((word) => text.includes(word));
+    })
     .sort(
       (a, b) =>
         a.name.localeCompare(b.name) ||
         String(a.alterEgo || "").localeCompare(String(b.alterEgo || "")),
     );
+  const close = () => {
+    setOpen(false);
+    setQuery(null);
+  };
+  const choose = (slug) => {
+    close();
+    cardViews.setCalculator(field, slug);
+  };
+  useEffect(() => {
+    close();
+  }, [value]);
+  useEffect(() => {
+    const option = list.current?.children[active];
+    if (!open || !option) return;
+    const top = option.offsetTop,
+      bottom = top + option.offsetHeight,
+      container = list.current;
+    if (top < container.scrollTop) container.scrollTop = top;
+    else if (bottom > container.scrollTop + container.clientHeight)
+      container.scrollTop = bottom - container.clientHeight;
+  }, [open, active, query]);
   return (
-    <div className="combat-character-picker">
-      <label className="field">
-        {field === "source"
-          ? "Найти первого персонажа"
-          : "Найти второго персонажа"}
-        <input
-          type="search"
-          placeholder="Имя или alter ego"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      </label>
-      <label className="field">
+    <div
+      className="combat-character-picker"
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) close();
+      }}
+    >
+      <label className="field" htmlFor={id}>
         {label}
-        <select
-          aria-label={label}
-          value={value}
-          onChange={(e) => cardViews.setCalculator(field, e.target.value)}
-        >
-          <option value="">Выберите персонажа…</option>
-          {candidates.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name} — {c.alterEgo || "Grunt"}
-            </option>
-          ))}
-        </select>
       </label>
+      <div className="combat-picker-input">
+        <input
+          id={id}
+          role="combobox"
+          autoComplete="off"
+          aria-autocomplete="list"
+          aria-expanded={open}
+          aria-controls={`${id}-list`}
+          aria-activedescendant={
+            open && candidates[active]
+              ? `${id}-${candidates[active].slug}`
+              : undefined
+          }
+          placeholder="Имя персонажа или alter ego…"
+          value={query ?? selected?.name ?? ""}
+          onFocus={(e) => {
+            setOpen(true);
+            setActive(
+              Math.max(
+                0,
+                candidates.findIndex((c) => c.slug === value),
+              ),
+            );
+            e.currentTarget.select();
+          }}
+          onClick={() => setOpen(true)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setActive(0);
+            setOpen(true);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+              e.preventDefault();
+              const step = e.key === "ArrowDown" ? 1 : -1;
+              setActive(
+                open
+                  ? (active + step + candidates.length) %
+                      Math.max(1, candidates.length)
+                  : step > 0
+                    ? 0
+                    : Math.max(0, candidates.length - 1),
+              );
+              setOpen(true);
+            } else if (e.key === "Enter" && open) {
+              e.preventDefault();
+              if (candidates[active]) choose(candidates[active].slug);
+            } else if (e.key === "Escape" && open) {
+              e.preventDefault();
+              e.stopPropagation();
+              close();
+            }
+          }}
+        />
+        {(value || query) && (
+          <button
+            type="button"
+            className="combat-picker-clear"
+            aria-label={`Очистить: ${label}`}
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => choose("")}
+          >
+            ×
+          </button>
+        )}
+        <span className="combat-picker-chevron" aria-hidden="true">
+          ▾
+        </span>
+      </div>
+      {open && (
+        <div className="combat-picker-menu">
+          <div ref={list} id={`${id}-list`} role="listbox" aria-label={label}>
+            {candidates.map((c) => (
+              <button
+                type="button"
+                role="option"
+                id={`${id}-${c.slug}`}
+                key={c.slug}
+                aria-selected={c.slug === value}
+                className={
+                  c.slug === candidates[active]?.slug ? "is-active" : ""
+                }
+                tabIndex={-1}
+                onMouseDown={(e) => e.preventDefault()}
+                onPointerMove={() => setActive(candidates.indexOf(c))}
+                onClick={() => choose(c.slug)}
+              >
+                <Avatar character={c} />
+                <span className="combat-picker-name">
+                  <strong>{c.name}</strong>
+                  <small>{c.alterEgo || "Grunt"}</small>
+                </span>
+                <span className="combat-picker-threat">{c.threatLevel}</span>
+              </button>
+            ))}
+          </div>
+          {!candidates.length && <p role="status">Персонажи не найдены</p>}
+        </div>
+      )}
     </div>
   );
 });

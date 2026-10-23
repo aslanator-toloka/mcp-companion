@@ -250,5 +250,21 @@
 .combat-page input:not([type=checkbox]), .combat-page select { min-height:42px; border:1px solid #ccd8e7; border-radius:7px; padding:8px 10px; width:100%; background:white; }
 
 .combat-distance { max-width:160px; margin-bottom:16px; }
-.combat-character-picker { display:grid; gap:10px; margin-bottom:12px; }
+.combat-character-picker { position:relative; display:grid; gap:6px; margin-bottom:12px; min-width:0; }
+.combat-picker-input { position:relative; }
+.combat-picker-input input[role=combobox] { padding-right:64px; text-overflow:ellipsis; }
+.combat-picker-chevron { position:absolute; right:13px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
+.combat-picker-clear { position:absolute; right:28px; top:50%; transform:translateY(-50%); padding:0; width:30px; height:32px; min-height:32px; border:0; background:transparent; font-size:22px; color:var(--muted); }
+.combat-picker-menu { position:absolute; top:100%; left:0; right:0; z-index:15; margin-top:4px; background:white; border:1px solid var(--line,#d4e0ee); border-radius:10px; box-shadow:0 8px 24px #20344e26; overflow:hidden; }
+.combat-picker-menu [role=listbox] { position:relative; max-height:300px; overflow-y:auto; overscroll-behavior:contain; }
+.combat-picker-menu [role=option] { display:flex; align-items:center; gap:10px; width:100%; padding:9px 12px; border:0; border-radius:0; background:white; text-align:left; color:inherit; }
+.combat-picker-menu [role=option].is-active { background:#edf3ff; }
+.combat-picker-menu [aria-selected=true] { box-shadow:inset 3px 0 #255ade; }
+.combat-picker-menu .avatar { flex-shrink:0; width:36px; height:40px; }
+.combat-picker-name { flex:1; min-width:0; }
+.combat-picker-name strong,.combat-picker-name small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.combat-picker-name strong { font-size:14px; }
+.combat-picker-name small { font-size:12px; color:var(--muted); }
+.combat-picker-threat { color:var(--muted); font-size:13px; }
+.combat-picker-menu p { padding:12px; margin:0; color:var(--muted); }
 .combat-controls .field { min-width:0; }

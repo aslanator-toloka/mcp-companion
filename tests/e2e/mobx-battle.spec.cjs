@@ -186,8 +186,12 @@ test("native local battle: stable fighter DOM, conditions, red live stats, portr
     calculator.getByRole("checkbox", { name: "root", exact: true }),
   ).toBeChecked();
   await calculator
-    .getByLabel("Второй персонаж", { exact: true })
-    .selectOption("malekith-the-accursed");
+    .getByRole("combobox", { name: "Второй персонаж", exact: true })
+    .fill("Malekith");
+  await calculator
+    .getByRole("option")
+    .filter({ hasText: "Malekith The Accursed" })
+    .click();
   await expect(calculator.locator(".combat-direction")).toHaveCount(2, {
     timeout: 30000,
   });
