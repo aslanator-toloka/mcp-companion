@@ -105,7 +105,22 @@ export function CharacterDetail({
             <span className="eyebrow">02 / Карточка персонажа</span>
             <h2>{c.name}</h2>
             <p>{c.alterEgo}</p>
-            <RoleIcons slug={c.slug} />
+            <div className="detail-character-actions">
+              <RoleIcons slug={c.slug} />
+              <button
+                className="character-role calculator-open"
+                aria-label="Калькулятор"
+                title="Калькулятор"
+                onClick={() =>
+                  cardViews.showCalculator(c.slug, {
+                    form: catalog.selectedForm,
+                    side: catalog.selectedSide,
+                  })
+                }
+              >
+                <i className="fa-solid fa-calculator" aria-hidden="true" />
+              </button>
+            </div>
             <div className="tags">
               {c.affiliations.map((a) => (
                 <span className="tag" key={a.slug || a.name}>
@@ -115,18 +130,6 @@ export function CharacterDetail({
               ))}
               {c.isGrunt && <span className="tag">Grunt</span>}
             </div>
-            <button
-              className="calculator-open"
-              onClick={() =>
-                cardViews.showCalculator(c.slug, {
-                  form: catalog.selectedForm,
-                  side: catalog.selectedSide,
-                })
-              }
-            >
-              <i className="fa-solid fa-calculator" aria-hidden="true" />{" "}
-              Калькулятор
-            </button>
           </div>
           <div className="detail-collection-controls">
             <OwnedCheckbox

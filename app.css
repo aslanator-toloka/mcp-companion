@@ -195,7 +195,9 @@
 .character-row-main>.row-open,.selected-character-main>.selected-character{width:100%}
 .character-row-main>.character-roles{padding-left:76px}
 .selected-character-main>.character-roles{padding-left:64px}
-.detail-name>.character-roles{margin-top:8px}
+.detail-character-actions{display:flex;align-items:center;gap:5px;margin:8px 0 7px}
+.detail-character-actions>.character-roles{margin:0}
+.detail-character-actions>.calculator-open{flex-shrink:0}
 .roster-summary+.character-roles{margin:8px 0 14px}
 .squad-variants .character-roles{margin:7px 0 9px}
 .picker-result>.character-roles{max-width:135px;flex-shrink:0}
@@ -251,7 +253,6 @@
  .combat-outcome strong { font-size:18px; }
  .combat-rule-columns { grid-template-columns:1fr; gap:6px; }
 }
-.detail-name>.calculator-open { display:inline-flex; margin-top:10px; }
 .combat-dialog input:not([type=checkbox]), .combat-dialog select { min-height:42px; border:1px solid #ccd8e7; border-radius:7px; padding:8px 10px; width:100%; background:white; }
 .combat-dialog>.dialog-heading { position:sticky; top:-24px; z-index:2; margin:-24px -24px 0; padding:24px 24px 16px; background:white; border-bottom:1px solid #d4e0ee; }
 @media(max-width:650px) { .combat-dialog>.dialog-heading { top:-16px; margin:-16px -16px 0; padding:16px; } }
