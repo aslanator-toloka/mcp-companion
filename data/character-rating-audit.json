@@ -2,7 +2,7 @@
   "version": "player-adjusted-v1",
   "archivePeriod": [
     "2026-08-10",
-    "2026-10-21"
+    "2026-10-23"
   ],
   "parameters": {
     "version": "player-adjusted-v1",
@@ -20,7 +20,7 @@
       "variants": 33,
       "incomplete": 135,
       "nonIndividual": 16,
-      "provisional": 16
+      "provisional": 18
     },
     "iterations": 42,
     "residual": 3.847564491233325e-8

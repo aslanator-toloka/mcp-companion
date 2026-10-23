@@ -1,56 +1,11 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-10-21T21:40:14.371Z",
+  "fetchedAt": "2026-10-23T14:40:02.714Z",
   "characters": 243,
-  "addedCharacters": [
-    {
-      "slug": "red-hulk",
-      "name": "Red Hulk"
-    },
-    {
-      "slug": "sensational-she-hulk",
-      "name": "Sensational She-Hulk"
-    },
-    {
-      "slug": "the-leader",
-      "name": "The Leader"
-    }
-  ],
-  "updatedCharacterCards": [
-    "arnim-zola",
-    "baron-strucker",
-    "black-dwarf",
-    "black-panther",
-    "bob-agent-of-hydra",
-    "corvus-glaive",
-    "ebony-maw",
-    "killmonger",
-    "klaw",
-    "nimrod"
-  ],
+  "addedCharacters": [],
+  "updatedCharacterCards": [],
   "tactics": 525,
-  "addedTactics": [
-    {
-      "slug": "hostile-witness",
-      "name": "Hostile Witness"
-    },
-    {
-      "slug": "my-latest-invention",
-      "name": "My Latest Invention"
-    },
-    {
-      "slug": "shadow-brokers",
-      "name": "Shadow Brokers"
-    },
-    {
-      "slug": "vicious-cycle",
-      "name": "Vicious Cycle"
-    },
-    {
-      "slug": "war-of-the-strongest",
-      "name": "War of the Strongest"
-    }
-  ],
+  "addedTactics": [],
   "crises": 72,
   "boxSets": 198
 }

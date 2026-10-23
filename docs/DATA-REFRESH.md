@@ -2,7 +2,7 @@
 
 The canonical files live in this repository. Do not run the historical `mcp-companion/scripts` preparation jobs against `app/` and copy that archived app back over Pages.
 
-Jarvis snapshot refreshed on 2026-10-21: 243 characters, 525 tactic printings, 72 crisis printings and 198 box sets. The refresh includes Red Hulk, The Leader, Sensational She-Hulk, five new tactics and current affiliations including Intelligencia and Thunderbolts. These previews have the source release date 2026-11-13; the existing hide-unreleased filter uses that date. Existing character IDs, variant IDs, collection keys and save formats are retained.
+Jarvis snapshot checked again on 2026-10-23: 243 characters, 525 tactic printings, 72 crisis printings and 198 box sets. All character details, tactics, crises, boxes and presentation metadata match the previous snapshot. The 2026-10-21 refresh added Red Hulk, The Leader, Sensational She-Hulk, five tactics and current affiliations including Intelligencia and Thunderbolts. These previews have the source release date 2026-11-13; the existing hide-unreleased filter uses that date. Existing character IDs, variant IDs, collection keys and save formats are retained.
 
 `data/refresh-audit.json` records added characters/tactics and changed stat cards. The API capture was public English data from `https://www.jarvis-protocol.com/api/characters`, `team_tactics_cards`, `crisis_cards`, `box_sets` and `artworks`, plus each `/characters/<slug>` and `/box_sets/<code>` detail. Raw public responses remain outside the published repository. The capture directory contains `characters.json`, `tactics.json`, `crises.json`, `boxes.json`, `artworks.json`, `cards/`, `boxes/` and per-face `layouts/` captures of changed/new character cards. Local portrait images are downloaded to `assets/avatars/`.
 
@@ -15,13 +15,14 @@ python3 scripts/sync-rule-references.py
 
 The apply step checks that no existing identities or card printings disappear, keeps original gameplay JSON as structured data, derives attack summaries from both faces/forms, and refreshes visual metadata separately. Changed/new character cards require an explicit Jarvis layout capture; a guessed artwork position is not used. API objects unrelated to the app, account metadata and shop links are not published. Existing box cover assets and custom reskin settings remain intact.
 
-Longshanks is still all played results with submitted rosters from rated offline events, including losing records. The complete snapshot is through 2026-10-21: 244 events, 2470 performances and 2520 roster variants. New standings finalized 51 previously provisional performances. The source scrape completed without errors and preserved every existing roster ID and previously resolved character. Two previously unresolved appearances can now be attributed to Red Hulk and The Leader.
+Longshanks is still all played results with submitted rosters from rated offline events, including losing records. The complete snapshot is through 2026-10-23: 245 events, 2472 performances and 2522 roster variants. This refresh adds two provisional performances from October MCP 2, updates three existing provisional standings (including one changed loss count), and updates one player's public display name. Ongoing performances receive no final score. The source scrape completed without errors and preserved every existing roster ID and previously resolved character. There are 2454 scored performances and 18 provisional performances. The 2026-10-21 refresh previously finalized 51 performances and resolved two appearances of Red Hulk and The Leader.
 
 After collecting a complete snapshot with the existing external `longshanks_scraper/full_results.py` and `build_player_countries.py` jobs, build and validate it with the current repo and scoring core:
 
 ```
 python3 scripts/prepare-tournament-data.py --source /path/to/complete-snapshot
 node scripts/validate-tournament-data.cjs tournaments/data.js /path/to/complete-snapshot
+npm run audit:rating
 npm run build
 npm test
 npm run test:e2e

@@ -1,6 +1,6 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-10-21T21:40:14.371Z",
+  "fetchedAt": "2026-10-23T14:40:02.714Z",
   "tactics": [
     {
       "slug": "a-better-tomorrow",
@@ -18852,6 +18852,6 @@
   ],
   "challengerSource": {
     "url": "https://www.jarvis-protocol.com/api/crisis_cards",
-    "fetchedAt": "2026-10-21T21:40:14.371Z"
+    "fetchedAt": "2026-10-23T14:40:02.714Z"
   }
 }
