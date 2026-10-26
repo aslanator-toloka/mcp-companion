@@ -102,7 +102,22 @@ test("box cards and details show collection-relative unlocks, completing boxes a
   );
   await page.goBack();
   await expect(tile).toBeVisible();
+  const purchaseUrl = page.url();
   await tile.locator("[data-show-almost]").click();
+  await expect(page).toHaveURL(purchaseUrl);
+  await expect(tile.locator("[data-show-almost]")).toHaveAttribute(
+    "aria-expanded",
+    "true",
+  );
+  await expect(tile.locator('[data-complement-box="CP64"]')).toBeVisible();
+  await tile.locator("[data-show-almost]").click();
+  await expect(page).toHaveURL(purchaseUrl);
+  await expect(tile.locator("[data-show-almost]")).toHaveAttribute(
+    "aria-expanded",
+    "false",
+  );
+  await tile.locator("[data-show-almost]").click();
+  await tile.locator("[data-show-almost-rosters]").click();
   await expect(page).toHaveURL(/purchase-view=almost/);
   await expect(page.locator("#at-roster-list [data-roster]")).toHaveCount(1);
   await expect(page.locator("#at-roster-list [data-roster]")).toHaveAttribute(
@@ -115,7 +130,11 @@ test("box cards and details show collection-relative unlocks, completing boxes a
   await expect(page).toHaveURL(/purchase-view=almost/);
   await page.goBack();
   await expect(tile).toBeVisible();
-  await tile.locator(".box-opportunities summary").click();
+  if (
+    (await tile.locator("[data-show-almost]").getAttribute("aria-expanded")) !==
+    "true"
+  )
+    await tile.locator("[data-show-almost]").click();
   await expect(tile.locator('[data-complement-box="CP64"]')).toContainText(
     "Mordo & Ancient One",
   );

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { library, purchases, catalog, actions } from "./stores/index.js";
-import React, { memo, useState } from "react";
+import React, { memo, useId, useState } from "react";
 import { Avatar, CollectionStatus, Control, count } from "./common.jsx";
 const summary = (set) =>
   (set.characters || [])
@@ -68,6 +68,7 @@ const BoxOpportunities = observer(function BoxOpportunities({
   expanded = false,
 }) {
   const [open, setOpen] = useState(expanded);
+  const optionsId = useId();
   const stats = purchases.opportunities?.get(code);
   if (!stats) return null;
   const extras = [...stats.complements].sort(
@@ -100,21 +101,38 @@ const BoxOpportunities = observer(function BoxOpportunities({
         data-show-almost
         type="button"
         disabled={!stats.almost.length}
-        onClick={() => actions.showPurchaseRosters(code, "almost")}
+        aria-expanded={open && stats.almost.length > 0}
+        aria-controls={optionsId}
+        onClick={() => setOpen((value) => !value)}
       >
         Ещё одна коробка: <strong data-box-almost>{stats.almost.length}</strong>{" "}
         {count(stats.almost.length, "ростер", "ростера", "ростеров").replace(
           /^\d+ /,
           "",
         )}{" "}
-        →
+        {open ? "▴" : "▾"}
       </button>
       <small title="Завершённые выступления: 4+ победы / ≤1 поражение или 3+ победы / 0 поражений. Считаются опубликованные полные составы по персонажам; тактики и кризисы не проверяются. Уже доступные составы не включены.">
         По персонажам твоей коллекции · 4+/≤1 или 3+/0
       </small>
       {extras.length > 0 && (
-        <details open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
+        <details
+          id={optionsId}
+          open={open}
+          onToggle={(e) => setOpen(e.currentTarget.open)}
+        >
           <summary>Варианты последней коробки · {extras.length}</summary>
+          {open && (
+            <button
+              type="button"
+              className="box-opportunity-link"
+              data-show-almost-rosters
+              onClick={() => actions.showPurchaseRosters(code, "almost")}
+            >
+              Посмотреть все{" "}
+              {count(stats.almost.length, "ростер", "ростера", "ростеров")} →
+            </button>
+          )}
           {open && (
             <ul>
               {extras.map(([extra, ids]) => {
