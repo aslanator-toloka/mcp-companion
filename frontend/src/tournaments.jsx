@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import { Control, number, count } from "./common.jsx";
 import { observer } from "mobx-react-lite";
-import { tournaments as t, actions } from "./stores/index.js";
+import { tournaments as t, purchases, actions } from "./stores/index.js";
 import { RatingValue } from "./character-rating.jsx";
 const mean = (value) => (value === null ? "—" : number(value));
 const initials = (name) =>
@@ -406,6 +406,7 @@ export function TournamentRosterBody({
           Открыть в моём билдере →
         </button>
       </div>
+      <RosterBoxNeeds roster={r} />
       <div className="at-detail-caption">
         <span>
           {r.location} · Лист #{r.listId}
@@ -545,6 +546,102 @@ export function TournamentRosterBody({
     </>
   );
 }
+const RosterBoxNeeds = observer(function RosterBoxNeeds({ roster }) {
+  const needs = purchases.rosterNeeds(roster);
+  if (!needs) return null;
+  const openBox = (box) => (
+    <button
+      key={box.code}
+      type="button"
+      data-needed-box={box.code}
+      onClick={(e) => {
+        e.stopPropagation();
+        actions.openBoxSet(box.code);
+      }}
+    >
+      {box.code} · {box.name} ↗
+    </button>
+  );
+  const plan = (value, i) => (
+    <div className="at-box-plan" key={value.boxes.map((b) => b.code).join("|")}>
+      {needs.plans.length > 1 && <strong>Вариант {i + 1}</strong>}
+      <ul>
+        {value.boxes.map((box) => (
+          <li key={box.code}>
+            {openBox(box)}
+            <small>Нужны: {box.needed.map((c) => c.name).join(" · ")}</small>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+  return (
+    <section
+      className="at-roster-box-needs"
+      data-roster-box-needs={roster.id}
+      aria-label="Коробки для этого ростера"
+    >
+      <h4>Каких коробок не хватает</h4>
+      {!needs.complete ? (
+        <p>
+          Состав распознан не полностью — полный список покупок пока определить
+          нельзя.
+        </p>
+      ) : needs.minimum === 0 ? (
+        <p className="at-ready">
+          Все персонажи уже есть — покупать коробки не нужно.
+        </p>
+      ) : (
+        <>
+          <p>
+            Не хватает:{" "}
+            {needs.missing
+              .map((c) => c.name + (c.count > 1 ? ` ×${c.count}` : ""))
+              .join(" · ")}
+          </p>
+          {needs.minimum !== null ? (
+            <>
+              <p>
+                <b>
+                  Минимум{" "}
+                  {count(needs.minimum, "коробка", "коробки", "коробок")}
+                </b>{" "}
+                по текущему каталогу
+              </p>
+              {plan(needs.plans[0], 0)}
+              {needs.plans.length > 1 && (
+                <details>
+                  <summary>Другие минимальные варианты</summary>
+                  {needs.plans.slice(1).map((p, i) => plan(p, i + 1))}
+                </details>
+              )}
+            </>
+          ) : (
+            <>
+              <p>Варианты коробок по недостающим персонажам:</p>
+              <ul>
+                {needs.choices.map((c) => (
+                  <li key={c.id}>
+                    <b>{c.name}</b>
+                    {c.boxes.length ? (
+                      c.boxes.map(openBox)
+                    ) : (
+                      <small>В каталоге нет набора с этим персонажем.</small>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <small>
+            Учитываются персонажи из твоей коллекции. Карты тактики и кризисы не
+            проверяются.
+          </small>
+        </>
+      )}
+    </section>
+  );
+});
 function ScoreContext({ affiliations, playerName, suffix = "все результаты" }) {
   return (
     <p className="at-score-context">

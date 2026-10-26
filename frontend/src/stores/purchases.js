@@ -43,6 +43,12 @@ export class PurchaseStore {
       new Set([...this.library.owned.keys(), ...this.library.boxOwned.keys()]),
     );
   }
+  rosterNeeds(roster) {
+    return this.opportunityIndex?.planRoster(
+      roster,
+      new Set([...this.library.owned.keys(), ...this.library.boxOwned.keys()]),
+    );
+  }
   select(code) {
     this.selected = code;
   }

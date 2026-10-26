@@ -1,5 +1,6 @@
 // A purchase is useful only when it adds missing models to a complete,
 // finished tournament roster. Variants remain separate published rosters.
+import { planRosterPurchases } from "./roster-purchases.js";
 export function createPurchaseOpportunities(archive, boxes, availability) {
   const characters = new Map((archive?.characters || []).map((c) => [c.id, c]));
   const inventories = new Map(),
@@ -37,6 +38,16 @@ export function createPurchaseOpportunities(archive, boxes, availability) {
   };
   return {
     eligible: rosters.length,
+    planRoster(roster, owned) {
+      return planRosterPurchases(
+        roster,
+        characters,
+        boxes,
+        inventories,
+        owned,
+        availability,
+      );
+    },
     evaluate(owned) {
       const result = new Map(
         boxes.map((b) => [

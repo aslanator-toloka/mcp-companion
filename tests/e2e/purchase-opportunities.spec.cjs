@@ -189,5 +189,38 @@ test("box cards and details show collection-relative unlocks, completing boxes a
   await detail.locator("[data-box-close]").click();
   await page.setViewportSize({ width: 1280, height: 900 });
   await tile.screenshot({ path: "previews/box-opportunities.png" });
+  await page.goto(origin + "#screen=tournaments&character=silk");
+  const tournamentRoster = page.locator(
+    '#at-roster-list [data-roster="unlock"]',
+  );
+  await tournamentRoster.locator("summary").click();
+  const needs = tournamentRoster.locator('[data-roster-box-needs="unlock"]');
+  await expect(needs).toContainText("Минимум 1 коробка");
+  await expect(needs).toContainText("Silk");
+  await expect(needs).toContainText("Spider-Man Noir");
+  await needs.scrollIntoViewIfNeeded();
+  await needs.screenshot({ path: "previews/roster-missing-boxes.png" });
+  const neededBox = needs.locator("[data-needed-box]").first();
+  const neededCode = await neededBox.getAttribute("data-needed-box");
+  await neededBox.click();
+  await expect(page).toHaveURL(new RegExp("box=" + neededCode));
+  await detail.locator(`[data-purchased-code="${neededCode}"]`).click();
+  await expect(needs).toContainText("Все персонажи уже есть");
+  await detail.locator(`[data-purchased-code="${neededCode}"]`).click();
+  await expect(needs).toContainText("Минимум 1 коробка");
+  await page.goBack();
+  await expect(tournamentRoster).toHaveAttribute("open", "");
+  const lowerResult = page.locator('#at-roster-list [data-roster="excluded"]');
+  await lowerResult.locator("summary").click();
+  await expect(lowerResult.locator("[data-roster-box-needs]")).toContainText(
+    "Минимум 1 коробка",
+  );
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  ).toBe(true);
+  await needs.screenshot({ path: "previews/roster-missing-boxes-mobile.png" });
   expect(errors).toEqual([]);
 });
