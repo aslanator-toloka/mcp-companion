@@ -114,7 +114,7 @@ const BoxOpportunities = observer(function BoxOpportunities({
       </small>
       {extras.length > 0 && (
         <details open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
-          <summary>Какая ещё коробка · {extras.length}</summary>
+          <summary>Варианты последней коробки · {extras.length}</summary>
           {open && (
             <ul>
               {extras.map(([extra, ids]) => {
