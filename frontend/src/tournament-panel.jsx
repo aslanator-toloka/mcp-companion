@@ -575,7 +575,9 @@ const ArchiveSection4 = observer(function ArchiveSection4() {
         </aside>
         <section
           className={"at-results-panel"}
-          aria-label={"Ростеры выбранного персонажа"}
+          aria-label={
+            t.purchaseBox ? "Ростеры покупки" : "Ростеры выбранного персонажа"
+          }
         >
           <div id={"at-character-overview"} className={"at-character-overview"}>
             {t.overview && <TournamentOverview {...t.overview} />}

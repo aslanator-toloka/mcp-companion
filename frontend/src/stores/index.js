@@ -15,7 +15,7 @@ export const catalog = new CatalogStore(library);
 export const purchases = new PurchaseStore(library);
 export const ui = new UIStore(window.localStorage);
 export const rosters = new RosterStore(library, catalog, ui);
-export const tournaments = new TournamentStore(library, ui);
+export const tournaments = new TournamentStore(library, ui, purchases);
 export const cardViews = new CardStore(window.localStorage);
 export const battle = new BattleStore(
   library,

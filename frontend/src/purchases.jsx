@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { library, purchases, catalog, actions } from "./stores/index.js";
 import React, { memo, useState } from "react";
-import { Avatar, CollectionStatus, Control } from "./common.jsx";
+import { Avatar, CollectionStatus, Control, count } from "./common.jsx";
 const summary = (set) =>
   (set.characters || [])
     .map((c) => c.name + (c.amount > 1 ? " ×" + c.amount : ""))
@@ -63,6 +63,99 @@ export const BoxActions = observer(function BoxActions({ set }) {
     </div>
   );
 });
+const BoxOpportunities = observer(function BoxOpportunities({
+  code,
+  expanded = false,
+}) {
+  const [open, setOpen] = useState(expanded);
+  const stats = purchases.opportunities?.get(code);
+  if (!stats) return null;
+  const extras = [...stats.complements].sort(
+    (a, b) =>
+      b[1].length - a[1].length ||
+      purchases.box(a[0]).name.localeCompare(purchases.box(b[0]).name),
+  );
+  return (
+    <section
+      className="box-opportunities"
+      data-box-opportunities={code}
+      aria-label="Какие ростеры откроет покупка"
+    >
+      <button
+        className="box-opportunity-link"
+        data-show-unlocks
+        type="button"
+        disabled={!stats.unlocked.length}
+        onClick={() => actions.showPurchaseRosters(code)}
+      >
+        Откроет: <strong data-box-unlocks>{stats.unlocked.length}</strong>{" "}
+        {count(stats.unlocked.length, "ростер", "ростера", "ростеров").replace(
+          /^\d+ /,
+          "",
+        )}{" "}
+        →
+      </button>
+      <button
+        className="box-opportunity-link"
+        data-show-almost
+        type="button"
+        disabled={!stats.almost.length}
+        onClick={() => actions.showPurchaseRosters(code, "almost")}
+      >
+        Ещё одна коробка: <strong data-box-almost>{stats.almost.length}</strong>{" "}
+        {count(stats.almost.length, "ростер", "ростера", "ростеров").replace(
+          /^\d+ /,
+          "",
+        )}{" "}
+        →
+      </button>
+      <small title="Завершённые выступления: 4+ победы / ≤1 поражение или 3+ победы / 0 поражений. Считаются опубликованные полные составы по персонажам; тактики и кризисы не проверяются. Уже доступные составы не включены.">
+        По персонажам твоей коллекции · 4+/≤1 или 3+/0
+      </small>
+      {extras.length > 0 && (
+        <details open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
+          <summary>Какая ещё коробка · {extras.length}</summary>
+          {open && (
+            <ul>
+              {extras.map(([extra, ids]) => {
+                const box = purchases.box(extra);
+                return (
+                  <li key={extra}>
+                    <button
+                      type="button"
+                      data-complement-box={extra}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        actions.openBoxSet(extra);
+                      }}
+                    >
+                      {box.code} · {box.name}
+                    </button>
+                    <button
+                      type="button"
+                      data-show-complement={extra}
+                      onClick={() =>
+                        actions.showPurchaseRosters(code, "almost", extra)
+                      }
+                    >
+                      {count(ids.length, "ростер", "ростера", "ростеров")} →
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+          {open && (
+            <small>
+              Один ростер может подходить к нескольким коробкам; в общем числе
+              он учтён один раз.
+            </small>
+          )}
+        </details>
+      )}
+    </section>
+  );
+});
 export const BoxTile = memo(function BoxTile({
   set,
   planned,
@@ -96,6 +189,7 @@ export const BoxTile = memo(function BoxTile({
           ↗
         </span>
       </button>
+      <BoxOpportunities code={set.code} />
       <BoxActions set={set} planned={planned} bought={bought} />
     </article>
   );
@@ -323,6 +417,7 @@ export function BoxDetail({ set, planned, bought, members }) {
           )}
         </section>
       </div>
+      <BoxOpportunities key={set.code} code={set.code} expanded />
       <p className="purchase-data-note">
         Состав набора — из каталога Jarvis. «Куплен» отмечает всех персонажей
         набора в коллекции.

@@ -236,6 +236,23 @@ ui.configure({
     )
       purchases.select(code);
   },
+  showPurchaseRosters: (code, view = "unlocked", extra = "") => {
+    if (!purchases.byCode.has(code)) return;
+    rosters.requestLeave(() => {
+      route("tournaments");
+      tournaments.applyRoute(
+        new URLSearchParams({
+          "purchase-box": code,
+          "purchase-view": view,
+          "purchase-extra": extra,
+        }),
+      );
+      tournaments.clearAffiliations();
+      tournaments.clearCountries();
+      tournaments.setField("resultQuery", "");
+      tournaments.setField("characterQuery", "");
+    });
+  },
   closeBoxSet: () => purchases.select(null),
   retryBoxes: async () => {
     await loadBoxes();
@@ -339,6 +356,7 @@ export async function initialize() {
       ].sort((a, b) => a.localeCompare(b)),
     });
     tournaments.configure(archive, AtlasCore, CollectionCore);
+    purchases.configureArchive(archive, CollectionCore.availability);
     cardViews.configure({
       layout: window.MCP_CARD_LAYOUT,
       art: window.MCP_CARD_ART,

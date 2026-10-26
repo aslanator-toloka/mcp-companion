@@ -11,9 +11,11 @@ const write = (name, value) =>
   fs.writeFileSync(name, JSON.stringify(value, null, 2) + "\n");
 const previous = JSON.parse(fs.readFileSync("data/catalog.json"));
 const oldCharacters = new Map(previous.characters.map((c) => [c.slug, c]));
-const rawCharacters = read("characters.json").filter(
-  (c) => !c.isAlternateSculpt,
+const capturedCharacters = read("characters.json");
+const mainSculpts = new Map(
+  capturedCharacters.map((c) => [c.slug, c.mainCharacterSlug || c.slug]),
 );
+const rawCharacters = capturedCharacters.filter((c) => !c.isAlternateSculpt);
 const latest = new Map(rawCharacters.map((c) => [c.slug, c]));
 for (const slug of oldCharacters.keys())
   if (!latest.has(slug)) throw Error("Missing existing character: " + slug);
@@ -179,7 +181,11 @@ const sets = read("boxes.json")
       characters: (detail.content || [])
         .filter((c) => c.itemType === "Character")
         .map((c) => ({
-          slug: c.itemSlug,
+          slug: mainSculpts.get(c.itemSlug) || c.itemSlug,
+          ...(mainSculpts.get(c.itemSlug) &&
+          mainSculpts.get(c.itemSlug) !== c.itemSlug
+            ? { sourceSlug: c.itemSlug }
+            : {}),
           name: c.name,
           amount: c.amount ?? 1,
         })),

@@ -2312,9 +2312,10 @@
       "releaseDate": "2026-03-28",
       "characters": [
         {
-          "slug": "mephisto-convention-exclusive",
+          "slug": "mephisto-lord-of-temptation",
           "name": "Mephisto, Lord of Temptation",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "mephisto-convention-exclusive"
         }
       ],
       "image": "assets/box-sets/ck51.png",
@@ -2629,29 +2630,34 @@
       "releaseDate": "2026-09-04",
       "characters": [
         {
-          "slug": "black-cat-night-of-the-goblin",
+          "slug": "black-cat",
           "name": "Black Cat",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "black-cat-night-of-the-goblin"
         },
         {
-          "slug": "ghost-spider-night-of-the-goblin",
+          "slug": "ghost-spider",
           "name": "Ghost-Spider",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "ghost-spider-night-of-the-goblin"
         },
         {
-          "slug": "green-goblin-night-of-the-goblin",
+          "slug": "green-goblin",
           "name": "Green Goblin",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "green-goblin-night-of-the-goblin"
         },
         {
-          "slug": "spectacular-spider-man-night-of-the-goblin",
+          "slug": "spectacular-spider-man",
           "name": "Spectacular Spider-Man",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "spectacular-spider-man-night-of-the-goblin"
         },
         {
-          "slug": "spider-man-miles-morales-night-of-the-goblin",
+          "slug": "spider-man-miles-morales",
           "name": "Spider-Man",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "spider-man-miles-morales-night-of-the-goblin"
         }
       ],
       "image": "assets/box-sets/mca01.png",
@@ -2951,14 +2957,16 @@
       "releaseDate": "2021-12-10",
       "characters": [
         {
-          "slug": "rival-panel-doctor-octopus",
+          "slug": "doctor-octopus",
           "name": "Doctor Octopus",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "rival-panel-doctor-octopus"
         },
         {
-          "slug": "rival-panel-spider-man",
+          "slug": "spider-man",
           "name": "Spider-Man",
-          "amount": 1
+          "amount": 1,
+          "sourceSlug": "rival-panel-spider-man"
         }
       ],
       "image": "assets/box-sets/cpe01.png",

@@ -155,6 +155,11 @@ export function createRoutes(s) {
       }
     }
     if (ui.screen === "tournaments") {
+      if (t.purchaseBox) {
+        put("purchase-box", t.purchaseBox);
+        put("purchase-view", t.purchaseMode, "unlocked");
+        put("purchase-extra", t.purchaseExtra);
+      }
       if (t.collectionMode) put("collection", "ready");
       else if (!t.playerMode) put("character", t.selected);
       put("player", t.selectedPlayer);

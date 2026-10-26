@@ -33,6 +33,9 @@ export class TournamentStore {
   geography = null;
   playerLimit = 60;
   dialog = null;
+  purchaseBox = "";
+  purchaseMode = "unlocked";
+  purchaseExtra = "";
   rating = null;
   ratingForKey = null;
   ratingStatus = "idle";
@@ -40,9 +43,10 @@ export class TournamentStore {
   ratingRequest = 0;
   ratingCache = new Map();
   ratingClient = createCharacterRatingClient();
-  constructor(library, ui) {
+  constructor(library, ui, purchaseSource = null) {
     this.library = library;
     this.ui = ui;
+    this.purchaseSource = purchaseSource;
     makeAutoObservable(
       this,
       {
@@ -57,6 +61,7 @@ export class TournamentStore {
         ratingRequest: false,
         library: false,
         ui: false,
+        purchaseSource: false,
       },
       { autoBind: true },
     );
@@ -229,18 +234,47 @@ export class TournamentStore {
     if (!this.data) return [];
     const rows = this.core.rosterList(
       this.scopedIndex,
-      this.collectionMode || this.playerMode ? null : this.selected,
+      this.purchaseBox || this.collectionMode || this.playerMode
+        ? null
+        : this.selected,
       this.resultQuery,
       this.resultSort,
       [...this.affiliations],
       this.selectedPlayer,
     );
-    return this.collectionMode
-      ? rows.filter((r) => this.availability(r).ready)
-      : rows;
+    const ids = this.purchaseRosterIds;
+    return rows.filter(
+      (r) =>
+        (!ids || ids.has(r.id)) &&
+        (!this.collectionMode || this.availability(r).ready),
+    );
+  }
+  get purchaseRosterIds() {
+    if (!this.purchaseBox) return null;
+    const stats = this.purchaseSource?.opportunities?.get(this.purchaseBox);
+    return new Set(
+      this.purchaseMode === "almost"
+        ? (this.purchaseExtra
+            ? stats?.complements.get(this.purchaseExtra)
+            : stats?.almost) || []
+        : stats?.unlocked || [],
+    );
+  }
+  clearPurchaseFilter() {
+    this.purchaseBox = "";
+    this.purchaseExtra = "";
+    this.purchaseMode = "unlocked";
+    this.selected = this.core.characterList(this.data)[0]?.id || null;
+    this.limit = 20;
   }
   get total() {
     if (!this.data) return 0;
+    if (this.purchaseBox)
+      return this.core.scopeRows(
+        this.countryRows.filter((r) => this.purchaseRosterIds.has(r.id)),
+        [],
+        this.selectedPlayer,
+      ).length;
     const rows = this.collectionMode
       ? this.readyRows
       : this.playerMode
@@ -250,6 +284,19 @@ export class TournamentStore {
   }
   get overview() {
     if (!this.data) return null;
+    if (this.purchaseBox)
+      return {
+        mode: "purchase",
+        purchase: {
+          name: this.purchaseSource.box(this.purchaseBox).name,
+          code: this.purchaseBox,
+          extra: this.purchaseExtra
+            ? this.purchaseSource.box(this.purchaseExtra).name
+            : "",
+          kind: this.purchaseMode,
+          count: this.rosterRows.length,
+        },
+      };
     const affiliations = [...this.affiliations],
       common = {
         affiliations,
@@ -393,6 +440,7 @@ export class TournamentStore {
     this.limit += 20;
   }
   choosePlayer(id, allRosters = false) {
+    if (this.purchaseBox) this.clearPurchaseFilter();
     this.selectedPlayer =
       id !== null && this.playersById.has(String(id)) ? String(id) : null;
     if (allRosters) this.collectionMode = false;
@@ -402,6 +450,7 @@ export class TournamentStore {
   }
   chooseCharacter(id, clearSearch = false) {
     if (!this.index.characters.has(id)) return;
+    if (this.purchaseBox) this.clearPurchaseFilter();
     this.selected = id;
     this.limit = 20;
     this.resultQuery = "";
@@ -410,6 +459,7 @@ export class TournamentStore {
     if (clearSearch) this.characterQuery = "";
   }
   chooseCollection() {
+    if (this.purchaseBox) this.clearPurchaseFilter();
     this.collectionMode = true;
     this.playerMode = false;
     this.limit = 20;
@@ -417,6 +467,22 @@ export class TournamentStore {
   }
   applyRoute(params) {
     if (!this.data) return;
+    this.purchaseBox = this.purchaseSource?.byCode.has(
+      params.get("purchase-box"),
+    )
+      ? params.get("purchase-box")
+      : "";
+    this.purchaseMode =
+      this.purchaseBox && params.get("purchase-view") === "almost"
+        ? "almost"
+        : "unlocked";
+    this.purchaseExtra =
+      this.purchaseBox &&
+      this.purchaseMode === "almost" &&
+      this.purchaseSource.byCode.has(params.get("purchase-extra")) &&
+      params.get("purchase-extra") !== this.purchaseBox
+        ? params.get("purchase-extra")
+        : "";
     this.selectedPlayer = this.playersById.has(params.get("player"))
       ? params.get("player")
       : null;
@@ -426,9 +492,11 @@ export class TournamentStore {
       !this.collectionMode &&
       !params.has("character");
     const id = params.get("character");
-    this.selected = this.index.characters.has(id)
-      ? id
-      : this.core.characterList(this.data)[0].id;
+    this.selected = this.purchaseBox
+      ? null
+      : this.index.characters.has(id)
+        ? id
+        : this.core.characterList(this.data)[0].id;
     this.limit = 20;
   }
   async share() {

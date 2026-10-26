@@ -597,7 +597,35 @@ export function TournamentOverview({
   ownership,
   peers,
   available,
+  purchase,
 }) {
+  if (mode === "purchase")
+    return (
+      <div className="at-purchase-filter" data-purchase-filter>
+        <div className="at-version-label">РОСТЕРЫ ПОКУПКИ · 4+/≤1 ИЛИ 3+/0</div>
+        <h2>
+          {purchase.code} · {purchase.name}
+        </h2>
+        <p>
+          {purchase.kind === "unlocked"
+            ? "Покупка откроет эти ростеры по персонажам."
+            : purchase.extra
+              ? `Для этих ростеров после покупки потребуется ещё ${purchase.extra}.`
+              : "После покупки для каждого из этих ростеров останется докупить одну коробку."}
+        </p>
+        <p>
+          Найдено: <strong>{purchase.count}</strong>. Расчёт относительно
+          текущей коллекции.
+        </p>
+        <button
+          type="button"
+          className="at-co-chip"
+          onClick={() => t.clearPurchaseFilter()}
+        >
+          Снять фильтр покупки
+        </button>
+      </div>
+    );
   if (mode === "collection")
     return (
       <>

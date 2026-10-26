@@ -1,5 +1,6 @@
 import { makeAutoObservable, observable, observableRef } from "mobx";
 import { words } from "./catalog.js";
+import { createPurchaseOpportunities } from "../purchase-opportunities.js";
 export class PurchaseStore {
   rows = [];
   byCode = new Map();
@@ -7,11 +8,19 @@ export class PurchaseStore {
   selected = null;
   tab = "wishlist";
   query = "";
+  archive = null;
+  availability = null;
   constructor(library) {
     this.library = library;
     makeAutoObservable(
       this,
-      { rows: observableRef, byCode: false, library: false },
+      {
+        rows: observableRef,
+        archive: observableRef,
+        availability: false,
+        byCode: false,
+        library: false,
+      },
       { autoBind: true },
     );
   }
@@ -19,6 +28,20 @@ export class PurchaseStore {
     this.rows = data.sets;
     this.byCode = new Map(this.rows.map((s) => [s.code, s]));
     this.error = error;
+  }
+  configureArchive(data, availability) {
+    this.availability = availability;
+    this.archive = data;
+  }
+  get opportunityIndex() {
+    return this.archive && this.availability
+      ? createPurchaseOpportunities(this.archive, this.rows, this.availability)
+      : null;
+  }
+  get opportunities() {
+    return this.opportunityIndex?.evaluate(
+      new Set([...this.library.owned.keys(), ...this.library.boxOwned.keys()]),
+    );
   }
   select(code) {
     this.selected = code;
