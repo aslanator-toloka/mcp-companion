@@ -119,6 +119,9 @@ const BoxOpportunities = observer(function BoxOpportunities({
             <ul>
               {extras.map(([extra, ids]) => {
                 const box = purchases.box(extra);
+                const missing = [
+                  ...stats.missingByComplement.get(extra).values(),
+                ].sort((a, b) => a.name.localeCompare(b.name));
                 return (
                   <li key={extra}>
                     <button
@@ -131,6 +134,18 @@ const BoxOpportunities = observer(function BoxOpportunities({
                     >
                       {box.code} · {box.name}
                     </button>
+                    <small data-missing-from-box={extra}>
+                      Не хватает:{" "}
+                      {missing.map((character, i) => (
+                        <React.Fragment key={character.id}>
+                          {i > 0 ? " · " : ""}
+                          {character.name}
+                          {ids.length > 1
+                            ? ` (${count(character.rosters.length, "ростер", "ростера", "ростеров")})`
+                            : ""}
+                        </React.Fragment>
+                      ))}
+                    </small>
                     <button
                       type="button"
                       data-show-complement={extra}

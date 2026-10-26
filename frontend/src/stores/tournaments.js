@@ -294,6 +294,16 @@ export class TournamentStore {
             ? this.purchaseSource.box(this.purchaseExtra).name
             : "",
           kind: this.purchaseMode,
+          missing: this.purchaseExtra
+            ? [
+                ...(this.purchaseSource.opportunities
+                  .get(this.purchaseBox)
+                  ?.missingByComplement.get(this.purchaseExtra)
+                  ?.values() || []),
+              ]
+                .map((c) => c.name)
+                .sort((a, b) => a.localeCompare(b))
+            : [],
           count: this.rosterRows.length,
         },
       };

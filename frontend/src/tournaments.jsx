@@ -617,6 +617,9 @@ export function TournamentOverview({
           Найдено: <strong>{purchase.count}</strong>. Расчёт относительно
           текущей коллекции.
         </p>
+        {purchase.missing.length > 0 && (
+          <p>Не хватает: {purchase.missing.join(" · ")}</p>
+        )}
         <button
           type="button"
           className="at-co-chip"

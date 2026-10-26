@@ -119,11 +119,20 @@ test("box cards and details show collection-relative unlocks, completing boxes a
   await expect(tile.locator('[data-complement-box="CP64"]')).toContainText(
     "Mordo & Ancient One",
   );
+  await expect(tile.locator('[data-missing-from-box="CP64"]')).toHaveText(
+    "Не хватает: Ancient One",
+  );
+  await expect(tile.locator('[data-missing-from-box="CP221"]')).toHaveText(
+    "Не хватает: Ancient One",
+  );
   await tile.screenshot({ path: "previews/box-opportunities-complements.png" });
   await tile.locator('[data-show-complement="CP64"]').click();
   await expect(page).toHaveURL(/purchase-extra=CP64/);
   await expect(page.locator("[data-purchase-filter]")).toContainText(
     "Mordo & Ancient One",
+  );
+  await expect(page.locator("[data-purchase-filter]")).toContainText(
+    "Не хватает: Ancient One",
   );
   await expect(page.locator("#at-roster-list [data-roster]")).toHaveAttribute(
     "data-roster",

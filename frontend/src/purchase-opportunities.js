@@ -45,6 +45,7 @@ export function createPurchaseOpportunities(archive, boxes, availability) {
             unlocked: [],
             almost: [],
             complements: new Map(),
+            missingByComplement: new Map(),
           },
         ]),
       );
@@ -79,6 +80,16 @@ export function createPurchaseOpportunities(archive, boxes, availability) {
             if (!availability(roster, characters, combined).ready) continue;
             if (!stats.complements.has(extra)) stats.complements.set(extra, []);
             stats.complements.get(extra).push(roster.id);
+            if (!stats.missingByComplement.has(extra))
+              stats.missingByComplement.set(extra, new Map());
+            const missing = stats.missingByComplement.get(extra);
+            for (const [id, item] of new Map(
+              after.missing.map((item) => [item.id, item]),
+            )) {
+              if (!missing.has(id))
+                missing.set(id, { id, name: item.name, rosters: [] });
+              missing.get(id).rosters.push(roster.id);
+            }
             almost = true;
           }
           if (almost) stats.almost.push(roster.id);

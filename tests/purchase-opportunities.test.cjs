@@ -48,6 +48,14 @@ test("counts only newly unlocked or useful two-box completions; OR thresholds an
   assert.deepEqual(stats.complements.get("CD"), ["two", "three", "four"]);
   assert.deepEqual(stats.complements.get("C"), ["two"]);
   assert.deepEqual(stats.complements.get("D"), ["three"]);
+  assert.deepEqual(
+    [...stats.missingByComplement.get("CD").values()],
+    [
+      { id: "c", name: "c", rosters: ["two", "four"] },
+      { id: "d", name: "d", rosters: ["three", "four"] },
+    ],
+  );
+  assert.deepEqual([...stats.missingByComplement.get("C").keys()], ["c"]);
   assert(!stats.complements.has("A"));
   assert.equal(index.evaluate(new Set(["h"])).get("EMPTY").almost.length, 0);
 });
@@ -105,6 +113,10 @@ test("multiple inventory alternatives preserve physical copy constraints for dup
     new Set(["a", "s2"]),
   );
   assert.deepEqual(complete.get("ONE").unlocked, ["twins"]);
+  assert.deepEqual(
+    result.get("ONE").missingByComplement.get("TWO").get("sentinel").rosters,
+    ["twins"],
+  );
 });
 test("MobX results react to manual ownership and box purchases, but not wishlist or search changes", async () => {
   const { LibraryStore } = await import("../frontend/src/stores/library.js");
