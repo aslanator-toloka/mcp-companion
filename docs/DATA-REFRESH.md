@@ -47,3 +47,9 @@ Role icons use the vendored Font Awesome Free 7.3.1 CSS and solid WOFF2 in
 `assets/fontawesome/7.3.1/`, with the upstream license and SHA-256 manifest. No CDN
 or Font Awesome runtime JavaScript is used. If upgrading the library, validate all
 ten icon names and update the pinned paths and manifest together.
+
+### Scheduled execution
+
+The checked-in runner is `tools/data-refresh/refresh.py`; the local Temporal worker
+runs its stages daily at 10:00 Europe/Amsterdam and waits for review before
+publication. See [Temporal operation and recovery](TEMPORAL-REFRESH.md).
