@@ -4,7 +4,7 @@ import { catalog, library, ui, actions } from "./stores/index.js";
 import { MODEL_STAGES } from "./model-progress.js";
 import { count } from "./common.jsx";
 import { CatalogList } from "./catalog.jsx";
-import { CatalogFilters } from "./catalog-filters.jsx";
+import { CatalogFilters, CatalogActiveFilters } from "./catalog-filters.jsx";
 import { ConnectedPurchases, ConnectedBoxDetail } from "./purchases.jsx";
 import { StaticShell } from "./shell-static.jsx";
 export const Navigation = observer(function Navigation() {
@@ -26,6 +26,7 @@ export const Navigation = observer(function Navigation() {
           key={id}
           disabled={!ui.ready}
           className={"nav-item" + (selected === id ? " selected" : "")}
+          aria-current={selected === id ? "page" : undefined}
           data-action={id}
           onClick={(event) => {
             event.stopPropagation();
@@ -206,6 +207,7 @@ export const CatalogPanel = observer(function CatalogPanel() {
           </button>
         </div>
         <CatalogFilters />
+        <CatalogActiveFilters />
       </div>
       <div className="list-heading">
         <span id="result" role="status" aria-live="polite">

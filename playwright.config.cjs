@@ -6,7 +6,7 @@ module.exports = defineConfig({
   timeout: 45000,
   expect: { timeout: 7000 },
   use: {
-    browserName: "chromium",
+    browserName: process.env.MCP_TEST_BROWSER || "chromium",
     viewport: { width: 1280, height: 900 },
     serviceWorkers: "block",
     trace: "retain-on-failure",

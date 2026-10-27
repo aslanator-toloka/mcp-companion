@@ -36,6 +36,9 @@ const panel = (page) =>
     exact: true,
   });
 async function ready(page) {
+  const disclosure = page.locator(".at-rating-disclosure");
+  if (!(await disclosure.evaluate((el) => el.open)))
+    await disclosure.locator("summary").first().click();
   await expect(panel(page)).toHaveAttribute("aria-busy", "false");
   await expect
     .poll(() => page.evaluate(() => MCPStores.tournaments.ratingStatus))

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { tournaments as t, ui, actions } from "./stores/index.js";
 import {
@@ -47,9 +47,7 @@ const ArchiveSection0 = observer(function ArchiveSection0() {
         <p className={"at-eyebrow"}>{"ТУРНИРНЫЙ АРХИВ / 2026"}</p>
         <h1>{"Турнирные ростеры"}</h1>
         <p className={"at-intro-copy"}>
-          {
-            "Выбери персонажа или игрока и посмотри турнирные составы со всеми результатами — от побед до поражений."
-          }
+          {"Составы и все результаты по персонажам, игрокам и аффилиациям."}
         </p>
       </div>
       <div className={"at-snapshot-counts"} aria-label={"Состав архива"}>
@@ -264,10 +262,13 @@ const TournamentCountries = observer(function TournamentCountries() {
       >
         Сбросить страны
       </button>
-      <p className="at-country-description">
-        Оба фильтра применяются вместе к ростерам, баллам персонажей и
-        аффилиаций, а также результатам в выборе игрока.
-      </p>
+      <details className="at-country-help">
+        <summary>Как применяются страны</summary>
+        <p className="at-country-description">
+          Оба фильтра применяются вместе к ростерам, баллам персонажей и
+          аффилиаций, а также результатам в выборе игрока.
+        </p>
+      </details>
     </section>
   );
 });
@@ -494,7 +495,7 @@ const ArchiveSection3 = observer(function ArchiveSection3() {
           {"Изменить коллекцию"}
         </button>
       </div>
-      <small>
+      <small hidden={!t.collectionMode}>
         {
           "Сравниваются версии персонажей. Тактики и кризисы в проверку наличия не входят."
         }
@@ -503,9 +504,17 @@ const ArchiveSection3 = observer(function ArchiveSection3() {
   );
 });
 const ArchiveSection4 = observer(function ArchiveSection4() {
+  const ratingDisclosure = useRef(null);
+  useEffect(() => {
+    if (t.ratingStatus === "error" && ratingDisclosure.current)
+      ratingDisclosure.current.open = true;
+  }, [t.ratingStatus]);
   return (
     <>
-      <CharacterRatingPanel />
+      <details className="at-rating-disclosure" ref={ratingDisclosure}>
+        <summary>Рейтинг с поправкой на игрока · подробности</summary>
+        <CharacterRatingPanel />
+      </details>
       <div className={"at-archive-layout"}>
         <aside className={"at-character-panel"} aria-label={"Выбор персонажа"}>
           <div className={"at-panel-top"}>
@@ -763,15 +772,62 @@ const ArchiveSection7 = observer(function ArchiveSection7() {
     </footer>
   );
 });
+const ArchiveFilters = observer(function ArchiveFilters() {
+  const compactQuery =
+    "(min-width: 701px) and (max-width: 1199px) and (max-height: 900px)";
+  const [open, setOpen] = useState(
+    () => !window.matchMedia(compactQuery).matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia(compactQuery);
+    const change = () => {
+      if (!t.dialog) setOpen(!query.matches);
+    };
+    query.addEventListener("change", change);
+    return () => query.removeEventListener("change", change);
+  }, []);
+  const selected = [...t.selectedAffiliations];
+  if (t.eventCountry)
+    selected.push(
+      t.geography.options.find((c) => c.code === t.eventCountry)?.name ||
+        "Страна турнира не указана",
+    );
+  if (t.rosterCountry)
+    selected.push(
+      t.countries.find(([code]) => code === t.rosterCountry)?.[1].name ||
+        "Страна игрока не указана",
+    );
+  if (t.selectedPlayer)
+    selected.push(t.playersById.get(t.selectedPlayer)?.name);
+  if (t.collectionMode) selected.push("Из моей коллекции");
+  return (
+    <details
+      className="at-filter-panel"
+      open={open}
+      onToggle={(e) => setOpen(e.currentTarget.open)}
+    >
+      <summary>
+        <strong>Фильтры турниров</strong>
+        <span>
+          {selected.filter(Boolean).join(" · ") ||
+            "Страны, аффилиации, игроки и коллекция"}
+        </span>
+      </summary>
+      <div className="at-filter-grid">
+        <TournamentCountries />
+        <ArchiveSection1 />
+        <ArchiveSection2 />
+      </div>
+      <ArchiveSection3 />
+    </details>
+  );
+});
 export const TournamentPanel = observer(function TournamentPanel() {
   return t.data ? (
     <>
       {" "}
       <ArchiveSection0 />
-      <TournamentCountries />
-      <ArchiveSection1 />
-      <ArchiveSection2 />
-      <ArchiveSection3 />
+      <ArchiveFilters />
       <ArchiveSection4 />
       <ArchiveSection5 />
       <ArchiveSection6 />

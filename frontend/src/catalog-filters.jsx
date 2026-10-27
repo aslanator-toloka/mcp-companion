@@ -1,8 +1,114 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { catalog } from "./stores/index.js";
+import { catalog, actions } from "./stores/index.js";
+import { CHARACTER_ROLES } from "./character-roles.js";
+import { MODEL_STAGES } from "./model-progress.js";
 import { RoleFilterChoices } from "./character-roles.jsx";
-import { CONDITIONS, TRAITS, EFFECTS, COMPARATORS } from "./catalog-filters.js";
+import {
+  CONDITIONS,
+  TRAITS,
+  EFFECTS,
+  COMPARATORS,
+  compactFilters,
+  defaultFilters,
+} from "./catalog-filters.js";
+
+// Keep restrictions visible even when the large advanced panel is closed.
+export const CatalogActiveFilters = observer(function CatalogActiveFilters() {
+  const chips = [];
+  const add = (id, label, remove) => chips.push({ id, label, remove });
+  if (catalog.query)
+    add("query", `Поиск: ${catalog.query}`, () =>
+      catalog.setFilter("query", ""),
+    );
+  if (catalog.affiliation)
+    add("affiliation", catalog.affiliation, () =>
+      catalog.setFilter("affiliation", ""),
+    );
+  if (catalog.threat)
+    add("threat", `Threat: ${catalog.threat}`, () =>
+      catalog.setFilter("threat", ""),
+    );
+  if (catalog.onlyOwned)
+    add("owned", "Есть у меня", () => {
+      catalog.setFilter("onlyOwned", false);
+      actions.catalogMode(false);
+    });
+  const labels = {
+    affiliations: "Аффилиация",
+    roles: "Роль",
+    tags: "Свойство",
+    hobbyStage: "Этап",
+    minThreat: "Threat от",
+    maxThreat: "Threat до",
+    minStamina: "Stamina от",
+    physicalDefense: "Physical от",
+    energyDefense: "Energy от",
+    mysticDefense: "Mystic от",
+    sizes: "Размер",
+    speeds: "Скорость",
+    baseSizes: "База, мм",
+    timeline: "Формат",
+    leaders: "Только лидеры",
+    hideUnreleased: "Только выпущенные",
+    missing: "Нет в коллекции",
+    allRoles: "Все выбранные роли",
+    allAffiliations: "Все выбранные аффилиации",
+    allAttacks: "Все блоки атак",
+  };
+  const names = new Map([
+    ...TRAITS,
+    ...EFFECTS,
+    ...MODEL_STAGES,
+    ...CHARACTER_ROLES.map((r) => [r.id, r.label]),
+  ]);
+  const defaults = defaultFilters();
+  for (const [key, value] of Object.entries(compactFilters(catalog.filters))) {
+    if (["sort", "descending"].includes(key)) continue;
+    if (key === "attacks") {
+      add(key, `Атаки: ${value.length}`, () =>
+        catalog.setAdvanced(key, defaults.attacks),
+      );
+    } else if (Array.isArray(value)) {
+      for (const item of value)
+        add(
+          `${key}-${item}`,
+          `${labels[key]}: ${names.get(item) || item}`,
+          () => catalog.toggleAdvanced(key, item),
+        );
+    } else {
+      const text =
+        key === "hobbyStage" && value === "unset"
+          ? "Без отметки"
+          : names.get(value) || value;
+      add(
+        key,
+        typeof value === "boolean" ? labels[key] : `${labels[key]}: ${text}`,
+        () => catalog.setAdvanced(key, defaults[key]),
+      );
+    }
+  }
+  return chips.length ? (
+    <div
+      className="active-filters"
+      role="group"
+      aria-label="Активные фильтры персонажей"
+    >
+      {chips.map(({ id, label, remove }) => (
+        <button
+          type="button"
+          key={id}
+          title={label}
+          aria-label={`Снять фильтр: ${label}`}
+          onClick={remove}
+        >
+          <span>{label}</span>
+          <span aria-hidden="true">×</span>
+        </button>
+      ))}
+    </div>
+  ) : null;
+});
 
 function Choices({ label, choices, selected, onToggle }) {
   return (

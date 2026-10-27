@@ -25,6 +25,9 @@ export function Dialog({
     const el = ref.current;
     if (open) {
       if (!el.open) el.showModal();
+      el.querySelector("[data-dialog-initial-focus]")?.focus({
+        preventScroll: true,
+      });
       el.scrollTop = 0;
     } else if (!open && el.open) el.close();
   }, [open, resetKey]);

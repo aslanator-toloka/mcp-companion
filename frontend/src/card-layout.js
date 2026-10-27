@@ -8,9 +8,14 @@ export function fitNativeCards(root = document) {
       height = Number(stage.dataset.nativeHeight);
     const surface = stage.closest(".stat-card-surface"),
       available = surface?.clientWidth || width;
+    const readable =
+      stage.closest(".stat-card-viewer")?.dataset.cardZoom === "readable";
     const scale = Math.min(
       1,
-      Math.min(1050, Math.max(available, width === 1200 ? 900 : 0)) / width,
+      Math.min(
+        1050,
+        Math.max(available, readable && width === 1200 ? 900 : 0),
+      ) / width,
     );
     stage.style.width = width * scale + "px";
     stage.style.height = height * scale + "px";

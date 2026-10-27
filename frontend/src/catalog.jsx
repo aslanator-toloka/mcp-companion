@@ -48,12 +48,12 @@ const CharacterRow = observer(function CharacterRow({
               )}
             </span>
           </span>
-          <span className="row-threat">
-            <b>{c.threatLevel ?? "—"}</b>
-            <small>THREAT</small>
-          </span>
         </button>
         <RoleIcons slug={c.slug} compact />
+        <span className="row-threat">
+          <b>{c.threatLevel ?? "—"}</b>
+          <small>THREAT</small>
+        </span>
       </div>
       <div className={"owned-control" + (owned ? " owned" : "")}>
         <OwnedCheckbox character={c} owned={owned} boxOwned={boxOwned} />
@@ -148,6 +148,7 @@ export function CharacterDetail({
               catalog.close();
             }}
             aria-label="Закрыть карточку"
+            data-dialog-initial-focus
           >
             ×
           </button>

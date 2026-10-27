@@ -1315,10 +1315,43 @@ export const RuleReferenceModal = observer(function RuleReferenceModal() {
 export const StatSurface = observer(function StatSurface({ view, children }) {
   const ref = useRef(null),
     layers = cardViews.layers.get(view.slug);
-  useCardLayout(ref, fitNativeCards, [view, layers, cardViews.metadata]);
+  const [readable, setReadable] = useState(false);
+  useCardLayout(ref, fitNativeCards, [
+    view,
+    layers,
+    cardViews.metadata,
+    readable,
+  ]);
   return (
-    <section ref={ref} className="stat-card-viewer" data-card-view={view.key}>
-      {children}
+    <section
+      ref={ref}
+      className="stat-card-viewer"
+      data-card-view={view.key}
+      data-card-zoom={readable ? "readable" : "fit"}
+    >
+      <div className="stat-view-tools">
+        {children}
+        <button
+          type="button"
+          className="stat-zoom-toggle quiet"
+          aria-pressed={readable}
+          onClick={() => setReadable(!readable)}
+        >
+          <i
+            className={
+              "fa-solid " +
+              (readable ? "fa-compress" : "fa-magnifying-glass-plus")
+            }
+            aria-hidden="true"
+          />
+          {readable ? "Вписать карту" : "Увеличить карту"}
+        </button>
+      </div>
+      {readable && (
+        <p className="stat-zoom-hint">
+          Прокрутите карту в сторону, чтобы прочитать все способности.
+        </p>
+      )}
       <div className="stat-card-surface">
         <StatCard view={view} />
       </div>

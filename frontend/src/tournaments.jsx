@@ -827,41 +827,33 @@ export function TournamentOverview({
               {c.grunt ? "GRUNT" : "ПЕРСОНАЖ"} · {c.threat ?? "—"} THREAT
             </div>
             <h2>{c.name}</h2>
-            <p>{c.alterEgo}</p>
-            <Ownership status={ownership} />
-            <button
-              className="at-co-chip"
-              data-action="catalog-character"
-              data-slug={inventorySlug}
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                actions.openCatalogCharacter(inventorySlug);
-              }}
-            >
-              В «Персонажи» ↗
-            </button>
+            <p className="at-character-meta">
+              {c.alterEgo} <Ownership status={ownership} />
+            </p>
             <ProfileAffiliations affiliations={c.affiliations} />
           </div>
         </div>
-        <button
-          className="at-share-button"
-          type="button"
-          id="at-share-character"
-          aria-label="Скопировать ссылку на персонажа"
-          onClick={(event) => {
-            event.stopPropagation();
-            t.share();
-          }}
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="m10 14 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0M16 8l1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0"
-              transform="translate(1 0) scale(.9)"
-            />
-          </svg>
-          <span>Ссылка</span>
-        </button>
+        <div className="at-overview-actions">
+          <CatalogArrow slug={inventorySlug} name={c.name} />
+          <button
+            className="at-share-button"
+            type="button"
+            id="at-share-character"
+            aria-label="Скопировать ссылку на персонажа"
+            onClick={(event) => {
+              event.stopPropagation();
+              t.share();
+            }}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="m10 14 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0M16 8l1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0"
+                transform="translate(1 0) scale(.9)"
+              />
+            </svg>
+            <span>Ссылка</span>
+          </button>
+        </div>
       </div>
       <ScoreContext affiliations={affiliations} playerName={playerName} />
       <div className="at-overview-stats at-scored-stats">
@@ -916,24 +908,26 @@ export function TournamentOverview({
         </div>
       </div>
       {peers?.length > 0 && (
-        <div className="at-cooccurrence">
-          <span>Часто рядом</span>
-          {peers.map((p) => (
-            <button
-              key={p.id}
-              className="at-co-chip"
-              type="button"
-              data-character={p.id}
-              onClick={(event) => {
-                event.stopPropagation();
-                t.chooseCharacter(p.id, true);
-              }}
-            >
-              {p.name}
-              <small>{p.count}</small>
-            </button>
-          ))}
-        </div>
+        <details className="at-cooccurrence">
+          <summary>Часто берут вместе · {peers.length}</summary>
+          <div className="at-cooccurrence-options">
+            {peers.map((p) => (
+              <button
+                key={p.id}
+                className="at-co-chip"
+                type="button"
+                data-character={p.id}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  t.chooseCharacter(p.id, true);
+                }}
+              >
+                {p.name}
+                <small>{p.count}</small>
+              </button>
+            ))}
+          </div>
+        </details>
       )}
     </>
   );
