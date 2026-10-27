@@ -420,3 +420,46 @@ test("tablet navigation reveals the current section after a direct link and rota
   await expect.poll(fullyVisible).toBe(true);
   expect(await page.evaluate(() => scrollY)).toBe(0);
 });
+
+test("modal backdrop scrolling retains the page position and nested windows keep it locked", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1194, height: 834 });
+  await page.goto(origin + "#screen=catalog");
+  const row = page.locator("#characters .row-open").nth(12);
+  await row.scrollIntoViewIfNeeded();
+  const before = await page.evaluate(() => ({
+    y: scrollY,
+    width: document.documentElement.clientWidth,
+  }));
+  expect(before.y).toBeGreaterThan(0);
+  await row.click();
+  await expect(page.locator("#character-dialog")).toBeVisible();
+  const opened = await page.evaluate(() => ({
+    y: scrollY,
+    width: document.documentElement.clientWidth,
+  }));
+  expect(opened).toEqual(before);
+  await page.mouse.move(3, 500);
+  await page.mouse.wheel(0, 800);
+  await page.waitForTimeout(200);
+  expect(await page.evaluate(() => scrollY)).toBe(before.y);
+  await page.locator("#character-dialog [data-box-code]").first().click();
+  await expect(page.locator("#box-set-dialog")).toBeVisible();
+  await page
+    .getByRole("button", { name: "Закрыть набор", exact: true })
+    .click();
+  await expect(page.locator("#character-dialog")).toBeVisible();
+  await page.mouse.move(3, 500);
+  await page.mouse.wheel(0, 500);
+  await page.waitForTimeout(200);
+  expect(await page.evaluate(() => scrollY)).toBe(before.y);
+  await page
+    .getByRole("button", { name: "Закрыть карточку", exact: true })
+    .click();
+  expect(await page.evaluate(() => scrollY)).toBe(before.y);
+  await page.mouse.wheel(0, 300);
+  await expect
+    .poll(() => page.evaluate(() => scrollY))
+    .toBeGreaterThan(before.y);
+});

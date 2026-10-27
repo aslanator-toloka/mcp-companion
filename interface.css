@@ -1,11 +1,16 @@
 /* Application chrome and tablet layout. Native game-card geometry stays in its
    own stylesheets; the viewer only scales the complete card proportionally. */
 :root {
+  scrollbar-gutter: stable;
   --app-chrome-height: 54px;
   --surface: #fff;
   --surface-muted: #f6f9fd;
   --muted: #5e7086;
   --focus-ring: #2563eb;
+}
+/* Keep the list in place beneath every native modal, including nested ones. */
+:root:has(dialog[open]) {
+  overflow: hidden;
 }
 .review {
   position: sticky;
