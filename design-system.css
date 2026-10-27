@@ -1,0 +1,926 @@
+/* Shared visual language for the app shell. Printed game-card canvases retain
+   their own fonts, symbols and geometry. Layout remains in interface.css. */
+:root {
+  --ui-canvas: #f4f6fa;
+  --ui-surface: #ffffff;
+  --ui-subtle: #f8fafc;
+  --ui-ink: #223248;
+  --ui-muted: #64748b;
+  --ui-border: #d4dce7;
+  --ui-border-strong: #b8c5d6;
+  --ui-accent: #2563eb;
+  --ui-accent-soft: #edf3ff;
+  --ui-success: #21835b;
+  --ui-warning: #a46b14;
+  --ui-danger: #b5474c;
+  --ui-radius: 8px;
+  --ui-panel-radius: 12px;
+  --ui-control-height: 44px;
+  --ui-control-arrow: url("assets/ui/chevron-down.svg");
+  --ink: var(--ui-ink);
+  --muted: var(--ui-muted);
+  --line: var(--ui-border);
+  --surface: var(--ui-surface);
+  --surface-muted: var(--ui-subtle);
+}
+body {
+  background: var(--ui-canvas);
+  color: var(--ui-ink);
+}
+.ui-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.ui-chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--ui-muted);
+}
+.ui-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+/* Native selects and searchable pickers share one caret and one inset. */
+#app-root select:not([multiple]):not([size]),
+#app-root
+  input:is(
+    [type="search"],
+    [type="text"],
+    [type="number"],
+    [type="url"],
+    [type="email"],
+    :not([type])
+  ),
+#app-root textarea {
+  min-height: var(--ui-control-height);
+  box-sizing: border-box;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background-color: var(--ui-surface);
+  color: var(--ui-ink);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  padding: 11px 14px;
+  box-shadow: none;
+}
+#app-root select:not([multiple]):not([size]) {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 11px 46px 11px 14px;
+  background-image: var(--ui-control-arrow);
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+#app-root input::placeholder,
+#app-root textarea::placeholder {
+  color: #8794a6;
+  opacity: 1;
+}
+#app-root input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+#app-root input[type="number"]::-webkit-inner-spin-button,
+#app-root input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#app-root select:disabled,
+#app-root input:disabled {
+  cursor: default;
+  background-color: #f0f3f7;
+  color: #8a97a8;
+}
+#app-root :is(select, input, textarea):focus-visible {
+  outline: 3px solid #c7d8fb;
+  outline-offset: 2px;
+  border-color: #7b9ee5;
+}
+#app-root input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  border: 1.5px solid var(--ui-border-strong);
+  border-radius: 5px;
+  background-color: var(--ui-surface);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  vertical-align: middle;
+  cursor: pointer;
+  box-shadow: none;
+}
+#app-root input[type="checkbox"]:checked {
+  border-color: var(--ui-accent);
+  background-color: var(--ui-accent);
+  background-image: url("assets/ui/check.svg");
+}
+#app-root input[type="checkbox"]:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+#app-root input[type="radio"] {
+  accent-color: var(--ui-accent);
+  width: 18px;
+  height: 18px;
+}
+#app-root .at-affiliation-picker {
+  min-height: var(--ui-control-height);
+  padding: 11px 14px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-surface);
+  color: var(--ui-ink);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 400;
+}
+#app-root .at-affiliation-picker > span:first-child {
+  flex: 1;
+  text-align: left;
+}
+#app-root .at-affiliation-picker > .ui-icon {
+  margin-left: auto;
+}
+#app-root .combat-picker-input {
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: white;
+  box-shadow: none;
+  min-height: 44px;
+  height: 44px;
+}
+#app-root .combat-picker-input > input {
+  border: 0;
+  background: transparent;
+  padding: 11px 84px 11px 14px;
+  min-height: 0;
+  height: 42px;
+}
+#app-root .combat-picker-input:focus-within {
+  border-color: #7b9ee5;
+  box-shadow: 0 0 0 3px #e2ebff;
+}
+#app-root .combat-picker-input > input:focus {
+  outline: none;
+  box-shadow: none;
+}
+#app-root .combat-picker-chevron {
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  color: var(--ui-muted);
+}
+#app-root .combat-picker-clear {
+  display: grid;
+  place-items: center;
+  right: 40px;
+  top: 4px;
+  width: 32px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0;
+  border-radius: 6px;
+  color: var(--ui-muted);
+  transform: none;
+}
+#app-root .combat-picker-menu {
+  background: white;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px #23374f1f;
+}
+
+/* Command hierarchy: primary action, outlined action, quiet utility. */
+#app-root button:not(:where(.sc-card *, .gc-card *)) {
+  box-shadow: none;
+}
+#app-root
+  :is(
+    .actions > button,
+    .heading > button,
+    .section-title > button,
+    .picker-footer > button,
+    .editor-footer button
+  ) {
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: var(--ui-radius);
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 20px;
+}
+#app-root .primary {
+  background: var(--ui-accent);
+  border-color: var(--ui-accent);
+  color: white;
+  border-radius: var(--ui-radius);
+  font-weight: 600;
+}
+#app-root .primary:hover {
+  background: #1e55d4;
+  border-color: #1e55d4;
+}
+#app-root .quiet {
+  color: var(--ui-muted);
+}
+#app-root .quiet:hover {
+  background: #edf2f8;
+  color: #344861;
+}
+#app-root .close,
+#app-root :is(#at-affiliation-close, #at-player-close) {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 12px;
+  border: 0;
+  border-radius: var(--ui-radius);
+  background: transparent;
+  color: var(--ui-muted);
+}
+#app-root .close:hover,
+#app-root :is(#at-affiliation-close, #at-player-close):hover {
+  background: #eef2f7;
+  color: var(--ui-ink);
+}
+#app-root
+  :is(.at-character-catalog-arrow, .at-roster-catalog-arrow, .at-share-button) {
+  display: inline-grid;
+  place-items: center;
+  color: #57718e;
+  border-radius: var(--ui-radius);
+}
+#app-root :is(.at-character-catalog-arrow, .at-roster-catalog-arrow):hover {
+  background: var(--ui-accent-soft);
+  color: var(--ui-accent);
+}
+#app-root .at-chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--ui-muted);
+}
+#app-root .roster-tile-actions .primary {
+  background: white;
+  color: #355b88;
+  border-color: var(--ui-border);
+}
+#app-root .roster-tile-actions .primary:hover {
+  background: var(--ui-accent-soft);
+  border-color: #b7cdf5;
+}
+#app-root .selected-row-actions > button {
+  font-weight: 500;
+}
+#app-root .selected-row-actions > .character-card-picker {
+  border-color: transparent;
+  background: var(--ui-accent-soft);
+}
+
+/* Text and surfaces: keep strong contrast for content, quiet metadata. */
+#app-root .heading p {
+  color: var(--ui-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 680px;
+}
+#app-root .heading h1 {
+  font-weight: 750;
+  letter-spacing: -0.6px;
+}
+#app-root
+  :is(
+    .field,
+    .filter-row > label:not(.check),
+    .at-country-field,
+    .field-label
+  ) {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ui-muted);
+}
+#app-root .eyebrow {
+  color: #77859a;
+  letter-spacing: 1.1px;
+}
+#app-root :is(.catalog-tools, .editor-info, .picker-tools) {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+  border-radius: var(--ui-panel-radius);
+}
+#app-root :is(.roster-tile, .match-tile, .box-set-card, .at-roster-card) {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+  border-radius: var(--ui-panel-radius);
+  box-shadow: none;
+}
+#app-root .stage-label {
+  background: var(--ui-subtle);
+  color: var(--ui-muted);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0;
+  padding: 4px 10px;
+}
+#app-root .list-heading,
+#app-root .purchase-results-count {
+  color: var(--ui-muted);
+  font-size: 12px;
+}
+#app-root :is(.affiliation, .tag, .at-affiliation-tag) {
+  border-radius: 5px;
+}
+#app-root .character-row .affiliation {
+  background: #f1f5f9;
+  color: #536980;
+  border-color: #e1e7ef;
+  font-size: 11px;
+}
+#app-root :is(.roster-summary, .battle-dashboard) {
+  background: white;
+  border-color: var(--ui-border);
+  border-radius: 10px;
+}
+#app-root .roster-summary b {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 650;
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+#app-root .roster-title {
+  color: var(--ui-ink);
+}
+#app-root .editor-info {
+  padding: 18px;
+}
+#app-root .editor-groups {
+  border-top: 1px solid #edf0f5;
+  padding-top: 12px;
+  margin-top: 16px;
+}
+#app-root .editor-footer {
+  border-color: var(--ui-border);
+  background: #fff;
+  box-shadow: 0 -6px 24px #273c5810;
+  border-radius: 10px;
+}
+#app-root .editor-tabs {
+  gap: 4px;
+}
+#app-root :is(.editor-tabs > button, .purchase-tabs > button) {
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+}
+#app-root :is(.editor-tabs > .selected, .purchase-tabs > .selected) {
+  background: var(--ui-accent-soft);
+  color: #245bc0;
+  border-color: #cedcf5;
+  font-weight: 600;
+}
+
+/* The empty state is a designed state, not a large unstructured blank. */
+#app-root .empty:not(.sc-card *) {
+  padding: 28px 20px;
+  border: 1px solid #e1e7ef;
+  border-radius: var(--ui-panel-radius);
+  background: white;
+}
+#app-root .empty h3 {
+  color: #34455d;
+  font-size: 17px;
+  font-weight: 650;
+}
+#app-root .empty p {
+  color: var(--ui-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#app-root .empty-illustration {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  border-radius: 13px;
+  background: #f0f4fa;
+  color: #6e86a8;
+}
+#app-root .empty-illustration .ui-icon {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.5;
+}
+#app-root .empty > .primary {
+  min-height: 44px;
+  margin-top: 16px;
+}
+#app-root .network-home {
+  background: white;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-panel-radius);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+#app-root .network-home h2 {
+  font-size: 20px;
+  letter-spacing: -0.3px;
+}
+#app-root .network-home p {
+  color: var(--ui-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+#app-root .network-home .eyebrow {
+  margin-bottom: 8px;
+}
+#app-root .network-home .primary {
+  background: var(--ui-accent-soft);
+  border-color: #cbdaf7;
+  color: #245bc0;
+}
+#app-root .network-home .primary:hover {
+  background: #e1ebff;
+}
+
+/* Pair selection is the calculator's primary operation. */
+#app-root .combat-distance {
+  margin: 0;
+  flex: 0 0 160px;
+}
+#app-root .combat-characters {
+  gap: 16px;
+  margin-top: 0;
+}
+#app-root .combat-characters > [role="group"] {
+  background: white;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-panel-radius);
+  padding: 18px;
+  min-width: 0;
+}
+#app-root .combat-character {
+  border: 0;
+  border-radius: 0;
+  padding: 16px 0 0;
+  background: transparent;
+}
+#app-root .combat-assumptions {
+  margin: 14px 0;
+  background: transparent;
+  padding: 0;
+  color: var(--ui-muted);
+}
+#app-root .combat-assumptions-body {
+  padding: 12px 16px;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  background: white;
+  margin-top: 4px;
+}
+#app-root .combat-assumptions-body p {
+  font-size: 13px;
+}
+#app-root .combat-empty {
+  padding: 30px 20px;
+}
+
+/* One disclosure marker; no platform triangle mixed with a text glyph. */
+#app-root details[data-ui-disclosure] > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 44px;
+  cursor: pointer;
+}
+#app-root details[data-ui-disclosure] > summary::-webkit-details-marker {
+  display: none;
+}
+#app-root details[data-ui-disclosure] > summary::before {
+  content: "";
+  display: block;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  background: var(--ui-control-arrow) center / 20px no-repeat;
+  transform: rotate(-90deg);
+}
+#app-root details[open][data-ui-disclosure] > summary::before {
+  transform: rotate(0);
+}
+#app-root .at-filter-panel > summary strong {
+  margin-right: 0;
+}
+#app-root .at-filter-panel > summary span {
+  color: var(--ui-muted);
+}
+#app-root .at-rating-disclosure > summary {
+  font-weight: 400;
+}
+#app-root .at-roster-card .at-chevron {
+  transform: none;
+}
+#app-root .at-roster-card[open] .at-chevron {
+  transform: rotate(180deg);
+}
+
+/* Modals use the same panel language, with elevation reserved for overlays. */
+#app-root dialog {
+  border: 1px solid #d0dae6;
+  border-radius: 16px;
+  box-shadow: 0 24px 72px #182d4b33;
+}
+#app-root dialog::backdrop {
+  background: #17263c66;
+}
+#app-root .dialog-heading h2 {
+  color: var(--ui-ink);
+  font-size: 22px;
+  font-weight: 700;
+}
+#app-root .dialog-heading p {
+  font-size: 13px;
+  color: var(--ui-muted);
+  line-height: 1.5;
+}
+#app-root .dialog-heading {
+  margin-bottom: 20px;
+}
+#app-root .picker-result {
+  border-color: #e6ebf2;
+}
+#app-root .picker-result.chosen {
+  background: var(--ui-accent-soft);
+}
+#app-root .picker-footer {
+  background: white;
+  border-color: var(--ui-border);
+}
+#app-root .box-set-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--ui-muted);
+}
+#app-root .box-opportunity-link > .ui-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+#app-root .purchase-count {
+  background: #f8fafc;
+  border-color: var(--ui-border);
+  color: var(--ui-muted);
+}
+
+/* Stable app chrome: active is a soft pill, rather than two stacked borders. */
+#app-root .review,
+#app-root .sidebar {
+  background: #fcfdff;
+  border-color: #dfe5ee;
+}
+#app-root .nav-item[aria-current="page"] {
+  box-shadow: none;
+  background: var(--ui-accent-soft);
+  border-color: transparent;
+  color: #245bc0;
+}
+#app-root .nav-item {
+  font-weight: 500;
+}
+#app-root .nav-item[aria-current="page"] {
+  font-weight: 650;
+}
+#app-root .sidebar-toggle {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#app-root .sidebar-toggle:hover {
+  background: #edf2f8;
+}
+@media (max-width: 900px) {
+  #app-root .combat-distance {
+    flex-basis: 140px;
+  }
+  #app-root .combat-characters > [role="group"] {
+    padding: 14px;
+  }
+  #app-root .network-home {
+    padding: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #app-root *,
+  #app-root *::before,
+  #app-root *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+#app-root .fighter-ability > summary::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  background: var(--ui-control-arrow) center / 20px no-repeat;
+  transform: none;
+}
+#app-root .fighter-ability[open] > summary::after {
+  transform: rotate(180deg);
+}
+#app-root summary:focus-visible {
+  outline: 3px solid #c7d8fb;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+/* Composite fields own their border; their input never draws a second box. */
+#app-root .at-search-box {
+  height: 44px;
+  min-height: 44px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: white;
+}
+#app-root .at-search-box > input {
+  min-height: 0;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#app-root .at-search-box > input:focus {
+  outline: none;
+}
+#app-root .at-search-box:focus-within {
+  border-color: #7b9ee5;
+  box-shadow: 0 0 0 3px #e2ebff;
+}
+#app-root .at-select-box {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#app-root .at-workspace-tools {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+  margin-bottom: 14px;
+}
+#app-root .at-workspace-tools > details {
+  margin-bottom: 0;
+}
+#app-root .at-workspace-tools > details[open] {
+  grid-column: 1 / -1;
+}
+#app-root .at-workspace-tools > details > summary {
+  padding: 8px 0;
+}
+@media (max-width: 700px) {
+  #app-root .at-workspace-tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#app-root .at-affiliation-picker {
+  height: 44px;
+  line-height: 20px;
+}
+#app-root .at-country-actions {
+  display: flex;
+  align-items: end;
+  gap: 4px;
+}
+#app-root .at-country-actions > button {
+  min-height: 44px;
+}
+#app-root .at-country-help {
+  position: relative;
+  grid-column: auto;
+  flex: 0 0 44px;
+  width: 44px;
+}
+#app-root details[data-ui-disclosure].at-country-help > summary {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--ui-muted);
+}
+#app-root details[data-ui-disclosure].at-country-help > summary:hover {
+  background: #edf2f8;
+}
+#app-root details[data-ui-disclosure].at-country-help > summary::before {
+  display: none;
+}
+#app-root .at-country-help .at-country-description {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 5;
+  width: min(360px, 70vw);
+  margin: 8px 0 0;
+  padding: 14px;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 8px 24px #23374f1f;
+  color: var(--ui-muted);
+  line-height: 1.5;
+}
+@media (min-width: 701px) and (max-width: 1199px) and (max-height: 900px) {
+  #app-root .at-intro {
+    margin-bottom: 12px;
+  }
+}
+/* Informational provenance is quiet; warnings retain their semantic colour. */
+#app-root .notice.roster-origin {
+  background: var(--ui-subtle);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  color: var(--ui-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+#app-root .editor-groups {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#app-root .editor-groups > .field-label {
+  margin: 0;
+  flex: none;
+}
+#app-root .editor-groups .group-checks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#app-root .battle-dashboard > .field {
+  flex: 0 0 200px;
+  width: 200px;
+}
+#app-root .battle-counter strong,
+#app-root .round-label b {
+  font-family: inherit;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+#app-root .battle-fighter,
+#app-root .setup-team {
+  border-radius: var(--ui-panel-radius);
+  box-shadow: none;
+}
+#app-root .setup-fields {
+  background: white;
+  border-color: var(--ui-border);
+  border-radius: var(--ui-panel-radius);
+}
+#app-root .battle-side-tabs > button {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 10px 14px;
+}
+#app-root .battle-side-tabs > .selected {
+  background: var(--ui-accent-soft);
+  border-color: #cedcf5;
+  color: #245bc0;
+  font-weight: 600;
+}
+#app-root .at-affiliation-tag {
+  background: #f1f5f9;
+  border-color: #e1e7ef;
+  color: #536980;
+  font-size: 11px;
+}
+#app-root .at-roster-card[open] > .at-roster-summary {
+  background: #f7faff;
+}
+#app-root .at-points-badge:not(.at-negative) {
+  background: var(--ui-accent-soft);
+  color: #2b5dc1;
+}
+@media (max-width: 700px) {
+  #app-root .battle-dashboard > .field {
+    flex: 1 1 100%;
+    width: auto;
+  }
+}
+
+#app-root .battle-dashboard > button {
+  margin-left: auto;
+  min-height: 44px;
+}
+/* Reserve the card's space while data loads, keeping the sections below stable. */
+#app-root .card-loading-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 0;
+  margin: 0 0 16px;
+  border: 1px solid #e1e7ef;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: var(--ui-muted);
+  font-size: 13px;
+}
+#app-root .box-set-tile {
+  border-color: var(--ui-border);
+  border-radius: var(--ui-panel-radius);
+  background: white;
+  box-shadow: none;
+}
+#app-root .box-set-open {
+  position: relative;
+}
+#app-root .box-set-arrow {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  border: 1px solid #e4eaf3;
+  border-radius: 8px;
+  background: #fffffff2;
+}
+#app-root .box-set-copy {
+  padding-right: 46px;
+}
+#app-root .box-opportunity-link:disabled {
+  opacity: 1;
+  color: #728196;
+}
+#app-root .box-opportunity-link:disabled strong {
+  color: inherit;
+}
+/* Portrait tablets keep readable field widths; utilities get their own row. */
+@media (min-width: 701px) and (max-width: 950px) {
+  #app-root #catalog-screen .filter-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: 12px;
+  }
+  #app-root #catalog-screen .filter-row > label:not(.check) {
+    min-width: 0;
+  }
+  #app-root #catalog-screen .filter-row select {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+  #app-root #catalog-screen .filter-row .only-owned {
+    grid-column: 1 / span 2;
+    margin: 0;
+  }
+  #app-root #catalog-screen .filter-row > .quiet {
+    grid-column: 3;
+    justify-self: end;
+  }
+}

@@ -1,3 +1,4 @@
+import { UIIcon, EmptyIllustration } from "./ui-icons.jsx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef } from "react";
 import {
@@ -254,6 +255,7 @@ export const RosterList = observer(function RosterList({
         </div>
       ) : (
         <div className="empty roster-empty">
+          <EmptyIllustration name="roster" />
           <h3>{total ? "Ничего не найдено" : "Создайте первый ростер"}</h3>
           <p>
             {total
@@ -402,7 +404,7 @@ export const RosterEditor = observer(function RosterEditor({
         </button>
       </div>
       {source && (
-        <div className="notice">
+        <div className="notice roster-origin">
           <b>Из турнирного архива</b> · {source.player} · {source.record} ·
           место {source.place} / {source.fieldSize}
           <br />
@@ -534,15 +536,18 @@ export const RosterEditor = observer(function RosterEditor({
               ? "Team Tactics"
               : "Secure и Extract"}
         </h3>
-        <button
-          data-rs="pick"
-          onClick={(event) => {
-            event.stopPropagation();
-            rosters.openPicker();
-          }}
-        >
-          + Добавить
-        </button>
+        {items.length > 0 && (
+          <button
+            data-rs="pick"
+            className="primary"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.openPicker();
+            }}
+          >
+            + Добавить
+          </button>
+        )}
       </div>
       {items.length ? (
         <div className="selected-items">
@@ -552,6 +557,7 @@ export const RosterEditor = observer(function RosterEditor({
         </div>
       ) : (
         <div className="empty">
+          <EmptyIllustration name="roster" />
           <h3>
             {tab === "characters"
               ? "Персонажи не выбраны"
@@ -763,7 +769,7 @@ function CardInsights({
         {coverage.excluded ? ` · ${coverage.excluded} без полного разбора` : ""}
         .
       </p>
-      <details className="card-insight-method">
+      <details data-ui-disclosure className="card-insight-method">
         <summary>Как считаются показатели</summary>
         <p>
           Популярность — доля списков с картой. Варианты одного выступления
@@ -892,7 +898,7 @@ export const RosterPicker = observer(function RosterPicker({
             rosters.closePicker();
           }}
         >
-          ×
+          <UIIcon name="close" />
         </button>
       </div>
       <div className="picker-tools">
@@ -1213,7 +1219,7 @@ export const RosterActionModal = observer(function RosterActionModal() {
                 aria-label="Закрыть окно"
                 onClick={rosters.closeDialog}
               >
-                ×
+                <UIIcon name="close" />
               </button>
             </div>
             {d.type === "leave" && (

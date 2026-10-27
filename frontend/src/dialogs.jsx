@@ -1,3 +1,4 @@
+import { UIIcon } from "./ui-icons.jsx";
 import React, { useEffect, useRef, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 import {
@@ -77,7 +78,15 @@ const CharacterCard = observer(function CharacterCard() {
         </div>
       </div>
     ) : (
-      <div className="loading">Загружаем полную карту…</div>
+      <div
+        className="loading card-loading-placeholder"
+        style={{
+          aspectRatio: catalog.byId.get(slug)?.isGrunt ? "550 / 950" : "3 / 2",
+        }}
+        role="status"
+      >
+        Загружаем полную карту…
+      </div>
     );
   return (
     <StatSurface view={view}>
@@ -157,7 +166,7 @@ export const MembershipModal = observer(function MembershipModal() {
                 aria-label="Закрыть выбор ростеров"
                 onClick={() => ui.setMembership(false)}
               >
-                ×
+                <UIIcon name="close" />
               </button>
             </div>
             {rosters.records.length ? (
@@ -267,7 +276,7 @@ export const DataModal = observer(function DataModal() {
                 aria-label="Закрыть данные"
                 onClick={ui.closeData}
               >
-                ×
+                <UIIcon name="close" />
               </button>
             </div>
             <p>

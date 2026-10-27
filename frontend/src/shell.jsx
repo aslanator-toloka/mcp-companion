@@ -1,3 +1,4 @@
+import { UIIcon } from "./ui-icons.jsx";
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog, library, ui, actions } from "./stores/index.js";
@@ -79,7 +80,7 @@ export const SidebarToggle = observer(function SidebarToggle() {
       title={ui.collapsed ? "Развернуть меню" : "Свернуть меню"}
       onClick={ui.toggleSidebar}
     >
-      <span aria-hidden="true">☰</span>
+      <UIIcon name="menu" />
     </button>
   );
 });

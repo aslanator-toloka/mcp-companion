@@ -163,7 +163,11 @@ function NumberField({ label, value, onChange, max = 99 }) {
 }
 function Group({ title, children, open = false }) {
   return (
-    <details className="catalog-filter-group" open={open || undefined}>
+    <details
+      data-ui-disclosure
+      className="catalog-filter-group"
+      open={open || undefined}
+    >
       <summary>{title}</summary>
       <div className="catalog-filter-group-body">{children}</div>
     </details>
@@ -282,6 +286,7 @@ export const CatalogFilters = observer(function CatalogFilters() {
   const selectedAffiliations = catalog.selectedAffiliations;
   return (
     <details
+      data-ui-disclosure
       className="catalog-advanced"
       open={catalog.filtersOpen}
       onToggle={(e) => catalog.setFilter("filtersOpen", e.currentTarget.open)}

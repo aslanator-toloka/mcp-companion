@@ -1,3 +1,4 @@
+import { UIIcon, EmptyIllustration } from "../ui-icons.jsx";
 import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog, cardViews, ui } from "../stores/index.js";
@@ -95,7 +96,7 @@ function CharacterSettings({ character, detail, value, onChange }) {
           </label>
         )}
       </div>
-      <details className="combat-context">
+      <details data-ui-disclosure className="combat-context">
         <summary>Условия и способности</summary>
         <div className="combat-checks">
           {[
@@ -226,7 +227,7 @@ function Direction({ value, attacker, defender, index }) {
               </>
             )}
           </div>
-          <details className="combat-explanation">
+          <details data-ui-disclosure className="combat-explanation">
             <summary>
               {a.warnings.length ? "Частичный расчёт · " : ""}Способности и
               пояснения
@@ -390,11 +391,11 @@ const CharacterPicker = observer(function CharacterPicker({
             onMouseDown={(e) => e.preventDefault()}
             onClick={() => choose("")}
           >
-            ×
+            <UIIcon name="close" />
           </button>
         )}
-        <span className="combat-picker-chevron" aria-hidden="true">
-          ▾
+        <span className="combat-picker-chevron">
+          <UIIcon name="chevron" />
         </span>
       </div>
       {open && (
@@ -496,21 +497,24 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
             атакой в обе стороны.
           </p>
         </div>
+        <label className="field combat-distance">
+          Дистанция
+          <select
+            aria-label="Дистанция"
+            value={config.distance}
+            onChange={(e) =>
+              cardViews.setCalculator("distance", e.target.value)
+            }
+          >
+            {[1, 2, 3, 4, 5].map((n) => (
+              <option key={n} value={n}>
+                Range {n}
+              </option>
+            ))}
+          </select>
+        </label>
       </header>
-      <label className="field combat-distance">
-        Дистанция
-        <select
-          aria-label="Дистанция"
-          value={config.distance}
-          onChange={(e) => cardViews.setCalculator("distance", e.target.value)}
-        >
-          {[1, 2, 3, 4, 5].map((n) => (
-            <option key={n} value={n}>
-              Range {n}
-            </option>
-          ))}
-        </select>
-      </label>
+
       <div className="combat-characters">
         <div role="group" aria-label="Первый персонаж: выбор и настройки">
           <CharacterPicker
@@ -539,18 +543,21 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
           />
         </div>
       </div>
-      <div className="combat-assumptions">
-        <p>
-          <b>Без допэнергии:</b> цена атаки уже оплачена, после оплаты у
-          атакующего 0 энергии, у защитника тоже 0. Бесплатные и пассивные
-          способности работают.
-        </p>
-        <p>
-          <b>Полная энергия:</b> оба начинают с 10; цена атаки и усиления
-          расходуют этот запас. Для каждой строки запас восстанавливается.
-          Энергия, получаемая в процессе, не добавляется.
-        </p>
-      </div>
+      <details data-ui-disclosure className="combat-assumptions">
+        <summary>Режимы энергии</summary>
+        <div className="combat-assumptions-body">
+          <p>
+            <b>Без допэнергии:</b> цена атаки уже оплачена, после оплаты у
+            атакующего 0 энергии, у защитника тоже 0. Бесплатные и пассивные
+            способности работают.
+          </p>
+          <p>
+            <b>Полная энергия:</b> оба начинают с 10; цена атаки и усиления
+            расходуют этот запас. Для каждой строки запас восстанавливается.
+            Энергия, получаемая в процессе, не добавляется.
+          </p>
+        </div>
+      </details>
       {error ? (
         <div className="empty" role="alert">
           <p>{error}</p>
@@ -559,7 +566,10 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
           </button>
         </div>
       ) : !first || !second ? (
-        <p className="empty">Выберите двух персонажей для сравнения.</p>
+        <div className="empty combat-empty">
+          <EmptyIllustration name="compare" />
+          <p>Выберите двух персонажей для сравнения.</p>
+        </div>
       ) : !result ? (
         <p className="loading" role="status">
           {firstDetail && secondDetail
@@ -577,7 +587,7 @@ const CalculatorContent = observer(function CalculatorContent({ config }) {
           />
         ))
       )}
-      <details className="combat-method">
+      <details data-ui-disclosure className="combat-method">
         <summary>Что именно считаем</summary>
         <p>
           Вероятности всех исходов кубиков рассчитываются напрямую и

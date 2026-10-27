@@ -1,3 +1,4 @@
+import { UIIcon, EmptyIllustration } from "./ui-icons.jsx";
 import { CharacterTactics } from "./character-tactics.jsx";
 import { observer } from "mobx-react-lite";
 import { catalog, library, actions } from "./stores/index.js";
@@ -68,6 +69,7 @@ export const CatalogList = observer(function CatalogList() {
     items.map((item) => <CharacterRow key={item.character.slug} {...item} />)
   ) : (
     <div className="empty">
+      <EmptyIllustration name={onlyOwned ? "collection" : "search"} />
       <h3>{onlyOwned ? "Здесь пока пусто" : "Ничего не найдено"}</h3>
       <p>
         {onlyOwned
@@ -150,7 +152,7 @@ export function CharacterDetail({
             aria-label="Закрыть карточку"
             data-dialog-initial-focus
           >
-            ×
+            <UIIcon name="close" />
           </button>
         </div>
       </header>

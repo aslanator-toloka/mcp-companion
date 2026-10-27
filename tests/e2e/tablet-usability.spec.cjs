@@ -158,3 +158,132 @@ test("roster picker keeps the Done action visible after scrolling on a landscape
     page.getByRole("heading", { name: "Новый ростер", exact: true }),
   ).toBeVisible();
 });
+
+test("tournament roster opens the populated builder through the bundled application", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto(origin + "#screen=tournaments&character=wong");
+  await page.locator(".at-roster-card").first().locator("summary").click();
+  await page.locator(".at-roster-card[open] [data-tournament-import]").click();
+  await expect(page.locator("#editor-name")).toBeVisible();
+  await expect(page.locator("#rosters-screen .selected-row")).toHaveCount(10);
+  await expect(
+    page.getByRole("button", { name: "Сохранить ростер", exact: true }),
+  ).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test("form controls share readable geometry across catalog, calculator and tournament pickers", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1194, height: 834 });
+  for (const screen of ["catalog", "calculator", "tournaments"]) {
+    await page.goto(origin + "#screen=" + screen);
+    if (screen === "catalog")
+      await expect(page.locator("#search")).toBeEnabled();
+    if (screen === "calculator")
+      await expect(
+        page.getByRole("combobox", { name: "Первый персонаж", exact: true }),
+      ).toBeVisible();
+    if (screen === "tournaments") {
+      await expect(page.locator("#at-character-list")).toBeVisible();
+      await page.locator(".at-filter-panel > summary").click();
+      const info = await page
+        .locator(".at-country-help > summary")
+        .evaluate((el) => {
+          const frame = el.getBoundingClientRect(),
+            glyph = el.querySelector("svg").getBoundingClientRect();
+          return {
+            horizontal: Math.abs(
+              frame.x + frame.width / 2 - glyph.x - glyph.width / 2,
+            ),
+            vertical: Math.abs(
+              frame.y + frame.height / 2 - glyph.y - glyph.height / 2,
+            ),
+          };
+        });
+      expect(info.horizontal).toBeLessThanOrEqual(1);
+      expect(info.vertical).toBeLessThanOrEqual(1);
+    }
+    const controls = await page.locator("select").evaluateAll((elements) =>
+      elements
+        .filter(
+          (el) =>
+            el.getBoundingClientRect().width &&
+            el.getBoundingClientRect().height,
+        )
+        .map((el) => {
+          const style = getComputedStyle(el);
+          return {
+            label: el.getAttribute("aria-label"),
+            height: el.getBoundingClientRect().height,
+            appearance: style.appearance,
+            hasArrow: style.backgroundImage !== "none",
+            paddingRight: parseFloat(style.paddingRight),
+          };
+        }),
+    );
+    expect(controls.length).toBeGreaterThan(0);
+    for (const control of controls) {
+      expect(control.height, control.label).toBeGreaterThanOrEqual(44);
+      expect(control.height, control.label).toBeLessThanOrEqual(46);
+      expect(control.appearance, control.label).toBe("none");
+      expect(control.hasArrow, control.label).toBe(true);
+      expect(control.paddingRight, control.label).toBeGreaterThanOrEqual(40);
+    }
+    for (const selector of [".at-affiliation-picker", ".combat-picker-input"]) {
+      const pickers = await page.locator(selector).evaluateAll((elements) =>
+        elements
+          .filter((el) => el.getBoundingClientRect().width)
+          .map((el) => {
+            const control = el.getBoundingClientRect(),
+              icon = el.querySelector(".ui-chevron, .combat-picker-chevron");
+            const arrow = icon?.getBoundingClientRect();
+            return {
+              height: control.height,
+              arrowWidth: arrow?.width,
+              right: arrow ? control.right - arrow.right : 0,
+              center: arrow
+                ? Math.abs(
+                    control.y +
+                      control.height / 2 -
+                      (arrow.y + arrow.height / 2),
+                  )
+                : 100,
+            };
+          }),
+      );
+      for (const picker of pickers) {
+        expect(picker.height).toBe(44);
+        expect(picker.arrowWidth).toBeGreaterThanOrEqual(18);
+        expect(picker.right).toBeGreaterThanOrEqual(12);
+        expect(picker.center).toBeLessThanOrEqual(1);
+      }
+    }
+  }
+  await page.setViewportSize({ width: 820, height: 1180 });
+  await page.goto(origin + "#screen=catalog");
+  await expect(page.locator("#search")).toBeEnabled();
+  const fields = await page
+    .locator("#catalog-screen .filter-row select")
+    .evaluateAll((elements) => {
+      const context = document.createElement("canvas").getContext("2d");
+      return elements.map((el) => {
+        const style = getComputedStyle(el);
+        context.font = style.font;
+        return {
+          label: el.getAttribute("aria-label"),
+          available:
+            el.clientWidth -
+            parseFloat(style.paddingLeft) -
+            parseFloat(style.paddingRight),
+          text: context.measureText(el.selectedOptions[0].textContent.trim())
+            .width,
+        };
+      });
+    });
+  for (const field of fields)
+    expect(field.available, field.label).toBeGreaterThanOrEqual(field.text);
+});

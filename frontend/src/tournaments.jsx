@@ -1,3 +1,4 @@
+import { UIIcon } from "./ui-icons.jsx";
 import React, { memo, useState } from "react";
 import { Control, number, count } from "./common.jsx";
 import { observer } from "mobx-react-lite";
@@ -90,7 +91,7 @@ const ArchiveCharacter = memo(function ArchiveCharacter({
           actions.openCatalogCharacter((c.inventoryIds || [c.id])[0]);
         }}
       >
-        ↗
+        <UIIcon name="external" />
       </button>
     </div>
   );
@@ -234,7 +235,7 @@ function CatalogArrow({ slug, name }) {
         actions.openCatalogCharacter(slug);
       }}
     >
-      ↗
+      <UIIcon name="external" />
     </button>
   );
 }
@@ -343,9 +344,7 @@ const TournamentRosterCard = observer(function TournamentRosterCard({
           <span className="at-slash">/</span>
           <span className="at-draw">{r.draws}</span>
         </div>
-        <span className="at-chevron" aria-hidden="true">
-          ⌄
-        </span>
+        <UIIcon name="chevron" className="at-chevron" />
       </summary>
       <div className="at-roster-body">
         {open && <TournamentRosterBody {...t.body(r)} />}
@@ -610,7 +609,7 @@ const RosterBoxNeeds = observer(function RosterBoxNeeds({ roster }) {
               </p>
               {plan(needs.plans[0], 0)}
               {needs.plans.length > 1 && (
-                <details>
+                <details data-ui-disclosure>
                   <summary>Другие минимальные варианты</summary>
                   {needs.plans.slice(1).map((p, i) => plan(p, i + 1))}
                 </details>
@@ -908,7 +907,7 @@ export function TournamentOverview({
         </div>
       </div>
       {peers?.length > 0 && (
-        <details className="at-cooccurrence">
+        <details data-ui-disclosure className="at-cooccurrence">
           <summary>Часто берут вместе · {peers.length}</summary>
           <div className="at-cooccurrence-options">
             {peers.map((p) => (

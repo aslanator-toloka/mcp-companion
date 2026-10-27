@@ -479,10 +479,10 @@ dialog {
 }
 /* Tournament controls share the app palette and keep the roster content first. */
 #tournaments-screen {
-  --ink: #21364f;
-  --muted: #607088;
-  --lime: #245fd1;
-  --soft: #f3f7ff;
+  --ink: var(--ui-ink);
+  --muted: var(--ui-muted);
+  --lime: var(--ui-accent);
+  --soft: var(--ui-accent-soft);
   --line: #dce5ef;
 }
 #tournaments-screen .at-filter-grid .at-affiliation-picker {

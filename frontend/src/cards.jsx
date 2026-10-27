@@ -542,7 +542,7 @@ export const StatCard = observer(function StatCard({ view: v }) {
         </article>
       </div>
       {card.erratas?.length > 0 && (
-        <details className="sc-errata">
+        <details data-ui-disclosure className="sc-errata">
           <summary>Обновления правил · {card.erratas.length}</summary>
           {card.erratas.map((e, i) => (
             <div key={i}>

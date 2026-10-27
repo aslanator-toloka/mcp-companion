@@ -93,7 +93,7 @@ export const CharacterRatingPanel = observer(function CharacterRatingPanel() {
         {t.selectedPlayer &&
           " Выбор игрока сужает ростеры и старые баллы; рейтинг остаётся сравнением всех игроков."}
       </p>
-      <details>
+      <details data-ui-disclosure>
         <summary>Как читать новый рейтинг</summary>
         <p>
           0 — нейтральная оценка включения в ростер; плюс и минус —

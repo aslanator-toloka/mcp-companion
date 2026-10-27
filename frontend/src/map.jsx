@@ -379,7 +379,7 @@ const DistancePanel = observer(function DistancePanel() {
           </div>
         </>
       )}
-      <details className="map-coordinate-editor">
+      <details data-ui-disclosure className="map-coordinate-editor">
         <summary>Задать координаты точки</summary>
         <div className="map-coordinates">
           {[
@@ -719,7 +719,7 @@ export const BattleMapView = observer(function BattleMapView() {
         </aside>
       </div>
       {s.distanceMode === "objects" && (
-        <details className="map-all-distances">
+        <details data-ui-disclosure className="map-all-distances">
           <summary>Все расстояния между точками · {s.points.length}</summary>
           {s.points.length < 2 ? (
             <p className="muted">Добавьте как минимум две точки.</p>

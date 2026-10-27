@@ -1,3 +1,4 @@
+import { UIIcon } from "./ui-icons.jsx";
 import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { tournaments as t, ui, actions } from "./stores/index.js";
@@ -92,7 +93,7 @@ const ArchiveSection1 = observer(function ArchiveSection1() {
             ? t.selectedAffiliations.join(" · ")
             : "Все аффилиации"}
         </span>
-        <span aria-hidden={"true"}>{"⌄"}</span>
+        <UIIcon name="chevron" className="ui-chevron" />
       </button>
       <ArchiveDialog
         id={"at-affiliation-dialog"}
@@ -113,7 +114,7 @@ const ArchiveSection1 = observer(function ArchiveSection1() {
               t.closeDialog();
             }}
           >
-            {"×"}
+            <UIIcon name="close" />
           </button>
         </div>
         <p className={"at-affiliation-description"}>
@@ -254,21 +255,28 @@ const TournamentCountries = observer(function TournamentCountries() {
           </option>
         </select>
       </label>
-      <button
-        type="button"
-        className="quiet"
-        disabled={!t.eventCountry && !t.rosterCountry}
-        onClick={t.clearCountries}
-      >
-        Сбросить страны
-      </button>
-      <details className="at-country-help">
-        <summary>Как применяются страны</summary>
-        <p className="at-country-description">
-          Оба фильтра применяются вместе к ростерам, баллам персонажей и
-          аффилиаций, а также результатам в выборе игрока.
-        </p>
-      </details>
+      <div className="at-country-actions">
+        <button
+          type="button"
+          className="quiet"
+          disabled={!t.eventCountry && !t.rosterCountry}
+          onClick={t.clearCountries}
+        >
+          Сбросить страны
+        </button>
+        <details data-ui-disclosure className="at-country-help">
+          <summary
+            aria-label="Как применяются страны"
+            title="Как применяются страны"
+          >
+            <UIIcon name="info" />
+          </summary>
+          <p className="at-country-description">
+            Оба фильтра применяются вместе к ростерам, баллам персонажей и
+            аффилиаций, а также результатам в выборе игрока.
+          </p>
+        </details>
+      </div>
     </section>
   );
 });
@@ -297,7 +305,7 @@ const ArchiveSection2 = observer(function ArchiveSection2() {
             ? t.playersById.get(t.selectedPlayer).name
             : "Все игроки"}
         </span>
-        <span aria-hidden={"true"}>{"⌄"}</span>
+        <UIIcon name="chevron" className="ui-chevron" />
       </button>
       <div
         id={"at-player-actions"}
@@ -344,7 +352,7 @@ const ArchiveSection2 = observer(function ArchiveSection2() {
               t.closeDialog();
             }}
           >
-            {"×"}
+            <UIIcon name="close" />
           </button>
         </div>
         <p
@@ -503,18 +511,26 @@ const ArchiveSection3 = observer(function ArchiveSection3() {
     </section>
   );
 });
-const ArchiveSection4 = observer(function ArchiveSection4() {
+const RatingDisclosure = observer(function RatingDisclosure() {
   const ratingDisclosure = useRef(null);
   useEffect(() => {
     if (t.ratingStatus === "error" && ratingDisclosure.current)
       ratingDisclosure.current.open = true;
   }, [t.ratingStatus]);
   return (
+    <details
+      data-ui-disclosure
+      className="at-rating-disclosure"
+      ref={ratingDisclosure}
+    >
+      <summary>Рейтинг с поправкой на игрока · подробности</summary>
+      <CharacterRatingPanel />
+    </details>
+  );
+});
+const ArchiveSection4 = observer(function ArchiveSection4() {
+  return (
     <>
-      <details className="at-rating-disclosure" ref={ratingDisclosure}>
-        <summary>Рейтинг с поправкой на игрока · подробности</summary>
-        <CharacterRatingPanel />
-      </details>
       <div className={"at-archive-layout"}>
         <aside className={"at-character-panel"} aria-label={"Выбор персонажа"}>
           <div className={"at-panel-top"}>
@@ -557,9 +573,7 @@ const ArchiveSection4 = observer(function ArchiveSection4() {
               >
                 <option value={"points"}>{"По общим баллам"}</option>
                 <option value={"average"}>{"По средним баллам"}</option>
-                <option value={"rating"}>
-                  {"По рейтингу с поправкой на игрока"}
-                </option>
+                <option value={"rating"}>{"По рейтингу R"}</option>
                 <option value={"frequency"}>{"Частые сначала"}</option>
                 <option value={"name"}>{"По имени"}</option>
               </select>
@@ -652,7 +666,7 @@ const ArchiveSection4 = observer(function ArchiveSection4() {
 });
 const ArchiveSection5 = observer(function ArchiveSection5() {
   return (
-    <details className={"at-about-data at-score-method"}>
+    <details data-ui-disclosure className={"at-about-data at-score-method"}>
       <summary>
         {"Как считаются баллы "}
         <span>{"Победы +5% · поражения в минус"}</span>
@@ -716,7 +730,7 @@ const ArchiveSection5 = observer(function ArchiveSection5() {
 });
 const ArchiveSection6 = observer(function ArchiveSection6() {
   return (
-    <details className={"at-about-data"}>
+    <details data-ui-disclosure className={"at-about-data"}>
       <summary>
         {"Что входит в архив "}
         <span>{"Рейтинговые · офлайн · все результаты"}</span>
@@ -731,7 +745,7 @@ const ArchiveSection6 = observer(function ArchiveSection6() {
         <p
           id={"at-data-period"}
         >{`Период: ${t.data.meta.start} — ${t.data.meta.end} включительно. Начальная дата округлена Longshanks до 5 августа. Снимок: ${new Date(t.data.meta.snapshot).toLocaleString("ru-RU")}.`}</p>
-        <details id={"at-unindexed-lists"}>
+        <details data-ui-disclosure id={"at-unindexed-lists"}>
           <summary>{"Листы без распознанного состава"}</summary>
           <div id={"at-unindexed-content"}>
             {t.data.rosters
@@ -802,6 +816,7 @@ const ArchiveFilters = observer(function ArchiveFilters() {
   if (t.collectionMode) selected.push("Из моей коллекции");
   return (
     <details
+      data-ui-disclosure
       className="at-filter-panel"
       open={open}
       onToggle={(e) => setOpen(e.currentTarget.open)}
@@ -827,7 +842,10 @@ export const TournamentPanel = observer(function TournamentPanel() {
     <>
       {" "}
       <ArchiveSection0 />
-      <ArchiveFilters />
+      <div className="at-workspace-tools">
+        <ArchiveFilters />
+        <RatingDisclosure />
+      </div>
       <ArchiveSection4 />
       <ArchiveSection5 />
       <ArchiveSection6 />

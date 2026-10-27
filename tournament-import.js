@@ -1,5 +1,6 @@
 (function(root){
   'use strict';
+  const collectionCore=typeof module!=='undefined'&&module.exports?require('./tournaments/collection-core.js'):root.AtlasCollectionCore;
   const key=value=>String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'').replace(/20\d\d$/,'');
   // Longshanks and Jarvis use different spellings for these same printed cards.
   const aliases=Object.fromEntries(Object.entries({
@@ -16,7 +17,7 @@
     return rows.find(c=>key(c.name)===wanted||key(c.slug)===wanted);
   }
   function draft(roster,characterMap,owned,catalog,cardLists){
-    const a=root.AtlasCollectionCore.availability(roster,characterMap,new Set(owned));
+    const a=collectionCore.availability(roster,characterMap,new Set(owned));
     const known=new Set(catalog.map(c=>c.slug)),unresolved=[];
     const characters=a.entries.map(e=>e.inventoryId).filter(id=>known.has(id));
     a.entries.forEach(e=>{if(!known.has(e.inventoryId))unresolved.push('Персонаж: '+e.name);});

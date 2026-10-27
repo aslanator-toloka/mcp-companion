@@ -1,3 +1,4 @@
+import { EmptyIllustration } from "./ui-icons.jsx";
 import { RoleIcons } from "./character-roles.jsx";
 import { BattleMapView } from "./map.jsx";
 import { observer } from "mobx-react-lite";
@@ -524,7 +525,6 @@ const MatchTile = memo(function MatchTile({ match: m, portraits }) {
 export function BattleHome({ pending, history, readError }) {
   return (
     <>
-      <PeerHome />
       <div className="heading">
         <div>
           <span className="eyebrow">08 / Бой</span>
@@ -543,6 +543,7 @@ export function BattleHome({ pending, history, readError }) {
           Новый бой +
         </button>
       </div>
+      <PeerHome />
       {readError && (
         <div className="notice">
           Сохранение партий не удалось прочитать. Исходная запись не
@@ -557,6 +558,7 @@ export function BattleHome({ pending, history, readError }) {
         </div>
       ) : (
         <div className="empty roster-empty">
+          <EmptyIllustration name="battle" />
           <h3>Пока нет незавершённых партий</h3>
           <p>
             Выберите свой ростер, отметьте бойцов и начните. Противника можно

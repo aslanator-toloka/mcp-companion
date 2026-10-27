@@ -1,3 +1,4 @@
+import { UIIcon, EmptyIllustration } from "./ui-icons.jsx";
 import { observer } from "mobx-react-lite";
 import { library, purchases, catalog, actions } from "./stores/index.js";
 import React, { memo, useId, useState } from "react";
@@ -94,7 +95,7 @@ const BoxOpportunities = observer(function BoxOpportunities({
           /^\d+ /,
           "",
         )}{" "}
-        →
+        {stats.unlocked.length > 0 ? "→" : ""}
       </button>
       <button
         className="box-opportunity-link"
@@ -110,13 +111,19 @@ const BoxOpportunities = observer(function BoxOpportunities({
           /^\d+ /,
           "",
         )}{" "}
-        {open ? "▴" : "▾"}
+        {stats.almost.length > 0 && (
+          <UIIcon
+            name="chevron"
+            className={open ? "ui-chevron is-open" : "ui-chevron"}
+          />
+        )}
       </button>
       <small title="Завершённые выступления: 4+ победы / ≤1 поражение или 3+ победы / 0 поражений. Считаются опубликованные полные составы по персонажам; тактики и кризисы не проверяются. Уже доступные составы не включены.">
         По персонажам твоей коллекции · 4+/≤1 или 3+/0
       </small>
       {extras.length > 0 && (
         <details
+          data-ui-disclosure
           id={optionsId}
           open={open}
           onToggle={(e) => setOpen(e.currentTarget.open)}
@@ -218,8 +225,8 @@ export const BoxTile = memo(function BoxTile({
           <strong>{set.name}</strong>
           <p>{summary(set)}</p>
         </div>
-        <span className="box-set-arrow" aria-hidden="true">
-          ↗
+        <span className="box-set-arrow">
+          <UIIcon name="external" />
         </span>
       </button>
       <BoxOpportunities code={set.code} />
@@ -337,6 +344,7 @@ export function PurchasesPage({
         </div>
       ) : (
         <div className="empty purchase-empty">
+          <EmptyIllustration name="collection" />
           <h3>
             {query
               ? "Ничего не найдено"

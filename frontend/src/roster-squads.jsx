@@ -44,6 +44,7 @@ export const RosterSquads = observer(function RosterSquads() {
   }, [resetKey]);
   return (
     <details
+      data-ui-disclosure
       className="squad-planner"
       open={plan.open}
       onToggle={(e) => rosters.setSquadField("open", e.currentTarget.open)}
