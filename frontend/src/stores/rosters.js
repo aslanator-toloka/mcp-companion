@@ -246,6 +246,9 @@ export class RosterStore {
     this.squads.excluded = [];
     this.squads.limit = 30;
   }
+  resetSquadConditions() {
+    this.squads = { ...defaultSquadPlanner(), open: true };
+  }
   moreSquads() {
     this.squads.limit = Math.min(1024, this.squadOptions.limit + 30);
   }

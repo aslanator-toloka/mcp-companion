@@ -52,7 +52,13 @@ async function seed(page, records = [roster]) {
   );
 }
 const planner = (p) => p.locator(".squad-planner");
+async function openControls(page) {
+  const toggle = planner(page).getByRole("button", { name: /Условия отряда/ });
+  if ((await toggle.getAttribute("aria-expanded")) === "false")
+    await toggle.click();
+}
 async function lock(page, slug) {
+  await openControls(page);
   await planner(page).locator(`[data-squad-required="${slug}"]`).check();
 }
 test("minimum five and locked Spider-Men produce the exact squads; groups, links, history and reload retain the selection", async ({
@@ -272,6 +278,7 @@ test("excluded models stay in the roster but leave every variant; exclusion and 
   await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
   await exclude.click();
   await page.setViewportSize({ width: 390, height: 844 });
+  await openControls(page);
   await root
     .locator('[data-squad-exclude="ghost-spider"]')
     .scrollIntoViewIfNeeded();
@@ -285,4 +292,166 @@ test("excluded models stay in the roster but leave every variant; exclusion and 
     .getByRole("button", { name: "Снять все исключения", exact: true })
     .click();
   await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+});
+
+test("wide tablet keeps the answer beside conditions and actions clear of the save bar", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1194, height: 834 });
+  await seed(page);
+  await page.goto(origin + "#screen=rosters&roster=squad-web&squads=1");
+  const root = planner(page),
+    results = root.locator(".squad-results");
+  await root
+    .locator(".squad-layout")
+    .evaluate((el) => el.scrollIntoView({ block: "start" }));
+  await root.locator('[data-squad-required="wong"]').scrollIntoViewIfNeeded();
+  const geometry = await page.evaluate(() => {
+    const bounds = (s) =>
+      document.querySelector(s).getBoundingClientRect().toJSON();
+    return {
+      controls: bounds(".squad-controls"),
+      results: bounds(".squad-results"),
+      footer: bounds(".editor-footer"),
+      nav: bounds(".sidebar"),
+      exclude: bounds(".squad-exclude"),
+      member: bounds("[data-squad-member]"),
+    };
+  });
+  expect(geometry.results.x).toBeGreaterThan(geometry.controls.right);
+  expect(geometry.results.y).toBeGreaterThanOrEqual(geometry.nav.bottom);
+  expect(geometry.results.bottom).toBeLessThan(geometry.footer.y);
+  expect(geometry.exclude.height).toBeGreaterThanOrEqual(44);
+  expect(geometry.member.height).toBeGreaterThanOrEqual(44);
+  await lock(page, "amazing-spider-man");
+  await lock(page, "ultimate-spider-man");
+  await expect(results.locator("[data-squad-variant]")).toHaveCount(9);
+  await expect(
+    results.getByLabel("Действующие ограничения отряда"),
+  ).toContainText("Amazing Spider-Man");
+  await expect(
+    results.getByLabel("Действующие ограничения отряда"),
+  ).toContainText("Ultimate Spider-Man");
+  await results
+    .getByRole("button", {
+      name: "Снять закрепление: Amazing Spider-Man",
+      exact: true,
+    })
+    .click();
+  await expect(
+    root.locator('[data-squad-required="amazing-spider-man"]'),
+  ).not.toBeChecked();
+  expect(await page.evaluate(() => MCPStores.rosters.dirty)).toBe(false);
+  await page.screenshot({ path: "previews/visual-review/squad-wide.png" });
+});
+
+test("portrait tablet starts with results and opens the editable conditions without losing their context", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 820, height: 1180 });
+  await seed(page);
+  await page.goto(
+    origin +
+      "#screen=rosters&roster=squad-web&squads=1&squad-required=amazing-spider-man&squad-required=ultimate-spider-man",
+  );
+  const root = planner(page),
+    toggle = root.getByRole("button", { name: /Условия отряда/ });
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await expect(root.locator("#squad-controls-body")).not.toBeVisible();
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+  await root
+    .locator(".squad-results-heading")
+    .getByRole("button", { name: "Изменить условия", exact: true })
+    .click();
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  const button = await toggle.boundingBox();
+  expect(button.y).toBeGreaterThanOrEqual(114);
+  expect(button.y).toBeLessThan(300);
+  await root.locator('[data-squad-exclude="ghost-spider"]').click();
+  await expect(
+    root.locator('[data-squad-exclude="ghost-spider"]'),
+  ).toHaveAccessibleName("Вернуть в варианты: Ghost-Spider");
+  await toggle.evaluate((el) => el.scrollIntoView({ block: "start" }));
+  const beforeCollapse = await toggle.boundingBox();
+  await toggle.click();
+  await expect
+    .poll(async () =>
+      Math.abs((await toggle.boundingBox()).y - beforeCollapse.y),
+    )
+    .toBeLessThan(2);
+  await expect(root.getByLabel("Действующие ограничения отряда")).toContainText(
+    "Ghost-Spider",
+  );
+  await root
+    .getByRole("button", {
+      name: "Вернуть в подбор: Ghost-Spider",
+      exact: true,
+    })
+    .click();
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(9);
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(820);
+  await page.screenshot({ path: "previews/visual-review/squad-portrait.png" });
+});
+
+test("empty groups offer a valid nearby Threat and condition reset retains the saved roster", async ({
+  page,
+}) => {
+  await seed(page);
+  await page.goto(
+    origin +
+      "#screen=rosters&roster=squad-web&squads=1&squad-threat=15&squad-required=amazing-spider-man&squad-required=ultimate-spider-man",
+  );
+  const root = planner(page);
+  await expect(root.locator(".squad-empty")).toContainText(
+    "Нет подходящих составов",
+  );
+  await root
+    .getByRole("button", {
+      name: "Показать 16 Threat · 3 варианта",
+      exact: true,
+    })
+    .click();
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(3);
+  await expect(
+    root.locator('[data-squad-required="amazing-spider-man"]'),
+  ).toBeChecked();
+  await page.goBack();
+  await expect(root.locator(".squad-empty")).toBeVisible();
+  await root
+    .getByRole("button", { name: "Сбросить условия", exact: true })
+    .click();
+  await expect(
+    root.getByLabel("Минимум персонажей", { exact: true }),
+  ).toHaveValue("5");
+  await expect(
+    root.locator('[data-squad-required="amazing-spider-man"]'),
+  ).not.toBeChecked();
+  expect(await page.evaluate(() => MCPStores.rosters.dirty)).toBe(false);
+  expect(
+    await page.evaluate(
+      () =>
+        MCPStores.library.snapshot.rosters.find((r) => r.id === "squad-web")
+          .characters,
+    ),
+  ).toEqual(ids);
+  for (const slug of [
+    "ghost-spider",
+    "spider-ham",
+    "black-cat",
+    "wong",
+    "moon-knight",
+    "daredevil",
+  ]) {
+    await root.locator(`[data-squad-exclude="${slug}"]`).click();
+  }
+  await root
+    .getByRole("button", { name: "Минимум 4 персонажа", exact: true })
+    .click();
+  await expect(
+    root.getByLabel("Минимум персонажей", { exact: true }),
+  ).toHaveValue("4");
+  await expect(root.locator("[data-squad-variant]")).toHaveCount(1);
+  expect(await page.evaluate(() => MCPStores.rosters.dirty)).toBe(false);
 });
