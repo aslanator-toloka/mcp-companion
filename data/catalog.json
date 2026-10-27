@@ -1,7 +1,7 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-10-23T14:40:02.714Z",
-  "searchMetadataUpdatedAt": "2026-10-23T14:40:02.714Z",
+  "fetchedAt": "2026-10-26T15:35:19.032Z",
+  "searchMetadataUpdatedAt": "2026-10-26T15:35:19.032Z",
   "characters": [
     {
       "slug": "abomination",
@@ -11756,7 +11756,7 @@
       "stamina": 7,
       "speed": "S",
       "size": 4,
-      "baseSize": 50,
+      "baseSize": 65,
       "physicalDefense": 4,
       "energyDefense": 4,
       "mysticDefense": 4,
@@ -11788,7 +11788,7 @@
         "immuneToPoison",
         "bald"
       ],
-      "version": 1792010398,
+      "version": 1792858644,
       "releaseDate": "2026-05-22",
       "actAs": "nimrod",
       "affiliations": [

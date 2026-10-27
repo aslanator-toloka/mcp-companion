@@ -78,7 +78,16 @@ test("all archived events resolve to an event country and counts deduplicate ros
     g.options.reduce((n, c) => n + c.count, 0),
     g.events.size,
   );
-  assert.equal(g.options.find((c) => c.code === "russia").count, 7);
+  const russianEvents = new Set(
+    data.rosters
+      .filter((r) => /(?:^|[,\s])Russia\s*$/i.test(r.location))
+      .map((r) => r.eventId),
+  );
+  assert(russianEvents.size > 0);
+  assert.equal(
+    g.options.find((c) => c.code === "russia").count,
+    russianEvents.size,
+  );
 });
 function store() {
   const t = new TournamentStore(

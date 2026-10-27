@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-23",
-  "catalogFetchedAt": "2026-10-23T14:40:02.714Z",
+  "catalogFetchedAt": "2026-10-26T15:35:19.032Z",
   "method": "Initial editorial multi-role classification from current local Jarvis stat cards; not a statistical rating or an automatic tag-to-role formula.",
   "scope": "Printed character kit and forms. Explicit conditional assignments list their enabling tactic, ally or leadership. No speculative gem/leadership bonuses assigned globally.",
   "referenceTaxonomy": "SG Protocol Battlefield Roles (2025) informed the vocabulary only; old character ratings not imported. See guides.md.",
@@ -713,9 +713,11 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/nightcrawler"
     },
     "nimrod": {
-      "cardVersion": 1792010398,
+      "cardVersion": 1792858644,
       "cardSha256": "dba82126c26d7076ca91e8221baace99b470ee21b7cca44c40b038940fe710fc",
-      "sourceUrl": "https://www.jarvis-protocol.com/characters/nimrod"
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nimrod",
+      "reviewedAt": "2026-10-26",
+      "reviewNote": "Jarvis metadata corrects base size from 50 to 65 mm; complete stat-card JSON is unchanged. Existing roles remain applicable."
     },
     "nkantu-the-living-mummy": {
       "cardVersion": 1753605541,
