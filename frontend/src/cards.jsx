@@ -10,6 +10,7 @@ import { observer } from "mobx-react-lite";
 import { cardViews, catalog } from "./stores/index.js";
 import { fitNativeCards, fitNativeGameCards } from "./card-layout.js";
 import { annotationReference, ruleReference } from "./rule-references.js";
+import { useDialogBackdrop } from "./dialog-backdrop.js";
 const labels = {
   stamina: "Stamina",
   speed: "Speed",
@@ -1098,6 +1099,7 @@ function CardModal({
   children,
 }) {
   const ref = useRef(null);
+  const backdrop = useDialogBackdrop(onClose);
   useEffect(() => {
     const el = ref.current;
     if (open && !el.open) el.showModal();
@@ -1105,6 +1107,7 @@ function CardModal({
   }, [open]);
   return (
     <dialog
+      {...backdrop}
       ref={ref}
       id={id}
       className={className}

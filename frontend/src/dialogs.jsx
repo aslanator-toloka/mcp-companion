@@ -12,6 +12,7 @@ import {
 import { CharacterDetail } from "./catalog.jsx";
 import { ConnectedBoxDetail } from "./purchases.jsx";
 import { StatControls, StatSurface } from "./cards.jsx";
+import { useDialogBackdrop } from "./dialog-backdrop.js";
 export function Dialog({
   id,
   className,
@@ -22,6 +23,7 @@ export function Dialog({
   children,
 }) {
   const ref = useRef(null);
+  const backdrop = useDialogBackdrop(onClose);
   useEffect(() => {
     const el = ref.current;
     if (open) {
@@ -34,6 +36,7 @@ export function Dialog({
   }, [open, resetKey]);
   return (
     <dialog
+      {...backdrop}
       ref={ref}
       id={id}
       className={className}

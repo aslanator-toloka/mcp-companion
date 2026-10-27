@@ -1,5 +1,5 @@
 import { UIIcon } from "./ui-icons.jsx";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { catalog, library, ui, actions } from "./stores/index.js";
 import { MODEL_STAGES } from "./model-progress.js";
@@ -20,8 +20,27 @@ export const Navigation = observer(function Navigation() {
   ];
   const selected =
     ui.screen === "catalog" ? (catalog.onlyOwned ? "mine" : "all") : ui.screen;
+  const navRef = useRef(null);
+  useEffect(() => {
+    const nav = navRef.current;
+    const revealCurrent = () => {
+      const active = nav.querySelector('[aria-current="page"]');
+      if (!active || getComputedStyle(nav).flexDirection !== "row") return;
+      const frame = nav.getBoundingClientRect(),
+        item = active.getBoundingClientRect();
+      // Scroll only the navigation strip, never the page or a user's open editor.
+      if (item.right > frame.right - 12)
+        nav.scrollLeft += item.right - frame.right + 12;
+      else if (item.left < frame.left + 12)
+        nav.scrollLeft += item.left - frame.left - 12;
+    };
+    revealCurrent();
+    const resize = new ResizeObserver(revealCurrent);
+    resize.observe(nav);
+    return () => resize.disconnect();
+  }, [selected, ui.collapsed]);
   return (
-    <nav aria-label="Разделы приложения">
+    <nav ref={navRef} aria-label="Разделы приложения">
       {items.map(([id, index, label]) => (
         <button
           key={id}

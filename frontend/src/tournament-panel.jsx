@@ -10,8 +10,10 @@ import {
   TournamentRosters,
 } from "./tournaments.jsx";
 import { CharacterRatingPanel } from "./character-rating.jsx";
+import { useDialogBackdrop } from "./dialog-backdrop.js";
 function ArchiveDialog({ openState, children, ...props }) {
   const ref = useRef(null);
+  const backdrop = useDialogBackdrop(() => t.closeDialog());
   useEffect(() => {
     const el = ref.current;
     if (openState && !el.open) el.showModal();
@@ -20,21 +22,11 @@ function ArchiveDialog({ openState, children, ...props }) {
   return (
     <dialog
       {...props}
+      {...backdrop}
       ref={ref}
       onClose={(event) => {
         if (event.currentTarget.open) return;
         if (t.dialog) t.closeDialog();
-      }}
-      onClick={(e) => {
-        if (e.target !== e.currentTarget) return;
-        const r = e.currentTarget.getBoundingClientRect();
-        if (
-          e.clientX < r.left ||
-          e.clientX > r.right ||
-          e.clientY < r.top ||
-          e.clientY > r.bottom
-        )
-          t.closeDialog();
       }}
     >
       {children}

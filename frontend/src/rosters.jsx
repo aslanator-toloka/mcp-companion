@@ -11,6 +11,7 @@ import {
 } from "./stores/index.js";
 import { cardStatus } from "./stores/rosters.js";
 import { RoleIcons } from "./character-roles.jsx";
+import { useDialogBackdrop } from "./dialog-backdrop.js";
 import { RosterSquads } from "./roster-squads.jsx";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
@@ -881,7 +882,16 @@ export const RosterPicker = observer(function RosterPicker({
   error,
 }) {
   const kind = p.kind,
-    isCard = kind !== "characters";
+    isCard = kind !== "characters",
+    filtered = !!(
+      p.query ||
+      p.affiliation ||
+      p.owned ||
+      p.type ||
+      p.available ||
+      p.relatedOnly ||
+      (kind === "crises" && !p.challenger)
+    );
   return (
     <>
       <div className="dialog-heading">
@@ -1018,6 +1028,17 @@ export const RosterPicker = observer(function RosterPicker({
       </div>
       <div className="picker-summary">
         <span>{items.length} найдено</span>
+        {filtered && (
+          <button
+            className="quiet picker-reset"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.resetPickerFilters();
+            }}
+          >
+            Сбросить поиск и фильтры
+          </button>
+        )}
         <span>В составе: {selectedCount}</span>
       </div>
       <div className="picker-results">
@@ -1033,11 +1054,23 @@ export const RosterPicker = observer(function RosterPicker({
           ))
         ) : (
           <div className="empty">
+            <h3>Ничего не найдено</h3>
             <p>
               {p.relatedOnly
-                ? "У этого персонажа нет связанных тактик в снимке Jarvis. Снимите отметку «Только связанные карты», чтобы посмотреть все тактики и их статистику с этим персонажем."
-                : "Ничего не найдено. Измените запрос или фильтры."}
+                ? "Нет связанных карт, подходящих под поиск и выбранные фильтры. Сброс откроет все карты, сохранив контекст статистики."
+                : "Нет позиций, подходящих под поиск и выбранные фильтры."}
             </p>
+            {filtered && (
+              <button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  rosters.resetPickerFilters();
+                }}
+              >
+                Показать{" "}
+                {kind === "crises" ? "кризисы Challenger" : "все позиции"}
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -1124,6 +1157,7 @@ export const RosterWorkspace = observer(function RosterWorkspace() {
 });
 function Modal({ id, className, label, open, onClose, children }) {
   const ref = useRef(null);
+  const backdrop = useDialogBackdrop(onClose);
   useEffect(() => {
     const el = ref.current;
     if (open && !el.open) el.showModal();
@@ -1131,6 +1165,7 @@ function Modal({ id, className, label, open, onClose, children }) {
   }, [open]);
   return (
     <dialog
+      {...backdrop}
       ref={ref}
       id={id}
       className={className}

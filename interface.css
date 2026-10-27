@@ -193,6 +193,43 @@ main {
 dialog {
   overscroll-behavior: contain;
 }
+/* The close action stays reachable while browsing a long set on a tablet. */
+.box-set-dialog {
+  --dialog-inset: 24px;
+}
+#app-root #box-set-content > .dialog-heading {
+  position: sticky;
+  top: calc(-1 * var(--dialog-inset));
+  z-index: 5;
+  margin: calc(-1 * var(--dialog-inset)) calc(-1 * var(--dialog-inset)) 20px;
+  padding: var(--dialog-inset) var(--dialog-inset) 14px;
+  background: white;
+  border-bottom: 1px solid var(--ui-border, #d0dae6);
+}
+#app-root #roster-picker-content > .dialog-heading {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: white;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ui-border, #d0dae6);
+}
+.picker-summary {
+  gap: 8px 16px;
+  flex-wrap: wrap;
+}
+.picker-summary > :last-child {
+  margin-left: auto;
+}
+#app-root .picker-summary .picker-reset {
+  min-height: 44px;
+  font-size: 12px;
+}
+@media (max-width: 700px) {
+  .box-set-dialog {
+    --dialog-inset: 18px;
+  }
+}
 .picker-footer {
   position: sticky;
   bottom: -24px;

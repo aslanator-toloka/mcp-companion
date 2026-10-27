@@ -360,6 +360,18 @@ export class RosterStore {
   closePicker() {
     this.picker = null;
   }
+  resetPickerFilters() {
+    if (!this.picker) return;
+    Object.assign(this.picker, {
+      query: "",
+      affiliation: "",
+      owned: false,
+      type: "",
+      available: false,
+      challenger: this.picker.kind === "crises",
+      relatedOnly: false,
+    });
+  }
   setPicker(name, value) {
     if (!this.picker) return;
     this.picker[name] = value;
