@@ -146,10 +146,20 @@ async function side(p, s) {
     .locator(`.battle-side-tabs [data-bt="team"][data-side="${s}"]`)
     .click();
 }
-async function pair(browser) {
+async function pair(browser, { tablet = false, capture = false } = {}) {
   const a = await player(browser, "Alice", "captain-america"),
     b = await player(browser, "Bob", "hulk");
+  if (tablet)
+    await Promise.all([
+      a.page.setViewportSize({ width: 820, height: 1180 }),
+      b.page.setViewportSize({ width: 820, height: 1180 }),
+    ]);
   await connect(a, b, await create(a));
+  await expect(a.page.locator('[data-peer="ready"]')).toBeDisabled();
+  await expect(b.page.locator('[data-peer="ready"]')).toBeDisabled();
+  await expect(a.page.locator('[data-peer="reconnect"]')).toHaveCount(0);
+  if (capture)
+    await a.page.screenshot({ path: "previews/complete-audit/peer-setup.png" });
   await Promise.all([pick(a, "mine", a.slug), pick(b, "opponent", b.slug)]);
   await a.page.locator('[data-peer="ready"]').click();
   await expect(a.page.locator('[data-peer="ready"]')).toHaveText(
@@ -158,12 +168,19 @@ async function pair(browser) {
   await b.page.locator('[data-peer="ready"]').click();
   for (const p of [a, b])
     await expect(p.page.locator(".battle-dashboard")).toBeVisible();
+  if (capture) {
+    await a.page.screenshot({ path: "previews/complete-audit/peer-host.png" });
+    await b.page.screenshot({ path: "previews/complete-audit/peer-guest.png" });
+  }
   return { a, b };
 }
 test("WebRTC: handshake, host authority, concurrent actions and reconnect", async ({
   browser,
 }) => {
-  const { a, b } = await pair(browser);
+  const { a, b } = await pair(browser, {
+    tablet: true,
+    capture: !!process.env.MCP_UX_SCREENSHOTS,
+  });
   try {
     const diagnostics = await a.page.evaluate(() =>
       NetworkBattle.diagnostics(),

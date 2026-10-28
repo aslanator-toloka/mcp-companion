@@ -978,3 +978,246 @@ dialog {
     grid-column: auto;
   }
 }
+
+/* Long tablet dialogs retain their title and escape action. */
+.small-dialog,
+.battle-dialog {
+  --dialog-inset: 24px;
+}
+#app-root
+  :is(
+    #data-content,
+    #roster-content,
+    #roster-action-content,
+    #battle-picker-content
+  )
+  > .dialog-heading,
+#app-root
+  #battle-dialog:not(.battle-character-dialog)
+  #battle-dialog-content
+  > .dialog-heading,
+#app-root #peer-connect-dialog > .dialog-heading {
+  position: sticky;
+  top: calc(-1 * var(--dialog-inset));
+  z-index: 6;
+  margin: calc(-1 * var(--dialog-inset)) calc(-1 * var(--dialog-inset)) 18px;
+  padding: var(--dialog-inset) var(--dialog-inset) 14px;
+  border-bottom: 1px solid var(--ui-border);
+  background: white;
+}
+#app-root .dialog-heading > .close {
+  flex: none;
+  min-height: 44px;
+  min-width: 44px;
+}
+.import-file-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  margin-bottom: 12px;
+}
+.import-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 18px;
+}
+.import-summary > div {
+  padding: 10px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+}
+.import-summary dt {
+  font-size: 12px;
+  color: var(--ui-muted);
+}
+.import-summary dd {
+  margin: 4px 0 0;
+  font-size: 17px;
+  font-weight: 650;
+}
+#data-content > .actions,
+.small-dialog form > .actions {
+  margin-top: 18px;
+}
+.import-error {
+  border-style: solid;
+  color: #9f1239;
+  background: #fff1f2;
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
+}
+.group-manager,
+.battle-log {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: calc(85dvh - 190px);
+}
+.group-tools,
+.log-tools {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  flex: none;
+}
+#app-root :is(.group-tools, .log-tools) input {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: white;
+}
+.group-manager > [role="status"],
+.battle-log > [role="status"] {
+  margin: 12px 0;
+  font-size: 12px;
+  color: var(--ui-muted);
+  flex: none;
+}
+.group-list,
+.battle-log-list {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+#app-root .group-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+.group-row > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.group-row > .actions {
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+#app-root .group-row button {
+  min-height: 44px;
+}
+#app-root .group-delete {
+  min-width: 44px;
+  padding: 8px;
+}
+.group-row strong {
+  line-height: 1.5;
+}
+#app-root .battle-log > [role="status"] {
+  padding: 0;
+  border: 0;
+}
+.battle-log-list > p {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ui-border);
+}
+.battle-log-list small {
+  font-size: 11px;
+  color: var(--ui-muted);
+}
+.battle-log-list span {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.map-configuration {
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  padding: 0 14px 14px;
+  background: white;
+  margin-bottom: 14px;
+}
+.map-configuration:not([open]) {
+  padding-bottom: 0;
+}
+.map-configuration > summary {
+  padding: 14px 32px 14px 0;
+  display: flex;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.map-configuration > summary span {
+  font-size: 12px;
+  color: var(--ui-muted);
+}
+.map-configuration .map-settings {
+  margin-top: 0;
+}
+.map-configuration .map-missions {
+  margin-bottom: 12px;
+}
+.map-canvas-section,
+.map-details {
+  scroll-margin-top: calc(var(--app-chrome-height) + 12px);
+}
+#app-root .map-zoom button {
+  min-height: 44px;
+  min-width: 44px;
+}
+.map-canvas-section > .map-zoom {
+  margin: 0 0 10px;
+}
+.map-jump {
+  display: none;
+}
+.map-rename-dialog form > button {
+  margin-top: 16px;
+}
+@media (min-width: 701px) {
+  .map-configuration .map-missions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1100px) {
+  #app-root .map-jump {
+    display: inline-flex;
+    min-height: 44px;
+    margin-bottom: 8px;
+  }
+}
+@media (min-width: 1101px) {
+  .map-canvas-section,
+  .map-details {
+    position: sticky;
+    top: calc(var(--app-chrome-height) + 12px);
+  }
+  .map-details {
+    max-height: calc(100dvh - var(--app-chrome-height) - 40px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+@media (max-width: 700px) {
+  .small-dialog {
+    --dialog-inset: 20px;
+  }
+  .battle-dialog {
+    --dialog-inset: 18px;
+  }
+  .group-tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.map-canvas-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+#app-root .map-canvas-tools .map-jump {
+  margin: 0;
+}
+.map-canvas-tools .check {
+  font-size: 12px;
+}

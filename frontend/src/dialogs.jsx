@@ -231,6 +231,9 @@ export const MembershipModal = observer(function MembershipModal() {
 });
 export const DataModal = observer(function DataModal() {
   const file = useRef(null);
+  const imported = ui.pendingImport
+    ? { ...ui.pendingImport, ...library.normalize(ui.pendingImport) }
+    : null;
   return (
     <Dialog
       id="data-dialog"
@@ -244,7 +247,37 @@ export const DataModal = observer(function DataModal() {
           <>
             <div className="dialog-heading">
               <h2>Восстановить данные?</h2>
+              <button
+                className="quiet close"
+                aria-label="Закрыть восстановление"
+                onClick={ui.closeData}
+              >
+                <UIIcon name="close" />
+              </button>
             </div>
+            <p className="import-file-name">{ui.importFileName}</p>
+            {imported && (
+              <dl className="import-summary" aria-label="Содержимое файла">
+                {[
+                  ["Персонажи", imported.owned.length],
+                  ["Ростеры", imported.rosters.length],
+                  ["Группы", imported.groups?.length || 0],
+                  ["Запланированные наборы", imported.wishlist?.length || 0],
+                  ["Купленные наборы", imported.purchasedSets?.length || 0],
+                  [
+                    "Локальные партии",
+                    imported.battles
+                      ? imported.battles.matches.length
+                      : "останутся текущие",
+                  ],
+                ].map(([name, value]) => (
+                  <div key={name}>
+                    <dt>{name}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
             <p>
               Коллекция, ростеры, группы, запланированные и купленные наборы
               будут заменены содержимым файла. В старых файлах без списков
@@ -261,6 +294,9 @@ export const DataModal = observer(function DataModal() {
               </button>
               <button data-action="close-data" onClick={ui.closeData}>
                 Отмена
+              </button>
+              <button className="quiet" onClick={ui.cancelImport}>
+                Выбрать другой файл
               </button>
             </div>
           </>
@@ -286,6 +322,11 @@ export const DataModal = observer(function DataModal() {
               Полные карты и портреты загружены из Jarvis. Для переноса
               используйте экспорт JSON и импорт здесь.
             </p>
+            {ui.importError && (
+              <p role="alert" className="notice import-error">
+                {ui.importError}
+              </p>
+            )}
             <div className="actions">
               <button
                 className="primary"
@@ -315,8 +356,9 @@ export const DataModal = observer(function DataModal() {
             />
             <p className="notice">
               Экспорт включает отметки наличия, ростеры, группы, запланированные
-              и купленные наборы и партии. Несохранённые правки и состояние
-              интерфейса не экспортируются.
+              и купленные наборы и локальные партии. Совместные партии в этот
+              файл не входят. Несохранённые правки и состояние интерфейса не
+              экспортируются.
             </p>
           </>
         )}

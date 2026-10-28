@@ -281,6 +281,7 @@ test("native SVG map: selection, distances, coordinate validation, pointer drag,
   await expect(svg.locator(".map-distance-line")).toHaveCount(0);
   await expect(page.locator(".map-details")).toContainText("До стартовых зон");
   const bases = await svg.locator(".map-reference-label").allTextContents();
+  await page.locator(".map-configuration > summary").click();
   await page.locator("#map-mode").selectOption("centers");
   await expect
     .poll(() => svg.locator(".map-reference-label").allTextContents())
@@ -296,7 +297,9 @@ test("native SVG map: selection, distances, coordinate validation, pointer drag,
   const id = await pin.getAttribute("data-map-key");
   await page.locator('[data-ma="rename-pin"]').click();
   await page.locator("#map-pin-form input").fill("Marker");
-  await page.locator("#map-pin-form button").click();
+  await page
+    .getByRole("button", { name: "Сохранить название", exact: true })
+    .click();
   await expect(pin).toContainText("Marker");
   await expect(page.locator("#map-origin")).toHaveValue(id);
   await page.locator(".map-coordinate-editor summary").click();

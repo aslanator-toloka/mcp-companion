@@ -526,6 +526,7 @@ export class RosterStore {
   groupForm(id) {
     const g = this.groups.find((g) => g.id === id);
     this.dialog = {
+      returnToGroups: this.dialog?.type === "groups",
       type: "group",
       id,
       name: g?.name || "",
@@ -536,8 +537,12 @@ export class RosterStore {
   editGroupName(name) {
     if (this.dialog) this.dialog.name = name;
   }
+  cancelGroup() {
+    if (this.dialog?.returnToGroups) this.showGroups();
+    else this.closeDialog();
+  }
   saveGroup() {
-    const { id } = this.dialog,
+    const { id, returnToGroups } = this.dialog,
       name = this.dialog.name.trim();
     if (!name) return;
     if (
@@ -557,7 +562,8 @@ export class RosterStore {
       return;
     }
     if (!id && this.draft) this.setGroup(group.id, true);
-    this.dialog = null;
+    if (returnToGroups) this.showGroups();
+    else this.dialog = null;
     this.ui.notify(id ? "Группа переименована" : "Группа создана");
   }
   removeGroup(id) {

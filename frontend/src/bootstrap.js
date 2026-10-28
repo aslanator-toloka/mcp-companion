@@ -105,13 +105,19 @@ function exportData() {
   ui.notify("Данные экспортированы");
 }
 async function readImport(file) {
+  ui.setImportError("");
   try {
     const value = JSON.parse(await file.text());
     validateLibrary(value, catalog.byId);
     if (value.battles) battle.validate(value.battles);
-    ui.confirmImport(value);
+    ui.confirmImport(value, file.name);
   } catch (e) {
-    ui.notify(e.message || "Не удалось прочитать файл.");
+    const message =
+      e instanceof SyntaxError
+        ? "Не удалось прочитать JSON. Выберите файл экспорта MCP Companion."
+        : e.message || "Не удалось прочитать файл.";
+    ui.setImportError(message);
+    ui.notify(message);
   }
 }
 function restore() {

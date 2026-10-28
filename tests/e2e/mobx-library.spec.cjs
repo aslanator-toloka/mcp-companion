@@ -85,7 +85,7 @@ test("roster/group CRUD and two-tab conflict resolution retain local draft and s
       "League",
       "League",
     ]);
-    await page.getByRole("button", { name: "Группы", exact: true }).click();
+    await expect(modal.locator(".group-manager")).toBeVisible();
     await modal.locator('[data-rs="delete-group"]').click();
     await modal.locator('[data-rs="confirm-delete-group"]').click();
     await modal.locator('[data-rs="close-action"]').click();

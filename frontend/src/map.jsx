@@ -1,3 +1,5 @@
+import { UIIcon } from "./ui-icons.jsx";
+import { useDialogBackdrop } from "./dialog-backdrop.js";
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { map as s, battle as b } from "./stores/index.js";
@@ -128,7 +130,7 @@ const MapCanvas = observer(function MapCanvas() {
       viewBox="0 0 440 440"
       style={{
         width: 100 * s.zoom + "%",
-        maxWidth: s.zoom === 1 ? "min(100%,65dvh)" : "none",
+        maxWidth: s.zoom === 1 ? "min(100%,60dvh)" : "none",
       }}
       role="img"
       tabIndex={0}
@@ -324,6 +326,59 @@ const DistancePanel = observer(function DistancePanel() {
         <h2>{s.pointName(p)}</h2>
       </div>
       <p className="map-size-note">Диаметр точки · 1″</p>
+      <details data-ui-disclosure className="map-coordinate-editor">
+        <summary>Задать координаты точки</summary>
+        <div className="map-coordinates">
+          {[
+            ["x", "X от левого края"],
+            ["y", "Y от верхнего края"],
+          ].map(([key, label]) => (
+            <label key={key} className="field">
+              {label}
+              <input
+                id={"map-" + key}
+                type="number"
+                min="0"
+                max={36 * (s.unit === "cm" ? 2.54 : 1)}
+                step=".01"
+                value={s[key]}
+                disabled={readonly}
+                onChange={(e) => s.setField(key, e.target.value)}
+              />
+            </label>
+          ))}
+          <small>
+            Координаты в {s.unit === "cm" ? "сантиметрах" : "дюймах"}
+          </small>
+          {!readonly && (
+            <button
+              className="primary"
+              data-ma="apply-coords"
+              onClick={s.applyCoordinates}
+            >
+              Применить координаты
+            </button>
+          )}
+        </div>
+      </details>
+      {!readonly && (
+        <div className="actions map-point-actions">
+          {p.kind === "objective" ? (
+            <button data-ma="reset-point" onClick={s.resetPoint}>
+              Вернуть цель на старт
+            </button>
+          ) : (
+            <>
+              <button data-ma="rename-pin" onClick={s.rename}>
+                Название точки
+              </button>
+              <button data-ma="remove-pin" onClick={() => s.remove(p.id)}>
+                Убрать точку
+              </button>
+            </>
+          )}
+        </div>
+      )}
       {s.distanceMode === "boundaries" ? (
         <section className="map-reference-summary">
           <h3>До краёв поля</h3>
@@ -379,72 +434,23 @@ const DistancePanel = observer(function DistancePanel() {
           </div>
         </>
       )}
-      <details data-ui-disclosure className="map-coordinate-editor">
-        <summary>Задать координаты точки</summary>
-        <div className="map-coordinates">
-          {[
-            ["x", "X от левого края"],
-            ["y", "Y от верхнего края"],
-          ].map(([key, label]) => (
-            <label key={key} className="field">
-              {label}
-              <input
-                id={"map-" + key}
-                type="number"
-                min="0"
-                max={36 * (s.unit === "cm" ? 2.54 : 1)}
-                step=".01"
-                value={s[key]}
-                disabled={readonly}
-                onChange={(e) => s.setField(key, e.target.value)}
-              />
-            </label>
-          ))}
-          <small>
-            Координаты в {s.unit === "cm" ? "сантиметрах" : "дюймах"}
-          </small>
-          {!readonly && (
-            <button
-              className="primary"
-              data-ma="apply-coords"
-              onClick={s.applyCoordinates}
-            >
-              Применить координаты
-            </button>
-          )}
-        </div>
-      </details>
-      {!readonly && (
-        <div className="actions map-point-actions">
-          {p.kind === "objective" ? (
-            <button data-ma="reset-point" onClick={s.resetPoint}>
-              Вернуть цель на старт
-            </button>
-          ) : (
-            <>
-              <button data-ma="rename-pin" onClick={s.rename}>
-                Название точки
-              </button>
-              <button data-ma="remove-pin" onClick={() => s.remove(p.id)}>
-                Убрать точку
-              </button>
-            </>
-          )}
-        </div>
-      )}
     </>
   );
 });
 const RenameDialog = observer(function RenameDialog() {
   const ref = useRef(null);
+  const cancel = () => s.setField("renaming", false);
+  const backdrop = useDialogBackdrop(cancel);
   useEffect(() => {
     if (s.renaming && !ref.current.open) ref.current.showModal();
     else if (!s.renaming && ref.current.open) ref.current.close();
   }, [s.renaming]);
   return (
     <dialog
+      {...backdrop}
       ref={ref}
-      className="small-dialog"
+      aria-label="Название точки"
+      className="small-dialog map-rename-dialog"
       onClose={(event) => {
         if (!event.currentTarget.open) s.setField("renaming", false);
       }}
@@ -456,6 +462,17 @@ const RenameDialog = observer(function RenameDialog() {
           s.saveName();
         }}
       >
+        <div className="dialog-heading">
+          <h2>Название точки</h2>
+          <button
+            type="button"
+            className="quiet close"
+            aria-label="Закрыть название точки"
+            onClick={cancel}
+          >
+            <UIIcon name="close" />
+          </button>
+        </div>
         <label className="field">
           Название
           <input
@@ -468,6 +485,9 @@ const RenameDialog = observer(function RenameDialog() {
         </label>
         <button className="primary" type="submit">
           Сохранить название
+        </button>
+        <button type="button" onClick={cancel}>
+          Отмена
         </button>
       </form>
     </dialog>
@@ -516,40 +536,88 @@ export const BattleMapView = observer(function BattleMapView() {
           </button>
         </div>
       </div>
-      <div className="map-missions">
-        {[
-          ["secure", "Secure"],
-          ["extract", "Extract"],
-        ].map(([kind, name]) => (
-          <div key={kind} className="map-mission" data-kind={kind}>
-            <span className="eyebrow">{name}</span>
-            {m[kind] ? (
-              <>
+      <details data-ui-disclosure className="map-configuration">
+        <summary>
+          <strong>Миссии и настройки</strong>
+          <span>
+            Secure {m.secure?.setup || "—"} · Extract {m.extract?.setup || "—"}{" "}
+            · {s.unit === "cm" ? "сантиметры" : "дюймы"}
+          </span>
+        </summary>
+        <div className="map-missions">
+          {[
+            ["secure", "Secure"],
+            ["extract", "Extract"],
+          ].map(([kind, name]) => (
+            <div key={kind} className="map-mission" data-kind={kind}>
+              <span className="eyebrow">{name}</span>
+              {m[kind] ? (
+                <>
+                  <button
+                    className="quiet"
+                    data-bt="mission-card"
+                    data-kind={kind}
+                    onClick={() => b.mission(kind)}
+                  >
+                    {m[kind].name} ↗
+                  </button>
+                  <small>Схема {m[kind].setup}</small>
+                </>
+              ) : (
+                <span className="muted">Не выбрана</span>
+              )}
+              {!readonly && (
                 <button
-                  className="quiet"
-                  data-bt="mission-card"
+                  data-bt="missions"
                   data-kind={kind}
-                  onClick={() => b.mission(kind)}
+                  onClick={() => b.openPicker("opponent", "crises", kind)}
                 >
-                  {m[kind].name} ↗
+                  {m[kind] ? "Заменить" : "Выбрать миссию"}
                 </button>
-                <small>Схема {m[kind].setup}</small>
-              </>
-            ) : (
-              <span className="muted">Не выбрана</span>
-            )}
-            {!readonly && (
-              <button
-                data-bt="missions"
-                data-kind={kind}
-                onClick={() => b.openPicker("opponent", "crises", kind)}
-              >
-                {m[kind] ? "Заменить" : "Выбрать миссию"}
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="map-settings">
+          <label>
+            {b.activeNetwork ? "Край " + m.mine.name : "Мой край"}
+            <select
+              id="map-edge"
+              value={s.state.edge}
+              disabled={readonly}
+              onChange={(e) => s.setEdge(e.target.value)}
+            >
+              {Object.entries(edgeNames).map(([key, name]) => (
+                <option key={key} value={key}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Измерять
+            <select
+              id="map-mode"
+              value={s.mode}
+              onChange={(e) => s.setField("mode", e.target.value)}
+            >
+              <option value="bases">От краёв баз</option>
+              <option value="centers">Между центрами</option>
+            </select>
+          </label>
+          <label>
+            Единицы
+            <select
+              id="map-unit"
+              value={s.unit}
+              onChange={(e) => s.setField("unit", e.target.value)}
+            >
+              <option value="in">Дюймы</option>
+              <option value="cm">Сантиметры</option>
+            </select>
+          </label>
+        </div>
+      </details>
       {s.error && (
         <div className="notice">{s.error} Точки миссий не построены.</div>
       )}
@@ -590,61 +658,64 @@ export const BattleMapView = observer(function BattleMapView() {
             </button>
           )}
         </div>
-        <div className="map-settings">
-          <label>
-            {b.activeNetwork ? "Край " + m.mine.name : "Мой край"}
-            <select
-              id="map-edge"
-              value={s.state.edge}
-              disabled={readonly}
-              onChange={(e) => s.setEdge(e.target.value)}
-            >
-              {Object.entries(edgeNames).map(([key, name]) => (
-                <option key={key} value={key}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Измерять
-            <select
-              id="map-mode"
-              value={s.mode}
-              onChange={(e) => s.setField("mode", e.target.value)}
-            >
-              <option value="bases">От краёв баз</option>
-              <option value="centers">Между центрами</option>
-            </select>
-          </label>
-          <label>
-            Единицы
-            <select
-              id="map-unit"
-              value={s.unit}
-              onChange={(e) => s.setField("unit", e.target.value)}
-            >
-              <option value="in">Дюймы</option>
-              <option value="cm">Сантиметры</option>
-            </select>
-          </label>
-          <label className="check">
-            <input
-              id="map-lines"
-              type="checkbox"
-              checked={s.lines}
-              onChange={(e) => s.setField("lines", e.target.checked)}
-            />
-            Расстояния на карте
-          </label>
-        </div>
       </div>
       <p className="map-instruction">
         Выберите или перетащите точку. Дополнительная метка удаляется клавишей
         Backspace, когда выделена.
       </p>
       <div className="battle-map-layout">
-        <section className="map-canvas-section">
+        <section
+          className="map-canvas-section"
+          id="map-canvas-section"
+          tabIndex={-1}
+        >
+          <div className="map-canvas-tools">
+            <button
+              className="quiet map-jump"
+              onClick={() => {
+                document
+                  .querySelector(".map-details")
+                  ?.scrollIntoView({ block: "start" });
+                document
+                  .querySelector("#map-origin")
+                  ?.focus({ preventScroll: true });
+              }}
+            >
+              К точке и расстояниям ↓
+            </button>
+            <div className="map-zoom">
+              <button
+                data-ma="zoom-out"
+                aria-label="Уменьшить карту"
+                onClick={() => s.zoomBy(-0.5)}
+              >
+                −
+              </button>
+              <span>{Math.round(s.zoom * 100)}%</span>
+              <button
+                data-ma="zoom-in"
+                aria-label="Увеличить карту"
+                onClick={() => s.zoomBy(0.5)}
+              >
+                +
+              </button>
+              <button
+                data-ma="zoom-reset"
+                onClick={() => s.setField("zoom", 1)}
+              >
+                Вписать
+              </button>
+            </div>
+            <label className="check">
+              <input
+                id="map-lines"
+                type="checkbox"
+                checked={s.lines}
+                onChange={(e) => s.setField("lines", e.target.checked)}
+              />
+              Расстояния на карте
+            </label>
+          </div>
           <div className="map-canvas-scroll">
             <MapCanvas />
           </div>
@@ -673,33 +744,26 @@ export const BattleMapView = observer(function BattleMapView() {
               Между стартовыми зонами: <b>{s.text(24)}</b>
             </p>
           )}
-          <div className="map-zoom">
-            <button
-              data-ma="zoom-out"
-              aria-label="Уменьшить карту"
-              onClick={() => s.zoomBy(-0.5)}
-            >
-              −
-            </button>
-            <span>{Math.round(s.zoom * 100)}%</span>
-            <button
-              data-ma="zoom-in"
-              aria-label="Увеличить карту"
-              onClick={() => s.zoomBy(0.5)}
-            >
-              +
-            </button>
-            <button data-ma="zoom-reset" onClick={() => s.setField("zoom", 1)}>
-              Вписать
-            </button>
-          </div>
           <p className="battle-rule-note">
             36″ × 36″. Стартовая полоса — 6″ от края. Все точки имеют диаметр
             1″. Координаты задают их центр. «От краёв баз» учитывает размер,
             «Между центрами» — нет. Расстояния — по прямой.
           </p>
         </section>
-        <aside className="map-details">
+        <aside className="map-details" tabIndex={-1}>
+          <button
+            className="quiet map-jump"
+            onClick={() => {
+              document
+                .querySelector(".map-canvas-section")
+                ?.scrollIntoView({ block: "start" });
+              document
+                .querySelector("#battle-map-svg")
+                ?.focus({ preventScroll: true });
+            }}
+          >
+            К карте ↑
+          </button>
           <label className="field">
             Точка отсчёта
             <select

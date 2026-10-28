@@ -1,5 +1,6 @@
+import { useDialogBackdrop } from "./dialog-backdrop.js";
 import { RoleIcons } from "./character-roles.jsx";
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
 import { observer } from "mobx-react-lite";
 import {
   battle as b,
@@ -443,6 +444,7 @@ export const BattleSetup = observer(function BattleSetup() {
 });
 function Modal({ id, className, open, onClose, children, label }) {
   const ref = useRef(null);
+  const backdrop = useDialogBackdrop(onClose);
   useEffect(() => {
     const el = ref.current;
     if (open && !el.open) el.showModal();
@@ -450,6 +452,7 @@ function Modal({ id, className, open, onClose, children, label }) {
   }, [open]);
   return (
     <dialog
+      {...backdrop}
       id={id}
       className={className}
       aria-label={label}
@@ -963,6 +966,80 @@ const FighterDetail = observer(function FighterDetail() {
     </>
   );
 });
+function BattleLog({ match }) {
+  const [query, setQuery] = useState("");
+  const [round, setRound] = useState("");
+  const entries = match.log
+    .slice()
+    .reverse()
+    .filter(
+      (e) =>
+        (!round || String(e.round) === round) &&
+        String(e.text || "")
+          .toLocaleLowerCase()
+          .includes(query.trim().toLocaleLowerCase()),
+    );
+  const rounds = [...new Set(match.log.map((e) => e.round))].sort(
+    (a, b) => b - a,
+  );
+  return (
+    <section className="battle-log" aria-label="События партии">
+      <div className="log-tools">
+        <input
+          type="search"
+          aria-label="Поиск по журналу"
+          placeholder="Найти событие или персонажа…"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <select
+          aria-label="Раунд журнала"
+          value={round}
+          onChange={(e) => setRound(e.target.value)}
+        >
+          <option value="">Все раунды</option>
+          {rounds.map((r) => (
+            <option key={r} value={r}>
+              Раунд {r}
+            </option>
+          ))}
+        </select>
+      </div>
+      <p role="status">
+        Найдено {entries.length} из {match.log.length} событий
+      </p>
+      <div className="battle-log-list">
+        {entries.map((entry, i) => (
+          <p key={i}>
+            <small>
+              Раунд {entry.round} ·{" "}
+              {new Date(entry.at).toLocaleTimeString("ru-RU", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </small>
+            <span>{entry.text}</span>
+          </p>
+        ))}
+        {!entries.length && (
+          <div className="empty">
+            <p>{match.log.length ? "Ничего не найдено" : "Пока нет событий"}</p>
+            {(query || round) && (
+              <button
+                onClick={() => {
+                  setQuery("");
+                  setRound("");
+                }}
+              >
+                Сбросить поиск и раунд
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
 export const BattleDialogModal = observer(function BattleDialogModal() {
   const d = b.dialog,
     m = b.current,
@@ -1196,26 +1273,7 @@ export const BattleDialogModal = observer(function BattleDialogModal() {
                   )}
                 </>
               )}
-              {d.type === "log" && m && (
-                <div className="battle-log">
-                  {m.log
-                    .slice()
-                    .reverse()
-                    .map((entry, i) => (
-                      <p key={i}>
-                        <small>
-                          Раунд {entry.round} ·{" "}
-                          {new Date(entry.at).toLocaleTimeString("ru-RU", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </small>
-                        <span>{entry.text}</span>
-                      </p>
-                    ))}
-                  {!m.log.length && <p>Пока нет событий.</p>}
-                </div>
-              )}
+              {d.type === "log" && m && <BattleLog match={m} />}
               {d.type === "round" && m && (
                 <>
                   {b.domain.Core.allFighters(m).some(

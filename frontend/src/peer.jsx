@@ -89,9 +89,11 @@ export const PeerHeader = observer(function PeerHeader() {
             : "◌ Нет связи с хозяином"}
       </span>
       <span>{p.role === "mine" ? "Вы — хозяин" : "Вы — второй игрок"}</span>
-      <button className="quiet" data-peer="reconnect" onClick={p.reconnect}>
-        {p.role === "mine" ? "Подключить игрока" : "Переподключиться"}
-      </button>
+      {!p.connected && (
+        <button className="quiet" data-peer="reconnect" onClick={p.reconnect}>
+          {p.role === "mine" ? "Подключить игрока" : "Переподключиться"}
+        </button>
+      )}
       <small>
         {p.pending
           ? "Ждём подтверждения изменений…"
@@ -108,6 +110,7 @@ export const PeerSetup = observer(function PeerSetup() {
     team = m[side],
     enemy = m[other],
     ready = room.ready[side];
+  const problems = b.domain.Core.errors({ ...m, mine: team, opponent: enemy });
   return (
     <>
       <PeerHeader />
@@ -189,13 +192,16 @@ export const PeerSetup = observer(function PeerSetup() {
         <span>
           {ready
             ? "✓ Вы готовы. Ждём второго игрока."
-            : "Выберите бойцов и нажмите «Я готов»."}
+            : problems[0] || "Выберите бойцов и нажмите «Я готов»."}
         </span>
         <button
           className="primary"
           data-peer="ready"
           disabled={
-            !!p.pending || !!b.busy || (p.role === "opponent" && !p.connected)
+            !!p.pending ||
+            !!b.busy ||
+            (!ready && !!problems.length) ||
+            (p.role === "opponent" && !p.connected)
           }
           onClick={p.ready}
         >

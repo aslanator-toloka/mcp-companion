@@ -1,6 +1,6 @@
 import { UIIcon, EmptyIllustration } from "./ui-icons.jsx";
 import { observer } from "mobx-react-lite";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   rosters,
   library,
@@ -1229,6 +1229,17 @@ export const RosterPickerModal = observer(function RosterPickerModal() {
 });
 export const RosterActionModal = observer(function RosterActionModal() {
   const d = rosters.dialog;
+  const [groupQuery, setGroupQuery] = useState("");
+  const groupScroll = useRef(0);
+  useEffect(() => {
+    if (!d) {
+      setGroupQuery("");
+      groupScroll.current = 0;
+    }
+  }, [!!d]);
+  const filteredGroups = rosters.groups.filter((g) =>
+    g.name.toLocaleLowerCase().includes(groupQuery.trim().toLocaleLowerCase()),
+  );
   return (
     <Modal
       id="roster-action-dialog"
@@ -1313,9 +1324,42 @@ export const RosterActionModal = observer(function RosterActionModal() {
               </div>
             )}
             {d.type === "groups" && (
-              <>
-                {rosters.groups.length ? (
-                  rosters.groups.map((g) => (
+              <section
+                className="group-manager"
+                aria-label="Список групп ростеров"
+              >
+                <div className="group-tools">
+                  <input
+                    type="search"
+                    aria-label="Найти группу"
+                    placeholder="Найти группу…"
+                    value={groupQuery}
+                    onChange={(e) => {
+                      groupScroll.current = 0;
+                      setGroupQuery(e.target.value);
+                    }}
+                  />
+                  <button
+                    className="primary"
+                    data-rs="new-group"
+                    onClick={() => rosters.groupForm()}
+                  >
+                    + Новая группа
+                  </button>
+                </div>
+                <p role="status">
+                  Найдено {filteredGroups.length} из {rosters.groups.length}
+                </p>
+                <div
+                  className="group-list"
+                  ref={(el) => {
+                    if (el) el.scrollTop = groupScroll.current;
+                  }}
+                  onScroll={(e) => {
+                    groupScroll.current = e.currentTarget.scrollTop;
+                  }}
+                >
+                  {filteredGroups.map((g) => (
                     <div key={g.id} className="group-row">
                       <span>
                         <strong>{g.name}</strong>
@@ -1333,34 +1377,43 @@ export const RosterActionModal = observer(function RosterActionModal() {
                       <div className="actions">
                         <button
                           data-rs="rename-group"
+                          aria-label={"Переименовать группу " + g.name}
                           onClick={() => rosters.groupForm(g.id)}
                         >
-                          Название
+                          Переименовать
                         </button>
                         <button
-                          className="quiet"
+                          className="quiet group-delete"
                           data-rs="delete-group"
                           aria-label={"Удалить группу " + g.name}
                           onClick={() => rosters.removeGroup(g.id)}
                         >
-                          ×
+                          <UIIcon name="close" />
                         </button>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <p className="muted">Групп ещё нет.</p>
-                )}
-                <div className="actions">
-                  <button
-                    className="primary"
-                    data-rs="new-group"
-                    onClick={() => rosters.groupForm()}
-                  >
-                    + Новая группа
-                  </button>
+                  ))}
+                  {!filteredGroups.length && (
+                    <div className="empty">
+                      <p>
+                        {rosters.groups.length
+                          ? "Ничего не найдено"
+                          : "Групп ещё нет"}
+                      </p>
+                      {groupQuery && (
+                        <button
+                          onClick={() => {
+                            groupScroll.current = 0;
+                            setGroupQuery("");
+                          }}
+                        >
+                          Сбросить поиск
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
-              </>
+              </section>
             )}
             {d.type === "group" && (
               <form
@@ -1388,7 +1441,7 @@ export const RosterActionModal = observer(function RosterActionModal() {
                   <button
                     type="button"
                     data-rs="close-action"
-                    onClick={rosters.closeDialog}
+                    onClick={rosters.cancelGroup}
                   >
                     Отмена
                   </button>

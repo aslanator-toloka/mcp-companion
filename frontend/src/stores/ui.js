@@ -8,6 +8,8 @@ export class UIStore {
   sourceDate = "";
   dataDialog = null;
   pendingImport = null;
+  importFileName = "";
+  importError = "";
   membership = false;
   rosterName = "";
   actions = {};
@@ -32,13 +34,26 @@ export class UIStore {
   setDataDialog(value) {
     this.dataDialog = value;
   }
-  confirmImport(value) {
+  confirmImport(value, fileName = "") {
     this.pendingImport = value;
+    this.importFileName = fileName;
+    this.importError = "";
     this.dataDialog = "confirm";
+  }
+  setImportError(message) {
+    this.importError = message;
+  }
+  cancelImport() {
+    this.pendingImport = null;
+    this.importFileName = "";
+    this.importError = "";
+    this.dataDialog = "main";
   }
   closeData() {
     this.dataDialog = null;
     this.pendingImport = null;
+    this.importFileName = "";
+    this.importError = "";
   }
   setMembership(value) {
     this.membership = value;
