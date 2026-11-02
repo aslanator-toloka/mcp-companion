@@ -41,14 +41,14 @@
 
 .sc-condition-reference{all:unset;display:inline;font:inherit;line-height:inherit;color:inherit;cursor:pointer;text-decoration:underline dotted #737e8d;text-underline-offset:3px;touch-action:manipulation}
 .sc-condition-reference:focus-visible{outline:2px solid #3b82f6;outline-offset:2px;border-radius:2px}
-.sc-condition-dialog{border:0;border-radius:0;padding:0;background:transparent;color:#fff;box-shadow:none;width:min(340px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto}
+.sc-condition-dialog{border:1px solid #cbd5e1;border-radius:18px;padding:0;background:#fff;color:#172131;box-shadow:0 20px 70px #0005;width:min(420px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto}
 .sc-condition-dialog::backdrop{background:#000b}
-.sc-condition-description{position:relative;text-align:center;padding:16px 20px 22px;font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-.sc-condition-description .sc-condition-token{display:block;width:160px;height:160px;object-fit:contain;margin:0 auto 2px}
-.sc-condition-description h2{font:700 16px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:0;margin:0 0 2px;color:#fff}
-.sc-condition-description p{margin:0;color:#fff}.sc-condition-description .sc-icon{filter:invert(1);width:1.1em;height:1.1em}
-.sc-condition-description .sc-condition-close{position:absolute;right:0;top:0;padding:0;width:36px;height:36px;min-height:36px;display:grid;place-items:center;border:0;background:transparent;color:#fff;font:24px/1 sans-serif;border-radius:50%;cursor:pointer}
-.sc-condition-description .sc-condition-close:hover{background:#ffffff26}.sc-condition-description .sc-condition-close:focus-visible{outline:2px solid #9fc5ff;outline-offset:-2px}
+.sc-condition-description{position:relative;text-align:left;padding:28px 24px 26px;font:17px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.sc-condition-description .sc-condition-token{display:block;width:96px;height:96px;object-fit:contain;margin:0 auto 12px}
+.sc-condition-description h2{font:700 22px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:0;text-align:center;margin:0 0 12px;color:inherit}
+.sc-condition-description p{margin:0;color:inherit}.sc-condition-description .sc-icon{filter:none;width:1.1em;height:1.1em}
+.sc-condition-description .sc-condition-close{position:absolute;right:8px;top:8px;padding:0;width:44px;height:44px;min-height:44px;display:grid;place-items:center;border:0;background:transparent;color:inherit;font:28px/1 sans-serif;border-radius:50%;cursor:pointer}
+.sc-condition-description .sc-condition-close:hover{background:#eef2f7}.sc-condition-description .sc-condition-close:focus-visible{outline:2px solid #2563eb;outline-offset:-2px}
 
 /* Live overlays for battle viewers; catalogue cards retain printed values. */
 .sc-stat-changed b,.sc-card .sc-live-changed,.sc-cost-changed b{color:#f87171}
