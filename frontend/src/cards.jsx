@@ -1,5 +1,4 @@
 import React, {
-  useId,
   useLayoutEffect,
   useRef,
   useEffect,
@@ -822,28 +821,36 @@ function Tactic({ card: c, visual, side, data }) {
   );
 }
 function Threat({ card: c }) {
-  const id = "gc-threat-" + useId(),
-    label = c.type === "Secure" ? "SECURE" : "EXTRACTION";
+  const label = c.type === "Secure" ? "SECURE" : "EXTRACTION",
+    spacedLabel = label === "SECURE" ? "  SECURE  " : label,
+    inscription = `THREAT ${spacedLabel} THREAT ${spacedLabel} `;
   return (
     <svg
       className="gc-threat"
-      viewBox="0 0 72 72"
+      viewBox="0 0 110 110"
       role="img"
       aria-label={`Threat ${c.threatLevel} · ${label}`}
     >
-      <defs>
-        <path id={id} d="M36 5a31 31 0 1 1-.01 0" />
-      </defs>
-      <circle cx="36" cy="36" r="34" className="gc-threat-ring" />
-      <circle cx="36" cy="36" r="22" fill="#fff" />
-      <text className="gc-threat-ring-text">
-        <textPath href={"#" + id} textLength="190" lengthAdjust="spacing">
-          THREAT {label} THREAT {label}
-        </textPath>
-      </text>
+      <circle cx="55" cy="55" r="54" className="gc-threat-ring" />
+      <circle cx="55" cy="55" r="33" className="gc-threat-center" />
+      {Array.from(inscription, (letter, i) => {
+        if (letter === " ") return null;
+        return (
+          <text
+            key={i}
+            x="55"
+            y="16"
+            textAnchor="middle"
+            transform={`rotate(${(360 * i) / inscription.length - 15} 55 55)`}
+            className={"gc-threat-ring-text" + (i % 18 >= 7 ? " gc-threat-type" : "")}
+          >
+            {letter}
+          </text>
+        );
+      })}
       <text
-        x="36"
-        y="37"
+        x="55"
+        y="55"
         className="gc-threat-number"
         textAnchor="middle"
         dominantBaseline="central"
@@ -989,6 +996,7 @@ function Crisis({ card: c, visual, side, data }) {
       style={{ width, height }}
       lang="en"
       aria-label={c.name}
+      data-crisis-type={c.type}
     >
       <img
         className="gc-crisis-paper"
