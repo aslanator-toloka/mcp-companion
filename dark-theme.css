@@ -206,6 +206,19 @@
 }
 :root[data-theme="dark"] #app-root :is(.photo-warning, .combat-unavailable, .sync-error, .network-connection.offline, .battle-tactic-card.played .battle-tactic-status) { color: var(--ui-warning); }
 :root[data-theme="dark"] #app-root :is(.owned-control.owned label, .photo-exact, .network-connection, .character-collection-status.is-owned) { color: var(--ui-success); }
+/* Collection badges use quiet, dark surfaces. Legacy badge colours are important. */
+:root[data-theme="dark"] #app-root :is(.at-ownership-tag.at-missing, .character-collection-status.is-missing) {
+  background: var(--ui-subtle);
+  color: var(--ui-muted) !important;
+}
+:root[data-theme="dark"] #app-root :is(.at-ownership-tag.at-owned, .at-availability-tag.at-ready) {
+  background: #203a32;
+  color: var(--ui-success) !important;
+}
+:root[data-theme="dark"] #app-root :is(.at-ownership-tag.at-planned, .character-collection-status.is-planned) {
+  background: #3c3021;
+  color: var(--ui-warning) !important;
+}
 :root[data-theme="dark"] #app-root :is(
   .fighter-state-cycle.state-healthy, .fighter-immunities > .tag,
   .fighter-energy-badge.enough, .purchase-bought-button.is-purchased,
