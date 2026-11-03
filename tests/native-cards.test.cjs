@@ -95,8 +95,11 @@ test("all structured character faces render names, statistics and every attack a
             ["speed", face.speed],
           ])
             assert(
-              html.includes(
-                `data-stat="${key}" aria-label="${key === "stamina" ? "Stamina" : key === "speed" ? "Speed" : key[0].toUpperCase() + key.slice(1)}: ${value ?? "—"}"`,
+              (
+                html.match(new RegExp(`<[^>]+data-stat="${key}"[^>]*>`))?.[0] ||
+                ""
+              ).includes(
+                `aria-label="${key === "stamina" ? "Stamina" : key === "speed" ? "Speed" : key[0].toUpperCase() + key.slice(1)}: ${value ?? "—"}"`,
               ),
               `${c.slug} ${side} ${key}`,
             );

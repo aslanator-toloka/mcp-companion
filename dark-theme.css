@@ -1,0 +1,249 @@
+/* Theme tokens and the legacy UI surfaces that predate the shared design system.
+   Printed .sc-card/.gc-card content and the SVG game board keep their real colours. */
+:root { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ui-canvas: #101722;
+  --ui-surface: #192330;
+  --ui-subtle: #202d3d;
+  --ui-ink: #e5edf7;
+  --ui-muted: #acbbce;
+  --ui-border: #38495f;
+  --ui-border-strong: #667c96;
+  --ui-control-border: #7e93ae;
+  --ui-accent: #346cdd;
+  --ui-accent-soft: #223b60;
+  --ui-success: #83d9ac;
+  --ui-warning: #f1c77f;
+  --ui-danger: #ffacb4;
+  --ui-control-arrow: url("assets/ui/chevron-down-dark.svg");
+  --ink: var(--ui-ink);
+  --muted: var(--ui-muted);
+  --line: var(--ui-border);
+  --surface: var(--ui-surface);
+  --surface-muted: var(--ui-subtle);
+  --paper: var(--ui-canvas);
+  --white: var(--ui-surface);
+  --wash: var(--ui-subtle);
+  --soft: var(--ui-subtle);
+  --panel: var(--ui-surface);
+  --green: #83d9ac;
+  --focus-ring: #a0c5ff;
+  --accent: #a0c5ff;
+}
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 10px;
+  margin-left: auto;
+  border: 0;
+  border-radius: 8px;
+}
+.review > span { min-width: 0; }
+:root[data-theme="dark"] body { background: var(--ui-canvas); }
+:root[data-theme="dark"] #tournaments-screen {
+  --paper: var(--ui-canvas);
+  --white: var(--ui-surface);
+  --ink: var(--ui-ink);
+  --muted: var(--ui-muted);
+  --line: var(--ui-border);
+  --soft: var(--ui-subtle);
+  --green: #a0c5ff;
+}
+:root[data-theme="dark"] #app-root :is(h1,h2,h3,h4):not(:where(.sc-card *, .gc-card *)) {
+  color: var(--ui-ink);
+}
+:root[data-theme="dark"] #app-root :is(a, .source-line a):not(:where(.sc-card *, .gc-card *)) {
+  color: #a0c5ff;
+}
+:root[data-theme="dark"] #app-root button:not(:where(.sc-card *, .gc-card *)) {
+  color: var(--ui-ink);
+  border-color: var(--ui-border);
+  background-color: var(--ui-surface);
+}
+:root[data-theme="dark"] #app-root button:hover:not(:where(.sc-card *, .gc-card *, :disabled)) {
+  background-color: var(--ui-subtle);
+  border-color: var(--ui-border-strong);
+}
+:root[data-theme="dark"] #app-root :is(.quiet, .close, .sidebar-toggle, .theme-toggle) {
+  background: transparent;
+  color: var(--ui-muted);
+}
+:root[data-theme="dark"] #app-root :is(.primary, .side-switch .selected, .condition-grid .selected, .status-grid .selected) {
+  background: var(--ui-accent);
+  border-color: var(--ui-accent);
+  color: #fff;
+}
+:root[data-theme="dark"] #app-root .primary:hover { background: #285dcc; color: #fff; }
+:root[data-theme="dark"] #app-root :is(input,textarea)::placeholder { color: var(--ui-muted); }
+:root[data-theme="dark"] #app-root :is(input,select,textarea):disabled {
+  background-color: var(--ui-subtle);
+  color: var(--ui-muted);
+}
+:root[data-theme="dark"] #app-root :focus-visible {
+  outline-color: var(--focus-ring);
+}
+:root[data-theme="dark"] #app-root :is(.at-search-box, .combat-picker-input):focus-within {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 3px #a0c5ff40;
+}
+:root[data-theme="dark"] #app-root :is(
+  .review, .sidebar, dialog, .detail-head, .gc-dialog-head,
+  .catalog-tools, .editor-info, .character-list, .character-row, .selected-items,
+  .roster-tile, .match-tile, .roster-summary, .editor-footer, .picker-tools,
+  .picker-footer, .empty, .no-rosters, .network-home, .network-strip,
+  .setup-team, .setup-fields, .battle-dashboard, .battle-fighter, .battle-tactic,
+  .battle-character-state, .battle-side-switch, .battle-tactic-unavailable,
+  .combat-picker-input, .combat-picker-menu, .combat-assumptions-body,
+  .squad-controls, .squad-results, .squad-variants > li, .squad-candidate,
+  .squad-empty, .character-role-tooltip, .map-configuration, .map-toolbar,
+  .map-mission, .map-details, .map-all-distances, .map-edge-cards > div,
+  .purchase-toolbar, .box-set-tile, .box-set-member, .box-set-arrow,
+  .at-character-panel, .at-character-overview, .at-roster-card, .at-roster-summary,
+  .at-search-box, .at-country-description, .at-affiliation-dialog-head,
+  .at-affiliation-dialog-foot, .at-player-dialog-head, .at-player-dialog-foot
+) {
+  background: var(--ui-surface);
+  color: var(--ui-ink);
+  border-color: var(--ui-border);
+}
+:root[data-theme="dark"] #app-root .combat-characters > [role="group"] { background: var(--ui-surface); }
+:root[data-theme="dark"] #app-root :is(#box-set-content, #roster-picker-content, #data-content, #roster-content, #roster-action-content, #battle-picker-content, #battle-dialog-content) > .dialog-heading {
+  background: var(--ui-surface);
+}
+:root[data-theme="dark"] #app-root :is(
+  .brand, .review strong, .roster-title, .selected-character strong,
+  .selected-card strong, .box-set-copy strong, .stat strong, .row-threat b,
+  .round-label b, .battle-counter strong, .roster-summary b, .fighter-card-stats dd,
+  .fighter-ability-description, .fighter-attack-stats, .battle-resource,
+  .box-opportunities, .map-reference-distances b, .map-edge-cards b,
+  .map-zone-cards b, .power-preview-copy > strong
+) { color: var(--ui-ink); }
+:root[data-theme="dark"] #app-root :is(
+  .review small, .brand small, .nav-item, .nav-item span, .eyebrow, .stage-label,
+  .roster-footnote, .battle-rule-note, .catalog-footer, .box-set-copy small,
+  .box-set-copy p, .box-set-member small, .purchase-data-note, .purchase-results-count,
+  .box-opportunities small, .box-opportunities li span, .at-roster-box-needs small,
+  .fighter-immunities, .fighter-card-stats dt, .fighter-ability-group > h4,
+  .battle-character-heading p, .fighter-form-control, .battle-tactic-status,
+  .map-mission > small, .map-settings > label:not(.check), .map-instruction,
+  .map-legend, .map-origin-heading p, .map-coordinates > small, .map-matrix td,
+  .map-reference-distances p, .map-zone-gap, .map-edge-cards span, .map-zone-cards span,
+  .squad-planner > summary small, .squad-required > p, .squad-explanation,
+  .squad-variant-head > span:last-child, .squad-members > button > b,
+  .squad-threats > button span, .model-progress, .role-provider span,
+  .character-role-tooltip p, .combat-direction :is(h2,h3) span, .gc-dialog-head small,
+  .game-card-text p
+) { color: var(--ui-muted); }
+:root[data-theme="dark"] #app-root :is(
+  .stage-label, .affiliation, .tag, .at-affiliation-tag, .card-symbol, .stat,
+  .empty-illustration, .card-loading-placeholder, .purchase-count,
+  .avatar, .avatar img, .at-character-avatar, .squad-row-number,
+  .model-progress select[data-stage="assembled"], .squad-planner,
+  .at-adjusted-rating, .combat-result-head, .combat-assumptions,
+  .battle-fighter-strip, .battle-tactic.played, .fighter-energy-badge,
+  .map-canvas-scroll, .map-reference-summary, .map-matrix th, .game-card-text
+) {
+  background: var(--ui-subtle);
+  color: var(--ui-muted);
+  border-color: var(--ui-border);
+}
+:root[data-theme="dark"] #app-root :is(
+  .character-row, .selected-row, .picker-result, .detail-head, .ability,
+  .editor-groups, .editor-tabs, .battle-side-tabs, .group-row, .setup-squad,
+  .power-preview, .power-preview-row, .source-line, .owned-control
+) { border-color: var(--ui-border); }
+:root[data-theme="dark"] #app-root :is(.character-row:hover, .box-set-open:hover, .at-roster-card[open] > .at-roster-summary) {
+  background: var(--ui-subtle);
+}
+:root[data-theme="dark"] #app-root :is(
+  .nav-item[aria-current="page"], .editor-tabs > .selected, .purchase-tabs > .selected,
+  .battle-side-tabs > .selected, .activation.selected, .picker-result.chosen,
+  .active-filters > button, .squad-candidate.is-required, .squad-members > button.is-required,
+  .squad-active-constraints button, .combat-picker-menu [role="option"].is-active,
+  .at-selected-icon, .at-points-badge:not(.at-negative), .at-roster-box-needs,
+  .network-home .primary, .roster-tile-actions .primary, .battle-character-portrait.selected,
+  .map-tool-prompt, .map-mode-bar > [data-ma="add-point"], .purchase-nav-count
+) {
+  background: var(--ui-accent-soft);
+  color: #a0c5ff;
+  border-color: #4a6c9b;
+}
+:root[data-theme="dark"] #tournaments-screen .at-character-button[aria-pressed="true"] {
+  background: var(--ui-accent-soft);
+  color: var(--ui-ink);
+}
+:root[data-theme="dark"] #tournaments-screen .at-character-button[aria-pressed="true"] :is(small,.at-character-affiliations,.at-character-frequency,.at-character-avatar) {
+  color: #b9d4ff;
+  background-color: transparent;
+}
+:root[data-theme="dark"] #app-root :is(
+  .combat-outcome:first-of-type strong, .at-adjusted-rating summary, .at-adjusted-value, .at-rank-mark, .box-opportunities p strong,
+  .box-opportunities li button, .box-opportunities .box-opportunity-link,
+  .at-roster-box-needs button, .power-result, .power-reasons b,
+  .map-distance-table b, .map-coordinate-editor summary, .map-zone-gap b,
+  .battle-fighter-strip .battle-portrait-team h3
+) { color: #a0c5ff; }
+:root[data-theme="dark"] #app-root .leader-mark { color: var(--ui-warning); }
+:root[data-theme="dark"] #tournaments-screen footer { color: var(--ui-muted); }
+:root[data-theme="dark"] #app-root :is(.nav-item:not([aria-current="page"]), .row-open, .selected-character, .selected-card) {
+  background-color: transparent;
+  border-color: transparent;
+}
+:root[data-theme="dark"] #app-root :is(
+  .notice, .missing-tag, .import-error, .squad-error, .combat-warning,
+  .battle-condition-chip, .battle-card-preview-note, .fighter-zero,
+  .purchase-wishlist-button.is-planned, .fighter-state-cycle.state-injured,
+  .fighter-energy-badge.missing
+) {
+  background: #3c3021;
+  color: var(--ui-warning);
+  border-color: #937445;
+}
+:root[data-theme="dark"] #app-root :is(.photo-warning, .combat-unavailable, .sync-error, .network-connection.offline, .battle-tactic-card.played .battle-tactic-status) { color: var(--ui-warning); }
+:root[data-theme="dark"] #app-root :is(.owned-control.owned label, .photo-exact, .network-connection, .character-collection-status.is-owned) { color: var(--ui-success); }
+:root[data-theme="dark"] #app-root :is(
+  .fighter-state-cycle.state-healthy, .fighter-immunities > .tag,
+  .fighter-energy-badge.enough, .purchase-bought-button.is-purchased,
+  .model-progress select[data-stage="painted"], .fighter-name .tag
+) { background: #203a32; color: var(--ui-success); border-color: #4d826a; }
+:root[data-theme="dark"] #app-root :is(
+  .fighter-state-cycle.state-dazed, .battle-tag-dazed, .fighter-energy-badge.variable,
+  .model-progress select[data-stage="primed"], .photo-card-kind,
+  .battle-fighter[data-status="dazed"], .battle-fighter[data-status="dazed"] .tag
+) { background: #332b49; color: #d4baff; border-color: #7c659d; }
+:root[data-theme="dark"] #app-root :is(
+  .fighter-state-cycle.state-ko, .battle-tag-ko, .battle-tag-injured,
+  .battle-fighter[data-status="ko"], .battle-fighter[data-status="ko"] .tag,
+  .squad-exclude[aria-pressed="true"], #editor-name[aria-invalid="true"]
+) { background: #432830; color: var(--ui-danger); border-color: #a66a75; }
+:root[data-theme="dark"] #app-root :is(.peer-error, .photo-source-error, .editor-fields .field-error, .battle-resource.changed b) { color: var(--ui-danger); }
+:root[data-theme="dark"] #app-root .photo-card-kind.kind-crises { background: var(--ui-accent-soft); color: #a0c5ff; border-color: #4a6c9b; }
+:root[data-theme="dark"] #app-root .mission-choice[data-kind="secure"] { background: #332b49; border-color: #9d80d9; }
+:root[data-theme="dark"] #app-root .mission-choice[data-kind="extract"] { background: #3c3021; border-color: #cd9b56; }
+:root[data-theme="dark"] #app-root .map-zone-cards > .mine { background: #183640; border-color: #4b8596; }
+:root[data-theme="dark"] #app-root .map-zone-cards > .mine b { color: #7ddbea; }
+:root[data-theme="dark"] #app-root .map-zone-cards > .opponent { background: #432830; border-color: #a66a75; }
+:root[data-theme="dark"] #app-root .map-zone-cards > .opponent b { color: #ffacb4; }
+:root[data-theme="dark"] #app-root .hpbar { background: #354756; }
+:root[data-theme="dark"] #app-root .hpbar i { background: #52c79d; }
+:root[data-theme="dark"] #app-root .battle-fighter.acted { background: #1d2e43; }
+:root[data-theme="dark"] #app-root .power-preview h3 { background: var(--ui-subtle); border-color: var(--ui-border); }
+:root[data-theme="dark"] #app-root .power-preview-copy small { color: var(--ui-success); }
+:root[data-theme="dark"] #app-root dialog::backdrop { background: #030810b8; }
+:root[data-theme="dark"] #app-root .skip-link { background: var(--ui-surface); color: #a0c5ff; }
+/* Printed cards use an independent light colour scheme, even inside dark dialogs. */
+:root[data-theme="dark"] :is(.sc-card, .gc-card, #battle-map-svg) { color-scheme: light; }
+:root[data-theme="dark"] #app-root #battle-dialog #battle-dialog-content > .dialog-heading,
+:root[data-theme="dark"] #app-root #peer-connect-dialog > .dialog-heading {
+  background: var(--ui-surface);
+}
+:root[data-theme="dark"] #app-root .at-event-name { color: var(--ui-muted); }
+:root[data-theme="dark"] #app-root .at-provisional-badge { color: var(--ui-warning); }
+:root[data-theme="dark"] #app-root .condition-grid [data-condition="Poison"].selected { background: #486d18; }
+:root[data-theme="dark"] #app-root .condition-grid [data-condition="Stun"].selected { background: #805405; }
+:root[data-theme="dark"] #app-root .condition-grid :is([data-condition="Bleed"], [data-condition="Incinerate"]).selected { background: #a83c36; }

@@ -70,7 +70,7 @@ export const CatalogList = observer(function CatalogList() {
   ) : (
     <div className="empty">
       <EmptyIllustration name={onlyOwned ? "collection" : "search"} />
-      <h3>{onlyOwned ? "Здесь пока пусто" : "Ничего не найдено"}</h3>
+      <h2>{onlyOwned ? "Здесь пока пусто" : "Ничего не найдено"}</h2>
       <p>
         {onlyOwned
           ? "Отметьте свои модели в каталоге или измените остальные фильтры."

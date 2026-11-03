@@ -1,3 +1,5 @@
+import { useEntryFocus } from "./keyboard.js";
+import { PhotoButton } from "./photo-import/dialog.jsx";
 import { useDialogBackdrop } from "./dialog-backdrop.js";
 import { RoleIcons } from "./character-roles.jsx";
 import React, { useEffect, useRef, useMemo, useState } from "react";
@@ -64,6 +66,12 @@ export const MissionGrid = observer(function MissionGrid({ setup = false }) {
           )}
           {setup && (
             <div className="actions">
+              <PhotoButton
+                type="battle"
+                side={b.ownSide}
+                kind="crises"
+                mission={kind}
+              />
               <button
                 data-bt="missions"
                 data-kind={kind}
@@ -283,6 +291,12 @@ export const SetupTeam = observer(function SetupTeam({ side }) {
           : "Быстро выбрать бойцов и карты"}{" "}
         +
       </button>
+      <PhotoButton
+        type="battle"
+        side={side}
+        kind="characters"
+        label="Добавить бойцов по фото"
+      />
       <RoleIcons
         slugs={team.fighters}
         tactics={team.tactics}
@@ -334,6 +348,7 @@ export const SetupTeam = observer(function SetupTeam({ side }) {
       </label>
       <div className="section-title">
         <h3>Тактики · {team.tactics.length} / 5</h3>
+        <PhotoButton type="battle" side={side} kind="tactics" />
         <button
           data-bt="pick"
           data-side={side}
@@ -349,6 +364,8 @@ export const SetupTeam = observer(function SetupTeam({ side }) {
 });
 export const BattleSetup = observer(function BattleSetup() {
   const m = b.current;
+  const entryHeading = useRef(null);
+  useEntryFocus(entryHeading, m.id);
   if (b.activeNetwork) return <PeerSetup />;
   const problems = b.domain.Core.errors(m);
   return (
@@ -356,7 +373,9 @@ export const BattleSetup = observer(function BattleSetup() {
       <div className="heading">
         <div>
           <span className="eyebrow">09 / Подготовка боя</span>
-          <h1>Собрать отряд</h1>
+          <h1 ref={entryHeading} tabIndex={-1}>
+            Собрать отряд
+          </h1>
           <p>{m.name} · подготовка сохраняется автоматически.</p>
         </div>
         <div className="actions">
@@ -1008,7 +1027,12 @@ function BattleLog({ match }) {
       <p role="status">
         Найдено {entries.length} из {match.log.length} событий
       </p>
-      <div className="battle-log-list">
+      <div
+        className="battle-log-list"
+        tabIndex={0}
+        role="region"
+        aria-label="Список событий партии"
+      >
         {entries.map((entry, i) => (
           <p key={i}>
             <small>

@@ -757,7 +757,8 @@ dialog {
   display: grid;
   gap: 16px;
   align-items: start;
-  scroll-margin-top: calc(var(--app-chrome-height) + 12px);
+  /* The document scroll-padding already accounts for the sticky app chrome. */
+  scroll-margin-top: 12px;
 }
 .squad-controls,
 .squad-results {
@@ -772,10 +773,10 @@ dialog {
   align-items: center;
   gap: 4px;
   padding: 8px;
-  scroll-margin-top: calc(var(--app-chrome-height) + 16px);
+  scroll-margin-top: 16px;
 }
 #app-root .squad-controls-toggle {
-  scroll-margin-top: calc(var(--app-chrome-height) + 16px);
+  scroll-margin-top: 16px;
   display: flex;
   flex: 1;
   align-items: center;
@@ -859,7 +860,7 @@ dialog {
   justify-content: space-between;
   gap: 12px;
 }
-.squad-results-heading h3 {
+.squad-results-heading :is(h2, h3) {
   font-size: 15px;
 }
 #app-root .squad-results-heading button {
@@ -1221,3 +1222,8 @@ dialog {
 .map-canvas-tools .check {
   font-size: 12px;
 }
+
+/* Keep a rejected roster name visible and associated with its error. */
+#editor-name[aria-invalid="true"] { border-color: #c62828; background: #fff5f5; box-shadow: 0 0 0 1px #c62828; }
+#editor-name[aria-invalid="true"]:focus { outline-color: #c62828; }
+.editor-fields .field-error { color: #b71c1c; font-size: 13px; font-weight: 500; line-height: 1.4; }

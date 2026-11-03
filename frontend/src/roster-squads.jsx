@@ -200,7 +200,7 @@ export const RosterSquads = observer(function RosterSquads() {
           </section>
           <section className="squad-results" aria-label="Подходящие составы">
             <div className="squad-results-heading">
-              <h3>Подходящие составы</h3>
+              <h2>Подходящие составы</h2>
               <button type="button" className="quiet" onClick={editConditions}>
                 Изменить условия
               </button>

@@ -1,3 +1,4 @@
+import { navigateTabs, useEntryFocus } from "./keyboard.js";
 import { UIIcon } from "./ui-icons.jsx";
 import { useDialogBackdrop } from "./dialog-backdrop.js";
 import React, { useEffect, useRef } from "react";
@@ -132,7 +133,7 @@ const MapCanvas = observer(function MapCanvas() {
         width: 100 * s.zoom + "%",
         maxWidth: s.zoom === 1 ? "min(100%,60dvh)" : "none",
       }}
-      role="img"
+      role="group"
       tabIndex={0}
       aria-label="Карта боя 36 на 36 дюймов, точки миссий и стартовые зоны"
       onPointerMove={(e) => s.pointerMove(e, ref.current)}
@@ -236,6 +237,7 @@ const MapCanvas = observer(function MapCanvas() {
             transform={`translate(${v.x} ${v.y})`}
             data-map-key={p.id}
             role="button"
+            aria-pressed={chosen}
             tabIndex={0}
             aria-label={"Точка " + group.map(s.pointName).join(" / ")}
             className={"map-point" + (chosen ? " map-point-selected" : "")}
@@ -315,7 +317,7 @@ const DistancePanel = observer(function DistancePanel() {
   if (!p)
     return (
       <div className="empty">
-        <h3>Выберите точку на карте</h3>
+        <h2>Выберите точку на карте</h2>
         <p>Выберите объект или добавьте дополнительную точку на карте.</p>
       </div>
     );
@@ -498,6 +500,8 @@ export const BattleMapView = observer(function BattleMapView() {
     readonly = m.status === "finished",
     G = s.geometry,
     roles = [...new Set(s.points.map((p) => p.role))];
+  const entryHeading = useRef(null);
+  useEntryFocus(entryHeading, m.id);
   useEffect(() => {
     const key = (e) => {
       if (
@@ -520,7 +524,9 @@ export const BattleMapView = observer(function BattleMapView() {
       <div className="heading">
         <div>
           <span className="eyebrow">12 / Карта боя</span>
-          <h1>Карта и расстояния</h1>
+          <h1 ref={entryHeading} tabIndex={-1}>
+            Карта и расстояния
+          </h1>
           <p>{m.name} · объекты и расстояния.</p>
         </div>
         <div className="actions">
@@ -633,6 +639,7 @@ export const BattleMapView = observer(function BattleMapView() {
           <div
             className="map-tools"
             role="tablist"
+            onKeyDown={navigateTabs}
             aria-label="Режим расстояний"
           >
             {[
@@ -645,6 +652,9 @@ export const BattleMapView = observer(function BattleMapView() {
                 data-ma="distance-mode"
                 data-distance-mode={mode}
                 aria-selected={s.distanceMode === mode}
+                tabIndex={s.distanceMode === mode ? 0 : -1}
+                id={"map-mode-tab-" + mode}
+                aria-controls="map-view-panel"
                 className={s.distanceMode === mode ? "selected" : ""}
                 onClick={() => s.setField("distanceMode", mode)}
               >
@@ -663,7 +673,12 @@ export const BattleMapView = observer(function BattleMapView() {
         Выберите или перетащите точку. Дополнительная метка удаляется клавишей
         Backspace, когда выделена.
       </p>
-      <div className="battle-map-layout">
+      <div
+        className="battle-map-layout"
+        id="map-view-panel"
+        role="tabpanel"
+        aria-labelledby={"map-mode-tab-" + s.distanceMode}
+      >
         <section
           className="map-canvas-section"
           id="map-canvas-section"

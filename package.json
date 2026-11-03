@@ -7,13 +7,24 @@
     "test": "node --test tests/*.test.cjs",
     "test:e2e": "playwright test",
     "serve": "node scripts/serve.cjs",
-    "audit:rating": "node scripts/audit-character-rating.mjs"
+    "audit:rating": "node scripts/audit-character-rating.mjs",
+    "audit:accessibility": "node scripts/audit-accessibility.cjs",
+    "test:accessibility": "playwright test tests/e2e/design-acceptance.spec.cjs",
+    "ocr:assets": "node scripts/prepare-ocr-assets.mjs",
+    "test:photo": "node --test tests/photo-import.test.cjs",
+    "test:photo:e2e": "playwright test tests/e2e/photo-import.spec.cjs",
+    "android:prepare": "npm run build && node scripts/prepare-android.mjs && cap sync android",
+    "android:check": "node scripts/android-check.mjs",
+    "android:apk": "npm run android:prepare && node scripts/android-check.mjs --apk"
   },
   "workspaces": [
     "frontend"
   ],
   "devDependencies": {
     "@playwright/test": "1.64.1",
-    "express": "5.1.0"
+    "express": "5.1.0",
+    "axe-core": "4.13.0",
+    "@capacitor/android": "8.5.3",
+    "@capacitor/cli": "8.5.3"
   }
 }

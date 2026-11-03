@@ -128,7 +128,7 @@ export class RosterStore {
   setField(name, value) {
     if (!this.draft) return;
     this.draft[name] = value;
-    this.error = "";
+    if (this.draft.name.trim()) this.error = "";
   }
   setGroup(id, include) {
     if (this.draft)

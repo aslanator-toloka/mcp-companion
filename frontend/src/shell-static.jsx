@@ -9,6 +9,7 @@ import {
 import { BattleWorkspace } from "./battle.jsx";
 import { BattlePickerModal, BattleDialogModal } from "./battle-extra.jsx";
 import { PeerModal } from "./peer.jsx";
+import { PhotoImportModal } from "./photo-import/dialog.jsx";
 import { GameCardModal, ConditionModal, RuleReferenceModal } from "./cards.jsx";
 import { TournamentPanel } from "./tournament-panel.jsx";
 import {
@@ -20,6 +21,7 @@ import React, { memo } from "react";
 import {
   Navigation,
   SidebarToggle,
+  ThemeToggle,
   CatalogPanel,
   Sidebar,
   Toast,
@@ -31,12 +33,25 @@ import { ConnectedPurchases, ConnectedBoxDetail } from "./purchases.jsx";
 export const StaticShell = memo(function StaticShell() {
   return (
     <>
+      <a
+        className="skip-link"
+        href="#main-content"
+        onClick={(event) => {
+          event.preventDefault();
+          const main = document.getElementById("main-content");
+          main?.focus({ preventScroll: true });
+          main?.scrollIntoView({ block: "start" });
+        }}
+      >
+        Перейти к содержимому
+      </a>
       <header className={"review"}>
         <SidebarToggle />
         <span>
           <strong>{"MCP COMPANION"}</strong>
           <small>{"Турниры · коллекция · ростеры"}</small>
         </span>
+        <ThemeToggle />
       </header>
       <div className={"shell"}>
         <Sidebar>
@@ -63,7 +78,7 @@ export const StaticShell = memo(function StaticShell() {
             <SourceDate />
           </div>
         </Sidebar>
-        <main>
+        <main id="main-content" tabIndex={-1}>
           <Screen name="catalog" id="catalog-screen">
             <CatalogPanel />
           </Screen>
@@ -97,6 +112,7 @@ export const StaticShell = memo(function StaticShell() {
       <ConditionModal />
       <RuleReferenceModal />
       <PeerModal />
+      <PhotoImportModal />
     </>
   );
 });

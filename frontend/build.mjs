@@ -41,3 +41,7 @@ for (const name of ["react", "react-dom", "mobx", "mobx-react-lite"])
     path.join(root, "../node_modules", name, "LICENSE"),
     path.join(licenses, name + ".txt"),
   );
+fs.copyFileSync(
+  path.join(appRoot, "node_modules/@capacitor/core/LICENSE"),
+  path.join(licenses, "capacitor-core.txt"),
+);

@@ -9,6 +9,7 @@ import { BattleStore } from "./battle.js";
 import { PeerSessionStore } from "./peer.js";
 import { MapStore } from "./map.js";
 import { UIStore } from "./ui.js";
+import { PhotoImportStore } from "../photo-import/store.js";
 configure({ enforceActions: "always" });
 export const library = new LibraryStore();
 export const catalog = new CatalogStore(library);
@@ -26,6 +27,12 @@ export const battle = new BattleStore(
   window.localStorage,
 );
 export const peer = new PeerSessionStore(ui);
+export const photoImport = new PhotoImportStore({
+  catalog,
+  rosters,
+  battle,
+  ui,
+});
 export const map = new MapStore(battle, catalog, ui);
 export const actions = new Proxy(
   {},
@@ -45,6 +52,7 @@ window.MCPStores = {
   cardViews,
   battle,
   peer,
+  photoImport,
   map,
   ui,
 };

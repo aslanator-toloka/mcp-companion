@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "tesseract.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js",
+      "sha256": "AAwn2c0N72Vfd7NscqOJwKsTeTqjHLTXqrVtCcCvvH4="
+    },
+    {
+      "path": "worker.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js",
+      "sha256": "V2t99+M5PhN+UYSTV8mttT/nrBu2m/oGzz1hUg8YLG0="
+    },
+    {
+      "path": "core/tesseract-core-lstm.wasm.js",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/tesseract-core-lstm.wasm.js",
+      "sha256": "7vX4svjiDhUGgLIK2uxKYLq6/uOtvoqUWDyB/uRuhoA="
+    },
+    {
+      "path": "core/tesseract-core-simd-lstm.wasm.js",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/tesseract-core-simd-lstm.wasm.js",
+      "sha256": "xYtGpMeWwLivzPd1kdW4dbaJa0XUArvOjKpvU2JEezg="
+    },
+    {
+      "path": "core/tesseract-core-relaxedsimd-lstm.wasm.js",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/tesseract-core-relaxedsimd-lstm.wasm.js",
+      "sha256": "hhpTbPnvjmPLZE1XurOcOI8399a29gAkt0HF9rOaWbM="
+    },
+    {
+      "path": "lang/eng.traineddata.gz",
+      "url": "https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int/eng.traineddata.gz",
+      "sha256": "RbTLNGckrBd08cNvQvGCuIe82yjr5j5v/5CsQfP8/5E="
+    },
+    {
+      "path": "LICENSE-tesseract.txt",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/LICENSE.md",
+      "sha256": "tAkwu8+AdEyGxGoSvJ2gVmQdcicWw3j1ZZueVV74M+E="
+    },
+    {
+      "path": "LICENSE-tesseract-core.txt",
+      "url": "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/LICENSE",
+      "sha256": "xllut76FgcGL5zbIRvuRc7aezPbvlMUTWJPsVr2Sugg="
+    }
+  ]
+}

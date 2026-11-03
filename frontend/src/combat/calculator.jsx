@@ -200,9 +200,9 @@ function Direction({ value, attacker, defender, index }) {
       <p className="eyebrow">
         {index === 0 ? "Первый → Второй" : "Второй → Первый"}
       </p>
-      <h3>
+      <h2>
         {attacker.name} <span aria-hidden="true">→</span> {defender.name}
-      </h3>
+      </h2>
       <div className="combat-result-head">
         <span>Атака</span>
         <span>Без допэнергии</span>

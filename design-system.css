@@ -5,9 +5,10 @@
   --ui-surface: #ffffff;
   --ui-subtle: #f8fafc;
   --ui-ink: #223248;
-  --ui-muted: #64748b;
+  --ui-muted: #56657b;
   --ui-border: #d4dce7;
   --ui-border-strong: #b8c5d6;
+  --ui-control-border: #7e8b9f;
   --ui-accent: #2563eb;
   --ui-accent-soft: #edf3ff;
   --ui-success: #21835b;
@@ -58,7 +59,7 @@ body {
 #app-root textarea {
   min-height: var(--ui-control-height);
   box-sizing: border-box;
-  border: 1px solid var(--ui-border);
+  border: 1px solid var(--ui-control-border);
   border-radius: var(--ui-radius);
   background-color: var(--ui-surface);
   color: var(--ui-ink);
@@ -82,7 +83,7 @@ body {
 }
 #app-root input::placeholder,
 #app-root textarea::placeholder {
-  color: #8794a6;
+  color: #56657b;
   opacity: 1;
 }
 #app-root input[type="number"] {
@@ -103,7 +104,7 @@ body {
 #app-root :is(select, input, textarea):focus-visible {
   outline: 3px solid #c7d8fb;
   outline-offset: 2px;
-  border-color: #7b9ee5;
+  border-color: #1d4ed8;
 }
 #app-root input[type="checkbox"] {
   appearance: none;
@@ -115,7 +116,7 @@ body {
   flex-shrink: 0;
   padding: 0;
   margin: 0;
-  border: 1.5px solid var(--ui-border-strong);
+  border: 1.5px solid var(--ui-control-border);
   border-radius: 5px;
   background-color: var(--ui-surface);
   background-position: center;
@@ -175,7 +176,7 @@ body {
   height: 42px;
 }
 #app-root .combat-picker-input:focus-within {
-  border-color: #7b9ee5;
+  border-color: #1d4ed8;
   box-shadow: 0 0 0 3px #e2ebff;
 }
 #app-root .combat-picker-input > input:focus {
@@ -324,7 +325,7 @@ body {
   color: var(--ui-muted);
 }
 #app-root .eyebrow {
-  color: #77859a;
+  color: #56657b;
   letter-spacing: 1.1px;
 }
 #app-root :is(.catalog-tools, .editor-info, .picker-tools) {
@@ -693,7 +694,7 @@ body {
   outline: none;
 }
 #app-root .at-search-box:focus-within {
-  border-color: #7b9ee5;
+  border-color: #1d4ed8;
   box-shadow: 0 0 0 3px #e2ebff;
 }
 #app-root .at-select-box {
@@ -923,4 +924,117 @@ body {
     grid-column: 3;
     justify-self: end;
   }
+}
+
+/* Acceptance: sufficient text/focus contrast on white and canvas surfaces. */
+#app-root input::placeholder,
+#app-root textarea::placeholder {
+  color: var(--ui-muted);
+}
+#app-root
+  :is(button, a, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 3px;
+}
+#app-root
+  :is(
+    .fighter-immunities small,
+    .fighter-conditions small,
+    .portrait-overflow,
+    .group-row small
+  ) {
+  color: var(--ui-muted);
+}
+#app-root .at-character-avatar {
+  color: #223248;
+}
+#app-root .map-tools button[aria-selected="true"] {
+  background: #0369a1;
+  border-color: #0369a1;
+  color: white;
+}
+#battle-map-svg:focus-visible {
+  outline-offset: -3px;
+}
+#app-root .map-point:focus-visible {
+  outline: none;
+}
+.map-point:focus-visible > circle:first-of-type {
+  stroke: #1d4ed8;
+  stroke-width: 3;
+}
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 16px;
+  z-index: 100;
+  transform: translateY(-160%);
+  padding: 12px 16px;
+  border: 2px solid #1d4ed8;
+  border-radius: 8px;
+  background: white;
+  color: #173d82;
+  font-weight: 600;
+}
+.skip-link:focus {
+  transform: none;
+}
+#main-content {
+  scroll-margin-top: var(--app-chrome-height);
+}
+#main-content:focus {
+  outline: none;
+}
+html {
+  scroll-padding-top: calc(var(--app-chrome-height) + 12px);
+  scroll-padding-bottom: 100px;
+}
+#app-root :is(button, a, input, select, textarea, summary, [tabindex]) {
+  scroll-margin-top: 8px;
+  scroll-margin-bottom: 8px;
+}
+
+#app-root dialog {
+  scroll-padding-top: 110px;
+  scroll-padding-bottom: 80px;
+}
+#app-root .condition-grid .selected small,
+#app-root .status-grid .selected small {
+  color: white;
+}
+#app-root .condition-grid [data-condition="Stun"].selected {
+  background: #8b5c05;
+  border-color: #8b5c05;
+}
+#app-root
+  .condition-grid
+  :is([data-condition="Bleed"], [data-condition="Incinerate"]).selected {
+  background: #b63d34;
+  border-color: #b63d34;
+}
+#app-root .battle-log-list:focus-visible {
+  outline-offset: -3px;
+}
+#app-root .fighter-card-stats dt > .sr-only {
+  display: block;
+}
+#battle-map-svg :is(.map-zone-label, .map-reference-label) {
+  fill: #223248;
+}
+
+#app-root :is(.combat-picker-input, .at-affiliation-picker) {
+  border-color: var(--ui-control-border);
+}
+#app-root :is(.section-title, .empty) h2 {
+  font-size: 16px;
+  letter-spacing: normal;
+  line-height: inherit;
+}
+#app-root .combat-direction h2 {
+  letter-spacing: normal;
+  line-height: inherit;
+}
+#app-root .squad-results-heading h2 {
+  letter-spacing: normal;
+  line-height: inherit;
 }

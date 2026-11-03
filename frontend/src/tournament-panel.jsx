@@ -43,7 +43,11 @@ const ArchiveSection0 = observer(function ArchiveSection0() {
           {"Составы и все результаты по персонажам, игрокам и аффилиациям."}
         </p>
       </div>
-      <div className={"at-snapshot-counts"} aria-label={"Состав архива"}>
+      <div
+        className={"at-snapshot-counts"}
+        role="group"
+        aria-label={"Состав архива"}
+      >
         <div>
           <strong id={"at-total-rosters"}>{t.data.meta.rosters}</strong>
           <span>{"ростеров"}</span>
@@ -573,6 +577,7 @@ const ArchiveSection4 = observer(function ArchiveSection4() {
           </div>
           <div
             id={"at-character-list"}
+            role="region"
             className={"at-character-list"}
             aria-label={"Персонажи"}
           >

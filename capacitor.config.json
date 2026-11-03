@@ -1,0 +1,17 @@
+{
+  "appId": "org.mcpcompanion.local",
+  "appName": "MCP Companion",
+  "webDir": "native-web",
+  "server": {
+    "hostname": "localhost",
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#101722",
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SystemBars": { "style": "DARK" }
+  }
+}

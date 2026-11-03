@@ -4,6 +4,13 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+execFileSync(
+  process.execPath,
+  [path.join(root, "scripts/prepare-ocr-assets.mjs"), "--check"],
+  {
+    stdio: "inherit",
+  },
+);
 execFileSync(process.execPath, [path.join(root, "frontend/build.mjs")], {
   stdio: "inherit",
 });

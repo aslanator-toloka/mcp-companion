@@ -2,6 +2,11 @@ import React from "react";
 
 // One 20 px stroke grid for application controls. Game symbols remain separate.
 const paths = {
+  sun: "M10 1v2M10 17v2M1 10h2M17 10h2M3.6 3.6 5 5M15 15l1.4 1.4M3.6 16.4 5 15M15 5l1.4-1.4M14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z",
+  moon: "M17.5 11.5A8 8 0 0 1 8.5 2.5a8 8 0 1 0 9 9Z",
+  camera:
+    "M3 6h3l1.5-2h5L14 6h3v11H3zM13.5 11.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z",
+  image: "M3 3h14v14H3zM3 14l4-4 3 3 3-5 4 6M7 6h.01",
   info: "M10 9v5m0-8h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z",
   chevron: "m5 7.5 5 5 5-5",
   close: "m5 5 10 10M15 5 5 15",

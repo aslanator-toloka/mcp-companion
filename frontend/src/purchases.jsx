@@ -81,7 +81,7 @@ const BoxOpportunities = observer(function BoxOpportunities({
     <section
       className="box-opportunities"
       data-box-opportunities={code}
-      aria-label="Какие ростеры откроет покупка"
+      aria-label={"Какие ростеры откроет покупка " + code}
     >
       <button
         className="box-opportunity-link"
@@ -345,13 +345,13 @@ export function PurchasesPage({
       ) : (
         <div className="empty purchase-empty">
           <EmptyIllustration name="collection" />
-          <h3>
+          <h2>
             {query
               ? "Ничего не найдено"
               : tab === "purchased"
                 ? "Пока нет купленных наборов"
                 : "Пока нет запланированных покупок"}
-          </h3>
+          </h2>
           <p>
             {query
               ? "Попробуйте другое название, код или имя персонажа."

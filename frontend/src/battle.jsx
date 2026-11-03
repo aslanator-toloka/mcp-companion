@@ -1,3 +1,5 @@
+import { navigateTabs, useEntryFocus } from "./keyboard.js";
+import { PhotoButton } from "./photo-import/dialog.jsx";
 import { EmptyIllustration } from "./ui-icons.jsx";
 import { RoleIcons } from "./character-roles.jsx";
 import { BattleMapView } from "./map.jsx";
@@ -11,7 +13,7 @@ import {
   BattleDialogModal,
 } from "./battle-extra.jsx";
 import { PeerHome, PeerHeader } from "./peer.jsx";
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 import { Avatar, Control } from "./common.jsx";
 const counterAction = (action, a, delta) =>
   action === "score"
@@ -42,13 +44,14 @@ const iconLabels = {
   reactive: "Reactive",
   leadership: "Leadership",
 };
-const Icon = memo(function Icon({ name, badge = false }) {
+const Icon = memo(function Icon({ name, badge = false, decorative = false }) {
   const plain = name.replace(/^badge-(attack-)?/, "");
   return (
     <img
       className={"sc-icon" + (badge ? " sc-badge-icon" : "")}
       src={"assets/card-icons/" + name + ".png"}
-      alt={iconLabels[plain] || plain}
+      alt={decorative ? "" : iconLabels[plain] || plain}
+      aria-hidden={decorative || undefined}
       title={iconLabels[plain] || plain}
       width={24}
       height={24}
@@ -78,7 +81,9 @@ export function Counter({
       >
         −
       </button>
-      <strong aria-label={label}>{value}</strong>
+      <strong role="status" aria-label={label} aria-atomic="true">
+        {value}
+      </strong>
       <button
         data-bt={action}
         data-delta="1"
@@ -280,14 +285,10 @@ const Fighter = memo(function Fighter({ model }) {
             ["energy", "energy", "Энергетическая защита"],
             ["mystic", "mystic", "Мистическая защита"],
           ].map(([icon, key, label]) => (
-            <div
-              key={key}
-              data-fighter-stat={key}
-              aria-label={label + ": " + (summary.stats[key] ?? "—")}
-            >
+            <div key={key} data-fighter-stat={key}>
               <dt>
-                <Icon name={"badge-" + icon} badge />
-                <span>{key === "move" ? "Move" : label.split(" ")[0]}</span>
+                <Icon name={"badge-" + icon} badge decorative />
+                <span className="sr-only">{label}</span>
               </dt>
               <dd>{summary.stats[key] ?? "—"}</dd>
             </div>
@@ -550,6 +551,7 @@ export function BattleHome({ pending, history, readError }) {
           перезаписывается; восстановите резервный JSON через «Данные».
         </div>
       )}
+      <h2 className="sr-only">Локальные партии</h2>
       {pending.length ? (
         <div className="match-grid">
           {pending.map((item) => (
@@ -577,7 +579,7 @@ export function BattleHome({ pending, history, readError }) {
         </div>
       )}
       <div className="section-title battle-history-title">
-        <h3>История партий</h3>
+        <h2>История партий</h2>
         <span className="muted">{history.length}</span>
       </div>
       {history.length ? (
@@ -607,6 +609,8 @@ export function BattlePlay({
     ready = team.fighters.filter(
       (f) => f.status === "ready" && !f.acted,
     ).length;
+  const entryHeading = useRef(null);
+  useEntryFocus(entryHeading, m.id);
   return (
     <>
       <button
@@ -633,7 +637,9 @@ export function BattlePlay({
           <span className="eyebrow">
             11 / {readonly ? "Завершённая партия" : "Бой"}
           </span>
-          <h1>{m.name}</h1>
+          <h1 ref={entryHeading} tabIndex={-1}>
+            {m.name}
+          </h1>
           <p>
             {m[network && ownSide === "opponent" ? "mine" : "opponent"].name} ·
             Threat {m.threat}
@@ -726,11 +732,19 @@ export function BattlePlay({
           </button>
         ))}
       </div>
-      <div className="battle-side-tabs" role="tablist" aria-label="Сторона боя">
+      <div
+        className="battle-side-tabs"
+        onKeyDown={navigateTabs}
+        role="tablist"
+        aria-label="Сторона боя"
+      >
         {["mine", "opponent"].map((side) => (
           <button
             role="tab"
             aria-selected={teamSide === side}
+            tabIndex={teamSide === side ? 0 : -1}
+            id={"battle-tab-" + side}
+            aria-controls="battle-team-panel"
             data-bt="team"
             data-side={side}
             className={teamSide === side ? "selected" : ""}
@@ -745,86 +759,100 @@ export function BattlePlay({
           </button>
         ))}
       </div>
-      <div className="section-title">
-        <div>
-          <h3>{labels[teamSide] === "Мои" ? "Мой отряд" : team.name}</h3>
-          <RoleIcons
-            slugs={team.fighters}
-            tactics={team.tactics}
-            leaderSlug={
-              team.fighters.find((f) => f.id === team.leader)?.slug || ""
-            }
-            context="squad"
-            owner={teamSide}
-          />
-          <p className="battle-small">
-            {ready} могут походить · {team.affiliation || "Без аффилиации"}
-            {team.leader
-              ? " · лидер " +
-                (team.fighters.find((f) => f.id === team.leader)?.name || "—")
-              : ""}
-          </p>
-        </div>
-        {(teamSide === "opponent" || network) && !readonly && (
-          <button
-            data-bt="pick"
-            data-side={teamSide}
-            data-kind="characters"
-            onClick={(event) => {
-              event.stopPropagation();
-              b.openPicker(teamSide, "characters");
-            }}
-          >
-            Изменить состав +
-          </button>
-        )}
-      </div>
-      <div className="fighter-grid">
-        {fighters.length ? (
-          fighters.map((model) => (
-            <Fighter key={model.fighter.id} model={model} />
-          ))
-        ) : (
-          <div className="empty roster-empty">
-            <h3>Противник не указан</h3>
-            <p>
-              Его счёт уже можно вести. Бойцов и карты добавьте, когда они
-              станут известны.
+      <div
+        id="battle-team-panel"
+        role="tabpanel"
+        aria-labelledby={"battle-tab-" + teamSide}
+      >
+        <div className="section-title">
+          <div>
+            <h2>{labels[teamSide] === "Мои" ? "Мой отряд" : team.name}</h2>
+            <RoleIcons
+              slugs={team.fighters}
+              tactics={team.tactics}
+              leaderSlug={
+                team.fighters.find((f) => f.id === team.leader)?.slug || ""
+              }
+              context="squad"
+              owner={teamSide}
+            />
+            <p className="battle-small">
+              {ready} могут походить · {team.affiliation || "Без аффилиации"}
+              {team.leader
+                ? " · лидер " +
+                  (team.fighters.find((f) => f.id === team.leader)?.name || "—")
+                : ""}
             </p>
-            {!readonly && (
-              <button
-                className="primary"
-                data-bt="pick"
-                data-side="opponent"
-                data-kind="characters"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  b.openPicker(teamSide, "characters");
-                }}
-              >
-                Выбрать бойцов и карты +
-              </button>
-            )}
           </div>
-        )}
+          {!readonly && (
+            <PhotoButton type="battle" side={teamSide} kind="characters" />
+          )}
+          {(teamSide === "opponent" || network) && !readonly && (
+            <button
+              data-bt="pick"
+              data-side={teamSide}
+              data-kind="characters"
+              onClick={(event) => {
+                event.stopPropagation();
+                b.openPicker(teamSide, "characters");
+              }}
+            >
+              Изменить состав +
+            </button>
+          )}
+        </div>
+        <div className="fighter-grid">
+          {fighters.length ? (
+            fighters.map((model) => (
+              <Fighter key={model.fighter.id} model={model} />
+            ))
+          ) : (
+            <div className="empty roster-empty">
+              <h3>Противник не указан</h3>
+              <p>
+                Его счёт уже можно вести. Бойцов и карты добавьте, когда они
+                станут известны.
+              </p>
+              {!readonly && (
+                <button
+                  className="primary"
+                  data-bt="pick"
+                  data-side="opponent"
+                  data-kind="characters"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    b.openPicker(teamSide, "characters");
+                  }}
+                >
+                  Выбрать бойцов и карты +
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="section-title battle-tactics-title">
+          <h3>
+            Тактики · {team.tactics.filter((t) => !t.played).length} в руке
+          </h3>
+          {!readonly && (
+            <PhotoButton type="battle" side={teamSide} kind="tactics" />
+          )}
+          {(teamSide === "opponent" || network) && !readonly && (
+            <button
+              data-bt="pick"
+              data-side={teamSide}
+              data-kind="tactics"
+              onClick={(event) => {
+                event.stopPropagation();
+                b.openPicker(teamSide, "tactics");
+              }}
+            >
+              Изменить карты +
+            </button>
+          )}
+        </div>
+        <TacticStrip team={team} side={teamSide} readonly={readonly} />
       </div>
-      <div className="section-title battle-tactics-title">
-        <h3>Тактики · {team.tactics.filter((t) => !t.played).length} в руке</h3>
-        {(teamSide === "opponent" || network) && !readonly && (
-          <button
-            data-bt="pick"
-            data-side={teamSide}
-            data-kind="tactics"
-            onClick={(event) => {
-              event.stopPropagation();
-              b.openPicker(teamSide, "tactics");
-            }}
-          >
-            Изменить карты +
-          </button>
-        )}
-      </div>
-      <TacticStrip team={team} side={teamSide} readonly={readonly} />
       <p className="battle-rule-note">
         HP, энергию, цели и эффекты меняете вы. Повреждение не начисляет энергию
         автоматически. Изменения партии сохраняются сразу; ↶ отменяет последнюю

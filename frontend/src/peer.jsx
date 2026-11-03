@@ -1,3 +1,4 @@
+import { useEntryFocus } from "./keyboard.js";
 import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { peer as p, battle as b, rosters, ui } from "./stores/index.js";
@@ -110,6 +111,8 @@ export const PeerSetup = observer(function PeerSetup() {
     team = m[side],
     enemy = m[other],
     ready = room.ready[side];
+  const entryHeading = useRef(null);
+  useEntryFocus(entryHeading, m.id + String(!!p.dialog));
   const problems = b.domain.Core.errors({ ...m, mine: team, opponent: enemy });
   return (
     <>
@@ -117,7 +120,9 @@ export const PeerSetup = observer(function PeerSetup() {
       <div className="heading">
         <div>
           <span className="eyebrow">ПОДГОТОВКА / ПРЯМАЯ СВЯЗЬ</span>
-          <h1>Собрать свой отряд</h1>
+          <h1 ref={entryHeading} tabIndex={-1}>
+            Собрать свой отряд
+          </h1>
           <p>
             {m.name} · вы играете за {team.name}
           </p>
@@ -236,6 +241,7 @@ export const PeerModal = observer(function PeerModal() {
   return (
     <dialog
       id="peer-connect-dialog"
+      aria-labelledby="peer-connect-title"
       className="battle-dialog peer-connect-dialog"
       ref={ref}
       onClose={(event) => {
@@ -246,7 +252,7 @@ export const PeerModal = observer(function PeerModal() {
       {d && (
         <>
           <div className="dialog-heading">
-            <h2>{title}</h2>
+            <h2 id="peer-connect-title">{title}</h2>
             <button
               className="quiet"
               data-peer="close"

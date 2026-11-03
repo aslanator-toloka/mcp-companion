@@ -241,6 +241,7 @@ export function Power({ power: p, change }) {
               "sc-power-cost" +
               (change?.cost?.changed ? " sc-cost-changed" : "")
             }
+            role="img"
             aria-label={"Power: " + cost}
             title={change?.cost?.changed ? change.cost.reason : undefined}
           >
@@ -268,6 +269,7 @@ export function Pill({ name, value, label, change }) {
     <div
       className={"sc-stat" + (change?.changed ? " sc-stat-changed" : "")}
       data-stat={name}
+      role="img"
       aria-label={label + ": " + (shown ?? "—")}
       title={reason}
     >
@@ -1140,6 +1142,7 @@ export const GameCardModal = observer(function GameCardModal() {
   return (
     <CardModal
       id="game-card-dialog"
+      labelledBy="game-card-title"
       className="game-card-dialog"
       open={!!v}
       onClose={cardViews.closeGame}
@@ -1149,7 +1152,7 @@ export const GameCardModal = observer(function GameCardModal() {
           <>
             <header className="gc-dialog-head">
               <div>
-                <strong>{c.name}</strong>
+                <strong id="game-card-title">{c.name}</strong>
                 {v.metadata && <small>{v.metadata}</small>}
               </div>
               <button

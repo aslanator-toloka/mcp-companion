@@ -103,6 +103,21 @@ export const SidebarToggle = observer(function SidebarToggle() {
     </button>
   );
 });
+export const ThemeToggle = observer(function ThemeToggle() {
+  const label =
+    ui.theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему";
+  return (
+    <button
+      type="button"
+      className="theme-toggle"
+      aria-label={label}
+      title={label}
+      onClick={ui.toggleTheme}
+    >
+      <UIIcon name={ui.theme === "dark" ? "sun" : "moon"} />
+    </button>
+  );
+});
 export const CatalogPanel = observer(function CatalogPanel() {
   const f = (name, event) =>
     catalog.setFilter(
@@ -242,7 +257,12 @@ export const CatalogPanel = observer(function CatalogPanel() {
           <span>Коллекция</span>
         </span>
       </div>
-      <div id="characters" className="character-list" aria-label="Персонажи">
+      <div
+        id="characters"
+        role="region"
+        className="character-list"
+        aria-label="Список персонажей"
+      >
         {ui.ready ? (
           <CatalogList />
         ) : catalog.error ? (

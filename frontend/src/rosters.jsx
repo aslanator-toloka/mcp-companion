@@ -1,3 +1,4 @@
+import { navigateTabs, useEntryFocus } from "./keyboard.js";
 import { UIIcon, EmptyIllustration } from "./ui-icons.jsx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
@@ -8,11 +9,13 @@ import {
   ui,
   actions,
   battle,
+  photoImport,
 } from "./stores/index.js";
 import { cardStatus } from "./stores/rosters.js";
 import { RoleIcons } from "./character-roles.jsx";
 import { useDialogBackdrop } from "./dialog-backdrop.js";
 import { RosterSquads } from "./roster-squads.jsx";
+import { PhotoButton, startPhotoCapture } from "./photo-import/dialog.jsx";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
 const Options = ({ names, empty }) => (
@@ -146,6 +149,17 @@ export const RosterList = observer(function RosterList({
         </div>
         <div className="actions">
           <button
+            className="photo-add-button"
+            onClick={() => {
+              startPhotoCapture(() => {
+                rosters.open();
+                photoImport.openRoster("characters");
+              });
+            }}
+          >
+            <UIIcon name="camera" /> Ростер по фото
+          </button>
+          <button
             data-rs="groups"
             onClick={(event) => {
               event.stopPropagation();
@@ -257,7 +271,7 @@ export const RosterList = observer(function RosterList({
       ) : (
         <div className="empty roster-empty">
           <EmptyIllustration name="roster" />
-          <h3>{total ? "Ничего не найдено" : "Создайте первый ростер"}</h3>
+          <h2>{total ? "Ничего не найдено" : "Создайте первый ростер"}</h2>
           <p>
             {total
               ? "Измените запрос или снимите фильтры."
@@ -385,13 +399,25 @@ export const RosterEditor = observer(function RosterEditor({
   secure,
   extract,
 }) {
+  const entryHeading = useRef(null), nameInput = useRef(null);
+  useEntryFocus(entryHeading, r.id);
+  const nameError = !!rosters.error && !r.name.trim();
+  const focusName = () => {
+    nameInput.current?.focus({ preventScroll: true });
+    nameInput.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+  };
+  useEffect(() => {
+    if (nameError) focusName();
+  }, [nameError]);
   const source = r.tournamentSource;
   return (
     <>
       <div className="heading">
         <div>
           <span className="eyebrow">05 / Редактор ростера</span>
-          <h1>{saved ? "Редактировать ростер" : "Новый ростер"}</h1>
+          <h1 ref={entryHeading} tabIndex={-1}>
+            {saved ? "Редактировать ростер" : "Новый ростер"}
+          </h1>
           <p>Правки применятся после нажатия «Сохранить ростер».</p>
         </div>
         <button
@@ -426,6 +452,9 @@ export const RosterEditor = observer(function RosterEditor({
             Название ростера
             <Control
               id="editor-name"
+              ref={nameInput}
+              aria-invalid={nameError || undefined}
+              aria-describedby={nameError ? "editor-name-error" : undefined}
               value={r.name}
               maxLength={100}
               placeholder="Например: Web Warriors · контроль"
@@ -434,6 +463,7 @@ export const RosterEditor = observer(function RosterEditor({
                 rosters.setField("name", event.target.value);
               }}
             />
+            {nameError && <span id="editor-name-error" className="field-error" role="alert">Введите название ростера.</span>}
           </label>
           <label className="field">
             Основная аффилиация
@@ -452,7 +482,7 @@ export const RosterEditor = observer(function RosterEditor({
           </label>
         </div>
         <div id="editor-error" className="editor-error" role="alert">
-          {rosters.error}
+          {!nameError && rosters.error}
         </div>
         <div className="editor-groups">
           <span className="field-label">Группы</span>
@@ -506,7 +536,12 @@ export const RosterEditor = observer(function RosterEditor({
         owner={r.id}
       />
       <RosterSquads />
-      <div className="editor-tabs" role="tablist" aria-label="Состав ростера">
+      <div
+        className="editor-tabs"
+        onKeyDown={navigateTabs}
+        role="tablist"
+        aria-label="Состав ростера"
+      >
         {[
           ["characters", "Персонажи"],
           ["tactics", "Тактики"],
@@ -516,6 +551,9 @@ export const RosterEditor = observer(function RosterEditor({
             key={id}
             role="tab"
             aria-selected={tab === id}
+            tabIndex={tab === id ? 0 : -1}
+            id={"roster-tab-" + id}
+            aria-controls="roster-tab-panel"
             data-rs="tab"
             data-tab={id}
             className={tab === id ? "selected" : ""}
@@ -529,58 +567,72 @@ export const RosterEditor = observer(function RosterEditor({
           </button>
         ))}
       </div>
-      <div className="section-title roster-section-title">
-        <h3>
-          {tab === "characters"
-            ? "Состав персонажей"
-            : tab === "tactics"
-              ? "Team Tactics"
-              : "Secure и Extract"}
-        </h3>
-        {items.length > 0 && (
-          <button
-            data-rs="pick"
-            className="primary"
-            onClick={(event) => {
-              event.stopPropagation();
-              rosters.openPicker();
-            }}
-          >
-            + Добавить
-          </button>
+      <div
+        id="roster-tab-panel"
+        role="tabpanel"
+        aria-labelledby={"roster-tab-" + tab}
+      >
+        <div className="section-title roster-section-title">
+          <h2>
+            {tab === "characters"
+              ? "Состав персонажей"
+              : tab === "tactics"
+                ? "Team Tactics"
+                : "Secure и Extract"}
+          </h2>
+          <div className="actions photo-section-actions">
+            <PhotoButton kind={tab} />
+            {items.length > 0 && (
+              <button
+                data-rs="pick"
+                className="primary"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  rosters.openPicker();
+                }}
+              >
+                + Добавить
+              </button>
+            )}
+          </div>
+        </div>
+        {items.length ? (
+          <div className="selected-items">
+            {items.map((item) => (
+              <SelectedItem
+                key={tab + ":" + item.slug}
+                item={item}
+                kind={tab}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="empty">
+            <EmptyIllustration name="roster" />
+            <h3>
+              {tab === "characters"
+                ? "Персонажи не выбраны"
+                : tab === "tactics"
+                  ? "Тактики не выбраны"
+                  : "Кризисы не выбраны"}
+            </h3>
+            <p>
+              Добавьте позиции из каталога. Неполный ростер тоже можно
+              сохранить.
+            </p>
+            <button
+              data-rs="pick"
+              className="primary"
+              onClick={(event) => {
+                event.stopPropagation();
+                rosters.openPicker();
+              }}
+            >
+              + Добавить
+            </button>
+          </div>
         )}
       </div>
-      {items.length ? (
-        <div className="selected-items">
-          {items.map((item) => (
-            <SelectedItem key={tab + ":" + item.slug} item={item} kind={tab} />
-          ))}
-        </div>
-      ) : (
-        <div className="empty">
-          <EmptyIllustration name="roster" />
-          <h3>
-            {tab === "characters"
-              ? "Персонажи не выбраны"
-              : tab === "tactics"
-                ? "Тактики не выбраны"
-                : "Кризисы не выбраны"}
-          </h3>
-          <p>
-            Добавьте позиции из каталога. Неполный ростер тоже можно сохранить.
-          </p>
-          <button
-            data-rs="pick"
-            className="primary"
-            onClick={(event) => {
-              event.stopPropagation();
-              rosters.openPicker();
-            }}
-          >
-            + Добавить
-          </button>
-        </div>
-      )}
       {notes.length > 0 && (
         <div className="notice">
           {notes.map((note) => (
@@ -640,6 +692,7 @@ export const RosterEditor = observer(function RosterEditor({
             onClick={(event) => {
               event.stopPropagation();
               if (rosters.save()) actions.showRosterList();
+              else if (!r.name.trim()) focusName();
             }}
           >
             Сохранить ростер

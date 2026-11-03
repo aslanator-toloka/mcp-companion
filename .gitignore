@@ -9,3 +9,15 @@ playwright-report/
 previews/
 
 __pycache__/
+
+# Generated Android bundles and machine-specific SDK paths
+native-web/
+.android-cache/
+output/apk/
+android/.gradle/
+android/**/build/
+android/local.properties
+android/capacitor-cordova-android-plugins/
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json

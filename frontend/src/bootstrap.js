@@ -1,4 +1,5 @@
 import { reaction } from "mobx";
+import { exportLibrary } from "./platform/export.js";
 import { BrowserNavigation } from "./navigation/history.js";
 import { createRoutes } from "./navigation/routes.js";
 import Core from "../../battle-core.js";
@@ -27,6 +28,7 @@ import {
   peer,
   map,
   ui,
+  photoImport,
 } from "./stores/index.js";
 const KEY = "mcp-companion-catalog-v1";
 let navigation;
@@ -36,6 +38,7 @@ const json = async (path, options = { cache: "no-cache" }) => {
   return r.json();
 };
 const closeTransient = () => {
+  photoImport.close();
   catalog.close();
   purchases.select(null);
   ui.setMembership(false);
@@ -92,17 +95,22 @@ function save(value) {
   );
   return false;
 }
-function exportData() {
-  const value = { ...library.serialize(), battles: battle.serialize() },
-    url = URL.createObjectURL(
-      new Blob([JSON.stringify(value, null, 2)], { type: "application/json" }),
-    ),
-    link = document.createElement("a");
-  link.href = url;
-  link.download = "mcp-companion-catalog.json";
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  ui.notify("Данные экспортированы");
+let exportPending = false;
+async function exportData() {
+  if (exportPending) return;
+  exportPending = true;
+  try {
+    await exportLibrary({
+      ...library.serialize(),
+      battles: battle.serialize(),
+    });
+    ui.notify("Файл экспорта сохранён");
+  } catch (error) {
+    if (error.code !== "EXPORT_CANCELLED")
+      ui.notify(error.message || "Не удалось сохранить экспорт.");
+  } finally {
+    exportPending = false;
+  }
 }
 async function readImport(file) {
   ui.setImportError("");

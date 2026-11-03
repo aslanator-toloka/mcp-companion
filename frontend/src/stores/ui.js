@@ -4,6 +4,7 @@ export class UIStore {
   screen = "catalog";
   mine = false;
   collapsed = false;
+  theme = "dark";
   toast = "";
   sourceDate = "";
   dataDialog = null;
@@ -19,6 +20,10 @@ export class UIStore {
     try {
       this.collapsed =
         storage?.getItem("mcp-companion-sidebar-collapsed-v1") === "1";
+    } catch {}
+    try {
+      if (storage?.getItem("mcp-companion-theme-v1") === "light")
+        this.theme = "light";
     } catch {}
     makeAutoObservable(
       this,
@@ -84,6 +89,17 @@ export class UIStore {
         "mcp-companion-sidebar-collapsed-v1",
         this.collapsed ? "1" : "0",
       );
+    } catch {}
+  }
+  toggleTheme() {
+    this.theme = this.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = this.theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+      "content",
+      this.theme === "dark" ? "#101722" : "#2563eb",
+    );
+    try {
+      this.storage?.setItem("mcp-companion-theme-v1", this.theme);
     } catch {}
   }
   notify(text) {

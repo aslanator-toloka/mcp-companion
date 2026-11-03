@@ -141,6 +141,8 @@ export function TournamentAffiliations({ rows, selected }) {
         className={
           "at-affiliation-score " + (a.points < 0 ? "at-negative" : "")
         }
+        role="status"
+        aria-live="off"
         aria-label={`Всего ${number(a.points)} баллов`}
       >
         {number(a.points)}
@@ -149,6 +151,8 @@ export function TournamentAffiliations({ rows, selected }) {
         className={
           "at-affiliation-score " + (a.average < 0 ? "at-negative" : "")
         }
+        role="status"
+        aria-live="off"
         aria-label={`Сглаженное среднее ${mean(a.average)}`}
       >
         {mean(a.average)}
@@ -193,12 +197,16 @@ export function TournamentPlayers({ rows, selected }) {
         </span>
         <span
           className={"at-player-score " + (p.points < 0 ? "at-negative" : "")}
+          role="status"
+          aria-live="off"
           aria-label={`Всего ${number(p.points)} баллов`}
         >
           {number(p.points)}
         </span>
         <span
           className={"at-player-score " + (p.average < 0 ? "at-negative" : "")}
+          role="status"
+          aria-live="off"
           aria-label={`Сглаженное среднее ${mean(p.average)}`}
         >
           {mean(p.average)}
@@ -336,6 +344,7 @@ const TournamentRosterCard = observer(function TournamentRosterCard({
         </div>
         <div
           className="at-record"
+          role="group"
           aria-label={`${r.wins} побед, ${r.losses} поражений, ${r.draws} ничьих`}
         >
           <span className="at-win">{r.wins}</span>
@@ -665,6 +674,7 @@ function ProfileAffiliations({ affiliations }) {
   return (
     <div
       className="at-profile-affiliations"
+      role="group"
       aria-label="Аффилиейшены персонажа"
     >
       {affiliations.length ? (

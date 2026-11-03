@@ -237,6 +237,7 @@ export const DataModal = observer(function DataModal() {
   return (
     <Dialog
       id="data-dialog"
+      resetKey={ui.dataDialog}
       className="small-dialog"
       label="Данные приложения"
       open={!!ui.dataDialog}
@@ -250,6 +251,7 @@ export const DataModal = observer(function DataModal() {
               <button
                 className="quiet close"
                 aria-label="Закрыть восстановление"
+                data-dialog-initial-focus
                 onClick={ui.closeData}
               >
                 <UIIcon name="close" />
@@ -313,6 +315,7 @@ export const DataModal = observer(function DataModal() {
                 className="quiet close"
                 data-action="close-data"
                 aria-label="Закрыть данные"
+                data-dialog-initial-focus
                 onClick={ui.closeData}
               >
                 <UIIcon name="close" />

@@ -1,0 +1,15 @@
+Offline browser OCR assets. No photographs are sent to a third-party service.
+
+Tesseract.js 7.0.0 and tesseract.js-core 7.0.0
+https://github.com/naptha/tesseract.js
+https://github.com/naptha/tesseract.js-core
+Apache License 2.0; see adjacent LICENSE files.
+
+English LSTM recognition model: @tesseract.js-data/eng 1.0.0,
+4.0.0_best_int/eng.traineddata.gz, distributed by the Tesseract.js project.
+https://github.com/naptha/tessdata
+https://github.com/tesseract-ocr/tessdata_best
+Tesseract language data is under Apache License 2.0.
+
+Exact download URLs and SHA-256 hashes: scripts/ocr-assets.json.
+Refresh only with explicit version/hash updates and OCR regression tests.
