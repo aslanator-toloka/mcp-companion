@@ -1,27 +1,14 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-10-26T15:35:19.032Z",
+  "fetchedAt": "2026-11-04T11:17:40.577Z",
   "characters": 243,
   "addedCharacters": [],
-  "updatedCharacterCards": [],
+  "updatedCharacterCards": [
+    "drax-the-destroyer",
+    "nkantu-the-living-mummy"
+  ],
   "tactics": 525,
   "addedTactics": [],
   "crises": 72,
-  "boxSets": 198,
-  "updatedCharacterMetadata": [
-    {
-      "slug": "nimrod",
-      "name": "Nimrod, the Hunter",
-      "changes": {
-        "baseSize": {
-          "before": 50,
-          "after": 65
-        },
-        "version": {
-          "before": 1792010398,
-          "after": 1792858644
-        }
-      }
-    }
-  ]
+  "boxSets": 198
 }

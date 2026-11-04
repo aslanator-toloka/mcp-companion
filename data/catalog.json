@@ -1,7 +1,7 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-10-26T15:35:19.032Z",
-  "searchMetadataUpdatedAt": "2026-10-26T15:35:19.032Z",
+  "fetchedAt": "2026-11-04T11:17:40.577Z",
+  "searchMetadataUpdatedAt": "2026-11-04T11:17:40.577Z",
   "characters": [
     {
       "slug": "abomination",
@@ -2874,79 +2874,6 @@
       ]
     },
     {
-      "slug": "captain-america",
-      "name": "Captain America",
-      "alterEgo": "Steve Rogers",
-      "threatLevel": 4,
-      "stamina": 6,
-      "speed": "M",
-      "size": 2,
-      "baseSize": 35,
-      "physicalDefense": 4,
-      "energyDefense": 4,
-      "mysticDefense": 3,
-      "isGrunt": false,
-      "secondFormSlug": null,
-      "secondFormBaseSize": null,
-      "boxSets": [
-        "CP01",
-        "CP141"
-      ],
-      "tags": [
-        "digitalUpdate2026August",
-        "digitalUpdate2021",
-        "leaderNatural",
-        "physicalR4",
-        "push",
-        "gainer",
-        "noLos",
-        "noCover",
-        "extraAtk",
-        "throwCharacter3",
-        "costReduction",
-        "bodyguardMinder",
-        "defBuff",
-        "blanks",
-        "errataed"
-      ],
-      "version": 1786695285,
-      "releaseDate": "2019-11-15",
-      "actAs": "captain-america",
-      "affiliations": [
-        {
-          "name": "Avengers",
-          "slug": "avengers",
-          "isLeader": true,
-          "timelines": [
-            "standard",
-            "extended",
-            "2026"
-          ],
-          "isLeaderWithTeamTactics": false
-        }
-      ],
-      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america",
-      "portrait": "assets/avatars/captain-america.png",
-      "cardAvailable": true,
-      "attacks": [
-        {
-          "type": "physical",
-          "range": "2",
-          "strength": "5"
-        },
-        {
-          "type": "physical",
-          "range": "4",
-          "strength": "5"
-        },
-        {
-          "type": "physical",
-          "range": "2",
-          "strength": "6"
-        }
-      ]
-    },
-    {
       "slug": "captain-america-sam-wilson",
       "name": "Captain America",
       "alterEgo": "Sam Wilson",
@@ -3024,6 +2951,79 @@
         {
           "type": "physical",
           "range": "3",
+          "strength": "6"
+        }
+      ]
+    },
+    {
+      "slug": "captain-america",
+      "name": "Captain America",
+      "alterEgo": "Steve Rogers",
+      "threatLevel": 4,
+      "stamina": 6,
+      "speed": "M",
+      "size": 2,
+      "baseSize": 35,
+      "physicalDefense": 4,
+      "energyDefense": 4,
+      "mysticDefense": 3,
+      "isGrunt": false,
+      "secondFormSlug": null,
+      "secondFormBaseSize": null,
+      "boxSets": [
+        "CP01",
+        "CP141"
+      ],
+      "tags": [
+        "digitalUpdate2026August",
+        "digitalUpdate2021",
+        "leaderNatural",
+        "physicalR4",
+        "push",
+        "gainer",
+        "noLos",
+        "noCover",
+        "extraAtk",
+        "throwCharacter3",
+        "costReduction",
+        "bodyguardMinder",
+        "defBuff",
+        "blanks",
+        "errataed"
+      ],
+      "version": 1786695285,
+      "releaseDate": "2019-11-15",
+      "actAs": "captain-america",
+      "affiliations": [
+        {
+          "name": "Avengers",
+          "slug": "avengers",
+          "isLeader": true,
+          "timelines": [
+            "standard",
+            "extended",
+            "2026"
+          ],
+          "isLeaderWithTeamTactics": false
+        }
+      ],
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/captain-america",
+      "portrait": "assets/avatars/captain-america.png",
+      "cardAvailable": true,
+      "attacks": [
+        {
+          "type": "physical",
+          "range": "2",
+          "strength": "5"
+        },
+        {
+          "type": "physical",
+          "range": "4",
+          "strength": "5"
+        },
+        {
+          "type": "physical",
+          "range": "2",
           "strength": "6"
         }
       ]
@@ -5285,7 +5285,7 @@
         "hardskin",
         "bald"
       ],
-      "version": 1787072075,
+      "version": 1793179143,
       "releaseDate": "2020-06-11",
       "actAs": "drax-the-destroyer",
       "affiliations": [
@@ -8239,8 +8239,8 @@
         "bodyguardReversed",
         "powerGen"
       ],
-      "version": 1791063114,
-      "releaseDate": null,
+      "version": 1793634845,
+      "releaseDate": "2026-10-30",
       "actAs": "jubilee",
       "affiliations": [
         {

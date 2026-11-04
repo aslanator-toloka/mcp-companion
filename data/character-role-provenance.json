@@ -308,9 +308,11 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/dracula"
     },
     "drax-the-destroyer": {
-      "cardVersion": 1787072075,
-      "cardSha256": "35d897e69d04d37df93847805980c7adeb9648f9081cce288402690e01cce86b",
-      "sourceUrl": "https://www.jarvis-protocol.com/characters/drax-the-destroyer"
+      "cardVersion": 1793179143,
+      "cardSha256": "bcde8f9888b5738c19aff2d7ed6b73a817f7b56d8c17e0a561e569e310a543a8",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/drax-the-destroyer",
+      "reviewedAt": "2026-11-04",
+      "reviewNote": "Reviewed both faces: Driven by Vengeance wording now uses this character may and while attacking, with the same +3 attack dice, removal timing and one-token limit. Unchanged attacks, durability and throws retain brawler, secure-holder and controller roles. Jarvis layout and artwork checked on both faces."
     },
     "ebony-maw": {
       "cardVersion": 1792097960,
@@ -493,9 +495,11 @@
       "sourceUrl": "https://www.jarvis-protocol.com/characters/jean-grey"
     },
     "jubilee": {
-      "cardVersion": 1791063114,
+      "cardVersion": 1793634845,
       "cardSha256": "2d72c3df1e307aff3abf5b95a3b18e6d2b27145fad87d63e9adab3a2ee992506",
-      "sourceUrl": "https://www.jarvis-protocol.com/characters/jubilee"
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/jubilee",
+      "reviewedAt": "2026-11-04",
+      "reviewNote": "Source metadata now records releaseDate 2026-10-30; structured stat-card bytes and all gameplay metadata unchanged. Existing shooter and support roles retained after review."
     },
     "juggernaut": {
       "cardVersion": 1747492452,
@@ -721,8 +725,10 @@
     },
     "nkantu-the-living-mummy": {
       "cardVersion": 1753605541,
-      "cardSha256": "ac563fbf8b4b1bb5f3ec0a0bf397ceb20a13ae99135c66e89b6a569e35f2ca21",
-      "sourceUrl": "https://www.jarvis-protocol.com/characters/nkantu-the-living-mummy"
+      "cardSha256": "0a46fe61ef604c2ab0062af0e2d8f26845c8e3133db83ad50e929f6bb0d77f5b",
+      "sourceUrl": "https://www.jarvis-protocol.com/characters/nkantu-the-living-mummy",
+      "reviewedAt": "2026-11-04",
+      "reviewNote": "Reviewed both faces: Spend Captured Soul changes one to 1 and count to treat for the same failure-to-wild effect at the end of Modify Dice. Other rules, stats and attacks unchanged; secure-holder role retained. Jarvis layout and artwork checked on both faces."
     },
     "nova": {
       "cardVersion": 1786695285,

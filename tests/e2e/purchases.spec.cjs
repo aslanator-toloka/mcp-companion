@@ -233,7 +233,7 @@ test("navigation to purchases preserves the unsaved-roster confirmation", async 
     await context.close();
   }
 });
-test("planned labels are yellow, purchased boxes own their characters, and undo keeps manual ownership across tabs", async ({
+test("planned labels follow the theme, purchased boxes own their characters, and undo keeps manual ownership across tabs", async ({
   browser,
 }) => {
   const context = await browser.newContext({
@@ -256,7 +256,12 @@ test("planned labels are yellow, purchased boxes own their characters, and undo 
     await expect(page.locator('nav [data-action="purchases"]')).toBeEnabled();
     const status = page.locator("#at-character-overview .at-ownership-tag");
     await expect(status).toHaveText("Запланирован");
+    await expect(status).toHaveCSS("background-color", "rgb(60, 48, 33)");
+    await expect(status).toHaveCSS("color", "rgb(241, 199, 127)");
+    await page.getByRole("button", { name: "Включить светлую тему", exact: true }).click();
     await expect(status).toHaveCSS("background-color", "rgb(255, 241, 184)");
+    await page.getByRole("button", { name: "Включить тёмную тему", exact: true }).click();
+    await expect(status).toHaveCSS("background-color", "rgb(60, 48, 33)");
     expect((await saved(page)).owned).not.toContain("silk");
     const rosterId = await page
       .locator("#at-roster-list details")
