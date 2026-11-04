@@ -181,6 +181,42 @@
   color: #b9d4ff;
   background-color: transparent;
 }
+/* Expanded rosters and checked filters share the application's selection palette. */
+:root[data-theme="dark"] #tournaments-screen .at-roster-column li {
+  border-color: var(--ui-border);
+}
+:root[data-theme="dark"] #tournaments-screen .at-roster-column li.at-selected {
+  background: var(--ui-accent-soft);
+  box-shadow: inset 2px 0 var(--ui-accent);
+}
+:root[data-theme="dark"] #app-root :is(
+  .at-affiliation-option:has(input:checked),
+  .at-player-option:has(input:checked),
+  .at-affiliation-chip
+) {
+  background: var(--ui-accent-soft);
+  color: #a0c5ff;
+  border-color: #4a6c9b;
+}
+:root[data-theme="dark"] #app-root .at-empty-state {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+}
+:root[data-theme="dark"] #app-root .at-text-badge {
+  background: #3c3021;
+  color: var(--ui-warning);
+  border-color: #937445;
+}
+:root[data-theme="dark"] #app-root .at-gems {
+  color: var(--ui-warning) !important;
+}
+:root[data-theme="dark"] #app-root .at-negative {
+  color: var(--ui-danger) !important;
+}
+:root[data-theme="dark"] #app-root .at-points-badge.at-negative {
+  background: #432830;
+  border-color: #a66a75;
+}
 :root[data-theme="dark"] #app-root :is(
   .combat-outcome:first-of-type strong, .at-adjusted-rating summary, .at-adjusted-value, .at-rank-mark, .box-opportunities p strong,
   .box-opportunities li button, .box-opportunities .box-opportunity-link,
@@ -190,7 +226,7 @@
 ) { color: #a0c5ff; }
 :root[data-theme="dark"] #app-root .leader-mark { color: var(--ui-warning); }
 :root[data-theme="dark"] #tournaments-screen footer { color: var(--ui-muted); }
-:root[data-theme="dark"] #app-root :is(.nav-item:not([aria-current="page"]), .row-open, .selected-character, .selected-card) {
+:root[data-theme="dark"] #app-root :is(.nav-item:not([aria-current="page"]), .row-open, .selected-character, .selected-card, .at-roster-character-button) {
   background-color: transparent;
   border-color: transparent;
 }
