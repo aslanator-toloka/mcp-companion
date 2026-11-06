@@ -162,6 +162,50 @@ test("missing and unrecognised lists are excluded, not treated as absence; text 
   assert.equal(t.cards.get("alpha-new").share, 100);
   assert.equal(insight.statistics("crises").cards.get("crisis").count, 2);
 });
+test("character tactic percentages filter finished 3+/≤1 records before coverage and preserve variant weights and cache isolation", () => {
+  const insight = index([
+    row("three-one", { tactics: ["Alpha", "Alpha"], variantCount: 2 }),
+    row("four-zero", { tactics: ["Beta"], wins: 4, losses: 0 }),
+    row("three-zero", {
+      tactics: ["Alpha"],
+      wins: 3,
+      losses: 0,
+      variantCount: 2,
+    }),
+    row("too-few", { tactics: ["Alpha"], wins: 2, losses: 0 }),
+    row("too-many-losses", { tactics: ["Alpha"], wins: 4, losses: 2 }),
+    row("unfinished", { tactics: ["Alpha"], provisional: true }),
+    row("invalid-wins", { tactics: ["Alpha"], wins: null }),
+    row("invalid-losses", { tactics: ["Alpha"], losses: -1 }),
+    row("other-character", { characterIds: ["iron-man"], tactics: ["Alpha"] }),
+    row("unparsed", { tactics: ["Alpha", "Unknown card"] }),
+  ]);
+  const options = { character: "hulk", record: { minWins: 3, maxLosses: 1 } };
+  const filtered = insight.statistics("tactics", options);
+  assert.equal(filtered.total, 4);
+  assert.equal(filtered.covered, 3);
+  assert.equal(filtered.excluded, 1);
+  assert.equal(filtered.cards.get("alpha-new").count, 2);
+  assert.equal(filtered.cards.get("alpha-new").share, 50);
+  assert.equal(filtered.cards.get("beta").share, 50);
+  assert.equal(insight.statistics("tactics", { character: "hulk" }).covered, 8);
+  assert.equal(insight.statistics("tactics", options), filtered);
+  assert.equal(
+    insight
+      .statistics("tactics", {
+        ...options,
+        record: { minWins: 4, maxLosses: 1 },
+      })
+      .cards.get("alpha-new").share,
+    0,
+  );
+  const empty = insight.statistics("tactics", {
+    ...options,
+    character: "missing",
+  });
+  assert.equal(empty.covered, 0);
+  assert.equal(empty.total, 0);
+});
 test("score totals retain negative results; smoothed average is zero below four distinct scored performances", () => {
   const rows = Array.from({ length: 4 }, (_, i) =>
     row("e" + i, { wins: 1, losses: 3, place: 12 }),

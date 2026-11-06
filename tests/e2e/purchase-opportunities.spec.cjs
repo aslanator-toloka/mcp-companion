@@ -63,9 +63,9 @@ test("box cards and details show collection-relative unlocks, completing boxes a
     })),
   });
   data.rosters = [
-    make("unlock", [...owned.slice(0, 8), "silk", "spider-man-noir"], 4, 1),
-    make("almost", [...owned.slice(0, 8), "silk", "ancient-one"], 3, 0),
-    make("excluded", [...owned.slice(0, 8), "silk", "spider-man-noir"], 3, 1),
+    make("unlock", [...owned.slice(0, 8), "silk", "spider-man-noir"], 3, 1),
+    make("almost", [...owned.slice(0, 8), "silk", "ancient-one"], 3, 1),
+    make("excluded", [...owned.slice(0, 8), "silk", "spider-man-noir"], 2, 1),
     make("already", owned, 4, 0),
   ];
   await page.route("**/tournaments/data.js*", (r) =>
@@ -85,11 +85,13 @@ test("box cards and details show collection-relative unlocks, completing boxes a
   const tile = page.locator('#purchases-screen [data-box-set="CP170"]');
   await expect(tile.locator("[data-box-unlocks]")).toHaveText("1");
   await expect(tile.locator("[data-box-almost]")).toHaveText("1");
+  await expect(tile).toContainText("3+/≤1");
   await tile.locator("[data-show-unlocks]").click();
   await expect(page).toHaveURL(/purchase-box=CP170/);
   await expect(page.locator("[data-purchase-filter]")).toContainText(
     "Покупка откроет",
   );
+  await expect(page.locator("[data-purchase-filter]")).toContainText("3+/≤1");
   await expect(page.locator("#at-roster-list [data-roster]")).toHaveCount(1);
   await expect(page.locator("#at-roster-list [data-roster]")).toHaveAttribute(
     "data-roster",

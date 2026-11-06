@@ -21,7 +21,7 @@ const roster = (id, ids, wins = 4, losses = 1, extra = {}) => ({
   ...extra,
 });
 const chars = ["h", "a", "b", "c", "d"].map((id) => character(id));
-test("counts only newly unlocked or useful two-box completions; OR thresholds and alternative boxes do not inflate totals", () => {
+test("counts only newly unlocked or useful two-box completions; alternative boxes do not inflate totals", () => {
   const boxes = [
     box("A", ["a", "b"]),
     box("C", ["c"]),
@@ -66,6 +66,7 @@ test("rejects losing/lower records, provisional/unresolved/incomplete lists; res
     roster("8-1", ["a"], 8, 1),
     roster("4-0", ["a"], 4, 0),
     roster("3-1", ["a"], 3, 1),
+    roster("3-2", ["a"], 3, 2),
     roster("2-0", ["a"], 2, 0),
     roster("4-2", ["a"], 4, 2),
     roster("pending", ["a"], 4, 0, { provisional: true }),
@@ -80,7 +81,7 @@ test("rejects losing/lower records, provisional/unresolved/incomplete lists; res
   )
     .evaluate(new Set())
     .get("A");
-  assert.deepEqual(stats.unlocked, ["3-0", "4-1", "8-1", "4-0"]);
+  assert.deepEqual(stats.unlocked, ["3-0", "4-1", "8-1", "4-0", "3-1"]);
 });
 test("owning or purchasing models recalculates marginal value; planned boxes are not assumed owned", () => {
   const index = create(

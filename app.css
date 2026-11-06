@@ -51,6 +51,10 @@
 .character-tactic-open{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:0 0 10px;border:0;background:transparent;color:inherit;min-height:34px}
 .character-tactic-open strong{font-size:13px}.character-tactic-open span{color:#2563eb;font-size:20px}
 .character-tactic-status{display:block;margin-top:10px;color:var(--muted,#62768e);font-size:11px}
+.character-tactics-coverage{margin:0 0 16px;color:var(--muted,#62768e);font-size:12px;line-height:1.6}
+.character-tactic-popularity{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 9px;margin:0 0 12px;color:var(--ink)}
+.character-tactic-popularity strong{font-size:24px;font-variant-numeric:tabular-nums;line-height:1.2}
+.character-tactic-popularity span{color:var(--muted,#62768e);font-size:11px}
 
 /* Character search: compact disclosures keep the long Jarvis filter set usable. */
 .catalog-advanced{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}

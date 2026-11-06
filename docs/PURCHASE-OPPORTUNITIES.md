@@ -2,7 +2,7 @@
 
 Each box tile and detail compares against current owned models (manual ownership plus purchased sets). Wishlist models are not owned. The full archive is used, independently of existing tournament filters.
 
-Eligible published roster variants have a complete recognized inventory, a finished result, and `(wins >= 4 && losses <= 1) || (wins >= 3 && losses === 0)`. Losing/lower records remain in the archive but are outside this purchase calculation. Draws impose no additional constraint. Each archive roster ID counts once; different published variants or tournament appearances remain separate. Tactics, crises and gems are not inventory requirements.
+Eligible published roster variants have a complete recognized inventory, a finished result, and `wins >= 3 && losses <= 1`. Losing/lower records remain in the archive but are outside this purchase calculation. Draws impose no additional constraint. Each archive roster ID counts once; different published variants or tournament appearances remain separate. Tactics, crises and gems are not inventory requirements.
 
 Already-buildable rosters do not count as a purchase benefit. A box must increase available models. `unlocked` contains rosters that become fully available with that box; `almost` contains other rosters completable with one additional box. Each possible finishing box has its own roster-ID list, while `almost` is deduplicated across these alternatives. Physical copy constraints and alternative inventory IDs use the same availability core as tournament collection matching.
 

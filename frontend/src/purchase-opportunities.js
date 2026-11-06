@@ -24,7 +24,8 @@ export function createPurchaseOpportunities(archive, boxes, availability) {
       Number.isInteger(r.losses) &&
       r.wins >= 0 &&
       r.losses >= 0 &&
-      ((r.wins >= 4 && r.losses <= 1) || (r.wins >= 3 && r.losses === 0)) &&
+      r.wins >= 3 &&
+      r.losses <= 1 &&
       r.characters?.length > 0 &&
       r.characters.every((c) => characters.has(c.id))
     );

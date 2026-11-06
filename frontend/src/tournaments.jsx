@@ -708,7 +708,7 @@ export function TournamentOverview({
   if (mode === "purchase")
     return (
       <div className="at-purchase-filter" data-purchase-filter>
-        <div className="at-version-label">РОСТЕРЫ ПОКУПКИ · 4+/≤1 ИЛИ 3+/0</div>
+        <div className="at-version-label">РОСТЕРЫ ПОКУПКИ · 3+/≤1</div>
         <h2>
           {purchase.code} · {purchase.name}
         </h2>

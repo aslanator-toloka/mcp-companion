@@ -64,10 +64,10 @@
    }
    return {row,resolved};
   });
-  function statistics(kind,{affiliation='',character=''}={}){
-   const cacheKey=JSON.stringify([kind,affiliation,character]);if(scopeCache.has(cacheKey))return scopeCache.get(cacheKey);
+  function statistics(kind,{affiliation='',character='',record=null}={}){
+   const cacheKey=JSON.stringify([kind,affiliation,character,!!record,record?.minWins??null,record?.maxLosses??null]);if(scopeCache.has(cacheKey))return scopeCache.get(cacheKey);
    const ids=inventory.get(character)||new Set([character]);
-   const cohort=indexed.filter(({row})=>(!affiliation||(affiliation==='__none__'?!row.affiliations.length:row.affiliations.includes(affiliation)))&&(!character||row.characterIds.some(id=>ids.has(id))));
+   const cohort=indexed.filter(({row})=>(!affiliation||(affiliation==='__none__'?!row.affiliations.length:row.affiliations.includes(affiliation)))&&(!character||row.characterIds.some(id=>ids.has(id)))&&(!record||(!row.provisional&&Number.isInteger(row.wins)&&Number.isInteger(row.losses)&&row.wins>=Math.max(0,record.minWins??0)&&row.losses>=0&&row.losses<=(record.maxLosses??Infinity))));
    const usable=cohort.filter(r=>r.resolved[kind].complete),byCard=new Map(cardLists[kind].map(c=>[c.slug,[]]));
    let totalWeight=0;
    for(const {row,resolved}of usable){totalWeight+=1/(row.variantCount||1);for(const id of resolved[kind].ids)byCard.get(id)?.push(row);}
