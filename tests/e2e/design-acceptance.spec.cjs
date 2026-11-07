@@ -55,6 +55,13 @@ for (const [name, hash, ready] of scenes)
     await page.setViewportSize({ width: 820, height: 1180 });
     await seed(page);
     await open(page, hash, ready);
+    if (name === "editor") {
+      // Audit with the sticky actions in normal flow rather than covering a
+      // partially visible row at this viewport's arbitrary scroll position.
+      await page.evaluate(() =>
+        window.scrollTo(0, document.documentElement.scrollHeight),
+      );
+    }
     await accessible(page, name);
   });
 

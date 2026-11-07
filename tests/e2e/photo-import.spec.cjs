@@ -587,6 +587,7 @@ test("active opponent character import preserves HP/power and one undo removes t
   await page
     .getByRole("button", { name: "Добавить в бой", exact: true })
     .click();
+  await expect(page.locator("#photo-import-dialog")).not.toBeVisible();
   const fighters = await page.evaluate(
     () => MCPStores.battle.current.opponent.fighters,
   );
@@ -683,6 +684,7 @@ test("own-side photo scan cannot import a character outside the saved source ros
   await page
     .getByRole("button", { name: "Добавить в бой", exact: true })
     .click();
+  await expect(page.locator("#photo-import-dialog")).not.toBeVisible();
   expect(
     await page.evaluate(() =>
       MCPStores.battle.current.mine.fighters.map((f) => f.slug),

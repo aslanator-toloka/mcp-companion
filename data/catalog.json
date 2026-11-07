@@ -1,7 +1,7 @@
 {
   "source": "https://www.jarvis-protocol.com",
-  "fetchedAt": "2026-11-04T11:17:40.577Z",
-  "searchMetadataUpdatedAt": "2026-11-04T11:17:40.577Z",
+  "fetchedAt": "2026-11-07T19:34:19.475Z",
+  "searchMetadataUpdatedAt": "2026-11-07T19:34:19.475Z",
   "characters": [
     {
       "slug": "abomination",
@@ -40,6 +40,7 @@
       "version": 1780689538,
       "releaseDate": "2024-11-08",
       "actAs": "abomination",
+      "exportCode": "01620101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -92,8 +93,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01620101"
+      ]
     },
     {
       "slug": "adam-warlock",
@@ -140,6 +140,7 @@
       "version": 1780732499,
       "releaseDate": "2026-02-13",
       "actAs": "adam-warlock",
+      "exportCode": "01910101",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -167,8 +168,7 @@
           "range": "4",
           "strength": "9"
         }
-      ],
-      "exportCode": "01910101"
+      ]
     },
     {
       "slug": "agent-venom",
@@ -209,6 +209,7 @@
       "version": 1786695284,
       "releaseDate": "2023-02-10",
       "actAs": "agent-venom",
+      "exportCode": "01000101",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -275,8 +276,7 @@
           "range": "B3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01000101"
+      ]
     },
     {
       "slug": "amazing-spider-man",
@@ -322,6 +322,7 @@
       "version": 1786706665,
       "releaseDate": "2021-06-24",
       "actAs": "amazing-spider-man",
+      "exportCode": "00370101",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -360,8 +361,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00370101"
+      ]
     },
     {
       "slug": "ancient-one",
@@ -406,6 +406,7 @@
       "version": 1786695284,
       "releaseDate": "2021-09-09",
       "actAs": "ancient-one",
+      "exportCode": "00640101",
       "affiliations": [
         {
           "name": "Convocation",
@@ -449,8 +450,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00640101"
+      ]
     },
     {
       "slug": "angel",
@@ -488,6 +488,7 @@
       "version": 1786695285,
       "releaseDate": "2024-09-27",
       "actAs": "angel",
+      "exportCode": "01520101",
       "affiliations": [
         {
           "name": "Hellfire Club",
@@ -536,8 +537,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01520101"
+      ]
     },
     {
       "slug": "angela",
@@ -580,6 +580,7 @@
       "version": 1786695284,
       "releaseDate": "2021-01-22",
       "actAs": "angela",
+      "exportCode": "00280101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -634,8 +635,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00280101"
+      ]
     },
     {
       "slug": "ant-man",
@@ -673,6 +673,7 @@
       "version": 1786695284,
       "releaseDate": "2020-09-12",
       "actAs": "ant-man",
+      "exportCode": "00260101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -714,8 +715,7 @@
           "range": "1",
           "strength": "6"
         }
-      ],
-      "exportCode": "00260101"
+      ]
     },
     {
       "slug": "apocalypse",
@@ -769,6 +769,7 @@
       "version": 1786695285,
       "releaseDate": "2024-09-27",
       "actAs": "apocalypse",
+      "exportCode": "01070101",
       "affiliations": [
         {
           "name": "Servants of the Apocalypse",
@@ -796,8 +797,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01070101"
+      ]
     },
     {
       "slug": "archangel",
@@ -839,6 +839,7 @@
       "version": 1786695285,
       "releaseDate": "2024-09-27",
       "actAs": "archangel",
+      "exportCode": "01520102",
       "affiliations": [
         {
           "name": "Hellfire Club",
@@ -888,8 +889,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01520102"
+      ]
     },
     {
       "slug": "arnim-zola",
@@ -933,6 +933,7 @@
       "version": 1786695285,
       "releaseDate": "2022-09-09",
       "actAs": "arnim-zola",
+      "exportCode": "00760101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -973,8 +974,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00760101"
+      ]
     },
     {
       "slug": "avalanche",
@@ -1009,6 +1009,7 @@
       "version": 1786695285,
       "releaseDate": "2025-06-13",
       "actAs": "avalanche",
+      "exportCode": "01730101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -1036,8 +1037,7 @@
           "range": "A2",
           "strength": "5"
         }
-      ],
-      "exportCode": "01730101"
+      ]
     },
     {
       "slug": "baron-helmut-zemo",
@@ -1077,6 +1077,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "baron-helmut-zemo",
+      "exportCode": "01430101",
       "affiliations": [
         {
           "name": "Hydra",
@@ -1122,8 +1123,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430101"
+      ]
     },
     {
       "slug": "baron-mordo",
@@ -1162,6 +1162,7 @@
       "version": 1786695285,
       "releaseDate": "2021-09-09",
       "actAs": "baron-mordo",
+      "exportCode": "00640102",
       "affiliations": [
         {
           "name": "Convocation",
@@ -1205,8 +1206,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "00640102"
+      ]
     },
     {
       "slug": "baron-strucker",
@@ -1248,6 +1248,7 @@
       "version": 1792050382,
       "releaseDate": "2022-09-09",
       "actAs": "baron-strucker",
+      "exportCode": "00760102",
       "affiliations": [
         {
           "name": "Hydra",
@@ -1286,8 +1287,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00760102"
+      ]
     },
     {
       "slug": "baron-zemo",
@@ -1325,6 +1325,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "baron-zemo",
+      "exportCode": "00010101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -1363,8 +1364,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00010101"
+      ]
     },
     {
       "slug": "bastion",
@@ -1402,6 +1402,7 @@
       "version": 1777812650,
       "releaseDate": "2026-05-22",
       "actAs": "bastion",
+      "exportCode": "30090101",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -1428,8 +1429,7 @@
           "range": "B4",
           "strength": "8"
         }
-      ],
-      "exportCode": "30090101"
+      ]
     },
     {
       "slug": "beast",
@@ -1470,6 +1470,7 @@
       "version": 1761082165,
       "releaseDate": "2020-11-13",
       "actAs": "beast",
+      "exportCode": "00430101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -1532,8 +1533,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00430101"
+      ]
     },
     {
       "slug": "beta-ray-bill",
@@ -1580,6 +1580,7 @@
       "version": 1787214899,
       "releaseDate": "2023-02-10",
       "actAs": "beta-ray-bill",
+      "exportCode": "01300101",
       "affiliations": [
         {
           "name": "Asgard",
@@ -1623,8 +1624,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "01300101"
+      ]
     },
     {
       "slug": "bishop",
@@ -1671,6 +1671,7 @@
       "version": 1786695285,
       "releaseDate": "2024-03-01",
       "actAs": "bishop",
+      "exportCode": "01120101",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -1711,8 +1712,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01120101"
+      ]
     },
     {
       "slug": "black-bolt",
@@ -1761,6 +1761,7 @@
       "version": 1790683500,
       "releaseDate": "2021-02-12",
       "actAs": "black-bolt",
+      "exportCode": "00340101",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -1792,8 +1793,7 @@
           "range": "B4",
           "strength": "10"
         }
-      ],
-      "exportCode": "00340101"
+      ]
     },
     {
       "slug": "black-cat",
@@ -1832,6 +1832,7 @@
       "version": 1783357044,
       "releaseDate": "2021-06-24",
       "actAs": "black-cat",
+      "exportCode": "00370102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -1901,8 +1902,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00370102"
+      ]
     },
     {
       "slug": "black-dwarf",
@@ -1939,6 +1939,7 @@
       "version": 1786695285,
       "releaseDate": "2020-06-29",
       "actAs": "black-dwarf",
+      "exportCode": "00190101",
       "affiliations": [
         {
           "name": "Black Order",
@@ -1966,8 +1967,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "00190101"
+      ]
     },
     {
       "slug": "black-panther",
@@ -2007,6 +2007,7 @@
       "version": 1786695285,
       "releaseDate": "2019-12-13",
       "actAs": "black-panther",
+      "exportCode": "00070101",
       "affiliations": [
         {
           "name": "Wakanda",
@@ -2044,8 +2045,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00070101"
+      ]
     },
     {
       "slug": "black-panther-chosen-of-bast",
@@ -2082,6 +2082,7 @@
       "version": 1786695285,
       "releaseDate": "2024-07-12",
       "actAs": "black-panther-chosen-of-bast",
+      "exportCode": "01580101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -2154,8 +2155,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01580101"
+      ]
     },
     {
       "slug": "black-swan",
@@ -2195,6 +2195,7 @@
       "version": 1787214914,
       "releaseDate": "2022-06-09",
       "actAs": "black-swan",
+      "exportCode": "00810101",
       "affiliations": [
         {
           "name": "Black Order",
@@ -2227,8 +2228,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00810101"
+      ]
     },
     {
       "slug": "black-widow",
@@ -2265,6 +2265,7 @@
       "version": 1768250597,
       "releaseDate": "2019-11-15",
       "actAs": "black-widow",
+      "exportCode": "00010102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -2340,8 +2341,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": "00010102"
+      ]
     },
     {
       "slug": "black-widow-agent-of-shield",
@@ -2385,6 +2385,7 @@
       "version": 1781520915,
       "releaseDate": "2020-05-07",
       "actAs": "black-widow-agent-of-shield",
+      "exportCode": "00240101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -2439,8 +2440,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00240101"
+      ]
     },
     {
       "slug": "blade",
@@ -2487,6 +2487,7 @@
       "version": 1786695285,
       "releaseDate": "2021-09-09",
       "actAs": "blade",
+      "exportCode": "00480101",
       "affiliations": [
         {
           "name": "Midnight Sons",
@@ -2541,8 +2542,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00480101"
+      ]
     },
     {
       "slug": "blue-marvel",
@@ -2582,6 +2582,7 @@
       "version": 1786285526,
       "releaseDate": "2026-01-09",
       "actAs": "blue-marvel",
+      "exportCode": "01290101",
       "affiliations": [
         {
           "name": "Defenders",
@@ -2619,8 +2620,7 @@
           "range": "A2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01290101"
+      ]
     },
     {
       "slug": "bob-agent-of-hydra",
@@ -2651,6 +2651,7 @@
       "version": 1780689544,
       "releaseDate": "2021-06-10",
       "actAs": "bob-agent-of-hydra",
+      "exportCode": "00450101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -2691,8 +2692,7 @@
           "range": "4",
           "strength": "9"
         }
-      ],
-      "exportCode": "00450101"
+      ]
     },
     {
       "slug": "bullseye",
@@ -2733,6 +2733,7 @@
       "version": 1780689545,
       "releaseDate": "2020-10-23",
       "actAs": "bullseye",
+      "exportCode": "00300101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -2779,8 +2780,7 @@
           "range": "4",
           "strength": "5"
         }
-      ],
-      "exportCode": "00300101"
+      ]
     },
     {
       "slug": "cable",
@@ -2827,6 +2827,7 @@
       "version": 1786695285,
       "releaseDate": "2021-06-10",
       "actAs": "cable",
+      "exportCode": "00470101",
       "affiliations": [
         {
           "name": "X-Force",
@@ -2903,8 +2904,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00470101"
+      ]
     },
     {
       "slug": "captain-america-sam-wilson",
@@ -2950,6 +2950,7 @@
       "version": 1786706665,
       "releaseDate": "2021-07-08",
       "actAs": "captain-america",
+      "exportCode": "00380101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -2986,8 +2987,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00380101"
+      ]
     },
     {
       "slug": "captain-america",
@@ -3028,6 +3028,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "captain-america",
+      "exportCode": "00010103",
       "affiliations": [
         {
           "name": "Avengers",
@@ -3060,8 +3061,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00010103"
+      ]
     },
     {
       "slug": "captain-america-first-avenger",
@@ -3098,6 +3098,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "captain-america-first-avenger",
+      "exportCode": "01430102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -3133,8 +3134,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "01430102"
+      ]
     },
     {
       "slug": "captain-marvel",
@@ -3178,6 +3178,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "captain-marvel",
+      "exportCode": "00010104",
       "affiliations": [
         {
           "name": "A-Force",
@@ -3221,8 +3222,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00010104"
+      ]
     },
     {
       "slug": "captain-marvel-cosmic-avenger",
@@ -3273,6 +3273,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "captain-marvel-cosmic-avenger",
+      "exportCode": "01430103",
       "affiliations": [
         {
           "name": "A-Force",
@@ -3336,8 +3337,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01430103"
+      ]
     },
     {
       "slug": "carnage",
@@ -3378,6 +3378,7 @@
       "version": 1747833461,
       "releaseDate": "2021-06-24",
       "actAs": "carnage",
+      "exportCode": "00500101",
       "affiliations": [
         {
           "name": "Spider Foes",
@@ -3405,8 +3406,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00500101"
+      ]
     },
     {
       "slug": "cassandra-nova",
@@ -3455,6 +3455,7 @@
       "version": 1786695285,
       "releaseDate": "2021-07-08",
       "actAs": "cassandra-nova",
+      "exportCode": "00530101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -3522,8 +3523,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00530101"
+      ]
     },
     {
       "slug": "clea",
@@ -3568,6 +3568,7 @@
       "version": 1786695285,
       "releaseDate": "2021-09-09",
       "actAs": "clea",
+      "exportCode": "00670101",
       "affiliations": [
         {
           "name": "Convocation",
@@ -3606,8 +3607,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "00670101"
+      ]
     },
     {
       "slug": "colossus",
@@ -3652,6 +3652,7 @@
       "version": 1786695285,
       "releaseDate": "2022-02-11",
       "actAs": "colossus",
+      "exportCode": "00570101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -3715,8 +3716,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00570101"
+      ]
     },
     {
       "slug": "corvus-glaive",
@@ -3761,6 +3761,7 @@
       "version": 1786695285,
       "releaseDate": "2020-08-01",
       "actAs": "corvus-glaive",
+      "exportCode": "00150101",
       "affiliations": [
         {
           "name": "Black Order",
@@ -3793,8 +3794,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00150101"
+      ]
     },
     {
       "slug": "cosmic-ghost-rider",
@@ -3844,6 +3844,7 @@
       "version": 1786706665,
       "releaseDate": "2023-07-14",
       "actAs": "cosmic-ghost-rider",
+      "exportCode": "00900101",
       "affiliations": [
         {
           "name": "Black Order",
@@ -3883,8 +3884,7 @@
           "range": "2",
           "strength": "12"
         }
-      ],
-      "exportCode": "00900101"
+      ]
     },
     {
       "slug": "crimson-dynamo",
@@ -3929,6 +3929,7 @@
       "version": 1790437524,
       "releaseDate": "2022-08-30",
       "actAs": "crimson-dynamo",
+      "exportCode": "00880101",
       "affiliations": [
         {
           "name": "Winter Guard",
@@ -3956,8 +3957,7 @@
           "range": "5",
           "strength": "5"
         }
-      ],
-      "exportCode": "00880101"
+      ]
     },
     {
       "slug": "crossbones",
@@ -3992,6 +3992,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "crossbones",
+      "exportCode": "00010105",
       "affiliations": [
         {
           "name": "Cabal",
@@ -4051,8 +4052,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00010105"
+      ]
     },
     {
       "slug": "crossbones-merciless-merc",
@@ -4091,6 +4091,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "crossbones-merciless-merc",
+      "exportCode": "01430104",
       "affiliations": [
         {
           "name": "Cabal",
@@ -4155,8 +4156,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01430104"
+      ]
     },
     {
       "slug": "crystal",
@@ -4200,6 +4200,7 @@
       "version": 1786725729,
       "releaseDate": "2021-02-12",
       "actAs": "crystal",
+      "exportCode": "00350101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -4248,8 +4249,7 @@
           "range": "B3",
           "strength": "4"
         }
-      ],
-      "exportCode": "00350101"
+      ]
     },
     {
       "slug": "cyclops",
@@ -4293,6 +4293,7 @@
       "version": 1786695285,
       "releaseDate": "2020-11-13",
       "actAs": "cyclops",
+      "exportCode": "00410101",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -4322,8 +4323,7 @@
           "range": "B5",
           "strength": "7"
         }
-      ],
-      "exportCode": "00410101"
+      ]
     },
     {
       "slug": "daredevil",
@@ -4366,6 +4366,7 @@
       "version": 1786695285,
       "releaseDate": "2020-10-23",
       "actAs": "daredevil",
+      "exportCode": "00300102",
       "affiliations": [
         {
           "name": "Defenders",
@@ -4411,8 +4412,7 @@
           "range": "A2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00300102"
+      ]
     },
     {
       "slug": "darkstar",
@@ -4451,6 +4451,7 @@
       "version": 1790437525,
       "releaseDate": "2022-08-30",
       "actAs": "darkstar",
+      "exportCode": "00880102",
       "affiliations": [
         {
           "name": "Winter Guard",
@@ -4478,8 +4479,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "00880102"
+      ]
     },
     {
       "slug": "deadpool",
@@ -4522,6 +4522,7 @@
       "version": 1786706665,
       "releaseDate": "2021-06-10",
       "actAs": "deadpool",
+      "exportCode": "00450102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -4603,8 +4604,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00450102"
+      ]
     },
     {
       "slug": "doc-ock-sinister-scientist",
@@ -4648,6 +4648,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "doc-ock-sinister-scientist",
+      "exportCode": "01430105",
       "affiliations": [
         {
           "name": "Spider Foes",
@@ -4681,8 +4682,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430105"
+      ]
     },
     {
       "slug": "doctor-octopus",
@@ -4722,6 +4722,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "doctor-octopus",
+      "exportCode": "00010106",
       "affiliations": [
         {
           "name": "Spider Foes",
@@ -4749,8 +4750,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "00010106"
+      ]
     },
     {
       "slug": "doctor-strange",
@@ -4802,6 +4802,7 @@
       "version": 1786695285,
       "releaseDate": "2020-09-11",
       "actAs": "doctor-strange",
+      "exportCode": "00230101",
       "affiliations": [
         {
           "name": "Defenders",
@@ -4852,8 +4853,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00230101"
+      ]
     },
     {
       "slug": "doctor-strange-sorcerer-supreme",
@@ -4908,6 +4908,7 @@
       "version": 1786695285,
       "releaseDate": "2021-09-09",
       "actAs": "doctor-strange-sorcerer-supreme",
+      "exportCode": "00670102",
       "affiliations": [
         {
           "name": "Convocation",
@@ -4951,8 +4952,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00670102"
+      ]
     },
     {
       "slug": "doctor-voodoo",
@@ -4994,6 +4994,7 @@
       "version": 1751710942,
       "releaseDate": "2021-09-09",
       "actAs": "doctor-voodoo",
+      "exportCode": "00650101",
       "affiliations": [
         {
           "name": "Convocation",
@@ -5042,8 +5043,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00650101"
+      ]
     },
     {
       "slug": "domino",
@@ -5084,6 +5084,7 @@
       "version": 1786695285,
       "releaseDate": "2021-06-10",
       "actAs": "domino",
+      "exportCode": "00470102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -5148,8 +5149,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00470102"
+      ]
     },
     {
       "slug": "dormammu",
@@ -5195,6 +5195,7 @@
       "version": 1786706665,
       "releaseDate": "2021-09-09",
       "actAs": "dormammu",
+      "exportCode": "00330101",
       "affiliations": [
         {
           "name": "Dark Dimension",
@@ -5222,8 +5223,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "00330101"
+      ]
     },
     {
       "slug": "dracula",
@@ -5265,6 +5265,7 @@
       "version": 1753605541,
       "releaseDate": "2024-11-01",
       "actAs": "dracula",
+      "exportCode": "02450101",
       "affiliations": [
         {
           "name": "Thralls of Dracula",
@@ -5308,8 +5309,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "02450101"
+      ]
     },
     {
       "slug": "drax-the-destroyer",
@@ -5348,6 +5348,7 @@
       "version": 1793179143,
       "releaseDate": "2020-06-11",
       "actAs": "drax-the-destroyer",
+      "exportCode": "00200101",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -5381,8 +5382,7 @@
           "range": "2",
           "strength": "3"
         }
-      ],
-      "exportCode": "00200101"
+      ]
     },
     {
       "slug": "ebony-maw",
@@ -5424,6 +5424,7 @@
       "version": 1792097960,
       "releaseDate": "2020-06-29",
       "actAs": "ebony-maw",
+      "exportCode": "00190102",
       "affiliations": [
         {
           "name": "Black Order",
@@ -5451,8 +5452,7 @@
           "range": "4",
           "strength": "8"
         }
-      ],
-      "exportCode": "00190102"
+      ]
     },
     {
       "slug": "echo",
@@ -5491,6 +5491,7 @@
       "version": 1786695285,
       "releaseDate": "2025-10-03",
       "actAs": "echo",
+      "exportCode": "01680101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -5534,8 +5535,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "01680101"
+      ]
     },
     {
       "slug": "electro",
@@ -5572,6 +5572,7 @@
       "version": 1786695285,
       "releaseDate": "2024-05-17",
       "actAs": "electro",
+      "exportCode": "01560101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -5610,8 +5611,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "01560101"
+      ]
     },
     {
       "slug": "elektra",
@@ -5656,6 +5656,7 @@
       "version": 1786695285,
       "releaseDate": "2022-03-26",
       "actAs": "elektra",
+      "exportCode": "00790101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -5704,8 +5705,7 @@
           "range": "1",
           "strength": "8"
         }
-      ],
-      "exportCode": "00790101"
+      ]
     },
     {
       "slug": "elsa-bloodstone",
@@ -5751,6 +5751,7 @@
       "version": 1786695285,
       "releaseDate": "2025-01-31",
       "actAs": "elsa-bloodstone",
+      "exportCode": "01860101",
       "affiliations": [
         {
           "name": "Midnight Sons",
@@ -5789,8 +5790,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "01860101"
+      ]
     },
     {
       "slug": "emma-frost",
@@ -5839,6 +5839,7 @@
       "version": 1786695285,
       "releaseDate": "2023-03-10",
       "actAs": "emma-frost",
+      "exportCode": "01030101",
       "affiliations": [
         {
           "name": "Hellfire Club",
@@ -5905,8 +5906,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01030101"
+      ]
     },
     {
       "slug": "enchantress",
@@ -5952,6 +5952,7 @@
       "version": 1786695285,
       "releaseDate": "2021-01-22",
       "actAs": "enchantress",
+      "exportCode": "00280102",
       "affiliations": [
         {
           "name": "Asgard",
@@ -5990,8 +5991,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00280102"
+      ]
     },
     {
       "slug": "exodus",
@@ -6034,6 +6034,7 @@
       "version": 1786695285,
       "releaseDate": "2025-06-13",
       "actAs": "exodus",
+      "exportCode": "01730102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -6066,8 +6067,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01730102"
+      ]
     },
     {
       "slug": "frankensteins-monster",
@@ -6106,6 +6106,7 @@
       "version": 1786695285,
       "releaseDate": "2024-11-01",
       "actAs": "frankensteins-monster",
+      "exportCode": "02450102",
       "affiliations": [
         {
           "name": "Midnight Sons",
@@ -6133,8 +6134,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "02450102"
+      ]
     },
     {
       "slug": "gambit",
@@ -6177,6 +6177,7 @@
       "version": 1786695285,
       "releaseDate": "2022-02-11",
       "actAs": "gambit",
+      "exportCode": "00600101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -6231,8 +6232,7 @@
           "range": "B4",
           "strength": "5"
         }
-      ],
-      "exportCode": "00600101"
+      ]
     },
     {
       "slug": "gamora",
@@ -6275,6 +6275,7 @@
       "version": 1787785979,
       "releaseDate": "2020-04-24",
       "actAs": "gamora",
+      "exportCode": "00160101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -6313,8 +6314,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00160101"
+      ]
     },
     {
       "slug": "ghost-rider",
@@ -6358,6 +6358,7 @@
       "version": 1751702731,
       "releaseDate": "2020-09-12",
       "actAs": "ghost-rider",
+      "exportCode": "00270101",
       "affiliations": [
         {
           "name": "Defenders",
@@ -6409,8 +6410,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00270101"
+      ]
     },
     {
       "slug": "ghost-spider",
@@ -6447,6 +6447,7 @@
       "version": 1786695285,
       "releaseDate": "2020-08-14",
       "actAs": "ghost-spider",
+      "exportCode": "00100101",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -6479,8 +6480,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00100101"
+      ]
     },
     {
       "slug": "gladiator",
@@ -6520,6 +6520,7 @@
       "version": 1755085331,
       "releaseDate": "2025-03-14",
       "actAs": "gladiator",
+      "exportCode": "20130101",
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/gladiator",
       "portrait": "assets/avatars/gladiator.png",
@@ -6540,8 +6541,7 @@
           "range": "3",
           "strength": "10"
         }
-      ],
-      "exportCode": "20130101"
+      ]
     },
     {
       "slug": "gorgon",
@@ -6580,6 +6580,7 @@
       "version": 1753605541,
       "releaseDate": "2025-03-14",
       "actAs": "gorgon",
+      "exportCode": "01660101",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -6612,8 +6613,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01660101"
+      ]
     },
     {
       "slug": "green-goblin",
@@ -6664,6 +6664,7 @@
       "version": 1786706665,
       "releaseDate": "2020-08-14",
       "actAs": "green-goblin",
+      "exportCode": "00210101",
       "affiliations": [
         {
           "name": "Spider Foes",
@@ -6707,8 +6708,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "00210101"
+      ]
     },
     {
       "slug": "groot",
@@ -6742,6 +6742,7 @@
       "version": 1787785979,
       "releaseDate": "2020-03-13",
       "actAs": "groot",
+      "exportCode": "00170101",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -6770,8 +6771,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00170101"
+      ]
     },
     {
       "slug": "gwenom",
@@ -6810,6 +6810,7 @@
       "version": 1786695285,
       "releaseDate": "2024-05-17",
       "actAs": "gwenom",
+      "exportCode": "01550101",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -6838,8 +6839,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01550101"
+      ]
     },
     {
       "slug": "gwenpool",
@@ -6882,6 +6882,7 @@
       "version": 1788638332,
       "releaseDate": "2023-05-12",
       "actAs": "gwenpool",
+      "exportCode": "01370101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -6936,8 +6937,7 @@
           "range": "4",
           "strength": "8"
         }
-      ],
-      "exportCode": "01370101"
+      ]
     },
     {
       "slug": "hand-ninjas-grunts",
@@ -6972,6 +6972,7 @@
       "version": 1786695285,
       "releaseDate": "2022-03-26",
       "actAs": "hand-ninjas-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hand-ninjas-grunts",
       "portrait": "assets/avatars/hand-ninjas-grunts.png",
@@ -6982,8 +6983,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "havok",
@@ -7020,6 +7020,7 @@
       "version": 1791329038,
       "releaseDate": "2026-10-30",
       "actAs": "havok",
+      "exportCode": "30080101",
       "affiliations": [
         {
           "name": "X-Factor",
@@ -7056,8 +7057,7 @@
           "range": "B4",
           "strength": "7"
         }
-      ],
-      "exportCode": "30080101"
+      ]
     },
     {
       "slug": "hawkeye",
@@ -7097,6 +7097,7 @@
       "version": 1781520915,
       "releaseDate": "2020-05-07",
       "actAs": "hawkeye",
+      "exportCode": "00240102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -7144,8 +7145,7 @@
           "range": "5",
           "strength": "5"
         }
-      ],
-      "exportCode": "00240102"
+      ]
     },
     {
       "slug": "heimdall-the-all-seeing",
@@ -7187,6 +7187,7 @@
       "version": 1786695285,
       "releaseDate": "2022-08-07",
       "actAs": "heimdall-the-all-seeing",
+      "exportCode": "01020101",
       "affiliations": [
         {
           "name": "Asgard",
@@ -7215,8 +7216,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01020101"
+      ]
     },
     {
       "slug": "hela-queen-of-hel",
@@ -7258,6 +7258,7 @@
       "version": 1786695285,
       "releaseDate": "2020-01-31",
       "actAs": "hela-queen-of-hel",
+      "exportCode": "00120101",
       "affiliations": [
         {
           "name": "Asgard",
@@ -7290,8 +7291,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00120101"
+      ]
     },
     {
       "slug": "honey-badger",
@@ -7331,6 +7331,7 @@
       "version": 1786695285,
       "releaseDate": "2022-02-11",
       "actAs": "honey-badger",
+      "exportCode": "00710101",
       "affiliations": [
         {
           "name": "New Mutants",
@@ -7402,8 +7403,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00710101"
+      ]
     },
     {
       "slug": "hood",
@@ -7447,6 +7447,7 @@
       "version": 1790437518,
       "releaseDate": "2021-09-09",
       "actAs": "hood",
+      "exportCode": "00650102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -7503,8 +7504,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "00650102"
+      ]
     },
     {
       "slug": "hulk",
@@ -7549,6 +7549,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "hulk",
+      "exportCode": "00040101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -7594,8 +7595,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00040101"
+      ]
     },
     {
       "slug": "hulkbuster",
@@ -7648,6 +7648,7 @@
       "version": 1786695285,
       "releaseDate": "2022-01-15",
       "actAs": "hulkbuster",
+      "exportCode": "00520101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -7681,8 +7682,7 @@
           "range": "4",
           "strength": "4"
         }
-      ],
-      "exportCode": "00520101"
+      ]
     },
     {
       "slug": "hydra-troopers-grunts",
@@ -7713,6 +7713,7 @@
       "version": 1786695285,
       "releaseDate": "2022-10-14",
       "actAs": "hydra-troopers-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/hydra-troopers-grunts",
       "portrait": "assets/avatars/hydra-troopers-grunts.png",
@@ -7723,8 +7724,7 @@
           "range": "3",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "iceman",
@@ -7766,6 +7766,7 @@
       "version": 1786695285,
       "releaseDate": "2024-03-01",
       "actAs": "iceman",
+      "exportCode": "00960101",
       "affiliations": [
         {
           "name": "Servants of the Apocalypse",
@@ -7803,8 +7804,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00960101"
+      ]
     },
     {
       "slug": "invincible-iron-man",
@@ -7844,6 +7844,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "invincible-iron-man",
+      "exportCode": "01430106",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -7889,8 +7890,7 @@
           "range": "5",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430106"
+      ]
     },
     {
       "slug": "iron-fist",
@@ -7931,6 +7931,7 @@
       "version": 1786695285,
       "releaseDate": "2021-06-10",
       "actAs": "iron-fist",
+      "exportCode": "00490101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -7994,8 +7995,7 @@
           "range": "2",
           "strength": "9"
         }
-      ],
-      "exportCode": "00490101"
+      ]
     },
     {
       "slug": "iron-lad",
@@ -8034,6 +8034,7 @@
       "version": 1786695285,
       "releaseDate": "2026-03-06",
       "actAs": "iron-lad",
+      "exportCode": "01540101",
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/iron-lad",
       "portrait": "assets/avatars/iron-lad.png",
@@ -8054,8 +8055,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01540101"
+      ]
     },
     {
       "slug": "iron-man",
@@ -8094,6 +8094,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "iron-man",
+      "exportCode": "00010107",
       "affiliations": [
         {
           "name": "Avengers",
@@ -8148,8 +8149,7 @@
           "range": "B5",
           "strength": "6"
         }
-      ],
-      "exportCode": "00010107"
+      ]
     },
     {
       "slug": "iron-monger",
@@ -8184,6 +8184,7 @@
       "version": 1768833130,
       "releaseDate": "2026-03-06",
       "actAs": "iron-monger",
+      "exportCode": "01540102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -8232,8 +8233,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01540102"
+      ]
     },
     {
       "slug": "jean-grey",
@@ -8276,6 +8276,7 @@
       "version": 1786695285,
       "releaseDate": "2021-07-08",
       "actAs": "jean-grey",
+      "exportCode": "00530102",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -8304,8 +8305,7 @@
           "range": "3",
           "strength": "9"
         }
-      ],
-      "exportCode": "00530102"
+      ]
     },
     {
       "slug": "jubilee",
@@ -8339,6 +8339,7 @@
       "version": 1793634845,
       "releaseDate": "2026-10-30",
       "actAs": "jubilee",
+      "exportCode": "30080102",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -8365,8 +8366,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "30080102"
+      ]
     },
     {
       "slug": "juggernaut",
@@ -8404,6 +8404,7 @@
       "version": 1747492452,
       "releaseDate": "2022-02-11",
       "actAs": "juggernaut",
+      "exportCode": "00560101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -8432,8 +8433,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00560101"
+      ]
     },
     {
       "slug": "kang-the-conqueror",
@@ -8480,6 +8480,7 @@
       "version": 1786695285,
       "releaseDate": "2026-03-06",
       "actAs": "kang-the-conqueror",
+      "exportCode": "01540103",
       "affiliations": [
         {
           "name": "Cabal",
@@ -8512,8 +8513,7 @@
           "range": "3",
           "strength": "9"
         }
-      ],
-      "exportCode": "01540103"
+      ]
     },
     {
       "slug": "karnak",
@@ -8549,6 +8549,7 @@
       "version": 1791228614,
       "releaseDate": "2025-03-14",
       "actAs": "karnak",
+      "exportCode": "01660102",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -8576,8 +8577,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01660102"
+      ]
     },
     {
       "slug": "killmonger",
@@ -8617,6 +8617,7 @@
       "version": 1792153260,
       "releaseDate": "2019-12-13",
       "actAs": "killmonger",
+      "exportCode": "00070102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -8675,8 +8676,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00070102"
+      ]
     },
     {
       "slug": "killmonger-usurper",
@@ -8714,6 +8714,7 @@
       "version": 1790334750,
       "releaseDate": "2024-02-02",
       "actAs": "killmonger-usurper",
+      "exportCode": "10040101",
       "affiliations": [
         {
           "name": "Wakanda",
@@ -8757,8 +8758,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "10040101"
+      ]
     },
     {
       "slug": "king-black-bolt",
@@ -8807,6 +8807,7 @@
       "version": 1786695285,
       "releaseDate": "2025-03-14",
       "actAs": "king-black-bolt",
+      "exportCode": "01660103",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -8834,8 +8835,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01660103"
+      ]
     },
     {
       "slug": "kingpin",
@@ -8882,6 +8882,7 @@
       "version": 1786695285,
       "releaseDate": "2020-10-23",
       "actAs": "kingpin",
+      "exportCode": "00290101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -8933,8 +8934,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00290101"
+      ]
     },
     {
       "slug": "king-tchalla",
@@ -8974,6 +8974,7 @@
       "version": 1786695285,
       "releaseDate": "2024-02-02",
       "actAs": "king-tchalla",
+      "exportCode": "10040102",
       "affiliations": [
         {
           "name": "Wakanda",
@@ -9013,8 +9014,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "10040102"
+      ]
     },
     {
       "slug": "klaw",
@@ -9060,6 +9060,7 @@
       "version": 1786695285,
       "releaseDate": "2023-07-14",
       "actAs": "klaw",
+      "exportCode": "01160101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -9108,8 +9109,7 @@
           "range": "B5",
           "strength": "7"
         }
-      ],
-      "exportCode": "01160101"
+      ]
     },
     {
       "slug": "kraven-the-hunter",
@@ -9146,6 +9146,7 @@
       "version": 1786695285,
       "releaseDate": "2021-06-24",
       "actAs": "kraven-the-hunter",
+      "exportCode": "00580101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -9184,8 +9185,7 @@
           "range": "3",
           "strength": "4"
         }
-      ],
-      "exportCode": "00580101"
+      ]
     },
     {
       "slug": "lady-mastermind",
@@ -9226,6 +9226,7 @@
       "version": 1786695285,
       "releaseDate": "2025-06-13",
       "actAs": "lady-mastermind",
+      "exportCode": "01730103",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -9263,8 +9264,7 @@
           "range": "A2",
           "strength": "6"
         }
-      ],
-      "exportCode": "01730103"
+      ]
     },
     {
       "slug": "lady-sif",
@@ -9305,6 +9305,7 @@
       "version": 1786695285,
       "releaseDate": "2024-08-02",
       "actAs": "lady-sif",
+      "exportCode": "00910101",
       "affiliations": [
         {
           "name": "Asgard",
@@ -9332,8 +9333,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00910101"
+      ]
     },
     {
       "slug": "lizard",
@@ -9371,6 +9371,7 @@
       "version": 1762291546,
       "releaseDate": "2021-06-24",
       "actAs": "lizard",
+      "exportCode": "00580102",
       "affiliations": [
         {
           "name": "Spider Foes",
@@ -9398,8 +9399,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00580102"
+      ]
     },
     {
       "slug": "lockjaw",
@@ -9437,6 +9437,7 @@
       "version": 1790430982,
       "releaseDate": "2021-02-12",
       "actAs": "lockjaw",
+      "exportCode": "00350102",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -9459,8 +9460,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": "00350102"
+      ]
     },
     {
       "slug": "logan-the-wolverine",
@@ -9502,6 +9502,7 @@
       "version": 1786695285,
       "releaseDate": "2022-12-09",
       "actAs": "logan-the-wolverine",
+      "exportCode": "10030101",
       "affiliations": [
         {
           "name": "Weapon X",
@@ -9539,8 +9540,7 @@
           "range": "B3",
           "strength": "7"
         }
-      ],
-      "exportCode": "10030101"
+      ]
     },
     {
       "slug": "loki-god-of-mischief",
@@ -9582,6 +9582,7 @@
       "version": 1788628852,
       "releaseDate": "2020-01-31",
       "actAs": "loki-god-of-mischief",
+      "exportCode": "00120102",
       "affiliations": [
         {
           "name": "Asgard",
@@ -9627,8 +9628,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "00120102"
+      ]
     },
     {
       "slug": "loki-prince-of-lies",
@@ -9669,6 +9669,7 @@
       "version": 1781520914,
       "releaseDate": "2024-08-02",
       "actAs": "loki-prince-of-lies",
+      "exportCode": "00910102",
       "affiliations": [
         {
           "name": "Asgard",
@@ -9707,8 +9708,7 @@
           "range": "A3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00910102"
+      ]
     },
     {
       "slug": "luke-cage",
@@ -9744,6 +9744,7 @@
       "version": 1768250597,
       "releaseDate": "2021-06-10",
       "actAs": "luke-cage",
+      "exportCode": "00490102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -9802,8 +9803,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00490102"
+      ]
     },
     {
       "slug": "magik",
@@ -9848,6 +9848,7 @@
       "version": 1786695285,
       "releaseDate": "2022-02-11",
       "actAs": "magik",
+      "exportCode": "00570102",
       "affiliations": [
         {
           "name": "Convocation",
@@ -9922,8 +9923,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00570102"
+      ]
     },
     {
       "slug": "magneto",
@@ -9963,6 +9963,7 @@
       "version": 1786695285,
       "releaseDate": "2020-11-13",
       "actAs": "magneto",
+      "exportCode": "00420101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -10013,8 +10014,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "00420101"
+      ]
     },
     {
       "slug": "malekith-the-accursed",
@@ -10068,6 +10068,7 @@
       "version": 1786695285,
       "releaseDate": "2022-08-12",
       "actAs": "malekith-the-accursed",
+      "exportCode": "00930101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -10100,8 +10101,7 @@
           "range": "3",
           "strength": "10"
         }
-      ],
-      "exportCode": "00930101"
+      ]
     },
     {
       "slug": "man-thing",
@@ -10137,6 +10137,7 @@
       "version": 1742248900,
       "releaseDate": "2025-01-31",
       "actAs": "man-thing",
+      "exportCode": "01860102",
       "affiliations": [
         {
           "name": "Defenders",
@@ -10176,8 +10177,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01860102"
+      ]
     },
     {
       "slug": "maverick",
@@ -10217,6 +10217,7 @@
       "version": 1786695285,
       "releaseDate": "2024-09-13",
       "actAs": "maverick",
+      "exportCode": "01090101",
       "affiliations": [
         {
           "name": "Weapon X",
@@ -10248,8 +10249,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01090101"
+      ]
     },
     {
       "slug": "maximus-the-mad",
@@ -10290,6 +10290,7 @@
       "version": 1788106078,
       "releaseDate": "2025-03-14",
       "actAs": "maximus-the-mad",
+      "exportCode": "01660104",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -10317,8 +10318,7 @@
           "range": "3",
           "strength": "9"
         }
-      ],
-      "exportCode": "01660104"
+      ]
     },
     {
       "slug": "mbaku",
@@ -10357,6 +10357,7 @@
       "version": 1787072375,
       "releaseDate": "2023-07-14",
       "actAs": "mbaku",
+      "exportCode": "01160102",
       "affiliations": [
         {
           "name": "Wakanda",
@@ -10395,8 +10396,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01160102"
+      ]
     },
     {
       "slug": "medusa",
@@ -10441,6 +10441,7 @@
       "version": 1786725729,
       "releaseDate": "2021-02-12",
       "actAs": "medusa",
+      "exportCode": "00340102",
       "affiliations": [
         {
           "name": "Inhumans",
@@ -10479,8 +10480,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00340102"
+      ]
     },
     {
       "slug": "mephisto-lord-of-temptation",
@@ -10525,6 +10525,7 @@
       "version": 1787594886,
       "releaseDate": "2024-11-08",
       "actAs": "mephisto-lord-of-temptation",
+      "exportCode": "00660101",
       "affiliations": [
         {
           "name": "Legion of the Lost",
@@ -10577,8 +10578,7 @@
           "range": "B4",
           "strength": "6"
         }
-      ],
-      "exportCode": "00660101"
+      ]
     },
     {
       "slug": "mirage",
@@ -10613,6 +10613,7 @@
       "version": 1791329038,
       "releaseDate": "2026-10-30",
       "actAs": "mirage",
+      "exportCode": "30080103",
       "affiliations": [
         {
           "name": "New Mutants",
@@ -10659,8 +10660,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "30080103"
+      ]
     },
     {
       "slug": "mister-sinister",
@@ -10702,6 +10702,7 @@
       "version": 1788764807,
       "releaseDate": "2021-05-14",
       "actAs": "mister-sinister",
+      "exportCode": "00460101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -10751,8 +10752,7 @@
           "range": "A2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00460101"
+      ]
     },
     {
       "slug": "modok",
@@ -10793,6 +10793,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "modok",
+      "exportCode": "00050101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -10841,8 +10842,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "00050101"
+      ]
     },
     {
       "slug": "modok-scientist-supreme",
@@ -10884,6 +10884,7 @@
       "version": 1786706665,
       "releaseDate": "2023-04-14",
       "actAs": "modok-scientist-supreme",
+      "exportCode": "01450101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -10934,8 +10935,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01450101"
+      ]
     },
     {
       "slug": "moondragon",
@@ -10974,6 +10974,7 @@
       "version": 1780689576,
       "releaseDate": "2026-02-13",
       "actAs": "moondragon",
+      "exportCode": "01910102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -11023,8 +11024,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01910102"
+      ]
     },
     {
       "slug": "moon-knight",
@@ -11068,6 +11068,7 @@
       "version": 1786695285,
       "releaseDate": "2021-09-09",
       "actAs": "moon-knight",
+      "exportCode": "00480102",
       "affiliations": [
         {
           "name": "Defenders",
@@ -11119,8 +11120,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00480102"
+      ]
     },
     {
       "slug": "ms-marvel",
@@ -11159,6 +11159,7 @@
       "version": 1788691634,
       "releaseDate": "2022-01-15",
       "actAs": "ms-marvel",
+      "exportCode": "00620101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -11197,8 +11198,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00620101"
+      ]
     },
     {
       "slug": "multiple-man",
@@ -11235,6 +11235,7 @@
       "version": 1791329037,
       "releaseDate": "2026-10-30",
       "actAs": "multiple-man",
+      "exportCode": "30080104",
       "affiliations": [
         {
           "name": "X-Factor",
@@ -11271,8 +11272,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "30080104"
+      ]
     },
     {
       "slug": "multiple-man-duplicates-grunts",
@@ -11302,6 +11302,7 @@
       "version": 1791590048,
       "releaseDate": "2026-10-30",
       "actAs": "multiple-man-duplicates-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/multiple-man-duplicates-grunts",
       "portrait": "assets/avatars/multiple-man-duplicates-grunts.png",
@@ -11312,8 +11313,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "mysterio",
@@ -11352,6 +11352,7 @@
       "version": 1786695285,
       "releaseDate": "2021-06-24",
       "actAs": "mysterio",
+      "exportCode": "00500102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -11401,8 +11402,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00500102"
+      ]
     },
     {
       "slug": "mystique",
@@ -11446,6 +11446,7 @@
       "version": 1786706665,
       "releaseDate": "2020-11-13",
       "actAs": "mystique",
+      "exportCode": "00430102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -11504,8 +11505,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00430102"
+      ]
     },
     {
       "slug": "namor-the-submariner",
@@ -11550,6 +11550,7 @@
       "version": 1755085331,
       "releaseDate": "2024-07-12",
       "actAs": "namor-the-submariner",
+      "exportCode": "01580102",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -11590,8 +11591,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01580102"
+      ]
     },
     {
       "slug": "nebula",
@@ -11633,6 +11633,7 @@
       "version": 1788628852,
       "releaseDate": "2020-04-24",
       "actAs": "nebula",
+      "exportCode": "00160102",
       "affiliations": [
         {
           "name": "Black Order",
@@ -11675,8 +11676,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00160102"
+      ]
     },
     {
       "slug": "nick-fury",
@@ -11718,6 +11718,7 @@
       "version": 1781520915,
       "releaseDate": "2022-03-26",
       "actAs": "nick-fury",
+      "exportCode": "00550101",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -11749,8 +11750,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00550101"
+      ]
     },
     {
       "slug": "nick-fury-and-the-howling-commandos",
@@ -11788,6 +11788,7 @@
       "version": 1786695285,
       "releaseDate": "2022-09-09",
       "actAs": "nick-fury-and-the-howling-commandos",
+      "exportCode": "00750101",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -11820,8 +11821,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00750101"
+      ]
     },
     {
       "slug": "nightcrawler",
@@ -11859,6 +11859,7 @@
       "version": 1786695285,
       "releaseDate": "2024-03-01",
       "actAs": "nightcrawler",
+      "exportCode": "01120102",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -11886,8 +11887,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "01120102"
+      ]
     },
     {
       "slug": "nimrod",
@@ -11932,6 +11932,7 @@
       "version": 1792858644,
       "releaseDate": "2026-05-22",
       "actAs": "nimrod",
+      "exportCode": "30090102",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -11963,8 +11964,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "30090102"
+      ]
     },
     {
       "slug": "nkantu-the-living-mummy",
@@ -12001,6 +12001,7 @@
       "version": 1753605541,
       "releaseDate": "2024-11-01",
       "actAs": "nkantu-the-living-mummy",
+      "exportCode": "02450103",
       "affiliations": [
         {
           "name": "Midnight Sons",
@@ -12028,8 +12029,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "02450103"
+      ]
     },
     {
       "slug": "nova",
@@ -12074,6 +12074,7 @@
       "version": 1786695285,
       "releaseDate": "2025-01-31",
       "actAs": "nova",
+      "exportCode": "01260101",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -12106,8 +12107,7 @@
           "range": "B5",
           "strength": "7"
         }
-      ],
-      "exportCode": "01260101"
+      ]
     },
     {
       "slug": "okoye",
@@ -12145,6 +12145,7 @@
       "version": 1741207463,
       "releaseDate": "2019-12-13",
       "actAs": "okoye",
+      "exportCode": "00080101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -12188,8 +12189,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "00080101"
+      ]
     },
     {
       "slug": "omega-red",
@@ -12230,6 +12230,7 @@
       "version": 1786695285,
       "releaseDate": "2021-07-08",
       "actAs": "omega-red",
+      "exportCode": "00540101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -12289,8 +12290,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00540101"
+      ]
     },
     {
       "slug": "omega-sentinel",
@@ -12334,6 +12334,7 @@
       "version": 1788102484,
       "releaseDate": "2026-05-22",
       "actAs": "omega-sentinel",
+      "exportCode": "30090103",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -12360,8 +12361,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "30090103"
+      ]
     },
     {
       "slug": "onslaught",
@@ -12404,6 +12404,7 @@
       "version": 1787121857,
       "releaseDate": "2026-09-25",
       "actAs": "onslaught",
+      "exportCode": "30070101",
       "affiliations": [
         {
           "name": "Onslaught's Grip",
@@ -12435,8 +12436,7 @@
           "range": "4",
           "strength": "8"
         }
-      ],
-      "exportCode": "30070101"
+      ]
     },
     {
       "slug": "phoenix",
@@ -12489,6 +12489,7 @@
       "version": 1786695285,
       "releaseDate": "2025-06-13",
       "actAs": "phoenix",
+      "exportCode": "00830101",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -12526,8 +12527,7 @@
           "range": "B4",
           "strength": "8"
         }
-      ],
-      "exportCode": "00830101"
+      ]
     },
     {
       "slug": "prime-sentinel-2",
@@ -12561,6 +12561,7 @@
       "version": 1782856007,
       "releaseDate": "2026-06-12",
       "actAs": "prime-sentinel-2",
+      "exportCode": "20230102",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -12587,8 +12588,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "20230102"
+      ]
     },
     {
       "slug": "prime-sentinel-1",
@@ -12621,6 +12621,7 @@
       "version": 1782856004,
       "releaseDate": "2026-06-12",
       "actAs": "prime-sentinel-1",
+      "exportCode": "20230101",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -12647,8 +12648,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "20230101"
+      ]
     },
     {
       "slug": "professor-x",
@@ -12687,6 +12687,7 @@
       "version": 1786695285,
       "releaseDate": "2024-03-01",
       "actAs": "professor-x",
+      "exportCode": "01510101",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -12719,8 +12720,7 @@
           "range": "3",
           "strength": "4"
         }
-      ],
-      "exportCode": "01510101"
+      ]
     },
     {
       "slug": "prowler",
@@ -12763,6 +12763,7 @@
       "version": 1786695285,
       "releaseDate": "2025-10-03",
       "actAs": "prowler",
+      "exportCode": "01690101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -12806,8 +12807,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01690101"
+      ]
     },
     {
       "slug": "proxima-midnight",
@@ -12850,6 +12850,7 @@
       "version": 1786797022,
       "releaseDate": "2020-08-01",
       "actAs": "proxima-midnight",
+      "exportCode": "00150102",
       "affiliations": [
         {
           "name": "Black Order",
@@ -12882,8 +12883,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "00150102"
+      ]
     },
     {
       "slug": "psylocke",
@@ -12928,6 +12928,7 @@
       "version": 1786695285,
       "releaseDate": "2023-03-10",
       "actAs": "psylocke",
+      "exportCode": "01030102",
       "affiliations": [
         {
           "name": "Hellfire Club",
@@ -12991,8 +12992,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01030102"
+      ]
     },
     {
       "slug": "punisher",
@@ -13031,6 +13031,7 @@
       "version": 1786695285,
       "releaseDate": "2020-09-10",
       "actAs": "punisher",
+      "exportCode": "00320101",
       "affiliations": [
         {
           "name": "Defenders",
@@ -13069,8 +13070,7 @@
           "range": "5",
           "strength": "7"
         }
-      ],
-      "exportCode": "00320101"
+      ]
     },
     {
       "slug": "pyro",
@@ -13107,6 +13107,7 @@
       "version": 1786725729,
       "releaseDate": "2022-12-09",
       "actAs": "pyro",
+      "exportCode": "00820101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -13139,8 +13140,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00820101"
+      ]
     },
     {
       "slug": "quasar",
@@ -13181,6 +13181,7 @@
       "version": 1771060333,
       "releaseDate": "2026-02-13",
       "actAs": "quasar",
+      "exportCode": "01910103",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -13208,8 +13209,7 @@
           "range": "B3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01910103"
+      ]
     },
     {
       "slug": "quicksilver",
@@ -13243,6 +13243,7 @@
       "version": 1786725729,
       "releaseDate": "2021-05-06",
       "actAs": "quicksilver",
+      "exportCode": "00630101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -13304,8 +13305,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00630101"
+      ]
     },
     {
       "slug": "red-guardian",
@@ -13342,6 +13342,7 @@
       "version": 1790437526,
       "releaseDate": "2022-08-30",
       "actAs": "red-guardian",
+      "exportCode": "00890101",
       "affiliations": [
         {
           "name": "Winter Guard",
@@ -13369,8 +13370,7 @@
           "range": "4",
           "strength": "4"
         }
-      ],
-      "exportCode": "00890101"
+      ]
     },
     {
       "slug": "red-hulk",
@@ -13415,6 +13415,7 @@
       "version": 1791841660,
       "releaseDate": "2026-11-13",
       "actAs": "red-hulk",
+      "exportCode": "30170101",
       "affiliations": [
         {
           "name": "Thunderbolts",
@@ -13441,8 +13442,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "30170101"
+      ]
     },
     {
       "slug": "red-skull",
@@ -13484,6 +13484,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "red-skull",
+      "exportCode": "00010108",
       "affiliations": [
         {
           "name": "Cabal",
@@ -13527,8 +13528,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "00010108"
+      ]
     },
     {
       "slug": "red-skull-master-of-hydra",
@@ -13570,6 +13570,7 @@
       "version": 1786725729,
       "releaseDate": "2022-10-14",
       "actAs": "red-skull-master-of-hydra",
+      "exportCode": "00740101",
       "affiliations": [
         {
           "name": "Hydra",
@@ -13610,8 +13611,7 @@
           "range": "2",
           "strength": "9"
         }
-      ],
-      "exportCode": "00740101"
+      ]
     },
     {
       "slug": "red-skull-master-of-the-world",
@@ -13653,6 +13653,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "red-skull-master-of-the-world",
+      "exportCode": "01430107",
       "affiliations": [
         {
           "name": "Cabal",
@@ -13693,8 +13694,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430107"
+      ]
     },
     {
       "slug": "rescue",
@@ -13733,6 +13733,7 @@
       "version": 1780689585,
       "releaseDate": "2026-03-06",
       "actAs": "rescue",
+      "exportCode": "01540104",
       "affiliations": [
         {
           "name": "A-Force",
@@ -13782,8 +13783,7 @@
           "range": "B4",
           "strength": "7"
         }
-      ],
-      "exportCode": "01540104"
+      ]
     },
     {
       "slug": "rhino",
@@ -13817,6 +13817,7 @@
       "version": 1762329541,
       "releaseDate": "2023-01-13",
       "actAs": "rhino",
+      "exportCode": "00980101",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -13850,8 +13851,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00980101"
+      ]
     },
     {
       "slug": "rocket-raccoon",
@@ -13889,6 +13889,7 @@
       "version": 1787785979,
       "releaseDate": "2020-03-13",
       "actAs": "rocket-raccoon",
+      "exportCode": "00170102",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -13917,8 +13918,7 @@
           "range": "5",
           "strength": "7"
         }
-      ],
-      "exportCode": "00170102"
+      ]
     },
     {
       "slug": "rogue",
@@ -13960,6 +13960,7 @@
       "version": 1786695285,
       "releaseDate": "2022-02-11",
       "actAs": "rogue",
+      "exportCode": "00600102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -13998,8 +13999,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00600102"
+      ]
     },
     {
       "slug": "ronan-the-accuser",
@@ -14042,6 +14042,7 @@
       "version": 1786802814,
       "releaseDate": "2020-06-11",
       "actAs": "ronan-the-accuser",
+      "exportCode": "00200102",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -14085,8 +14086,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00200102"
+      ]
     },
     {
       "slug": "ronin",
@@ -14126,6 +14126,7 @@
       "version": 1786695285,
       "releaseDate": "2025-10-03",
       "actAs": "ronin",
+      "exportCode": "01680102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -14169,8 +14170,7 @@
           "range": "B3",
           "strength": "6"
         }
-      ],
-      "exportCode": "01680102"
+      ]
     },
     {
       "slug": "sabretooth",
@@ -14212,6 +14212,7 @@
       "version": 1786695285,
       "releaseDate": "2020-11-13",
       "actAs": "sabretooth",
+      "exportCode": "00400101",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -14277,8 +14278,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00400101"
+      ]
     },
     {
       "slug": "sabretooth-apex-predator",
@@ -14315,6 +14315,7 @@
       "version": 1788696912,
       "releaseDate": "2022-12-09",
       "actAs": "sabretooth-apex-predator",
+      "exportCode": "10030102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -14361,8 +14362,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "10030102"
+      ]
     },
     {
       "slug": "sand-construct-1-grunts",
@@ -14397,6 +14397,7 @@
       "version": 1785702189,
       "releaseDate": "2024-05-17",
       "actAs": "sand-construct-1-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sand-construct-1-grunts",
       "portrait": "assets/avatars/sand-construct-1-grunts.png",
@@ -14407,8 +14408,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "sand-construct-2-grunts",
@@ -14443,6 +14443,7 @@
       "version": 1785702191,
       "releaseDate": "2024-05-17",
       "actAs": "sand-construct-2-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sand-construct-2-grunts",
       "portrait": "assets/avatars/sand-construct-2-grunts.png",
@@ -14453,8 +14454,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "sandman",
@@ -14493,6 +14493,7 @@
       "version": 1786695285,
       "releaseDate": "2024-05-17",
       "actAs": "sandman",
+      "exportCode": "01560102",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -14536,8 +14537,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01560102"
+      ]
     },
     {
       "slug": "scarlet-spider",
@@ -14578,6 +14578,7 @@
       "version": 1786695285,
       "releaseDate": "2024-05-17",
       "actAs": "scarlet-spider",
+      "exportCode": "01550102",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -14610,8 +14611,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01550102"
+      ]
     },
     {
       "slug": "scarlet-witch",
@@ -14652,6 +14652,7 @@
       "version": 1791228615,
       "releaseDate": "2021-05-06",
       "actAs": "scarlet-witch",
+      "exportCode": "00630102",
       "affiliations": [
         {
           "name": "Convocation",
@@ -14722,8 +14723,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "00630102"
+      ]
     },
     {
       "slug": "sensational-she-hulk",
@@ -14765,6 +14765,7 @@
       "version": 1791841661,
       "releaseDate": "2026-11-13",
       "actAs": "sensational-she-hulk",
+      "exportCode": "30170102",
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/sensational-she-hulk",
       "portrait": "assets/avatars/sensational-she-hulk.png",
@@ -14780,8 +14781,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "30170102"
+      ]
     },
     {
       "slug": "sentinel-mk4",
@@ -14828,6 +14828,7 @@
       "version": 1763497002,
       "releaseDate": "2022-10-14",
       "actAs": "sentinel-mk4",
+      "exportCode": "00510101",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -14861,8 +14862,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "00510101"
+      ]
     },
     {
       "slug": "sentinel-prime-mk4",
@@ -14910,6 +14910,7 @@
       "version": 1790423697,
       "releaseDate": "2022-10-14",
       "actAs": "sentinel-prime-mk4",
+      "exportCode": "01600101",
       "affiliations": [
         {
           "name": "Sentinels",
@@ -14938,8 +14939,7 @@
           "range": "4",
           "strength": "8"
         }
-      ],
-      "exportCode": "01600101"
+      ]
     },
     {
       "slug": "shadowcat",
@@ -14976,6 +14976,7 @@
       "version": 1786695285,
       "releaseDate": "2024-03-01",
       "actAs": "shadowcat",
+      "exportCode": "00960102",
       "affiliations": [
         {
           "name": "New Mutants",
@@ -15019,8 +15020,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00960102"
+      ]
     },
     {
       "slug": "shadow-king",
@@ -15060,6 +15060,7 @@
       "version": 1786695285,
       "releaseDate": "2024-03-01",
       "actAs": "shadow-king",
+      "exportCode": "01510102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -15098,8 +15099,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "01510102"
+      ]
     },
     {
       "slug": "shadowland-daredevil",
@@ -15142,6 +15142,7 @@
       "version": 1786695285,
       "releaseDate": "2022-03-26",
       "actAs": "shadowland-daredevil",
+      "exportCode": "00790102",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -15179,8 +15180,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00790102"
+      ]
     },
     {
       "slug": "shang-chi",
@@ -15226,6 +15226,7 @@
       "version": 1786695285,
       "releaseDate": "2024-07-12",
       "actAs": "shang-chi",
+      "exportCode": "00690101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -15269,8 +15270,7 @@
           "range": "2",
           "strength": "10"
         }
-      ],
-      "exportCode": "00690101"
+      ]
     },
     {
       "slug": "she-hulk",
@@ -15313,6 +15313,7 @@
       "version": 1786727411,
       "releaseDate": "2021-01-09",
       "actAs": "she-hulk",
+      "exportCode": "00390101",
       "affiliations": [
         {
           "name": "A-Force",
@@ -15379,8 +15380,7 @@
           "range": "3",
           "strength": "10"
         }
-      ],
-      "exportCode": "00390101"
+      ]
     },
     {
       "slug": "shield-agents-grunts",
@@ -15411,6 +15411,7 @@
       "version": 1786402840,
       "releaseDate": "2022-03-26",
       "actAs": "shield-agents-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/shield-agents-grunts",
       "portrait": "assets/avatars/shield-agents-grunts.png",
@@ -15421,8 +15422,7 @@
           "range": "3",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "shocker",
@@ -15457,6 +15457,7 @@
       "version": 1786695285,
       "releaseDate": "2024-05-17",
       "actAs": "shocker",
+      "exportCode": "01560103",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -15497,8 +15498,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01560103"
+      ]
     },
     {
       "slug": "shuri",
@@ -15537,6 +15537,7 @@
       "version": 1786695285,
       "releaseDate": "2019-12-13",
       "actAs": "shuri",
+      "exportCode": "00080102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -15575,8 +15576,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00080102"
+      ]
     },
     {
       "slug": "silk",
@@ -15619,6 +15619,7 @@
       "version": 1786695285,
       "releaseDate": "2025-10-03",
       "actAs": "silk",
+      "exportCode": "01700101",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -15651,8 +15652,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01700101"
+      ]
     },
     {
       "slug": "silver-sable",
@@ -15692,6 +15692,7 @@
       "version": 1786695285,
       "releaseDate": "2024-07-12",
       "actAs": "silver-sable",
+      "exportCode": "00690102",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -15741,8 +15742,7 @@
           "range": "5",
           "strength": "6"
         }
-      ],
-      "exportCode": "00690102"
+      ]
     },
     {
       "slug": "sin",
@@ -15782,6 +15782,7 @@
       "version": 1786695285,
       "releaseDate": "2021-05-06",
       "actAs": "sin",
+      "exportCode": "00610101",
       "affiliations": [
         {
           "name": "Cabal",
@@ -15828,8 +15829,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00610101"
+      ]
     },
     {
       "slug": "skurge-the-executioner",
@@ -15869,6 +15869,7 @@
       "version": 1786695285,
       "releaseDate": "2022-08-07",
       "actAs": "skurge-the-executioner",
+      "exportCode": "01020102",
       "affiliations": [
         {
           "name": "Asgard",
@@ -15907,8 +15908,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01020102"
+      ]
     },
     {
       "slug": "spectacular-spider-man",
@@ -15944,6 +15944,7 @@
       "version": 1783357075,
       "releaseDate": "2023-10-13",
       "actAs": "spectacular-spider-man",
+      "exportCode": "01430108",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -15988,8 +15989,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430108"
+      ]
     },
     {
       "slug": "spectrum",
@@ -16034,6 +16034,7 @@
       "version": 1786695285,
       "releaseDate": "2026-01-09",
       "actAs": "spectrum",
+      "exportCode": "01290102",
       "affiliations": [
         {
           "name": "Mighty Avengers",
@@ -16066,8 +16067,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01290102"
+      ]
     },
     {
       "slug": "spider-ham",
@@ -16104,6 +16104,7 @@
       "version": 1786285530,
       "releaseDate": "2025-10-03",
       "actAs": "spider-ham",
+      "exportCode": "01700102",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -16136,8 +16137,7 @@
           "range": "2",
           "strength": "6"
         }
-      ],
-      "exportCode": "01700102"
+      ]
     },
     {
       "slug": "spider-man-miles-morales",
@@ -16177,6 +16177,7 @@
       "version": 1783357070,
       "releaseDate": "2020-08-14",
       "actAs": "spider-man",
+      "exportCode": "00100102",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -16205,8 +16206,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00100102"
+      ]
     },
     {
       "slug": "spider-man",
@@ -16246,6 +16246,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "spider-man",
+      "exportCode": "00010109",
       "affiliations": [
         {
           "name": "Defenders",
@@ -16289,8 +16290,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00010109"
+      ]
     },
     {
       "slug": "spider-man-2099",
@@ -16336,6 +16336,7 @@
       "version": 1786695285,
       "releaseDate": "2025-10-03",
       "actAs": "spider-man-2099",
+      "exportCode": "01690102",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -16368,8 +16369,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01690102"
+      ]
     },
     {
       "slug": "spider-man-noir",
@@ -16404,6 +16404,7 @@
       "version": 1786285531,
       "releaseDate": "2025-10-03",
       "actAs": "spider-man-noir",
+      "exportCode": "01700103",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -16431,8 +16432,7 @@
           "range": "B4",
           "strength": "5"
         }
-      ],
-      "exportCode": "01700103"
+      ]
     },
     {
       "slug": "spider-woman",
@@ -16473,6 +16473,7 @@
       "version": 1790421993,
       "releaseDate": "2023-02-10",
       "actAs": "spider-woman",
+      "exportCode": "01000102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -16544,8 +16545,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01000102"
+      ]
     },
     {
       "slug": "squirrel-girl",
@@ -16583,6 +16583,7 @@
       "version": 1788703543,
       "releaseDate": "2023-05-12",
       "actAs": "squirrel-girl",
+      "exportCode": "01370102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -16621,8 +16622,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "01370102"
+      ]
     },
     {
       "slug": "star-lord",
@@ -16667,6 +16667,7 @@
       "version": 1781520915,
       "releaseDate": "2020-03-13",
       "actAs": "star-lord",
+      "exportCode": "00180101",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -16694,8 +16695,7 @@
           "range": "4",
           "strength": "7"
         }
-      ],
-      "exportCode": "00180101"
+      ]
     },
     {
       "slug": "steve-rogers-captain-america",
@@ -16731,6 +16731,7 @@
       "version": 1788628852,
       "releaseDate": "2022-09-09",
       "actAs": "steve-rogers-captain-america",
+      "exportCode": "00770101",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -16769,8 +16770,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00770101"
+      ]
     },
     {
       "slug": "storm",
@@ -16819,6 +16819,7 @@
       "version": 1786706665,
       "releaseDate": "2020-11-13",
       "actAs": "storm",
+      "exportCode": "00410102",
       "affiliations": [
         {
           "name": "Uncanny X-Men",
@@ -16880,8 +16881,7 @@
           "range": "A2",
           "strength": "6"
         }
-      ],
-      "exportCode": "00410102"
+      ]
     },
     {
       "slug": "sunspot",
@@ -16919,6 +16919,7 @@
       "version": 1786695285,
       "releaseDate": "2024-09-13",
       "actAs": "sunspot",
+      "exportCode": "01530101",
       "affiliations": [
         {
           "name": "Hellfire Club",
@@ -16966,8 +16967,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01530101"
+      ]
     },
     {
       "slug": "supergiant",
@@ -17009,6 +17009,7 @@
       "version": 1788628852,
       "releaseDate": "2022-06-09",
       "actAs": "supergiant",
+      "exportCode": "00810102",
       "affiliations": [
         {
           "name": "Black Order",
@@ -17036,8 +17037,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "00810102"
+      ]
     },
     {
       "slug": "taskmaster",
@@ -17080,6 +17080,7 @@
       "version": 1786695285,
       "releaseDate": "2020-09-10",
       "actAs": "taskmaster",
+      "exportCode": "00320102",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -17146,8 +17147,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": "00320102"
+      ]
     },
     {
       "slug": "thanos-the-mad-titan",
@@ -17197,6 +17197,7 @@
       "version": 1760709168,
       "releaseDate": "2020-07-10",
       "actAs": "thanos-the-mad-titan",
+      "exportCode": "00250107",
       "affiliations": [
         {
           "name": "Black Order",
@@ -17224,8 +17225,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00250107"
+      ]
     },
     {
       "slug": "the-black-widow",
@@ -17264,6 +17264,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "the-black-widow",
+      "exportCode": "01430109",
       "affiliations": [
         {
           "name": "A-Force",
@@ -17331,8 +17332,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430109"
+      ]
     },
     {
       "slug": "the-blob",
@@ -17369,6 +17369,7 @@
       "version": 1786695285,
       "releaseDate": "2022-12-09",
       "actAs": "the-blob",
+      "exportCode": "00820102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -17408,8 +17409,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00820102"
+      ]
     },
     {
       "slug": "the-immortal-hulk",
@@ -17450,6 +17450,7 @@
       "version": 1786695285,
       "releaseDate": "2023-04-14",
       "actAs": "the-immortal-hulk",
+      "exportCode": "01440101",
       "affiliations": [
         {
           "name": "Defenders",
@@ -17487,8 +17488,7 @@
           "range": "3",
           "strength": "10"
         }
-      ],
-      "exportCode": "01440101"
+      ]
     },
     {
       "slug": "the-leader",
@@ -17531,6 +17531,7 @@
       "version": 1792012469,
       "releaseDate": "2026-11-13",
       "actAs": "the-leader",
+      "exportCode": "30170103",
       "affiliations": [
         {
           "name": "Intelligencia",
@@ -17557,8 +17558,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "30170103"
+      ]
     },
     {
       "slug": "mighty-thor",
@@ -17601,6 +17601,7 @@
       "version": 1781520914,
       "releaseDate": "2024-08-02",
       "actAs": "mighty-thor",
+      "exportCode": "00910103",
       "affiliations": [
         {
           "name": "Asgard",
@@ -17641,8 +17642,7 @@
           "range": "4",
           "strength": "8"
         }
-      ],
-      "exportCode": "00910103"
+      ]
     },
     {
       "slug": "the-original-human-torch",
@@ -17682,6 +17682,7 @@
       "version": 1786695285,
       "releaseDate": "2022-09-09",
       "actAs": "the-original-human-torch",
+      "exportCode": "00770102",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -17709,8 +17710,7 @@
           "range": "B2",
           "strength": "4"
         }
-      ],
-      "exportCode": "00770102"
+      ]
     },
     {
       "slug": "the-wrecking-crew",
@@ -17751,6 +17751,7 @@
       "version": 1786723716,
       "releaseDate": "2024-11-08",
       "actAs": "the-wrecking-crew",
+      "exportCode": "01620102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -17803,8 +17804,7 @@
           "range": "B4",
           "strength": "4"
         }
-      ],
-      "exportCode": "01620102"
+      ]
     },
     {
       "slug": "thor-hero-of-midgard",
@@ -17848,6 +17848,7 @@
       "version": 1786695285,
       "releaseDate": "2024-08-02",
       "actAs": "thor-hero-of-midgard",
+      "exportCode": "00910104",
       "affiliations": [
         {
           "name": "Asgard",
@@ -17876,8 +17877,7 @@
           "range": "3",
           "strength": "10"
         }
-      ],
-      "exportCode": "00910104"
+      ]
     },
     {
       "slug": "thor-prince-of-asgard",
@@ -17927,6 +17927,7 @@
       "version": 1787518623,
       "releaseDate": "2020-01-31",
       "actAs": "thor-prince-of-asgard",
+      "exportCode": "00110101",
       "affiliations": [
         {
           "name": "Asgard",
@@ -17970,8 +17971,7 @@
           "range": "A2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00110101"
+      ]
     },
     {
       "slug": "tigra",
@@ -18010,6 +18010,7 @@
       "version": 1787837207,
       "releaseDate": "2025-10-03",
       "actAs": "tigra",
+      "exportCode": "01680103",
       "affiliations": [
         {
           "name": "Avengers",
@@ -18048,8 +18049,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01680103"
+      ]
     },
     {
       "slug": "toad",
@@ -18089,6 +18089,7 @@
       "version": 1761082038,
       "releaseDate": "2020-11-13",
       "actAs": "toad",
+      "exportCode": "00420102",
       "affiliations": [
         {
           "name": "Brotherhood of Mutants",
@@ -18126,8 +18127,7 @@
           "range": "2",
           "strength": "5"
         }
-      ],
-      "exportCode": "00420102"
+      ]
     },
     {
       "slug": "ulik",
@@ -18163,6 +18163,7 @@
       "version": 1787211858,
       "releaseDate": "2023-02-10",
       "actAs": "ulik",
+      "exportCode": "01300102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -18200,8 +18201,7 @@
           "range": "2",
           "strength": "9"
         }
-      ],
-      "exportCode": "01300102"
+      ]
     },
     {
       "slug": "ultimate-spider-man",
@@ -18245,6 +18245,7 @@
       "version": 1786695285,
       "releaseDate": "2025-10-03",
       "actAs": "ultimate-spider-man",
+      "exportCode": "01690103",
       "affiliations": [
         {
           "name": "Web Warriors",
@@ -18277,8 +18278,7 @@
           "range": "2",
           "strength": "8"
         }
-      ],
-      "exportCode": "01690103"
+      ]
     },
     {
       "slug": "ultron",
@@ -18320,6 +18320,7 @@
       "version": 1786695285,
       "releaseDate": "2019-11-15",
       "actAs": "ultron",
+      "exportCode": "00010110",
       "affiliations": [
         {
           "name": "Cabal",
@@ -18352,8 +18353,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00010110"
+      ]
     },
     {
       "slug": "ultron-drones-grunts",
@@ -18390,6 +18390,7 @@
       "version": 1785702201,
       "releaseDate": "2023-10-13",
       "actAs": "ultron-drones-grunts",
+      "exportCode": null,
       "affiliations": [],
       "sourceUrl": "https://www.jarvis-protocol.com/characters/ultron-drones-grunts",
       "portrait": "assets/avatars/ultron-drones-grunts.png",
@@ -18400,8 +18401,7 @@
           "range": "3",
           "strength": "4"
         }
-      ],
-      "exportCode": null
+      ]
     },
     {
       "slug": "ultron-metal-tyrant",
@@ -18444,6 +18444,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "ultron-metal-tyrant",
+      "exportCode": "01430110",
       "affiliations": [
         {
           "name": "Cabal",
@@ -18473,8 +18474,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01430110"
+      ]
     },
     {
       "slug": "ursa-major",
@@ -18511,6 +18511,7 @@
       "version": 1786695285,
       "releaseDate": "2022-08-30",
       "actAs": "ursa-major",
+      "exportCode": "00890102",
       "affiliations": [
         {
           "name": "Winter Guard",
@@ -18538,8 +18539,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00890102"
+      ]
     },
     {
       "slug": "valkyrie",
@@ -18580,6 +18580,7 @@
       "version": 1786695285,
       "releaseDate": "2020-01-31",
       "actAs": "valkyrie",
+      "exportCode": "00110102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -18629,8 +18630,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00110102"
+      ]
     },
     {
       "slug": "valkyrie-and-elendil",
@@ -18671,6 +18671,7 @@
       "version": 1788107237,
       "releaseDate": "2026-02-13",
       "actAs": "valkyrie-and-elendil",
+      "exportCode": "00940101",
       "affiliations": [
         {
           "name": "Asgard",
@@ -18703,8 +18704,7 @@
           "range": "3",
           "strength": "5"
         }
-      ],
-      "exportCode": "00940101"
+      ]
     },
     {
       "slug": "venom",
@@ -18743,6 +18743,7 @@
       "version": 1788628852,
       "releaseDate": "2019-12-13",
       "actAs": "venom",
+      "exportCode": "00090101",
       "affiliations": [
         {
           "name": "Spider Foes",
@@ -18783,8 +18784,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00090101"
+      ]
     },
     {
       "slug": "viper",
@@ -18825,6 +18825,7 @@
       "version": 1786695285,
       "releaseDate": "2021-05-06",
       "actAs": "viper",
+      "exportCode": "00610102",
       "affiliations": [
         {
           "name": "Cabal",
@@ -18880,8 +18881,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00610102"
+      ]
     },
     {
       "slug": "vision",
@@ -18927,6 +18927,7 @@
       "version": 1786695285,
       "releaseDate": "2020-03-06",
       "actAs": "vision",
+      "exportCode": "00130101",
       "affiliations": [
         {
           "name": "Avengers",
@@ -18953,8 +18954,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00130101"
+      ]
     },
     {
       "slug": "vulture",
@@ -18993,6 +18993,7 @@
       "version": 1786695285,
       "releaseDate": "2024-05-17",
       "actAs": "vulture",
+      "exportCode": "01560104",
       "affiliations": [
         {
           "name": "Criminal Syndicate",
@@ -19031,8 +19032,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "01560104"
+      ]
     },
     {
       "slug": "warlock",
@@ -19074,6 +19074,7 @@
       "version": 1788299153,
       "releaseDate": "2024-09-13",
       "actAs": "warlock",
+      "exportCode": "01530102",
       "affiliations": [
         {
           "name": "New Mutants",
@@ -19116,8 +19117,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01530102"
+      ]
     },
     {
       "slug": "war-machine",
@@ -19153,6 +19153,7 @@
       "version": 1787228872,
       "releaseDate": "2021-07-08",
       "actAs": "war-machine",
+      "exportCode": "00380102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -19196,8 +19197,7 @@
           "range": "3",
           "strength": "8"
         }
-      ],
-      "exportCode": "00380102"
+      ]
     },
     {
       "slug": "warriors-three",
@@ -19241,6 +19241,7 @@
       "version": 1786695285,
       "releaseDate": "2026-02-13",
       "actAs": "warriors-three",
+      "exportCode": "00940102",
       "affiliations": [
         {
           "name": "Asgard",
@@ -19273,8 +19274,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": "00940102"
+      ]
     },
     {
       "slug": "wasp",
@@ -19312,6 +19312,7 @@
       "version": 1786695285,
       "releaseDate": "2020-09-12",
       "actAs": "wasp",
+      "exportCode": "00260102",
       "affiliations": [
         {
           "name": "A-Force",
@@ -19353,8 +19354,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00260102"
+      ]
     },
     {
       "slug": "weapon-x",
@@ -19396,6 +19396,7 @@
       "version": 1780689523,
       "releaseDate": "2024-09-13",
       "actAs": "weapon-x",
+      "exportCode": "01090102",
       "affiliations": [
         {
           "name": "Weapon X",
@@ -19427,8 +19428,7 @@
           "range": "A2",
           "strength": "5"
         }
-      ],
-      "exportCode": "01090102"
+      ]
     },
     {
       "slug": "werewolf-by-night",
@@ -19466,6 +19466,7 @@
       "version": 1786695285,
       "releaseDate": "2024-11-01",
       "actAs": "werewolf-by-night",
+      "exportCode": "02450104",
       "affiliations": [
         {
           "name": "Midnight Sons",
@@ -19493,8 +19494,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "02450104"
+      ]
     },
     {
       "slug": "winter-soldier",
@@ -19533,6 +19533,7 @@
       "version": 1786695285,
       "releaseDate": "2020-03-06",
       "actAs": "winter-soldier",
+      "exportCode": "00130102",
       "affiliations": [
         {
           "name": "S.H.I.E.L.D.",
@@ -19560,8 +19561,7 @@
           "range": "2",
           "strength": "7"
         }
-      ],
-      "exportCode": "00130102"
+      ]
     },
     {
       "slug": "winter-soldier-operative",
@@ -19605,6 +19605,7 @@
       "version": 1786695285,
       "releaseDate": "2023-10-13",
       "actAs": "winter-soldier-operative",
+      "exportCode": "01430111",
       "affiliations": [
         {
           "name": "Avengers",
@@ -19695,8 +19696,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "01430111"
+      ]
     },
     {
       "slug": "wolverine",
@@ -19744,6 +19744,7 @@
       "version": 1786695285,
       "releaseDate": "2020-11-13",
       "actAs": "wolverine",
+      "exportCode": "00400102",
       "affiliations": [
         {
           "name": "Avengers",
@@ -19823,8 +19824,7 @@
           "range": "3",
           "strength": "7"
         }
-      ],
-      "exportCode": "00400102"
+      ]
     },
     {
       "slug": "wong",
@@ -19862,6 +19862,7 @@
       "version": 1780689608,
       "releaseDate": "2020-09-11",
       "actAs": "wong",
+      "exportCode": "00230102",
       "affiliations": [
         {
           "name": "Convocation",
@@ -19907,8 +19908,7 @@
           "range": "2",
           "strength": "4"
         }
-      ],
-      "exportCode": "00230102"
+      ]
     },
     {
       "slug": "x-23",
@@ -19947,6 +19947,7 @@
       "version": 1785407694,
       "releaseDate": "2022-02-11",
       "actAs": "x-23",
+      "exportCode": "00710102",
       "affiliations": [
         {
           "name": "Weapon X",
@@ -20007,8 +20008,7 @@
           "range": "3",
           "strength": "6"
         }
-      ],
-      "exportCode": "00710102"
+      ]
     },
     {
       "slug": "yondu",
@@ -20049,6 +20049,7 @@
       "version": 1781520915,
       "releaseDate": "2025-01-31",
       "actAs": "yondu",
+      "exportCode": "01260102",
       "affiliations": [
         {
           "name": "Guardians of the Galaxy",
@@ -20076,8 +20077,7 @@
           "range": "4",
           "strength": "6"
         }
-      ],
-      "exportCode": "01260102"
+      ]
     }
   ]
 }
