@@ -423,6 +423,14 @@ test("keyboard entry into a new editor announces its heading without resetting t
   ).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(
+    page.getByRole("button", { name: "Код ростера", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("button", { name: "Ростер по коду", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(
     page.getByRole("button", { name: "← К ростерам", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("Tab");
