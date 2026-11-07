@@ -9,7 +9,7 @@ The web version has a local WASM fallback, useful for development and importing 
 ## User flow
 
 - **Ростеры → Ростер по фото**, or open any roster and use **По фото** next to Characters/Tactics/Crises.
-- Photo-entry buttons open the camera immediately; the review still offers gallery selection and more photos. Cancelling the camera leaves the review available.
+- Photo-entry buttons first show only **Сфотографировать** and **Загрузить фото**. The camera or gallery opens after that choice. Cancelling keeps the choice available; adding a photo opens the review, which also allows more photos.
 - Capture or pick one or more photos. Show the side with the title; 2–4 cards per image is preferable for small printed text. Up to 12 photos, each up to 35 MiB.
 - All detected catalogue matches start checked, including fuzzy/truncated matches. Ambiguous detections preselect the top candidate and retain alternatives for correction. Explicit user unchecks are preserved across additional photos. Existing items are labelled and cannot be duplicated. Names/alter egos can also be searched manually. An optional text-paste fallback accepts names already read by another tool.
 - Confirm once to add. Roster edits remain a draft until **Сохранить ростер**. Saving without a name highlights and focuses the name field with an inline error; entering a name clears it.

@@ -144,7 +144,7 @@ async function openScanner(
   if (target === "roster" && kind !== "characters")
     await page.locator('[data-rs="tab"][data-tab="' + kind + '"]').click();
   // Most scenarios exercise the review and acquisition controls independently.
-  // Direct camera entry is covered separately below.
+  // The source-choice entry is covered separately below.
   await page.evaluate(({ kind, target, side }) => {
     if (target === "roster") MCPStores.photoImport.openRoster(kind);
     else MCPStores.photoImport.openBattle(side, kind);
@@ -153,7 +153,8 @@ async function openScanner(
 }
 async function paste(page, text) {
   const d = page.locator("#photo-import-dialog");
-  await d.locator(".photo-text-import summary").click();
+  // Text fixtures enter the review directly, bypassing photo acquisition.
+  await page.evaluate(() => MCPStores.photoImport.toggleManual());
   await d.locator("#photo-recognized-text").fill(text);
   await d
     .getByRole("button", { name: "Найти названия в тексте", exact: true })
@@ -270,7 +271,7 @@ for (const [kind, text, slug] of [
     await openRoster(page);
     await openScanner(page, kind);
     await page
-      .getByRole("button", { name: "Выбрать фото", exact: true })
+      .getByRole("button", { name: "Загрузить фото", exact: true })
       .click();
     await expect(page.locator(`[data-photo-card="${slug}"]`)).toBeVisible();
     await page
@@ -320,11 +321,11 @@ test("multiple native photos deduplicate, preserve explicit unchecks and remove 
   await native(page, ["BLACK CAT", "BLACK CAT\nWONG"]);
   await openRoster(page);
   await openScanner(page);
-  await page.getByRole("button", { name: "Выбрать фото", exact: true }).click();
+  await page.getByRole("button", { name: "Загрузить фото", exact: true }).click();
   const cat = page.locator('[data-photo-card="black-cat"]');
   await expect(cat).toBeVisible();
   await cat.getByRole("checkbox").uncheck();
-  await page.getByRole("button", { name: "Выбрать фото", exact: true }).click();
+  await page.getByRole("button", { name: "Загрузить фото", exact: true }).click();
   await expect(page.locator(".photo-source")).toHaveCount(2);
   await expect(cat.getByRole("checkbox")).not.toBeChecked();
   await expect(page.locator('[data-photo-card="wong"]')).toBeVisible();
@@ -367,7 +368,7 @@ test("camera cancellation and errors keep the draft unchanged and allow gallery 
     .getByRole("button", { name: "Сфотографировать", exact: true })
     .click();
   await expect(page.locator(".photo-error")).toContainText("Камера недоступна");
-  await page.getByRole("button", { name: "Выбрать фото", exact: true }).click();
+  await page.getByRole("button", { name: "Загрузить фото", exact: true }).click();
   await expect(page.locator('[data-photo-card="black-cat"]')).toBeVisible();
 });
 
@@ -609,7 +610,7 @@ test("battle tactics stay unplayed on import and existing played cards are untou
   await native(page, ["FALL BACK\nCLONE SAGA"]);
   await openBattle(page);
   await openScanner(page, "tactics", "battle", "opponent");
-  await page.getByRole("button", { name: "Выбрать фото", exact: true }).click();
+  await page.getByRole("button", { name: "Загрузить фото", exact: true }).click();
   await expect(page.locator('[data-photo-card="clone-saga"]')).toBeVisible();
   await page
     .getByRole("button", { name: "Добавить в бой", exact: true })
@@ -730,16 +731,30 @@ test("cancelling a real running WASM worker releases it and a new scan still wor
   expect(errors).toEqual([]);
 });
 
-for (const target of ["roster", "battle"]) {
-  test(`${target} photo entry opens the native camera immediately`, async ({ page }) => {
-    await seed(page, target === "battle" ? fixtureMatch() : null);
-    await native(page, ["BLACK CAT"]);
-    if (target === "battle") await openBattle(page);
-    else await openRoster(page);
-    await page.locator(`[data-photo-target="${target}"][data-photo-kind="characters"]${target === "battle" ? '[data-photo-side="opponent"]' : ''}`).first().click();
-    await expect(page.locator('[data-photo-card="black-cat"]')).toBeVisible();
-    expect(await page.evaluate(() => __nativeCalls.filter(c => c.method === "choosePhotos").map(c => c.args.source))).toEqual(["camera"]);
-  });
+for (const target of ["roster", "battle", "new roster"]) {
+  for (const source of ["camera", "gallery"]) {
+    test(`${target} photo entry waits for ${source} choice`, async ({ page }) => {
+      await seed(page, target === "battle" ? fixtureMatch() : null);
+      await native(page, ["BLACK CAT"]);
+      if (target === "battle") await openBattle(page);
+      else if (target === "roster") await openRoster(page);
+      else await page.goto(origin + "#screen=rosters");
+      const opener = target === "new roster"
+        ? page.getByRole("button", { name: "Ростер по фото", exact: true })
+        : page.locator(`[data-photo-target="${target}"][data-photo-kind="characters"]${target === "battle" ? '[data-photo-side="opponent"]' : ''}`).first();
+      await opener.click();
+      const dialog = page.locator("#photo-import-dialog");
+      await expect(dialog).toBeVisible();
+      await expect(dialog.locator(".photo-acquisition button")).toHaveCount(2);
+      await expect(dialog.locator(".photo-footer")).toHaveCount(0);
+      await expect(dialog.locator(".photo-result-heading")).toHaveCount(0);
+      await expect(dialog.locator(".photo-manual-search")).toHaveCount(0);
+      expect(await page.evaluate(() => __nativeCalls)).toEqual([]);
+      await dialog.getByRole("button", { name: source === "camera" ? "Сфотографировать" : "Загрузить фото", exact: true }).click();
+      await expect(dialog.locator('[data-photo-card="black-cat"]')).toBeVisible();
+      expect(await page.evaluate(() => __nativeCalls.filter(c => c.method === "choosePhotos").map(c => c.args.source))).toEqual([source]);
+    });
+  }
 }
 test("empty roster name is highlighted, focused and explained until corrected", async ({ page }) => {
   await seed(page);

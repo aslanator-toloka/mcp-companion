@@ -558,3 +558,16 @@
     grid-column: 1 / -1;
   }
 }
+
+/* Start with a compact choice; review controls appear once a photo is added. */
+.photo-import-dialog.photo-source-dialog {
+  width: min(480px, calc(100vw - 28px));
+}
+.photo-source-dialog .photo-acquisition {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.photo-source-dialog .photo-acquisition > button {
+  min-height: 52px;
+  font-size: 15px;
+}

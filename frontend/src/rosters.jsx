@@ -16,7 +16,7 @@ import { RoleIcons } from "./character-roles.jsx";
 import { useDialogBackdrop } from "./dialog-backdrop.js";
 import { RosterSquads } from "./roster-squads.jsx";
 import { RosterCodeFields } from "./roster-code-dialog.jsx";
-import { PhotoButton, startPhotoCapture } from "./photo-import/dialog.jsx";
+import { PhotoButton } from "./photo-import/dialog.jsx";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
 const Options = ({ names, empty }) => (
@@ -158,10 +158,8 @@ export const RosterList = observer(function RosterList({
           <button
             className="photo-add-button"
             onClick={() => {
-              startPhotoCapture(() => {
-                rosters.open();
-                photoImport.openRoster("characters");
-              });
+              rosters.open();
+              photoImport.openRoster("characters");
             }}
           >
             <UIIcon name="camera" /> Ростер по фото

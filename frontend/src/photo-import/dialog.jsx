@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import { observer } from "mobx-react-lite";
 import { photoImport as scan, rosters, battle } from "../stores/index.js";
 import { UIIcon } from "../ui-icons.jsx";
@@ -10,13 +9,6 @@ const labels = {
   tactics: ["Тактики", "тактики"],
   crises: ["Кризисы", "кризисы"],
 };
-// Mount the review synchronously so the browser file input keeps this user gesture.
-export function startPhotoCapture(open) {
-  flushSync(open);
-  if (!scan.target) return;
-  if (scan.native) void scan.chooseNative("camera");
-  else document.querySelector('#photo-import-dialog input[capture="environment"]')?.click();
-}
 export const PhotoButton = observer(function PhotoButton({
   type = "roster",
   kind,
@@ -45,11 +37,9 @@ export const PhotoButton = observer(function PhotoButton({
       aria-label={`Добавить ${labels[actualKind][1]} по фото${type === "battle" ? " · " + battle.label(side) : " в ростер"}`}
       onClick={(event) => {
         event.stopPropagation();
-        startPhotoCapture(() => {
-          type === "roster"
-            ? scan.openRoster(actualKind)
-            : scan.openBattle(side, actualKind, mission);
-        });
+        type === "roster"
+          ? scan.openRoster(actualKind)
+          : scan.openBattle(side, actualKind, mission);
       }}
     >
       <UIIcon name="camera" />
@@ -257,6 +247,11 @@ export const PhotoImportModal = observer(function PhotoImportModal() {
     camera = useRef(null),
     first = useRef(null);
   const open = !!scan.target,
+    choosing =
+      !scan.photos.length &&
+      !scan.rows.length &&
+      !scan.busy &&
+      !scan.manualOpen,
     backdrop = useDialogBackdrop(scan.close);
   useEffect(() => {
     const el = dialog.current;
@@ -275,14 +270,17 @@ export const PhotoImportModal = observer(function PhotoImportModal() {
         "--photo-heading-height",
         `${heading.offsetHeight}px`,
       );
-      el.style.setProperty("--photo-footer-height", `${footer.offsetHeight}px`);
+      el.style.setProperty(
+        "--photo-footer-height",
+        `${footer?.offsetHeight || 0}px`,
+      );
     };
     update();
     const observer = new ResizeObserver(update);
     observer.observe(heading);
-    observer.observe(footer);
+    if (footer) observer.observe(footer);
     return () => observer.disconnect();
-  }, [open]);
+  }, [open, choosing]);
   const kind = scan.target?.kind || "characters",
     disabled = scan.busy || scan.applying || scan.photos.length >= PHOTO_LIMIT;
   return (
@@ -290,7 +288,7 @@ export const PhotoImportModal = observer(function PhotoImportModal() {
       id="photo-import-dialog"
       ref={dialog}
       {...backdrop}
-      className="photo-import-dialog"
+      className={`photo-import-dialog${choosing ? " photo-source-dialog" : ""}`}
       aria-labelledby="photo-import-title"
       aria-describedby="photo-import-description"
       onCancel={(e) => {
@@ -308,7 +306,9 @@ export const PhotoImportModal = observer(function PhotoImportModal() {
               <span className="eyebrow">{scan.state.title}</span>
               <h2 id="photo-import-title">{labels[kind][0]} по фото</h2>
               <p id="photo-import-description">
-                Проверьте найденные карты перед добавлением.
+                {choosing
+                  ? "Сфотографируйте карты или загрузите готовое фото."
+                  : "Проверьте найденные карты перед добавлением."}
               </p>
             </div>
             <button
@@ -352,7 +352,7 @@ export const PhotoImportModal = observer(function PhotoImportModal() {
                 }
               >
                 <UIIcon name="image" />
-                Выбрать фото
+                Загрузить фото
               </button>
               <input
                 ref={camera}
@@ -381,210 +381,226 @@ export const PhotoImportModal = observer(function PhotoImportModal() {
                 }}
               />
             </div>
-            <p className="photo-hint">
-              Снимайте сторону с названием, без бликов; мелкие карты лучше
-              фотографировать по 2–4 за раз. Можно добавить несколько снимков —
-              повторы объединим. Фотографии обрабатываются на этом устройстве,
-              правила берём из каталога приложения.
-            </p>
-            {scan.busy && (
-              <div className="photo-progress" role="status" aria-live="polite">
-                <span>{scan.stage}</span>
-                <progress
-                  max="1"
-                  value={scan.progress}
-                  aria-label="Распознавание фотографий"
-                />
-              </div>
-            )}
             {scan.error && (
               <div className="notice photo-error" role="alert">
                 {scan.error}
               </div>
             )}
-            {!!scan.photos.length && (
-              <div
-                className="photo-sources"
-                aria-label="Добавленные фотографии"
-              >
-                {scan.photos.map((p, i) => (
-                  <article className="photo-source" key={p.id}>
-                    <div className="photo-source-image">
-                      {p.preview ? (
-                        <img
-                          src={p.preview}
-                          alt={`Фото ${i + 1}: ${p.name}`}
-                          style={{ transform: `rotate(${p.rotation}deg)` }}
-                        />
-                      ) : (
-                        <UIIcon name="roster" />
-                      )}
-                    </div>
-                    <strong>{p.textOnly ? "Текст" : `Фото ${i + 1}`}</strong>
-                    <small className={p.error ? "photo-warning" : ""}>
-                      {p.error
-                        ? "Не прочитано"
-                        : p.result
-                          ? "Обработано"
-                          : "Обрабатывается…"}
-                    </small>
-                    {p.error && (
-                      <p className="photo-source-error" role="alert">
-                        {p.error}
-                      </p>
-                    )}
-                    <div className="photo-source-actions">
-                      {!p.textOnly && (
-                        <>
-                          <button
-                            type="button"
-                            disabled={scan.busy || scan.applying}
-                            onClick={() => scan.rotate(p.id, -90)}
-                            aria-label={`Повернуть фото ${i + 1} влево и распознать снова`}
-                          >
-                            ↶ 90°
-                          </button>
-                          <button
-                            type="button"
-                            disabled={scan.busy || scan.applying}
-                            onClick={() => scan.rotate(p.id, 90)}
-                            aria-label={`Повернуть фото ${i + 1} вправо и распознать снова`}
-                          >
-                            ↷ 90°
-                          </button>
-                        </>
-                      )}
-                      <button
-                        type="button"
-                        className="quiet"
-                        disabled={scan.busy || scan.applying}
-                        onClick={() => scan.removePhoto(p.id)}
-                        aria-label={`Убрать фото ${i + 1}`}
-                      >
-                        <UIIcon name="close" />
-                      </button>
-                    </div>
-                    {p.result && (
-                      <details className="photo-raw">
-                        <summary>Прочитанный текст</summary>
-                        <pre>
-                          {String(p.result.text || "").slice(0, 12000) ||
-                            "Текст не найден"}
-                        </pre>
-                      </details>
-                    )}
-                  </article>
-                ))}
-              </div>
-            )}
-            {scan.target.type === "battle" && (
-              <div className="photo-battle-note">
-                {kind === "crises"
-                  ? "Для боя выберите по одной карте Secure и Extract. Выбранные кризисы заменят текущие миссии."
-                  : `${scan.deps.battle.label(scan.target.side)}: добавляем в отряд этой партии. Существующие бойцы, HP и сыгранные тактики сохранятся.`}
-              </div>
-            )}
-            <div className="photo-result-heading">
-              <h3>Найдено: {scan.rows.length}</h3>
-              <span>
-                Выбрано {scan.selected.length} · новых {scan.pendingCount}
-              </span>
-            </div>
-            {scan.rows.length ? (
-              <ul className="photo-results" aria-label="Распознанные карты">
-                {scan.rows.map((row) => (
-                  <RecognizedRow key={row.key} row={row} />
-                ))}
-              </ul>
-            ) : (
-              <div className="photo-empty">
-                <UIIcon name="camera" />
-                <p>
-                  {scan.photos.length && !scan.busy
-                    ? "Не удалось уверенно найти названия. Снимите карты ближе, поверните фото или добавьте недостающее через поиск."
-                    : "Сфотографируйте карты — найденные названия появятся здесь."}
+            {!choosing && (
+              <>
+                <p className="photo-hint">
+                  Снимайте сторону с названием, без бликов; мелкие карты лучше
+                  фотографировать по 2–4 за раз. Можно добавить несколько
+                  снимков — повторы объединим. Фотографии обрабатываются на этом
+                  устройстве, правила берём из каталога приложения.
                 </p>
-              </div>
+                {scan.busy && (
+                  <div
+                    className="photo-progress"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <span>{scan.stage}</span>
+                    <progress
+                      max="1"
+                      value={scan.progress}
+                      aria-label="Распознавание фотографий"
+                    />
+                  </div>
+                )}
+                {!!scan.photos.length && (
+                  <div
+                    className="photo-sources"
+                    aria-label="Добавленные фотографии"
+                  >
+                    {scan.photos.map((p, i) => (
+                      <article className="photo-source" key={p.id}>
+                        <div className="photo-source-image">
+                          {p.preview ? (
+                            <img
+                              src={p.preview}
+                              alt={`Фото ${i + 1}: ${p.name}`}
+                              style={{ transform: `rotate(${p.rotation}deg)` }}
+                            />
+                          ) : (
+                            <UIIcon name="roster" />
+                          )}
+                        </div>
+                        <strong>
+                          {p.textOnly ? "Текст" : `Фото ${i + 1}`}
+                        </strong>
+                        <small className={p.error ? "photo-warning" : ""}>
+                          {p.error
+                            ? "Не прочитано"
+                            : p.result
+                              ? "Обработано"
+                              : "Обрабатывается…"}
+                        </small>
+                        {p.error && (
+                          <p className="photo-source-error" role="alert">
+                            {p.error}
+                          </p>
+                        )}
+                        <div className="photo-source-actions">
+                          {!p.textOnly && (
+                            <>
+                              <button
+                                type="button"
+                                disabled={scan.busy || scan.applying}
+                                onClick={() => scan.rotate(p.id, -90)}
+                                aria-label={`Повернуть фото ${i + 1} влево и распознать снова`}
+                              >
+                                ↶ 90°
+                              </button>
+                              <button
+                                type="button"
+                                disabled={scan.busy || scan.applying}
+                                onClick={() => scan.rotate(p.id, 90)}
+                                aria-label={`Повернуть фото ${i + 1} вправо и распознать снова`}
+                              >
+                                ↷ 90°
+                              </button>
+                            </>
+                          )}
+                          <button
+                            type="button"
+                            className="quiet"
+                            disabled={scan.busy || scan.applying}
+                            onClick={() => scan.removePhoto(p.id)}
+                            aria-label={`Убрать фото ${i + 1}`}
+                          >
+                            <UIIcon name="close" />
+                          </button>
+                        </div>
+                        {p.result && (
+                          <details className="photo-raw">
+                            <summary>Прочитанный текст</summary>
+                            <pre>
+                              {String(p.result.text || "").slice(0, 12000) ||
+                                "Текст не найден"}
+                            </pre>
+                          </details>
+                        )}
+                      </article>
+                    ))}
+                  </div>
+                )}
+                {scan.target.type === "battle" && (
+                  <div className="photo-battle-note">
+                    {kind === "crises"
+                      ? "Для боя выберите по одной карте Secure и Extract. Выбранные кризисы заменят текущие миссии."
+                      : `${scan.deps.battle.label(scan.target.side)}: добавляем в отряд этой партии. Существующие бойцы, HP и сыгранные тактики сохранятся.`}
+                  </div>
+                )}
+                <div className="photo-result-heading">
+                  <h3>Найдено: {scan.rows.length}</h3>
+                  <span>
+                    Выбрано {scan.selected.length} · новых {scan.pendingCount}
+                  </span>
+                </div>
+                {scan.rows.length ? (
+                  <ul className="photo-results" aria-label="Распознанные карты">
+                    {scan.rows.map((row) => (
+                      <RecognizedRow key={row.key} row={row} />
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="photo-empty">
+                    <UIIcon name="camera" />
+                    <p>
+                      {scan.photos.length && !scan.busy
+                        ? "Не удалось уверенно найти названия. Снимите карты ближе, поверните фото или добавьте недостающее через поиск."
+                        : "Сфотографируйте карты — найденные названия появятся здесь."}
+                    </p>
+                  </div>
+                )}
+                {!!scan.missionChanges.length && (
+                  <div className="notice">
+                    <strong>Будут заменены миссии:</strong>
+                    {scan.missionChanges.map((text) => (
+                      <p key={text}>{text}</p>
+                    ))}
+                  </div>
+                )}
+                <ManualSearch />
+                <details
+                  className="photo-text-import"
+                  open={scan.manualOpen}
+                  onToggle={(e) => {
+                    if (e.currentTarget.open !== scan.manualOpen)
+                      scan.toggleManual();
+                  }}
+                >
+                  <summary>Вставить уже распознанный текст</summary>
+                  <label htmlFor="photo-recognized-text">
+                    Названия карт, каждое с новой строки
+                  </label>
+                  <textarea
+                    id="photo-recognized-text"
+                    rows="4"
+                    maxLength="20000"
+                    value={scan.manualText}
+                    disabled={scan.busy || scan.applying}
+                    onChange={(e) => scan.setManualText(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    disabled={
+                      !scan.manualText.trim() || scan.busy || scan.applying
+                    }
+                    onClick={scan.recognizeText}
+                  >
+                    Найти названия в тексте
+                  </button>
+                </details>
+              </>
             )}
-            {!!scan.missionChanges.length && (
-              <div className="notice">
-                <strong>Будут заменены миссии:</strong>
-                {scan.missionChanges.map((text) => (
-                  <p key={text}>{text}</p>
-                ))}
+          </div>
+          {!choosing && (
+            <div className="photo-footer">
+              <div aria-live="polite">
+                <strong>
+                  {scan.pendingCount
+                    ? `Добавить: ${scan.pendingCount}`
+                    : "Новые карты не выбраны"}
+                </strong>
+                {scan.selected.length > 0 && scan.selectionProblem && (
+                  <small className="photo-warning">
+                    {scan.selectionProblem}
+                  </small>
+                )}
+                {!!scan.rows.length && scan.uncertainCount > 0 && (
+                  <small>Проверьте неоднозначные совпадения.</small>
+                )}
               </div>
-            )}
-            <ManualSearch />
-            <details
-              className="photo-text-import"
-              open={scan.manualOpen}
-              onToggle={(e) => {
-                if (e.currentTarget.open !== scan.manualOpen)
-                  scan.toggleManual();
-              }}
-            >
-              <summary>Вставить уже распознанный текст</summary>
-              <label htmlFor="photo-recognized-text">
-                Названия карт, каждое с новой строки
-              </label>
-              <textarea
-                id="photo-recognized-text"
-                rows="4"
-                maxLength="20000"
-                value={scan.manualText}
-                disabled={scan.busy || scan.applying}
-                onChange={(e) => scan.setManualText(e.target.value)}
-              />
-              <button
-                type="button"
-                disabled={!scan.manualText.trim() || scan.busy || scan.applying}
-                onClick={scan.recognizeText}
-              >
-                Найти названия в тексте
-              </button>
-            </details>
-          </div>
-          <div className="photo-footer">
-            <div aria-live="polite">
-              <strong>
-                {scan.pendingCount
-                  ? `Добавить: ${scan.pendingCount}`
-                  : "Новые карты не выбраны"}
-              </strong>
-              {scan.selected.length > 0 && scan.selectionProblem && (
-                <small className="photo-warning">{scan.selectionProblem}</small>
-              )}
-              {!!scan.rows.length && scan.uncertainCount > 0 && (
-                <small>Проверьте неоднозначные совпадения.</small>
-              )}
+              <div className="actions">
+                <button
+                  type="button"
+                  disabled={scan.applying}
+                  onClick={scan.close}
+                >
+                  {scan.busy ? "Отменить распознавание" : "Отмена"}
+                </button>
+                <button
+                  type="button"
+                  className="primary"
+                  disabled={
+                    scan.busy ||
+                    scan.applying ||
+                    !scan.pendingCount ||
+                    !!scan.selectionProblem
+                  }
+                  onClick={scan.apply}
+                >
+                  {scan.applying
+                    ? "Добавляю…"
+                    : scan.target.type === "roster"
+                      ? "Добавить в ростер"
+                      : "Добавить в бой"}
+                </button>
+              </div>
             </div>
-            <div className="actions">
-              <button
-                type="button"
-                disabled={scan.applying}
-                onClick={scan.close}
-              >
-                {scan.busy ? "Отменить распознавание" : "Отмена"}
-              </button>
-              <button
-                type="button"
-                className="primary"
-                disabled={
-                  scan.busy ||
-                  scan.applying ||
-                  !scan.pendingCount ||
-                  !!scan.selectionProblem
-                }
-                onClick={scan.apply}
-              >
-                {scan.applying
-                  ? "Добавляю…"
-                  : scan.target.type === "roster"
-                    ? "Добавить в ростер"
-                    : "Добавить в бой"}
-              </button>
-            </div>
-          </div>
+          )}
         </>
       )}
     </dialog>
