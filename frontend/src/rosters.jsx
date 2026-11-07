@@ -15,6 +15,7 @@ import { cardStatus } from "./stores/rosters.js";
 import { RoleIcons } from "./character-roles.jsx";
 import { useDialogBackdrop } from "./dialog-backdrop.js";
 import { RosterSquads } from "./roster-squads.jsx";
+import { RosterCodeFields } from "./roster-code-dialog.jsx";
 import { PhotoButton, startPhotoCapture } from "./photo-import/dialog.jsx";
 import React, { memo } from "react";
 import { Avatar, CollectionStatus, Control, number, count } from "./common.jsx";
@@ -116,6 +117,9 @@ const RosterTile = memo(function RosterTile({
         >
           Копия
         </button>
+        <button data-rs="export-code" onClick={() => rosters.showCode(r.id)}>
+          Код ростера
+        </button>
         <button
           className="quiet"
           data-rs="delete"
@@ -148,6 +152,9 @@ export const RosterList = observer(function RosterList({
           <p>Сохранённые составы, карты и группы для разных планов игры.</p>
         </div>
         <div className="actions">
+          <button data-rs="import-code" onClick={rosters.showCodeImport}>
+            Ростер по коду
+          </button>
           <button
             className="photo-add-button"
             onClick={() => {
@@ -399,7 +406,8 @@ export const RosterEditor = observer(function RosterEditor({
   secure,
   extract,
 }) {
-  const entryHeading = useRef(null), nameInput = useRef(null);
+  const entryHeading = useRef(null),
+    nameInput = useRef(null);
   useEntryFocus(entryHeading, r.id);
   const nameError = !!rosters.error && !r.name.trim();
   const focusName = () => {
@@ -420,15 +428,23 @@ export const RosterEditor = observer(function RosterEditor({
           </h1>
           <p>Правки применятся после нажатия «Сохранить ростер».</p>
         </div>
-        <button
-          data-rs="back"
-          onClick={(event) => {
-            event.stopPropagation();
-            rosters.navigate();
-          }}
-        >
-          ← К ростерам
-        </button>
+        <div className="actions">
+          <button data-rs="export-code" onClick={() => rosters.showCode()}>
+            Код ростера
+          </button>
+          <button data-rs="import-code" onClick={rosters.showCodeImport}>
+            Ростер по коду
+          </button>
+          <button
+            data-rs="back"
+            onClick={(event) => {
+              event.stopPropagation();
+              rosters.navigate();
+            }}
+          >
+            ← К ростерам
+          </button>
+        </div>
       </div>
       {source && (
         <div className="notice roster-origin">
@@ -463,7 +479,11 @@ export const RosterEditor = observer(function RosterEditor({
                 rosters.setField("name", event.target.value);
               }}
             />
-            {nameError && <span id="editor-name-error" className="field-error" role="alert">Введите название ростера.</span>}
+            {nameError && (
+              <span id="editor-name-error" className="field-error" role="alert">
+                Введите название ростера.
+              </span>
+            )}
           </label>
           <label className="field">
             Основная аффилиация
@@ -1321,6 +1341,9 @@ export const RosterActionModal = observer(function RosterActionModal() {
                 <UIIcon name="close" />
               </button>
             </div>
+            {["code-export", "code-import"].includes(d.type) && (
+              <RosterCodeFields dialog={d} />
+            )}
             {d.type === "leave" && (
               <div className="actions">
                 <button

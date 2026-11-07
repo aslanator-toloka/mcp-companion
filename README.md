@@ -6,6 +6,8 @@ Native React + MobX companion for Marvel Crisis Protocol: character/tactic/crisi
 
 The app starts in dark mode. The sun/moon button in the top right switches themes and remembers the choice on this device. Printed game cards and the game board retain their original colours in either theme.
 
+Use **Ростеры → Ростер по коду** to import a Jarvis/Longshanks MCT code, a Jarvis validator link, or a Companion code. **Код ростера** is available on saved roster tiles and in the editor, including unsaved edits. The Companion format preserves the name and affiliation; MCT transfers membership for other MCP tools. Imports open a new draft for review and explicit saving.
+
 ## Develop and verify
 
 Node.js 22 or newer. From a clean clone:

@@ -55,6 +55,8 @@
 .character-tactic-popularity{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 9px;margin:0 0 12px;color:var(--ink)}
 .character-tactic-popularity strong{font-size:24px;font-variant-numeric:tabular-nums;line-height:1.2}
 .character-tactic-popularity span{color:var(--muted,#62768e);font-size:11px}
+#roster-action-dialog .roster-code-text{box-sizing:border-box;width:100%;min-height:140px;max-height:320px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+[data-roster-code-form]>.field{margin-bottom:14px}
 
 /* Character search: compact disclosures keep the long Jarvis filter set usable. */
 .catalog-advanced{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}

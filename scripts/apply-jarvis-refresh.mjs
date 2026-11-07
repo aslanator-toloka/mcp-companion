@@ -42,6 +42,7 @@ const fields = [
   "version",
   "releaseDate",
   "actAs",
+  "exportCode",
 ];
 const characters = rawCharacters.map((raw) => {
   const detail = read("cards/" + raw.slug + ".json");
@@ -113,6 +114,7 @@ const cardFields = [
   "setSymbol",
   "latestSetSymbol",
   "requirementsItems",
+  "exportCode",
   "challengerStatus",
   "challengerRotatesInOn",
   "challengerRotatesOutOn",

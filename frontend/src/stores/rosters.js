@@ -1,5 +1,6 @@
 import { makeAutoObservable, observableRef } from "mobx";
 import { words } from "./catalog.js";
+import { createRosterCodeCodec } from "../roster-code.js";
 import {
   defaultSquadPlanner,
   squadSettings,
@@ -35,6 +36,7 @@ export class RosterStore {
   cardIndex = new Map();
   cardError = "";
   insights = null;
+  codec = null;
   archiveAffiliations = [];
   squads = defaultSquadPlanner();
   constructor(library, catalog, ui) {
@@ -50,18 +52,97 @@ export class RosterStore {
         cards: observableRef,
         cardIndex: false,
         insights: false,
+        codec: false,
         archiveAffiliations: observableRef,
         leave: false,
       },
       { autoBind: true },
     );
   }
-  configure({ cards, index, error, insights, archiveAffiliations }) {
+  configure({
+    cards,
+    index,
+    error,
+    insights,
+    archiveAffiliations,
+    codeCards = cards,
+  }) {
     this.cards = cards;
     this.cardIndex = index;
     this.cardError = error;
     this.insights = insights;
     this.archiveAffiliations = archiveAffiliations;
+    this.codec = createRosterCodeCodec({
+      characters: this.catalog.rows,
+      cards: codeCards,
+      canonical: (kind, slug) => this.canonical(kind, slug),
+    });
+  }
+  showCode(id, format = "mct") {
+    const source = id ? this.records.find((r) => r.id === id) : this.draft;
+    if (!source || !this.codec) return;
+    this.dialog = {
+      type: "code-export",
+      id,
+      title: "Код ростера",
+      description: source.name || "Текущий черновик",
+      source: normalizeRoster(source),
+      format,
+      code: "",
+      error: "",
+    };
+    this.setCodeFormat(format);
+  }
+  setCodeFormat(format) {
+    const dialog = this.dialog;
+    if (
+      dialog?.type !== "code-export" ||
+      !["mct", "companion"].includes(format)
+    )
+      return;
+    dialog.format = format;
+    dialog.error = "";
+    dialog.code = "";
+    try {
+      dialog.code = this.codec.encode(dialog.source, format);
+    } catch (error) {
+      dialog.error = error.message;
+    }
+  }
+  showCodeImport() {
+    this.dialog = {
+      type: "code-import",
+      title: "Ростер по коду",
+      description:
+        "Вставьте код Jarvis / Longshanks, ссылку Jarvis или код MCP Companion.",
+      text: "",
+      error: "",
+    };
+  }
+  setCodeInput(text) {
+    if (this.dialog?.type !== "code-import") return;
+    this.dialog.text = text;
+    this.dialog.error = "";
+  }
+  importCode() {
+    if (this.dialog?.type !== "code-import" || !this.codec) return false;
+    const importDialog = this.dialog;
+    let value;
+    try {
+      value = this.codec.decode(this.dialog.text);
+    } catch (error) {
+      this.dialog.error = error.message;
+      return false;
+    }
+    this.requestLeave(() => {
+      this.dialog = null;
+      this.setDraft({ ...value, id: crypto.randomUUID() }, false, "");
+      this.ui.actions.showRosterList(true);
+      this.ui.notify("Ростер открыт. Проверьте состав и сохраните его.");
+    });
+    // Keep the import overlay's URL while the save/discard command is pending.
+    if (this.dialog?.type === "leave") this.dialog.codeImport = importDialog;
+    return true;
   }
   card(kind, slug) {
     return this.cardIndex.get(kind + ":" + slug);

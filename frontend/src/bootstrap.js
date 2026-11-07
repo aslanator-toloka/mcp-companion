@@ -302,7 +302,7 @@ export async function initialize() {
     let cardLists = { tactics: [], crises: [] },
       cardError = "";
     try {
-      cardLists = await json("data/roster-cards.json");
+      cardLists = await json("data/roster-cards.json", { cache: "no-cache" });
     } catch (e) {
       cardError = e.message;
     }
@@ -356,6 +356,7 @@ export async function initialize() {
     const archive = window.ROSTER_ATLAS;
     rosters.configure({
       cards: lists,
+      codeCards: cardLists,
       index,
       error: cardError,
       insights: Insights.create({

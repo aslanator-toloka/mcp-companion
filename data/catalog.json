@@ -92,7 +92,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01620101"
     },
     {
       "slug": "adam-warlock",
@@ -166,7 +167,8 @@
           "range": "4",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "01910101"
     },
     {
       "slug": "agent-venom",
@@ -273,7 +275,8 @@
           "range": "B3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01000101"
     },
     {
       "slug": "amazing-spider-man",
@@ -357,7 +360,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00370101"
     },
     {
       "slug": "ancient-one",
@@ -445,7 +449,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00640101"
     },
     {
       "slug": "angel",
@@ -531,7 +536,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01520101"
     },
     {
       "slug": "angela",
@@ -628,7 +634,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00280101"
     },
     {
       "slug": "ant-man",
@@ -707,7 +714,8 @@
           "range": "1",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00260101"
     },
     {
       "slug": "apocalypse",
@@ -788,7 +796,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01070101"
     },
     {
       "slug": "archangel",
@@ -879,7 +888,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01520102"
     },
     {
       "slug": "arnim-zola",
@@ -963,7 +973,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00760101"
     },
     {
       "slug": "avalanche",
@@ -1025,7 +1036,8 @@
           "range": "A2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01730101"
     },
     {
       "slug": "baron-helmut-zemo",
@@ -1110,7 +1122,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430101"
     },
     {
       "slug": "baron-mordo",
@@ -1192,7 +1205,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00640102"
     },
     {
       "slug": "baron-strucker",
@@ -1272,7 +1286,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00760102"
     },
     {
       "slug": "baron-zemo",
@@ -1348,7 +1363,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00010101"
     },
     {
       "slug": "bastion",
@@ -1412,7 +1428,8 @@
           "range": "B4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "30090101"
     },
     {
       "slug": "beast",
@@ -1515,7 +1532,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00430101"
     },
     {
       "slug": "beta-ray-bill",
@@ -1605,7 +1623,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01300101"
     },
     {
       "slug": "bishop",
@@ -1692,7 +1711,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01120101"
     },
     {
       "slug": "black-bolt",
@@ -1772,7 +1792,8 @@
           "range": "B4",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "00340101"
     },
     {
       "slug": "black-cat",
@@ -1880,7 +1901,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00370102"
     },
     {
       "slug": "black-dwarf",
@@ -1944,7 +1966,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00190101"
     },
     {
       "slug": "black-panther",
@@ -2021,7 +2044,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00070101"
     },
     {
       "slug": "black-panther-chosen-of-bast",
@@ -2130,7 +2154,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01580101"
     },
     {
       "slug": "black-swan",
@@ -2202,7 +2227,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00810101"
     },
     {
       "slug": "black-widow",
@@ -2314,7 +2340,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00010102"
     },
     {
       "slug": "black-widow-agent-of-shield",
@@ -2412,7 +2439,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00240101"
     },
     {
       "slug": "blade",
@@ -2513,7 +2541,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00480101"
     },
     {
       "slug": "blue-marvel",
@@ -2590,7 +2619,8 @@
           "range": "A2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01290101"
     },
     {
       "slug": "bob-agent-of-hydra",
@@ -2661,7 +2691,8 @@
           "range": "4",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "00450101"
     },
     {
       "slug": "bullseye",
@@ -2748,7 +2779,8 @@
           "range": "4",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00300101"
     },
     {
       "slug": "cable",
@@ -2871,7 +2903,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00470101"
     },
     {
       "slug": "captain-america-sam-wilson",
@@ -2953,7 +2986,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00380101"
     },
     {
       "slug": "captain-america",
@@ -3026,7 +3060,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00010103"
     },
     {
       "slug": "captain-america-first-avenger",
@@ -3098,7 +3133,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01430102"
     },
     {
       "slug": "captain-marvel",
@@ -3185,7 +3221,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00010104"
     },
     {
       "slug": "captain-marvel-cosmic-avenger",
@@ -3299,7 +3336,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01430103"
     },
     {
       "slug": "carnage",
@@ -3367,7 +3405,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00500101"
     },
     {
       "slug": "cassandra-nova",
@@ -3483,7 +3522,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00530101"
     },
     {
       "slug": "clea",
@@ -3566,7 +3606,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00670101"
     },
     {
       "slug": "colossus",
@@ -3674,7 +3715,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00570101"
     },
     {
       "slug": "corvus-glaive",
@@ -3751,7 +3793,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00150101"
     },
     {
       "slug": "cosmic-ghost-rider",
@@ -3840,7 +3883,8 @@
           "range": "2",
           "strength": "12"
         }
-      ]
+      ],
+      "exportCode": "00900101"
     },
     {
       "slug": "crimson-dynamo",
@@ -3912,7 +3956,8 @@
           "range": "5",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00880101"
     },
     {
       "slug": "crossbones",
@@ -4006,7 +4051,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00010105"
     },
     {
       "slug": "crossbones-merciless-merc",
@@ -4109,7 +4155,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01430104"
     },
     {
       "slug": "crystal",
@@ -4201,7 +4248,8 @@
           "range": "B3",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00350101"
     },
     {
       "slug": "cyclops",
@@ -4274,7 +4322,8 @@
           "range": "B5",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00410101"
     },
     {
       "slug": "daredevil",
@@ -4362,7 +4411,8 @@
           "range": "A2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00300102"
     },
     {
       "slug": "darkstar",
@@ -4428,7 +4478,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00880102"
     },
     {
       "slug": "deadpool",
@@ -4552,7 +4603,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00450102"
     },
     {
       "slug": "doc-ock-sinister-scientist",
@@ -4629,7 +4681,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430105"
     },
     {
       "slug": "doctor-octopus",
@@ -4696,7 +4749,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00010106"
     },
     {
       "slug": "doctor-strange",
@@ -4798,7 +4852,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00230101"
     },
     {
       "slug": "doctor-strange-sorcerer-supreme",
@@ -4896,7 +4951,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00670102"
     },
     {
       "slug": "doctor-voodoo",
@@ -4986,7 +5042,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00650101"
     },
     {
       "slug": "domino",
@@ -5091,7 +5148,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00470102"
     },
     {
       "slug": "dormammu",
@@ -5164,7 +5222,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00330101"
     },
     {
       "slug": "dracula",
@@ -5249,7 +5308,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "02450101"
     },
     {
       "slug": "drax-the-destroyer",
@@ -5321,7 +5381,8 @@
           "range": "2",
           "strength": "3"
         }
-      ]
+      ],
+      "exportCode": "00200101"
     },
     {
       "slug": "ebony-maw",
@@ -5390,7 +5451,8 @@
           "range": "4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00190102"
     },
     {
       "slug": "echo",
@@ -5472,7 +5534,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01680101"
     },
     {
       "slug": "electro",
@@ -5547,7 +5610,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01560101"
     },
     {
       "slug": "elektra",
@@ -5640,7 +5704,8 @@
           "range": "1",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00790101"
     },
     {
       "slug": "elsa-bloodstone",
@@ -5724,7 +5789,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01860101"
     },
     {
       "slug": "emma-frost",
@@ -5839,7 +5905,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01030101"
     },
     {
       "slug": "enchantress",
@@ -5923,7 +5990,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00280102"
     },
     {
       "slug": "exodus",
@@ -5998,7 +6066,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01730102"
     },
     {
       "slug": "frankensteins-monster",
@@ -6064,7 +6133,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "02450102"
     },
     {
       "slug": "gambit",
@@ -6161,7 +6231,8 @@
           "range": "B4",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00600101"
     },
     {
       "slug": "gamora",
@@ -6242,7 +6313,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00160101"
     },
     {
       "slug": "ghost-rider",
@@ -6337,7 +6409,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00270101"
     },
     {
       "slug": "ghost-spider",
@@ -6406,7 +6479,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00100101"
     },
     {
       "slug": "gladiator",
@@ -6466,7 +6540,8 @@
           "range": "3",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "20130101"
     },
     {
       "slug": "gorgon",
@@ -6537,7 +6612,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01660101"
     },
     {
       "slug": "green-goblin",
@@ -6631,7 +6707,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00210101"
     },
     {
       "slug": "groot",
@@ -6693,7 +6770,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00170101"
     },
     {
       "slug": "gwenom",
@@ -6760,7 +6838,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01550101"
     },
     {
       "slug": "gwenpool",
@@ -6857,7 +6936,8 @@
           "range": "4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01370101"
     },
     {
       "slug": "hand-ninjas-grunts",
@@ -6902,7 +6982,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "havok",
@@ -6975,7 +7056,8 @@
           "range": "B4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "30080101"
     },
     {
       "slug": "hawkeye",
@@ -7062,7 +7144,8 @@
           "range": "5",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00240102"
     },
     {
       "slug": "heimdall-the-all-seeing",
@@ -7132,7 +7215,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01020101"
     },
     {
       "slug": "hela-queen-of-hel",
@@ -7206,7 +7290,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00120101"
     },
     {
       "slug": "honey-badger",
@@ -7317,7 +7402,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00710101"
     },
     {
       "slug": "hood",
@@ -7417,7 +7503,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00650102"
     },
     {
       "slug": "hulk",
@@ -7507,7 +7594,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00040101"
     },
     {
       "slug": "hulkbuster",
@@ -7593,7 +7681,8 @@
           "range": "4",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00520101"
     },
     {
       "slug": "hydra-troopers-grunts",
@@ -7634,7 +7723,8 @@
           "range": "3",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "iceman",
@@ -7713,7 +7803,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00960101"
     },
     {
       "slug": "invincible-iron-man",
@@ -7798,7 +7889,8 @@
           "range": "5",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430106"
     },
     {
       "slug": "iron-fist",
@@ -7902,7 +7994,8 @@
           "range": "2",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "00490101"
     },
     {
       "slug": "iron-lad",
@@ -7961,7 +8054,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01540101"
     },
     {
       "slug": "iron-man",
@@ -8054,7 +8148,8 @@
           "range": "B5",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00010107"
     },
     {
       "slug": "iron-monger",
@@ -8137,7 +8232,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01540102"
     },
     {
       "slug": "jean-grey",
@@ -8208,7 +8304,8 @@
           "range": "3",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "00530102"
     },
     {
       "slug": "jubilee",
@@ -8268,7 +8365,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "30080102"
     },
     {
       "slug": "juggernaut",
@@ -8334,7 +8432,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00560101"
     },
     {
       "slug": "kang-the-conqueror",
@@ -8413,7 +8512,8 @@
           "range": "3",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "01540103"
     },
     {
       "slug": "karnak",
@@ -8476,7 +8576,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01660102"
     },
     {
       "slug": "killmonger",
@@ -8574,7 +8675,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00070102"
     },
     {
       "slug": "killmonger-usurper",
@@ -8655,7 +8757,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "10040101"
     },
     {
       "slug": "king-black-bolt",
@@ -8731,7 +8834,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01660103"
     },
     {
       "slug": "kingpin",
@@ -8829,7 +8933,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00290101"
     },
     {
       "slug": "king-tchalla",
@@ -8908,7 +9013,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "10040102"
     },
     {
       "slug": "klaw",
@@ -9002,7 +9108,8 @@
           "range": "B5",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01160101"
     },
     {
       "slug": "kraven-the-hunter",
@@ -9077,7 +9184,8 @@
           "range": "3",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00580101"
     },
     {
       "slug": "lady-mastermind",
@@ -9155,7 +9263,8 @@
           "range": "A2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01730103"
     },
     {
       "slug": "lady-sif",
@@ -9223,7 +9332,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00910101"
     },
     {
       "slug": "lizard",
@@ -9288,7 +9398,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00580102"
     },
     {
       "slug": "lockjaw",
@@ -9348,7 +9459,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00350102"
     },
     {
       "slug": "logan-the-wolverine",
@@ -9427,7 +9539,8 @@
           "range": "B3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "10030101"
     },
     {
       "slug": "loki-god-of-mischief",
@@ -9514,7 +9627,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00120102"
     },
     {
       "slug": "loki-prince-of-lies",
@@ -9593,7 +9707,8 @@
           "range": "A3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00910102"
     },
     {
       "slug": "luke-cage",
@@ -9687,7 +9802,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00490102"
     },
     {
       "slug": "magik",
@@ -9806,7 +9922,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00570102"
     },
     {
       "slug": "magneto",
@@ -9896,7 +10013,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00420101"
     },
     {
       "slug": "malekith-the-accursed",
@@ -9982,7 +10100,8 @@
           "range": "3",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "00930101"
     },
     {
       "slug": "man-thing",
@@ -10057,7 +10176,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01860102"
     },
     {
       "slug": "maverick",
@@ -10128,7 +10248,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01090101"
     },
     {
       "slug": "maximus-the-mad",
@@ -10196,7 +10317,8 @@
           "range": "3",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "01660104"
     },
     {
       "slug": "mbaku",
@@ -10273,7 +10395,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01160102"
     },
     {
       "slug": "medusa",
@@ -10356,7 +10479,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00340102"
     },
     {
       "slug": "mephisto-lord-of-temptation",
@@ -10453,7 +10577,8 @@
           "range": "B4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00660101"
     },
     {
       "slug": "mirage",
@@ -10534,7 +10659,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "30080103"
     },
     {
       "slug": "mister-sinister",
@@ -10625,7 +10751,8 @@
           "range": "A2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00460101"
     },
     {
       "slug": "modok",
@@ -10714,7 +10841,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00050101"
     },
     {
       "slug": "modok-scientist-supreme",
@@ -10806,7 +10934,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01450101"
     },
     {
       "slug": "moondragon",
@@ -10894,7 +11023,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01910102"
     },
     {
       "slug": "moon-knight",
@@ -10989,7 +11119,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00480102"
     },
     {
       "slug": "ms-marvel",
@@ -11066,7 +11197,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00620101"
     },
     {
       "slug": "multiple-man",
@@ -11139,7 +11271,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "30080104"
     },
     {
       "slug": "multiple-man-duplicates-grunts",
@@ -11179,7 +11312,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "mysterio",
@@ -11267,7 +11401,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00500102"
     },
     {
       "slug": "mystique",
@@ -11369,7 +11504,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00430102"
     },
     {
       "slug": "namor-the-submariner",
@@ -11454,7 +11590,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01580102"
     },
     {
       "slug": "nebula",
@@ -11538,7 +11675,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00160102"
     },
     {
       "slug": "nick-fury",
@@ -11611,7 +11749,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00550101"
     },
     {
       "slug": "nick-fury-and-the-howling-commandos",
@@ -11681,7 +11820,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00750101"
     },
     {
       "slug": "nightcrawler",
@@ -11746,7 +11886,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01120102"
     },
     {
       "slug": "nimrod",
@@ -11822,7 +11963,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "30090102"
     },
     {
       "slug": "nkantu-the-living-mummy",
@@ -11886,7 +12028,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "02450103"
     },
     {
       "slug": "nova",
@@ -11963,7 +12106,8 @@
           "range": "B5",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01260101"
     },
     {
       "slug": "okoye",
@@ -12044,7 +12188,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00080101"
     },
     {
       "slug": "omega-red",
@@ -12144,7 +12289,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00540101"
     },
     {
       "slug": "omega-sentinel",
@@ -12214,7 +12360,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "30090103"
     },
     {
       "slug": "onslaught",
@@ -12288,7 +12435,8 @@
           "range": "4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "30070101"
     },
     {
       "slug": "phoenix",
@@ -12378,7 +12526,8 @@
           "range": "B4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00830101"
     },
     {
       "slug": "prime-sentinel-2",
@@ -12438,7 +12587,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "20230102"
     },
     {
       "slug": "prime-sentinel-1",
@@ -12497,7 +12647,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "20230101"
     },
     {
       "slug": "professor-x",
@@ -12568,7 +12719,8 @@
           "range": "3",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "01510101"
     },
     {
       "slug": "prowler",
@@ -12654,7 +12806,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01690101"
     },
     {
       "slug": "proxima-midnight",
@@ -12729,7 +12882,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00150102"
     },
     {
       "slug": "psylocke",
@@ -12837,7 +12991,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01030102"
     },
     {
       "slug": "punisher",
@@ -12914,7 +13069,8 @@
           "range": "5",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00320101"
     },
     {
       "slug": "pyro",
@@ -12983,7 +13139,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00820101"
     },
     {
       "slug": "quasar",
@@ -13051,7 +13208,8 @@
           "range": "B3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01910103"
     },
     {
       "slug": "quicksilver",
@@ -13146,7 +13304,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00630101"
     },
     {
       "slug": "red-guardian",
@@ -13210,7 +13369,8 @@
           "range": "4",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00890101"
     },
     {
       "slug": "red-hulk",
@@ -13281,7 +13441,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "30170101"
     },
     {
       "slug": "red-skull",
@@ -13366,7 +13527,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00010108"
     },
     {
       "slug": "red-skull-master-of-hydra",
@@ -13448,7 +13610,8 @@
           "range": "2",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "00740101"
     },
     {
       "slug": "red-skull-master-of-the-world",
@@ -13530,7 +13693,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430107"
     },
     {
       "slug": "rescue",
@@ -13618,7 +13782,8 @@
           "range": "B4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01540104"
     },
     {
       "slug": "rhino",
@@ -13685,7 +13850,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00980101"
     },
     {
       "slug": "rocket-raccoon",
@@ -13751,7 +13917,8 @@
           "range": "5",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00170102"
     },
     {
       "slug": "rogue",
@@ -13831,7 +13998,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00600102"
     },
     {
       "slug": "ronan-the-accuser",
@@ -13917,7 +14085,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00200102"
     },
     {
       "slug": "ronin",
@@ -14000,7 +14169,8 @@
           "range": "B3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01680102"
     },
     {
       "slug": "sabretooth",
@@ -14107,7 +14277,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00400101"
     },
     {
       "slug": "sabretooth-apex-predator",
@@ -14190,7 +14361,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "10030102"
     },
     {
       "slug": "sand-construct-1-grunts",
@@ -14235,7 +14407,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "sand-construct-2-grunts",
@@ -14280,7 +14453,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "sandman",
@@ -14362,7 +14536,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01560102"
     },
     {
       "slug": "scarlet-spider",
@@ -14435,7 +14610,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01550102"
     },
     {
       "slug": "scarlet-witch",
@@ -14546,7 +14722,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00630102"
     },
     {
       "slug": "sensational-she-hulk",
@@ -14603,7 +14780,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "30170102"
     },
     {
       "slug": "sentinel-mk4",
@@ -14683,7 +14861,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00510101"
     },
     {
       "slug": "sentinel-prime-mk4",
@@ -14759,7 +14938,8 @@
           "range": "4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01600101"
     },
     {
       "slug": "shadowcat",
@@ -14839,7 +15019,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00960102"
     },
     {
       "slug": "shadow-king",
@@ -14917,7 +15098,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01510102"
     },
     {
       "slug": "shadowland-daredevil",
@@ -14997,7 +15179,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00790102"
     },
     {
       "slug": "shang-chi",
@@ -15086,7 +15269,8 @@
           "range": "2",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "00690101"
     },
     {
       "slug": "she-hulk",
@@ -15195,7 +15379,8 @@
           "range": "3",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "00390101"
     },
     {
       "slug": "shield-agents-grunts",
@@ -15236,7 +15421,8 @@
           "range": "3",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "shocker",
@@ -15311,7 +15497,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01560103"
     },
     {
       "slug": "shuri",
@@ -15388,7 +15575,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00080102"
     },
     {
       "slug": "silk",
@@ -15463,7 +15651,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01700101"
     },
     {
       "slug": "silver-sable",
@@ -15552,7 +15741,8 @@
           "range": "5",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00690102"
     },
     {
       "slug": "sin",
@@ -15638,7 +15828,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00610101"
     },
     {
       "slug": "skurge-the-executioner",
@@ -15716,7 +15907,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01020102"
     },
     {
       "slug": "spectacular-spider-man",
@@ -15796,7 +15988,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430108"
     },
     {
       "slug": "spectrum",
@@ -15873,7 +16066,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01290102"
     },
     {
       "slug": "spider-ham",
@@ -15942,7 +16136,8 @@
           "range": "2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01700102"
     },
     {
       "slug": "spider-man-miles-morales",
@@ -16010,7 +16205,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00100102"
     },
     {
       "slug": "spider-man",
@@ -16093,7 +16289,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00010109"
     },
     {
       "slug": "spider-man-2099",
@@ -16171,7 +16368,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01690102"
     },
     {
       "slug": "spider-man-noir",
@@ -16233,7 +16431,8 @@
           "range": "B4",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01700103"
     },
     {
       "slug": "spider-woman",
@@ -16345,7 +16544,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01000102"
     },
     {
       "slug": "squirrel-girl",
@@ -16421,7 +16621,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01370102"
     },
     {
       "slug": "star-lord",
@@ -16493,7 +16694,8 @@
           "range": "4",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00180101"
     },
     {
       "slug": "steve-rogers-captain-america",
@@ -16567,7 +16769,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00770101"
     },
     {
       "slug": "storm",
@@ -16677,7 +16880,8 @@
           "range": "A2",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00410102"
     },
     {
       "slug": "sunspot",
@@ -16762,7 +16966,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01530101"
     },
     {
       "slug": "supergiant",
@@ -16831,7 +17036,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00810102"
     },
     {
       "slug": "taskmaster",
@@ -16940,7 +17146,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00320102"
     },
     {
       "slug": "thanos-the-mad-titan",
@@ -17017,7 +17224,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00250107"
     },
     {
       "slug": "the-black-widow",
@@ -17123,7 +17331,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430109"
     },
     {
       "slug": "the-blob",
@@ -17199,7 +17408,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00820102"
     },
     {
       "slug": "the-immortal-hulk",
@@ -17277,7 +17487,8 @@
           "range": "3",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "01440101"
     },
     {
       "slug": "the-leader",
@@ -17346,7 +17557,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "30170103"
     },
     {
       "slug": "mighty-thor",
@@ -17429,7 +17641,8 @@
           "range": "4",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00910103"
     },
     {
       "slug": "the-original-human-torch",
@@ -17496,7 +17709,8 @@
           "range": "B2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00770102"
     },
     {
       "slug": "the-wrecking-crew",
@@ -17589,7 +17803,8 @@
           "range": "B4",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "01620102"
     },
     {
       "slug": "thor-hero-of-midgard",
@@ -17661,7 +17876,8 @@
           "range": "3",
           "strength": "10"
         }
-      ]
+      ],
+      "exportCode": "00910104"
     },
     {
       "slug": "thor-prince-of-asgard",
@@ -17754,7 +17970,8 @@
           "range": "A2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00110101"
     },
     {
       "slug": "tigra",
@@ -17831,7 +18048,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01680103"
     },
     {
       "slug": "toad",
@@ -17908,7 +18126,8 @@
           "range": "2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00420102"
     },
     {
       "slug": "ulik",
@@ -17981,7 +18200,8 @@
           "range": "2",
           "strength": "9"
         }
-      ]
+      ],
+      "exportCode": "01300102"
     },
     {
       "slug": "ultimate-spider-man",
@@ -18057,7 +18277,8 @@
           "range": "2",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01690103"
     },
     {
       "slug": "ultron",
@@ -18131,7 +18352,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00010110"
     },
     {
       "slug": "ultron-drones-grunts",
@@ -18178,7 +18400,8 @@
           "range": "3",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": null
     },
     {
       "slug": "ultron-metal-tyrant",
@@ -18250,7 +18473,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01430110"
     },
     {
       "slug": "ursa-major",
@@ -18314,7 +18538,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00890102"
     },
     {
       "slug": "valkyrie",
@@ -18404,7 +18629,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00110102"
     },
     {
       "slug": "valkyrie-and-elendil",
@@ -18477,7 +18703,8 @@
           "range": "3",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "00940101"
     },
     {
       "slug": "venom",
@@ -18556,7 +18783,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00090101"
     },
     {
       "slug": "viper",
@@ -18652,7 +18880,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00610102"
     },
     {
       "slug": "vision",
@@ -18724,7 +18953,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00130101"
     },
     {
       "slug": "vulture",
@@ -18801,7 +19031,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "01560104"
     },
     {
       "slug": "warlock",
@@ -18885,7 +19116,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01530102"
     },
     {
       "slug": "war-machine",
@@ -18964,7 +19196,8 @@
           "range": "3",
           "strength": "8"
         }
-      ]
+      ],
+      "exportCode": "00380102"
     },
     {
       "slug": "warriors-three",
@@ -19040,7 +19273,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00940102"
     },
     {
       "slug": "wasp",
@@ -19119,7 +19353,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00260102"
     },
     {
       "slug": "weapon-x",
@@ -19192,7 +19427,8 @@
           "range": "A2",
           "strength": "5"
         }
-      ]
+      ],
+      "exportCode": "01090102"
     },
     {
       "slug": "werewolf-by-night",
@@ -19257,7 +19493,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "02450104"
     },
     {
       "slug": "winter-soldier",
@@ -19323,7 +19560,8 @@
           "range": "2",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00130102"
     },
     {
       "slug": "winter-soldier-operative",
@@ -19457,7 +19695,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "01430111"
     },
     {
       "slug": "wolverine",
@@ -19584,7 +19823,8 @@
           "range": "3",
           "strength": "7"
         }
-      ]
+      ],
+      "exportCode": "00400102"
     },
     {
       "slug": "wong",
@@ -19667,7 +19907,8 @@
           "range": "2",
           "strength": "4"
         }
-      ]
+      ],
+      "exportCode": "00230102"
     },
     {
       "slug": "x-23",
@@ -19766,7 +20007,8 @@
           "range": "3",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "00710102"
     },
     {
       "slug": "yondu",
@@ -19834,7 +20076,8 @@
           "range": "4",
           "strength": "6"
         }
-      ]
+      ],
+      "exportCode": "01260102"
     }
   ]
 }

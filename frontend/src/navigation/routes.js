@@ -43,8 +43,14 @@ const overlayKeys = [
   "connect",
   "roster-dialog",
   "group-edit",
+  "code-roster",
+  "code-format",
   "map-dialog",
 ];
+const rosterDialog = (rosters) =>
+  rosters.dialog?.type === "leave" && rosters.dialog.codeImport
+    ? rosters.dialog.codeImport
+    : rosters.dialog;
 export function closingOverlay(from, to) {
   const a = new URLSearchParams(from.slice(1)),
     b = new URLSearchParams(to.slice(1));
@@ -144,14 +150,23 @@ export function createRoutes(s) {
             p.set("pick-challenger", "0");
         }
       }
+      const dialog = rosterDialog(rosters);
       if (
-        rosters.dialog &&
-        ["groups", "group", "delete", "delete-group"].includes(
-          rosters.dialog.type,
-        )
+        dialog &&
+        [
+          "groups",
+          "group",
+          "delete",
+          "delete-group",
+          "code-import",
+          "code-export",
+        ].includes(dialog.type)
       ) {
-        put("roster-dialog", rosters.dialog.type);
-        put("group-edit", rosters.dialog.id);
+        put("roster-dialog", dialog.type);
+        if (dialog.type === "code-export") {
+          put("code-roster", dialog.id);
+          put("code-format", dialog.format, "mct");
+        } else if (dialog.type !== "code-import") put("group-edit", dialog.id);
       }
     }
     if (ui.screen === "tournaments") {
@@ -261,6 +276,10 @@ export function createRoutes(s) {
             )
           : null,
       groupName: rosters.dialog?.type === "group" ? rosters.dialog.name : null,
+      rosterCodeInput:
+        rosterDialog(rosters)?.type === "code-import"
+          ? rosterDialog(rosters).text
+          : null,
     };
   }
   function editorId(hash) {
@@ -401,7 +420,16 @@ export function createRoutes(s) {
         }
         const dialog = p.get("roster-dialog"),
           id = p.get("group-edit");
-        if (dialog === "groups") rosters.showGroups();
+        if (dialog === "code-import") {
+          rosters.showCodeImport();
+          if (entry?.context?.rosterCodeInput)
+            rosters.setCodeInput(entry.context.rosterCodeInput);
+        } else if (dialog === "code-export")
+          rosters.showCode(
+            p.get("code-roster") || undefined,
+            one(p.get("code-format"), ["mct", "companion"], "mct"),
+          );
+        else if (dialog === "groups") rosters.showGroups();
         else if (dialog === "group") {
           rosters.groupForm(id || undefined);
           if (entry?.context?.groupName)
