@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "prototype": "node scripts/serve-ui-prototype.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.cjs",
     "test:e2e": "playwright test",
