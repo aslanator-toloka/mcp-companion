@@ -133,6 +133,9 @@ const characters = selected(allCharacters, "characters", [
   "magik",
   "cable",
   "logan-the-wolverine",
+  "archangel",
+  "mirage",
+  "sunspot",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

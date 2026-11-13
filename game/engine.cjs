@@ -533,6 +533,18 @@ function targetingReactions(state, pending) {
         reactor: ally.id,
       });
     if (
+      combat.isPower(ally, "Wing Shield") &&
+      ally.id === defender.id &&
+      ["physical", "energy"].includes(pending.damageType)
+    )
+      reactions.push({
+        value: "cant-touch:" + ally.id,
+        key: "wing-shield:" + ally.id,
+        label: "Wing Shield · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
       combat.isPower(ally, "Can‘t Touch This") &&
       ["physical", "energy"].includes(pending.damageType) &&
       (ally.id === defender.id || geometry.within(ally, defender, 2))
@@ -1027,6 +1039,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     diceBonus: attack.diceBonus,
     doubleWild: attack.doubleWild,
     throwAfter: attack.throwAfter,
+    flares: attack.flares,
     coldSnapAction: attack.coldSnapAction,
     side: target.side,
     ...(attack.volley && { volley: true }),
@@ -1214,6 +1227,11 @@ function nextRound(state, priority) {
     f.injured = true;
     f.damage = 0;
     f.conditions = [];
+    if (combat.leadership(state, f.side, "Coming of Age")) {
+      combat.gain(f, 3);
+      f.selfDiscovery = true;
+      log(state, "Coming of Age · " + f.name, { side: f.side, fighter: f.id });
+    }
     const card = combat.face(f);
     f.speed = card.speed || f.speed;
     f.size = Number(card.size) || f.size;
@@ -1256,6 +1274,8 @@ function endActivation(state, side, random, applyBleed = true) {
     if (healing && combat.usable(actor))
       actor.damage = Math.max(0, (actor.damage || 0) - healing);
     actor.activated = true;
+    actor.selfDiscovery = false;
+    actor.sunburnFlight = false;
     actor.trickShot = false;
     actor.noMercy = false;
     actor.baronRerolls = 0;
@@ -1803,7 +1823,15 @@ function act(state, side, action, random = randomInt) {
           boost <= (option.boostMax || 0),
         "Укажите допустимую доплату Power.",
       );
-      const diceBonus = (!extra ? actor.stokeFlames || 0 : 0) + boost;
+      const flares = action.flares || 0;
+      expect(
+        Number.isInteger(flares) &&
+          flares >= 0 &&
+          flares <= (option.flareMax || 0),
+        "Укажите допустимое число Flare.",
+      );
+      actor.flares = (actor.flares || 0) - flares;
+      const diceBonus = (!extra ? actor.stokeFlames || 0 : 0) + boost + flares;
       if (option.shape !== "single") {
         const remaining = combat.beginVolley(
           state,
@@ -1833,6 +1861,7 @@ function act(state, side, action, random = randomInt) {
           targetCount: remaining.length,
           angle: action.angle,
           diceBonus,
+          flares,
           doubleWild: effect?.doubleWild,
           coldSnapAction: !extra,
           sampleBoost: option.sampleBoost,
@@ -1887,6 +1916,7 @@ function act(state, side, action, random = randomInt) {
           reroll: effect?.reroll,
           payment,
           diceBonus,
+          flares,
           doubleWild: effect?.doubleWild,
           throwAfter: granted && effect?.throwAfter,
           coldSnapAction: !extra,
@@ -1916,6 +1946,7 @@ function act(state, side, action, random = randomInt) {
           volley: true,
           angle: volley.angle,
           diceBonus: volley.diceBonus,
+          flares: volley.flares,
           doubleWild: volley.doubleWild,
           coldSnapAction: volley.coldSnapAction,
           sample: !!action.sample,
@@ -1993,7 +2024,8 @@ function act(state, side, action, random = randomInt) {
           delete pending.quickDraw;
         } else if (cantTouch) {
           pending.defenseBonus = (pending.defenseBonus || 0) + 2;
-          pending.cantTouch = pending.target;
+          if (combat.isPower(ally, "Can‘t Touch This"))
+            pending.cantTouch = pending.target;
         } else if (!bigBrother) {
           (state.reactionUses ||= []).push(chosenReaction.key);
           pending.defenseBonus = (pending.defenseBonus || 0) + 2;
@@ -2011,7 +2043,9 @@ function act(state, side, action, random = randomInt) {
             : dangerous
               ? "Too Dangerous to Ignore · " + ally.name
               : cantTouch
-                ? "Can‘t Touch This · " + ally.name
+                ? (combat.isPower(ally, "Can‘t Touch This")
+                    ? "Can‘t Touch This · "
+                    : "Wing Shield · ") + ally.name
                 : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
@@ -3022,6 +3056,17 @@ function act(state, side, action, random = randomInt) {
       break;
   }
   if (state.phase === "finished") return;
+  for (const [id, x, y] of previousPositions) {
+    const moved = state.fighters.find((f) => f.id === id);
+    if (
+      combat.usable(moved) &&
+      moved.x != null &&
+      x != null &&
+      (moved.x !== x || moved.y !== y) &&
+      !state.effects.some((e) => e.mover === id && e.type === "displace")
+    )
+      combat.addFlare(moved);
+  }
   for (const objective of state.objectives.filter((o) => o.freedom))
     if (
       state.fighters.some(

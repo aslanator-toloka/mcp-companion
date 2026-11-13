@@ -295,6 +295,7 @@ function GamePanel() {
   const [payer, setPayer] = useState("");
   const [powerSpend, setPowerSpend] = useState("");
   const [boost, setBoost] = useState("");
+  const [flares, setFlares] = useState("");
   const feedback = useGameFeedback(state);
   useEffect(() => {
     function onUndoShortcut(event) {
@@ -478,6 +479,7 @@ function GamePanel() {
       damageType: selectedType,
       payer: currentPayer,
       ...(attackOption.boostMax > 0 && boost && { boost: Number(boost) }),
+      ...(attackOption.flareMax > 0 && flares && { flares: Number(flares) }),
     });
   }
   function hitTarget(id) {
@@ -654,6 +656,21 @@ function GamePanel() {
           <select value={boost} onChange={(e) => setBoost(e.target.value)}>
             <option value="">0</option>
             {Array.from({ length: attackOption.boostMax }, (_, i) => i + 1).map(
+              (amount) => (
+                <option key={amount} value={amount}>
+                  {amount} · +{amount} куб.
+                </option>
+              ),
+            )}
+          </select>
+        </label>
+      )}
+      {attackOption?.flareMax > 0 && (
+        <label>
+          Thermokinesis · Flare{" "}
+          <select value={flares} onChange={(e) => setFlares(e.target.value)}>
+            <option value="">0</option>
+            {Array.from({ length: attackOption.flareMax }, (_, i) => i + 1).map(
               (amount) => (
                 <option key={amount} value={amount}>
                   {amount} · +{amount} куб.

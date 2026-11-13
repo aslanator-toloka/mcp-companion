@@ -326,6 +326,23 @@ const profiles = {
     conditions: [["wild", "bleed"]],
     placeAfterVolley: true,
   },
+  "Razor Wing Strike": {
+    builder: "damage",
+    conditionChoice: ["bleed", "poison"],
+    conditionTrigger: "each-wild",
+    afterMove: {
+      mode: "place",
+      who: "actor",
+      range: 1,
+      on: "critical",
+      required: true,
+    },
+  },
+  "Avatar of Death": { neurotoxin: true },
+  "Neurokinetic Arrows": { builder: "damage", neural: true },
+  "Psionic Salvo": { extra: "salvo", rapidOn: "critical wild" },
+  "UV Strike": { builder: "damage", flareOn: "wild hit" },
+  "Dark Solar Blast": { concussion: "wild hit" },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -509,6 +526,24 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Figment of Fantasy": {
+    mode: "target",
+    range: 5,
+    enemy: 99,
+    effect: "advance",
+    speed: "S",
+    neuralTarget: true,
+  },
+  "High Energy Conversion": {
+    mode: "target",
+    range: 2,
+    terrain: 0,
+    enemy: 0,
+    flareLimit: true,
+    speed: "S",
+    effect: "throw",
+  },
+  Sunburn: { mode: "self", action: true },
   "Body Slide by One": { mode: "place", range: 2 },
   "Limbo Step": { mode: "self", variableCost: "bamf" },
   "Omega Level Threat": {
@@ -856,7 +891,9 @@ function moveEvent(spec, actor, target, damageType) {
 function dodge(state, target, source, random, bonus = 0) {
   if (target.phasing === "phased") return;
   const rolled = dice(
-    Number(face(target).physicalDefense) + bonus,
+    Number(face(target).physicalDefense) +
+      bonus +
+      (target.selfDiscovery ? 3 : 0),
     has(target, "hex") ? 0 : 1,
     random,
   );
@@ -893,6 +930,10 @@ function totallyMeantIt(state, model, roll) {
     fighter: model.id,
   });
 }
+function addFlare(model, amount = 1) {
+  if (isPower(model, "Flare State"))
+    model.flares = Math.min(3, (model.flares || 0) + amount);
+}
 function dodgeDamage(target, rolled) {
   return Math.max(
     0,
@@ -906,8 +947,9 @@ function cantTouchThis(state, target, source) {
     (f) =>
       f.side === target.side &&
       usable(f) &&
-      isPower(f, "Can‘t Touch This") &&
-      (f.id === target.id || within(f, target, 2)) &&
+      ((isPower(f, "Can‘t Touch This") &&
+        (f.id === target.id || within(f, target, 2))) ||
+        (isPower(f, "Wing Shield") && f.id === target.id)) &&
       f.power >= 2 + rootTax(f) &&
       reactiveAllowed(source, f, state),
   );
@@ -934,7 +976,11 @@ function collide(state, target, source, random, offerDiamond = true) {
       label:
         payer === target && isPower(target, "Unglaublich Acrobatics")
           ? "Unglaublich Acrobatics"
-          : "Can‘t Touch This · " + payer.name,
+          : (isPower(payer, "Wing Shield")
+              ? "Wing Shield"
+              : "Can‘t Touch This") +
+            " · " +
+            payer.name,
       cost: 2 + rootTax(payer),
     });
     return;
@@ -970,7 +1016,7 @@ function collide(state, target, source, random, offerDiamond = true) {
     return;
   }
   const rolled = dice(
-    Number(face(target).physicalDefense),
+    Number(face(target).physicalDefense) + (target.selfDiscovery ? 3 : 0),
     has(target, "hex") ? 0 : 1,
     random,
   );
@@ -1362,6 +1408,22 @@ function damage(
       fighter: target.id,
     });
   }
+  if (
+    target.damage === maximum &&
+    target.flares &&
+    isPower(target, "Flare State")
+  ) {
+    const reach = target.flares;
+    target.flares = 0;
+    log(state, "Flare State · " + target.name + " · Range " + reach, {
+      side: target.side,
+      fighter: target.id,
+    });
+    for (const f of state.fighters.filter(
+      (f) => f.side !== target.side && usable(f) && within(f, target, reach),
+    ))
+      damage(state, f, 1, target);
+  }
   if (target.damage === maximum) {
     target.ko = !!target.injured || !!target.grunt;
     target.dazed = !target.ko;
@@ -1461,6 +1523,7 @@ function transformModel(f, form) {
 
 function movementModel(fighter) {
   return isPower(fighter, "Flight") ||
+    fighter.sunburnFlight ||
     isPower(fighter, "Wall Crawler") ||
     isPower(fighter, "Wallcrawler")
     ? { ...fighter, climbsOnAdvance: true }
@@ -1596,6 +1659,7 @@ function attacks(state, actor, previous) {
         )
           return false;
         if (previous?.kind === "rapid") return target.id === previous.target;
+        if (previous?.kind === "salvo") return target.id !== previous.target;
         if (
           ["velocity", "speed-of-sight"].includes(previous?.kind) &&
           target.id === previous.target
@@ -1654,6 +1718,7 @@ function attacks(state, actor, previous) {
                     .map((f) => ({ value: f.id, label: f.name }))
                 : [],
             sampleBoost: !!rules.sampleBoost && (actor.samples ?? 1) > 0,
+            flareMax: isPower(actor, "Thermokinesis") ? actor.flares || 0 : 0,
             boostMax: rules.boost
               ? Math.max(
                   0,
@@ -1689,7 +1754,10 @@ function interactRange(fighter) {
 
 function powers(state, actor) {
   return (face(actor).superPowers || []).flatMap((card) => {
-    const settings = activePowers[card.name];
+    const base = activePowers[card.name];
+    const settings = base?.flareLimit
+      ? { ...base, enemy: actor.flares || 0, terrain: actor.flares || 0 }
+      : base;
     const spendable = availablePower(state, actor) - rootTax(actor);
     const cost =
       (settings?.variableCost ? 1 : Number(card.powerCost)) +
@@ -1762,6 +1830,9 @@ function powers(state, actor) {
                   ? displacementSize(f)
                   : f.size) > settings.enemy)) ||
             !within(rangeOrigin(actor), f, settings.range) ||
+            (settings.neuralTarget &&
+              !within(actor, f, 1) &&
+              state.neural?.[actor.id] !== f.id) ||
             (["advance", "push"].includes(settings.effect) &&
               ((f.side !== actor.side && isPower(f, "Metal Mind")) ||
                 (f.side !== actor.side && mindShielded(f)) ||
@@ -1914,6 +1985,24 @@ function usePower(state, actor, selected, action, random) {
     case "Trick Shot":
       actor.trickShot = true;
       return;
+    case "Sunburn": {
+      const blaze = (actor.flares || 0) >= 3;
+      if (blaze) actor.sunburnFlight = true;
+      state.effects.push(
+        {
+          type: "displace",
+          mode: "advance",
+          speed: blaze ? "L" : actor.speed,
+          side: actor.side,
+          mover: actor.id,
+          source: actor.id,
+          name: "Sunburn",
+          required: true,
+        },
+        { type: "granted-attack", side: actor.side, source: actor.id },
+      );
+      return;
+    }
     case "Synthesis":
     case "Cosmic Energy Absorption":
       gain(actor, 2);
@@ -2008,6 +2097,8 @@ function usePower(state, actor, selected, action, random) {
   }
   const target = fighter(state, action.target);
   const terrain = state.terrain.find((p) => p.id === action.target);
+  if (selected.value === "Figment of Fantasy" && state.neural)
+    delete state.neural[actor.id];
   if (selected.value === "Field Leader")
     (state.fieldLeaderMoves ||= []).push(target.id);
   if (selected.value === "Matter Transmutation")
@@ -2437,10 +2528,13 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       role === "rolled" &&
       wildCount &&
       dispersible.length &&
-      isPower(model, "Plasma Dispersion")
+      (isPower(model, "Plasma Dispersion") ||
+        isPower(model, "Chosen of Apocalypse"))
     ) {
       const option = candidate("dispersion", model.side, {
-        label: "Plasma Dispersion",
+        label: isPower(model, "Plasma Dispersion")
+          ? "Plasma Dispersion"
+          : "Chosen of Apocalypse",
         dice: values,
         max: Math.min(wildCount, dispersible.length),
         kind: "fixed-face",
@@ -2477,6 +2571,36 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         usage: model.id + ":fireworks",
         role,
         eligible,
+      });
+      if (option) return option;
+    }
+    const mirage =
+      role === "rolled" &&
+      model.side !== target.side &&
+      values.length &&
+      state.fighters.find(
+        (f) =>
+          f.side === target.side &&
+          usable(f) &&
+          isPower(f, "Telepathic Emotion Manifestation") &&
+          reactiveAllowed(model, f, state) &&
+          f.power >= 2 + rootTax(f) &&
+          !state.reactionUses?.includes(f.id + ":manifestation") &&
+          (within(f, model, 1) ||
+            (state.neural?.[f.id] === model.id && within(f, model, 5))),
+      );
+    if (mirage) {
+      const option = candidate("manifestation", mirage.side, {
+        label: "Telepathic Emotion Manifestation",
+        dice: values,
+        max: Math.min(2, values.length),
+        kind: "reroll",
+        cost: 2 + rootTax(mirage),
+        payer: mirage.id,
+        usage: mirage.id + ":manifestation",
+        clearNeural: mirage.id,
+        role,
+        eligible: values.map((_, i) => i),
       });
       if (option) return option;
     }
@@ -2844,6 +2968,8 @@ function applyModifier(state, event, action, random) {
           !leadershipRerolls.includes(event.id),
         );
         if (event.usage) (state.reactionUses ||= []).push(event.usage);
+        if (event.clearNeural && state.neural)
+          delete state.neural[event.clearNeural];
         const values = pending.rolls[event.role];
         if (event.kind === "change" && !faces.includes(action.face))
           throw Error("Выберите грань.");
@@ -3076,7 +3202,8 @@ function resolve(state, pending, block, random) {
             ],
           )) +
         (pending.block ? 2 : 0) +
-        (pending.defenseBonus || 0) -
+        (pending.defenseBonus || 0) +
+        (target.selfDiscovery ? 3 : 0) -
         Number(
           state.fighters.some(
             (f) =>
@@ -3263,6 +3390,24 @@ function resolve(state, pending, block, random) {
   if (rules.backlash && rolled.includes("critical")) damage(state, actor, 2);
   for (const [test, ...values] of rules.conditions || [])
     if (matches(test, dealt)) values.forEach((name) => condition(target, name));
+  if (rules.neurotoxin && wilds && usable(target)) {
+    if (has(target, "bleed") && has(target, "poison") && !target.activated)
+      target.activated = true;
+    else condition(target, "stagger");
+  }
+  if (rules.neural && wilds && usable(target))
+    (state.neural ||= {})[actor.id] = target.id;
+  if (rules.flareOn && matches(rules.flareOn)) addFlare(actor);
+  if (pending.flares) condition(target, "incinerate");
+  if (rules.concussion && matches(rules.concussion))
+    for (const f of state.fighters.filter(
+      (f) =>
+        f.id !== actor.id &&
+        f.id !== target.id &&
+        usable(f) &&
+        within(f, origin, 2),
+    ))
+      damage(state, f, 1, actor, { noPower: true });
   if (rules.closeCondition && within(actor, target, rules.closeCondition[0]))
     condition(target, rules.closeCondition[1]);
   if (rules.splashShock && wilds) {
@@ -3557,7 +3702,7 @@ function resolve(state, pending, block, random) {
     });
   if (
     usable(actor) &&
-    rules.extra === "rapid" &&
+    ["rapid", "salvo"].includes(rules.extra) &&
     !pending.extra &&
     hasFaces(rolled, rules.rapidOn || "hit")
   )
@@ -3746,6 +3891,7 @@ module.exports = {
   usePower,
   pay,
   spend,
+  addFlare,
   xavierTargets,
   rootTax,
   payerFor,

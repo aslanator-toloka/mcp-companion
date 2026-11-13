@@ -43,6 +43,9 @@
 | 34 | Magik | Готово | Проверены Darkchylde с Failure в обоих бросках, Hex на Critical и Wild, Limbo Step и Scrying Mirrors только против Mystic. |
 | 35 | Cable | Готово | Проверены перебросы Plasma Rifle в Range 3, лечение Askani‘Son, Omega Level Threat, Wetworks и отряд X-Force. |
 | 36 | Logan the Wolverine | Готово | Проверены X-Slash с Place, Tornado Claw, What I Do Isn‘t Very Nice, On the Hunt и Get Out of my Head!. |
+| 37 | Archangel | Готово | Проверены Razor Wing Strike, Overwing, Avatar of Death, Wing Shield и Chosen of Apocalypse. |
+| 38 | Mirage | Готово | Проверены Neural Connection, Figment of Fantasy, Telepathic Emotion Manifestation, Psionic Salvo и Coming of Age. |
+| 39 | Sunspot | Готово | Проверены жетоны Flare, Thermokinesis, Dark Solar Blast, Sunburn и взрыв Flare State. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -221,3 +224,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Сохранённый ростер проверен. Браузер не проверен.
 
 [Сценарии Magik, Cable и Logan](../tests/game-magik-cable-logan.test.cjs).
+
+## 37–39. Archangel, Mirage и Sunspot
+
+- [x] Razor Wing Strike даёт выбор Bleed или Poison за каждый Wild, на Critical ставит Archangel в Range 1 от цели. Avatar of Death на Wild накладывает Stagger, а цели с Bleed и Poison вместо этого даёт Activated. Wing Shield добавляет 2 кубика защиты или уклонения только самому Archangel. Chosen of Apocalypse работает как Plasma Dispersion.
+- [x] Neurokinetic Arrows на Wild переносит единственный жетон Neural Connection на защитника. Figment of Fantasy и Telepathic Emotion Manifestation достают врага в Range 1 или в Range 5 с жетоном и снимают его. Psionic Salvo на Critical и Wild даёт бесплатную атаку по другой цели.
+- [x] Coming of Age: при переходе союзника на раненую сторону он получает 3 Power и жетон Self-Discovery (+3 кубика защиты и уклонения до конца его активации). Лидерство New Mutants.
+- [x] Sunspot получает Flare после любого перемещения, максимум 3. UV Strike добавляет Flare на Wild и Hit. Thermokinesis тратит Flare на кубики до броска и накладывает Incinerate. Выбор Flare есть в интерфейсе атаки. Dark Solar Blast наносит 1 урон всем рядом с защитником без начисления Power. Sunburn даёт Advance на Speed или Long с Flight при 3 Flare, затем атаку. Перед Daze или KO Sunspot тратит все Flare и наносит 1 урон врагам в Range, равном их числу. High Energy Conversion ограничивает размер цели числом Flare.
+- [x] Отряд X-Force с новыми бойцами собирается. Браузер не проверен. Число Flare и жетон Neural Connection на поле пока не показаны.
+
+[Сценарии Archangel, Mirage и Sunspot](../tests/game-archangel-mirage-sunspot.test.cjs).
