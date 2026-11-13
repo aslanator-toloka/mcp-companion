@@ -231,6 +231,6 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Neurokinetic Arrows на Wild переносит единственный жетон Neural Connection на защитника. Figment of Fantasy и Telepathic Emotion Manifestation достают врага в Range 1 или в Range 5 с жетоном и снимают его. Psionic Salvo на Critical и Wild даёт бесплатную атаку по другой цели.
 - [x] Coming of Age: при переходе союзника на раненую сторону он получает 3 Power и жетон Self-Discovery (+3 кубика защиты и уклонения до конца его активации). Лидерство New Mutants.
 - [x] Sunspot получает Flare после любого перемещения, максимум 3. UV Strike добавляет Flare на Wild и Hit. Thermokinesis тратит Flare на кубики до броска и накладывает Incinerate. Выбор Flare есть в интерфейсе атаки. Dark Solar Blast наносит 1 урон всем рядом с защитником без начисления Power. Sunburn даёт Advance на Speed или Long с Flight при 3 Flare, затем атаку. Перед Daze или KO Sunspot тратит все Flare и наносит 1 урон врагам в Range, равном их числу. High Energy Conversion ограничивает размер цели числом Flare.
-- [x] Отряд X-Force с новыми бойцами собирается. Браузер не проверен. Число Flare и жетон Neural Connection на поле пока не показаны.
+- [x] Отряд X-Force с новыми бойцами собирается. Браузер не проверен. Flare, Neural Connection и Self-Discovery показаны в строке бойца.
 
 [Сценарии Archangel, Mirage и Sunspot](../tests/game-archangel-mirage-sunspot.test.cjs).
