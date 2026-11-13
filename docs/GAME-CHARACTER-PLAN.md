@@ -2,7 +2,7 @@
 
 Добавляем по одному персонажу. Статус «Готово» означает, что бойца можно взять в сохранённый ростер Game, а его атаки, способности и обязательные решения проверены через команды партии. Для каждого нового эффекта нужен сценарий с проверкой результата, включая отказ при недопустимом действии там, где это важно.
 
-Перед добавлением способности сверяем эффект и момент срабатывания с уже существующими. Если у одноимённой атаки разных персонажей разный текст, правило задаём в `characterProfiles` по ключу `slug:имя`. Power на активные и реактивные суперспособности списываем через `combat.spend`, чтобы на трату могли реагировать Leadership вроде Xavier's School. Charge, Hit and Run и Freeze and Fade используют общую последовательность Move и Attack. Ice Slide и Air Lift используют одну механику выбора союзника до Move и размещения после него.
+Перед добавлением способности сверяем эффект и момент срабатывания с уже существующими. Если у одноимённой атаки разных персонажей разный текст, правило задаём в `characterProfiles` по ключу `slug:имя`. Урон снимаем через `combat.heal`, чтобы его мог остановить Anti-Healing Factor Corrosive. Power на активные и реактивные суперспособности списываем через `combat.spend`, чтобы на трату могли реагировать Leadership вроде Xavier's School. Charge, Hit and Run и Freeze and Fade используют общую последовательность Move и Attack. Ice Slide и Air Lift используют одну механику выбора союзника до Move и размещения после него.
 
 | Очередь | Персонаж | Статус | Следующий шаг |
 | --- | --- | --- | --- |
@@ -48,6 +48,9 @@
 | 39 | Sunspot | Готово | Проверены жетоны Flare, Thermokinesis, Dark Solar Blast, Sunburn и взрыв Flare State. |
 | 40 | Deadpool | Готово | Проверены Stab, Stab и Bang, Bang, Duodenum Poke, Maximum Effort!, Merc with a Mouth, перебросы и защита от Mystic Advance. |
 | 41 | Warlock | Готово | Проверены T-O Talons, Self Must Protect Selffriend, Techno-Organic Absorption, Transmode Virus Infection и Unstable Outline. |
+| 42 | Maverick | Готово | Проверены Rapid Fire, Agent Zero, Anti-Healing Factor Corrosive и Kinetic Energy Absorption. |
+| 43 | Weapon X | Готово | Проверены Berserker Rage по повторной цели, Rampage и Wild Abandon, Savagery Protocols и Aimless Aggression. |
+| 44 | Omega Red | Готово | Проверены Carbonadium Coils и Armor, Absorb Essence, Ensnare, Death Factor и Death Spores. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -246,3 +249,12 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд X-Force собирается. Браузер не проверен.
 
 [Сценарии Deadpool и Warlock](../tests/game-deadpool-warlock.test.cjs).
+
+## 42–44. Maverick, Weapon X и Omega Red
+
+- [x] Плюс-лечение идёт через `combat.heal`. Anti-Healing Factor Corrosive предлагает Maverick за 2 Power отменить лечение врага в Range 3. Kinetic Energy Absorption после физического урона даёт 1 Power и Short Advance по желанию. Plasma Blasters даёт Rapid Fire на Hit, Agent Zero — Throw на Wild.
+- [x] Berserker Rage на здоровой стороне получает +1 кубик против цели, которую Weapon X уже атаковал в этот Turn. Uncontrollable Weapon: Rampage на Wild и Hit бьёт всех в Range 2, на двух Wild — бесплатный повтор. Savagery Protocols у Secure даёт +2 кубика атаки и −1 кубик защиты, не даёт держать Extract. Aimless Aggression при KO бросает 5 кубиков и бьёт всех рядом. Healing Factor [3] учтён.
+- [x] Carbonadium Coils лечит Omega Red при уроне. Carbonadium Armor снижает урон от врагов на 1. Absorb Essence на Wild превращает защитный успех в Failure и даёт Power. Ensnare притягивает видимого врага в Range 4, по одному разу на цель за Turn. Death Factor наносит 2 урона себе и врагам с Poison. Death Spores отравляет врагов, закончивших активацию рядом, и врагов рядом в конце своей активации.
+- [x] Отряды Weapon X и Hellfire Club собираются. Браузер не проверен.
+
+[Сценарии Maverick, Weapon X и Omega Red](../tests/game-weapon-x-omega-red.test.cjs).

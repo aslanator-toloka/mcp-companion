@@ -223,6 +223,7 @@ function beginActivation(state, active, locked = false) {
     activationLocked: locked,
     moves: 0,
     usedPowers: [],
+    attackedThisTurn: [],
     duelTargets: [],
     fieldLeaderMoves: [],
     interacted: [],
@@ -764,6 +765,19 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "anti-healing")
+      return [
+        {
+          type: "anti-healing",
+          label:
+            "Anti-Healing Factor Corrosive · " +
+            state.fighters.find((f) => f.id === effect.target).name +
+            " · " +
+            effect.cost +
+            " Power",
+        },
+        { type: "skip-effect", label: "Разрешить лечение" },
+      ];
     if (effect.type === "frenzy")
       return [
         { type: "frenzy", label: "Frenzy · " + effect.cost + " Power" },
@@ -1280,13 +1294,30 @@ function endActivation(state, side, random, applyBleed = true) {
       });
       return;
     }
-    const healing = combat.isPower(actor, "Healing Factor [2]")
-      ? 2
-      : combat.isPower(actor, "Healing Factor [1]")
-        ? 1
-        : 0;
-    if (healing && combat.usable(actor))
-      actor.damage = Math.max(0, (actor.damage || 0) - healing);
+    const healing = combat.isPower(actor, "Healing Factor [3]")
+      ? 3
+      : combat.isPower(actor, "Healing Factor [2]")
+        ? 2
+        : combat.isPower(actor, "Healing Factor [1]")
+          ? 1
+          : 0;
+    if (healing && combat.usable(actor)) combat.heal(state, actor, healing);
+    for (const omega of state.fighters.filter(
+      (f) =>
+        f.side !== actor.side &&
+        combat.usable(f) &&
+        combat.isPower(f, "Death Spores") &&
+        geometry.within(f, actor, 2),
+    ))
+      combat.condition(actor, "poison");
+    if (combat.isPower(actor, "Death Spores") && combat.usable(actor))
+      for (const enemy of state.fighters.filter(
+        (f) =>
+          f.side !== actor.side &&
+          combat.usable(f) &&
+          geometry.within(f, actor, 2),
+      ))
+        combat.condition(enemy, "poison");
     actor.activated = true;
     actor.selfDiscovery = false;
     actor.sunburnFlight = false;
@@ -2195,6 +2226,18 @@ function act(state, side, action, random = randomInt) {
       );
       break;
     }
+    case "anti-healing": {
+      const effect = state.effects.shift();
+      const source = state.fighters.find((f) => f.id === effect.source);
+      combat.spend(state, source, effect.cost);
+      log(state, "Anti-Healing Factor Corrosive", {
+        side,
+        fighter: source.id,
+        target: effect.target,
+        power: "Anti-Healing Factor Corrosive",
+      });
+      break;
+    }
     case "frenzy": {
       const effect = state.effects.shift();
       const source = state.fighters.find((f) => f.id === effect.source);
@@ -2339,7 +2382,7 @@ function act(state, side, action, random = randomInt) {
       source.power -= effect.cost;
       tactics.use(state, side, "go-get-em-tiger");
       if (mission.held(state, source).length) {
-        source.damage = Math.max(0, (source.damage || 0) - 3);
+        combat.heal(state, source, 3);
         if (source.conditions?.length)
           state.effects.unshift({
             type: "tiger-shake",
@@ -2846,6 +2889,10 @@ function act(state, side, action, random = randomInt) {
     }
     case "skip-effect": {
       const effect = state.effects.shift();
+      if (effect.type === "anti-healing") {
+        const target = state.fighters.find((f) => f.id === effect.target);
+        target.damage = Math.max(0, (target.damage || 0) - effect.amount);
+      }
       if (effect.type === "acrobatic-dodge")
         combat.resolveAcrobaticDodge(state, effect, false, random);
       if (effect.type === "diamond-dodge") {
@@ -3002,7 +3049,7 @@ function act(state, side, action, random = randomInt) {
         });
       } else if (selected.targets) {
         const target = state.fighters.find((f) => f.id === action.target);
-        target.damage -= 1;
+        combat.heal(state, target, 1);
         log(
           state,
           actor.name + " · " + objective.name + " лечит " + target.name,
@@ -3090,6 +3137,7 @@ function act(state, side, action, random = randomInt) {
         undo: [],
         moves: 0,
         usedPowers: [],
+        attackedThisTurn: [],
         duelTargets: [],
         interacted: [],
         leadershipUses: { p1: [], p2: [] },

@@ -1,3 +1,4 @@
+const { randomInt } = require("node:crypto");
 const { details, pool, grantedAttacks } = require("./catalog.cjs");
 const log = require("./log.cjs");
 const {
@@ -370,6 +371,25 @@ const profiles = {
       on: "wild",
     },
   },
+  "Plasma Blasters": { builder: 1, extra: "rapid" },
+  "Adamantium Knife": { builder: "damage", conditions: [["wild", "bleed"]] },
+  "Agent Zero": {
+    afterMove: {
+      mode: "throw",
+      speed: "S",
+      direction: "away",
+      limit: 3,
+      on: "wild",
+    },
+  },
+  "Berserker Rage": { builder: 1, pierce: true, repeatBonus: true },
+  "Uncontrollable Weapon": {
+    rampage: "wild hit",
+    extra: "rapid",
+    rapidOn: "wild wild",
+  },
+  "Carbonadium Coils": { builder: "damage", healOnDamage: 1 },
+  "Red Terror": { types: ["physical", "energy"], absorbEssence: true },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -553,6 +573,19 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Death Factor": { mode: "self" },
+  Ensnare: {
+    mode: "target",
+    range: 4,
+    enemy: 99,
+    sight: true,
+    effect: "push",
+    speed: "M",
+    direction: "toward",
+    referenceActor: true,
+    oncePerTarget: true,
+    repeat: true,
+  },
   "You Can‘t Spell Legendary Without Leg Day": { mode: "place", range: 2 },
   "Merc with a Mouth": { mode: "target", range: 3, enemy: 99, effect: "mouth" },
   "Techno-Organic Absorption": {
@@ -969,6 +1002,37 @@ function totallyMeantIt(state, model, roll) {
     side: model.side,
     fighter: model.id,
   });
+}
+function savage(state, model) {
+  return (
+    isPower(model, "Savagery Protocols") &&
+    state.objectives?.some((o) => o.role === "secure" && within(model, o, 1))
+  );
+}
+// Removes damage unless an enemy Anti-Healing Factor Corrosive stops it.
+function heal(state, model, amount) {
+  if (!usable(model) || amount <= 0 || !model.damage) return;
+  const maverick = state.fighters.find(
+    (f) =>
+      f.side !== model.side &&
+      usable(f) &&
+      isPower(f, "Anti-Healing Factor Corrosive") &&
+      f.power >= 2 + rootTax(f) &&
+      reactiveAllowed(model, f, state) &&
+      within(f, model, 3),
+  );
+  if (maverick) {
+    (state.effects ||= []).unshift({
+      type: "anti-healing",
+      side: maverick.side,
+      source: maverick.id,
+      target: model.id,
+      amount,
+      cost: 2 + rootTax(maverick),
+    });
+    return;
+  }
+  model.damage = Math.max(0, model.damage - amount);
 }
 function addFlare(model, amount = 1) {
   if (isPower(model, "Flare State"))
@@ -1408,7 +1472,8 @@ function damage(
     enemy &&
     (power(target, "I Can Take It") ||
       power(target, "Kree-Mutant Physiology") ||
-      power(target, "Organic Steel"))
+      power(target, "Organic Steel") ||
+      power(target, "Carbonadium Armor"))
   )
     amount = Math.max(1, amount - 1);
   const maximum = Number(face(target).stamina);
@@ -1424,6 +1489,24 @@ function damage(
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
   if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
+  if (
+    dealt &&
+    enemy &&
+    attackType === "physical" &&
+    usable(target) &&
+    isPower(target, "Kinetic Energy Absorption")
+  ) {
+    gain(target, 1);
+    (state.effects ||= []).push({
+      type: "displace",
+      mode: "advance",
+      speed: "S",
+      side: target.side,
+      mover: target.id,
+      source: target.id,
+      name: "Kinetic Energy Absorption",
+    });
+  }
   if (
     dealt &&
     enemy &&
@@ -1463,6 +1546,24 @@ function damage(
       (f) => f.side !== target.side && usable(f) && within(f, target, reach),
     ))
       damage(state, f, 1, target);
+  }
+  if (
+    target.damage === maximum &&
+    (target.injured || target.grunt) &&
+    isPower(target, "Aimless Aggression")
+  ) {
+    const rolled = rawDice(5, state.rng || randomInt);
+    const hits = rolled.filter((d) => d === "critical" || d === "wild").length;
+    log(state, "Aimless Aggression · " + target.name, {
+      side: target.side,
+      fighter: target.id,
+      rolls: [{ label: "Aimless Aggression", faces: rolled }],
+    });
+    if (hits)
+      for (const f of state.fighters.filter(
+        (f) => f.id !== target.id && usable(f) && within(f, target, 2),
+      ))
+        damage(state, f, hits, target);
   }
   if (target.damage === maximum) {
     target.ko = !!target.injured || !!target.grunt;
@@ -1778,6 +1879,8 @@ function canHoldExtract(state, actor, token) {
   return (
     token.role === "extract" &&
     !isPower(actor, "Wild Rage") &&
+    !isPower(actor, "Savagery Protocols") &&
+    !isPower(actor, "Berserker Wrath") &&
     (!limitedExtracts.includes(token.name) ||
       !state.objectives.some(
         (o) => o.holder === actor.id && o.name === token.name,
@@ -1871,6 +1974,9 @@ function powers(state, actor) {
                   : f.size) > settings.enemy)) ||
             !within(rangeOrigin(actor), f, settings.range) ||
             (settings.effect === "mouth" && state.mouthRound?.includes(f.id)) ||
+            (settings.oncePerTarget &&
+              state.usedPowers?.includes(card.name + ":" + f.id)) ||
+            (settings.sight && !lineOfSight(actor, f, state.terrain).visible) ||
             (settings.neuralTarget &&
               !within(actor, f, 1) &&
               state.neural?.[actor.id] !== f.id) ||
@@ -2045,6 +2151,7 @@ function usePower(state, actor, selected, action, random) {
       return;
     }
     case "Transmode Virus Infection":
+    case "Death Factor":
       for (const f of [
         actor,
         ...state.fighters.filter(
@@ -2091,7 +2198,7 @@ function usePower(state, actor, selected, action, random) {
       actor.projection = projectionAt(action, rangeOrigin(actor));
       return;
     case "Immortal Essence":
-      actor.damage = Math.max(0, (actor.damage || 0) - 3);
+      heal(state, actor, 3);
       return;
     case "BAMF!":
     case "Limbo Step":
@@ -2151,6 +2258,8 @@ function usePower(state, actor, selected, action, random) {
   }
   const target = fighter(state, action.target);
   const terrain = state.terrain.find((p) => p.id === action.target);
+  if (selected.oncePerTarget)
+    (state.usedPowers ||= []).push(selected.value + ":" + action.target);
   if (selected.value === "Figment of Fantasy" && state.neural)
     delete state.neural[actor.id];
   if (selected.value === "Field Leader")
@@ -2164,7 +2273,7 @@ function usePower(state, actor, selected, action, random) {
   }
   if (selected.effect === "absorb-terrain") {
     state.terrain = state.terrain.filter((p) => p.id !== terrain.id);
-    actor.damage = Math.max(0, (actor.damage || 0) - terrain.size);
+    heal(state, actor, terrain.size);
     return;
   }
   if (selected.effect === "firewall") {
@@ -2274,7 +2383,9 @@ function usePower(state, actor, selected, action, random) {
       speed: selected.speed,
       range: selected.destinationRange,
       required: true,
-      reference: { x: target.x, y: target.y, radius: target.radius },
+      reference: selected.referenceActor
+        ? { x: actor.x, y: actor.y, radius: actor.radius }
+        : { x: target.x, y: target.y, radius: target.radius },
     });
   }
 }
@@ -2948,6 +3059,25 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       });
     if (option) return option;
   }
+  if (rules.absorbEssence && rolled.includes("wild")) {
+    const eligible = defense.flatMap((d, i) =>
+      ["critical", "wild", "block"].includes(d) ? [i] : [],
+    );
+    const option =
+      eligible.length &&
+      candidate("essence", actor.side, {
+        label: "Absorb Essence",
+        dice: defense,
+        max: 1,
+        kind: "fixed-face",
+        face: "failure",
+        cost: 0,
+        payer: actor.id,
+        role: "defense",
+        eligible,
+      });
+    if (option) return option;
+  }
   if (
     rules.pierce &&
     (typeof rules.pierce === "string"
@@ -3073,6 +3203,7 @@ function applyModifier(state, event, action, random) {
             indices.map((index) => values[index]),
           );
         if (event.id === "absorption") for (const _ of indices) gain(payer, 1);
+        if (event.id === "essence") gain(payer, 1);
       }
     }
     if (["avengers", "cabal"].includes(event.id)) {
@@ -3225,6 +3356,12 @@ function resolve(state, pending, block, random) {
         (isPower(actor, "Wild Rage") ? actor.damage || 0 : 0) +
         (rules.powerDice ? Math.min(5, target.power) : 0) +
         (rules.mysticDice ? Number(face(target).mysticDefense) || 0 : 0) +
+        (rules.repeatBonus &&
+        !actor.injured &&
+        state.attackedThisTurn?.includes(actor.id + ">" + target.id)
+          ? 1
+          : 0) +
+        (savage(state, actor) ? 2 : 0) +
         (rules.placementDice ? state.placements?.[actor.id] || 0 : 0) +
         hammer +
         Number(stark) +
@@ -3239,6 +3376,7 @@ function resolve(state, pending, block, random) {
     ? null
     : pending.initial || rawDice(attackCount, random);
   if (initial) {
+    (state.attackedThisTurn ||= []).push(actor.id + ">" + target.id);
     recordFailure(state, pending, "rolled", actor, initial);
     actor.momentumReady = false;
     if (apexDice) actor.apexDice = 0;
@@ -3294,7 +3432,8 @@ function resolve(state, pending, block, random) {
           )) +
         (pending.block ? 2 : 0) +
         (pending.defenseBonus || 0) +
-        (target.selfDiscovery ? 3 : 0) +
+        (target.selfDiscovery ? 3 : 0) -
+        (savage(state, target) ? 1 : 0) +
         (isPower(target, "Unstable Outline") &&
         ["physical", "energy"].includes(pending.damageType) &&
         !within(actor, target, 3)
@@ -3477,9 +3616,9 @@ function resolve(state, pending, block, random) {
           ? Math.max(1, dealt)
           : rules.builder,
     );
-  if (rules.heal) actor.damage = Math.max(0, (actor.damage || 0) - rules.heal);
+  if (rules.heal) heal(state, actor, rules.heal);
   if (rules.healOnDamage && dealt && usable(actor))
-    actor.damage = Math.max(0, (actor.damage || 0) - rules.healOnDamage);
+    heal(state, actor, rules.healOnDamage);
 
   if (rules.afterDrain && wilds)
     target.power = Math.max(0, target.power - wilds);
@@ -3495,6 +3634,11 @@ function resolve(state, pending, block, random) {
     (state.neural ||= {})[actor.id] = target.id;
   if (rules.flareOn && matches(rules.flareOn)) addFlare(actor);
   if (pending.flares) condition(target, "incinerate");
+  if (rules.rampage && matches(rules.rampage))
+    for (const f of state.fighters.filter(
+      (f) => f.id !== actor.id && usable(f) && within(f, actor, 2),
+    ))
+      damage(state, f, 1, actor);
   if (rules.concussion && matches(rules.concussion))
     for (const f of state.fighters.filter(
       (f) =>
@@ -3987,6 +4131,7 @@ module.exports = {
   usePower,
   pay,
   spend,
+  heal,
   addFlare,
   xavierTargets,
   rootTax,

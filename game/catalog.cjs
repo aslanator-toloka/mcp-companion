@@ -138,6 +138,9 @@ const characters = selected(allCharacters, "characters", [
   "sunspot",
   "deadpool",
   "warlock",
+  "maverick",
+  "weapon-x",
+  "omega-red",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

@@ -183,8 +183,7 @@ function activate(state, actor, option, action) {
     case "i-am-a-baron-after-all":
       if (action.choice === "reroll") actor.baronRerolls = state.round;
       if (action.choice === "power") combat.gain(actor, state.round);
-      if (action.choice === "heal")
-        actor.damage = Math.max(0, (actor.damage || 0) - state.round);
+      if (action.choice === "heal") combat.heal(state, actor, state.round);
       break;
     case "battle-plan":
       state.effects.push(
