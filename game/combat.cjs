@@ -234,6 +234,44 @@ const profiles = {
     conditions: [["wild", "root"]],
   },
   "Astral Disintegration": { powerDice: true, lockDefense: true },
+  "Telekinetic Katana": {
+    types: ["energy", "mystic"],
+    builder: "damage",
+    drain: "each",
+  },
+  "Psi-Bow": {
+    builder: 1,
+    beforeMove: {
+      mode: "advance",
+      who: "actor",
+      speed: "S",
+      direction: "toward",
+      on: "hit",
+    },
+  },
+  "Psionic Assault": { before: [["", "stun"]] },
+  "Phasing Strike": {
+    builder: "damage",
+    ignoreDefenseCritical: true,
+    afterMove: {
+      mode: "place",
+      who: "actor",
+      self: true,
+      range: 1,
+      on: "wild",
+    },
+  },
+  "Get‘em Lockheed!": { builder: 1, conditions: [["wild", "incinerate"]] },
+  "Intangible Assault": {
+    ignoreDefenseCritical: true,
+    afterMove: {
+      mode: "place",
+      who: "actor",
+      self: true,
+      range: 2,
+      on: "wild",
+    },
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -407,6 +445,8 @@ const activePowers = {
   },
   Speedster: { mode: "self" },
   Hop: { mode: "place", range: 2 },
+  "Phase Rush": { mode: "place", range: 2 },
+  "Telekinetic Combat Enhancement": { mode: "advance", speed: "S" },
   "Freeze and Fade": {
     mode: "sequence",
     action: true,
@@ -684,7 +724,9 @@ function mindShielded(model) {
 }
 function moveEvent(spec, actor, target, damageType) {
   const mover = spec.who === "actor" ? actor : target;
-  const ref = spec.reference || (mover === actor ? target : actor);
+  const ref = spec.self
+    ? mover
+    : spec.reference || (mover === actor ? target : actor);
   if (
     !usable(mover) ||
     (spec.mode === "place" && ref.x == null) ||
@@ -755,20 +797,41 @@ function dodgeDamage(target, rolled) {
       innateDiceSuccesses(target, rolled),
   );
 }
+function cantTouchThis(state, target, source) {
+  return state.fighters.find(
+    (f) =>
+      f.side === target.side &&
+      usable(f) &&
+      isPower(f, "Can‘t Touch This") &&
+      (f.id === target.id || within(f, target, 2)) &&
+      f.power >= 2 + rootTax(f) &&
+      reactiveAllowed(source, f, state),
+  );
+}
 function collide(state, target, source, random, offerDiamond = true) {
   if (!usable(target)) return;
   const acrobaticsCost = 2 + rootTax(target);
+  const shadowcat = cantTouchThis(state, target, source);
   if (
-    isPower(target, "Unglaublich Acrobatics") &&
-    target.power >= acrobaticsCost &&
-    reactiveAllowed(source, target, state)
+    (isPower(target, "Unglaublich Acrobatics") &&
+      target.power >= acrobaticsCost &&
+      reactiveAllowed(source, target, state)) ||
+    shadowcat
   ) {
+    const payer = isPower(target, "Unglaublich Acrobatics")
+      ? target
+      : shadowcat;
     (state.effects ||= []).unshift({
       type: "acrobatic-dodge",
       side: target.side,
       target: target.id,
       source: source?.id,
-      cost: acrobaticsCost,
+      payer: payer.id,
+      label:
+        payer === target && isPower(target, "Unglaublich Acrobatics")
+          ? "Unglaublich Acrobatics"
+          : "Can‘t Touch This · " + payer.name,
+      cost: 2 + rootTax(payer),
     });
     return;
   }
@@ -861,7 +924,8 @@ function resolveDodge(state, effect, action, random) {
 }
 function resolveAcrobaticDodge(state, effect, use, random) {
   const target = fighter(state, effect.target);
-  if (use) spend(state, target, effect.cost);
+  if (use)
+    spend(state, fighter(state, effect.payer || effect.target), effect.cost);
   dodge(state, target, fighter(state, effect.source), random, use ? 2 : 0);
 }
 
@@ -1652,6 +1716,7 @@ function usePower(state, actor, selected, action, random) {
     payerFor(state, actor, selected.cost, action.payer),
     selected.cost,
   );
+  if (selected.value === "Telekinetic Combat Enhancement") actor.apexDice = 2;
   switch (selected.value) {
     case "Trick Shot":
       actor.trickShot = true;
@@ -2140,6 +2205,27 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         if (option) return option;
       }
     }
+    const precognition =
+      eligible.length &&
+      isPower(model, "Telepathic Precognition") &&
+      reactiveAllowed(model === actor ? target : actor, model, state) &&
+      !state.reactionUses?.includes(model.id + ":precognition") &&
+      model.power > rootTax(model);
+    if (precognition) {
+      const option = candidate("precognition-" + role, model.side, {
+        label: "Telepathic Precognition",
+        dice: values,
+        max: Math.min(eligible.length, model.power - rootTax(model)),
+        kind: "reroll",
+        cost: rootTax(model),
+        variable: true,
+        payer: model.id,
+        usage: model.id + ":precognition",
+        role,
+        eligible,
+      });
+      if (option) return option;
+    }
     if (eligible.length) {
       const opponent = model === actor ? target : actor;
       const professor = state.fighters.find(
@@ -2571,9 +2657,11 @@ function resolve(state, pending, block, random) {
   ).length;
   const grantedDice =
     pending.index === 101 ? actor.grantedAttacks?.[101]?.dice || 0 : 0;
-  const apexDice = ["Claw Slash", "Bloodthirsty Onslaught"].includes(
-    attack.name,
-  )
+  const apexDice = [
+    "Claw Slash",
+    "Bloodthirsty Onslaught",
+    "Telekinetic Katana",
+  ].includes(attack.name)
     ? actor.apexDice || 0
     : 0;
   const attackCount =
@@ -3273,6 +3361,7 @@ module.exports = {
   resolveDodge,
   resolveAcrobaticDodge,
   isPower,
+  cantTouchThis,
   finishVolley,
   movementModel,
   gain,

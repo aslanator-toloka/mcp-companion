@@ -122,6 +122,8 @@ const characters = selected(allCharacters, "characters", [
   "iceman",
   "angel",
   "professor-x",
+  "psylocke",
+  "shadowcat",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

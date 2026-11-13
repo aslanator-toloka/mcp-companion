@@ -32,6 +32,8 @@
 | 23 | Iceman | Готово | Проверены Ice Slide, Freeze and Fade, Cold Snap и обе атаки. |
 | 24 | Angel | Готово | Проверены Air Lift и Hostile Takeover в одном Move, Flyby и Avenging Angel. |
 | 25 | Professor X | Готово | Проверены Xavier's School, Professor's Guidance, Telepathic Lock и все три атаки. Браузер не проверен. |
+| 26 | Psylocke | Готово | Проверены Katana с выбором типа, Neural Disruption, Pursuit, Telekinetic Combat Enhancement и Telepathic Precognition. |
+| 27 | Shadowcat | Готово | Проверены атаки без защитных Critical, Sidestep и Ghosted, Phase Rush и обе части Can‘t Touch This. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -169,3 +171,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Сохранённый ростер и карточка через CLI проверены. Карточку и выбор Xavier's School в браузере ещё не смотрели.
 
 [Сценарии Professor X](../tests/game-professor-x.test.cjs).
+
+## 26–27. Psylocke и Shadowcat
+
+- [x] Telekinetic Katana выбирает Energy или Mystic, снимает 1 Power за каждый Wild до урона и получает +2 кубика от Telekinetic Combat Enhancement только в следующей атаке Katana.
+- [x] Psi-Bow предлагает Advance к защитнику на Hit. Psionic Assault накладывает Stun до урона. Telepathic Precognition перебрасывает свои кубики атаки или защиты за любое количество Power, раз за Turn.
+- [x] Phasing Strike и Intangible Assault не учитывают защитные Critical и не добавляют за них кубики. На Wild Shadowcat делает Place в Range 1 или 2 от себя.
+- [x] Phase Rush делает Place в Range 2. Can‘t Touch This добавляет 2 кубика защиты Shadowcat или союзнику в Range 2 против Physical и Energy, а также 2 кубика уклонения. После Push или Throw от атаки защищённый боец может сделать Place в Range 1.
+- [x] Сохранённый ростер проверен. Браузер не проверен.
+
+[Сценарии Psylocke и Shadowcat](../tests/game-psylocke-shadowcat.test.cjs).

@@ -499,6 +499,18 @@ function targetingReactions(state, pending) {
         reactor: ally.id,
       });
     if (
+      combat.isPower(ally, "Can‘t Touch This") &&
+      ["physical", "energy"].includes(pending.damageType) &&
+      (ally.id === defender.id || geometry.within(ally, defender, 2))
+    )
+      reactions.push({
+        value: "cant-touch:" + ally.id,
+        key: "cant-touch:" + ally.id,
+        label: "Can‘t Touch This · " + ally.name + " · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
       combat.isPower(ally, "Telekinetic Shield") &&
       geometry.within(ally, defender, 3) &&
       !state.reactionUses?.includes("telekinetic-shield:" + ally.id)
@@ -588,7 +600,11 @@ function currentEffect(state, side) {
       return [
         {
           type: effect.type,
-          label: "Unglaublich Acrobatics · " + effect.cost + " Power",
+          label:
+            (effect.label || "Unglaublich Acrobatics") +
+            " · " +
+            effect.cost +
+            " Power",
         },
         skip,
       ];
@@ -1911,7 +1927,11 @@ function act(state, side, action, random = randomInt) {
         const attacker = state.fighters.find((f) => f.id === pending.actor);
         combat.spend(state, ally, chosenReaction.cost);
         const bigBrother = value.startsWith("big-brother:");
-        if (!bigBrother) {
+        const cantTouch = value.startsWith("cant-touch:");
+        if (cantTouch) {
+          pending.defenseBonus = (pending.defenseBonus || 0) + 2;
+          pending.cantTouch = pending.target;
+        } else if (!bigBrother) {
           (state.reactionUses ||= []).push(chosenReaction.key);
           pending.defenseBonus = (pending.defenseBonus || 0) + 2;
         } else if (geometry.within(attacker, ally, 2)) {
@@ -1925,7 +1945,9 @@ function act(state, side, action, random = randomInt) {
           state,
           bigBrother
             ? "Big Brother · " + ally.name
-            : "Telekinetic Shield · " + ally.name,
+            : cantTouch
+              ? "Can‘t Touch This · " + ally.name
+              : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
         continueTargeting(state, pending, random);
@@ -2585,6 +2607,22 @@ function act(state, side, action, random = randomInt) {
       );
       if (effect.mode === "place") recordPlacement(state, effect.mover);
       state.undo = [];
+      const moved = state.fighters.find((f) => f.id === effect.mover);
+      if (
+        effect.resume?.cantTouch === effect.mover &&
+        ["push", "throw"].includes(effect.mode) &&
+        combat.usable(moved)
+      )
+        state.effects.unshift({
+          type: "displace",
+          mode: "place",
+          range: 1,
+          side: moved.side,
+          mover: moved.id,
+          source: moved.id,
+          name: "Can‘t Touch This",
+          reference: { x: moved.x, y: moved.y, radius: moved.radius },
+        });
       log(state, effect.name + " · " + effect.mode, {
         side,
         fighter: effect.mover,
