@@ -19,6 +19,7 @@ function interacts(state, actor) {
   return state.objectives.flatMap((o) => {
     if (
       !onBoard(o) ||
+      (o.role === "secure" && combat.isPower(actor, "Anklebiter")) ||
       !within(actor, o, combat.interactRange(actor)) ||
       state.interacted?.includes(o.id)
     )
@@ -49,7 +50,11 @@ function consoleOptions(state, o) {
 
 function secureSide(state, objective) {
   const nearby = state.fighters.filter(
-    (f) => !f.grunt && combat.usable(f) && within(f, objective, 1),
+    (f) =>
+      !f.grunt &&
+      combat.usable(f) &&
+      !combat.isPower(f, "Anklebiter") &&
+      within(f, objective, 1),
   );
   const healthy = nearby.filter((f) => !f.injured);
   const eligible = healthy.length ? healthy : nearby;
@@ -93,7 +98,7 @@ function powerPhase(state) {
     const near = state.objectives.some(
       (o) => o.role === "secure" && within(f, o, 1),
     );
-    if (!near) continue;
+    if (!near || combat.isPower(f, "Anklebiter")) continue;
     if (state.mission.secure === cards.serum) combat.gain(f, 1);
     if (state.mission.secure === cards.demons)
       combat.condition(f, "incinerate");
@@ -119,6 +124,10 @@ function cosmicEffects(state) {
 }
 function cleanup(state, random) {
   for (const f of state.fighters.filter(combat.usable)) {
+    if (combat.isPower(f, "Overload") && f.power >= 8) {
+      combat.damage(state, f, 1);
+      log(state, "Overload · " + f.name, { side: f.side, fighter: f.id });
+    }
     if (
       state.mission.secure === cards.gamma &&
       !state.objectives.some((o) => o.role === "secure" && within(f, o, 2))
@@ -163,4 +172,5 @@ module.exports = {
   powerPhase,
   cosmicEffects,
   cleanup,
+  secureSide,
 };

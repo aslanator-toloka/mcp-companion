@@ -50,6 +50,7 @@ const decisionLabels = {
   "magnetic-crush": "Выбор террейна · Magnetic Crush",
   "from-the-ruins": "Выбор получателя Power · From the Ruins",
   "xavier-school": "Выбор получателя Power · Xavier's School",
+  frenzy: "Frenzy · Advance и Adamantium Slash",
   "phase-tactic": "Розыгрыш тактики",
 };
 
@@ -293,6 +294,7 @@ function GamePanel() {
   const [damageType, setDamageType] = useState("");
   const [payer, setPayer] = useState("");
   const [powerSpend, setPowerSpend] = useState("");
+  const [boost, setBoost] = useState("");
   const feedback = useGameFeedback(state);
   useEffect(() => {
     function onUndoShortcut(event) {
@@ -475,6 +477,7 @@ function GamePanel() {
       angle,
       damageType: selectedType,
       payer: currentPayer,
+      ...(attackOption.boostMax > 0 && boost && { boost: Number(boost) }),
     });
   }
   function hitTarget(id) {
@@ -644,6 +647,21 @@ function GamePanel() {
             </button>
           ))}
         </div>
+      )}
+      {attackOption?.boostMax > 0 && (
+        <label>
+          Доплата Power{" "}
+          <select value={boost} onChange={(e) => setBoost(e.target.value)}>
+            <option value="">0</option>
+            {Array.from({ length: attackOption.boostMax }, (_, i) => i + 1).map(
+              (amount) => (
+                <option key={amount} value={amount}>
+                  {amount} · +{amount} куб.
+                </option>
+              ),
+            )}
+          </select>
+        </label>
       )}
       {currentPayers.length > 0 && (
         <label>

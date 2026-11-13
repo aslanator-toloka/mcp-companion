@@ -127,6 +127,9 @@ const characters = selected(allCharacters, "characters", [
   "havok",
   "jubilee",
   "domino",
+  "bishop",
+  "x-23",
+  "honey-badger",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

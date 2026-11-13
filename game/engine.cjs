@@ -508,6 +508,20 @@ function targetingReactions(state, pending) {
     if (
       ally.id !== defender.id &&
       !pending.redirected &&
+      combat.isPower(ally, "Too Dangerous to Ignore") &&
+      geometry.within(attacker, ally, 2)
+    )
+      reactions.push({
+        value: "too-dangerous:" + ally.id,
+        key: "too-dangerous:" + ally.id,
+        label:
+          "Too Dangerous to Ignore · " + ally.name + " · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
+      ally.id !== defender.id &&
+      !pending.redirected &&
       combat.isPower(ally, "Big Brother") &&
       geometry.within(attacker, ally, 4)
     )
@@ -725,6 +739,11 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "frenzy")
+      return [
+        { type: "frenzy", label: "Frenzy · " + effect.cost + " Power" },
+        skip,
+      ];
     if (effect.type === "untamed")
       return [{ type: "untamed", label: "Untamed Force · 2 Power" }, skip];
     if (effect.type === "slippery")
@@ -1770,7 +1789,14 @@ function act(state, side, action, random = randomInt) {
       const granted = ["granted-attack", "flurry-attack"].includes(
         effect?.type,
       );
-      const diceBonus = !extra ? actor.stokeFlames : 0;
+      const boost = action.boost || 0;
+      expect(
+        Number.isInteger(boost) &&
+          boost >= 0 &&
+          boost <= (option.boostMax || 0),
+        "Укажите допустимую доплату Power.",
+      );
+      const diceBonus = (!extra ? actor.stokeFlames || 0 : 0) + boost;
       if (option.shape !== "single") {
         const remaining = combat.beginVolley(
           state,
@@ -1785,7 +1811,7 @@ function act(state, side, action, random = randomInt) {
           "Шаблон должен накрыть хотя бы одну допустимую цель.",
         );
         if (!extra) {
-          combat.pay(state, actor, option.cost, action.payer);
+          combat.pay(state, actor, option.cost + boost, action.payer);
           actor.stokeFlames = 0;
         }
         if (granted || extra) state.effects.shift();
@@ -1834,10 +1860,10 @@ function act(state, side, action, random = randomInt) {
             .some((r) => r.value === "cant-catch-me")
         ) {
           payment = {
-            cost: option.cost,
+            cost: option.cost + boost,
             payer: combat.payerFor(state, actor, option.cost, action.payer).id,
           };
-        } else combat.pay(state, actor, option.cost, action.payer);
+        } else combat.pay(state, actor, option.cost + boost, action.payer);
         if (!granted) state.actionsLeft -= 1;
         actor.stokeFlames = 0;
       }
@@ -1948,7 +1974,16 @@ function act(state, side, action, random = randomInt) {
         combat.spend(state, ally, chosenReaction.cost);
         const bigBrother = value.startsWith("big-brother:");
         const cantTouch = value.startsWith("cant-touch:");
-        if (cantTouch) {
+        const dangerous = value.startsWith("too-dangerous:");
+        if (dangerous) {
+          Object.assign(pending, {
+            target: ally.id,
+            redirected: true,
+            defenseBonus: 0,
+            block: false,
+          });
+          delete pending.quickDraw;
+        } else if (cantTouch) {
           pending.defenseBonus = (pending.defenseBonus || 0) + 2;
           pending.cantTouch = pending.target;
         } else if (!bigBrother) {
@@ -1965,9 +2000,11 @@ function act(state, side, action, random = randomInt) {
           state,
           bigBrother
             ? "Big Brother · " + ally.name
-            : cantTouch
-              ? "Can‘t Touch This · " + ally.name
-              : "Telekinetic Shield · " + ally.name,
+            : dangerous
+              ? "Too Dangerous to Ignore · " + ally.name
+              : cantTouch
+                ? "Can‘t Touch This · " + ally.name
+                : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
         continueTargeting(state, pending, random);
@@ -2096,6 +2133,35 @@ function act(state, side, action, random = randomInt) {
       (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
         "sinister-shake",
       );
+      break;
+    }
+    case "frenzy": {
+      const effect = state.effects.shift();
+      const source = state.fighters.find((f) => f.id === effect.source);
+      combat.spend(state, source, effect.cost);
+      (state.reactionUses ||= []).push(source.id + ":frenzy");
+      state.effects.unshift(
+        {
+          type: "displace",
+          mode: "advance",
+          speed: "S",
+          side,
+          mover: source.id,
+          source: source.id,
+          name: "Frenzy",
+          required: true,
+        },
+        {
+          type: "granted-attack",
+          side,
+          source: source.id,
+          index:
+            combat
+              .attacks(state, source)
+              .find((a) => a.name === "Adamantium Slash")?.index ?? 0,
+        },
+      );
+      log(state, "Frenzy", { side, fighter: source.id, power: "Frenzy" });
       break;
     }
     case "untamed": {

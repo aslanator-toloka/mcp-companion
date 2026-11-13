@@ -2,7 +2,7 @@
 
 Добавляем по одному персонажу. Статус «Готово» означает, что бойца можно взять в сохранённый ростер Game, а его атаки, способности и обязательные решения проверены через команды партии. Для каждого нового эффекта нужен сценарий с проверкой результата, включая отказ при недопустимом действии там, где это важно.
 
-Перед добавлением способности сверяем эффект и момент срабатывания с уже существующими. Power на активные и реактивные суперспособности списываем через `combat.spend`, чтобы на трату могли реагировать Leadership вроде Xavier's School. Charge, Hit and Run и Freeze and Fade используют общую последовательность Move и Attack. Ice Slide и Air Lift используют одну механику выбора союзника до Move и размещения после него.
+Перед добавлением способности сверяем эффект и момент срабатывания с уже существующими. Если у одноимённой атаки разных персонажей разный текст, правило задаём в `characterProfiles` по ключу `slug:имя`. Power на активные и реактивные суперспособности списываем через `combat.spend`, чтобы на трату могли реагировать Leadership вроде Xavier's School. Charge, Hit and Run и Freeze and Fade используют общую последовательность Move и Attack. Ice Slide и Air Lift используют одну механику выбора союзника до Move и размещения после него.
 
 | Очередь | Персонаж | Статус | Следующий шаг |
 | --- | --- | --- | --- |
@@ -37,6 +37,9 @@
 | 28 | Havok | Готово | Проверены Plasma Dispersion, Pierce и Incinerate Plasma Wave, Cosmic Energy Absorption и Blast Off. Leadership X-Factor не добавлен: в Game нет этой аффилиации. |
 | 29 | Jubilee | Готово | Проверены Stun на Wild и Hit, Rapid Fire, Fireworks, Wolverine! и I Totally Meant to Do That!. |
 | 30 | Domino | Готово | Проверены Rapid Fire, Grenade Bounce через LOS, Lucky Shot, Probability Manipulation и Things Tend To Go My Way. |
+| 31 | Bishop | Готово | Проверены XSE Blaster в Range 3, Return With Interest с выбором типа и доплатой Power, Mutant Energy Absorption, Overload и иммунитеты. |
+| 32 | X-23 | Готово | Проверены Claw Rush, Assassin Training, Frenzy после Daze и Lil‘ Sis. |
+| 33 | Honey Badger | Готово | Проверены Hamstring, Claw Slash без Pierce, Too Dangerous to Ignore, Anklebiter и Big Sis. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -194,3 +197,14 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Сохранённый ростер проверен. Браузер не проверен.
 
 [Сценарии Havok, Jubilee и Domino](../tests/game-havok-jubilee-domino.test.cjs).
+
+## 31–33. Bishop, X-23 и Honey Badger
+
+- [x] XSE Blaster накладывает Incinerate, только если защитник в Range 3. Return With Interest выбирает тип и принимает до 3 Power доплаты: каждая добавляет кубик каждой атаке. На Wild — Push от Bishop, затем Slow. В интерфейсе атаки появился выбор доплаты.
+- [x] Mutant Energy Absorption работает против атаки любого типа: за каждый Wild в защите превращает Hit, Wild или Critical атакующего в Blank и даёт за это Power. Overload наносит 1 урон в Cleanup при 8 Power. Absorbed Energy Conversion бросает на Medium.
+- [x] Claw Rush даёт Medium Advance после атаки. Assassin Training перебрасывает один кубик. Frenzy после Daze или KO во время активации даёт Short Advance и бесплатный Adamantium Slash, раз за Turn.
+- [x] Big Sis и Lil‘ Sis после урона по сестре в Range 3 дают Medium Advance к источнику урона, раз за Turn.
+- [x] Claw Slash у Honey Badger без Pierce. Hamstring при уроне накладывает Slow и Bleed, на Wild даёт Medium Advance. Too Dangerous to Ignore перехватывает атаку врага в Range 2. Anklebiter снимает кубик защиты у врага в Range 1 при атаке другого союзника, не даёт оспаривать Secure, взаимодействовать с ним и получать за него эффекты Power Phase.
+- [x] Сохранённый ростер проверен, клиент пересобран. Браузер не проверен.
+
+[Сценарии Bishop, X-23 и Honey Badger](../tests/game-bishop-x23-honey-badger.test.cjs).

@@ -283,6 +283,27 @@ const profiles = {
     conditions: [["", "incinerate"]],
   },
   "Lucky Shot": { noPower: true, conditions: [["wild", "stun"]] },
+  "XSE Blaster": { builder: "damage", closeCondition: [3, "incinerate"] },
+  "Return With Interest": {
+    types: ["physical", "energy", "mystic"],
+    boost: 3,
+    conditions: [["wild", "slow"]],
+    afterMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      on: "wild",
+      required: true,
+    },
+  },
+  "Claw Rush": {
+    pierce: true,
+    afterMove: { mode: "advance", who: "actor", speed: "M" },
+  },
+  Hamstring: {
+    conditions: [["damage", "slow", "bleed"]],
+    afterMove: { mode: "advance", who: "actor", speed: "M", on: "wild" },
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -404,8 +425,16 @@ const blobStrike = {
     on: "wild",
   },
 };
+const characterProfiles = {
+  "honey-badger:Claw Slash": {
+    builder: "damage",
+    conditions: [["wild", "bleed"]],
+  },
+};
 function attackProfile(actor, attack) {
   if (attack.borrowedFrom) return {};
+  const own = characterProfiles[actor.slug + ":" + attack.name];
+  if (own) return own;
   if (actor.slug === "colossus" && attack.name === "Strike")
     return colossusStrike;
   return actor.slug === "the-blob" && attack.name === "Strike"
@@ -458,6 +487,14 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Absorbed Energy Conversion": {
+    mode: "target",
+    range: 2,
+    terrain: 4,
+    enemy: 4,
+    speed: "M",
+    effect: "throw",
+  },
   "Cosmic Energy Absorption": { mode: "self", action: true, repeat: true },
   "Telekinetic Combat Enhancement": { mode: "advance", speed: "S" },
   "Freeze and Fade": {
@@ -1175,6 +1212,35 @@ function dropObjectives(state, target) {
   }
 }
 
+const sisters = { "Big Sis": "honey-badger", "Lil‘ Sis": "x-23" };
+function sisterAdvance(state, target, source) {
+  for (const f of state.fighters) {
+    const power = Object.keys(sisters).find(
+      (name) => sisters[name] === target.slug && isPower(f, name),
+    );
+    if (
+      !power ||
+      f.side !== target.side ||
+      f.id === target.id ||
+      !usable(f) ||
+      !within(f, target, 3) ||
+      state.reactionUses?.includes(f.id + ":sister")
+    )
+      continue;
+    (state.reactionUses ||= []).push(f.id + ":sister");
+    (state.effects ||= []).push({
+      type: "displace",
+      mode: "advance",
+      speed: "M",
+      direction: "toward",
+      side: f.side,
+      mover: f.id,
+      source: f.id,
+      name: power,
+      reference: { x: source.x, y: source.y, radius: source.radius },
+    });
+  }
+}
 function damage(
   state,
   target,
@@ -1232,6 +1298,7 @@ function damage(
     });
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
+  if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
   if (target.damage === maximum) {
     target.ko = !!target.injured || !!target.grunt;
     target.dazed = !target.ko;
@@ -1524,6 +1591,12 @@ function attacks(state, actor, previous) {
                     .map((f) => ({ value: f.id, label: f.name }))
                 : [],
             sampleBoost: !!rules.sampleBoost && (actor.samples ?? 1) > 0,
+            boostMax: rules.boost
+              ? Math.max(
+                  0,
+                  Math.min(rules.boost, actor.power - Number(attack.powerCost)),
+                )
+              : 0,
             types,
             targets: options,
           },
@@ -2419,6 +2492,13 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       ],
       [genius, "genius", "Strategic Genius", 1, false],
       [
+        isPower(model, "Assassin Training"),
+        "assassin",
+        "Assassin Training",
+        1,
+        false,
+      ],
+      [
         isPower(model, "Spetsnaz Training") && within(model, opponent, 1),
         "spetsnaz",
         "Spetsnaz Training",
@@ -2584,9 +2664,11 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
   }
   if (
     !rules.fixedPool &&
-    isPower(target, "Enhanced Energy Absorption") &&
-    pending.damageType !== "physical"
+    ((isPower(target, "Enhanced Energy Absorption") &&
+      pending.damageType !== "physical") ||
+      isPower(target, "Mutant Energy Absorption"))
   ) {
+    const mutant = isPower(target, "Mutant Energy Absorption");
     const max = defense.filter((d) => d === "wild").length;
     const eligible = rolled
       .map((d, i) => (["critical", "wild", "hit"].includes(d) ? i : -1))
@@ -2595,9 +2677,11 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       max &&
       eligible.length &&
       candidate("absorption", target.side, {
-        label: "Enhanced Energy Absorption",
+        label: mutant
+          ? "Mutant Energy Absorption"
+          : "Enhanced Energy Absorption",
         dice: rolled,
-        max,
+        max: Math.min(max, eligible.length),
         kind: "fixed-face",
         face: "blank",
         cost: 0,
@@ -2877,7 +2961,17 @@ function resolve(state, pending, block, random) {
             ],
           )) +
         (pending.block ? 2 : 0) +
-        (pending.defenseBonus || 0) +
+        (pending.defenseBonus || 0) -
+        Number(
+          state.fighters.some(
+            (f) =>
+              f.id !== actor.id &&
+              f.side === actor.side &&
+              usable(f) &&
+              isPower(f, "Anklebiter") &&
+              within(f, target, 1),
+          ),
+        ) +
         ((target.phasing === "density" && pending.damageType === "physical") ||
         (target.phasing === "phased" && pending.damageType === "energy")
           ? 3
@@ -3051,6 +3145,8 @@ function resolve(state, pending, block, random) {
   if (rules.backlash && rolled.includes("critical")) damage(state, actor, 2);
   for (const [test, ...values] of rules.conditions || [])
     if (matches(test, dealt)) values.forEach((name) => condition(target, name));
+  if (rules.closeCondition && within(actor, target, rules.closeCondition[0]))
+    condition(target, rules.closeCondition[1]);
   if (rules.splashShock && wilds) {
     state.fighters
       .filter(
@@ -3401,6 +3497,21 @@ function resolve(state, pending, block, random) {
       side: target.side,
       source: target.id,
       target: actor.id,
+    });
+  if (
+    state.active === actor.id &&
+    (target.dazed || target.ko) &&
+    isPower(actor, "Frenzy") &&
+    usable(actor) &&
+    reactiveAllowed(target, actor, state) &&
+    actor.power >= 2 + rootTax(actor) &&
+    !state.reactionUses?.includes(actor.id + ":frenzy")
+  )
+    events.push({
+      type: "frenzy",
+      side: actor.side,
+      source: actor.id,
+      cost: 2 + rootTax(actor),
     });
   if (
     dealt &&
