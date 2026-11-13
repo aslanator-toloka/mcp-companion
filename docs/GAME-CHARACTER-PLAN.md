@@ -34,6 +34,9 @@
 | 25 | Professor X | Готово | Проверены Xavier's School, Professor's Guidance, Telepathic Lock и все три атаки. Браузер не проверен. |
 | 26 | Psylocke | Готово | Проверены Katana с выбором типа, Neural Disruption, Pursuit, Telekinetic Combat Enhancement и Telepathic Precognition. |
 | 27 | Shadowcat | Готово | Проверены атаки без защитных Critical, Sidestep и Ghosted, Phase Rush и обе части Can‘t Touch This. |
+| 28 | Havok | Готово | Проверены Plasma Dispersion, Pierce и Incinerate Plasma Wave, Cosmic Energy Absorption и Blast Off. Leadership X-Factor не добавлен: в Game нет этой аффилиации. |
+| 29 | Jubilee | Готово | Проверены Stun на Wild и Hit, Rapid Fire, Fireworks, Wolverine! и I Totally Meant to Do That!. |
+| 30 | Domino | Готово | Проверены Rapid Fire, Grenade Bounce через LOS, Lucky Shot, Probability Manipulation и Things Tend To Go My Way. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -181,3 +184,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Сохранённый ростер проверен. Браузер не проверен.
 
 [Сценарии Psylocke и Shadowcat](../tests/game-psylocke-shadowcat.test.cjs).
+
+## 28–30. Havok, Jubilee и Domino
+
+- [x] Plasma Dispersion меняет по одному кубику на Hit за каждый Wild. Plasma Wave накладывает Incinerate на каждую цель и даёт Pierce на Wild. Cosmic Energy Absorption тратит действие на 2 Power, Blast Off делает Place в Range 2. Immunity к Incinerate действует.
+- [x] Lumikinetic Blast накладывает Stun только при Wild и Hit. Princess of Pyrotechnics даёт бесплатную дополнительную атаку по тому же защитнику на Wild и Hit.
+- [x] Fireworks перебрасывает до трёх кубиков защиты Jubilee или союзника в Range 2, раз за Turn для каждого защитника. Wolverine! переводит атаку на James Logan Howlett в Range 2. I Totally Meant to Do That! после Critical даёт 1 Power и сбрасывает жетоны, в атаке, защите и уклонении.
+- [x] Probability Manipulation превращает оплаченные Failure в Critical и добавляет за них кубики, в атаке, защите и уклонении. Things Tend To Go My Way не даёт врагам дополнительных кубиков за Critical против Domino.
+- [x] Сохранённый ростер проверен. Браузер не проверен.
+
+[Сценарии Havok, Jubilee и Domino](../tests/game-havok-jubilee-domino.test.cjs).

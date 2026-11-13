@@ -477,6 +477,26 @@ function targetingReactions(state, pending) {
       key: defender.id + ":mental-lock",
       label: lock + " · предложить защиту Mystic",
     });
+  const logan =
+    !pending.redirected &&
+    combat.isPower(defender, "Wolverine!") &&
+    combat.reactiveAllowed(attacker, defender, state) &&
+    defender.power >= combat.rootTax(defender) &&
+    state.fighters.find(
+      (f) =>
+        f.side === defender.side &&
+        f.id !== defender.id &&
+        combat.usable(f) &&
+        pool.characters[f.slug]?.alterEgo === "James Logan Howlett" &&
+        geometry.within(defender, f, 2),
+    );
+  if (logan)
+    reactions.push({
+      value: "wolverine-swap:" + logan.id,
+      key: defender.id + ":wolverine-swap",
+      label: "Wolverine! · " + logan.name + " становится целью",
+      cost: combat.rootTax(defender),
+    });
   for (const ally of state.fighters.filter(
     (f) =>
       f.side === defender.side &&
@@ -1950,6 +1970,24 @@ function act(state, side, action, random = randomInt) {
               : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
+        continueTargeting(state, pending, random);
+        break;
+      }
+      if (value?.startsWith("wolverine-swap:")) {
+        const jubilee = state.fighters.find((f) => f.id === pending.target);
+        combat.spend(state, jubilee, chosenReaction.cost);
+        Object.assign(pending, {
+          target: value.split(":").slice(1).join(":"),
+          redirected: true,
+          defenseBonus: 0,
+          block: false,
+        });
+        delete pending.quickDraw;
+        log(state, "Wolverine! · " + jubilee.name, {
+          side,
+          fighter: jubilee.id,
+          target: pending.target,
+        });
         continueTargeting(state, pending, random);
         break;
       }

@@ -272,6 +272,17 @@ const profiles = {
       on: "wild",
     },
   },
+  "Plasma Blast": { builder: "damage", conditions: [["wild", "incinerate"]] },
+  "Plasma Wave": { pierce: true, conditions: [["", "incinerate"]] },
+  "Lumikinetic Blast": { builder: 1, conditions: [["wild hit", "stun"]] },
+  "Princess of Pyrotechnics": { extra: "rapid", rapidOn: "wild hit" },
+  "Automatic Pistols": { builder: 1, extra: "rapid" },
+  "Grenade Bounce": {
+    ignoreSight: true,
+    nearbyDamage: "wild",
+    conditions: [["", "incinerate"]],
+  },
+  "Lucky Shot": { noPower: true, conditions: [["wild", "stun"]] },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -446,6 +457,8 @@ const activePowers = {
   Speedster: { mode: "self" },
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
+  "Blast Off": { mode: "place", range: 2 },
+  "Cosmic Energy Absorption": { mode: "self", action: true, repeat: true },
   "Telekinetic Combat Enhancement": { mode: "advance", speed: "S" },
   "Freeze and Fade": {
     mode: "sequence",
@@ -788,6 +801,21 @@ function dodge(state, target, source, random, bonus = 0) {
   ]);
   damage(state, target, dodgeDamage(target, rolled), source);
   grantFailurePower(state, observers);
+  totallyMeantIt(state, target, rolled);
+}
+function totallyMeantIt(state, model, roll) {
+  if (
+    !usable(model) ||
+    !roll.includes("critical") ||
+    !isPower(model, "I Totally Meant to Do That!")
+  )
+    return;
+  gain(model, 1);
+  dropObjectives(state, model);
+  log(state, "I Totally Meant to Do That! · " + model.name, {
+    side: model.side,
+    fighter: model.id,
+  });
 }
 function dodgeDamage(target, rolled) {
   return Math.max(
@@ -856,7 +884,12 @@ function collide(state, target, source, random, offerDiamond = true) {
       ? Math.min(3, target.power - rootTax(target))
       : 0;
   const reflexes = isPower(target, "Supersonic Reflexes");
-  if (stars <= 0 && !reflexes) {
+  const luck =
+    isPower(target, "Probability Manipulation") &&
+    reactiveAllowed(source, target, state)
+      ? target.power - rootTax(target)
+      : 0;
+  if (stars <= 0 && !reflexes && luck <= 0) {
     dodge(state, target, source, random);
     return;
   }
@@ -865,6 +898,28 @@ function collide(state, target, source, random, offerDiamond = true) {
     has(target, "hex") ? 0 : 1,
     random,
   );
+  if (luck > 0) {
+    const failures = rolled.flatMap((d, i) => (d === "failure" ? [i] : []));
+    const effect = {
+      type: "modify-dice",
+      id: "luck-dodge",
+      kind: "fixed-face",
+      face: "critical",
+      explode: !has(target, "hex"),
+      label: "Probability Manipulation · Уклонение",
+      role: "defense",
+      dice: rolled,
+      max: Math.min(failures.length, luck),
+      variable: true,
+      cost: rootTax(target),
+      eligible: failures,
+      side: target.side,
+      collision: { target: target.id, source: source?.id },
+    };
+    if (failures.length) (state.effects ||= []).unshift(effect);
+    else resolveDodge(state, effect, null, random);
+    return;
+  }
   const eligible = rolled.flatMap((die, index) =>
     die === "failure" ? [] : [index],
   );
@@ -899,7 +954,8 @@ function resolveDodge(state, effect, action, random) {
       !indices.every((index) => effect.eligible.includes(index)))
   )
     throw Error("Выберите допустимые кубики.");
-  for (const index of indices) rolled[index] = faces[random(8)];
+  for (const index of indices) rolled[index] = effect.face || faces[random(8)];
+  if (effect.explode) for (const _ of indices) rolled.push(faces[random(8)]);
   if (effect.variable && indices.length)
     spend(state, target, effect.cost + indices.length);
   log(state, "Уклонение · " + target.name, {
@@ -921,6 +977,7 @@ function resolveDodge(state, effect, action, random) {
     fighter(state, effect.collision.source),
   );
   grantFailurePower(state, observers);
+  totallyMeantIt(state, target, rolled);
 }
 function resolveAcrobaticDodge(state, effect, use, random) {
   const target = fighter(state, effect.target);
@@ -1722,6 +1779,7 @@ function usePower(state, actor, selected, action, random) {
       actor.trickShot = true;
       return;
     case "Synthesis":
+    case "Cosmic Energy Absorption":
       gain(actor, 2);
       return;
     case "No Mercy":
@@ -2205,6 +2263,79 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         if (option) return option;
       }
     }
+    const failures = values.flatMap((d, i) => (d === "failure" ? [i] : []));
+    if (
+      failures.length &&
+      isPower(model, "Probability Manipulation") &&
+      reactiveAllowed(model === actor ? target : actor, model, state) &&
+      model.power > rootTax(model)
+    ) {
+      const option = candidate("luck-" + role, model.side, {
+        label: "Probability Manipulation",
+        dice: values,
+        max: Math.min(failures.length, model.power - rootTax(model)),
+        kind: "fixed-face",
+        face: "critical",
+        explode: !has(model, "hex"),
+        cost: rootTax(model),
+        variable: true,
+        payer: model.id,
+        role,
+        eligible: failures,
+      });
+      if (option) return option;
+    }
+    const wildCount = values.filter((d) => d === "wild").length;
+    const dispersible = values.flatMap((d, i) =>
+      ["blank", "failure", "block"].includes(d) ? [i] : [],
+    );
+    if (
+      role === "rolled" &&
+      wildCount &&
+      dispersible.length &&
+      isPower(model, "Plasma Dispersion")
+    ) {
+      const option = candidate("dispersion", model.side, {
+        label: "Plasma Dispersion",
+        dice: values,
+        max: Math.min(wildCount, dispersible.length),
+        kind: "fixed-face",
+        face: "hit",
+        cost: 0,
+        payer: model.id,
+        role,
+        eligible: dispersible,
+      });
+      if (option) return option;
+    }
+    const jubilee =
+      role === "defense" &&
+      eligible.length &&
+      !state.reactionUses?.includes(model.id + ":fireworks") &&
+      state.fighters.find(
+        (f) =>
+          f.side === model.side &&
+          usable(f) &&
+          isPower(f, "Fireworks") &&
+          reactiveAllowed(actor, f, state) &&
+          (f.id === model.id || within(f, model, 2)) &&
+          f.power > rootTax(f),
+      );
+    if (jubilee) {
+      const option = candidate("fireworks", model.side, {
+        label: "Fireworks",
+        dice: values,
+        max: Math.min(3, jubilee.power - rootTax(jubilee)),
+        kind: "reroll",
+        cost: rootTax(jubilee),
+        variable: true,
+        payer: jubilee.id,
+        usage: model.id + ":fireworks",
+        role,
+        eligible,
+      });
+      if (option) return option;
+    }
     const precognition =
       eligible.length &&
       isPower(model, "Telepathic Precognition") &&
@@ -2527,6 +2658,8 @@ function applyModifier(state, event, action, random) {
               : event.kind === "fixed-face"
                 ? event.face
                 : faces[random(8)];
+        if (event.explode)
+          for (const _ of indices) values.push(faces[random(8)]);
         if (event.kind === "reroll")
           recordFailure(
             state,
@@ -2727,7 +2860,9 @@ function resolve(state, pending, block, random) {
     pending.rolls?.rolled ||
     dice(
       attackCount,
-      has(actor, "hex") ? 0 : rules.criticals || 1,
+      has(actor, "hex") || isPower(target, "Things Tend To Go My Way")
+        ? 0
+        : rules.criticals || 1,
       random,
       initial,
     );
@@ -2748,7 +2883,11 @@ function resolve(state, pending, block, random) {
           ? 3
           : 0) -
         Number(has(target, "incinerate") || false),
-      has(target, "hex") || rules.ignoreDefenseCritical ? 0 : 1,
+      has(target, "hex") ||
+        rules.ignoreDefenseCritical ||
+        isPower(actor, "Things Tend To Go My Way")
+        ? 0
+        : 1,
       random,
     );
   if (!pending.rolls) {
@@ -2886,8 +3025,17 @@ function resolve(state, pending, block, random) {
     target,
     Math.max(pending.tickles ? 1 : 0, incoming - (pending.reduction || 0)),
     actor,
-    { reviewed: true, attackType: pending.damageType },
+    {
+      reviewed: true,
+      attackType: pending.damageType,
+      noPower: !!rules.noPower,
+    },
   );
+  for (const [model, roll] of [
+    [actor, rolled],
+    [target, defense],
+  ])
+    totallyMeantIt(state, model, roll);
   if (rules.builder)
     gain(
       actor,
@@ -3197,7 +3345,7 @@ function resolve(state, pending, block, random) {
     usable(actor) &&
     rules.extra === "rapid" &&
     !pending.extra &&
-    rolled.includes("hit")
+    hasFaces(rolled, rules.rapidOn || "hit")
   )
     events.push({
       type: "bonus-attack",
@@ -3356,6 +3504,7 @@ module.exports = {
   pay,
   spend,
   xavierTargets,
+  rootTax,
   payerFor,
   collide,
   resolveDodge,
