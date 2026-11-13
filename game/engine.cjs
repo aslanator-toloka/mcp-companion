@@ -1026,6 +1026,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     angle: attack.angle,
     diceBonus: attack.diceBonus,
     doubleWild: attack.doubleWild,
+    throwAfter: attack.throwAfter,
     coldSnapAction: attack.coldSnapAction,
     side: target.side,
     ...(attack.volley && { volley: true }),
@@ -1138,7 +1139,8 @@ function finishVolleyTarget(state, pending, actor) {
             source: actor.id,
             targets: [...new Set(state.volley.targets)],
           });
-        if (combat.attackCard(actor, pending.index).name === "Flyby") {
+        const placeAfter = combat.attackCard(actor, pending.index).name;
+        if (["Flyby", "Tornado Claw"].includes(placeAfter)) {
           const last = state.fighters.find((f) => f.id === pending.target);
           if (last?.x != null)
             state.effects.push({
@@ -1147,7 +1149,7 @@ function finishVolleyTarget(state, pending, actor) {
               side: actor.side,
               mover: actor.id,
               source: actor.id,
-              name: "Flyby",
+              name: placeAfter,
               required: true,
               range: 1,
               reference: { x: last.x, y: last.y, radius: last.radius },
@@ -1481,6 +1483,11 @@ function beginRound(state) {
       if (combat.isPower(fighter, "Omega Level Multi-Versal Entity"))
         combat.gain(fighter, 1);
       if (combat.isPower(fighter, "Inner Rage")) combat.gain(fighter, 2);
+      if (
+        combat.isPower(fighter, "Techno-Organic Virus Suppression") ||
+        combat.isPower(fighter, "Psionic Nexus")
+      )
+        combat.gain(fighter, 1);
       if (combat.isPower(fighter, "Latent Psychic Potential"))
         combat.gain(fighter, 2);
     }
@@ -1881,6 +1888,7 @@ function act(state, side, action, random = randomInt) {
           payment,
           diceBonus,
           doubleWild: effect?.doubleWild,
+          throwAfter: granted && effect?.throwAfter,
           coldSnapAction: !extra,
         },
         random,

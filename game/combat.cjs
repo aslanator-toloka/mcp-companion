@@ -304,6 +304,28 @@ const profiles = {
     conditions: [["damage", "slow", "bleed"]],
     afterMove: { mode: "advance", who: "actor", speed: "M", on: "wild" },
   },
+  Soulsword: { builder: "damage", pierce: true },
+  "Bolts of Oshtur": { builder: 1, conditions: [["critical wild", "hex"]] },
+  Darkchylde: {
+    failuresSucceed: true,
+    conditions: [["", "bleed", "incinerate"]],
+  },
+  "Plasma Rifle": {
+    builder: "damage",
+    closeReroll: true,
+    conditions: [["wild", "incinerate"]],
+  },
+  "Askani‘Son": { healOnDamage: 1 },
+  "X-Slash": {
+    builder: "damage",
+    pierce: true,
+    afterMove: { mode: "place", who: "actor", range: 1, required: true },
+  },
+  "Tornado Claw": {
+    pierce: true,
+    conditions: [["wild", "bleed"]],
+    placeAfterVolley: true,
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -487,6 +509,23 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Body Slide by One": { mode: "place", range: 2 },
+  "Limbo Step": { mode: "self", variableCost: "bamf" },
+  "Omega Level Threat": {
+    mode: "target",
+    range: 3,
+    terrain: 4,
+    speed: "M",
+    effect: "throw",
+    variableCost: "terrain",
+  },
+  "What I Do Isn‘t Very Nice": {
+    mode: "sequence",
+    action: true,
+    order: ["attack"],
+    attackName: "X-Slash",
+    throwAfter: true,
+  },
   "Absorbed Energy Conversion": {
     mode: "target",
     range: 2,
@@ -1299,6 +1338,30 @@ function damage(
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
   if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
+  if (
+    dealt &&
+    enemy &&
+    attackType === "mystic" &&
+    usable(target) &&
+    isPower(target, "Get Out of my Head!") &&
+    !state.reactionUses?.includes(target.id + ":head")
+  ) {
+    (state.reactionUses ||= []).push(target.id + ":head");
+    for (const ally of state.fighters.filter(
+      (f) =>
+        f.id !== target.id &&
+        f.side === target.side &&
+        usable(f) &&
+        within(f, target, 3),
+    )) {
+      damage(state, ally, 1, target, { reviewed: true });
+      gain(ally, 1);
+    }
+    log(state, "Get Out of my Head! · " + target.name, {
+      side: target.side,
+      fighter: target.id,
+    });
+  }
   if (target.damage === maximum) {
     target.ko = !!target.injured || !!target.grunt;
     target.dazed = !target.ko;
@@ -1888,6 +1951,7 @@ function usePower(state, actor, selected, action, random) {
       actor.damage = Math.max(0, (actor.damage || 0) - 3);
       return;
     case "BAMF!":
+    case "Limbo Step":
       state.effects.push({
         type: "displace",
         mode: "place",
@@ -1895,7 +1959,7 @@ function usePower(state, actor, selected, action, random) {
         side: actor.side,
         mover: actor.id,
         source: actor.id,
-        name: "BAMF!",
+        name: selected.value,
         required: true,
         reference: { x: actor.x, y: actor.y, radius: actor.radius },
       });
@@ -1929,6 +1993,13 @@ function usePower(state, actor, selected, action, random) {
         side: actor.side,
         source: actor.id,
         ...(kind === "attack" && selected.doubleWild && { doubleWild: true }),
+        ...(kind === "attack" &&
+          selected.attackName && {
+            index: face(actor).attacks.findIndex(
+              (a) => a.name === selected.attackName,
+            ),
+            throwAfter: !!selected.throwAfter,
+          }),
         ...(kind === "move" &&
           selected.moveSizeFive && { climbsOnAdvance: true }),
       })),
@@ -2492,6 +2563,39 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       ],
       [genius, "genius", "Strategic Genius", 1, false],
       [
+        role === "rolled" && rules.closeReroll && within(actor, target, 3),
+        "plasma-rifle",
+        "Plasma Rifle",
+        2,
+        false,
+      ],
+      [
+        role === "rolled" &&
+          isPower(model, "On the Hunt") &&
+          !state.fighters.some(
+            (f) =>
+              f.id !== model.id &&
+              f.side === model.side &&
+              usable(f) &&
+              within(f, model, 3),
+          ),
+        "on-the-hunt",
+        "On the Hunt",
+        2,
+        false,
+      ],
+      [
+        role === "rolled" &&
+          !model.grunt &&
+          leadership(state, model.side, "Wetworks") &&
+          !state.reactionUses?.includes(model.id + ":wetworks"),
+        "wetworks",
+        "Wetworks",
+        1,
+        true,
+        model.id + ":wetworks",
+      ],
+      [
         isPower(model, "Assassin Training"),
         "assassin",
         "Assassin Training",
@@ -2538,7 +2642,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         pending.reroll === "failures",
       ],
     ];
-    for (const [enabled, id, label, max, failures] of sources) {
+    for (const [enabled, id, label, max, failures, usage] of sources) {
       if (!enabled) continue;
       const eligible = values
         .map((d, i) => (d !== "failure" || failures ? i : -1))
@@ -2554,6 +2658,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
           payer: model.id,
           role,
           eligible,
+          ...(usage && { usage }),
         });
       if (option) return option;
     }
@@ -2602,6 +2707,9 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
   }
   const cover =
     !rules.lockDefense &&
+    !(
+      pending.reviewed?.includes("wetworks-rolled") && within(actor, target, 3)
+    ) &&
     !rules.ignoreSight &&
     !(
       actor.trickShot && attackCard(actor, pending.index).name === "Arrow Shot"
@@ -2666,9 +2774,15 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
     !rules.fixedPool &&
     ((isPower(target, "Enhanced Energy Absorption") &&
       pending.damageType !== "physical") ||
-      isPower(target, "Mutant Energy Absorption"))
+      isPower(target, "Mutant Energy Absorption") ||
+      (isPower(target, "Scrying Mirrors of Limbo") &&
+        pending.damageType === "mystic"))
   ) {
-    const mutant = isPower(target, "Mutant Energy Absorption");
+    const mutant = isPower(target, "Mutant Energy Absorption")
+      ? "Mutant Energy Absorption"
+      : isPower(target, "Scrying Mirrors of Limbo")
+        ? "Scrying Mirrors of Limbo"
+        : null;
     const max = defense.filter((d) => d === "wild").length;
     const eligible = rolled
       .map((d, i) => (["critical", "wild", "hit"].includes(d) ? i : -1))
@@ -2677,9 +2791,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       max &&
       eligible.length &&
       candidate("absorption", target.side, {
-        label: mutant
-          ? "Mutant Energy Absorption"
-          : "Enhanced Energy Absorption",
+        label: mutant || "Enhanced Energy Absorption",
         dice: rolled,
         max: Math.min(max, eligible.length),
         kind: "fixed-face",
@@ -2800,6 +2912,9 @@ function attackRollSummary(state, pending, rolls = pending?.rolls) {
   const attackHits =
     rolled.filter((die) => ["hit", "wild", "critical"].includes(die)).length +
     innateDiceSuccesses(actor, rolled) +
+    (rules.failuresSucceed
+      ? [...rolled, ...defense].filter((die) => die === "failure").length
+      : 0) +
     (rules.doubleWild || pending.doubleWild
       ? rolled.filter((die) => die === "wild").length
       : 0);
@@ -3140,6 +3255,9 @@ function resolve(state, pending, block, random) {
           : rules.builder,
     );
   if (rules.heal) actor.damage = Math.max(0, (actor.damage || 0) - rules.heal);
+  if (rules.healOnDamage && dealt && usable(actor))
+    actor.damage = Math.max(0, (actor.damage || 0) - rules.healOnDamage);
+
   if (rules.afterDrain && wilds)
     target.power = Math.max(0, target.power - wilds);
   if (rules.backlash && rolled.includes("critical")) damage(state, actor, 2);
@@ -3498,6 +3616,20 @@ function resolve(state, pending, block, random) {
       source: target.id,
       target: actor.id,
     });
+  if (
+    pending.throwAfter &&
+    usable(target) &&
+    usable(actor) &&
+    displacementSize(target) <= 3
+  ) {
+    const thrown = moveEvent(
+      { mode: "throw", speed: "S" },
+      actor,
+      target,
+      "superpower",
+    );
+    if (thrown) events.push({ ...thrown, name: "What I Do Isn‘t Very Nice" });
+  }
   if (
     state.active === actor.id &&
     (target.dazed || target.ko) &&

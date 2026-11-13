@@ -40,6 +40,9 @@
 | 31 | Bishop | Готово | Проверены XSE Blaster в Range 3, Return With Interest с выбором типа и доплатой Power, Mutant Energy Absorption, Overload и иммунитеты. |
 | 32 | X-23 | Готово | Проверены Claw Rush, Assassin Training, Frenzy после Daze и Lil‘ Sis. |
 | 33 | Honey Badger | Готово | Проверены Hamstring, Claw Slash без Pierce, Too Dangerous to Ignore, Anklebiter и Big Sis. |
+| 34 | Magik | Готово | Проверены Darkchylde с Failure в обоих бросках, Hex на Critical и Wild, Limbo Step и Scrying Mirrors только против Mystic. |
+| 35 | Cable | Готово | Проверены перебросы Plasma Rifle в Range 3, лечение Askani‘Son, Omega Level Threat, Wetworks и отряд X-Force. |
+| 36 | Logan the Wolverine | Готово | Проверены X-Slash с Place, Tornado Claw, What I Do Isn‘t Very Nice, On the Hunt и Get Out of my Head!. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -208,3 +211,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Сохранённый ростер проверен, клиент пересобран. Браузер не проверен.
 
 [Сценарии Bishop, X-23 и Honey Badger](../tests/game-bishop-x23-honey-badger.test.cjs).
+
+## 34–36. Magik, Cable и Logan the Wolverine
+
+- [x] Darkchylde засчитывает Failure из бросков атаки и защиты как успехи атакующего и накладывает Bleed и Incinerate. Bolts of Oshtur накладывает Hex на Critical и Wild. Limbo Step делает Place на дальность, равную оплаченному Power. Scrying Mirrors of Limbo работает как Mutant Energy Absorption, но только против Mystic.
+- [x] Plasma Rifle перебрасывает до двух кубиков, если цель в Range 3. Askani‘Son лечит Cable на 1 за каждую цель, получившую урон. Omega Level Threat стоит не меньше размера террейна. Techno-Organic Virus Suppression и Psionic Nexus дают +1 Power в Power Phase.
+- [x] Wetworks позволяет каждому союзнику раз за Turn перебросить один кубик атаки, включая Failure. После такого переброса цель в Range 3 не получает Cover. Отряд X-Force из добавленных бойцов собирается, и ему предлагается Wetworks.
+- [x] X-Slash ставит Logan в Range 1 от защитника. Tornado Claw ставит его у последней цели луча. What I Do Isn‘t Very Nice тратит действие на X-Slash и затем предлагает Short Throw цели Size 3 и меньше. On the Hunt даёт два переброса, если рядом нет союзников. Get Out of my Head! наносит 1 урон союзникам в Range 3 и даёт им Power.
+- [x] Сохранённый ростер проверен. Браузер не проверен.
+
+[Сценарии Magik, Cable и Logan](../tests/game-magik-cable-logan.test.cjs).
