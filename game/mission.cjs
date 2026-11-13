@@ -56,7 +56,9 @@ function secureSide(state, objective) {
       !combat.isPower(f, "Anklebiter") &&
       within(f, objective, 1),
   );
-  const healthy = nearby.filter((f) => !f.injured);
+  const healthy = nearby.filter(
+    (f) => !f.injured || combat.isPower(f, "All Right, Now it‘s Serious..."),
+  );
   const eligible = healthy.length ? healthy : nearby;
   if (objective.freedom && !nearby.some((f) => f.side !== objective.freedom))
     return objective.freedom;

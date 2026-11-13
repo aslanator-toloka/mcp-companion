@@ -343,6 +343,33 @@ const profiles = {
   "Psionic Salvo": { extra: "salvo", rapidOn: "critical wild" },
   "UV Strike": { builder: "damage", flareOn: "wild hit" },
   "Dark Solar Blast": { concussion: "wild hit" },
+  Stab: { builder: "damage", extra: "rapid", rapidOn: "wild wild" },
+  Bang: { builder: 1, extra: "rapid", rapidOn: "wild hit" },
+  "Duodenum Poke": { conditions: [["damage", "bleed", "slow"]] },
+  "Maximum Effort!": {
+    afterMove: {
+      mode: "advance",
+      who: "actor",
+      speed: "S",
+      on: "wild",
+      danceParty: true,
+    },
+  },
+  "T-O Talons": {
+    builder: "damage",
+    conditions: [["wild", "bleed", "poison"]],
+  },
+  "Buster Cannon": { builder: 1, conditions: [["wild", "shock"]] },
+  "Self Must Protect Selffriend": {
+    selffriend: true,
+    afterMove: {
+      mode: "throw",
+      speed: "S",
+      direction: "away",
+      limit: 3,
+      on: "wild",
+    },
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -526,6 +553,16 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "You Can‘t Spell Legendary Without Leg Day": { mode: "place", range: 2 },
+  "Merc with a Mouth": { mode: "target", range: 3, enemy: 99, effect: "mouth" },
+  "Techno-Organic Absorption": {
+    mode: "target",
+    range: 3,
+    terrain: 3,
+    effect: "absorb-terrain",
+    repeat: true,
+  },
+  "Transmode Virus Infection": { mode: "self" },
   "Figment of Fantasy": {
     mode: "target",
     range: 5,
@@ -842,9 +879,12 @@ const displacementSize = (fighter) =>
   isPower(fighter, "Adamantium Skeleton") ? 3 : fighter.size;
 
 function mindShielded(model) {
-  return ["Helmet", "Psychic Immunity", "Omega-Level Telepath"].some((name) =>
-    isPower(model, name),
-  );
+  return [
+    "Helmet",
+    "Psychic Immunity",
+    "Omega-Level Telepath",
+    "Unicorns, Rainbows, and Sugar Plums Dancing Through My Head",
+  ].some((name) => isPower(model, name));
 }
 function moveEvent(spec, actor, target, damageType) {
   const mover = spec.who === "actor" ? actor : target;
@@ -1830,6 +1870,7 @@ function powers(state, actor) {
                   ? displacementSize(f)
                   : f.size) > settings.enemy)) ||
             !within(rangeOrigin(actor), f, settings.range) ||
+            (settings.effect === "mouth" && state.mouthRound?.includes(f.id)) ||
             (settings.neuralTarget &&
               !within(actor, f, 1) &&
               state.neural?.[actor.id] !== f.id) ||
@@ -2003,6 +2044,19 @@ function usePower(state, actor, selected, action, random) {
       );
       return;
     }
+    case "Transmode Virus Infection":
+      for (const f of [
+        actor,
+        ...state.fighters.filter(
+          (f) =>
+            f.side !== actor.side &&
+            usable(f) &&
+            has(f, "poison") &&
+            within(actor, f, 2),
+        ),
+      ])
+        damage(state, f, 2, actor);
+      return;
     case "Synthesis":
     case "Cosmic Energy Absorption":
       gain(actor, 2);
@@ -2103,6 +2157,16 @@ function usePower(state, actor, selected, action, random) {
     (state.fieldLeaderMoves ||= []).push(target.id);
   if (selected.value === "Matter Transmutation")
     (state.usedPowers ||= []).push("matter:" + target.id);
+  if (selected.effect === "mouth") {
+    target.power = Math.max(0, target.power - 2);
+    (state.mouthRound ||= []).push(target.id);
+    return;
+  }
+  if (selected.effect === "absorb-terrain") {
+    state.terrain = state.terrain.filter((p) => p.id !== terrain.id);
+    actor.damage = Math.max(0, (actor.damage || 0) - terrain.size);
+    return;
+  }
   if (selected.effect === "firewall") {
     condition(target, "root");
     condition(target, "slow");
@@ -2687,6 +2751,13 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       ],
       [genius, "genius", "Strategic Genius", 1, false],
       [
+        role === "rolled" && pending.selffriend,
+        "selffriend",
+        "Self Must Protect Selffriend",
+        pending.selffriend,
+        false,
+      ],
+      [
         role === "rolled" && rules.closeReroll && within(actor, target, 3),
         "plasma-rifle",
         "Plasma Rifle",
@@ -2720,9 +2791,17 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         model.id + ":wetworks",
       ],
       [
-        isPower(model, "Assassin Training"),
+        [
+          "Assassin Training",
+          "I Know Karate",
+          "All Right, Now it‘s Serious...",
+        ].some((name) => isPower(model, name)),
         "assassin",
-        "Assassin Training",
+        [
+          "Assassin Training",
+          "I Know Karate",
+          "All Right, Now it‘s Serious...",
+        ].find((name) => isPower(model, name)),
         1,
         false,
       ],
@@ -3075,6 +3154,18 @@ function resolve(state, pending, block, random) {
   const attack = attackCard(actor, pending.index),
     rules = attackProfile(actor, attack);
   pending.block ||= block;
+  if (rules.selffriend && pending.selffriend == null) {
+    const pieces = state.terrain.filter(
+      (piece) => piece.size <= 3 && distanceToTerrain(actor, piece) <= range[3],
+    );
+    if (pieces.length)
+      return {
+        suspended: true,
+        events: [
+          { type: "selffriend", side: actor.side, pieces, resume: pending },
+        ],
+      };
+  }
   if (rules.magneticCrush && pending.crushDice == null) {
     const destroyed = state.terrain.filter(
       (piece) =>
@@ -3203,7 +3294,12 @@ function resolve(state, pending, block, random) {
           )) +
         (pending.block ? 2 : 0) +
         (pending.defenseBonus || 0) +
-        (target.selfDiscovery ? 3 : 0) -
+        (target.selfDiscovery ? 3 : 0) +
+        (isPower(target, "Unstable Outline") &&
+        ["physical", "energy"].includes(pending.damageType) &&
+        !within(actor, target, 3)
+          ? 1
+          : 0) -
         Number(
           state.fighters.some(
             (f) =>

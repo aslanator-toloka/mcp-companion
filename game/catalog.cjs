@@ -136,6 +136,8 @@ const characters = selected(allCharacters, "characters", [
   "archangel",
   "mirage",
   "sunspot",
+  "deadpool",
+  "warlock",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

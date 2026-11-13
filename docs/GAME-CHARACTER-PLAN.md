@@ -46,6 +46,8 @@
 | 37 | Archangel | Готово | Проверены Razor Wing Strike, Overwing, Avatar of Death, Wing Shield и Chosen of Apocalypse. |
 | 38 | Mirage | Готово | Проверены Neural Connection, Figment of Fantasy, Telepathic Emotion Manifestation, Psionic Salvo и Coming of Age. |
 | 39 | Sunspot | Готово | Проверены жетоны Flare, Thermokinesis, Dark Solar Blast, Sunburn и взрыв Flare State. |
+| 40 | Deadpool | Готово | Проверены Stab, Stab и Bang, Bang, Duodenum Poke, Maximum Effort!, Merc with a Mouth, перебросы и защита от Mystic Advance. |
+| 41 | Warlock | Готово | Проверены T-O Talons, Self Must Protect Selffriend, Techno-Organic Absorption, Transmode Virus Infection и Unstable Outline. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -234,3 +236,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд X-Force с новыми бойцами собирается. Браузер не проверен. Flare, Neural Connection и Self-Discovery показаны в строке бойца.
 
 [Сценарии Archangel, Mirage и Sunspot](../tests/game-archangel-mirage-sunspot.test.cjs).
+
+## 40–41. Deadpool и Warlock
+
+- [x] Stab даёт повторную атаку на двух Wild, Bang на Wild и Hit. Duodenum Poke при уроне накладывает Bleed и Slow. Maximum Effort! на раненой стороне после Short Advance наносит 1 урон всем в Range 2 и даёт Deadpool Power за каждый урон.
+- [x] Merc with a Mouth снимает 2 Power с врага в Range 3, раз за раунд на каждого врага. Leg Day делает Place в Range 2. I Know Karate и All Right, Now it‘s Serious... перебрасывают один кубик. Раненый Deadpool оспаривает задания как здоровый. Unicorns... защищает от Push и Advance от Mystic и вражеских способностей.
+- [x] T-O Talons накладывает Bleed и Poison на Wild, Buster Cannon — Shock. Self Must Protect Selffriend перед броском предлагает уничтожить террейн Size 3 и меньше в Range 3: можно перебросить столько кубиков, каков его размер. На Wild — Short Throw от Warlock.
+- [x] Techno-Organic Absorption уничтожает террейн и лечит на его размер. Transmode Virus Infection наносит 2 урона Warlock и врагам с Poison в Range 2. Unstable Outline добавляет кубик защиты против Physical и Energy, если атакующий дальше Range 3.
+- [x] Отряд X-Force собирается. Браузер не проверен.
+
+[Сценарии Deadpool и Warlock](../tests/game-deadpool-warlock.test.cjs).

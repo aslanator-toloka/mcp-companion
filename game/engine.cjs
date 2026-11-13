@@ -693,6 +693,19 @@ function currentEffect(state, side) {
           })),
         },
       ];
+    if (effect.type === "selffriend")
+      return [
+        {
+          type: "selffriend",
+          options: [
+            ...effect.pieces.map((piece) => ({
+              value: piece.id,
+              label: "Уничтожить " + piece.name + " · Size " + piece.size,
+            })),
+            { value: "", label: "Без террейна" },
+          ],
+        },
+      ];
     if (effect.type === "magnetic-crush")
       return [
         {
@@ -1209,6 +1222,7 @@ function declareWinner(state, side) {
 }
 
 function nextRound(state, priority) {
+  state.mouthRound = [];
   const living = sides.filter((p) =>
     state.fighters.some((f) => f.side === p && !f.ko),
   );
@@ -2475,6 +2489,17 @@ function act(state, side, action, random = randomInt) {
       finishAttack(state, pending, false, random);
       break;
     }
+    case "selffriend": {
+      const { pieces, resume } = state.effects.shift();
+      const piece = pieces.find((p) => p.id === value);
+      resume.selffriend = piece?.size || 0;
+      if (piece) {
+        state.terrain = state.terrain.filter((p) => p.id !== piece.id);
+        log(state, "Self Must Protect Selffriend · " + piece.name, { side });
+      }
+      finishAttack(state, resume, false, random);
+      break;
+    }
     case "magnetic-crush": {
       const { destroyed, resume } = state.effects.shift();
       const primary = destroyed.find((piece) => piece.id === value);
@@ -2757,6 +2782,22 @@ function act(state, side, action, random = randomInt) {
       );
       if (effect.mode === "place") recordPlacement(state, effect.mover);
       state.undo = [];
+      if (effect.danceParty) {
+        const dancer = state.fighters.find((f) => f.id === effect.mover);
+        let dealt = 0;
+        for (const f of state.fighters.filter(
+          (f) =>
+            f.id !== dancer.id &&
+            combat.usable(f) &&
+            geometry.within(f, dancer, 2),
+        ))
+          dealt += combat.damage(state, f, 1, dancer) || 0;
+        combat.gain(dancer, dealt);
+        log(state, "Dance Party · " + dealt + " урона", {
+          side,
+          fighter: dancer.id,
+        });
+      }
       const moved = state.fighters.find((f) => f.id === effect.mover);
       if (
         effect.resume?.cantTouch === effect.mover &&
