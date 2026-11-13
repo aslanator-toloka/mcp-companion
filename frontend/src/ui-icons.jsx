@@ -17,6 +17,7 @@ const paths = {
   collection: "m3 6 7-3 7 3-7 3-7-3Zm0 0v8l7 3 7-3V6M10 9v8",
   compare: "M3 6h13m-4-4 4 4-4 4M17 14H4m4-4-4 4 4 4",
   search: "M13.5 13.5 17 17M15 9a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z",
+  flip: "M3 7h14m-4-4 4 4-4 4M17 13H3m4-4-4 4 4 4",
   battle: "M4 3h12v14H4zM7 6h.01M13 6h.01M10 10h.01M7 14h.01M13 14h.01",
 };
 export function UIIcon({ name, className = "" }) {

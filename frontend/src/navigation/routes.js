@@ -310,6 +310,7 @@ export function createRoutes(s) {
                 "rosters",
                 "tournaments",
                 "battle",
+                "game",
                 "purchases",
                 "calculator",
               ],

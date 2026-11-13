@@ -16,6 +16,9 @@ export const Navigation = observer(function Navigation() {
     ["rosters", "04", "Ростеры"],
     ["calculator", "07", "Калькулятор"],
     ["battle", "08", "Бой"],
+    ...(["127.0.0.1", "localhost"].includes(location.hostname)
+      ? [["game", "10", "Game"]]
+      : []),
     ["purchases", "09", "Запланированные покупки"],
   ];
   const selected =
@@ -318,6 +321,7 @@ export const Screen = observer(function Screen({ name, children, ...props }) {
           rosters: "Ростеры",
           calculator: "Калькулятор атак",
           battle: "Бой",
+          game: "Game",
           tournaments: "Турнирный архив",
           purchases: "Запланированные покупки",
         }[name]

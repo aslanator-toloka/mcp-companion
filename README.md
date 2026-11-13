@@ -25,6 +25,44 @@ The local URL is http://127.0.0.1:4173/mcp-companion/. All UI and stores are in 
 
 Two-player battles use WebRTC DataChannel, a browser-hosted authority and manual invitation/answer exchange. There is no signaling, STUN or TURN service. Changes are sent immediately, with a full snapshot every 10 seconds. After reload exchange new connection texts for the saved room. Direct connectivity depends on browser/network permissions and Wi-Fi peer access; two physical iPads remain a manual test.
 
+## Local Game
+
+Run `npm run build` and `npm run serve`, then open **Game** at
+[127.0.0.1:4173/mcp-companion](http://127.0.0.1:4173/mcp-companion/#screen=game).
+The Avengers and Cabal roster presets use local card data for stat cards,
+mission rules, attacks, superpowers, and tactics. Game shows pending decisions
+from both sides, including attacks with multiple targets and reactions.
+Movement, line of sight, and collisions use sampled 2D geometry. Game saves its
+state to `.runtime/game.json` separately from Battle.
+
+The CLI and browser share one local match. The browser's **Вернуть управление**
+button retakes a side at its current decision. Set `PORT` if you started the
+server on a different port.
+
+```sh
+npm run game -- state p2
+npm run game -- take p2
+npm run game -- reach p2 advance
+npm run game -- act p2 '{"type":"advance","x":12.25,"y":7}' <revision>
+npm run game -- snapshot
+npm run game -- finish
+```
+
+Use the current `revision` and the side's `actions` from `state` to construct
+a command. Use `reach` for legal sample positions and `character <slug>` for the
+stat card. For a beam, send an `attack` with `angle` in degrees clockwise from
+the right of the screen. For an area, omit the angle. Resolve each target with
+the `volley-target` commands returned in `state`. The same action list describes
+pending reactions, dice changes, tactics, and effect placements. `snapshot` also includes both sides' sealed choices and is intended
+for inspection outside the player's normal view.
+
+Game feedback is configured in `assets/game-feedback.json`. Under `attacks` or
+`powers`, add the card's exact move name and set `animation` to `beam`,
+`bolt`, `slash` or `pulse`. You can set a colour, use a built-in sound
+(`impact`, `zap`, `charge`, `silent`), or point `sound` at a local file
+under `assets/`. An optional `sprite` path under `assets/` adds custom art
+at the impact point. Refresh Game to reload the configuration.
+
 ## Android and photo import
 
 The Capacitor Android app imports characters, tactics and crises from photos into rosters and battles. Recognition runs locally using bundled ML Kit, followed by a review before adding cards. No account or OCR server is needed.

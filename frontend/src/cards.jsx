@@ -355,7 +355,7 @@ function Art({ mode, image, fallback, name, settings = {} }) {
     </div>
   );
 }
-export const StatCard = observer(function StatCard({ view: v }) {
+export const StatCard = observer(function StatCard({ view: v, cardControls }) {
   const { slug, detail, form = 0, side = "front", battle } = v,
     character = catalog.byId.get(slug) || {},
     metadata = cardViews.metadata || {},
@@ -542,6 +542,7 @@ export const StatCard = observer(function StatCard({ view: v }) {
             {(side === "back" && card.secondSideArtist) || card.artist || ""}
           </footer>
         </article>
+        {cardControls}
       </div>
       {card.erratas?.length > 0 && (
         <details data-ui-disclosure className="sc-errata">
@@ -1326,7 +1327,11 @@ export const RuleReferenceModal = observer(function RuleReferenceModal() {
     </CardModal>
   );
 });
-export const StatSurface = observer(function StatSurface({ view, children }) {
+export const StatSurface = observer(function StatSurface({
+  view,
+  children,
+  cardControls,
+}) {
   const ref = useRef(null),
     layers = cardViews.layers.get(view.slug);
   const [readable, setReadable] = useState(false);
@@ -1367,7 +1372,7 @@ export const StatSurface = observer(function StatSurface({ view, children }) {
         </p>
       )}
       <div className="stat-card-surface">
-        <StatCard view={view} />
+        <StatCard view={view} cardControls={cardControls} />
       </div>
     </section>
   );

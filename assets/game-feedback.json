@@ -1,0 +1,14 @@
+{
+  "attacks": {
+    "Plasma Beam": { "animation": "beam", "color": "#52dcff", "sound": "zap" },
+    "Mystic Beam": { "animation": "beam", "color": "#ca9dff", "sound": "zap" },
+    "Helios Laser Bombardment": { "animation": "beam", "color": "#ffe8a3", "sound": "zap" },
+    "Shield Bounce": { "animation": "bolt", "color": "#ff806d", "sound": "impact" },
+    "Sword Strike": { "animation": "slash", "color": "#fff5c4", "sound": "impact" }
+  },
+  "powers": {
+    "Hook Arrow": { "animation": "bolt", "color": "#b8a9ff", "sound": "charge" },
+    "Web-Slinger": { "animation": "bolt", "color": "#e7f7ff", "sound": "zap" },
+    "Quick Step": { "animation": "pulse", "color": "#a6ffbf", "sound": "charge" }
+  }
+}

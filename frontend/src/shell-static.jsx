@@ -6,6 +6,7 @@ import {
   MembershipModal,
   DataModal,
 } from "./dialogs.jsx";
+import { GameWorkspace } from "./game.jsx";
 import { BattleWorkspace } from "./battle.jsx";
 import { BattlePickerModal, BattleDialogModal } from "./battle-extra.jsx";
 import { PeerModal } from "./peer.jsx";
@@ -90,6 +91,9 @@ export const StaticShell = memo(function StaticShell() {
           </Screen>
           <Screen name="battle" id="battle-screen">
             <BattleWorkspace />
+          </Screen>
+          <Screen name="game" id="game-screen">
+            <GameWorkspace />
           </Screen>
           <Screen name="tournaments" id="tournaments-screen">
             <TournamentPanel />
