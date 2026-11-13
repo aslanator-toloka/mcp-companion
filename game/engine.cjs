@@ -765,6 +765,27 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "deflection")
+      return [
+        {
+          type: "deflection",
+          label: "Telekinetic Deflection · " + effect.cost + " Power",
+        },
+        skip,
+      ];
+    if (effect.type === "psychic-distraction")
+      return [
+        {
+          type: "psychic-distraction",
+          label:
+            "Psychic Distraction · " +
+            state.fighters.find((f) => f.id === effect.target).name +
+            " · " +
+            effect.cost +
+            " Power",
+        },
+        skip,
+      ];
     if (effect.type === "anti-healing")
       return [
         {
@@ -1554,6 +1575,7 @@ function beginRound(state) {
       if (combat.isPower(fighter, "Inner Rage")) combat.gain(fighter, 2);
       if (
         combat.isPower(fighter, "Techno-Organic Virus Suppression") ||
+        combat.isPower(fighter, "Telepathic Cloak") ||
         combat.isPower(fighter, "Psionic Nexus")
       )
         combat.gain(fighter, 1);
@@ -2226,6 +2248,27 @@ function act(state, side, action, random = randomInt) {
       );
       break;
     }
+    case "deflection": {
+      const effect = state.effects.shift();
+      const target = state.fighters.find((f) => f.id === effect.target);
+      combat.spend(state, target, effect.cost);
+      log(state, "Telekinetic Deflection · " + target.name, {
+        side,
+        fighter: target.id,
+        power: "Telekinetic Deflection",
+      });
+      break;
+    }
+    case "psychic-distraction": {
+      const effect = state.effects.shift();
+      const source = state.fighters.find((f) => f.id === effect.source);
+      const target = state.fighters.find((f) => f.id === effect.target);
+      combat.spend(state, source, effect.cost);
+      state.undo = [];
+      combat.psychicDistraction(state, source, target, random);
+      resumeAfterDamage(state, random);
+      break;
+    }
     case "anti-healing": {
       const effect = state.effects.shift();
       const source = state.fighters.find((f) => f.id === effect.source);
@@ -2889,6 +2932,16 @@ function act(state, side, action, random = randomInt) {
     }
     case "skip-effect": {
       const effect = state.effects.shift();
+      if (effect.type === "deflection")
+        combat.collide(
+          state,
+          state.fighters.find((f) => f.id === effect.target),
+          state.fighters.find((f) => f.id === effect.source),
+          random,
+          effect.offerDiamond,
+          false,
+        );
+      if (effect.type === "psychic-distraction") state.undo = [];
       if (effect.type === "anti-healing") {
         const target = state.fighters.find((f) => f.id === effect.target);
         target.damage = Math.max(0, (target.damage || 0) - effect.amount);
@@ -3149,6 +3202,33 @@ function act(state, side, action, random = randomInt) {
       break;
   }
   if (state.phase === "finished") return;
+  if (state.phase === "activation")
+    for (const [id, x, y] of previousPositions) {
+      const moved = state.fighters.find((f) => f.id === id);
+      if (
+        !combat.usable(moved) ||
+        x == null ||
+        (moved.x === x && moved.y === y) ||
+        state.effects.some((e) => e.mover === id && e.type === "displace")
+      )
+        continue;
+      for (const nova of state.fighters.filter(
+        (f) =>
+          f.side !== moved.side &&
+          combat.usable(f) &&
+          combat.isPower(f, "Psychic Distraction") &&
+          f.power >= 2 + combat.rootTax(f) &&
+          combat.reactiveAllowed(moved, f, state) &&
+          geometry.within(f, moved, 3),
+      ))
+        state.effects.unshift({
+          type: "psychic-distraction",
+          side: nova.side,
+          source: nova.id,
+          target: moved.id,
+          cost: 2 + combat.rootTax(nova),
+        });
+    }
   for (const [id, x, y] of previousPositions) {
     const moved = state.fighters.find((f) => f.id === id);
     if (

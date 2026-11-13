@@ -51,6 +51,7 @@
 | 42 | Maverick | Готово | Проверены Rapid Fire, Agent Zero, Anti-Healing Factor Corrosive и Kinetic Energy Absorption. |
 | 43 | Weapon X | Готово | Проверены Berserker Rage по повторной цели, Rampage и Wild Abandon, Savagery Protocols и Aimless Aggression. |
 | 44 | Omega Red | Готово | Проверены Carbonadium Coils и Armor, Absorb Essence, Ensnare, Death Factor и Death Spores. |
+| 45 | Cassandra Nova | Готово | Проверены Telepathic Cloak, Psionic Bolt без Pierce, Mind Possession, Flesh Manipulation, Biokinesis, Psychic Distraction и Telekinetic Deflection. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -258,3 +259,12 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряды Weapon X и Hellfire Club собираются. Браузер не проверен.
 
 [Сценарии Maverick, Weapon X и Omega Red](../tests/game-weapon-x-omega-red.test.cjs).
+
+## 45. Cassandra Nova
+
+- [x] Telepathic Cloak: Cassandra можно атаковать только из Range 3. Даёт +1 Power в Power Phase. Её Psionic Bolt вытягивает Power на Wild, без Pierce другой версии. Mind Possession предлагает Short Advance защитника даже без урона.
+- [x] Flesh Manipulation на Wild отталкивает всех остальных в Range 2 и наносит им 1 урон. Biokinesis накладывает Root и Slow.
+- [x] Psychic Distraction: когда враг заканчивает перемещение в Range 3, Cassandra может бросить 4 кубика, нанести урон за Critical и Wild и затем сделать Short Advance. Telekinetic Deflection за 2 Power отменяет урон от столкновения.
+- [x] Отряды Hellfire Club и Servants of the Apocalypse собираются. Apocalypse пока не добавлен: его Leadership раздаёт карты Всадников, которых нет в данных.
+
+[Сценарии Cassandra Nova](../tests/game-cassandra-nova.test.cjs).

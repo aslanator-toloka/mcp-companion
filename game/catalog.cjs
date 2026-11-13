@@ -141,6 +141,7 @@ const characters = selected(allCharacters, "characters", [
   "maverick",
   "weapon-x",
   "omega-red",
+  "cassandra-nova",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

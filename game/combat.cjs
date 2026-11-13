@@ -390,6 +390,8 @@ const profiles = {
   },
   "Carbonadium Coils": { builder: "damage", healOnDamage: 1 },
   "Red Terror": { types: ["physical", "energy"], absorbEssence: true },
+  "Mind Possession": { afterMove: { mode: "advance", speed: "S" } },
+  "Flesh Manipulation": { explosiveForce: true },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -512,6 +514,7 @@ const blobStrike = {
   },
 };
 const characterProfiles = {
+  "cassandra-nova:Psionic Bolt": { builder: "damage", drain: "sap" },
   "honey-badger:Claw Slash": {
     builder: "damage",
     conditions: [["wild", "bleed"]],
@@ -573,6 +576,13 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  Biokinesis: {
+    mode: "target",
+    range: 3,
+    enemy: 99,
+    effect: "firewall",
+    repeat: true,
+  },
   "Death Factor": { mode: "self" },
   Ensnare: {
     mode: "target",
@@ -1058,8 +1068,31 @@ function cantTouchThis(state, target, source) {
       reactiveAllowed(source, f, state),
   );
 }
-function collide(state, target, source, random, offerDiamond = true) {
+function collide(
+  state,
+  target,
+  source,
+  random,
+  offerDiamond = true,
+  offerDeflection = true,
+) {
   if (!usable(target)) return;
+  if (
+    offerDeflection &&
+    isPower(target, "Telekinetic Deflection") &&
+    target.power >= 2 + rootTax(target) &&
+    reactiveAllowed(source, target, state)
+  ) {
+    (state.effects ||= []).unshift({
+      type: "deflection",
+      side: target.side,
+      target: target.id,
+      source: source?.id,
+      offerDiamond,
+      cost: 2 + rootTax(target),
+    });
+    return;
+  }
   const acrobaticsCost = 2 + rootTax(target);
   const shadowcat = cantTouchThis(state, target, source);
   if (
@@ -1776,6 +1809,8 @@ function attacks(state, actor, previous) {
     const options = targets
       .filter((target) => {
         if (target.id === attack.borrowedFrom) return false;
+        if (isPower(target, "Telepathic Cloak") && !within(actor, target, 3))
+          return false;
         if (previous?.kind === "flurry" && target.id !== previous.target)
           return false;
         if (
@@ -4001,6 +4036,27 @@ function resolve(state, pending, block, random) {
       source: target.id,
       target: actor.id,
     });
+  if (rules.explosiveForce && wilds)
+    for (const f of state.fighters.filter(
+      (f) => f.id !== actor.id && usable(f) && within(f, actor, 2),
+    )) {
+      const push = moveEvent(
+        {
+          mode: "push",
+          speed: "S",
+          direction: "away",
+          required: true,
+          reference: { x: actor.x, y: actor.y, radius: actor.radius },
+        },
+        actor,
+        f,
+        pending.damageType,
+      );
+      if (push) {
+        events.push({ ...push, name: "Explosive Force · " + f.name });
+        damage(state, f, 1, actor);
+      }
+    }
   if (
     pending.throwAfter &&
     usable(target) &&
@@ -4092,6 +4148,27 @@ function xmenBlueTargets(state, source) {
       !state.leadershipUses?.[f.side]?.includes("blue:" + f.id),
   );
 }
+function psychicDistraction(state, actor, target, random) {
+  const rolled = rawDice(4, random);
+  const hits = rolled.filter((d) => d === "critical" || d === "wild").length;
+  log(state, "Psychic Distraction · " + target.name, {
+    side: actor.side,
+    fighter: actor.id,
+    target: target.id,
+    rolls: [{ label: "Psychic Distraction", faces: rolled }],
+  });
+  const dealt = damage(state, target, hits, actor) || 0;
+  if (dealt && usable(actor))
+    (state.effects ||= []).unshift({
+      type: "displace",
+      mode: "advance",
+      speed: "S",
+      side: actor.side,
+      mover: actor.id,
+      source: actor.id,
+      name: "Psychic Distraction",
+    });
+}
 function nightmareVisions(state, actor, target, random) {
   const rolled = rawDice(4, random);
   const successes = rolled.filter(
@@ -4132,6 +4209,7 @@ module.exports = {
   pay,
   spend,
   heal,
+  psychicDistraction,
   addFlare,
   xavierTargets,
   rootTax,
