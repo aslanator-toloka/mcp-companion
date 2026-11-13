@@ -234,6 +234,11 @@ const profiles = {
     conditions: [["wild", "root"]],
   },
   "Astral Disintegration": { powerDice: true, lockDefense: true },
+  "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
+  "Mental Suggestion": {
+    afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
+  },
+  "Astral Duel": { mysticDice: true, lockDefense: true },
   "Deadly Illusions": {
     builder: 1,
     damageCap: 1,
@@ -672,6 +677,11 @@ function isPower(fighter, name) {
 const displacementSize = (fighter) =>
   isPower(fighter, "Adamantium Skeleton") ? 3 : fighter.size;
 
+function mindShielded(model) {
+  return ["Helmet", "Psychic Immunity", "Omega-Level Telepath"].some((name) =>
+    isPower(model, name),
+  );
+}
 function moveEvent(spec, actor, target, damageType) {
   const mover = spec.who === "actor" ? actor : target;
   const ref = spec.reference || (mover === actor ? target : actor);
@@ -692,7 +702,7 @@ function moveEvent(spec, actor, target, damageType) {
     ((damageType === "mystic" || damageType === "superpower") &&
       mover.side !== actor.side &&
       ["push", "advance"].includes(spec.mode) &&
-      (isPower(mover, "Helmet") || isPower(mover, "Psychic Immunity"))) ||
+      mindShielded(mover)) ||
     (spec.mode === "push" &&
       (mover.phasing === "density" ||
         (isPower(mover, "Metal Mind") &&
@@ -828,7 +838,7 @@ function resolveDodge(state, effect, action, random) {
     throw Error("Выберите допустимые кубики.");
   for (const index of indices) rolled[index] = faces[random(8)];
   if (effect.variable && indices.length)
-    target.power -= effect.cost + indices.length;
+    spend(state, target, effect.cost + indices.length);
   log(state, "Уклонение · " + target.name, {
     side: target.side,
     fighter: target.id,
@@ -851,7 +861,7 @@ function resolveDodge(state, effect, action, random) {
 }
 function resolveAcrobaticDodge(state, effect, use, random) {
   const target = fighter(state, effect.target);
-  if (use) target.power -= effect.cost;
+  if (use) spend(state, target, effect.cost);
   dodge(state, target, fighter(state, effect.source), random, use ? 2 : 0);
 }
 
@@ -1164,7 +1174,7 @@ function removeGrunt(state, drone, source) {
 function resolveNicePunch(state, effect, use) {
   const target = fighter(state, effect.target);
   if (!usable(target)) return;
-  if (use) target.power -= effect.cost;
+  if (use) spend(state, target, effect.cost);
   const dealt = damage(
     state,
     target,
@@ -1497,8 +1507,7 @@ function powers(state, actor) {
             !within(rangeOrigin(actor), f, settings.range) ||
             (["advance", "push"].includes(settings.effect) &&
               ((f.side !== actor.side && isPower(f, "Metal Mind")) ||
-                (f.side !== actor.side &&
-                  (isPower(f, "Helmet") || isPower(f, "Psychic Immunity"))) ||
+                (f.side !== actor.side && mindShielded(f)) ||
                 (settings.effect === "push" &&
                   (f.phasing === "density" ||
                     (f.side !== actor.side && isPower(f, "Organic Steel"))))))
@@ -1584,6 +1593,34 @@ function payerFor(state, actor, cost, payer) {
 function pay(state, actor, cost, payer) {
   payerFor(state, actor, cost, payer).power -= cost;
 }
+const leadershipRerolls = ["avengers", "shield-rolled", "shield-defense"];
+const xavierSchool = "Xavier's School for Gifted Youngsters";
+// Power spent on an active or reactive superpower. Xavier's School lets
+// another ally gain 1 Power once per Turn after that effect is resolved.
+function spend(state, model, amount, superpower = true) {
+  model.power -= amount;
+  const side = model.side;
+  if (
+    !superpower ||
+    amount < 1 ||
+    !leadership(state, side, xavierSchool) ||
+    state.leadershipUses?.[side]?.includes("xavier") ||
+    !xavierTargets(state, model).length
+  )
+    return;
+  (state.leadershipUses ||= { p1: [], p2: [] })[side].push("xavier");
+  (state.effects ||= []).push({
+    type: "xavier-school",
+    side,
+    source: model.id,
+  });
+}
+function xavierTargets(state, spender) {
+  return state.fighters.filter(
+    (f) =>
+      f.id !== spender.id && f.side === spender.side && usable(f) && !f.grunt,
+  );
+}
 
 function throwTerrain(state, effect, angle, random) {
   if (!Number.isFinite(angle)) throw Error("Укажите направление броска.");
@@ -1610,7 +1647,11 @@ function throwTerrain(state, effect, angle, random) {
 
 function usePower(state, actor, selected, action, random) {
   if (selected.action) state.actionsLeft--;
-  pay(state, actor, selected.cost, action.payer);
+  spend(
+    state,
+    payerFor(state, actor, selected.cost, action.payer),
+    selected.cost,
+  );
   switch (selected.value) {
     case "Trick Shot":
       actor.trickShot = true;
@@ -2099,6 +2140,35 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         if (option) return option;
       }
     }
+    if (eligible.length) {
+      const opponent = model === actor ? target : actor;
+      const professor = state.fighters.find(
+        (f) =>
+          f.id !== model.id &&
+          f.side === model.side &&
+          usable(f) &&
+          reactiveAllowed(opponent, f, state) &&
+          isPower(f, "Professor's Guidance") &&
+          !state.reactionUses?.includes(f.id + ":guidance") &&
+          within(f, model, 4) &&
+          f.power > rootTax(f),
+      );
+      if (professor) {
+        const option = candidate("guidance-" + role, model.side, {
+          label: "Professor's Guidance",
+          dice: values,
+          max: Math.min(3, professor.power - rootTax(professor)),
+          kind: "reroll",
+          cost: rootTax(professor),
+          variable: true,
+          payer: professor.id,
+          usage: professor.id + ":guidance",
+          role,
+          eligible,
+        });
+        if (option) return option;
+      }
+    }
   }
   for (const [model, opponent, role, values] of [
     [actor, target, "rolled", rolled],
@@ -2334,7 +2404,7 @@ function applyModifier(state, event, action, random) {
       )
         throw Error("Укажите число сокращаемого урона.");
       const payer = fighter(state, event.payer);
-      payer.power -= event.cost;
+      spend(state, payer, event.cost);
       if (event.id === "molecular")
         payer.samples = (payer.samples ?? 1) - action.amount;
       pending.reduction = action.amount;
@@ -2354,7 +2424,13 @@ function applyModifier(state, event, action, random) {
         pending.cabal = true;
       } else {
         const payer = fighter(state, event.payer);
-        payer.power -= event.cost + (event.variable ? indices.length : 0);
+        spend(
+          state,
+          payer,
+          event.cost + (event.variable ? indices.length : 0),
+          !leadershipRerolls.includes(event.id),
+        );
+        if (event.usage) (state.reactionUses ||= []).push(event.usage);
         const values = pending.rolls[event.role];
         if (event.kind === "change" && !faces.includes(action.face))
           throw Error("Выберите грань.");
@@ -2511,6 +2587,7 @@ function resolve(state, pending, block, random) {
         apexDice +
         (isPower(actor, "Wild Rage") ? actor.damage || 0 : 0) +
         (rules.powerDice ? Math.min(5, target.power) : 0) +
+        (rules.mysticDice ? Number(face(target).mysticDefense) || 0 : 0) +
         (rules.placementDice ? state.placements?.[actor.id] || 0 : 0) +
         hammer +
         Number(stark) +
@@ -3189,6 +3266,8 @@ module.exports = {
   throwTerrain,
   usePower,
   pay,
+  spend,
+  xavierTargets,
   payerFor,
   collide,
   resolveDodge,

@@ -450,6 +450,12 @@ function xmenGoldTargets(state, actor) {
   );
 }
 
+function mindLock(defender) {
+  return ["Mental Lock", "Telepathic Lock"].find((name) =>
+    combat.isPower(defender, name),
+  );
+}
+
 function targetingReactions(state, pending) {
   const attacker = state.fighters.find((f) => f.id === pending.actor);
   const defender = state.fighters.find((f) => f.id === pending.target);
@@ -464,14 +470,12 @@ function targetingReactions(state, pending) {
           ? "rapid-phase"
           : option.value),
     }));
-  if (
-    pending.damageType !== "mystic" &&
-    combat.isPower(defender, "Mental Lock")
-  )
+  const lock = mindLock(defender);
+  if (pending.damageType !== "mystic" && lock)
     reactions.push({
       value: "mental-lock",
       key: defender.id + ":mental-lock",
-      label: "Mental Lock · предложить защиту Mystic",
+      label: lock + " · предложить защиту Mystic",
     });
   for (const ally of state.fighters.filter(
     (f) =>
@@ -522,7 +526,11 @@ function currentEffect(state, side) {
         {
           type: "reaction",
           value: "mental-lock-pay",
-          label: "Заплатить 2 Power · Mental Lock",
+          label:
+            "Заплатить 2 Power · " +
+            mindLock(
+              state.fighters.find((f) => f.id === state.pendingAttack.target),
+            ),
         },
         {
           type: "reaction",
@@ -636,6 +644,24 @@ function currentEffect(state, side) {
           ],
         },
       ];
+    if (effect.type === "xavier-school") {
+      const source = state.fighters.find((f) => f.id === effect.source);
+      const recipients = combat.xavierTargets(state, source);
+      return [
+        ...(recipients.length
+          ? [
+              {
+                type: "xavier-school",
+                options: recipients.map((f) => ({
+                  value: f.id,
+                  label: "Xavier's School · " + f.name + " · +1 Power",
+                })),
+              },
+            ]
+          : []),
+        skip,
+      ];
+    }
     if (effect.type === "from-the-ruins") {
       const recipients = state.fighters.filter(
         (f) =>
@@ -1680,7 +1706,7 @@ function act(state, side, action, random = randomInt) {
         const selected = allowed[0].options.find(
           (option) => option.value === value,
         );
-        actor.power -= selected.cost;
+        combat.spend(state, actor, selected.cost);
         (state.reactionUses ||= []).push(actor.id + ":" + selected.power);
         move.followups.push(selected);
         log(state, selected.power, {
@@ -1838,7 +1864,7 @@ function act(state, side, action, random = randomInt) {
       if (chosenReaction.key) (pending.reacted ||= []).push(chosenReaction.key);
       if (value === "quick-draw") {
         const cyclops = state.fighters.find((f) => f.id === pending.target);
-        cyclops.power -= chosenReaction.cost;
+        combat.spend(state, cyclops, chosenReaction.cost);
         pending.quickDraw = cyclops.damage || 0;
         log(state, "Quick Draw", {
           side,
@@ -1870,7 +1896,7 @@ function act(state, side, action, random = randomInt) {
       }
       if (value === "diamond-form") {
         const emma = state.fighters.find((f) => f.id === pending.target);
-        emma.power -= chosenReaction.cost;
+        combat.spend(state, emma, chosenReaction.cost);
         state.pendingAttack = null;
         state.effects.unshift({
           ...transformEvent(emma, 1, true),
@@ -1883,7 +1909,7 @@ function act(state, side, action, random = randomInt) {
           (f) => f.id === chosenReaction.reactor,
         );
         const attacker = state.fighters.find((f) => f.id === pending.actor);
-        ally.power -= chosenReaction.cost;
+        combat.spend(state, ally, chosenReaction.cost);
         const bigBrother = value.startsWith("big-brother:");
         if (!bigBrother) {
           (state.reactionUses ||= []).push(chosenReaction.key);
@@ -1907,7 +1933,11 @@ function act(state, side, action, random = randomInt) {
       }
       if (value === "cant-catch-me") {
         const reactor = state.fighters.find((f) => f.id === pending.target);
-        reactor.power -= allowed.find((a) => a.value === value).cost;
+        combat.spend(
+          state,
+          reactor,
+          allowed.find((a) => a.value === value).cost,
+        );
         (state.reactionUses ||= []).push(reactor.id + ":evasion");
         state.pendingAttack = null;
         state.effects.unshift({
@@ -1931,8 +1961,11 @@ function act(state, side, action, random = randomInt) {
         const reactor = state.fighters.find((f) => f.id === pending.target);
         const initial = state.fighters.find((f) => f.id === pending.actor);
         const chosen = allowed.find((o) => o.value === value);
-        reactor.power -=
-          1 + Number(reactor.conditions?.includes("root") || false);
+        combat.spend(
+          state,
+          reactor,
+          1 + Number(reactor.conditions?.includes("root") || false),
+        );
         state.pendingAttack = null;
         state.effects.unshift({
           type: "resume-attack",
@@ -1951,8 +1984,11 @@ function act(state, side, action, random = randomInt) {
       }
       if (value !== "skip") {
         const target = state.fighters.find((f) => f.id === pending.target);
-        target.power -=
-          2 + Number(target.conditions?.includes("root") || false);
+        combat.spend(
+          state,
+          target,
+          2 + Number(target.conditions?.includes("root") || false),
+        );
         const block = [
           "Perfect Block",
           "bozhe-moi",
@@ -2006,7 +2042,11 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const source = state.fighters.find((f) => f.id === effect.source);
       const target = state.fighters.find((f) => f.id === effect.target);
-      source.power -= 2 + Number(source.conditions?.includes("root") || false);
+      combat.spend(
+        state,
+        source,
+        2 + Number(source.conditions?.includes("root") || false),
+      );
       (state.reactionUses ||= []).push(source.id + ":untamed");
       announceAttack(
         state,
@@ -2022,7 +2062,7 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const witch = state.fighters.find((f) => f.id === effect.source);
       const enemy = state.fighters.find((f) => f.id === effect.target);
-      witch.power -= effect.cost;
+      combat.spend(state, witch, effect.cost);
       combat.condition(enemy, "judgment");
       state.undo = [];
       log(state, "Curse · " + enemy.name + " получает Judgment", {
@@ -2036,7 +2076,7 @@ function act(state, side, action, random = randomInt) {
     case "slippery": {
       const effect = state.effects.shift();
       const toad = state.fighters.find((f) => f.id === effect.mover);
-      toad.power -= effect.cost;
+      combat.spend(state, toad, effect.cost);
       state.effects.unshift({
         type: "displace",
         mode: "advance",
@@ -2054,7 +2094,11 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const source = state.fighters.find((f) => f.id === effect.source);
       const target = state.fighters.find((f) => f.id === effect.target);
-      source.power -= 3 + Number(source.conditions?.includes("root") || false);
+      combat.spend(
+        state,
+        source,
+        3 + Number(source.conditions?.includes("root") || false),
+      );
       if (type === "kill-box")
         (state.reactionUses ||= []).push(source.id + ":kill-box");
       state.terrain = state.terrain.filter((p) => p.id !== value);
@@ -2073,7 +2117,7 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const gambit = state.fighters.find((f) => f.id === effect.mover);
       const attacker = state.fighters.find((f) => f.id === effect.target);
-      gambit.power -= effect.cost;
+      combat.spend(state, gambit, effect.cost);
       state.effects.unshift({
         type: "displace",
         mode: "advance",
@@ -2096,7 +2140,7 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const source = state.fighters.find((f) => f.id === effect.source);
       const target = state.fighters.find((f) => f.id === effect.target);
-      source.power -= effect.cost;
+      combat.spend(state, source, effect.cost);
       (state.reactionUses ||= []).push(source.id + ":nightmare-visions");
       state.undo = [];
       combat.nightmareVisions(state, source, target, random);
@@ -2200,7 +2244,7 @@ function act(state, side, action, random = randomInt) {
     case "diamond-dodge": {
       const effect = state.effects.shift();
       const emma = state.fighters.find((f) => f.id === effect.target);
-      emma.power -= effect.cost;
+      combat.spend(state, emma, effect.cost);
       state.effects.unshift({
         ...transformEvent(emma, 1, true),
         dodgeAfterTransform: effect,
@@ -2215,7 +2259,7 @@ function act(state, side, action, random = randomInt) {
     case "puff-smoke": {
       const effect = state.effects.shift();
       const mover = state.fighters.find((f) => f.id === effect.source);
-      mover.power -= effect.cost;
+      combat.spend(state, mover, effect.cost);
       state.effects.unshift({
         type: "displace",
         mode: "place",
@@ -2348,6 +2392,16 @@ function act(state, side, action, random = randomInt) {
       combat.damage(state, target, 1, source, { juggernautContact: true });
       break;
     }
+    case "xavier-school": {
+      state.effects.shift();
+      const ally = state.fighters.find((f) => f.id === value);
+      combat.gain(ally, 1);
+      log(state, "Xavier's School · " + ally.name + " получает 1 Power", {
+        side,
+        fighter: ally.id,
+      });
+      break;
+    }
     case "from-the-ruins": {
       const effect = state.effects[0];
       const target = state.fighters.find((f) => f.id === value);
@@ -2416,7 +2470,7 @@ function act(state, side, action, random = randomInt) {
         );
         const protector = state.fighters.find((f) => f.id === option.protector);
         state.effects.shift();
-        protector.power -= option.cost;
+        combat.spend(state, protector, option.cost);
         log(state, option.power, {
           side,
           fighter: protector.id,

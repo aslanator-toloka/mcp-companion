@@ -2,7 +2,7 @@
 
 Добавляем по одному персонажу. Статус «Готово» означает, что бойца можно взять в сохранённый ростер Game, а его атаки, способности и обязательные решения проверены через команды партии. Для каждого нового эффекта нужен сценарий с проверкой результата, включая отказ при недопустимом действии там, где это важно.
 
-Перед добавлением способности сверяем эффект и момент срабатывания с уже существующими. Charge, Hit and Run и Freeze and Fade используют общую последовательность Move и Attack. Ice Slide и Air Lift используют одну механику выбора союзника до Move и размещения после него.
+Перед добавлением способности сверяем эффект и момент срабатывания с уже существующими. Power на активные и реактивные суперспособности списываем через `combat.spend`, чтобы на трату могли реагировать Leadership вроде Xavier's School. Charge, Hit and Run и Freeze and Fade используют общую последовательность Move и Attack. Ice Slide и Air Lift используют одну механику выбора союзника до Move и размещения после него.
 
 | Очередь | Персонаж | Статус | Следующий шаг |
 | --- | --- | --- | --- |
@@ -31,6 +31,7 @@
 | 22 | Nightcrawler | Готово | Проверены переменный BAMF!, счётчик Place и Flurry of Blows. |
 | 23 | Iceman | Готово | Проверены Ice Slide, Freeze and Fade, Cold Snap и обе атаки. |
 | 24 | Angel | Готово | Проверены Air Lift и Hostile Takeover в одном Move, Flyby и Avenging Angel. |
+| 25 | Professor X | Готово | Проверены Xavier's School, Professor's Guidance, Telepathic Lock и все три атаки. Браузер не проверен. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -158,3 +159,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Проверены сохранённый ростер, карточки и Air Lift на поле в браузере. CLI подтвердил допустимые точки и итоговое состояние.
 
 [Сценарии Iceman и Angel](../tests/game-iceman-angel.test.cjs), [AMG о Freeze and Fade и Ice Slide](https://forums.atomicmassgames.com/topic/14400-freeze-and-fade-ice-slide/), [AMG о завершении Attack Action](https://forums.atomicmassgames.com/topic/14378-when-does-an-attack-action-end/).
+
+## 25. Professor X
+
+- [x] Psychic Dart даёт Power за урон и Root на Wild. Mental Suggestion после урона Advance защитника на его Speed. Astral Duel добавляет кубики по Mystic-защите и запрещает перебросы защиты.
+- [x] Telepathic Lock работает как Mental Lock. Omega-Level Telepath защищает от Push и Advance от Mystic-атак и вражеских суперспособностей, как Helmet.
+- [x] Professor's Guidance перебрасывает до трёх кубиков атакующего или защищающегося союзника в Range 4, по 1 Power за кубик, раз за Turn.
+- [x] Xavier's School после траты Power на активную или реактивную суперспособность даёт 1 Power другому союзнику, раз за Turn. Траты на атаки и Leadership не считаются.
+- [x] Сохранённый ростер и карточка через CLI проверены. Карточку и выбор Xavier's School в браузере ещё не смотрели.
+
+[Сценарии Professor X](../tests/game-professor-x.test.cjs).

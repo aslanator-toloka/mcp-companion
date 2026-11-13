@@ -49,6 +49,7 @@ const decisionLabels = {
   "strike-order": "Порядок Dash и Velocity",
   "magnetic-crush": "Выбор террейна · Magnetic Crush",
   "from-the-ruins": "Выбор получателя Power · From the Ruins",
+  "xavier-school": "Выбор получателя Power · Xavier's School",
   "phase-tactic": "Розыгрыш тактики",
 };
 
