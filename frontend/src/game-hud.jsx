@@ -147,6 +147,9 @@ export function Vitals({ fighter }) {
       ) : f.activated ? (
         <span>Активирован</span>
       ) : null}
+      {f.flares > 0 && <span title="Flare">Flare {f.flares}</span>}
+      {f.neural && <span title="Neural Connection">Neural</span>}
+      {f.selfDiscovery && <span title="Self-Discovery">+3 защ.</span>}
       {f.conditions?.map((name) => (
         <img
           key={name}

@@ -1468,7 +1468,11 @@ function view(state, side, full = false) {
   const { undo, commits, ...visible } = state;
   return {
     ...visible,
-    fighters: state.fighters.map((f) => ({ ...f, ...combat.status(f) })),
+    fighters: state.fighters.map((f) => ({
+      ...f,
+      ...combat.status(f),
+      neural: Object.values(state.neural || {}).includes(f.id),
+    })),
     attackRoll: combat.attackRollSummary(state, state.effects?.[0]?.resume),
     awaitingSide:
       pendingDecision(state) ||
