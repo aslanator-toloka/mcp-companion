@@ -252,7 +252,7 @@ Metal Construct использует квадратный габарит 35 мм
 
 ## 42–44. Maverick, Weapon X и Omega Red
 
-- [x] Плюс-лечение идёт через `combat.heal`. Anti-Healing Factor Corrosive предлагает Maverick за 2 Power отменить лечение врага в Range 3. Kinetic Energy Absorption после физического урона даёт 1 Power и Short Advance по желанию. Plasma Blasters даёт Rapid Fire на Hit, Agent Zero — Throw на Wild.
+- [x] Лечение идёт через `combat.heal`. Anti-Healing Factor Corrosive предлагает Maverick за 2 Power отменить лечение врага в Range 3. Kinetic Energy Absorption после физического урона даёт 1 Power и Short Advance по желанию. Plasma Blasters даёт Rapid Fire на Hit, Agent Zero — Throw на Wild.
 - [x] Berserker Rage на здоровой стороне получает +1 кубик против цели, которую Weapon X уже атаковал в этот Turn. Uncontrollable Weapon: Rampage на Wild и Hit бьёт всех в Range 2, на двух Wild — бесплатный повтор. Savagery Protocols у Secure даёт +2 кубика атаки и −1 кубик защиты, не даёт держать Extract. Aimless Aggression при KO бросает 5 кубиков и бьёт всех рядом. Healing Factor [3] учтён.
 - [x] Carbonadium Coils лечит Omega Red при уроне. Carbonadium Armor снижает урон от врагов на 1. Absorb Essence на Wild превращает защитный успех в Failure и даёт Power. Ensnare притягивает видимого врага в Range 4, по одному разу на цель за Turn. Death Factor наносит 2 урона себе и врагам с Poison. Death Spores отравляет врагов, закончивших активацию рядом, и врагов рядом в конце своей активации.
 - [x] Отряды Weapon X и Hellfire Club собираются. Браузер не проверен.
