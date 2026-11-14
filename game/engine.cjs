@@ -320,6 +320,26 @@ function movementProtection(state, effect) {
         });
     }
   }
+  if (source.side !== mover.side && effect.mode === "push")
+    for (const ally of state.fighters.filter(
+      (f) =>
+        f.side === mover.side &&
+        f.id !== mover.id &&
+        combat.usable(f) &&
+        combat.isPower(f, "Supreme Control") &&
+        geometry.within(f, mover, 4) &&
+        combat.reactiveAllowed(source, f, state),
+    )) {
+      const cost = 2 + tax(ally);
+      if (ally.power >= cost)
+        options.push({
+          value: "shield:" + ally.id,
+          label: "Supreme Control · " + ally.name + " · " + cost + " Power",
+          protector: ally.id,
+          cost,
+          power: "Supreme Control",
+        });
+    }
   if (
     source.side !== mover.side &&
     ["advance", "place", "push"].includes(effect.mode)
@@ -484,6 +504,11 @@ function xmenGoldTargets(state, actor) {
 }
 
 function mindLock(defender) {
+  if (
+    defender.slug === "ebony-maw" &&
+    combat.isPower(defender, "Mind Over Matter")
+  )
+    return "Mind Over Matter";
   return ["Mental Lock", "Telepathic Lock"].find((name) =>
     combat.isPower(defender, name),
   );
@@ -1797,6 +1822,8 @@ function beginRound(state) {
       if (combat.isPower(fighter, "Omega Level Multi-Versal Entity"))
         combat.gain(fighter, 1);
       if (combat.isPower(fighter, "Inner Rage")) combat.gain(fighter, 2);
+      if (combat.isPower(fighter, "Incredible Psychic Potential"))
+        combat.gain(fighter, 2);
       if (combat.isPower(fighter, "Untamed Cosmic Entity"))
         combat.gain(fighter, fighter.phoenix || 0);
       if (

@@ -515,6 +515,28 @@ const profiles = {
   "Quantum Starburst": { conditions: [["damage", "bleed", "poison", "stun"]] },
   "Axe Strike": { builder: "damage" },
   "Brutal End": { conditions: [["wild", "stagger"]] },
+  "Black Tongue": {
+    builder: 1,
+    afterMove: { mode: "advance", speed: "S", on: "wild" },
+  },
+  "Herald of Doom": {
+    noPower: true,
+    afterMove: { mode: "throw", speed: "S", limit: 2, on: "wild" },
+  },
+  "Mental Vampire": { builder: 1, healOnDamage: 1 },
+  "Devastate Intellect": {
+    drainInstead: true,
+    conditions: [
+      ["wild", "stun"],
+      ["wild wild", "stagger"],
+    ],
+    devour: "critical wild hit hit failure failure",
+  },
+  "Eye Beam": { pierce: true, conditions: [["", "incinerate"]] },
+  "Everything Dies": {
+    afterMove: { mode: "throw", speed: "S", on: "wild", required: true },
+    extra: "eyebeam",
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -646,6 +668,16 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "black-swan:Strike": {
+    builder: "damage",
+    beforeMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      limit: 4,
+      on: "wild",
+    },
+  },
   "corvus-glaive:Strike": { builder: "damage", pierce: true },
   "proxima-midnight:Strike": { builder: "damage", pierce: true },
   "black-panther:Strike": {
@@ -734,6 +766,19 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Submit!": {
+    mode: "target",
+    effect: "submit",
+    variableCost: "civilian",
+    maxPower: 5,
+  },
+  "Telekinetic Powerhouse": {
+    mode: "target",
+    range: 3,
+    terrain: 4,
+    speed: "L",
+    effect: "throw",
+  },
   "Glaive‘s Edge": {
     mode: "sequence",
     action: true,
@@ -1233,11 +1278,22 @@ function dodge(state, target, source, random, bonus = 0) {
     ...rolls[0].faces,
     ...rolled,
   ]);
-  damage(state, target, dodgeDamage(target, rolled), source);
+  damage(state, target, dodgeDamage(target, rolled), source, {
+    collision: true,
+  });
   grantFailurePower(state, observers);
   totallyMeantIt(state, target, rolled);
 }
 function totallyMeantIt(state, model, roll) {
+  if (roll.includes("critical"))
+    for (const omni of state.fighters.filter(
+      (f) =>
+        f.side !== model.side &&
+        usable(f) &&
+        isPower(f, "Omnipathy") &&
+        within(f, model, 3),
+    ))
+      gain(omni, 1);
   if (
     usable(model) &&
     roll.includes("failure") &&
@@ -1516,6 +1572,7 @@ function resolveDodge(state, effect, action, random) {
     target,
     dodgeDamage(target, rolled),
     fighter(state, effect.collision.source),
+    { collision: true },
   );
   grantFailurePower(state, observers);
   totallyMeantIt(state, target, rolled);
@@ -1775,9 +1832,13 @@ function damage(
     followAdvance,
     juggernautContact = false,
     attackType,
+    collision = false,
   } = {},
 ) {
   if (!usable(target) || amount <= 0) return 0;
+  const ethereal =
+    (attackType === "physical" || collision) && isPower(target, "Ethereal");
+  if (ethereal && amount >= 2) amount = 1;
   const enemy = source && source.side !== target.side;
   if (enemy && target.survival) return 0;
   const cost = 1 + rootTax(target);
@@ -1817,6 +1878,7 @@ function damage(
   const dealt = Math.min(amount, maximum - (target.damage || 0));
   if (dealt && juggernautContact) (source.juggernautHit ||= []).push(target.id);
   target.damage = (target.damage || 0) + dealt;
+  if (ethereal && dealt) dropObjectives(state, target);
   if (dealt && enemy && attackType === "mystic" && target.projection) {
     delete target.projection;
     log(state, "Astral Fiend · Projection снята", {
@@ -2210,6 +2272,7 @@ function attacks(state, actor, previous) {
     const options = targets
       .filter((target) => {
         if (target.id === attack.borrowedFrom) return false;
+        if (previous?.kind === "eyebeam") return target.id === previous.target;
         if (isPower(target, "Telepathic Cloak") && !within(actor, target, 3))
           return false;
         if (previous?.kind === "flurry" && target.id !== previous.target)
@@ -2356,7 +2419,21 @@ function powers(state, actor) {
       return [];
     const targets = [];
     if (settings.mode === "target") {
-      if (settings.effect === "borrow-attack") {
+      if (settings.effect === "submit") {
+        for (const o of state.objectives.filter(
+          (o) => o.name === "Senator" && o.x != null && !o.holder,
+        )) {
+          const minPower = [1, 2, 3, 4, 5].find((band) =>
+            within(actor, o, band),
+          );
+          if (
+            minPower &&
+            minPower <= Math.min(5, spendable) &&
+            canHoldExtract(state, actor, o)
+          )
+            targets.push({ value: o.id, label: o.name, minPower });
+        }
+      } else if (settings.effect === "borrow-attack") {
         for (const f of state.fighters) {
           const minPower = Number(face(f).mysticDefense);
           if (
@@ -2467,7 +2544,7 @@ function powers(state, actor) {
         ...(settings.variableCost && {
           maxPower: ["terrain", "bamf"].includes(settings.variableCost)
             ? Math.min(settings.variableCost === "terrain" ? 4 : 3, spendable)
-            : spendable,
+            : Math.min(settings.maxPower || spendable, spendable),
           tax: rootTax(actor),
         }),
         ...(targets.length && { targets }),
@@ -2766,6 +2843,12 @@ function usePower(state, actor, selected, action, random) {
     (state.fieldLeaderMoves ||= []).push(target.id);
   if (selected.value === "Matter Transmutation")
     (state.usedPowers ||= []).push("matter:" + target.id);
+  if (selected.effect === "submit") {
+    const token = state.objectives.find((o) => o.id === action.target);
+    token.holder = actor.id;
+    (state.interacted ||= []).push(token.id);
+    return;
+  }
   if (selected.effect === "rejuvenate") {
     heal(state, target, 2);
     const remove =
@@ -3312,6 +3395,50 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         usage: model.id + ":fireworks",
         role,
         eligible,
+      });
+      if (option) return option;
+    }
+    if (
+      role === "rolled" &&
+      model === actor &&
+      isPower(target, "Midnight Field") &&
+      reactiveAllowed(actor, target, state) &&
+      target.power > rootTax(target)
+    ) {
+      const wildIndices = values.flatMap((d, i) => (d === "wild" ? [i] : []));
+      const option =
+        wildIndices.length &&
+        candidate("midnight", target.side, {
+          label: "Midnight Field",
+          dice: values,
+          max: Math.min(wildIndices.length, target.power - rootTax(target)),
+          kind: "fixed-face",
+          face: "blank",
+          cost: rootTax(target),
+          variable: true,
+          payer: target.id,
+          role,
+          eligible: wildIndices,
+        });
+      if (option) return option;
+    }
+    if (
+      role === "defense" &&
+      model === target &&
+      values.length &&
+      isPower(actor, "Telepathic Suggestion") &&
+      reactiveAllowed(target, actor, state) &&
+      actor.power >= 1 + rootTax(actor)
+    ) {
+      const option = candidate("suggestion", actor.side, {
+        label: "Telepathic Suggestion",
+        dice: values,
+        max: 1,
+        kind: "reroll",
+        cost: 1 + rootTax(actor),
+        payer: actor.id,
+        role,
+        eligible: values.map((_, i) => i),
       });
       if (option) return option;
     }
@@ -4336,10 +4463,20 @@ function resolve(state, pending, block, random) {
     ))
       damage(state, f, 1, actor);
   }
+  if (rules.drainInstead) {
+    const lost = Math.min(
+      target.power,
+      Math.max(0, incoming - (pending.reduction || 0)),
+    );
+    target.power -= lost;
+    pending.drained = lost;
+  }
   const dealt = damage(
     state,
     target,
-    Math.max(pending.tickles ? 1 : 0, incoming - (pending.reduction || 0)),
+    rules.drainInstead
+      ? 0
+      : Math.max(pending.tickles ? 1 : 0, incoming - (pending.reduction || 0)),
     actor,
     {
       reviewed: true,
@@ -4362,6 +4499,14 @@ function resolve(state, pending, block, random) {
           : rules.builder,
     );
   if (rules.heal) heal(state, actor, rules.heal);
+  if (rules.devour && hasFaces(rolled, rules.devour) && usable(target))
+    damage(
+      state,
+      target,
+      Number(face(target).stamina) - (target.damage || 0),
+      actor,
+      { noPower: true, reviewed: true },
+    );
   if (pending.prowess && !dealt && usable(actor) && usable(target))
     damage(state, actor, 2, target);
   if (rules.healOnDamage && dealt && usable(actor))
@@ -4563,6 +4708,7 @@ function resolve(state, pending, block, random) {
       avalanche: ["Knobkerrie", "wild hit"],
       finisher: ["Panther Strike", "wild hit", true],
       deathblow: ["Strike", "wild block"],
+      eyebeam: ["Eye Beam", "hit"],
       spear: ["Strike", "wild"],
     };
     const rule = alternatives[rules.extra];

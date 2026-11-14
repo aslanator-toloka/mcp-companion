@@ -70,6 +70,9 @@
 | 61 | Corvus Glaive | Готово, кроме Gem Bearer | Проверены Glaive‘s Edge, Death Blow, Atom Splitter и Husband of Proxima Midnight. Infinity Gems в Game нет. |
 | 62 | Proxima Midnight | Готово | Проверены Spear Throw, Quantum Starburst, Martial Prowess и Wife of Corvus Glaive. |
 | 63 | Black Dwarf | Готово | Проверены Enforced Oblivion, Black Fury, Intimidating Presence и Invulnerable Skin. |
+| 64 | Ebony Maw | Готово, кроме Gem Bearer | Проверены Black Tongue, Herald of Doom, Mind Over Matter и Incredible Psychic Potential. |
+| 65 | Supergiant | Готово, кроме Gem Bearer | Проверены Devastate Intellect с Devour Mind, Ethereal, Omnipathy, Supreme Control и Submit! для жетона Senator. |
+| 66 | Black Swan | Готово, кроме Gem Bearer | Проверены Midnight Field, Telepathic Suggestion и Follow-Up Eye Beam вне дальности. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -365,3 +368,12 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Black Order собирается. Браузер не проверен.
 
 [Сценарии Black Order](../tests/game-black-order.test.cjs).
+
+## 64–66. Ebony Maw, Supergiant и Black Swan
+
+- [x] Black Tongue на Wild даёт Short Advance цели. Herald of Doom не даёт цели Power и на Wild может бросить цель Size 2. Telekinetic Powerhouse бросает террейн на Long. Mind Over Matter у Ebony Maw работает как Mental Lock. Incredible Psychic Potential даёт +2 Power.
+- [x] Mental Vampire лечит 1 при уроне. Devastate Intellect вместо урона снимает Power, накладывает Stun и Stagger, а Devour Mind по точному набору граней вырубает цель. Ethereal снижает урон от физических атак и столкновений до 1 и сбрасывает жетоны. Omnipathy даёт Power за Critical врагов в Range 3. Supreme Control отменяет вражеский Push союзника в Range 4. Submit! за 1–5 Power берёт Senator в Range, равном оплате, без платы за Interact.
+- [x] Strike Black Swan на Wild отталкивает цель до Size 4. Eye Beam всегда накладывает Incinerate и даёт Pierce на Wild. Everything Dies на Wild бросает цель, а на Hit даёт бесплатный Eye Beam по той же цели без учёта дальности и LOS. Midnight Field за Power превращает Wild атакующего в Blank. Telepathic Suggestion за 1 Power перебрасывает кубик защиты.
+- [x] Отряд Black Order собирается. Браузер не проверен.
+
+[Сценарии Ebony Maw, Supergiant и Black Swan](../tests/game-black-order-psychics.test.cjs).

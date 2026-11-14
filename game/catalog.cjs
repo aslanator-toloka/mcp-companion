@@ -161,6 +161,9 @@ const characters = selected(allCharacters, "characters", [
   "corvus-glaive",
   "proxima-midnight",
   "black-dwarf",
+  "ebony-maw",
+  "supergiant",
+  "black-swan",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");
