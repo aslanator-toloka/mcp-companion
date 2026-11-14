@@ -140,6 +140,11 @@ function cosmicEffects(state) {
 }
 function cleanup(state, random) {
   for (const f of state.fighters.filter(combat.usable)) {
+    if (f.herb) {
+      f.herb = false;
+      combat.damage(state, f, 1);
+      combat.gain(f, 1);
+    }
     if (combat.isPower(f, "Overload") && f.power >= 8) {
       combat.damage(state, f, 1);
       log(state, "Overload · " + f.name, { side: f.side, fighter: f.id });

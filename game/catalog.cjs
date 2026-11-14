@@ -156,6 +156,8 @@ const characters = selected(allCharacters, "characters", [
   "mbaku",
   "killmonger",
   "king-tchalla",
+  "black-panther-chosen-of-bast",
+  "killmonger-usurper",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

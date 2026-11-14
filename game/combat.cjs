@@ -490,6 +490,10 @@ const profiles = {
       { mode: "advance", who: "actor", speed: "M" },
     ],
   },
+  "Panther Strike": { builder: "damage", conditions: [["wild", "bleed"]] },
+  "Spirit Predator": { extra: "finisher" },
+  "Covert Armament": { builder: 1, lockDefense: true },
+  "K‘Liluna‘s Fury": { woundDice: true, lockDefense: true },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -3015,7 +3019,10 @@ const sides = ["p1", "p2"];
 function modEvent(state, pending, rolled, defense, actor, target, rules) {
   const reviewed = pending.reviewed || [];
   const candidate = (id, side, data) =>
-    reviewed.includes(id)
+    reviewed.includes(id) ||
+    (data.role === "rolled" &&
+      side === actor.side &&
+      isPower(target, "Superior Agility"))
       ? null
       : {
           type: "modify-dice",
@@ -3984,6 +3991,8 @@ function resolve(state, pending, block, random) {
           : 0) +
         (savage(state, actor) ? 2 : 0) +
         (pending.destructive || 0) +
+        (rules.woundDice ? actor.damage || 0 : 0) +
+        (actor.herb ? 1 : 0) +
         (rules.dupeDice && nearDuplicates(state, actor, target)
           ? rules.dupeDice
           : 0) +
@@ -4002,6 +4011,7 @@ function resolve(state, pending, block, random) {
     : pending.initial || rawDice(attackCount, random);
   if (initial) {
     (state.attackedThisTurn ||= []).push(actor.id + ">" + target.id);
+    actor.herb = false;
     if (attack.name === "Vibranium Spear" && actor.bound) {
       actor.bound = false;
       pending.boundReroll = true;
@@ -4470,6 +4480,7 @@ function resolve(state, pending, block, random) {
       claw: ["Claw Slash", "wild hit", true],
       batons: ["Shock Batons", "wild hit", "failures"],
       avalanche: ["Knobkerrie", "wild hit"],
+      finisher: ["Panther Strike", "wild hit", true],
       spear: ["Strike", "wild"],
     };
     const rule = alternatives[rules.extra];

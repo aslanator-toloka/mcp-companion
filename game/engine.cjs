@@ -826,6 +826,25 @@ function currentEffect(state, side) {
         skip,
       ];
     }
+    if (effect.type === "herb") {
+      const allies = state.fighters.filter(
+        (f) => f.side === side && combat.usable(f) && !f.herb,
+      );
+      return [
+        ...(allies.length
+          ? [
+              {
+                type: "herb",
+                options: allies.map((f) => ({
+                  value: f.id,
+                  label: "Herb · " + f.name,
+                })),
+              },
+            ]
+          : []),
+        skip,
+      ];
+    }
     if (effect.type === "from-the-ruins") {
       const recipients = state.fighters.filter(
         (f) =>
@@ -1197,6 +1216,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     doubleWild: attack.doubleWild,
     throwAfter: attack.throwAfter,
     flares: attack.flares,
+    reroll: attack.reroll,
     coldSnapAction: attack.coldSnapAction,
     side: target.side,
     ...(attack.volley && { volley: true }),
@@ -1722,6 +1742,11 @@ function beginRound(state) {
   state.effects = [
     ...tactics.phaseEffects(state),
     ...mission.cosmicEffects(state),
+    ...sides
+      .filter((side) =>
+        combat.leadership(state, side, "Strength of the New generation"),
+      )
+      .map((side) => ({ type: "herb", side, remaining: 3 })),
   ];
   log(state, "Раунд " + state.round);
 }
@@ -2904,6 +2929,24 @@ function act(state, side, action, random = randomInt) {
       const ally = state.fighters.find((f) => f.id === value);
       combat.gain(ally, 1);
       log(state, "Xavier's School · " + ally.name + " получает 1 Power", {
+        side,
+        fighter: ally.id,
+      });
+      break;
+    }
+    case "herb": {
+      const effect = state.effects[0];
+      const ally = state.fighters.find((f) => f.id === value);
+      ally.herb = true;
+      effect.remaining--;
+      if (
+        !effect.remaining ||
+        !state.fighters.some(
+          (f) => f.side === side && combat.usable(f) && !f.herb,
+        )
+      )
+        state.effects.shift();
+      log(state, "Strength of the New Generation · " + ally.name, {
         side,
         fighter: ally.id,
       });

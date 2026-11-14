@@ -65,6 +65,8 @@
 | 56 | M'Baku | Готово | Проверены два эффекта Knobkerrie до урона, Avalanche, Chieftain of the Jabari, Solid Frame и Blessed by Ghekre. |
 | 57 | Killmonger | Готово | Проверены Black Ops Strike, Focused on the Kill, Special Forces и Kill Count. |
 | 58 | King T'Challa | Готово | Проверены Vibranium Spear вблизи и издали, Bound, Royal Rebuke, Defender of Wakanda и Strength of the Ancestors. |
+| 59 | Black Panther, Chosen of Bast | Готово, кроме Insight of the Ancients | Проверены Finisher с перебросами и Superior Agility. |
+| 60 | Killmonger, Usurper | Готово | Проверены атаки с запретом модификаций защиты, K‘Liluna‘s Fury и жетоны Herb. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -340,3 +342,12 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Wakanda собирается. Браузер не проверен.
 
 [Сценарии M'Baku, Killmonger и King T'Challa](../tests/game-wakanda-rivals.test.cjs).
+
+## 59–60. Black Panther, Chosen of Bast и Killmonger, Usurper
+
+- [x] Spirit Predator на Wild и Hit даёт Panther Strike со свободными перебросами. Попутно исправлено: бесплатные перебросы бонусных атак раньше терялись (у Claw Slash Sabretooth тоже). Superior Agility не даёт врагам менять кубики атаки по нему. Pounce, Stealth и Wallcrawler уже работали.
+- [ ] Insight of the Ancients не сделан: при Interact в Game нет бросков кубиков.
+- [x] Covert Armament и K‘Liluna‘s Fury запрещают защитнику менять кубики, Fury добавляет кубик за каждый урон Killmonger. Strength of the New Generation в Power Phase раздаёт до трёх жетонов Herb. Жетон автоматически тратится на +1 кубик при следующей атаке, а оставшийся в Cleanup наносит 1 урон и даёт 1 Power. Жетоны Herb и Kill Count видны в строке бойца.
+- [x] Wakanda собрана полностью. Браузер не проверен.
+
+[Сценарии Chosen of Bast и Usurper](../tests/game-wakanda-heirs.test.cjs).
