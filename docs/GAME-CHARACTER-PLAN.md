@@ -79,6 +79,10 @@
 | 70 | Wong | Готово | Проверены Faithful Assistant, Meditate, The Vishanti‘s Blessing и Servant to the Sorcerer Supreme. |
 | 71 | Clea | Готово | Проверены Icy Tendrils, Descendant of the Faltine, Vapors of Dormammu и Talons of Farallah. |
 | 72 | Doctor Strange | Готово, кроме Gem Bearer | Проверены Bolts of Bedevilment, Crimson Bands, Eye of Agamotto, Shield of the Seraphim, Hoggoth‘s Hoary Wisdom, Oshtur‘s Refuge и Judgment of the Vishanti. |
+| 73 | Ancient One | Готово | Проверены Winds of Watoomb, Keeper of the Eye of Agamotto, Astral Strike и Mists of Hoggoth. |
+| 74 | Baron Mordo | Готово | Проверены Soul Barb, Ferocity of Cyttorak, Vaulting Boots и Master of the Occult. |
+| 75 | Doctor Strange, Sorcerer Supreme | Готово | Проверены Shining Circle, Mystic Armor of Strange, Scalpel of Strange и Chosen of the Vishanti. |
+| 76 | Doctor Voodoo | Готово | Проверены жетон Brother Daniel, Possession, Recall Spirit, Staff of Legba и Spirit Venom. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -404,3 +408,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Convocation собирается. Браузер не проверен.
 
 [Сценарии Wong, Clea и Doctor Strange](../tests/game-convocation.test.cjs).
+
+## 73–76. Ancient One, Baron Mordo, Doctor Strange Sorcerer Supreme и Doctor Voodoo
+
+- [x] Winds of Watoomb за 3 Power притягивает атакующего Short Push до броска. После этого атака продолжается и можно взять другие реакции. Keeper of the Eye of Agamotto перебрасывает два кубика защиты или уклонения и даёт +1 Power. Astral Strike игнорирует защитные Critical и при уроне накладывает Stagger.
+- [x] Staff of the Living Tribunal на Wild отталкивает цель Size 2. Bolts of Bishru накладывает Hex, Rains of Raggadorr — Incinerate и Poison. Soul Barb копирует состояние отмеченного врага на врагов в Range 2 от него. Ferocity of Cyttorak через общий переключатель даёт союзнику +2 кубика, а после атаки атакующий получает 1 урон. Vaulting Boots после Push предлагает Short Advance.
+- [x] Shining Circle на Wild снимает одно состояние, на Wild и Block лечит 1 у Strange и союзников в Range 2. Mystic Armor of Strange гасит кубики атакующего против Energy и Mystic. Scalpel of Strange делает Place любого персонажа в Range 2 на дистанцию 3. Chosen of the Vishanti даёт +2 Power.
+- [x] Brother Daniel начинает игру у Doctor Voodoo и даёт ему +2 кубика защиты и уклонения. Possession за Power не меньше угрозы переносит жетон на врага в Range 3: тот сбрасывает жетоны и не может их держать. Recall Spirit возвращает жетон, когда Voodoo атакуют. Daze или KO носителя возвращает жетон. Staff of Legba превращает снятые Power в урон без начисления Power. Жетон виден в строке бойца.
+- [x] Convocation собрана полностью. Браузер не проверен.
+
+[Сценарии Ancient One, Mordo, Strange и Voodoo](../tests/game-convocation-masters.test.cjs).

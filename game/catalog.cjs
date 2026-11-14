@@ -170,6 +170,10 @@ const characters = selected(allCharacters, "characters", [
   "wong",
   "clea",
   "doctor-strange",
+  "ancient-one",
+  "baron-mordo",
+  "doctor-strange-sorcerer-supreme",
+  "doctor-voodoo",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

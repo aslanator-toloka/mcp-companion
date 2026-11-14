@@ -572,6 +572,45 @@ const profiles = {
     afterMove: { mode: "push", speed: "S", damageRequired: true },
   },
   "Crimson Bands of Cyttorak": { mysticBinding: "critical wild hit" },
+  "Shards of the Seraphim": { builder: "damage", pierce: true },
+  "Fangs of Farallah": { builder: 1, conditions: [["damage", "poison"]] },
+  "Astral Strike": {
+    ignoreDefenseCritical: true,
+    conditions: [["damage", "stagger"]],
+  },
+  "Staff of the Living Tribunal": {
+    builder: "damage",
+    beforeMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      limit: 2,
+      on: "wild",
+    },
+  },
+  "Bolts of Bishru": { builder: 1, conditions: [["wild", "hex"]] },
+  "Rains of Raggadorr": { conditions: [["", "incinerate", "poison"]] },
+  "Baleful Bolts of Balthakk": { builder: "damage", pierce: true },
+  "Deadly Daggers of Daveroth": {
+    types: ["physical", "energy", "mystic"],
+    conditions: [["damage", "poison"]],
+  },
+  "Shining Circle of the Seraphim": {
+    cleanse: "wild",
+    salve: "wild block",
+  },
+  "Spirit Venom": {
+    builder: "damage",
+    drain: "sap",
+    afterMove: {
+      mode: "throw",
+      speed: "S",
+      limit: 2,
+      on: "hit hit",
+      required: true,
+    },
+  },
+  "Staff of Legba": { powerBurn: true },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -812,6 +851,32 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Mists of Hoggoth": { mode: "place", range: 2 },
+  "Master of the Occult": { mode: "self", action: true },
+  "Soul Barb": {
+    mode: "target",
+    range: 3,
+    enemy: 99,
+    effect: "soul-barb",
+    repeat: true,
+  },
+  "Scalpel of Strange": {
+    mode: "target",
+    range: 2,
+    any: true,
+    self: true,
+    effect: "place",
+    destinationRange: 3,
+    oncePerTarget: true,
+    repeat: true,
+  },
+  Possession: {
+    mode: "target",
+    range: 3,
+    enemy: 99,
+    effect: "possession",
+    variableCost: "threat",
+  },
   "Faithful Assistant": {
     mode: "target",
     range: 3,
@@ -1372,7 +1437,8 @@ function dodge(state, target, source, random, bonus = 0) {
   const rolled = dice(
     Number(face(target).physicalDefense) +
       bonus +
-      (target.selfDiscovery ? 3 : 0),
+      (target.selfDiscovery ? 3 : 0) +
+      (target.slug === "doctor-voodoo" && hasDaniel(state, target) ? 2 : 0),
     has(target, "hex") ? 0 : 1,
     random,
   );
@@ -1416,7 +1482,8 @@ function totallyMeantIt(state, model, roll) {
   if (
     usable(model) &&
     roll.includes("failure") &&
-    isPower(model, "Head of Wakanda R&D")
+    (isPower(model, "Head of Wakanda R&D") ||
+      isPower(model, "Spirit of Brother Daniel"))
   )
     gain(model, 1);
   if (
@@ -1442,8 +1509,24 @@ function decreeSource(state, actor) {
       ((isPower(f, "Death‘s Decree") &&
         f.id !== actor.id &&
         f.power >= 2 + rootTax(f)) ||
-        (isPower(f, "Talons of Farallah") && f.power >= 3 + rootTax(f))) &&
+        (isPower(f, "Talons of Farallah") && f.power >= 3 + rootTax(f)) ||
+        (isPower(f, "Ferocity of Cyttorak") &&
+          f.id !== actor.id &&
+          f.power >= 2 + rootTax(f) &&
+          within(f, actor, 3))) &&
       (f.id === actor.id || within(f, actor, 4)),
+  );
+}
+function danielHolder(state, voodoo) {
+  return voodoo.danielOn || voodoo.id;
+}
+function hasDaniel(state, model) {
+  return state.fighters.some(
+    (v) =>
+      v.slug === "doctor-voodoo" &&
+      !v.ko &&
+      v.x != null &&
+      danielHolder(state, v) === model.id,
   );
 }
 function savage(state, model) {
@@ -1617,7 +1700,9 @@ function collide(
     reactiveAllowed(source, target, state)
       ? Math.min(3, target.power - rootTax(target))
       : 0;
-  const reflexes = isPower(target, "Supersonic Reflexes");
+  const reflexes =
+    isPower(target, "Supersonic Reflexes") ||
+    isPower(target, "Keeper of the Eye of Agamotto");
   const luck =
     isPower(target, "Probability Manipulation") &&
     reactiveAllowed(source, target, state)
@@ -1628,7 +1713,9 @@ function collide(
     return;
   }
   const rolled = dice(
-    Number(face(target).physicalDefense) + (target.selfDiscovery ? 3 : 0),
+    Number(face(target).physicalDefense) +
+      (target.selfDiscovery ? 3 : 0) +
+      (target.slug === "doctor-voodoo" && hasDaniel(state, target) ? 2 : 0),
     has(target, "hex") ? 0 : 1,
     random,
   );
@@ -1662,8 +1749,11 @@ function collide(
     id: stars > 0 ? "stars-dodge" : "supersonic-dodge",
     kind: "reroll",
     label:
-      (stars > 0 ? "Stars and Garters" : "Supersonic Reflexes") +
-      " · Уклонение",
+      (stars > 0
+        ? "Stars and Garters"
+        : isPower(target, "Keeper of the Eye of Agamotto")
+          ? "Keeper of the Eye of Agamotto"
+          : "Supersonic Reflexes") + " · Уклонение",
     role: "defense",
     dice: rolled,
     max: Math.min(eligible.length, stars > 0 ? stars : 2),
@@ -2177,6 +2267,11 @@ function damage(
       source.killCount = (source.killCount || 0) + 1;
     if (!target.injured && isPower(target, "Ready to Roll"))
       target.psychosis = true;
+    for (const voodoo of state.fighters.filter(
+      (v) => v.slug === "doctor-voodoo" && !v.ko,
+    ))
+      if (voodoo.id === target.id || danielHolder(state, voodoo) === target.id)
+        voodoo.danielOn = voodoo.id;
     if (
       (target.injured || target.grunt) &&
       !target.grunt &&
@@ -2553,6 +2648,7 @@ function canHoldExtract(state, actor, token) {
     !isPower(actor, "Wild Rage") &&
     !isPower(actor, "Savagery Protocols") &&
     !isPower(actor, "Assassin") &&
+    !(actor.slug !== "doctor-voodoo" && hasDaniel(state, actor)) &&
     !actor.psychosis &&
     !isPower(actor, "Berserker Wrath") &&
     (!limitedExtracts.includes(token.name) ||
@@ -2663,6 +2759,13 @@ function powers(state, actor) {
             !within(rangeOrigin(actor), f, settings.range) ||
             (settings.effect === "mouth" && state.mouthRound?.includes(f.id)) ||
             (settings.duplicate && f.slug !== duplicates) ||
+            (settings.effect === "soul-barb" &&
+              !["hex", "incinerate", "poison", "slow"].some((c) =>
+                has(f, c),
+              )) ||
+            (settings.effect === "possession" &&
+              (threatOf(f) > spendable ||
+                danielHolder(state, actor) === f.id)) ||
             (settings.oncePerRound &&
               state.roundUses?.includes(card.name + ":" + f.id)) ||
             (settings.oncePerTarget &&
@@ -2679,7 +2782,13 @@ function powers(state, actor) {
                     (f.side !== actor.side && isPower(f, "Organic Steel"))))))
           )
             continue;
-          targets.push({ value: f.id, label: f.name });
+          targets.push({
+            value: f.id,
+            label: f.name,
+            ...(settings.effect === "possession" && {
+              minPower: Math.max(1, threatOf(f)),
+            }),
+          });
         }
         for (const piece of state.terrain.filter(
           (p) =>
@@ -2865,6 +2974,9 @@ function usePower(state, actor, selected, action, random) {
     case "Meditate":
       gain(actor, 1);
       return;
+    case "Master of the Occult":
+      gain(actor, 2);
+      return;
     case "Descendant of the Faltine": {
       gain(actor, 3);
       const rolled = rawDice(5, state.rng || randomInt);
@@ -3030,6 +3142,26 @@ function usePower(state, actor, selected, action, random) {
   if (selected.chainIncinerate && target) condition(target, "incinerate");
   if (selected.oncePerRound)
     (state.roundUses ||= []).push(selected.value + ":" + action.target);
+  if (selected.effect === "soul-barb") {
+    const kind =
+      action.condition && target.conditions?.includes(action.condition)
+        ? action.condition
+        : ["hex", "incinerate", "poison", "slow"].find((c) => has(target, c));
+    for (const f of state.fighters.filter(
+      (f) =>
+        f.id !== target.id &&
+        f.side !== actor.side &&
+        usable(f) &&
+        within(f, target, 2),
+    ))
+      condition(f, kind);
+    return;
+  }
+  if (selected.effect === "possession") {
+    actor.danielOn = target.id;
+    dropObjectives(state, target);
+    return;
+  }
   if (selected.effect === "assist") {
     gain(target, 1);
     return;
@@ -3860,6 +3992,13 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         true,
       ],
       [
+        role === "defense" && isPower(model, "Keeper of the Eye of Agamotto"),
+        "keeper",
+        "Keeper of the Eye of Agamotto",
+        2,
+        false,
+      ],
+      [
         role === "defense" && isPower(model, "General of the Dora Milaje"),
         "dora",
         "General of the Dora Milaje",
@@ -4138,13 +4277,17 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       pending.damageType !== "physical") ||
       isPower(target, "Mutant Energy Absorption") ||
       (isPower(target, "Scrying Mirrors of Limbo") &&
-        pending.damageType === "mystic"))
+        pending.damageType === "mystic") ||
+      (isPower(target, "Mystic Armor of Strange") &&
+        ["energy", "mystic"].includes(pending.damageType)))
   ) {
     const mutant = isPower(target, "Mutant Energy Absorption")
       ? "Mutant Energy Absorption"
       : isPower(target, "Scrying Mirrors of Limbo")
         ? "Scrying Mirrors of Limbo"
-        : null;
+        : isPower(target, "Mystic Armor of Strange")
+          ? "Mystic Armor of Strange"
+          : null;
     const max = defense.filter((d) => d === "wild").length;
     const eligible = rolled
       .map((d, i) => (["critical", "wild", "hit"].includes(d) ? i : -1))
@@ -4519,6 +4662,7 @@ function resolve(state, pending, block, random) {
         (pending.block ? 2 : 0) +
         (pending.defenseBonus || 0) +
         (target.selfDiscovery ? 3 : 0) +
+        (hasDaniel(state, target) && target.slug === "doctor-voodoo" ? 2 : 0) +
         (isPower(target, "Servant to the Sorcerer Supreme") &&
         state.fighters.some(
           (f) =>
@@ -4700,6 +4844,11 @@ function resolve(state, pending, block, random) {
     target.power -= lost;
     if (rules.drain === "sap") gain(actor, lost);
   }
+  if (rules.powerBurn && wilds) {
+    const lost = Math.min(target.power, wilds);
+    target.power -= lost;
+    if (lost) damage(state, target, lost, actor, { noPower: true });
+  }
   const origin = { x: target.x, y: target.y, radius: target.radius };
   if (
     rules.magneticCrush ||
@@ -4772,6 +4921,20 @@ function resolve(state, pending, block, random) {
   if (rules.backlash && rolled.includes("critical")) damage(state, actor, 2);
   for (const [test, ...values] of rules.conditions || [])
     if (matches(test, dealt)) values.forEach((name) => condition(target, name));
+  for (const [rule, kind] of [
+    [rules.cleanse, "cleanse"],
+    [rules.salve, "salve"],
+  ])
+    if (rule && matches(rule))
+      for (const ally of state.fighters.filter(
+        (f) =>
+          f.side === actor.side &&
+          usable(f) &&
+          (f.id === actor.id || within(f, actor, 2)),
+      ))
+        if (kind === "salve") heal(state, ally, 1);
+        else if (ally.conditions?.length) ally.conditions.shift();
+  if (pending.ferocity && usable(actor)) damage(state, actor, 1);
   if (rules.mysticBinding && usable(target)) {
     if (hasFaces(rolled, rules.mysticBinding) && !target.activated)
       target.activated = true;
@@ -5372,6 +5535,8 @@ module.exports = {
   pay,
   spend,
   heal,
+  hasDaniel,
+  danielHolder,
   decreeSource,
   counterStrike,
   unleash,

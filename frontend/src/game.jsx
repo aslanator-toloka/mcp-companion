@@ -674,7 +674,7 @@ function GamePanel() {
             checked={decree}
             onChange={(e) => setDecree(e.target.checked)}
           />{" "}
-          Death‘s Decree / Talons of Farallah
+          Бонус союзника: Death‘s Decree / Talons / Ferocity
         </label>
       )}
       {attackOption?.flareMax > 0 && (

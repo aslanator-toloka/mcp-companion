@@ -646,6 +646,32 @@ function targetingReactions(state, pending) {
         cost,
         reactor: ally.id,
       });
+    const windsCost = 3 + Number(ally.conditions?.includes("root") || false);
+    if (
+      ally.id === defender.id &&
+      ally.power >= windsCost &&
+      combat.isPower(ally, "Winds of Watoomb")
+    )
+      reactions.push({
+        value: "winds:" + ally.id,
+        key: "winds:" + ally.id,
+        label: "Winds of Watoomb · " + windsCost + " Power",
+        cost: windsCost,
+        reactor: ally.id,
+      });
+    if (
+      ally.id === defender.id &&
+      ally.power >= windsCost &&
+      combat.isPower(ally, "Recall Spirit") &&
+      combat.danielHolder(state, ally) !== ally.id
+    )
+      reactions.push({
+        value: "recall:" + ally.id,
+        key: "recall:" + ally.id,
+        label: "Recall Spirit · " + windsCost + " Power",
+        cost: windsCost,
+        reactor: ally.id,
+      });
     if (
       combat.isPower(ally, "Focused Repulsion Field") &&
       ally.id === defender.id &&
@@ -936,6 +962,14 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "vaulting")
+      return [
+        {
+          type: "vaulting",
+          label: "Vaulting Boots of Valtorr · " + effect.cost + " Power",
+        },
+        skip,
+      ];
     if (effect.type === "cosmic-justice")
       return [
         {
@@ -1294,7 +1328,9 @@ function checkpoint(state) {
 
 function announceAttack(state, actor, target, option, attack, random) {
   const talons = !!state.talonsPending;
+  const ferocity = !!state.ferocityPending;
   state.talonsPending = false;
+  state.ferocityPending = false;
   const pending = {
     actor: actor.id,
     target: target.id,
@@ -1309,6 +1345,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     throwAfter: attack.throwAfter,
     flares: attack.flares,
     talons,
+    ferocity,
     reroll: attack.reroll,
     blanksAttack: attack.blanksAttack,
     coldSnapAction: attack.coldSnapAction,
@@ -1816,6 +1853,7 @@ function view(state, side, full = false) {
       ...f,
       ...combat.status(f),
       neural: Object.values(state.neural || {}).includes(f.id),
+      daniel: combat.hasDaniel(state, f),
     })),
     attackRoll: combat.attackRollSummary(state, state.effects?.[0]?.resume),
     awaitingSide:
@@ -1851,8 +1889,13 @@ function beginRound(state) {
       if (combat.isPower(fighter, "Omega Level Multi-Versal Entity"))
         combat.gain(fighter, 1);
       if (combat.isPower(fighter, "Inner Rage")) combat.gain(fighter, 2);
-      if (combat.isPower(fighter, "Incredible Psychic Potential"))
+      if (
+        combat.isPower(fighter, "Incredible Psychic Potential") ||
+        combat.isPower(fighter, "Chosen of the Vishanti")
+      )
         combat.gain(fighter, 2);
+      if (combat.isPower(fighter, "Keeper of the Eye of Agamotto"))
+        combat.gain(fighter, 1);
       if (state.round === 1 && combat.isPower(fighter, "Ready to Roll"))
         fighter.psychosis = true;
       if (combat.isPower(fighter, "Untamed Cosmic Entity"))
@@ -2219,10 +2262,12 @@ function act(state, side, action, random = randomInt) {
         const thanos = combat.decreeSource(state, actor);
         expect(thanos && option.decree, "Death‘s Decree недоступен.");
         const talons = combat.isPower(thanos, "Talons of Farallah");
+        const ferocity = combat.isPower(thanos, "Ferocity of Cyttorak");
         combat.spend(state, thanos, (talons ? 3 : 2) + combat.rootTax(thanos));
         (state.reactionUses ||= []).push(thanos.id + ":decree");
-        decree = talons ? 2 : actor.injured ? 4 : 2;
+        decree = talons || ferocity ? 2 : actor.injured ? 4 : 2;
         state.talonsPending = talons;
+        state.ferocityPending = ferocity;
         log(
           state,
           (talons ? "Talons of Farallah" : "Death‘s Decree") +
@@ -2429,6 +2474,31 @@ function act(state, side, action, random = randomInt) {
         const repulsion = value.startsWith("repulsion:");
         const vibranium = value.startsWith("vibranium:");
         const prowess = value.startsWith("prowess:");
+        if (value.startsWith("recall:")) {
+          ally.danielOn = ally.id;
+          log(state, "Recall Spirit", { side, fighter: ally.id });
+          continueTargeting(state, pending, random);
+          break;
+        }
+        if (value.startsWith("winds:")) {
+          state.pendingAttack = null;
+          state.effects.unshift({
+            type: "displace",
+            mode: "push",
+            speed: "S",
+            direction: "toward",
+            side,
+            mover: attacker.id,
+            source: ally.id,
+            name: "Winds of Watoomb",
+            required: true,
+            cause: "superpower",
+            reference: { x: ally.x, y: ally.y, radius: ally.radius },
+            afterWinds: pending,
+          });
+          log(state, "Winds of Watoomb", { side, fighter: ally.id });
+          break;
+        }
         const barrier = value.startsWith("barrier:");
         if (prowess) pending.prowess = true;
         else if (repulsion) pending.blanksSucceed = true;
@@ -2606,6 +2676,21 @@ function act(state, side, action, random = randomInt) {
       (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
         "sinister-shake",
       );
+      break;
+    }
+    case "vaulting": {
+      const effect = state.effects.shift();
+      const source = state.fighters.find((f) => f.id === effect.source);
+      combat.spend(state, source, effect.cost);
+      state.effects.unshift({
+        type: "displace",
+        mode: "advance",
+        speed: "S",
+        side: source.side,
+        mover: source.id,
+        source: source.id,
+        name: "Vaulting Boots of Valtorr",
+      });
       break;
     }
     case "cosmic-justice": {
@@ -3355,6 +3440,19 @@ function act(state, side, action, random = randomInt) {
       );
       if (effect.mode === "place") recordPlacement(state, effect.mover);
       state.undo = [];
+      const vaulter = state.fighters.find((f) => f.id === effect.mover);
+      if (
+        effect.mode === "push" &&
+        combat.usable(vaulter) &&
+        combat.isPower(vaulter, "Vaulting Boots of Valtorr") &&
+        vaulter.power >= 2 + combat.rootTax(vaulter)
+      )
+        state.effects.unshift({
+          type: "vaulting",
+          side: vaulter.side,
+          source: vaulter.id,
+          cost: 2 + combat.rootTax(vaulter),
+        });
       if (effect.danceParty) {
         const dancer = state.fighters.find((f) => f.id === effect.mover);
         let dealt = 0;
@@ -3408,6 +3506,8 @@ function act(state, side, action, random = randomInt) {
           });
         } else finishAttack(state, effect.resume, false, random);
       }
+      if (effect.afterWinds)
+        continueTargeting(state, effect.afterWinds, random);
       if (effect.afterEvasion)
         state.effects.unshift({
           type: "resume-attack",
