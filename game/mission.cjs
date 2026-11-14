@@ -14,12 +14,26 @@ const onBoard = (o) => !o.holder;
 const held = (state, f) => state.objectives.filter((o) => o.holder === f.id);
 
 function interacts(state, actor) {
-  if (actor.grunt || actor.power < 1 || combat.isPower(actor, "Wild Rage"))
+  const workforce = combat.isPower(actor, "X-Factor Investigations Workforce");
+  if (
+    (actor.grunt && !workforce) ||
+    (actor.power < 1 && !workforce) ||
+    combat.isPower(actor, "Wild Rage")
+  )
     return [];
   return state.objectives.flatMap((o) => {
     if (
       !onBoard(o) ||
       (o.role === "secure" && combat.isPower(actor, "Anklebiter")) ||
+      (combat.isPower(actor, "Like Herding Cats") &&
+        !state.fighters.some(
+          (f) =>
+            f.id !== actor.id &&
+            f.side === actor.side &&
+            !f.grunt &&
+            combat.usable(f) &&
+            within(f, o, 1),
+        )) ||
       !within(actor, o, combat.interactRange(actor)) ||
       state.interacted?.includes(o.id)
     )

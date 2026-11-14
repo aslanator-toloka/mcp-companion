@@ -1323,6 +1323,17 @@ function endActivation(state, side, random, applyBleed = true) {
           ? 1
           : 0;
     if (healing && combat.usable(actor)) combat.heal(state, actor, healing);
+    if (
+      combat.isPower(actor, "Like Herding Cats") &&
+      !state.fighters.some(
+        (f) =>
+          f.side === actor.side &&
+          f.slug === "multiple-man" &&
+          combat.usable(f) &&
+          geometry.within(f, actor, 3),
+      )
+    )
+      combat.dropObjectives(state, actor);
     for (const omega of state.fighters.filter(
       (f) =>
         f.side !== actor.side &&
@@ -1576,6 +1587,11 @@ function beginRound(state) {
       if (
         combat.isPower(fighter, "Techno-Organic Virus Suppression") ||
         combat.isPower(fighter, "Telepathic Cloak") ||
+        (combat.leadership(state, fighter.side, "X-Factor Investigations") &&
+          !fighter.grunt &&
+          state.objectives.some(
+            (o) => o.role === "secure" && geometry.within(fighter, o, 1),
+          )) ||
         combat.isPower(fighter, "Psionic Nexus")
       )
         combat.gain(fighter, 1);
@@ -1800,10 +1816,18 @@ function act(state, side, action, random = randomInt) {
         "Нельзя активировать персонажа.",
       );
       const model = state.fighters.find((f) => f.id === value);
+      const gruntSlug = {
+        "ultron-metal-tyrant": "ultron-drones-grunts",
+        "multiple-man": "multiple-man-duplicates-grunts",
+      }[model.slug];
       const drone =
-        model.slug === "ultron-metal-tyrant" &&
+        gruntSlug &&
         state.fighters.find(
-          (f) => f.grunt && f.side === side && !f.activated && combat.usable(f),
+          (f) =>
+            f.slug === gruntSlug &&
+            f.side === side &&
+            !f.activated &&
+            combat.usable(f),
         );
       state.queuedParent = drone ? model.id : null;
       beginActivation(state, drone || model);
@@ -2485,7 +2509,8 @@ function act(state, side, action, random = randomInt) {
         state.fighters.push({
           ...effect.model,
           ...point,
-          conditions: ["stagger"],
+          conditions:
+            effect.model.slug === "ultron-drones-grunts" ? ["stagger"] : [],
         });
       }
       state.undo = [];
@@ -3090,7 +3115,8 @@ function act(state, side, action, random = randomInt) {
       const objective = state.objectives.find(
         (o) => o.id === (freedom ? value.split("|")[1] : value),
       );
-      actor.power -= 1;
+      if (!combat.isPower(actor, "X-Factor Investigations Workforce"))
+        actor.power -= 1;
       (state.interacted ||= []).push(objective.id);
       if (freedom) {
         for (const o of state.objectives.filter((o) => o.freedom === side))

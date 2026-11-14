@@ -392,6 +392,8 @@ const profiles = {
   "Red Terror": { types: ["physical", "energy"], absorbEssence: true },
   "Mind Possession": { afterMove: { mode: "advance", speed: "S" } },
   "Flesh Manipulation": { explosiveForce: true },
+  Dogpile: { dupeReroll: true, conditions: [["wild", "slow"]] },
+  "Madrox Monkey Pile!": { dupeDice: 2, conditions: [["wild hit", "stagger"]] },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -513,7 +515,17 @@ const blobStrike = {
     on: "wild",
   },
 };
+const duplicates = "multiple-man-duplicates-grunts";
+const nearDuplicates = (state, actor, target) =>
+  state.fighters.some(
+    (f) =>
+      f.side === actor.side &&
+      f.slug === (actor.slug === duplicates ? "multiple-man" : duplicates) &&
+      usable(f) &&
+      within(f, target, 2),
+  );
 const characterProfiles = {
+  "multiple-man:Strike": { builder: "damage", dupeReroll: true },
   "cassandra-nova:Psionic Bolt": { builder: "damage", drain: "sap" },
   "honey-badger:Claw Slash": {
     builder: "damage",
@@ -576,6 +588,14 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Duplicate Reabsorption": {
+    mode: "target",
+    range: 3,
+    ally: true,
+    duplicate: true,
+    effect: "reabsorb",
+  },
+  "Follow the Leads": { mode: "self" },
   Biokinesis: {
     mode: "target",
     range: 3,
@@ -1522,6 +1542,56 @@ function damage(
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
   if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
+  if (dealt && enemy)
+    for (const [dupe, side] of [
+      [target, target.side],
+      [source, source?.side],
+    ])
+      if (dupe?.slug === duplicates)
+        for (const madrox of state.fighters.filter(
+          (f) =>
+            f.side === side &&
+            usable(f) &&
+            isPower(f, "Shared Experiences") &&
+            (dupe.x == null || within(f, dupe, 3)),
+        ))
+          gain(madrox, 1);
+  if (
+    dealt &&
+    usable(target) &&
+    isPower(target, "Kinetic Duplication") &&
+    target.damage < Number(face(target).stamina) &&
+    !state.fighters.some(
+      (f) => f.slug === duplicates && f.side === target.side && usable(f),
+    ) &&
+    !state.effects?.some(
+      (e) => e.type === "spawn-drones" && e.side === target.side,
+    )
+  ) {
+    const card = pool.characters[duplicates];
+    (state.effects ||= []).push({
+      type: "spawn-drones",
+      mode: "place",
+      side: target.side,
+      model: {
+        id: target.side + ":" + duplicates,
+        side: target.side,
+        slug: duplicates,
+        name: card.name,
+        size: card.size,
+        speed: card.speed,
+        radius: card.baseSize / 50.8,
+        power: 0,
+        grunt: true,
+        activated: false,
+        x: null,
+        y: null,
+      },
+      name: card.name,
+      range: 2,
+      reference: { x: target.x, y: target.y, radius: target.radius },
+    });
+  }
   if (
     dealt &&
     enemy &&
@@ -1650,6 +1720,7 @@ function removeGrunt(state, drone, source) {
     (f) =>
       f.slug === "ultron-metal-tyrant" && f.side === drone.side && usable(f),
   );
+  if (drone.slug !== "ultron-drones-grunts") return;
   let dealt = 0;
   for (const enemy of state.fighters.filter(
     (f) => usable(f) && f.side !== drone.side && within(f, origin, 2),
@@ -2009,6 +2080,7 @@ function powers(state, actor) {
                   : f.size) > settings.enemy)) ||
             !within(rangeOrigin(actor), f, settings.range) ||
             (settings.effect === "mouth" && state.mouthRound?.includes(f.id)) ||
+            (settings.duplicate && f.slug !== duplicates) ||
             (settings.oncePerTarget &&
               state.usedPowers?.includes(card.name + ":" + f.id)) ||
             (settings.sight && !lineOfSight(actor, f, state.terrain).visible) ||
@@ -2213,6 +2285,18 @@ function usePower(state, actor, selected, action, random) {
     case "Nothing Stops the Juggernaut!":
       state.effects.push(juggernautPush(actor));
       return;
+    case "Follow the Leads":
+      state.effects.push({
+        type: "displace",
+        mode: "throw",
+        speed: "S",
+        side: actor.side,
+        mover: actor.id,
+        source: actor.id,
+        name: "Follow the Leads",
+        required: true,
+      });
+      return;
     case "Primal Pounce":
       state.effects.push({
         type: "displace",
@@ -2301,6 +2385,16 @@ function usePower(state, actor, selected, action, random) {
     (state.fieldLeaderMoves ||= []).push(target.id);
   if (selected.value === "Matter Transmutation")
     (state.usedPowers ||= []).push("matter:" + target.id);
+  if (selected.effect === "reabsorb") {
+    const token = state.objectives.find(
+      (o) => o.holder === target.id && o.role === "extract",
+    );
+    if (token && canHoldExtract(state, actor, token)) token.holder = actor.id;
+    else if (token) delete token.holder;
+    removeGrunt(state, target);
+    heal(state, actor, 3);
+    return;
+  }
   if (selected.effect === "mouth") {
     target.power = Math.max(0, target.power - 2);
     (state.mouthRound ||= []).push(target.id);
@@ -2897,6 +2991,15 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       ],
       [genius, "genius", "Strategic Genius", 1, false],
       [
+        role === "rolled" &&
+          rules.dupeReroll &&
+          nearDuplicates(state, actor, target),
+        "dogpile",
+        actor.slug === duplicates ? "Dogpile" : "Strike · Multiple Man",
+        2,
+        false,
+      ],
+      [
         role === "rolled" && pending.selffriend,
         "selffriend",
         "Self Must Protect Selffriend",
@@ -3397,6 +3500,9 @@ function resolve(state, pending, block, random) {
           ? 1
           : 0) +
         (savage(state, actor) ? 2 : 0) +
+        (rules.dupeDice && nearDuplicates(state, actor, target)
+          ? rules.dupeDice
+          : 0) +
         (rules.placementDice ? state.placements?.[actor.id] || 0 : 0) +
         hammer +
         Number(stark) +

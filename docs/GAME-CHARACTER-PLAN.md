@@ -52,6 +52,7 @@
 | 43 | Weapon X | Готово | Проверены Berserker Rage по повторной цели, Rampage и Wild Abandon, Savagery Protocols и Aimless Aggression. |
 | 44 | Omega Red | Готово | Проверены Carbonadium Coils и Armor, Absorb Essence, Ensnare, Death Factor и Death Spores. |
 | 45 | Cassandra Nova | Готово | Проверены Telepathic Cloak, Psionic Bolt без Pierce, Mind Possession, Flesh Manipulation, Biokinesis, Psychic Distraction и Telekinetic Deflection. |
+| 46 | Multiple Man | Готово | Проверены Kinetic Duplication, Shared Experiences, Dogpile и Monkey Pile рядом с дубликатами, Duplicate Reabsorption, Follow the Leads и правила Interact для Duplicates. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -268,3 +269,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряды Hellfire Club и Servants of the Apocalypse собираются. Apocalypse пока не добавлен: его Leadership раздаёт карты Всадников, которых нет в данных.
 
 [Сценарии Cassandra Nova](../tests/game-cassandra-nova.test.cjs).
+
+## 46. Multiple Man и Duplicates
+
+- [x] Kinetic Duplication: после урона, если Multiple Man не Dazed и дубликатов нет в игре, он ставит Multiple Man Duplicates в Range 2. Duplicates активируются вместе с ним, как Ultron Drones. Взрыв при KO остался только у Ultron Drones.
+- [x] Shared Experiences даёт 1 Power, когда дубликаты в Range 3 наносят урон врагу или получают его. Strike Multiple Man и Dogpile дубликатов перебрасывают до двух кубиков, если другой рядом с защитником. Madrox Monkey Pile! получает +2 кубика рядом с дубликатами и накладывает Stagger на Wild и Hit.
+- [x] Duplicate Reabsorption убирает дубликатов, забирает их жетон Extract и лечит Multiple Man на 3. Follow the Leads — Short Throw самого себя.
+- [x] Duplicates взаимодействуют с жетонами бесплатно и только если жетон оспаривает другой союзник. В конце активации вне Range 3 от Multiple Man сбрасывают жетоны. X-Factor Investigations даёт +1 Power союзникам у Secure в Power Phase. Переброс кубиков при Interact не сделан: в Game таких бросков почти нет.
+- [x] Отряды X-Factor и Uncanny X-Men собираются. Браузер не проверен.
+
+[Сценарии Multiple Man](../tests/game-multiple-man.test.cjs).
