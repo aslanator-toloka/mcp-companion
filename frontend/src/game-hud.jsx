@@ -150,6 +150,7 @@ export function Vitals({ fighter }) {
       {f.flares > 0 && <span title="Flare">Flare {f.flares}</span>}
       {f.phoenix > 0 && <span title="Phoenix">Phoenix {f.phoenix}</span>}
       {f.herb && <span title="Herb">Herb</span>}
+      {f.psychosis && <span title="Psychosis">Psychosis</span>}
       {f.killCount > 0 && <span title="Kill Count">Kill {f.killCount}</span>}
       {f.neural && <span title="Neural Connection">Neural</span>}
       {f.selfDiscovery && <span title="Self-Discovery">+3 защ.</span>}

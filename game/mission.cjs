@@ -18,7 +18,9 @@ function interacts(state, actor) {
   if (
     (actor.grunt && !workforce) ||
     (actor.power < 1 && !workforce) ||
-    combat.isPower(actor, "Wild Rage")
+    combat.isPower(actor, "Wild Rage") ||
+    combat.isPower(actor, "Assassin") ||
+    actor.psychosis
   )
     return [];
   return state.objectives.flatMap((o) => {
@@ -68,6 +70,8 @@ function secureSide(state, objective) {
       !f.grunt &&
       combat.usable(f) &&
       !combat.isPower(f, "Anklebiter") &&
+      !combat.isPower(f, "Assassin") &&
+      !f.psychosis &&
       within(f, objective, 1),
   );
   const healthy = nearby.filter(
@@ -140,6 +144,28 @@ function cosmicEffects(state) {
 }
 function cleanup(state, random) {
   for (const f of state.fighters.filter(combat.usable)) {
+    if (
+      combat.isPower(
+        f,
+        "I‘m the Spirit of Vengeance, Bearer of the Power Cosmic, and Just A Bit Unstable",
+      )
+    ) {
+      f.psychosis = false;
+      const rolled = combat.rawDice(5, random);
+      combat.gain(
+        f,
+        rolled.filter((d) => ["critical", "wild", "hit"].includes(d)).length,
+      );
+      if (f.power >= 5) {
+        f.psychosis = true;
+        combat.dropObjectives(state, f);
+      }
+      log(state, "Spirit of Vengeance · " + f.name, {
+        side: f.side,
+        fighter: f.id,
+        rolls: [{ label: "Psychosis", faces: rolled }],
+      });
+    }
     if (f.herb) {
       f.herb = false;
       combat.damage(state, f, 1);

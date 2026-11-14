@@ -296,6 +296,7 @@ function GamePanel() {
   const [powerSpend, setPowerSpend] = useState("");
   const [boost, setBoost] = useState("");
   const [flares, setFlares] = useState("");
+  const [decree, setDecree] = useState(false);
   const feedback = useGameFeedback(state);
   useEffect(() => {
     function onUndoShortcut(event) {
@@ -480,6 +481,7 @@ function GamePanel() {
       payer: currentPayer,
       ...(attackOption.boostMax > 0 && boost && { boost: Number(boost) }),
       ...(attackOption.flareMax > 0 && flares && { flares: Number(flares) }),
+      ...(attackOption.decree && decree && { decree: true }),
     });
   }
   function hitTarget(id) {
@@ -663,6 +665,16 @@ function GamePanel() {
               ),
             )}
           </select>
+        </label>
+      )}
+      {attackOption?.decree && (
+        <label>
+          <input
+            type="checkbox"
+            checked={decree}
+            onChange={(e) => setDecree(e.target.checked)}
+          />{" "}
+          Death‘s Decree
         </label>
       )}
       {attackOption?.flareMax > 0 && (

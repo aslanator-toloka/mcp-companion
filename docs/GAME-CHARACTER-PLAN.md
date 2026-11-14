@@ -73,6 +73,9 @@
 | 64 | Ebony Maw | Готово, кроме Gem Bearer | Проверены Black Tongue, Herald of Doom, Mind Over Matter и Incredible Psychic Potential. |
 | 65 | Supergiant | Готово, кроме Gem Bearer | Проверены Devastate Intellect с Devour Mind, Ethereal, Omnipathy, Supreme Control и Submit! для жетона Senator. |
 | 66 | Black Swan | Готово, кроме Gem Bearer | Проверены Midnight Field, Telepathic Suggestion и Follow-Up Eye Beam вне дальности. |
+| 67 | Nebula | Готово | Проверены Assassin, Cybernetic Enhancements и Shock Sword Assault. |
+| 68 | Cosmic Ghost Rider | Готово | Проверены Psychosis, Spirit of Vengeance в Cleanup, Penance Stare, Hellcycle, Chains of Cyttorak и Cosmic Justice on Wheels. |
+| 69 | Thanos, the Mad Titan | Готово, кроме Infinity Gems | Проверены Death‘s Decree, Death‘s Agenda (VP за KO), Cosmic Blast, Cosmic Portal и Being of Immeasurable Power. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -377,3 +380,14 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Black Order собирается. Браузер не проверен.
 
 [Сценарии Ebony Maw, Supergiant и Black Swan](../tests/game-black-order-psychics.test.cjs).
+
+## 67–69. Nebula, Cosmic Ghost Rider и Thanos
+
+- [x] Assassin не держит, не оспаривает и не берёт жетоны, но перебрасывает любые кубики атаки против того, кто держит или оспаривает жетон. Cybernetic Enhancements перебрасывает кубик защиты и лечит 1 в начале активации. Shock Sword Assault ставит Nebula у цели, на Wild — Stun.
+- [x] Psychosis появляется в первой Power Phase и при Daze: Failure засчитываются как успехи в атаке, защите и уклонении, а жетоны недоступны. В Cleanup Ghost Rider снимает Psychosis, бросает 5 кубиков за Power и при 5+ Power снова получает Psychosis и сбрасывает жетоны.
+- [x] Penance Stare не даёт Power цели, а по своему набору граней превращает все Block защиты в Failure. Interstellar Hellcycle делает Place на 1–5. Chains of Cyttorak притягивает и поджигает. Cosmic Justice on Wheels за 3 Power стреляет Hellfire Blasters в того, кто вырубил союзника.
+- [x] Death‘s Decree за 2 Power добавляет союзнику в Range 4 +2 кубика, раненому +4, раз за Turn. В окне атаки появился переключатель. Death‘s Agenda даёт 1 VP за KO не-грунта врага. Being of Immeasurable Power снижает урон от врагов на 1, вплоть до 0.
+- [ ] Infinity Gems: Gem Bearer и бесплатные способности камней у Thanos не реализованы.
+- [x] Peerless не пускает Thanos и Cosmic Ghost Rider в один отряд. Black Order собран полностью, кроме камней. Браузер не проверен.
+
+[Сценарии Nebula, Cosmic Ghost Rider и Thanos](../tests/game-black-order-titans.test.cjs).

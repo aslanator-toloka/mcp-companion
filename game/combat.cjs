@@ -537,6 +537,27 @@ const profiles = {
     afterMove: { mode: "throw", speed: "S", on: "wild", required: true },
     extra: "eyebeam",
   },
+  "Blaster Pistol": { builder: 1 },
+  "Shock Sword Assault": {
+    conditions: [["wild", "stun"]],
+    afterMove: { mode: "place", who: "actor", range: 1, required: true },
+  },
+  "Hellfire Blasters": { builder: 1 },
+  "Power Cosmic Penance Stare": {
+    noPower: true,
+    dustToDust: "critical wild hit block failure",
+  },
+  "Cosmic Blast": {
+    boost: 3,
+    conditions: [["wild", "slow"]],
+    afterMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      on: "wild",
+      required: true,
+    },
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -668,6 +689,16 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "nebula:Strike": { builder: "damage", conditions: [["wild", "shock"]] },
+  "thanos-the-mad-titan:Strike": {
+    builder: "damage",
+    beforeMove: {
+      mode: "throw",
+      speed: "S",
+      direction: "away",
+      on: "wild hit",
+    },
+  },
   "black-swan:Strike": {
     builder: "damage",
     beforeMove: {
@@ -766,6 +797,28 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Interstellar Hellcycle": {
+    mode: "self",
+    variableCost: "hellcycle",
+    maxPower: 5,
+  },
+  "Chains of Cyttorak": {
+    mode: "target",
+    range: 3,
+    any: true,
+    effect: "push",
+    speed: "S",
+    direction: "toward",
+    referenceActor: true,
+    chainIncinerate: true,
+  },
+  "Cosmic Portal": {
+    mode: "target",
+    range: 4,
+    ally: true,
+    effect: "place",
+    destinationRange: 2,
+  },
   "Submit!": {
     mode: "target",
     effect: "submit",
@@ -1312,6 +1365,18 @@ function totallyMeantIt(state, model, roll) {
     side: model.side,
     fighter: model.id,
   });
+}
+function decreeSource(state, actor) {
+  return state.fighters.find(
+    (f) =>
+      f.id !== actor.id &&
+      f.side === actor.side &&
+      usable(f) &&
+      isPower(f, "Death‘s Decree") &&
+      f.power >= 2 + rootTax(f) &&
+      !state.reactionUses?.includes(f.id + ":decree") &&
+      within(f, actor, 4),
+  );
 }
 function savage(state, model) {
   return (
@@ -1874,6 +1939,9 @@ function damage(
       power(target, "Invulnerable Skin"))
   )
     amount = Math.max(1, amount - 1);
+  if (enemy && power(target, "Being of Immeasurable Power"))
+    amount = Math.max(0, amount - 1);
+  if (amount <= 0) return 0;
   const maximum = Number(face(target).stamina);
   const dealt = Math.min(amount, maximum - (target.damage || 0));
   if (dealt && juggernautContact) (source.juggernautHit ||= []).push(target.id);
@@ -2035,6 +2103,36 @@ function damage(
       source.phoenix -= 1;
     if (source && source.side !== target.side && isPower(source, "Kill Count"))
       source.killCount = (source.killCount || 0) + 1;
+    if (!target.injured && isPower(target, "Ready to Roll"))
+      target.psychosis = true;
+    if (
+      (target.injured || target.grunt) &&
+      !target.grunt &&
+      source &&
+      source.side !== target.side &&
+      leadership(state, source.side, "Death‘s Agenda") &&
+      state.score
+    ) {
+      state.score[source.side] += 1;
+      log(state, "Death‘s Agenda · +1 VP", { side: source.side });
+    }
+    if (source && source.side !== target.side && source.x != null)
+      for (const rider of state.fighters.filter(
+        (f) =>
+          f.id !== target.id &&
+          f.side === target.side &&
+          usable(f) &&
+          isPower(f, "Cosmic Justice on Wheels") &&
+          f.power >= 3 + rootTax(f) &&
+          reactiveAllowed(source, f, state),
+      ))
+        (state.effects ||= []).push({
+          type: "cosmic-justice",
+          side: rider.side,
+          source: rider.id,
+          target: source.id,
+          cost: 3 + rootTax(rider),
+        });
     if (!target.injured && isPower(target, "I Am Fire and Life Incarnate"))
       target.phoenix = (target.phoenix || 0) + 3;
     if (target.injured && isPower(target, "Untamed Cosmic Entity")) {
@@ -2361,6 +2459,7 @@ function attacks(state, actor, previous) {
                 : [],
             sampleBoost: !!rules.sampleBoost && (actor.samples ?? 1) > 0,
             flareMax: isPower(actor, "Thermokinesis") ? actor.flares || 0 : 0,
+            decree: !previous && !!decreeSource(state, actor),
             boostMax: rules.boost
               ? Math.max(
                   0,
@@ -2381,6 +2480,8 @@ function canHoldExtract(state, actor, token) {
     token.role === "extract" &&
     !isPower(actor, "Wild Rage") &&
     !isPower(actor, "Savagery Protocols") &&
+    !isPower(actor, "Assassin") &&
+    !actor.psychosis &&
     !isPower(actor, "Berserker Wrath") &&
     (!limitedExtracts.includes(token.name) ||
       !state.objectives.some(
@@ -2754,6 +2855,7 @@ function usePower(state, actor, selected, action, random) {
       return;
     case "BAMF!":
     case "Limbo Step":
+    case "Interstellar Hellcycle":
       state.effects.push({
         type: "displace",
         mode: "place",
@@ -2837,6 +2939,7 @@ function usePower(state, actor, selected, action, random) {
   const terrain = state.terrain.find((p) => p.id === action.target);
   if (selected.oncePerTarget)
     (state.usedPowers ||= []).push(selected.value + ":" + action.target);
+  if (selected.chainIncinerate && target) condition(target, "incinerate");
   if (selected.value === "Figment of Fantasy" && state.neural)
     delete state.neural[actor.id];
   if (selected.value === "Field Leader")
@@ -3613,6 +3716,25 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         false,
       ],
       [
+        role === "rolled" &&
+          isPower(model, "Assassin") &&
+          (state.objectives.some((o) => o.holder === opponent.id) ||
+            state.objectives.some(
+              (o) => o.x != null && !o.holder && within(opponent, o, 1),
+            )),
+        "assassin-hunt",
+        "Assassin",
+        values.length,
+        false,
+      ],
+      [
+        role === "defense" && isPower(model, "Cybernetic Enhancements"),
+        "cybernetic",
+        "Cybernetic Enhancements",
+        1,
+        false,
+      ],
+      [
         role === "rolled" && model.mantle,
         "mantle",
         "Mantle of the Black Panther",
@@ -4013,6 +4135,7 @@ function applyModifier(state, event, action, random) {
 }
 
 function innateDiceSuccesses(fighter, dice) {
+  if (fighter.psychosis) return dice.filter((die) => die === "failure").length;
   const extraFace = isPower(fighter, "Chosen of Chthon")
     ? "failure"
     : isPower(fighter, "The Cards Always Be In My Favor")
@@ -4372,6 +4495,10 @@ function resolve(state, pending, block, random) {
         ],
       };
   }
+  if (rules.dustToDust && hasFaces(rolled, rules.dustToDust))
+    defense.forEach((die, i) => {
+      if (die === "block") defense[i] = "failure";
+    });
   if (
     !pending.superGenius &&
     (isPower(actor, "Super Genius") || isPower(actor, "Special Forces")) &&
@@ -5101,6 +5228,7 @@ module.exports = {
   pay,
   spend,
   heal,
+  decreeSource,
   counterStrike,
   unleash,
   phoenixExplosion,

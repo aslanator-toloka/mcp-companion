@@ -228,6 +228,8 @@ function beginActivation(state, active, locked = false) {
     fieldLeaderMoves: [],
     interacted: [],
   });
+  if (combat.isPower(active, "Cybernetic Enhancements"))
+    combat.heal(state, active, 1);
   if (
     active.conditions?.length &&
     combat.leadership(state, active.side, "Unbreakable Red Line")
@@ -922,6 +924,17 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "cosmic-justice")
+      return [
+        {
+          type: "cosmic-justice",
+          label:
+            "Cosmic Justice on Wheels · Hellfire Blasters · " +
+            effect.cost +
+            " Power",
+        },
+        skip,
+      ];
     if (effect.type === "partner")
       return [
         {
@@ -1824,6 +1837,8 @@ function beginRound(state) {
       if (combat.isPower(fighter, "Inner Rage")) combat.gain(fighter, 2);
       if (combat.isPower(fighter, "Incredible Psychic Potential"))
         combat.gain(fighter, 2);
+      if (state.round === 1 && combat.isPower(fighter, "Ready to Roll"))
+        fighter.psychosis = true;
       if (combat.isPower(fighter, "Untamed Cosmic Entity"))
         combat.gain(fighter, fighter.phoenix || 0);
       if (
@@ -2183,7 +2198,20 @@ function act(state, side, action, random = randomInt) {
         "Укажите допустимое число Flare.",
       );
       actor.flares = (actor.flares || 0) - flares;
-      const diceBonus = (!extra ? actor.stokeFlames || 0 : 0) + boost + flares;
+      let decree = 0;
+      if (action.decree) {
+        const thanos = combat.decreeSource(state, actor);
+        expect(thanos && option.decree, "Death‘s Decree недоступен.");
+        combat.spend(state, thanos, 2 + combat.rootTax(thanos));
+        (state.reactionUses ||= []).push(thanos.id + ":decree");
+        decree = actor.injured ? 4 : 2;
+        log(state, "Death‘s Decree · +" + decree + " куб.", {
+          side,
+          fighter: thanos.id,
+        });
+      }
+      const diceBonus =
+        (!extra ? actor.stokeFlames || 0 : 0) + boost + flares + decree;
       if (option.shape !== "single") {
         const remaining = combat.beginVolley(
           state,
@@ -2555,6 +2583,26 @@ function act(state, side, action, random = randomInt) {
       target.conditions = target.conditions.filter((c) => c !== value);
       (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
         "sinister-shake",
+      );
+      break;
+    }
+    case "cosmic-justice": {
+      const effect = state.effects.shift();
+      const rider = state.fighters.find((f) => f.id === effect.source);
+      const enemy = state.fighters.find((f) => f.id === effect.target);
+      if (!combat.usable(rider) || !combat.usable(enemy)) break;
+      combat.spend(state, rider, effect.cost);
+      state.undo = [];
+      const index = combat
+        .face(rider)
+        .attacks.findIndex((a) => a.name === "Hellfire Blasters");
+      announceAttack(
+        state,
+        rider,
+        enemy,
+        { index, name: "Hellfire Blasters" },
+        { damageType: "energy", extra: true },
+        random,
       );
       break;
     }
