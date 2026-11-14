@@ -596,7 +596,9 @@ function targetingReactions(state, pending) {
       combat
         .face(ally)
         .superPowers?.some(
-          (p) => p.name === "Vibranium Armor" && p.type === "reactive",
+          (p) =>
+            (p.name === "Vibranium Armor" && p.type === "reactive") ||
+            p.name === "Vibranium Shield",
         ) &&
       ally.id === defender.id &&
       ["physical", "energy"].includes(pending.damageType)
@@ -604,7 +606,13 @@ function targetingReactions(state, pending) {
       reactions.push({
         value: "vibranium:" + ally.id,
         key: "vibranium:" + ally.id,
-        label: "Vibranium Armor · " + cost + " Power",
+        label:
+          (combat.isPower(ally, "Vibranium Shield")
+            ? "Vibranium Shield"
+            : "Vibranium Armor") +
+          " · " +
+          cost +
+          " Power",
         cost,
         reactor: ally.id,
       });
@@ -657,6 +665,20 @@ function targetingReactions(state, pending) {
         key: "bodyguard:" + ally.id,
         label: "Bodyguard · " + ally.name + " · " + cost + " Power",
         cost,
+        reactor: ally.id,
+      });
+    const pymCost = 1 + Number(ally.conditions?.includes("root") || false);
+    if (
+      ally.id === defender.id &&
+      !ally.form &&
+      ally.power >= pymCost &&
+      combat.isPower(ally, "Pym Particle Control")
+    )
+      reactions.push({
+        value: "pym:" + ally.id,
+        key: "pym:" + ally.id,
+        label: "Pym Particle Control · " + pymCost + " Power",
+        cost: pymCost,
         reactor: ally.id,
       });
     const windsCost = 3 + Number(ally.conditions?.includes("root") || false);
@@ -2516,6 +2538,21 @@ function act(state, side, action, random = randomInt) {
         const repulsion = value.startsWith("repulsion:");
         const vibranium = value.startsWith("vibranium:");
         const prowess = value.startsWith("prowess:");
+        if (value.startsWith("pym:")) {
+          state.pendingAttack = null;
+          state.effects.unshift({
+            ...transformEvent(ally, 1, true),
+            attackAfterTransform: pending,
+          });
+          for (const o of state.objectives.filter(
+            (o) => o.holder === ally.id && o.name === "Senator",
+          )) {
+            delete o.holder;
+            o.x = ally.x;
+            o.y = ally.y;
+          }
+          break;
+        }
         if (value.startsWith("recall:")) {
           ally.danielOn = ally.id;
           log(state, "Recall Spirit", { side, fighter: ally.id });

@@ -641,6 +641,37 @@ const profiles = {
   },
   "Anti-Matter Blast": { builder: "damage", conditions: [["wild", "stun"]] },
   "Let Loose": { energyPulse: "critical wild" },
+  "Pym Particle Punch": { builder: "damage", transformTo: [1, false] },
+  "Ant-Sized Uppercut": { builder: "damage", transformTo: [0, true] },
+  Unibeam: { ignoreSight: true },
+  "Bullet Ant Barrage": { conditions: [["damage", "poison", "stun"]] },
+  "Repulsor Blast": {
+    builder: "damage",
+    beforeMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      on: "wild",
+      required: true,
+    },
+  },
+  "Redwing Assault": {
+    afterMove: [
+      {
+        mode: "throw",
+        speed: "S",
+        direction: "away",
+        limit: 3,
+        damageRequired: true,
+      },
+      { mode: "place", who: "actor", self: true, range: 2, required: true },
+    ],
+  },
+  "Stars and Stripes Strike": { builder: "damage", extra: "stripes" },
+  "I Don‘t Like Bullies": {
+    conditions: [["wild hit", "stun", "slow"]],
+    afterMove: { mode: "throw", speed: "M", limit: 3, on: "wild" },
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -772,6 +803,19 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "captain-america-sam-wilson:Shield Throw": {
+    builder: 1,
+    ignoreSight: true,
+    extra: "bounce",
+    bounceOn: "wild",
+    afterMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      limit: 2,
+      damageRequired: true,
+    },
+  },
   "spectrum:Photon Blast": { builder: 1, rerollAll: true },
   "wong:Strike": { builder: 1 },
   "nebula:Strike": { builder: "damage", conditions: [["wild", "shock"]] },
@@ -882,6 +926,10 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Change Size": { mode: "self" },
+  "Hitch a Ride": { mode: "place", range: 3, dropFirst: true },
+  "Friday AI": { mode: "self" },
+  "On Your Left": { mode: "advance", speed: "M" },
   "Street Fighter": {
     mode: "target",
     range: 2,
@@ -1586,6 +1634,15 @@ function hasDaniel(state, model) {
       danielHolder(state, v) === model.id,
   );
 }
+function dropCivilians(state, model) {
+  for (const o of state.objectives.filter(
+    (o) => o.holder === model.id && o.name === "Senator",
+  )) {
+    delete o.holder;
+    o.x = model.x;
+    o.y = model.y;
+  }
+}
 function savage(state, model) {
   return (
     isPower(model, "Savagery Protocols") &&
@@ -1759,7 +1816,8 @@ function collide(
       : 0;
   const reflexes =
     isPower(target, "Supersonic Reflexes") ||
-    isPower(target, "Keeper of the Eye of Agamotto");
+    isPower(target, "Keeper of the Eye of Agamotto") ||
+    isPower(target, "Tiny Superhero");
   const luck =
     isPower(target, "Probability Manipulation") &&
     reactiveAllowed(source, target, state)
@@ -1810,10 +1868,15 @@ function collide(
         ? "Stars and Garters"
         : isPower(target, "Keeper of the Eye of Agamotto")
           ? "Keeper of the Eye of Agamotto"
-          : "Supersonic Reflexes") + " · Уклонение",
+          : isPower(target, "Tiny Superhero")
+            ? "Tiny Superhero"
+            : "Supersonic Reflexes") + " · Уклонение",
     role: "defense",
     dice: rolled,
-    max: Math.min(eligible.length, stars > 0 ? stars : 2),
+    max: Math.min(
+      eligible.length,
+      stars > 0 ? stars : isPower(target, "Tiny Superhero") ? 99 : 2,
+    ),
     ...(stars > 0 && { variable: true, cost: rootTax(target) }),
     eligible,
     side: target.side,
@@ -2159,6 +2222,7 @@ function damage(
       power(target, "Invulnerable Skin"))
   )
     amount = Math.max(1, amount - 1);
+  if (power(target, "Invincible Iron Man")) amount = Math.max(1, amount - 1);
   if (enemy && power(target, "Being of Immeasurable Power"))
     amount = Math.max(0, amount - 1);
   if (amount <= 0) return 0;
@@ -2724,6 +2788,7 @@ function canHoldExtract(state, actor, token) {
     !isPower(actor, "Wild Rage") &&
     !isPower(actor, "Savagery Protocols") &&
     !isPower(actor, "Assassin") &&
+    !(token.name === "Senator" && isPower(actor, "Tiny Superhero")) &&
     !(actor.slug !== "doctor-voodoo" && hasDaniel(state, actor)) &&
     !actor.psychosis &&
     !isPower(actor, "Berserker Wrath") &&
@@ -3010,6 +3075,7 @@ function usePower(state, actor, selected, action, random) {
     selected.cost,
   );
   if (selected.value === "Telekinetic Combat Enhancement") actor.apexDice = 2;
+  if (selected.dropFirst) dropObjectives(state, actor);
   if (selected.value === "Bound") actor.bound = true;
   switch (selected.value) {
     case "Trick Shot":
@@ -3053,6 +3119,26 @@ function usePower(state, actor, selected, action, random) {
     case "Superior Weight Training":
       actor.weightTraining = true;
       return;
+    case "Friday AI":
+      actor.nextDice = (actor.nextDice || 0) + 2;
+      return;
+    case "Change Size": {
+      const form = actor.form ? 0 : 1;
+      if (form === 1) dropCivilians(state, actor);
+      state.effects.push({
+        type: "transform",
+        side: actor.side,
+        mover: actor.id,
+        mode: "place",
+        form,
+        range: 1,
+        required: true,
+        model: transformModel(actor, form),
+        name: actor.name,
+        reference: { x: actor.x, y: actor.y, radius: actor.radius },
+      });
+      return;
+    }
     case "Master of the Occult":
       gain(actor, 2);
       return;
@@ -3967,6 +4053,25 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       });
       if (option) return option;
     }
+    if (
+      role === "rolled" &&
+      eligible.length &&
+      isPower(model, "I've Knocked Out Tyrants Over 200 Times") &&
+      model.power >= 3 + rootTax(model) &&
+      reactiveAllowed(target, model, state)
+    ) {
+      const option = candidate("tyrants", model.side, {
+        label: "I've Knocked Out Tyrants Over 200 Times",
+        dice: values,
+        max: eligible.length,
+        kind: "reroll",
+        cost: 3 + rootTax(model),
+        payer: model.id,
+        role,
+        eligible,
+      });
+      if (option) return option;
+    }
     const precognition =
       eligible.length &&
       isPower(model, "Telepathic Precognition") &&
@@ -4094,6 +4199,13 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         "Mantle of the Black Panther",
         values.length,
         true,
+      ],
+      [
+        role === "defense" && isPower(model, "Tiny Superhero"),
+        "tiny",
+        "Tiny Superhero",
+        values.length,
+        false,
       ],
       [
         role === "defense" && isPower(model, "Keeper of the Eye of Agamotto"),
@@ -5269,6 +5381,7 @@ function resolve(state, pending, block, random) {
       avalanche: ["Knobkerrie", "wild hit"],
       finisher: ["Panther Strike", "wild hit", true],
       deathblow: ["Strike", "wild block"],
+      stripes: ["Stars and Stripes Strike", "wild block"],
       eyebeam: ["Eye Beam", "hit"],
       spear: ["Strike", "wild"],
     };
@@ -5488,6 +5601,26 @@ function resolve(state, pending, block, random) {
         damage(state, f, 1, actor);
       }
     }
+  if (
+    rules.transformTo &&
+    usable(actor) &&
+    (actor.form || 0) !== rules.transformTo[0]
+  ) {
+    const form = rules.transformTo[0];
+    if (form === 1) dropCivilians(state, actor);
+    events.push({
+      type: "transform",
+      side: actor.side,
+      mover: actor.id,
+      mode: "place",
+      form,
+      range: 1,
+      required: rules.transformTo[1],
+      model: transformModel(actor, form),
+      name: actor.name,
+      reference: { x: actor.x, y: actor.y, radius: actor.radius },
+    });
+  }
   if (
     pending.throwAfter &&
     usable(target) &&

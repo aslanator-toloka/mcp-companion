@@ -178,6 +178,10 @@ const characters = selected(allCharacters, "characters", [
   "she-hulk",
   "spectrum",
   "blue-marvel",
+  "ant-man",
+  "iron-man",
+  "captain-america-sam-wilson",
+  "steve-rogers-captain-america",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

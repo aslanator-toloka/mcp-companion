@@ -433,3 +433,8 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Mighty Avengers собирается. Браузер не проверен.
 
 [Сценарии Mighty Avengers](../tests/game-mighty-avengers.test.cjs).
+
+## 81–84. Ant-Man, Iron Man, Sam Wilson и Steve Rogers (без сценариев)
+
+- [x] Код добавлен: превращения Ant-Man в Tiny и обратно (Change Size, Pym Particle Punch, Ant-Sized Uppercut, Pym Particle Control), Hitch a Ride, Tiny Superhero. Iron Man: Repulsor Blast, Unibeam, Friday AI, Invincible Iron Man. Sam Wilson: своя версия Shield Throw, Redwing Assault, Vibranium Shield. Steve Rogers: Flurry у Stars and Stripes Strike, I Don‘t Like Bullies, On Your Left, I've Knocked Out Tyrants.
+- [ ] Сценарии в тестах не написаны. All New, All Different и столкновения для Pym Particle Control не сделаны.
