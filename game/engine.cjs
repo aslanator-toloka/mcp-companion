@@ -566,6 +566,35 @@ function targetingReactions(state, pending) {
         reactor: ally.id,
       });
     if (
+      combat
+        .face(ally)
+        .superPowers?.some(
+          (p) => p.name === "Vibranium Armor" && p.type === "reactive",
+        ) &&
+      ally.id === defender.id &&
+      ["physical", "energy"].includes(pending.damageType)
+    )
+      reactions.push({
+        value: "vibranium:" + ally.id,
+        key: "vibranium:" + ally.id,
+        label: "Vibranium Armor · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
+      ally.id !== defender.id &&
+      !pending.redirected &&
+      combat.isPower(ally, "Bodyguard") &&
+      geometry.within(ally, defender, 2)
+    )
+      reactions.push({
+        value: "too-dangerous:" + ally.id,
+        key: "bodyguard:" + ally.id,
+        label: "Bodyguard · " + ally.name + " · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
       combat.isPower(ally, "Focused Repulsion Field") &&
       ally.id === defender.id &&
       ["physical", "energy"].includes(pending.damageType)
@@ -1438,6 +1467,7 @@ function endActivation(state, side, random, applyBleed = true) {
       combat.phoenixExplosion(state, actor, random);
     actor.activated = true;
     actor.selfDiscovery = false;
+    actor.mantle = false;
     actor.sunburnFlight = false;
     actor.trickShot = false;
     actor.noMercy = false;
@@ -2217,8 +2247,11 @@ function act(state, side, action, random = randomInt) {
         const cantTouch = value.startsWith("cant-touch:");
         const dangerous = value.startsWith("too-dangerous:");
         const repulsion = value.startsWith("repulsion:");
+        const vibranium = value.startsWith("vibranium:");
         const barrier = value.startsWith("barrier:");
         if (repulsion) pending.blanksSucceed = true;
+        else if (vibranium)
+          pending.defenseBonus = (pending.defenseBonus || 0) + 2;
         else if (barrier) {
           pending.defenseBonus = (pending.defenseBonus || 0) + 2;
           pending.anchored = true;
@@ -2248,17 +2281,19 @@ function act(state, side, action, random = randomInt) {
           state,
           bigBrother
             ? "Big Brother · " + ally.name
-            : repulsion
-              ? "Focused Repulsion Field · " + ally.name
-              : barrier
-                ? "Darkforce Barrier · " + ally.name
-                : dangerous
-                  ? "Too Dangerous to Ignore · " + ally.name
-                  : cantTouch
-                    ? (combat.isPower(ally, "Can‘t Touch This")
-                        ? "Can‘t Touch This · "
-                        : "Wing Shield · ") + ally.name
-                    : "Telekinetic Shield · " + ally.name,
+            : vibranium
+              ? "Vibranium Armor · " + ally.name
+              : repulsion
+                ? "Focused Repulsion Field · " + ally.name
+                : barrier
+                  ? "Darkforce Barrier · " + ally.name
+                  : dangerous
+                    ? "Too Dangerous to Ignore · " + ally.name
+                    : cantTouch
+                      ? (combat.isPower(ally, "Can‘t Touch This")
+                          ? "Can‘t Touch This · "
+                          : "Wing Shield · ") + ally.name
+                      : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
         continueTargeting(state, pending, random);

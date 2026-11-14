@@ -423,6 +423,26 @@ const profiles = {
   },
   "Electric Blast": { builder: 1, conditions: [["wild", "shock"]] },
   "Homing Rockets": { ignoreSight: true, nearbyDamage: "wild" },
+  "Kinetic Burst": { boost: 3, explosiveForce: true },
+  "Vibranium Spear Blast": {},
+  "Vibranium Spear Thrust": { pierce: true, extra: "spear" },
+  "Panther Gauntlets": {
+    builder: 1,
+    damageCap: 1,
+    afterMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      limit: 3,
+      required: true,
+    },
+  },
+  "Sonic Crush": {
+    conditions: [
+      ["", "stun"],
+      ["wild", "stagger"],
+    ],
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -554,6 +574,17 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "black-panther:Strike": {
+    builder: "damage",
+    beforeMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      limit: 3,
+      required: true,
+    },
+  },
+  "okoye:Strike": { builder: "damage" },
   "black-widow:Strike": { builder: "damage", widowSting: true },
   "black-widow:Pistol": {},
   "red-guardian:Strike": {
@@ -861,6 +892,8 @@ const activePowers = {
     speed: "M",
   },
   "Primal Pounce": { mode: "self" },
+  Pounce: { mode: "self" },
+  "Mantle of the Black Panther": { mode: "self" },
   "Stop Squealing and Die": { mode: "self", repeat: true },
   "Finders Keepers": {
     mode: "target",
@@ -1097,6 +1130,12 @@ function dodge(state, target, source, random, bonus = 0) {
   totallyMeantIt(state, target, rolled);
 }
 function totallyMeantIt(state, model, roll) {
+  if (
+    usable(model) &&
+    roll.includes("failure") &&
+    isPower(model, "Head of Wakanda R&D")
+  )
+    gain(model, 1);
   if (
     !usable(model) ||
     !roll.includes("critical") ||
@@ -2323,7 +2362,13 @@ function payerFor(state, actor, cost, payer) {
 function pay(state, actor, cost, payer) {
   payerFor(state, actor, cost, payer).power -= cost;
 }
-const leadershipRerolls = ["avengers", "shield-rolled", "shield-defense"];
+const leadershipRerolls = [
+  "avengers",
+  "shield-rolled",
+  "shield-defense",
+  "king-rolled",
+  "king-defense",
+];
 const xavierSchool = "Xavier's School for Gifted Youngsters";
 // Power spent on an active or reactive superpower. Xavier's School lets
 // another ally gain 1 Power once per Turn after that effect is resolved.
@@ -2444,6 +2489,22 @@ function usePower(state, actor, selected, action, random) {
         source: actor.id,
         name: "Follow the Leads",
         required: true,
+      });
+      return;
+    case "Mantle of the Black Panther":
+      actor.mantle = true;
+      return;
+    case "Pounce":
+      state.effects.push({
+        type: "displace",
+        mode: "throw",
+        speed: "S",
+        side: actor.side,
+        mover: actor.id,
+        source: actor.id,
+        name: "Pounce",
+        required: true,
+        noSelfCollisionDamage: true,
       });
       return;
     case "Primal Pounce":
@@ -2921,6 +2982,24 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
     if (
       eligible.length &&
       model.power > 0 &&
+      !model.grunt &&
+      leadership(state, model.side, "King of Wakanda")
+    ) {
+      const option = candidate("king-" + role, model.side, {
+        label: "King of Wakanda",
+        dice: values,
+        max: 1,
+        kind: "reroll",
+        cost: 1,
+        payer: model.id,
+        role,
+        eligible,
+      });
+      if (option) return option;
+    }
+    if (
+      eligible.length &&
+      model.power > 0 &&
       leadership(state, model.side, "Get You An Upgrade")
     ) {
       const option = candidate("shield-" + role, model.side, {
@@ -3143,21 +3222,23 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
           f.side === model.side &&
           usable(f) &&
           reactiveAllowed(opponent, f, state) &&
-          isPower(f, "Professor's Guidance") &&
-          !state.reactionUses?.includes(f.id + ":guidance") &&
+          (isPower(f, "Upgrades") ||
+            (isPower(f, "Professor's Guidance") &&
+              !state.reactionUses?.includes(f.id + ":guidance"))) &&
           within(f, model, 4) &&
           f.power > rootTax(f),
       );
       if (professor) {
+        const upgrades = isPower(professor, "Upgrades");
         const option = candidate("guidance-" + role, model.side, {
-          label: "Professor's Guidance",
+          label: upgrades ? "Upgrades" : "Professor's Guidance",
           dice: values,
           max: Math.min(3, professor.power - rootTax(professor)),
           kind: "reroll",
           cost: rootTax(professor),
           variable: true,
           payer: professor.id,
-          usage: professor.id + ":guidance",
+          ...(!upgrades && { usage: professor.id + ":guidance" }),
           role,
           eligible,
         });
@@ -3203,6 +3284,20 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         "dogpile",
         actor.slug === duplicates ? "Dogpile" : "Strike · Multiple Man",
         2,
+        false,
+      ],
+      [
+        role === "rolled" && model.mantle,
+        "mantle",
+        "Mantle of the Black Panther",
+        values.length,
+        true,
+      ],
+      [
+        role === "defense" && isPower(model, "General of the Dora Milaje"),
+        "dora",
+        "General of the Dora Milaje",
+        1,
         false,
       ],
       [
@@ -3603,7 +3698,9 @@ function attackRollSummary(state, pending, rolls = pending?.rolls) {
     pending.damageType !== "mystic" &&
     within(actor, target, 2);
   const attackHits =
-    rolled.filter((die) => ["hit", "wild", "critical"].includes(die)).length +
+    rolled.filter((die) =>
+      [pending.superGenius ? "block" : "hit", "wild", "critical"].includes(die),
+    ).length +
     innateDiceSuccesses(actor, rolled) +
     (rules.failuresSucceed
       ? [...rolled, ...defense].filter((die) => die === "failure").length
@@ -3616,7 +3713,10 @@ function attackRollSummary(state, pending, rolls = pending?.rolls) {
       (die) =>
         ["block", "wild"].includes(die) ||
         (die === "critical" && !rules.ignoreDefenseCritical) ||
-        (die === "blank" && pending.blanksSucceed) ||
+        (die === "blank" &&
+          (pending.blanksSucceed ||
+            (power(target, "Vibranium Armor")?.type === "innate" &&
+              ["physical", "energy"].includes(pending.damageType)))) ||
         (die === "blank" &&
           (martial ||
             isPower(target, "I Can Do This All Day") ||
@@ -3906,6 +4006,22 @@ function resolve(state, pending, block, random) {
           },
         ],
       };
+  }
+  if (
+    !pending.superGenius &&
+    isPower(actor, "Super Genius") &&
+    actor.power >= 1 + rootTax(actor) &&
+    reactiveAllowed(target, actor, state) &&
+    rolled.filter((d) => d === "block").length >
+      rolled.filter((d) => d === "hit").length
+  ) {
+    pending.superGenius = true;
+    spend(state, actor, 1 + rootTax(actor));
+    log(state, "Super Genius · " + actor.name, {
+      side: actor.side,
+      fighter: actor.id,
+      power: "Super Genius",
+    });
   }
   const rollSummary = attackRollSummary(state, pending, { rolled, defense });
   const incoming = Math.min(rollSummary.incoming, rules.damageCap ?? Infinity);
@@ -4202,6 +4318,7 @@ function resolve(state, pending, block, random) {
       reality: [attack.name, "critical wild hit"],
       claw: ["Claw Slash", "wild hit", true],
       batons: ["Shock Batons", "wild hit", "failures"],
+      spear: ["Strike", "wild"],
     };
     const rule = alternatives[rules.extra];
     if (rule && matches(rule[1])) {

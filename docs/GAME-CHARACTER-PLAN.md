@@ -59,6 +59,9 @@
 | 50 | Darkstar | Готово | Проверены переброс всех кубиков Darkforce Strike, Darkforce Barrier и Dimensional Portal. |
 | 51 | Black Widow | Готово | Проверены свои версии Strike и Pistol, Mixed Technique и Counter-Strike. |
 | 52 | Crimson Dynamo | Готово | Проверены Electric Blast, Homing Rockets, Disruption Field, Overcharge Capacitors, броня и Unbreakable Red Line. |
+| 53 | Black Panther | Готово | Проверены Strike с Push, Kinetic Burst с доплатой, Mantle, Pounce, обе версии Vibranium Armor и King of Wakanda. |
+| 54 | Okoye | Готово | Проверены Bodyguard, General of the Dora Milaje и Strike после Vibranium Spear Thrust. |
+| 55 | Shuri | Готово | Проверены Panther Gauntlets с лимитом урона, Sonic Crush, Super Genius, Upgrades и Head of Wakanda R&D. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -314,3 +317,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Winter Guard собран полностью. Браузер не проверен.
 
 [Сценарии Black Widow и Crimson Dynamo](../tests/game-widow-dynamo.test.cjs).
+
+## 53–55. Black Panther, Okoye и Shuri
+
+- [x] Strike Black Panther всегда отталкивает цель Size 3 и меньше до урона. Kinetic Burst принимает до 3 Power доплаты и на Wild отталкивает и ранит всех в Range 2. Mantle of the Black Panther до конца хода разрешает перебрасывать любые кубики атаки. Pounce — Short Throw себя без урона от столкновения. Vibranium Armor на здоровой стороне засчитывает Blank против Physical и Energy, на раненой — реакция +2 кубика.
+- [x] King of Wakanda: союзник может заплатить 1 Power за переброс одного кубика атаки или защиты. Переброс при уклонении не сделан.
+- [x] Strike Okoye только даёт Power. Vibranium Spear Thrust с Pierce даёт Strike на Wild. Bodyguard перехватывает атаку на союзника в Range 2. General of the Dora Milaje перебрасывает кубик защиты.
+- [x] Panther Gauntlets наносит не больше 1 урона и отталкивает. Sonic Crush накладывает Stun, на Wild — Stagger. Super Genius автоматически считает Block вместо Hit, если Block больше. Upgrades работает как Professor's Guidance, но без ограничения за Turn. Head of Wakanda R&D даёт 1 Power за бросок с Failure.
+- [x] Отряд Wakanda собирается. Браузер не проверен.
+
+[Сценарии Wakanda](../tests/game-wakanda.test.cjs).

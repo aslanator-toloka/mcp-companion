@@ -150,6 +150,9 @@ const characters = selected(allCharacters, "characters", [
   "darkstar",
   "black-widow",
   "crimson-dynamo",
+  "black-panther",
+  "okoye",
+  "shuri",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");
