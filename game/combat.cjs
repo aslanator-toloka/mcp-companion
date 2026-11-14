@@ -443,6 +443,53 @@ const profiles = {
       ["wild", "stagger"],
     ],
   },
+  Knobkerrie: {
+    builder: "damage",
+    beforeMove: [
+      {
+        mode: "advance",
+        who: "actor",
+        speed: "S",
+        direction: "toward",
+        on: "wild",
+      },
+      { mode: "push", speed: "S", direction: "away", on: "critical" },
+    ],
+  },
+  "Wrath of the Jabari": {
+    beforeMove: { mode: "throw", speed: "M", limit: 4 },
+    afterMove: { mode: "advance", who: "actor", speed: "S", on: "wild hit" },
+    extra: "avalanche",
+  },
+  "Vibranium Weapons": { builder: "damage", pierce: true },
+  "Black Ops Strike": {
+    conditions: [["wild", "stagger"]],
+    afterMove: {
+      mode: "place",
+      who: "actor",
+      range: 1,
+      required: true,
+      damageRequired: true,
+    },
+  },
+  "Vibranium Spear": {
+    builder: "damage",
+    closeReroll: 2,
+    afterMove: {
+      mode: "push",
+      speed: "S",
+      direction: "toward",
+      limit: 3,
+      required: true,
+      unlessWithin: 2,
+    },
+  },
+  "The Panther‘s Fury": {
+    afterMove: [
+      { mode: "throw", speed: "M", limit: 3, on: "wild" },
+      { mode: "advance", who: "actor", speed: "M" },
+    ],
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -660,6 +707,14 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Strength of the White Gorilla": {
+    mode: "target",
+    range: 2,
+    terrain: 3,
+    speed: "M",
+    effect: "throw",
+  },
+  Bound: { mode: "place", range: 2 },
   "Propulsion Thrusters": { mode: "place", range: 2 },
   "Overcharge Capacitors": { mode: "self", action: true, repeat: true },
   "Ursine Temper": {
@@ -1074,6 +1129,11 @@ function moveEvent(spec, actor, target, damageType) {
     (spec.mode === "push" &&
       mover.side !== actor.side &&
       isPower(mover, "Organic Steel")) ||
+    (["push", "advance"].includes(spec.mode) &&
+      mover.side !== actor.side &&
+      ["physical", "energy"].includes(damageType) &&
+      actor.size <= 3 &&
+      isPower(mover, "Chieftain of the Jabari")) ||
     (damageType &&
       damageType !== "superpower" &&
       ["push", "throw"].includes(spec.mode) &&
@@ -1470,15 +1530,33 @@ function displacement(state, spec, action, random, geometry) {
     const hit = state.terrain.find((p) => p.id === result.terrain);
     if (hit && hit.size < displacementSize(mover))
       state.terrain = state.terrain.filter((p) => p.id !== hit.id);
-    if (mover.phasing !== "phased" && !spec.noSelfCollisionDamage)
+    if (
+      mover.phasing !== "phased" &&
+      !spec.noSelfCollisionDamage &&
+      !(result.fighter && !result.terrain && isPower(mover, "Solid Frame"))
+    )
       damage(state, mover, 1, source);
     if (result.fighter) {
       const target = fighter(state, result.fighter);
-      collide(state, target, source, random);
+      if (!isPower(target, "Solid Frame"))
+        collide(state, target, source, random);
     }
   }
   if (spec.damage && (mover.x !== before.x || mover.y !== before.y))
     damage(state, mover, spec.damage, source);
+  if (
+    spec.mode === "push" &&
+    result.terrain &&
+    source &&
+    source.side !== mover.side &&
+    leadership(state, source.side, "Strength of the Ancestors") &&
+    !state.leadershipUses?.[source.side]?.includes("ancestors")
+  ) {
+    (state.leadershipUses ||= { p1: [], p2: [] })[source.side].push(
+      "ancestors",
+    );
+    damage(state, mover, 1, source);
+  }
   if (spec.breakSize) {
     mover.conditions = (mover.conditions || []).filter(
       (name) => name !== "stagger",
@@ -1697,6 +1775,18 @@ function damage(
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
   if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
+  if (dealt && enemy)
+    for (const king of state.fighters.filter(
+      (f) =>
+        f.id !== target.id &&
+        f.side === target.side &&
+        usable(f) &&
+        isPower(f, "Defender of Wakanda") &&
+        !state.reactionUses?.includes(f.id + ":defender"),
+    )) {
+      (state.reactionUses ||= []).push(king.id + ":defender");
+      gain(king, 1);
+    }
   if (
     dealt &&
     target.damage < Number(face(target).stamina) &&
@@ -1830,6 +1920,8 @@ function damage(
       isPower(source, "Untamed Cosmic Entity")
     )
       source.phoenix -= 1;
+    if (source && source.side !== target.side && isPower(source, "Kill Count"))
+      source.killCount = (source.killCount || 0) + 1;
     if (!target.injured && isPower(target, "I Am Fire and Life Incarnate"))
       target.phoenix = (target.phoenix || 0) + 3;
     if (target.injured && isPower(target, "Untamed Cosmic Entity")) {
@@ -2094,6 +2186,8 @@ function attacks(state, actor, previous) {
           return false;
         if (previous?.kind === "rapid") return target.id === previous.target;
         if (previous?.kind === "salvo") return target.id !== previous.target;
+        if (previous?.kind === "avalanche")
+          return target.id !== previous.target;
         if (
           ["velocity", "speed-of-sight"].includes(previous?.kind) &&
           target.id === previous.target
@@ -2428,6 +2522,7 @@ function usePower(state, actor, selected, action, random) {
     selected.cost,
   );
   if (selected.value === "Telekinetic Combat Enhancement") actor.apexDice = 2;
+  if (selected.value === "Bound") actor.bound = true;
   switch (selected.value) {
     case "Trick Shot":
       actor.trickShot = true;
@@ -3063,6 +3158,31 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       if (option) return option;
     }
     const wildCount = values.filter((d) => d === "wild").length;
+    if (
+      role === "rolled" &&
+      wildCount &&
+      leadership(state, model.side, "Blessed by Ghekre") &&
+      !state.leadershipUses?.[model.side]?.includes("ghekre-dice")
+    ) {
+      const changeable = values.flatMap((d, i) =>
+        ["blank", "failure", "block"].includes(d) ? [i] : [],
+      );
+      const option =
+        changeable.length &&
+        candidate("ghekre", model.side, {
+          label: "Blessed by Ghekre",
+          dice: values,
+          max: 1,
+          kind: "fixed-face",
+          face: "hit",
+          cost: 0,
+          payer: model.id,
+          role,
+          eligible: changeable,
+          leadershipUse: "ghekre-dice",
+        });
+      if (option) return option;
+    }
     const dispersible = values.flatMap((d, i) =>
       ["blank", "failure", "block"].includes(d) ? [i] : [],
     );
@@ -3317,10 +3437,24 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         false,
       ],
       [
-        role === "rolled" && rules.closeReroll && within(actor, target, 3),
+        role === "rolled" &&
+          rules.closeReroll &&
+          within(
+            actor,
+            target,
+            rules.closeReroll === true ? 3 : rules.closeReroll,
+          ),
         "plasma-rifle",
-        "Plasma Rifle",
+        attackCard(actor, pending.index).name,
         2,
+        false,
+      ],
+      [role === "rolled" && pending.boundReroll, "bound", "Bound", 2, false],
+      [
+        role === "rolled" && model.killCount > 0,
+        "kill-count",
+        "Kill Count",
+        model.killCount || 0,
         false,
       ],
       [
@@ -3628,6 +3762,10 @@ function applyModifier(state, event, action, random) {
           !leadershipRerolls.includes(event.id),
         );
         if (event.usage) (state.reactionUses ||= []).push(event.usage);
+        if (event.leadershipUse)
+          (state.leadershipUses ||= { p1: [], p2: [] })[payer.side].push(
+            event.leadershipUse,
+          );
         if (event.phoenixToken) payer.phoenix = (payer.phoenix || 0) + 1;
         if (event.clearNeural && state.neural)
           delete state.neural[event.clearNeural];
@@ -3840,6 +3978,10 @@ function resolve(state, pending, block, random) {
         state.attackedThisTurn?.includes(actor.id + ">" + target.id)
           ? 1
           : 0) +
+        (isPower(actor, "Focused on the Kill") &&
+        state.attackedThisTurn?.includes(actor.id + ">" + target.id)
+          ? 2
+          : 0) +
         (savage(state, actor) ? 2 : 0) +
         (pending.destructive || 0) +
         (rules.dupeDice && nearDuplicates(state, actor, target)
@@ -3860,6 +4002,10 @@ function resolve(state, pending, block, random) {
     : pending.initial || rawDice(attackCount, random);
   if (initial) {
     (state.attackedThisTurn ||= []).push(actor.id + ">" + target.id);
+    if (attack.name === "Vibranium Spear" && actor.bound) {
+      actor.bound = false;
+      pending.boundReroll = true;
+    }
     recordFailure(state, pending, "rolled", actor, initial);
     actor.momentumReady = false;
     if (apexDice) actor.apexDice = 0;
@@ -3984,32 +4130,35 @@ function resolve(state, pending, block, random) {
   }
   const matches = (test, dealt = 0) =>
     !test || (test === "damage" ? dealt > 0 : hasFaces(rolled, test));
-  if (
-    !pending.moved &&
-    rules.beforeMove &&
-    matches(rules.beforeMove.on) &&
-    !(pending.anchored && rules.beforeMove.who !== "actor")
+  const befores = [].concat(rules.beforeMove || []);
+  for (
+    let i = pending.beforeIndex || 0;
+    !pending.moved && i < befores.length;
+    i++
   ) {
-    const event = moveEvent(
-      rules.beforeMove,
-      actor,
-      target,
-      pending.damageType,
-    );
+    const spec = befores[i];
+    if (!matches(spec.on) || (pending.anchored && spec.who !== "actor"))
+      continue;
+    const event = moveEvent(spec, actor, target, pending.damageType);
     if (event)
       return {
         suspended: true,
         events: [
           {
             ...event,
-            resume: { ...pending, moved: true, rolls: { rolled, defense } },
+            resume: {
+              ...pending,
+              beforeIndex: i + 1,
+              moved: i + 1 >= befores.length,
+              rolls: { rolled, defense },
+            },
           },
         ],
       };
   }
   if (
     !pending.superGenius &&
-    isPower(actor, "Super Genius") &&
+    (isPower(actor, "Super Genius") || isPower(actor, "Special Forces")) &&
     actor.power >= 1 + rootTax(actor) &&
     reactiveAllowed(target, actor, state) &&
     rolled.filter((d) => d === "block").length >
@@ -4017,10 +4166,13 @@ function resolve(state, pending, block, random) {
   ) {
     pending.superGenius = true;
     spend(state, actor, 1 + rootTax(actor));
-    log(state, "Super Genius · " + actor.name, {
+    const genius = isPower(actor, "Super Genius")
+      ? "Super Genius"
+      : "Special Forces";
+    log(state, genius + " · " + actor.name, {
       side: actor.side,
       fighter: actor.id,
-      power: "Super Genius",
+      power: genius,
     });
   }
   const rollSummary = attackRollSummary(state, pending, { rolled, defense });
@@ -4275,17 +4427,16 @@ function resolve(state, pending, block, random) {
     );
     if (push) events.push(push);
   }
-  if (
-    rules.afterMove &&
-    !(pending.anchored && rules.afterMove.who !== "actor") &&
-    (!rules.afterMove.damageRequired || dealt > 0) &&
-    (rules.afterMove.on === "down"
-      ? dealt > 0 && !usable(target)
-      : matches(rules.afterMove.on))
-  ) {
-    const event = moveEvent(rules.afterMove, actor, target, pending.damageType);
-    if (event) events.push(event);
-  }
+  for (const spec of [].concat(rules.afterMove || []))
+    if (
+      !(pending.anchored && spec.who !== "actor") &&
+      (!spec.damageRequired || dealt > 0) &&
+      !(spec.unlessWithin && within(actor, target, spec.unlessWithin)) &&
+      (spec.on === "down" ? dealt > 0 && !usable(target) : matches(spec.on))
+    ) {
+      const event = moveEvent(spec, actor, target, pending.damageType);
+      if (event) events.push(event);
+    }
   if (rules.warbird && wilds) {
     const event = moveEvent(
       { mode: "throw", speed: "S" },
@@ -4318,6 +4469,7 @@ function resolve(state, pending, block, random) {
       reality: [attack.name, "critical wild hit"],
       claw: ["Claw Slash", "wild hit", true],
       batons: ["Shock Batons", "wild hit", "failures"],
+      avalanche: ["Knobkerrie", "wild hit"],
       spear: ["Strike", "wild"],
     };
     const rule = alternatives[rules.extra];
@@ -4564,7 +4716,7 @@ function resolve(state, pending, block, random) {
   if (
     usable(target) &&
     usable(actor) &&
-    isPower(target, "Counter-Strike") &&
+    (isPower(target, "Counter-Strike") || isPower(target, "Royal Rebuke")) &&
     target.power >= 2 + rootTax(target) &&
     reactiveAllowed(actor, target, state) &&
     within(actor, target, 3)

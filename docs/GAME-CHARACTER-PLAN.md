@@ -62,6 +62,9 @@
 | 53 | Black Panther | Готово | Проверены Strike с Push, Kinetic Burst с доплатой, Mantle, Pounce, обе версии Vibranium Armor и King of Wakanda. |
 | 54 | Okoye | Готово | Проверены Bodyguard, General of the Dora Milaje и Strike после Vibranium Spear Thrust. |
 | 55 | Shuri | Готово | Проверены Panther Gauntlets с лимитом урона, Sonic Crush, Super Genius, Upgrades и Head of Wakanda R&D. |
+| 56 | M'Baku | Готово | Проверены два эффекта Knobkerrie до урона, Avalanche, Chieftain of the Jabari, Solid Frame и Blessed by Ghekre. |
+| 57 | Killmonger | Готово | Проверены Black Ops Strike, Focused on the Kill, Special Forces и Kill Count. |
+| 58 | King T'Challa | Готово | Проверены Vibranium Spear вблизи и издали, Bound, Royal Rebuke, Defender of Wakanda и Strength of the Ancestors. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -327,3 +330,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Wakanda собирается. Браузер не проверен.
 
 [Сценарии Wakanda](../tests/game-wakanda.test.cjs).
+
+## 56–58. M'Baku, Killmonger и King T'Challa
+
+- [x] `beforeMove` и `afterMove` в профилях атак теперь могут быть списком. Knobkerrie: Pursuit на Wild, затем Push на Critical, оба до урона. Wrath of the Jabari: Throw до урона, на Wild и Hit — Short Advance и Knobkerrie по другому врагу. Chieftain of the Jabari: Physical и Energy атаки персонажей Size 3 и меньше не могут сдвинуть M'Baku. Solid Frame отменяет урон от столкновений с персонажами.
+- [x] Blessed by Ghekre раз за Turn меняет кубик на Hit при Wild. Союзник у жетона раз за Turn бросает кубик перед вражеским Push или Place.
+- [x] Black Ops Strike ставит Killmonger у цели после урона. Focused on the Kill даёт +2 кубика по повторной цели. Special Forces, как и Super Genius, считает Block вместо Hit. Kill Count копит жетоны за Daze и KO врагов и даёт по перебросу за жетон.
+- [x] Vibranium Spear перебрасывает 2 кубика по цели в Range 2, а дальнюю маленькую цель притягивает. Bound даёт Place и перебросы для следующего Vibranium Spear. Royal Rebuke работает как Counter-Strike. Defender of Wakanda раз за Turn даёт Power, когда союзник получает урон. Strength of the Ancestors раз за Turn наносит 1 урон врагу, вытолкнутому в террейн.
+- [x] Отряд Wakanda собирается. Браузер не проверен.
+
+[Сценарии M'Baku, Killmonger и King T'Challa](../tests/game-wakanda-rivals.test.cjs).

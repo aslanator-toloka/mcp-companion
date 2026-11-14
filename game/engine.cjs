@@ -1468,6 +1468,7 @@ function endActivation(state, side, random, applyBleed = true) {
     actor.activated = true;
     actor.selfDiscovery = false;
     actor.mantle = false;
+    actor.bound = false;
     actor.sunburnFlight = false;
     actor.trickShot = false;
     actor.noMercy = false;
@@ -3083,14 +3084,26 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const nextEffect = state.effects[0];
       const pushed = state.fighters.find((f) => f.id === effect.mover);
-      if (
-        effect.mode === "push" &&
+      const ghekre =
+        ["push", "place"].includes(effect.mode) &&
         pushed &&
         pushed.side !== effect.side &&
-        combat.leadership(state, pushed.side, "Unbreakable Red Line") &&
-        state.objectives.some(
-          (o) => o.role === "secure" && geometry.within(pushed, o, 1),
-        )
+        combat.leadership(state, pushed.side, "Blessed by Ghekre") &&
+        !state.leadershipUses?.[pushed.side]?.includes("ghekre-move") &&
+        state.objectives.some((o) => geometry.within(pushed, o, 1));
+      if (ghekre)
+        (state.leadershipUses ||= { p1: [], p2: [] })[pushed.side].push(
+          "ghekre-move",
+        );
+      if (
+        ghekre ||
+        (effect.mode === "push" &&
+          pushed &&
+          pushed.side !== effect.side &&
+          combat.leadership(state, pushed.side, "Unbreakable Red Line") &&
+          state.objectives.some(
+            (o) => o.role === "secure" && geometry.within(pushed, o, 1),
+          ))
       ) {
         const die = combat.rawDice(1, random)[0];
         log(state, "Unbreakable Red Line · " + pushed.name + " · " + die, {

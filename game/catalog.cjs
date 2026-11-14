@@ -153,6 +153,9 @@ const characters = selected(allCharacters, "characters", [
   "black-panther",
   "okoye",
   "shuri",
+  "mbaku",
+  "killmonger",
+  "king-tchalla",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");
