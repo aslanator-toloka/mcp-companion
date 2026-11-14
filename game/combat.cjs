@@ -417,6 +417,12 @@ const profiles = {
     types: ["physical", "energy"],
     conditions: [["wild", "bleed"]],
   },
+  "Mixed Technique": {
+    conditions: [["damage", "stagger"]],
+    afterMove: { mode: "advance", who: "actor", speed: "S", on: "wild" },
+  },
+  "Electric Blast": { builder: 1, conditions: [["wild", "shock"]] },
+  "Homing Rockets": { ignoreSight: true, nearbyDamage: "wild" },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -548,6 +554,8 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "black-widow:Strike": { builder: "damage", widowSting: true },
+  "black-widow:Pistol": {},
   "red-guardian:Strike": {
     builder: 1,
     afterMove: {
@@ -621,6 +629,8 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Propulsion Thrusters": { mode: "place", range: 2 },
+  "Overcharge Capacitors": { mode: "self", action: true, repeat: true },
   "Ursine Temper": {
     mode: "target",
     range: 2,
@@ -1631,7 +1641,8 @@ function damage(
     (power(target, "I Can Take It") ||
       power(target, "Kree-Mutant Physiology") ||
       power(target, "Organic Steel") ||
-      power(target, "Carbonadium Armor"))
+      power(target, "Carbonadium Armor") ||
+      power(target, "Carborundum Matrix Alloy"))
   )
     amount = Math.max(1, amount - 1);
   const maximum = Number(face(target).stamina);
@@ -2409,6 +2420,7 @@ function usePower(state, actor, selected, action, random) {
         damage(state, f, 2, actor);
       return;
     case "Synthesis":
+    case "Overcharge Capacitors":
     case "Cosmic Energy Absorption":
       gain(actor, 2);
       return;
@@ -3022,6 +3034,32 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         usage: model.id + ":fireworks",
         role,
         eligible,
+      });
+      if (option) return option;
+    }
+    const dynamo =
+      role === "rolled" &&
+      model.side !== target.side &&
+      values.length &&
+      state.fighters.find(
+        (f) =>
+          f.side === target.side &&
+          usable(f) &&
+          isPower(f, "Disruption Field") &&
+          reactiveAllowed(model, f, state) &&
+          f.power >= 2 + rootTax(f) &&
+          within(f, model, 3),
+      );
+    if (dynamo) {
+      const option = candidate("disruption", dynamo.side, {
+        label: "Disruption Field",
+        dice: values,
+        max: Math.min(2, values.length),
+        kind: "reroll",
+        cost: 2 + rootTax(dynamo),
+        payer: dynamo.id,
+        role,
+        eligible: values.map((_, i) => i),
       });
       if (option) return option;
     }
@@ -3983,6 +4021,8 @@ function resolve(state, pending, block, random) {
   if (rules.neural && wilds && usable(target))
     (state.neural ||= {})[actor.id] = target.id;
   if (rules.flareOn && matches(rules.flareOn)) addFlare(actor);
+  if (rules.widowSting && wilds && usable(target))
+    target.power = Math.max(0, target.power - 1);
   if (rules.phoenixGain && usable(actor))
     actor.phoenix = (actor.phoenix || 0) + rules.phoenixGain;
   if (rules.phoenixLoss && usable(target) && actor.phoenix) actor.phoenix -= 1;
@@ -4405,6 +4445,21 @@ function resolve(state, pending, block, random) {
       cost: 2 + rootTax(actor),
     });
   if (
+    usable(target) &&
+    usable(actor) &&
+    isPower(target, "Counter-Strike") &&
+    target.power >= 2 + rootTax(target) &&
+    reactiveAllowed(actor, target, state) &&
+    within(actor, target, 3)
+  )
+    events.push({
+      type: "counter-strike",
+      side: target.side,
+      source: target.id,
+      target: actor.id,
+      cost: 2 + rootTax(target),
+    });
+  if (
     dealt &&
     leadership(state, actor.side, "X-Men Blue") &&
     xmenBlueTargets(state, actor).length
@@ -4465,6 +4520,17 @@ function xmenBlueTargets(state, source) {
       within(source, f, 5) &&
       !state.leadershipUses?.[f.side]?.includes("blue:" + f.id),
   );
+}
+function counterStrike(state, widow, attacker, random) {
+  const rolled = rawDice(4, random);
+  const hits = rolled.filter((d) => d === "critical" || d === "wild").length;
+  log(state, "Counter-Strike · " + attacker.name, {
+    side: widow.side,
+    fighter: widow.id,
+    target: attacker.id,
+    rolls: [{ label: "Counter-Strike", faces: rolled }],
+  });
+  damage(state, attacker, hits, widow);
 }
 function psychicDistraction(state, actor, target, random) {
   const rolled = rawDice(4, random);
@@ -4527,6 +4593,7 @@ module.exports = {
   pay,
   spend,
   heal,
+  counterStrike,
   unleash,
   phoenixExplosion,
   psychicDistraction,

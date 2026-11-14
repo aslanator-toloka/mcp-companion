@@ -57,6 +57,8 @@
 | 48 | Red Guardian | Готово | Проверены Strike с Push, Ricochet у Shield Throw, Focused Repulsion Field и Red Guardian‘s Suit. |
 | 49 | Ursa Major | Готово | Проверены Bear-Handed Slap, Bear-Armed Brawler и Ursine Temper. |
 | 50 | Darkstar | Готово | Проверены переброс всех кубиков Darkforce Strike, Darkforce Barrier и Dimensional Portal. |
+| 51 | Black Widow | Готово | Проверены свои версии Strike и Pistol, Mixed Technique и Counter-Strike. |
+| 52 | Crimson Dynamo | Готово | Проверены Electric Blast, Homing Rockets, Disruption Field, Overcharge Capacitors, броня и Unbreakable Red Line. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -303,3 +305,12 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Winter Guard с Omega Red собирается. Браузер не проверен.
 
 [Сценарии Winter Guard](../tests/game-winter-guard.test.cjs).
+
+## 51–52. Black Widow и Crimson Dynamo
+
+- [x] Strike Black Widow — Energy, на Wild снимает 1 Power с цели и не отталкивает. Её Pistol без Rapid Fire. Mixed Technique при уроне накладывает Stagger, на Wild даёт Short Advance. Counter-Strike после атаки по ней бросает 4 кубика против атакующего в Range 3.
+- [x] Electric Blast накладывает Shock на Wild. Homing Rockets игнорирует LOS и на Wild бьёт врагов рядом с целью. Disruption Field перебрасывает до двух кубиков врага, атакующего Dynamo или союзника из Range 3. Overcharge Capacitors тратит действие на 2 Power, Propulsion Thrusters делает Place в Range 2. Carborundum Matrix Alloy снижает урон от врагов на 1.
+- [x] Unbreakable Red Line в начале активации союзника предлагает снять одно состояние. Союзник у Secure перед вражеским Push бросает кубик и на Critical, Wild или Block остаётся на месте.
+- [x] Winter Guard собран полностью. Браузер не проверен.
+
+[Сценарии Black Widow и Crimson Dynamo](../tests/game-widow-dynamo.test.cjs).

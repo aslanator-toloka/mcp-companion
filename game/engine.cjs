@@ -228,6 +228,15 @@ function beginActivation(state, active, locked = false) {
     fieldLeaderMoves: [],
     interacted: [],
   });
+  if (
+    active.conditions?.length &&
+    combat.leadership(state, active.side, "Unbreakable Red Line")
+  )
+    (state.effects ||= []).unshift({
+      type: "red-line",
+      side: active.side,
+      target: active.id,
+    });
   log(state, "Активирован " + active.name, {
     side: active.side,
     fighter: active.id,
@@ -815,6 +824,27 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "counter-strike")
+      return [
+        {
+          type: "counter-strike",
+          label: "Counter-Strike · " + effect.cost + " Power",
+        },
+        skip,
+      ];
+    if (effect.type === "red-line") {
+      const target = state.fighters.find((f) => f.id === effect.target);
+      return [
+        {
+          type: "red-line",
+          options: (target.conditions || []).map((value) => ({
+            value,
+            label: "Unbreakable Red Line · снять " + value,
+          })),
+        },
+        skip,
+      ];
+    }
     if (effect.type === "deflection")
       return [
         {
@@ -2359,6 +2389,26 @@ function act(state, side, action, random = randomInt) {
       );
       break;
     }
+    case "counter-strike": {
+      const effect = state.effects.shift();
+      const widow = state.fighters.find((f) => f.id === effect.source);
+      const attacker = state.fighters.find((f) => f.id === effect.target);
+      combat.spend(state, widow, effect.cost);
+      state.undo = [];
+      combat.counterStrike(state, widow, attacker, random);
+      resumeAfterDamage(state, random);
+      break;
+    }
+    case "red-line": {
+      const effect = state.effects.shift();
+      const target = state.fighters.find((f) => f.id === effect.target);
+      target.conditions = target.conditions.filter((c) => c !== value);
+      log(state, "Unbreakable Red Line · " + target.name + " · " + value, {
+        side,
+        fighter: target.id,
+      });
+      break;
+    }
     case "deflection": {
       const effect = state.effects.shift();
       const target = state.fighters.find((f) => f.id === effect.target);
@@ -2997,6 +3047,27 @@ function act(state, side, action, random = randomInt) {
     case "displace": {
       const effect = state.effects.shift();
       const nextEffect = state.effects[0];
+      const pushed = state.fighters.find((f) => f.id === effect.mover);
+      if (
+        effect.mode === "push" &&
+        pushed &&
+        pushed.side !== effect.side &&
+        combat.leadership(state, pushed.side, "Unbreakable Red Line") &&
+        state.objectives.some(
+          (o) => o.role === "secure" && geometry.within(pushed, o, 1),
+        )
+      ) {
+        const die = combat.rawDice(1, random)[0];
+        log(state, "Unbreakable Red Line · " + pushed.name + " · " + die, {
+          side: pushed.side,
+          fighter: pushed.id,
+          rolls: [{ label: "Push", faces: [die] }],
+        });
+        if (["critical", "wild", "block"].includes(die)) {
+          if (effect.resume) finishAttack(state, effect.resume, false, random);
+          break;
+        }
+      }
       const point = combat.displacement(
         state,
         effect,
