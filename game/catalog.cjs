@@ -174,6 +174,10 @@ const characters = selected(allCharacters, "characters", [
   "baron-mordo",
   "doctor-strange-sorcerer-supreme",
   "doctor-voodoo",
+  "luke-cage",
+  "she-hulk",
+  "spectrum",
+  "blue-marvel",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

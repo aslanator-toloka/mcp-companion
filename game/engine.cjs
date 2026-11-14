@@ -636,6 +636,19 @@ function targetingReactions(state, pending) {
     if (
       ally.id !== defender.id &&
       !pending.redirected &&
+      combat.isPower(ally, "Legal Defense") &&
+      geometry.within(ally, defender, 2)
+    )
+      reactions.push({
+        value: "too-dangerous:" + ally.id,
+        key: "legal:" + ally.id,
+        label: "Legal Defense · " + ally.name + " · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
+      ally.id !== defender.id &&
+      !pending.redirected &&
       combat.isPower(ally, "Bodyguard") &&
       geometry.within(ally, defender, 2)
     )
@@ -962,6 +975,30 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "arcadia") {
+      const recipients = state.fighters.filter(
+        (f) =>
+          f.id !== effect.source &&
+          f.side === side &&
+          combat.usable(f) &&
+          !f.grunt &&
+          !state.leadershipUses?.[side]?.includes("arcadia:" + f.id),
+      );
+      return [
+        ...(recipients.length
+          ? [
+              {
+                type: "arcadia",
+                options: recipients.map((f) => ({
+                  value: f.id,
+                  label: "Defenders of Arcadia · " + f.name + " · +1 Power",
+                })),
+              },
+            ]
+          : []),
+        skip,
+      ];
+    }
     if (effect.type === "vaulting")
       return [
         {
@@ -1654,6 +1691,7 @@ function endActivation(state, side, random, applyBleed = true) {
     actor.activated = true;
     actor.selfDiscovery = false;
     actor.mantle = false;
+    actor.weightTraining = false;
     actor.bound = false;
     actor.sunburnFlight = false;
     actor.trickShot = false;
@@ -1894,7 +1932,10 @@ function beginRound(state) {
         combat.isPower(fighter, "Chosen of the Vishanti")
       )
         combat.gain(fighter, 2);
-      if (combat.isPower(fighter, "Keeper of the Eye of Agamotto"))
+      if (
+        combat.isPower(fighter, "Keeper of the Eye of Agamotto") ||
+        combat.isPower(fighter, "Gamma Transfusion")
+      )
         combat.gain(fighter, 1);
       if (state.round === 1 && combat.isPower(fighter, "Ready to Roll"))
         fighter.psychosis = true;
@@ -2263,9 +2304,10 @@ function act(state, side, action, random = randomInt) {
         expect(thanos && option.decree, "Death‘s Decree недоступен.");
         const talons = combat.isPower(thanos, "Talons of Farallah");
         const ferocity = combat.isPower(thanos, "Ferocity of Cyttorak");
+        const boostPower = combat.isPower(thanos, "Energy Boost");
         combat.spend(state, thanos, (talons ? 3 : 2) + combat.rootTax(thanos));
         (state.reactionUses ||= []).push(thanos.id + ":decree");
-        decree = talons || ferocity ? 2 : actor.injured ? 4 : 2;
+        decree = talons || ferocity || boostPower ? 2 : actor.injured ? 4 : 2;
         state.talonsPending = talons;
         state.ferocityPending = ferocity;
         log(
@@ -2676,6 +2718,19 @@ function act(state, side, action, random = randomInt) {
       (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
         "sinister-shake",
       );
+      break;
+    }
+    case "arcadia": {
+      state.effects.shift();
+      const ally = state.fighters.find((f) => f.id === value);
+      combat.gain(ally, 1);
+      (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
+        "arcadia:" + ally.id,
+      );
+      log(state, "Defenders of Arcadia · " + ally.name, {
+        side,
+        fighter: ally.id,
+      });
       break;
     }
     case "vaulting": {

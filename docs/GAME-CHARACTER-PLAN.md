@@ -83,6 +83,10 @@
 | 74 | Baron Mordo | Готово | Проверены Soul Barb, Ferocity of Cyttorak, Vaulting Boots и Master of the Occult. |
 | 75 | Doctor Strange, Sorcerer Supreme | Готово | Проверены Shining Circle, Mystic Armor of Strange, Scalpel of Strange и Chosen of the Vishanti. |
 | 76 | Doctor Voodoo | Готово | Проверены жетон Brother Daniel, Possession, Recall Spirit, Staff of Legba и Spirit Venom. |
+| 77 | Luke Cage | Готово | Проверены Sweet Christmas, Power Man Punch, Street Fighter и Unbreakable Skin. |
+| 78 | She-Hulk | Готово | Проверены The Defense Rests, Superior Weight Training, Legal Defense, Gamma Transfusion и Defenders of Arcadia. |
+| 79 | Spectrum | Готово, кроме Stronger Together Than Apart | Проверены Photon Blast с перебросом всех кубиков, Energy Boost, Pulsar Wave и Multi-Spectrum Energy Absorption. |
+| 80 | Blue Marvel | Готово | Проверены Living Anti-Matter Reactor, Let Loose, Anti-Matter Barrier и Hyper Cosmic Awareness. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -418,3 +422,14 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Convocation собрана полностью. Браузер не проверен.
 
 [Сценарии Ancient One, Mordo, Strange и Voodoo](../tests/game-convocation-masters.test.cjs).
+
+## 77–80. Luke Cage, She-Hulk, Spectrum и Blue Marvel
+
+- [x] Power Man Punch накладывает Stagger на двух Wild. Sweet Christmas всегда накладывает Slow и Stun, на Wild может бросить цель. Street Fighter бросает террейн Size 2. Unbreakable Skin снижает урон от врагов на 1.
+- [x] Sensational Uppercut накладывает Slow. The Defense Rests при уроне накладывает Slow и Stun, а уже замедленной цели ещё Stagger. Superior Weight Training добавляет к следующей атаке кубики по размеру цели. Legal Defense перехватывает атаку на союзника в Range 2. Gamma Transfusion работает как Aggressive и даёт +1 Power. Defenders of Arcadia (A-Force): после урона по союзнику другой союзник получает 1 Power, раз за Turn на каждого.
+- [x] Photon Blast у Spectrum — луч с перебросом всех кубиков. Energy Boost через общий переключатель даёт +2 кубика. Pulsar Wave выбирает тип, на Wild бросает цель до урона и затем ставит Spectrum в Range 1. Multi-Spectrum Energy Absorption работает как Mutant Energy Absorption.
+- [ ] Stronger Together Than Apart (перераспределение получаемого Power) не сделан.
+- [x] Living Anti-Matter Reactor засчитывает Failure как успехи. Hyper Cosmic Awareness даёт Power за Failure. Let Loose на Critical и Wild бьёт других врагов в Range 2 и снимает 1 Power. Anti-Matter Barrier перебрасывает любые кубики защиты, включая Failure. Time‘s Up бросает на Medium.
+- [x] Отряд Mighty Avengers собирается. Браузер не проверен.
+
+[Сценарии Mighty Avengers](../tests/game-mighty-avengers.test.cjs).

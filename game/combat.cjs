@@ -611,6 +611,36 @@ const profiles = {
     },
   },
   "Staff of Legba": { powerBurn: true },
+  "Power Man Punch": {
+    builder: "damage",
+    conditions: [["wild wild", "stagger"]],
+  },
+  "Sweet Christmas": {
+    conditions: [["", "slow", "stun"]],
+    afterMove: { mode: "throw", speed: "S", limit: 3, on: "wild" },
+  },
+  "Sensational Uppercut": { builder: "damage", conditions: [["", "slow"]] },
+  "The Defense Rests": { defenseRests: true },
+  "Gamma Strike": { builder: 1, conditions: [["wild", "stun"]] },
+  "Pulsar Wave": {
+    types: ["physical", "energy"],
+    beforeMove: {
+      mode: "throw",
+      speed: "M",
+      direction: "away",
+      limit: 4,
+      on: "wild",
+    },
+    afterMove: {
+      mode: "place",
+      who: "actor",
+      self: true,
+      range: 1,
+      required: true,
+    },
+  },
+  "Anti-Matter Blast": { builder: "damage", conditions: [["wild", "stun"]] },
+  "Let Loose": { energyPulse: "critical wild" },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -742,6 +772,7 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "spectrum:Photon Blast": { builder: 1, rerollAll: true },
   "wong:Strike": { builder: 1 },
   "nebula:Strike": { builder: "damage", conditions: [["wild", "shock"]] },
   "thanos-the-mad-titan:Strike": {
@@ -851,6 +882,30 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Street Fighter": {
+    mode: "target",
+    range: 2,
+    terrain: 2,
+    speed: "S",
+    effect: "throw",
+  },
+  "Clear the Court": {
+    mode: "target",
+    range: 2,
+    enemy: 4,
+    terrain: 4,
+    speed: "M",
+    effect: "throw",
+  },
+  "Superior Weight Training": { mode: "self" },
+  "Time‘s Up": {
+    mode: "target",
+    range: 3,
+    enemy: 4,
+    terrain: 4,
+    speed: "M",
+    effect: "throw",
+  },
   "Mists of Hoggoth": { mode: "place", range: 2 },
   "Master of the Occult": { mode: "self", action: true },
   "Soul Barb": {
@@ -1483,6 +1538,7 @@ function totallyMeantIt(state, model, roll) {
     usable(model) &&
     roll.includes("failure") &&
     (isPower(model, "Head of Wakanda R&D") ||
+      isPower(model, "Hyper Cosmic Awareness") ||
       isPower(model, "Spirit of Brother Daniel"))
   )
     gain(model, 1);
@@ -1510,6 +1566,7 @@ function decreeSource(state, actor) {
         f.id !== actor.id &&
         f.power >= 2 + rootTax(f)) ||
         (isPower(f, "Talons of Farallah") && f.power >= 3 + rootTax(f)) ||
+        (isPower(f, "Energy Boost") && f.power >= 2 + rootTax(f)) ||
         (isPower(f, "Ferocity of Cyttorak") &&
           f.id !== actor.id &&
           f.power >= 2 + rootTax(f) &&
@@ -2097,6 +2154,7 @@ function damage(
       power(target, "Carbonadium Armor") ||
       power(target, "Carborundum Matrix Alloy") ||
       power(target, "Glaive of Immortality") ||
+      power(target, "Unbreakable Skin") ||
       power(target, "Invulnerability") ||
       power(target, "Invulnerable Skin"))
   )
@@ -2118,6 +2176,24 @@ function damage(
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
   if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
+  if (
+    dealt &&
+    enemy &&
+    leadership(state, target.side, "Defenders of Arcadia") &&
+    state.fighters.some(
+      (f) =>
+        f.id !== target.id &&
+        f.side === target.side &&
+        usable(f) &&
+        !f.grunt &&
+        !state.leadershipUses?.[f.side]?.includes("arcadia:" + f.id),
+    )
+  )
+    (state.effects ||= []).push({
+      type: "arcadia",
+      side: target.side,
+      source: target.id,
+    });
   if (dealt && enemy)
     for (const king of state.fighters.filter(
       (f) =>
@@ -2974,6 +3050,9 @@ function usePower(state, actor, selected, action, random) {
     case "Meditate":
       gain(actor, 1);
       return;
+    case "Superior Weight Training":
+      actor.weightTraining = true;
+      return;
     case "Master of the Occult":
       gain(actor, 2);
       return;
@@ -3786,6 +3865,31 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       });
       if (option) return option;
     }
+    const barrierMarvel =
+      role === "defense" &&
+      values.length &&
+      state.fighters.find(
+        (f) =>
+          f.side === model.side &&
+          usable(f) &&
+          isPower(f, "Anti-Matter Barrier") &&
+          reactiveAllowed(actor, f, state) &&
+          f.power >= 3 + rootTax(f) &&
+          (f.id === model.id || within(f, model, 3)),
+      );
+    if (barrierMarvel) {
+      const option = candidate("antimatter", model.side, {
+        label: "Anti-Matter Barrier",
+        dice: values,
+        max: values.length,
+        kind: "reroll",
+        cost: 3 + rootTax(barrierMarvel),
+        payer: barrierMarvel.id,
+        role,
+        eligible: values.map((_, i) => i),
+      });
+      if (option) return option;
+    }
     const dynamo =
       role === "rolled" &&
       model.side !== target.side &&
@@ -4276,6 +4380,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
     ((isPower(target, "Enhanced Energy Absorption") &&
       pending.damageType !== "physical") ||
       isPower(target, "Mutant Energy Absorption") ||
+      isPower(target, "Multi-Spectrum Energy Absorption") ||
       (isPower(target, "Scrying Mirrors of Limbo") &&
         pending.damageType === "mystic") ||
       (isPower(target, "Mystic Armor of Strange") &&
@@ -4283,11 +4388,13 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
   ) {
     const mutant = isPower(target, "Mutant Energy Absorption")
       ? "Mutant Energy Absorption"
-      : isPower(target, "Scrying Mirrors of Limbo")
-        ? "Scrying Mirrors of Limbo"
-        : isPower(target, "Mystic Armor of Strange")
-          ? "Mystic Armor of Strange"
-          : null;
+      : isPower(target, "Multi-Spectrum Energy Absorption")
+        ? "Multi-Spectrum Energy Absorption"
+        : isPower(target, "Scrying Mirrors of Limbo")
+          ? "Scrying Mirrors of Limbo"
+          : isPower(target, "Mystic Armor of Strange")
+            ? "Mystic Armor of Strange"
+            : null;
     const max = defense.filter((d) => d === "wild").length;
     const eligible = rolled
       .map((d, i) => (["critical", "wild", "hit"].includes(d) ? i : -1))
@@ -4396,7 +4503,8 @@ function applyModifier(state, event, action, random) {
 }
 
 function innateDiceSuccesses(fighter, dice) {
-  if (fighter.psychosis) return dice.filter((die) => die === "failure").length;
+  if (fighter.psychosis || isPower(fighter, "Living Anti-Matter Reactor"))
+    return dice.filter((die) => die === "failure").length;
   const extraFace = isPower(fighter, "Chosen of Chthon")
     ? "failure"
     : isPower(fighter, "The Cards Always Be In My Favor")
@@ -4476,6 +4584,7 @@ function resolve(state, pending, block, random) {
   const attack = attackCard(actor, pending.index),
     rules = attackProfile(actor, attack);
   pending.block ||= block;
+  if (pending.wasSlow == null) pending.wasSlow = has(target, "slow");
   if (rules.destructiveForce && pending.destructive == null) {
     const pieces = state.terrain.filter(
       (piece) =>
@@ -4582,6 +4691,7 @@ function resolve(state, pending, block, random) {
         (rules.woundDice ? actor.damage || 0 : 0) +
         (actor.herb ? 1 : 0) +
         (actor.nextDice || 0) +
+        (actor.weightTraining ? target.size || 0 : 0) +
         (rules.dupeDice && nearDuplicates(state, actor, target)
           ? rules.dupeDice
           : 0) +
@@ -4602,6 +4712,7 @@ function resolve(state, pending, block, random) {
     (state.attackedThisTurn ||= []).push(actor.id + ">" + target.id);
     actor.herb = false;
     actor.nextDice = 0;
+    actor.weightTraining = false;
     if (attack.name === "Vibranium Spear" && actor.bound) {
       actor.bound = false;
       pending.boundReroll = true;
@@ -4935,6 +5046,22 @@ function resolve(state, pending, block, random) {
         if (kind === "salve") heal(state, ally, 1);
         else if (ally.conditions?.length) ally.conditions.shift();
   if (pending.ferocity && usable(actor)) damage(state, actor, 1);
+  if (rules.defenseRests && dealt && usable(target)) {
+    if (pending.wasSlow) condition(target, "stagger");
+    condition(target, "slow");
+    condition(target, "stun");
+  }
+  if (rules.energyPulse && matches(rules.energyPulse) && usable(actor)) {
+    for (const f of state.fighters.filter(
+      (f) =>
+        f.id !== target.id &&
+        f.side !== actor.side &&
+        usable(f) &&
+        within(f, actor, 2),
+    ))
+      damage(state, f, 1, actor);
+    actor.power = Math.max(0, actor.power - 1);
+  }
   if (rules.mysticBinding && usable(target)) {
     if (hasFaces(rolled, rules.mysticBinding) && !target.activated)
       target.activated = true;
@@ -5179,7 +5306,11 @@ function resolve(state, pending, block, random) {
       if (event) events.push(event);
     }
   }
-  if (usable(target) && dealt && isPower(target, "Aggressive"))
+  if (
+    usable(target) &&
+    dealt &&
+    (isPower(target, "Aggressive") || isPower(target, "Gamma Transfusion"))
+  )
     events.push({
       ...moveEvent(
         { mode: "advance", speed: "S", direction: "toward" },
