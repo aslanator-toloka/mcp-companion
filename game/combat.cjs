@@ -398,6 +398,25 @@ const profiles = {
   Firestorm: { conditions: [["wild", "incinerate"]] },
   "Phoenix Blast": { destructiveForce: true, phoenixGain: 1 },
   "Molecular Disintegration": { phoenixLoss: true },
+  "Shield Throw": {
+    builder: 1,
+    ignoreSight: true,
+    extra: "bounce",
+    bounceOn: "wild",
+  },
+  "Siberian Shield Slam": {
+    beforeMove: { mode: "throw", speed: "S", limit: 3 },
+  },
+  "Bear-Handed Slap": { builder: "damage", conditions: [["wild", "bleed"]] },
+  "Bear-Armed Brawler": {
+    beforeMove: { mode: "throw", speed: "S", limit: 4 },
+    conditions: [["", "stagger"]],
+  },
+  "Darkforce Strike": { builder: 1, rerollAll: true },
+  "Rending Force": {
+    types: ["physical", "energy"],
+    conditions: [["wild", "bleed"]],
+  },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -529,6 +548,16 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "red-guardian:Strike": {
+    builder: 1,
+    afterMove: {
+      mode: "push",
+      speed: "S",
+      direction: "away",
+      limit: 3,
+      required: true,
+    },
+  },
   "multiple-man:Strike": { builder: "damage", dupeReroll: true },
   "cassandra-nova:Psionic Bolt": { builder: "damage", drain: "sap" },
   "honey-badger:Claw Slash": {
@@ -592,6 +621,23 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Ursine Temper": {
+    mode: "target",
+    range: 2,
+    terrain: 3,
+    speed: "M",
+    effect: "throw",
+  },
+  "Dimensional Portal": {
+    mode: "target",
+    range: 3,
+    ally: true,
+    self: true,
+    effect: "place",
+    destinationRange: 3,
+    oncePerTarget: true,
+    repeat: true,
+  },
   "Cosmically Empowered Telekinesis": {
     mode: "target",
     range: 2,
@@ -1601,6 +1647,12 @@ function damage(
   }
   if (enemy && !noPower && !has(target, "judgment")) gain(target, dealt);
   if (dealt && enemy && source?.x != null) sisterAdvance(state, target, source);
+  if (
+    dealt &&
+    target.damage < Number(face(target).stamina) &&
+    isPower(target, "Red Guardian‘s Suit")
+  )
+    gain(target, 1);
   if (dealt && enemy)
     for (const [dupe, side] of [
       [target, target.side],
@@ -3116,6 +3168,15 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         false,
       ],
       [
+        role === "rolled" && rules.rerollAll,
+        "darkforce",
+        "Darkforce Strike · все кубики",
+        values.length,
+        true,
+        null,
+        true,
+      ],
+      [
         role === "rolled" && pending.selffriend,
         "selffriend",
         "Self Must Protect Selffriend",
@@ -3210,7 +3271,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         pending.reroll === "failures",
       ],
     ];
-    for (const [enabled, id, label, max, failures, usage] of sources) {
+    for (const [enabled, id, label, max, failures, usage, exact] of sources) {
       if (!enabled) continue;
       const eligible = values
         .map((d, i) => (d !== "failure" || failures ? i : -1))
@@ -3227,6 +3288,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
           role,
           eligible,
           ...(usage && { usage }),
+          ...(exact && { exact: true }),
         });
       if (option) return option;
     }
@@ -3419,6 +3481,8 @@ function applyModifier(state, event, action, random) {
         !indices.every((i) => event.eligible.includes(i))
       )
         throw Error("Выберите допустимые кубики.");
+      if (event.exact && indices.length !== event.eligible.length)
+        throw Error("Перебросьте все кубики.");
       if (event.kind === "cabal") {
         pending.initial[indices[0]] = "critical";
         pending.cabal = true;
@@ -3514,6 +3578,7 @@ function attackRollSummary(state, pending, rolls = pending?.rolls) {
       (die) =>
         ["block", "wild"].includes(die) ||
         (die === "critical" && !rules.ignoreDefenseCritical) ||
+        (die === "blank" && pending.blanksSucceed) ||
         (die === "blank" &&
           (martial ||
             isPower(target, "I Can Do This All Day") ||
@@ -3781,7 +3846,12 @@ function resolve(state, pending, block, random) {
   }
   const matches = (test, dealt = 0) =>
     !test || (test === "damage" ? dealt > 0 : hasFaces(rolled, test));
-  if (!pending.moved && rules.beforeMove && matches(rules.beforeMove.on)) {
+  if (
+    !pending.moved &&
+    rules.beforeMove &&
+    matches(rules.beforeMove.on) &&
+    !(pending.anchored && rules.beforeMove.who !== "actor")
+  ) {
     const event = moveEvent(
       rules.beforeMove,
       actor,
@@ -4051,6 +4121,7 @@ function resolve(state, pending, block, random) {
   }
   if (
     rules.afterMove &&
+    !(pending.anchored && rules.afterMove.who !== "actor") &&
     (!rules.afterMove.damageRequired || dealt > 0) &&
     (rules.afterMove.on === "down"
       ? dealt > 0 && !usable(target)
@@ -4211,8 +4282,7 @@ function resolve(state, pending, block, random) {
     usable(actor) &&
     rules.extra &&
     !pending.extra &&
-    wilds &&
-    rolled.includes("hit") &&
+    hasFaces(rolled, rules.bounceOn || "wild hit") &&
     rules.extra === "bounce"
   )
     events.push({

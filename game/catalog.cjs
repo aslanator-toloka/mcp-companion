@@ -145,6 +145,9 @@ const characters = selected(allCharacters, "characters", [
   "multiple-man",
   "multiple-man-duplicates-grunts",
   "phoenix",
+  "red-guardian",
+  "ursa-major",
+  "darkstar",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

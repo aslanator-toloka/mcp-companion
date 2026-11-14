@@ -557,6 +557,33 @@ function targetingReactions(state, pending) {
         reactor: ally.id,
       });
     if (
+      combat.isPower(ally, "Focused Repulsion Field") &&
+      ally.id === defender.id &&
+      ["physical", "energy"].includes(pending.damageType)
+    )
+      reactions.push({
+        value: "repulsion:" + ally.id,
+        key: "repulsion:" + ally.id,
+        label: "Focused Repulsion Field · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    const barrierCost = 3 + Number(ally.conditions?.includes("root") || false);
+    if (
+      combat.isPower(ally, "Darkforce Barrier") &&
+      ally.power >= barrierCost &&
+      ["physical", "energy"].includes(pending.damageType) &&
+      (ally.id === defender.id || geometry.within(ally, defender, 3))
+    )
+      reactions.push({
+        value: "barrier:" + ally.id,
+        key: "barrier:" + ally.id,
+        label:
+          "Darkforce Barrier · " + ally.name + " · " + barrierCost + " Power",
+        cost: barrierCost,
+        reactor: ally.id,
+      });
+    if (
       combat.isPower(ally, "Wing Shield") &&
       ally.id === defender.id &&
       ["physical", "energy"].includes(pending.damageType)
@@ -2159,7 +2186,13 @@ function act(state, side, action, random = randomInt) {
         const bigBrother = value.startsWith("big-brother:");
         const cantTouch = value.startsWith("cant-touch:");
         const dangerous = value.startsWith("too-dangerous:");
-        if (dangerous) {
+        const repulsion = value.startsWith("repulsion:");
+        const barrier = value.startsWith("barrier:");
+        if (repulsion) pending.blanksSucceed = true;
+        else if (barrier) {
+          pending.defenseBonus = (pending.defenseBonus || 0) + 2;
+          pending.anchored = true;
+        } else if (dangerous) {
           Object.assign(pending, {
             target: ally.id,
             redirected: true,
@@ -2185,13 +2218,17 @@ function act(state, side, action, random = randomInt) {
           state,
           bigBrother
             ? "Big Brother · " + ally.name
-            : dangerous
-              ? "Too Dangerous to Ignore · " + ally.name
-              : cantTouch
-                ? (combat.isPower(ally, "Can‘t Touch This")
-                    ? "Can‘t Touch This · "
-                    : "Wing Shield · ") + ally.name
-                : "Telekinetic Shield · " + ally.name,
+            : repulsion
+              ? "Focused Repulsion Field · " + ally.name
+              : barrier
+                ? "Darkforce Barrier · " + ally.name
+                : dangerous
+                  ? "Too Dangerous to Ignore · " + ally.name
+                  : cantTouch
+                    ? (combat.isPower(ally, "Can‘t Touch This")
+                        ? "Can‘t Touch This · "
+                        : "Wing Shield · ") + ally.name
+                    : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
         continueTargeting(state, pending, random);
@@ -2621,6 +2658,11 @@ function act(state, side, action, random = randomInt) {
       break;
     }
     case "modify-dice": {
+      expect(
+        !state.effects[0]?.exact ||
+          action.indices?.length === state.effects[0].eligible.length,
+        "Перебросьте все кубики.",
+      );
       const effect = state.effects.shift();
       if (effect.collision) {
         combat.resolveDodge(state, effect, action, random);

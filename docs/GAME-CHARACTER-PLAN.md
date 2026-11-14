@@ -54,6 +54,9 @@
 | 45 | Cassandra Nova | Готово | Проверены Telepathic Cloak, Psionic Bolt без Pierce, Mind Possession, Flesh Manipulation, Biokinesis, Psychic Distraction и Telekinetic Deflection. |
 | 46 | Multiple Man | Готово | Проверены Kinetic Duplication, Shared Experiences, Dogpile и Monkey Pile рядом с дубликатами, Duplicate Reabsorption, Follow the Leads и правила Interact для Duplicates. |
 | 47 | Phoenix | Готово, кроме All Are Beneath Me | Проверены атаки и способности обеих сторон, жетоны Phoenix, переход в Phoenix Unleashed и взрыв Untamed Cosmic Entity. Атака от Flame Pillar не сделана. |
+| 48 | Red Guardian | Готово | Проверены Strike с Push, Ricochet у Shield Throw, Focused Repulsion Field и Red Guardian‘s Suit. |
+| 49 | Ursa Major | Готово | Проверены Bear-Handed Slap, Bear-Armed Brawler и Ursine Temper. |
+| 50 | Darkstar | Готово | Проверены переброс всех кубиков Darkforce Strike, Darkforce Barrier и Dimensional Portal. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -291,3 +294,12 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряд Uncanny X-Men собирается, жетоны видны в строке бойца. Браузер не проверен.
 
 [Сценарии Phoenix](../tests/game-phoenix.test.cjs).
+
+## 48–50. Red Guardian, Ursa Major и Darkstar
+
+- [x] Strike Red Guardian всегда делает Push цели Size 3 и меньше. Shield Throw игнорирует LOS и на Wild даёт Ricochet по цели в Range 3 от первой. Siberian Shield Slam может бросить цель до урона. Focused Repulsion Field засчитывает Blank в защите. Red Guardian‘s Suit даёт 1 Power за любой урон, если он не Dazed.
+- [x] Bear-Handed Slap накладывает Bleed на Wild. Bear-Armed Brawler может бросить цель Size 4 до урона и всегда накладывает Stagger. Ursine Temper бросает террейн на Medium.
+- [x] Darkforce Strike разрешает перебросить только все кубики атаки сразу. Rending Force выбирает Physical или Energy. Dimensional Portal делает Place Darkstar или союзника в Range 3, по разу на цель за Turn. Darkforce Barrier добавляет 2 кубика защиты и запрещает этой атаке двигать защитника.
+- [x] Отряд Winter Guard с Omega Red собирается. Браузер не проверен.
+
+[Сценарии Winter Guard](../tests/game-winter-guard.test.cjs).
