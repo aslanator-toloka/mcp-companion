@@ -53,6 +53,7 @@
 | 44 | Omega Red | Готово | Проверены Carbonadium Coils и Armor, Absorb Essence, Ensnare, Death Factor и Death Spores. |
 | 45 | Cassandra Nova | Готово | Проверены Telepathic Cloak, Psionic Bolt без Pierce, Mind Possession, Flesh Manipulation, Biokinesis, Psychic Distraction и Telekinetic Deflection. |
 | 46 | Multiple Man | Готово | Проверены Kinetic Duplication, Shared Experiences, Dogpile и Monkey Pile рядом с дубликатами, Duplicate Reabsorption, Follow the Leads и правила Interact для Duplicates. |
+| 47 | Phoenix | Готово, кроме All Are Beneath Me | Проверены атаки и способности обеих сторон, жетоны Phoenix, переход в Phoenix Unleashed и взрыв Untamed Cosmic Entity. Атака от Flame Pillar не сделана. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -279,3 +280,14 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Отряды X-Factor и Uncanny X-Men собираются. Браузер не проверен.
 
 [Сценарии Multiple Man](../tests/game-multiple-man.test.cjs).
+
+## 47. Phoenix
+
+- [x] Bolts of Flame даёт Power и Incinerate на Wild. Firestorm снимает 1 урон союзникам в Range 3. Cosmically Empowered Telekinesis — Medium Throw. Rejuvenating Flames лечит 2 и снимает одно состояние, по разу на цель за Turn. Psionic Nexus даёт +1 Power. Burning Resolve за 3 Power отменяет вражеские Advance, Place или Push союзника в Range 3. Immune [..] теперь читается как Immunity.
+- [x] Жетоны Phoenix: +1 за Daze или KO союзника (не грунта), +3 при собственном Daze. В начале хода своей стороны с 3 жетонами, а также при переходе на раненую сторону Phoenix становится Phoenix Unleashed: обратная сторона карты, Size 4, урон и состояния сброшены, Power и жетоны сохраняются.
+- [x] Phoenix Unleashed получает +1 Power за каждый жетон в Power Phase и теряет жетон, когда вырубает врага. Phoenix Blast может уничтожить террейн Size 2–4 ради кубиков, на его месте встаёт Flame Pillar (не больше двух); после атаки +1 жетон. Molecular Disintegration снимает жетон, если цель устояла. Temporal Domination перебрасывает до трёх кубиков за жетон, раз за Turn.
+- [x] При KO или с 5+ жетонами в конце активации — взрыв: бросок кубиков по числу жетонов, урон всем в Range 5 за каждый Critical, Wild и Hit, уничтожение террейна до этого размера, затем KO.
+- [ ] All Are Beneath Me: измерение Range и LOS от Flame Pillar и Incinerate целям не сделаны. Место для Flame Pillar берётся там, где стоял уничтоженный террейн, без отдельного выбора.
+- [x] Отряд Uncanny X-Men собирается, жетоны видны в строке бойца. Браузер не проверен.
+
+[Сценарии Phoenix](../tests/game-phoenix.test.cjs).

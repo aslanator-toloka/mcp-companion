@@ -394,6 +394,10 @@ const profiles = {
   "Flesh Manipulation": { explosiveForce: true },
   Dogpile: { dupeReroll: true, conditions: [["wild", "slow"]] },
   "Madrox Monkey Pile!": { dupeDice: 2, conditions: [["wild hit", "stagger"]] },
+  "Bolts of Flame": { builder: "damage", conditions: [["wild", "incinerate"]] },
+  Firestorm: { conditions: [["wild", "incinerate"]] },
+  "Phoenix Blast": { destructiveForce: true, phoenixGain: 1 },
+  "Molecular Disintegration": { phoenixLoss: true },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -588,6 +592,23 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Cosmically Empowered Telekinesis": {
+    mode: "target",
+    range: 2,
+    enemy: 5,
+    terrain: 4,
+    speed: "M",
+    effect: "throw",
+  },
+  "Rejuvenating Flames": {
+    mode: "target",
+    range: 3,
+    ally: true,
+    self: true,
+    effect: "rejuvenate",
+    oncePerTarget: true,
+    repeat: true,
+  },
   "Duplicate Reabsorption": {
     mode: "target",
     range: 3,
@@ -1064,6 +1085,44 @@ function heal(state, model, amount) {
   }
   model.damage = Math.max(0, model.damage - amount);
 }
+function unleash(state, phoenix) {
+  const back = details[phoenix.slug].statCard.backSide;
+  Object.assign(phoenix, {
+    injured: true,
+    dazed: false,
+    damage: 0,
+    conditions: [],
+    size: Number(back.size) || phoenix.size,
+    speed: back.speed || phoenix.speed,
+  });
+  log(state, "Phoenix Unleashed", { side: phoenix.side, fighter: phoenix.id });
+}
+function phoenixExplosion(state, phoenix, random) {
+  const rolled = rawDice(phoenix.phoenix || 0, random);
+  const hits = rolled.filter((d) =>
+    ["critical", "wild", "hit"].includes(d),
+  ).length;
+  const origin = { x: phoenix.x, y: phoenix.y, radius: phoenix.radius };
+  log(state, "Untamed Cosmic Entity · " + hits, {
+    side: phoenix.side,
+    fighter: phoenix.id,
+    rolls: [{ label: "Phoenix", faces: rolled }],
+  });
+  phoenix.phoenix = 0;
+  phoenix.ko = true;
+  phoenix.dazed = false;
+  phoenix.x = phoenix.y = null;
+  dropObjectives(state, phoenix);
+  if (hits) {
+    for (const f of state.fighters.filter(
+      (f) => usable(f) && within(f, origin, 5),
+    ))
+      damage(state, f, hits, phoenix);
+    state.terrain = state.terrain.filter(
+      (p) => p.size > hits || distanceToTerrain(origin, p) > range[5],
+    );
+  }
+}
 function addFlare(model, amount = 1) {
   if (isPower(model, "Flare State"))
     model.flares = Math.min(3, (model.flares || 0) + amount);
@@ -1427,7 +1486,7 @@ function condition(fighter, name) {
   if (!usable(fighter) || has(fighter, name)) return;
   const immune = face(fighter).superPowers?.some((p) =>
     p.name
-      .match(/Immunity \[([^\]]+)\]/i)?.[1]
+      .match(/Immun(?:e|ity) \[([^\]]+)\]/i)?.[1]
       .toLowerCase()
       .split(/,\s*/)
       .includes(name),
@@ -1649,6 +1708,32 @@ function damage(
       (f) => f.side !== target.side && usable(f) && within(f, target, reach),
     ))
       damage(state, f, 1, target);
+  }
+  if (target.damage === maximum) {
+    if (!target.grunt)
+      for (const phoenix of state.fighters.filter(
+        (f) =>
+          f.id !== target.id &&
+          f.side === target.side &&
+          !f.ko &&
+          f.x != null &&
+          (isPower(f, "I Am Fire and Life Incarnate") ||
+            isPower(f, "Untamed Cosmic Entity")),
+      ))
+        phoenix.phoenix = (phoenix.phoenix || 0) + 1;
+    if (
+      source &&
+      source.side !== target.side &&
+      source.phoenix &&
+      isPower(source, "Untamed Cosmic Entity")
+    )
+      source.phoenix -= 1;
+    if (!target.injured && isPower(target, "I Am Fire and Life Incarnate"))
+      target.phoenix = (target.phoenix || 0) + 3;
+    if (target.injured && isPower(target, "Untamed Cosmic Entity")) {
+      phoenixExplosion(state, target, state.rng || randomInt);
+      return dealt;
+    }
   }
   if (
     target.damage === maximum &&
@@ -2069,7 +2154,7 @@ function powers(state, actor) {
                 state.usedPowers?.includes("matter:" + f.id))) ||
             (settings.ally &&
               (f.side !== actor.side ||
-                f.id === actor.id ||
+                (f.id === actor.id && !settings.self) ||
                 state.fieldLeaderMoves?.includes(f.id))) ||
             (!settings.any &&
               !settings.ally &&
@@ -2385,6 +2470,16 @@ function usePower(state, actor, selected, action, random) {
     (state.fieldLeaderMoves ||= []).push(target.id);
   if (selected.value === "Matter Transmutation")
     (state.usedPowers ||= []).push("matter:" + target.id);
+  if (selected.effect === "rejuvenate") {
+    heal(state, target, 2);
+    const remove =
+      action.condition && target.conditions?.includes(action.condition)
+        ? action.condition
+        : target.conditions?.[0];
+    if (remove)
+      target.conditions = target.conditions.filter((c) => c !== remove);
+    return;
+  }
   if (selected.effect === "reabsorb") {
     const token = state.objectives.find(
       (o) => o.holder === target.id && o.role === "extract",
@@ -2908,6 +3003,27 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       });
       if (option) return option;
     }
+    if (
+      eligible.length &&
+      isPower(model, "Temporal Domination") &&
+      reactiveAllowed(model === actor ? target : actor, model, state) &&
+      model.power >= rootTax(model) &&
+      !state.reactionUses?.includes(model.id + ":temporal")
+    ) {
+      const option = candidate("temporal-" + role, model.side, {
+        label: "Temporal Domination",
+        dice: values,
+        max: Math.min(3, eligible.length),
+        kind: "reroll",
+        cost: rootTax(model),
+        payer: model.id,
+        usage: model.id + ":temporal",
+        phoenixToken: true,
+        role,
+        eligible,
+      });
+      if (option) return option;
+    }
     const precognition =
       eligible.length &&
       isPower(model, "Telepathic Precognition") &&
@@ -3315,6 +3431,7 @@ function applyModifier(state, event, action, random) {
           !leadershipRerolls.includes(event.id),
         );
         if (event.usage) (state.reactionUses ||= []).push(event.usage);
+        if (event.phoenixToken) payer.phoenix = (payer.phoenix || 0) + 1;
         if (event.clearNeural && state.neural)
           delete state.neural[event.clearNeural];
         const values = pending.rolls[event.role];
@@ -3423,6 +3540,27 @@ function resolve(state, pending, block, random) {
   const attack = attackCard(actor, pending.index),
     rules = attackProfile(actor, attack);
   pending.block ||= block;
+  if (rules.destructiveForce && pending.destructive == null) {
+    const pieces = state.terrain.filter(
+      (piece) =>
+        piece.size >= 2 &&
+        piece.size <= 4 &&
+        distanceToTerrain(actor, piece) <= range[4],
+    );
+    if (pieces.length)
+      return {
+        suspended: true,
+        events: [
+          {
+            type: "selffriend",
+            label: "Destructive Force",
+            side: actor.side,
+            pieces,
+            resume: pending,
+          },
+        ],
+      };
+  }
   if (rules.selffriend && pending.selffriend == null) {
     const pieces = state.terrain.filter(
       (piece) => piece.size <= 3 && distanceToTerrain(actor, piece) <= range[3],
@@ -3500,6 +3638,7 @@ function resolve(state, pending, block, random) {
           ? 1
           : 0) +
         (savage(state, actor) ? 2 : 0) +
+        (pending.destructive || 0) +
         (rules.dupeDice && nearDuplicates(state, actor, target)
           ? rules.dupeDice
           : 0) +
@@ -3774,6 +3913,9 @@ function resolve(state, pending, block, random) {
   if (rules.neural && wilds && usable(target))
     (state.neural ||= {})[actor.id] = target.id;
   if (rules.flareOn && matches(rules.flareOn)) addFlare(actor);
+  if (rules.phoenixGain && usable(actor))
+    actor.phoenix = (actor.phoenix || 0) + rules.phoenixGain;
+  if (rules.phoenixLoss && usable(target) && actor.phoenix) actor.phoenix -= 1;
   if (pending.flares) condition(target, "incinerate");
   if (rules.rampage && matches(rules.rampage))
     for (const f of state.fighters.filter(
@@ -4315,6 +4457,8 @@ module.exports = {
   pay,
   spend,
   heal,
+  unleash,
+  phoenixExplosion,
   psychicDistraction,
   addFlare,
   xavierTargets,

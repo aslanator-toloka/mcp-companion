@@ -311,6 +311,29 @@ function movementProtection(state, effect) {
         });
     }
   }
+  if (
+    source.side !== mover.side &&
+    ["advance", "place", "push"].includes(effect.mode)
+  )
+    for (const ally of state.fighters.filter(
+      (f) =>
+        f.side === mover.side &&
+        f.id !== mover.id &&
+        combat.usable(f) &&
+        combat.isPower(f, "Burning Resolve") &&
+        geometry.within(f, mover, 3) &&
+        combat.reactiveAllowed(source, f, state),
+    )) {
+      const cost = 3 + tax(ally);
+      if (ally.power >= cost)
+        options.push({
+          value: "shield:" + ally.id,
+          label: "Burning Resolve · " + ally.name + " · " + cost + " Power",
+          protector: ally.id,
+          cost,
+          power: "Burning Resolve",
+        });
+    }
   if (!options.length) return null;
   return {
     options,
@@ -1350,6 +1373,12 @@ function endActivation(state, side, random, applyBleed = true) {
           geometry.within(f, actor, 2),
       ))
         combat.condition(enemy, "poison");
+    if (
+      combat.usable(actor) &&
+      (actor.phoenix || 0) >= 5 &&
+      combat.isPower(actor, "Untamed Cosmic Entity")
+    )
+      combat.phoenixExplosion(state, actor, random);
     actor.activated = true;
     actor.selfDiscovery = false;
     actor.sunburnFlight = false;
@@ -1584,6 +1613,8 @@ function beginRound(state) {
       if (combat.isPower(fighter, "Omega Level Multi-Versal Entity"))
         combat.gain(fighter, 1);
       if (combat.isPower(fighter, "Inner Rage")) combat.gain(fighter, 2);
+      if (combat.isPower(fighter, "Untamed Cosmic Entity"))
+        combat.gain(fighter, fighter.phoenix || 0);
       if (
         combat.isPower(fighter, "Techno-Organic Virus Suppression") ||
         combat.isPower(fighter, "Telepathic Cloak") ||
@@ -1815,6 +1846,16 @@ function act(state, side, action, random = randomInt) {
         allowed.some((option) => option.value === value),
         "Нельзя активировать персонажа.",
       );
+      for (const phoenix of state.fighters.filter(
+        (f) =>
+          f.side === side &&
+          !f.ko &&
+          f.x != null &&
+          !f.injured &&
+          (f.phoenix || 0) >= 3 &&
+          combat.isPower(f, "I Am Fire and Life Incarnate"),
+      ))
+        combat.unleash(state, phoenix);
       const model = state.fighters.find((f) => f.id === value);
       const gruntSlug = {
         "ultron-metal-tyrant": "ultron-drones-grunts",
@@ -1936,6 +1977,15 @@ function act(state, side, action, random = randomInt) {
           action.damageType,
         );
         if (option.index === 100) actor.montesiUsed = true;
+        if (option.name === "Firestorm")
+          for (const ally of state.fighters.filter(
+            (f) =>
+              f.id !== actor.id &&
+              f.side === actor.side &&
+              combat.usable(f) &&
+              geometry.within(actor, f, 3),
+          ))
+            combat.heal(state, ally, 1);
         expect(
           remaining.length,
           "Шаблон должен накрыть хотя бы одну допустимую цель.",
@@ -2601,12 +2651,33 @@ function act(state, side, action, random = randomInt) {
       break;
     }
     case "selffriend": {
-      const { pieces, resume } = state.effects.shift();
+      const { pieces, resume, label } = state.effects.shift();
       const piece = pieces.find((p) => p.id === value);
-      resume.selffriend = piece?.size || 0;
+      const destructive = label === "Destructive Force";
+      resume[destructive ? "destructive" : "selffriend"] = piece?.size || 0;
       if (piece) {
         state.terrain = state.terrain.filter((p) => p.id !== piece.id);
-        log(state, "Self Must Protect Selffriend · " + piece.name, { side });
+        log(
+          state,
+          (label || "Self Must Protect Selffriend") + " · " + piece.name,
+          {
+            side,
+          },
+        );
+        if (
+          destructive &&
+          state.terrain.filter((p) => p.pillarOf === resume.actor).length < 2
+        )
+          state.terrain.push({
+            id: "flame-pillar-" + resume.actor + "-" + state.log.length,
+            name: "Flame Pillar",
+            size: 1,
+            x: piece.x,
+            y: piece.y,
+            w: 1,
+            h: 1,
+            pillarOf: resume.actor,
+          });
       }
       finishAttack(state, resume, false, random);
       break;

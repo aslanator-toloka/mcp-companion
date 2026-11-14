@@ -144,6 +144,7 @@ const characters = selected(allCharacters, "characters", [
   "cassandra-nova",
   "multiple-man",
   "multiple-man-duplicates-grunts",
+  "phoenix",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");
