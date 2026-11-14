@@ -167,6 +167,9 @@ const characters = selected(allCharacters, "characters", [
   "nebula",
   "cosmic-ghost-rider",
   "thanos-the-mad-titan",
+  "wong",
+  "clea",
+  "doctor-strange",
 ]);
 const tactics = selected(allTactics, "tactics");
 const crises = selected(allCrises, "crises");

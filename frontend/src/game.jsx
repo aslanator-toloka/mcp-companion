@@ -674,7 +674,7 @@ function GamePanel() {
             checked={decree}
             onChange={(e) => setDecree(e.target.checked)}
           />{" "}
-          Death‘s Decree
+          Death‘s Decree / Talons of Farallah
         </label>
       )}
       {attackOption?.flareMax > 0 && (

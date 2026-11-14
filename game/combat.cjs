@@ -558,6 +558,20 @@ const profiles = {
       required: true,
     },
   },
+  "Demon Claws of Denak": { builder: 1, conditions: [["wild", "bleed"]] },
+  "Icy Tendrils of Ikthalon": {
+    conditions: [
+      ["hit", "slow"],
+      ["wild hit", "stun"],
+      ["critical wild hit", "stagger"],
+    ],
+  },
+  "Bolts of Bedevilment": {
+    builder: "damage",
+    pierce: "block",
+    afterMove: { mode: "push", speed: "S", damageRequired: true },
+  },
+  "Crimson Bands of Cyttorak": { mysticBinding: "critical wild hit" },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -689,6 +703,7 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "wong:Strike": { builder: 1 },
   "nebula:Strike": { builder: "damage", conditions: [["wild", "shock"]] },
   "thanos-the-mad-titan:Strike": {
     builder: "damage",
@@ -797,6 +812,51 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Faithful Assistant": {
+    mode: "target",
+    range: 3,
+    ally: true,
+    effect: "assist",
+    oncePerRound: true,
+    repeat: true,
+  },
+  Meditate: { mode: "self", action: true, repeat: true },
+  "The Vishanti‘s Blessing": {
+    mode: "target",
+    range: 3,
+    ally: true,
+    self: true,
+    action: true,
+    effect: "blessing",
+    oncePerRound: true,
+    repeat: true,
+  },
+  "Descendant of the Faltine": { mode: "self", action: true },
+  "Oshtur‘s Mighty Hand": {
+    mode: "target",
+    range: 3,
+    enemy: 2,
+    terrain: 2,
+    speed: "S",
+    effect: "throw",
+  },
+  "Vapors of Dormammu": {
+    mode: "target",
+    range: 4,
+    ally: true,
+    self: true,
+    effect: "place",
+    destinationRange: 2,
+    oncePerTarget: true,
+    repeat: true,
+  },
+  "Oshtur‘s Refuge": {
+    mode: "target",
+    range: 3,
+    ally: true,
+    self: true,
+    effect: "refuge",
+  },
   "Interstellar Hellcycle": {
     mode: "self",
     variableCost: "hellcycle",
@@ -1338,6 +1398,12 @@ function dodge(state, target, source, random, bonus = 0) {
   totallyMeantIt(state, target, rolled);
 }
 function totallyMeantIt(state, model, roll) {
+  if (
+    usable(model) &&
+    roll.includes("block") &&
+    isPower(model, "Shield of the Seraphim")
+  )
+    gain(model, 1);
   if (roll.includes("critical"))
     for (const omni of state.fighters.filter(
       (f) =>
@@ -1366,16 +1432,18 @@ function totallyMeantIt(state, model, roll) {
     fighter: model.id,
   });
 }
+const threatOf = (f) => Number(pool.characters[f.slug]?.threatLevel) || 0;
 function decreeSource(state, actor) {
   return state.fighters.find(
     (f) =>
-      f.id !== actor.id &&
       f.side === actor.side &&
       usable(f) &&
-      isPower(f, "Death‘s Decree") &&
-      f.power >= 2 + rootTax(f) &&
       !state.reactionUses?.includes(f.id + ":decree") &&
-      within(f, actor, 4),
+      ((isPower(f, "Death‘s Decree") &&
+        f.id !== actor.id &&
+        f.power >= 2 + rootTax(f)) ||
+        (isPower(f, "Talons of Farallah") && f.power >= 3 + rootTax(f))) &&
+      (f.id === actor.id || within(f, actor, 4)),
   );
 }
 function savage(state, model) {
@@ -1466,6 +1534,8 @@ function cantTouchThis(state, target, source) {
       usable(f) &&
       ((isPower(f, "Can‘t Touch This") &&
         (f.id === target.id || within(f, target, 2))) ||
+        (isPower(f, "Hoggoth‘s Hoary Wisdom") &&
+          (f.id === target.id || within(f, target, 3))) ||
         (isPower(f, "Wing Shield") && f.id === target.id)) &&
       f.power >= 2 + rootTax(f) &&
       reactiveAllowed(source, f, state),
@@ -1518,7 +1588,9 @@ function collide(
           ? "Unglaublich Acrobatics"
           : (isPower(payer, "Wing Shield")
               ? "Wing Shield"
-              : "Can‘t Touch This") +
+              : isPower(payer, "Hoggoth‘s Hoary Wisdom")
+                ? "Hoggoth‘s Hoary Wisdom"
+                : "Can‘t Touch This") +
             " · " +
             payer.name,
       cost: 2 + rootTax(payer),
@@ -2591,6 +2663,8 @@ function powers(state, actor) {
             !within(rangeOrigin(actor), f, settings.range) ||
             (settings.effect === "mouth" && state.mouthRound?.includes(f.id)) ||
             (settings.duplicate && f.slug !== duplicates) ||
+            (settings.oncePerRound &&
+              state.roundUses?.includes(card.name + ":" + f.id)) ||
             (settings.oncePerTarget &&
               state.usedPowers?.includes(card.name + ":" + f.id)) ||
             (settings.sight && !lineOfSight(actor, f, state.terrain).visible) ||
@@ -2788,6 +2862,20 @@ function usePower(state, actor, selected, action, random) {
       ])
         damage(state, f, 2, actor);
       return;
+    case "Meditate":
+      gain(actor, 1);
+      return;
+    case "Descendant of the Faltine": {
+      gain(actor, 3);
+      const rolled = rawDice(5, state.rng || randomInt);
+      log(state, "Descendant of the Faltine", {
+        side: actor.side,
+        fighter: actor.id,
+        rolls: [{ label: "Faltine", faces: rolled }],
+      });
+      if (rolled.includes("failure")) damage(state, actor, 2);
+      return;
+    }
     case "Synthesis":
     case "Overcharge Capacitors":
     case "Cosmic Energy Absorption":
@@ -2940,6 +3028,27 @@ function usePower(state, actor, selected, action, random) {
   if (selected.oncePerTarget)
     (state.usedPowers ||= []).push(selected.value + ":" + action.target);
   if (selected.chainIncinerate && target) condition(target, "incinerate");
+  if (selected.oncePerRound)
+    (state.roundUses ||= []).push(selected.value + ":" + action.target);
+  if (selected.effect === "assist") {
+    gain(target, 1);
+    return;
+  }
+  if (selected.effect === "blessing") {
+    if (action.condition || !target.damage) {
+      const remove =
+        action.condition && target.conditions?.includes(action.condition)
+          ? action.condition
+          : target.conditions?.[0];
+      if (remove)
+        target.conditions = target.conditions.filter((c) => c !== remove);
+    } else heal(state, target, 2);
+    return;
+  }
+  if (selected.effect === "refuge") {
+    heal(state, target, 3);
+    return;
+  }
   if (selected.value === "Figment of Fantasy" && state.neural)
     delete state.neural[actor.id];
   if (selected.value === "Field Leader")
@@ -3735,6 +3844,15 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         false,
       ],
       [
+        isPower(model, "Eye of Agamotto"),
+        "agamotto",
+        "Eye of Agamotto · все кубики",
+        values.length,
+        true,
+        null,
+        true,
+      ],
+      [
         role === "rolled" && model.mantle,
         "mantle",
         "Mantle of the Black Panther",
@@ -4400,7 +4518,17 @@ function resolve(state, pending, block, random) {
           )) +
         (pending.block ? 2 : 0) +
         (pending.defenseBonus || 0) +
-        (target.selfDiscovery ? 3 : 0) -
+        (target.selfDiscovery ? 3 : 0) +
+        (isPower(target, "Servant to the Sorcerer Supreme") &&
+        state.fighters.some(
+          (f) =>
+            f.side === target.side &&
+            usable(f) &&
+            pool.characters[f.slug]?.alterEgo === "Stephen Vincent Strange" &&
+            within(f, target, 3),
+        )
+          ? 1
+          : 0) -
         (savage(state, target) ? 1 : 0) +
         (isPower(target, "Unstable Outline") &&
         ["physical", "energy"].includes(pending.damageType) &&
@@ -4644,6 +4772,22 @@ function resolve(state, pending, block, random) {
   if (rules.backlash && rolled.includes("critical")) damage(state, actor, 2);
   for (const [test, ...values] of rules.conditions || [])
     if (matches(test, dealt)) values.forEach((name) => condition(target, name));
+  if (rules.mysticBinding && usable(target)) {
+    if (hasFaces(rolled, rules.mysticBinding) && !target.activated)
+      target.activated = true;
+    else condition(target, "stagger");
+  }
+  if (pending.talons && dealt && threatOf(target) >= 5)
+    condition(target, "judgment");
+  if (
+    usable(actor) &&
+    (dealt || threatOf(target) >= 5) &&
+    leadership(state, actor.side, "Judgment of the Vishanti") &&
+    !state.leadershipUses?.[actor.side]?.includes("vishanti")
+  ) {
+    (state.leadershipUses ||= { p1: [], p2: [] })[actor.side].push("vishanti");
+    condition(target, "hex");
+  }
   if (rules.neurotoxin && wilds && usable(target)) {
     if (has(target, "bleed") && has(target, "poison") && !target.activated)
       target.activated = true;

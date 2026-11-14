@@ -76,6 +76,9 @@
 | 67 | Nebula | Готово | Проверены Assassin, Cybernetic Enhancements и Shock Sword Assault. |
 | 68 | Cosmic Ghost Rider | Готово | Проверены Psychosis, Spirit of Vengeance в Cleanup, Penance Stare, Hellcycle, Chains of Cyttorak и Cosmic Justice on Wheels. |
 | 69 | Thanos, the Mad Titan | Готово, кроме Infinity Gems | Проверены Death‘s Decree, Death‘s Agenda (VP за KO), Cosmic Blast, Cosmic Portal и Being of Immeasurable Power. |
+| 70 | Wong | Готово | Проверены Faithful Assistant, Meditate, The Vishanti‘s Blessing и Servant to the Sorcerer Supreme. |
+| 71 | Clea | Готово | Проверены Icy Tendrils, Descendant of the Faltine, Vapors of Dormammu и Talons of Farallah. |
+| 72 | Doctor Strange | Готово, кроме Gem Bearer | Проверены Bolts of Bedevilment, Crimson Bands, Eye of Agamotto, Shield of the Seraphim, Hoggoth‘s Hoary Wisdom, Oshtur‘s Refuge и Judgment of the Vishanti. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -391,3 +394,13 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Peerless не пускает Thanos и Cosmic Ghost Rider в один отряд. Black Order собран полностью, кроме камней. Браузер не проверен.
 
 [Сценарии Nebula, Cosmic Ghost Rider и Thanos](../tests/game-black-order-titans.test.cjs).
+
+## 70–72. Wong, Clea и Doctor Strange
+
+- [x] Faithful Assistant даёт союзнику 1 Power раз за раунд. Meditate — действие за 1 Power. The Vishanti‘s Blessing тратит действие и лечит 2 или снимает одно состояние, раз за раунд на цель. Servant to the Sorcerer Supreme добавляет Wong кубик защиты рядом со Stephen Strange.
+- [x] Demon Claws накладывает Bleed на Wild. Icy Tendrils накладывает Slow, Stun и Stagger по своим наборам граней. Descendant of the Faltine даёт 3 Power и 2 урона, если в броске 5 кубиков есть Failure. Oshtur‘s Mighty Hand бросает цель до Size 2. Vapors of Dormammu делает Place в Range 2. Talons of Farallah, через тот же переключатель, что Death‘s Decree, добавляет 2 кубика и даёт Judgment цели с угрозой 5+ после урона.
+- [x] Bolts of Bedevilment даёт Pierce на Block и Push после урона. Crimson Bands накладывает Stagger, а по своему набору граней даёт цели Activated. Eye of Agamotto разрешает перебросить сразу все кубики. Shield of the Seraphim даёт Power за Block в броске. Hoggoth‘s Hoary Wisdom: +2 кубика защиты или уклонения себе или союзнику в Range 3 против любой атаки. Oshtur‘s Refuge лечит 3. Judgment of the Vishanti (Defenders) раз за Turn накладывает Hex.
+- [ ] Eye of Agamotto: модификация Failure не сделана, только переброс всех кубиков.
+- [x] Отряд Convocation собирается. Браузер не проверен.
+
+[Сценарии Wong, Clea и Doctor Strange](../tests/game-convocation.test.cjs).

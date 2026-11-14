@@ -686,6 +686,18 @@ function targetingReactions(state, pending) {
         reactor: ally.id,
       });
     if (
+      combat.isPower(ally, "Hoggoth‘s Hoary Wisdom") &&
+      (ally.id === defender.id || geometry.within(ally, defender, 3))
+    )
+      reactions.push({
+        value: "cant-touch:" + ally.id,
+        key: "hoggoth:" + ally.id,
+        label:
+          "Hoggoth‘s Hoary Wisdom · " + ally.name + " · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
       combat.isPower(ally, "Can‘t Touch This") &&
       ["physical", "energy"].includes(pending.damageType) &&
       (ally.id === defender.id || geometry.within(ally, defender, 2))
@@ -1281,6 +1293,8 @@ function checkpoint(state) {
 }
 
 function announceAttack(state, actor, target, option, attack, random) {
+  const talons = !!state.talonsPending;
+  state.talonsPending = false;
   const pending = {
     actor: actor.id,
     target: target.id,
@@ -1294,6 +1308,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     doubleWild: attack.doubleWild,
     throwAfter: attack.throwAfter,
     flares: attack.flares,
+    talons,
     reroll: attack.reroll,
     blanksAttack: attack.blanksAttack,
     coldSnapAction: attack.coldSnapAction,
@@ -1466,6 +1481,7 @@ function declareWinner(state, side) {
 
 function nextRound(state, priority) {
   state.mouthRound = [];
+  state.roundUses = [];
   const living = sides.filter((p) =>
     state.fighters.some((f) => f.side === p && !f.ko),
   );
@@ -2202,13 +2218,19 @@ function act(state, side, action, random = randomInt) {
       if (action.decree) {
         const thanos = combat.decreeSource(state, actor);
         expect(thanos && option.decree, "Death‘s Decree недоступен.");
-        combat.spend(state, thanos, 2 + combat.rootTax(thanos));
+        const talons = combat.isPower(thanos, "Talons of Farallah");
+        combat.spend(state, thanos, (talons ? 3 : 2) + combat.rootTax(thanos));
         (state.reactionUses ||= []).push(thanos.id + ":decree");
-        decree = actor.injured ? 4 : 2;
-        log(state, "Death‘s Decree · +" + decree + " куб.", {
-          side,
-          fighter: thanos.id,
-        });
+        decree = talons ? 2 : actor.injured ? 4 : 2;
+        state.talonsPending = talons;
+        log(
+          state,
+          (talons ? "Talons of Farallah" : "Death‘s Decree") +
+            " · +" +
+            decree +
+            " куб.",
+          { side, fighter: thanos.id },
+        );
       }
       const diceBonus =
         (!extra ? actor.stokeFlames || 0 : 0) + boost + flares + decree;
@@ -2452,9 +2474,9 @@ function act(state, side, action, random = randomInt) {
                     : dangerous
                       ? "Too Dangerous to Ignore · " + ally.name
                       : cantTouch
-                        ? (combat.isPower(ally, "Can‘t Touch This")
-                            ? "Can‘t Touch This · "
-                            : "Wing Shield · ") + ally.name
+                        ? chosenReaction.label.split(" · ")[0] +
+                          " · " +
+                          ally.name
                         : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
