@@ -584,6 +584,31 @@ function targetingReactions(state, pending) {
     if (
       ally.id !== defender.id &&
       !pending.redirected &&
+      combat.isPower(ally, "Intimidating Presence") &&
+      geometry.within(attacker, ally, 2)
+    )
+      reactions.push({
+        value: "too-dangerous:" + ally.id,
+        key: "intimidating:" + ally.id,
+        label: "Intimidating Presence · " + ally.name + " · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
+      ally.id === defender.id &&
+      combat.isPower(ally, "Martial Prowess") &&
+      geometry.within(attacker, ally, 2)
+    )
+      reactions.push({
+        value: "prowess:" + ally.id,
+        key: "prowess:" + ally.id,
+        label: "Martial Prowess · " + cost + " Power",
+        cost,
+        reactor: ally.id,
+      });
+    if (
+      ally.id !== defender.id &&
+      !pending.redirected &&
       combat.isPower(ally, "Bodyguard") &&
       geometry.within(ally, defender, 2)
     )
@@ -872,6 +897,17 @@ function currentEffect(state, side) {
       return [{ type: "deploy", fighters: [effect.fighter] }];
     if (effect.type === "transform" || effect.type === "spawn-drones")
       return [effect, ...(!effect.required ? [skip] : [])];
+    if (effect.type === "partner")
+      return [
+        {
+          type: "partner",
+          label:
+            effect.power +
+            " · активировать " +
+            state.fighters.find((f) => f.id === effect.partner).name,
+        },
+        skip,
+      ];
     if (effect.type === "counter-strike")
       return [
         {
@@ -1105,7 +1141,11 @@ function currentEffect(state, side) {
       const attacks = combat.usable(actor)
         ? combat
             .attacks(state, actor)
-            .filter((a) => effect.index == null || a.index === effect.index)
+            .filter(
+              (a) =>
+                (effect.index == null || a.index === effect.index) &&
+                (!effect.indices || effect.indices.includes(a.index)),
+            )
         : [];
       return attacks.length ? [{ type: "attack", attacks }] : [skip];
     }
@@ -1217,6 +1257,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     throwAfter: attack.throwAfter,
     flares: attack.flares,
     reroll: attack.reroll,
+    blanksAttack: attack.blanksAttack,
     coldSnapAction: attack.coldSnapAction,
     side: target.side,
     ...(attack.volley && { volley: true }),
@@ -1426,8 +1467,42 @@ function nextRound(state, priority) {
   beginRound(state);
 }
 
+const partners = {
+  "Husband of Proxima Midnight": "proxima-midnight",
+  "Wife of Corvus Glaive": "corvus-glaive",
+};
 function endActivation(state, side, random, applyBleed = true) {
   const actor = actorOf(state);
+  if (actor && state.partnerOffered !== actor.id) {
+    const power = Object.keys(partners).find((name) =>
+      combat.isPower(actor, name),
+    );
+    const partner =
+      power &&
+      combat.usable(actor) &&
+      state.fighters.find(
+        (f) =>
+          f.side === actor.side &&
+          f.slug === partners[power] &&
+          combat.usable(f) &&
+          !f.activated &&
+          geometry.within(f, actor, 3),
+      );
+    const cost = 1 + Number(actor.conditions?.includes("root") || false);
+    if (partner && actor.power >= cost && !state.queuedParent) {
+      state.partnerOffered = actor.id;
+      state.effects.unshift({
+        type: "partner",
+        side: actor.side,
+        source: actor.id,
+        partner: partner.id,
+        power,
+        cost,
+        applyBleed,
+      });
+      return;
+    }
+  }
   if (actor) {
     if (applyBleed && actor.conditions?.includes("bleed")) {
       combat.damage(state, actor, 1);
@@ -1515,6 +1590,7 @@ function endActivation(state, side, random, applyBleed = true) {
       return;
     }
   }
+  state.partnerOffered = null;
   tactics.resetTurn(state);
   state.leadershipUses = { p1: [], p2: [] };
   state.reactionUses = [];
@@ -2177,6 +2253,7 @@ function act(state, side, action, random = randomInt) {
           flares,
           doubleWild: effect?.doubleWild,
           throwAfter: granted && effect?.throwAfter,
+          blanksAttack: granted && effect?.blanksAttack,
           coldSnapAction: !extra,
         },
         random,
@@ -2274,8 +2351,10 @@ function act(state, side, action, random = randomInt) {
         const dangerous = value.startsWith("too-dangerous:");
         const repulsion = value.startsWith("repulsion:");
         const vibranium = value.startsWith("vibranium:");
+        const prowess = value.startsWith("prowess:");
         const barrier = value.startsWith("barrier:");
-        if (repulsion) pending.blanksSucceed = true;
+        if (prowess) pending.prowess = true;
+        else if (repulsion) pending.blanksSucceed = true;
         else if (vibranium)
           pending.defenseBonus = (pending.defenseBonus || 0) + 2;
         else if (barrier) {
@@ -2307,19 +2386,21 @@ function act(state, side, action, random = randomInt) {
           state,
           bigBrother
             ? "Big Brother · " + ally.name
-            : vibranium
-              ? "Vibranium Armor · " + ally.name
-              : repulsion
-                ? "Focused Repulsion Field · " + ally.name
-                : barrier
-                  ? "Darkforce Barrier · " + ally.name
-                  : dangerous
-                    ? "Too Dangerous to Ignore · " + ally.name
-                    : cantTouch
-                      ? (combat.isPower(ally, "Can‘t Touch This")
-                          ? "Can‘t Touch This · "
-                          : "Wing Shield · ") + ally.name
-                      : "Telekinetic Shield · " + ally.name,
+            : prowess
+              ? "Martial Prowess · " + ally.name
+              : vibranium
+                ? "Vibranium Armor · " + ally.name
+                : repulsion
+                  ? "Focused Repulsion Field · " + ally.name
+                  : barrier
+                    ? "Darkforce Barrier · " + ally.name
+                    : dangerous
+                      ? "Too Dangerous to Ignore · " + ally.name
+                      : cantTouch
+                        ? (combat.isPower(ally, "Can‘t Touch This")
+                            ? "Can‘t Touch This · "
+                            : "Wing Shield · ") + ally.name
+                        : "Telekinetic Shield · " + ally.name,
           { side, fighter: ally.id, target: pending.target },
         );
         continueTargeting(state, pending, random);
@@ -2448,6 +2529,15 @@ function act(state, side, action, random = randomInt) {
       (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
         "sinister-shake",
       );
+      break;
+    }
+    case "partner": {
+      const effect = state.effects.shift();
+      const source = state.fighters.find((f) => f.id === effect.source);
+      combat.spend(state, source, effect.cost);
+      state.queuedParent = effect.partner;
+      log(state, effect.power, { side, fighter: source.id });
+      endActivation(state, side, random, effect.applyBleed);
       break;
     }
     case "counter-strike": {
@@ -3232,6 +3322,10 @@ function act(state, side, action, random = randomInt) {
     }
     case "skip-effect": {
       const effect = state.effects.shift();
+      if (effect.type === "partner") {
+        endActivation(state, side, random, effect.applyBleed);
+        break;
+      }
       if (effect.type === "deflection")
         combat.collide(
           state,

@@ -67,6 +67,9 @@
 | 58 | King T'Challa | Готово | Проверены Vibranium Spear вблизи и издали, Bound, Royal Rebuke, Defender of Wakanda и Strength of the Ancestors. |
 | 59 | Black Panther, Chosen of Bast | Готово, кроме Insight of the Ancients | Проверены Finisher с перебросами и Superior Agility. |
 | 60 | Killmonger, Usurper | Готово | Проверены атаки с запретом модификаций защиты, K‘Liluna‘s Fury и жетоны Herb. |
+| 61 | Corvus Glaive | Готово, кроме Gem Bearer | Проверены Glaive‘s Edge, Death Blow, Atom Splitter и Husband of Proxima Midnight. Infinity Gems в Game нет. |
+| 62 | Proxima Midnight | Готово | Проверены Spear Throw, Quantum Starburst, Martial Prowess и Wife of Corvus Glaive. |
+| 63 | Black Dwarf | Готово | Проверены Enforced Oblivion, Black Fury, Intimidating Presence и Invulnerable Skin. |
 
 Следующую группу выбираем по аффилиациям и новым правилам, которые нужны для игры.
 
@@ -351,3 +354,14 @@ Metal Construct использует квадратный габарит 35 мм
 - [x] Wakanda собрана полностью. Браузер не проверен.
 
 [Сценарии Chosen of Bast и Usurper](../tests/game-wakanda-heirs.test.cjs).
+
+## 61–63. Corvus Glaive, Proxima Midnight и Black Dwarf
+
+- [x] Strike Corvus и Proxima — с Pierce на Wild. Glaive‘s Edge тратит действие: Place в Range 1, затем бесплатный Strike или Death Blow, где Blank засчитываются как успехи. Death Blow даёт Medium Advance, на Wild и Block — Strike. Atom Splitter на Hit даёт Advance к цели.
+- [x] Husband и Wife в конце активации за 1 Power позволяют партнёру в Range 3 сразу активироваться в тот же ход. Glaive of Immortality, Invulnerability и Invulnerable Skin снижают урон от врагов на 1.
+- [x] Spear Throw ставит Proxima у цели, на Wild — Poison. Quantum Starburst при уроне накладывает Bleed, Poison и Stun. Martial Prowess против атаки из Range 2: пять кубиков защиты, а без урона атакующий получает 2 урона.
+- [x] Enforced Oblivion: действие на Move и +2 кубика к следующей атаке. Black Fury бросает врага или террейн до Size 4 на Medium. Intimidating Presence перехватывает атаку врага в Range 2.
+- [ ] Gem Bearer и Infinity Gems в Game не реализованы.
+- [x] Отряд Black Order собирается. Браузер не проверен.
+
+[Сценарии Black Order](../tests/game-black-order.test.cjs).

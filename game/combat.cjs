@@ -494,6 +494,27 @@ const profiles = {
   "Spirit Predator": { extra: "finisher" },
   "Covert Armament": { builder: 1, lockDefense: true },
   "K‘Liluna‘s Fury": { woundDice: true, lockDefense: true },
+  "Atom Splitter": {
+    builder: 1,
+    afterMove: {
+      mode: "advance",
+      who: "actor",
+      speed: "S",
+      direction: "toward",
+      on: "hit",
+    },
+  },
+  "Death Blow": {
+    afterMove: { mode: "advance", who: "actor", speed: "M" },
+    extra: "deathblow",
+  },
+  "Spear Throw": {
+    conditions: [["wild", "poison"]],
+    afterMove: { mode: "place", who: "actor", range: 1, required: true },
+  },
+  "Quantum Starburst": { conditions: [["damage", "bleed", "poison", "stun"]] },
+  "Axe Strike": { builder: "damage" },
+  "Brutal End": { conditions: [["wild", "stagger"]] },
   "Psychic Dart": { builder: "damage", conditions: [["wild", "root"]] },
   "Mental Suggestion": {
     afterMove: { mode: "advance", targetSpeed: true, damageRequired: true },
@@ -625,6 +646,8 @@ const nearDuplicates = (state, actor, target) =>
       within(f, target, 2),
   );
 const characterProfiles = {
+  "corvus-glaive:Strike": { builder: "damage", pierce: true },
+  "proxima-midnight:Strike": { builder: "damage", pierce: true },
   "black-panther:Strike": {
     builder: "damage",
     beforeMove: {
@@ -711,6 +734,27 @@ const activePowers = {
   Hop: { mode: "place", range: 2 },
   "Phase Rush": { mode: "place", range: 2 },
   "Blast Off": { mode: "place", range: 2 },
+  "Glaive‘s Edge": {
+    mode: "sequence",
+    action: true,
+    order: ["place", "attack"],
+    attackNames: ["Strike", "Death Blow"],
+    blanksAttack: true,
+  },
+  "Black Fury": {
+    mode: "target",
+    range: 2,
+    enemy: 4,
+    terrain: 4,
+    speed: "M",
+    effect: "throw",
+  },
+  "Enforced Oblivion": {
+    mode: "sequence",
+    action: true,
+    order: ["move"],
+    nextAttackDice: 2,
+  },
   "Strength of the White Gorilla": {
     mode: "target",
     range: 2,
@@ -1763,7 +1807,10 @@ function damage(
       power(target, "Kree-Mutant Physiology") ||
       power(target, "Organic Steel") ||
       power(target, "Carbonadium Armor") ||
-      power(target, "Carborundum Matrix Alloy"))
+      power(target, "Carborundum Matrix Alloy") ||
+      power(target, "Glaive of Immortality") ||
+      power(target, "Invulnerability") ||
+      power(target, "Invulnerable Skin"))
   )
     amount = Math.max(1, amount - 1);
   const maximum = Number(face(target).stamina);
@@ -2665,22 +2712,47 @@ function usePower(state, actor, selected, action, random) {
     return;
   }
   if (selected.mode === "sequence") {
+    if (selected.nextAttackDice) actor.nextDice = selected.nextAttackDice;
     state.effects.push(
-      ...selected.order.map((kind) => ({
-        type: kind === "move" ? "granted-move" : "granted-attack",
-        side: actor.side,
-        source: actor.id,
-        ...(kind === "attack" && selected.doubleWild && { doubleWild: true }),
-        ...(kind === "attack" &&
-          selected.attackName && {
-            index: face(actor).attacks.findIndex(
-              (a) => a.name === selected.attackName,
-            ),
-            throwAfter: !!selected.throwAfter,
-          }),
-        ...(kind === "move" &&
-          selected.moveSizeFive && { climbsOnAdvance: true }),
-      })),
+      ...selected.order.map((kind) =>
+        kind === "place"
+          ? {
+              type: "displace",
+              mode: "place",
+              range: 1,
+              side: actor.side,
+              mover: actor.id,
+              source: actor.id,
+              name: selected.value,
+              required: true,
+              reference: { x: actor.x, y: actor.y, radius: actor.radius },
+            }
+          : {
+              type: kind === "move" ? "granted-move" : "granted-attack",
+              side: actor.side,
+              source: actor.id,
+              ...(kind === "attack" &&
+                selected.doubleWild && { doubleWild: true }),
+              ...(kind === "attack" &&
+                selected.attackName && {
+                  index: face(actor).attacks.findIndex(
+                    (a) => a.name === selected.attackName,
+                  ),
+                  throwAfter: !!selected.throwAfter,
+                }),
+              ...(kind === "attack" &&
+                selected.attackNames && {
+                  indices: face(actor)
+                    .attacks.map((a, i) =>
+                      selected.attackNames.includes(a.name) ? i : -1,
+                    )
+                    .filter((i) => i >= 0),
+                  blanksAttack: !!selected.blanksAttack,
+                }),
+              ...(kind === "move" &&
+                selected.moveSizeFive && { climbsOnAdvance: true }),
+            },
+      ),
     );
     return;
   }
@@ -3844,7 +3916,12 @@ function attackRollSummary(state, pending, rolls = pending?.rolls) {
     within(actor, target, 2);
   const attackHits =
     rolled.filter((die) =>
-      [pending.superGenius ? "block" : "hit", "wild", "critical"].includes(die),
+      [
+        pending.superGenius ? "block" : "hit",
+        "wild",
+        "critical",
+        ...(pending.blanksAttack ? ["blank"] : []),
+      ].includes(die),
     ).length +
     innateDiceSuccesses(actor, rolled) +
     (rules.failuresSucceed
@@ -3993,6 +4070,7 @@ function resolve(state, pending, block, random) {
         (pending.destructive || 0) +
         (rules.woundDice ? actor.damage || 0 : 0) +
         (actor.herb ? 1 : 0) +
+        (actor.nextDice || 0) +
         (rules.dupeDice && nearDuplicates(state, actor, target)
           ? rules.dupeDice
           : 0) +
@@ -4012,6 +4090,7 @@ function resolve(state, pending, block, random) {
   if (initial) {
     (state.attackedThisTurn ||= []).push(actor.id + ">" + target.id);
     actor.herb = false;
+    actor.nextDice = 0;
     if (attack.name === "Vibranium Spear" && actor.bound) {
       actor.bound = false;
       pending.boundReroll = true;
@@ -4062,7 +4141,7 @@ function resolve(state, pending, block, random) {
   const defense =
     pending.rolls?.defense ||
     dice(
-      (pending.quickDraw != null
+      (pending.quickDraw != null || pending.prowess
         ? 5
         : Number(
             face(target)[
@@ -4283,6 +4362,8 @@ function resolve(state, pending, block, random) {
           : rules.builder,
     );
   if (rules.heal) heal(state, actor, rules.heal);
+  if (pending.prowess && !dealt && usable(actor) && usable(target))
+    damage(state, actor, 2, target);
   if (rules.healOnDamage && dealt && usable(actor))
     heal(state, actor, rules.healOnDamage);
 
@@ -4481,6 +4562,7 @@ function resolve(state, pending, block, random) {
       batons: ["Shock Batons", "wild hit", "failures"],
       avalanche: ["Knobkerrie", "wild hit"],
       finisher: ["Panther Strike", "wild hit", true],
+      deathblow: ["Strike", "wild block"],
       spear: ["Strike", "wild"],
     };
     const rule = alternatives[rules.extra];
