@@ -297,6 +297,6 @@ test("all four new X-Men fit in a saved Game roster and unlock both leadership c
   s.phase = "leadership";
   assert.deepEqual(
     options(s)[0].options.map((o) => o.label),
-    ["X-Men Blue", "X-Men Gold", "Без Leadership"],
+    ["X-Men Blue", "X-Men Gold", "No Leadership"],
   );
 });

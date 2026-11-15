@@ -151,7 +151,7 @@ test("Bolts of Bedevilment Pierce on a Block and may Push after damage; Shield o
     else act(s, "p1", { type: "skip-effect" });
   }
   assert.ok(labels.includes("Pierce"), labels.join());
-  assert.ok(labels.includes("Eye of Agamotto · все кубики"));
+  assert.ok(labels.includes("Eye of Agamotto · all dice"));
   assert.ok(hulk.damage > 0);
   assert.equal(strange.power, 3 + hulk.damage + 1);
   assert.equal(actions(s)[0].mode, "push");

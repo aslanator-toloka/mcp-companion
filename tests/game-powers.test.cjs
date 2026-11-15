@@ -53,7 +53,7 @@ test("Hulk drops his extract when Dazed and is KO’d during Cleanup", () => {
   assert.ok(
     s.log.some(
       (entry) =>
-        entry.fighter === hulk.id && entry.text === "Hulk · KO в Cleanup",
+        entry.fighter === hulk.id && entry.text === "Hulk · KO in Cleanup",
     ),
   );
 });

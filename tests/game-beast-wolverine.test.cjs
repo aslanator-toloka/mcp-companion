@@ -112,7 +112,7 @@ test("Stars and Garters allows paid dodge rerolls including a die added by a cri
   });
   act(s, "p1", { type: "throw-terrain", angle: 0 }, dice(0));
   const effect = actions(s, "p2")[0];
-  assert.equal(effect.label, "Stars and Garters · Уклонение");
+  assert.equal(effect.label, "Stars and Garters · Dodge");
   const last = effect.dice.length - 1;
   act(s, "p2", { type: "modify-dice", indices: [1, last] }, () => 4);
   assert.equal(beast.damage || 0, 0);

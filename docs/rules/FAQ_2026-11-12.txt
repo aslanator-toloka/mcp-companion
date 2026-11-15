@@ -1,0 +1,469 @@
+FAQ & ERRATA
+  EFFECTIVE 12/1/2026
+FREQUENTLY ASKED QUESTIONS:                                                          A: No, you do not. The measuring tool should be held parallel to
+                                                                                     the board and the vertical distance between the character and the
+Below you will find a list of frequently asked questions and                         target is not taken into account when measuring.
+clarifications to the Marvel: Crisis Protocol miniatures game.                       Q: When the rules reference the ‘end’ of a measuring tool, what
+                                                                                     does that mean?
+CORE RULES:                                                                          A: The end of a movement tool is the curved portion of the
+                                                                                     end of the tool. When the end is placed in contact with a
+Q: Some times a rule tells a player to push a character toward                       character, the characters base must touch both points on the
+or away from a token. What happens if the character’s base is                        tool. The end of a range tool is the flat portion of the tool.
+centered on the token?                                                               When using a Range tool to measure players must use the
+A: In this case the character can be pushed in any direction.                        flat end to the flat end and may not use opposite corners to
+                                                                                     measure distance.
+
+Q: What happens if a character picks up or gets an Objective
+token placed on them, but they cannot hold Objective tokens?                         Q: I have two characters with the Bodyguard Reactive
+                                                                                     Superpower, Captain America and Okoye. An enemy character
+A: A character that cannot hold Objective tokens cannot pick up                      attacks an allied character, and I choose to use this superpower
+or have objective tokens placed on them in any way.                                  to change the target of the attack to Captain America. Can I then
+                                                                                     choose to use bodyguard again on Okoye and have her become
+Q: When a rule says that a character may modify or reroll Failure                    the target of the attack instead of Captain America?
+(o) results, does that mean that I can reroll as many failures as I                  A: Yes, you can! When a player has multiple reactive abilities
+roll?                                                                                they can choose the order in which they resolve inside of the
+A: No, it does not. When a rule states this it is giving the player                  window of their use, but all requirements of the ability must
+permission to break the Core Rules of the game that state a                          be met at the time of their use.
+player may not modify or reroll Failure (o) results. A player
+must still have an effect that grants a modification or a reroll to                  Q: If a superpower or attack has a power cost of X and
+use on any Failures (o) they have rolled.                                            something reduces its cost, what happens?
+                                                                                     A: Superpowers or attacks with a cost of X cannot have their
+Q: When an effect grants a character cover, if I attack them from                    cost reduced.
+within Range (i) 2, do they still benefit from cover?
+A: Yes, they do. The Range (i) 2 restriction for cover only                          Q: When a character is making a Beam or Area attack and an
+applies to how cover is gained from terrain. Effects will list any                   effect moves the character part of the way through resolving all
+requirements they may have for a character gaining cover.                            of the attacks, what happens?
+                                                                                     A: Range is measured before any attacks are made - all characters
+Q: When an effect lists multiple things happening but I cannot do                    that are were in range at the start of the attack are still considered
+part of the effect, do the other portions of the effect still happen?                to be in range. Range is not measured again from this new position.
+A: Superpowers or special rules that list a series of events that
+are related must meet each event for the next event to occur. For                    Q: When a character is making a Beam or Area attack and an
+example, the Martial Prowess super power states Gamora rolls                         effect Dazes or KO’s the attacking character, what happens?
+5 defense dice instead of her normal defense. It then goes on to
+state if she suffers no damage from the attack an effect occurs. If                  A: No additional attacks are made and the attack ends.
+she were to use Martial Prowess and something else were to occur
+causing her to no longer roll defense dice the secondary effect                      Q: Terrain Sizes list 1 through 5 in the rule book, can I have
+would not occur.                                                                     larger terrain than that?
+Some special rules will also list additional effects. When this                      A: Yes, you can! However, you should be careful when creating
+happens either a line break will separate the effects or the word                    battlefields that contain terrain larger than Size 5. Make sure
+Additionally will appear showing that this is now a new effect.                      any terrain of Size 6 or larger does not interfere with characters
+When a special rule would cause a character or card to gain, lose,                   access to Objective tokens as it will be very difficult for
+or remove one or more tokens, the next event in the special rule still               characters to traverse Size 6 or larger terrain features.
+occurs regardless of the number of tokens gained, lost, or removed.
+Q: I think I can throw a character so it will collide with two other                 Q: When a character throws a terrain feature, is this distance
+characters at the same time? What do I do?                                           measured from the character or from the terrain?
+
+A: If players determine that a thrown character would collide                        A: When a character throws a terrain feature measure the
+with multiple characters simultaneously the player performing                        distance of the throw from the character performing the throw,
+the throw chooses one of the two (or more) characters to suffer                      not from the terrain feature being thrown.
+the collision of the throw.
+
+Q: When a character is standing on top of a terrain feature and
+attacks a character that is not, when measuring range do I take
+into account the angle down to the board?
+
+
+
+
+                                                                Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                                                Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                                      © 2026 MARVEL             Actual components may vary from those shown.
+Q: If Ultron is KO’d by an effect before attack damage is dealt                     A: The attack will be a beam attack measured from Storm’s base,
+and uses The Age of Ultron to “revive”, does he still take the                      and it will not target Storm since she is being measured from.
+normal attack damage or any other effects that occur after he
+was KO’d?                                                                           TACTIC CARDS:
+A: No, he does not. Once KO’d no more effects of the attack can
+apply to a character even if they are brought back by an effect                     Q: When I use the Ricochet Blast Team Tactic card do I have to
+before those effects would apply.                                                   use an attack action to make the attack?
+                                                                                    A: Yes! The Team Tactic card itself gives Iron Man access to the
+                                                                                    attack profile - he must still spend an action to make the attack.
+Q: Which effects modify dice?
+A: “Modify”, “reroll”, and “change” effects modify dice. “Count                     Q: When using the Ricochet Blast tactic card does Iron Man need
+as” and “treat as” effects do NOT modify dice.                                      Line of Sight to Captain America to bounce his blast off the shield?
+                                                                                    A: No line of sight is needed from Iron Man to Captain America
+CHARACTERS:                                                                         to use this card.
+
+Q: If the Freedom Force leadership from Mystique is used to                         Q: If a Team Tactic Card does not specify the source of its effects
+place a token on an objective that already has a token placed on                    (such as for a Throw), what is the source?
+it from Freedom Force, who secures the objective?                                   A: If a card does not specify, the character that played the Team
+A: The player that has most recently placed a Freedom Force token                   Tactic Card is the source of its effects. If multiple characters
+on the objective secures the objective.                                             played the card, they are all the source.
+
+Q: If two players in a game are both playing Magneto, can one
+Magneto benefit from the other Magneto’s Metallic Constructs?
+                                                                                    CRISIS CARDS:
+A: No, each Magneto puts their own Metallic Constructs into play.                   Q: If the scenario cards have the same or similar placement of
+Their rules reference and affect only their own Metallic Constructs.                tokens and there is overlap where do you place the tokens? Is
+                                                                                    it fine to just put them on top of each other?
+Q: When Iron Man uses Friday AI, does it affect all my attacks                      A: Yes! The tokens are stacked on top of each other.
+made with Unibeam or only the first attack?
+A: Because Friday AI affects ALL attack rolls from the next attack                  Q: When setting up a scenario, do I measure from the center of
+action made it will add +2 dice to ALL Unibeam attacks. Keep in                     the Objective token or the edge?
+mind that most effects like this on other characters only affect the
+NEXT attack made by a character.                                                    A: When placing objective tokens during set up measure to the
+                                                                                    center of the token.
+
+Q: When a character is Dazed and has a Leadership ability does
+my team still gain the benefit of that Leadership?                                  Q: Can you drop an objective token?
+A: Yes, they do! When a character is Dazed they retain their                        A: A character holding an objective token cannot drop it voluntarily.
+Leadership abilities, but not superpowers. Leadership abilities
+are not superpowers. However, a Leadership ability no longer
+benefits a squad once the character is KO’d.                                        ERRATA
+                                                                                    From time to time there may be a typo that needs correcting or
+Q: If Doctor Octopus is defending against a character that                          a rule that requires updating on a printed card. If that is the case
+can modify his dice and rolls a Critical p, but that die is later                   we will list any updates below.
+changed to a blank, does he gain power from Scientific Hubris?
+A: Because Scientific Hubris takes affect “After the effect is                      Core Set [CP01] Escort to Safety Team Tactic Card: Replace the
+resolved” the result must be in the final roll. Doctor Octopus                      second sentence of the second paragraph with the following text:
+would not gain a power in this case.                                                If at the end of the Push the targeted character is outside of the attack’s
+                                                                                    Range or the attacker’s LOS, the attack ends.
+Q: M.O.D.O.K. has targeted Black Widow with his Doomsday                            Thanos [CP25] Ultimate Encounter Tip Card [Cosmic Threat]:
+Chair attack. Captain America then used his superpower
+                                                                                    Add the following sentence to All That For A Drop Of Blood:
+Bodyguard to change the target to himself. The Whirling Blades
+                                                                                    Then flip this character’s card over to the Injured side.
+special rule says I can make another Doomsday Chair attack, but
+I cannot choose the Original Target for the second attack. Which
+character is the Original Target?                                                   Mighty Thor, Lady Sif, Thor, Hero of Midgard, & Loki, Prince
+                                                                                    of Lies [CP91] Heart of the Worthy Team Tactic Card: Replace
+A: When rules state Original Target they are referring to the                       the first and second sentences with the following text:
+target of the previous attack - so in this case that would be
+                                                                                    When a character’s Activation would end, if all other characters have
+Captain America. You could select Black Widow for the second
+Doomsday Chair attack.                                                              Activated or Dazed tokens, The Mighty Thor may spend 2 g to
+                                                                                    play this card.
+Q: Lady Mastermind uses her Your Reality Is Whatever I Want
+it to Be superpower and chooses to make Storm’s Ice Blizzard                        If The Mighty Thor has an Activated token, she removes it.
+attack. Will that attack be a beam attack measured from Storm’s
+base? Will it target Storm?
+
+
+
+                                                               Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                                               Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                                     © 2026 MARVEL             Actual components may vary from those shown.
+Angel and Archangel [CP152] Battle Bound Team Tactic Card:                            first paragraph of the Touchdown section with the following:
+Replace the Active Type with Reactive.                                                The opposing player Places all Balls removed from this character
+                                                                                      overlapping the Line of Scrimmage and not within i 1 of another Ball.
+Angel and Archangel [CP152] Death From Above Team Tactic
+Card: Replace the Active Type with Reactive.                                          Completely resolve Placing each Ball before Placing any remaining Balls.
+
+Bastion, Nimrod & Omega Sentinel [MCP09] Nimrod, the                                  Mojo Ball [CA14] Map:
+                                                                                      Replace the map with the following:
+Hunter Stat Card: Replace a with b on the Metahuman Power
+Recognition and Adaptation Protocol superpower.
+
+Bastion, Nimrod & Omega Sentinel [MCP09] Omega Sentinel:
+Replace the first sentence of Adaptive Non-Shifting Protocols
+with: During the Power Phase, this character chooses a Nano-
+Shift type. It gains the chosen effect until the start of the next
+Power Phase.
+
+Mojo Ball [CA14] Deployment:
+Replace the Deployment section with the following:
+Characters deploy within i 5 of their deployment edge. Roll dice to
+determine priority as normal.
+
+Mojo Ball [CA14] Line of Scrimmage:
+Add the Line of Scrimmage section after the Deployment section
+with the following text.
+The Line of Scrimmage is the shortest line between the 2 Jails.
+
+Mojo Ball [CA14] Tokens:
+Replace the first sentence of the second paragraph of the Zones
+section with the following:
+A player’s Zones are the Zones closest to their deployment edge.
+During its activation, a character holding 1 or more Balls may spend
+2 g to interact with the opposing player’s Zone. Characters cannot
+interact with their controlling player’s Zone.                                                                                                              Jail Token
+
+                                                                                                                        Goal Zone
+Mojo Ball [CA14] Pass Attempt                                                                                            Tokens
+Replace the last sentence of the last paragraph of the Pass
+Attempt section with the following:                                                                                                                         Ball Token
+
+If the roll contained 1 or more o results, the pass is fumbled; the
+opposing player Places this token within i X of this character, where                                                                   Line of Scrimmage
+X is the Pass Range.
+                                                                                      Mojo Ball [CA14] Team Captain Abilities:
+Mojo Ball [CA14] Touchdown: Replace the last sentence of the                          Replace the GET IN POSITION! Leadership with the following
+                                                                                      text:
+                                                                                      Once during each of your Turns, an allied character with at least one
+                                                                                      attack or superpower that allows them to Throw terrain or characters
+                                                                                      may spend 1 g. That character chooses an allied character within
+                                                                                      i 2 and of Size 2 or less that is holding one or more Balls and
+                                                                                      Throws them 1.
+
+                                                                                      Mojo Ball [CA14] Playbook Cards:
+                                                                                      Add the following to the end of the first paragraph of the
+                                                                                      Playbook Cards section.
+                                                                                      Playbook Cards do not have to be revealed to the opposing player until
+                                                                                      they are played or discarded. A player may look at their Playbook Cards
+                                                                                      at any time.
+
+
+
+
+                                                                 Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                                                 Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                                      © 2026 MARVEL              Actual components may vary from those shown.
+UPDATED CARDS:                                                                    •      Captain America, First Avenger
+The following cards have been replaced. The updated Stat                          •      Captain Marvel
+Cards can be found in the August 2026 Updates. The rest of the                    •      Captain Marvel, Cosmic Avenger
+updated cards can be found in the July 2024 Updates, February
+2025 updates, May 2025 Updates, November 2025 Updates, and                        •      Carnage
+August 2026 Updates. The updated cards replace any previous                       •      Cassandra Nova
+iterations with the same name. These updated cards can be
+found here:                                                                       •      Clea
+https://www.atomicmassgames.com/rules                                             •      Colossus
+STAT CARDS:                                                                       •      Corvus Glaive
+  •   Abomination                                                                 •      Cosmic Ghost Rider
+  •   Adam Warlock                                                                •      Crimson Dynamo
+  •   Agent Venom                                                                 •      Crossbones
+  •   Amazing Spider-Man                                                          •      Crossbones, Merciless Merc
+  •   Ancient One                                                                 •      Crystal
+  •   Angel                                                                       •      Cyclops
+  •   Angela                                                                      •      Daredevil
+  •   Ant-Man                                                                     •      Darkstar
+  •   Apocalypse                                                                  •      Deadpool
+  •   Archangel                                                                   •      Doc Ock, Sinister Scientist
+  •   Arnim Zola                                                                  •      Doctor Octopus
+  •   Avalanche                                                                   •      Doctor Strange
+  •   Baron Helmut Zemo                                                           •      Doctor Strange, Sorcerer Supreme
+  •   Baron Mordo                                                                 •      Doctor Voodoo
+  •   Baron Strucker                                                              •      Domino
+  •   Baron Zemo                                                                  •      Dormammu
+  •   Beast                                                                       •      Dracula
+  •   Beta Ray Bill                                                               •      Drax the Destroyer
+  •   Bishop                                                                      •      Ebony Maw
+  •   Black Bolt                                                                  •      Echo
+  •   Black Cat                                                                   •      Electro
+  •   Black Dwarf                                                                 •      Elektra
+  •   Black Panther                                                               •      Elsa Bloodstone
+  •   Black Panther, Chosen of Bast                                               •      Emma Frost
+  •   Black Swan                                                                  •      Enchantress
+  •   Black Widow                                                                 •      Exodus
+  •   Black Widow Agent of S.H.I.E.L.D.                                           •      Frankenstein’s Monster
+  •   Blade                                                                       •      Gambit
+  •   Blue Marvel                                                                 •      Gamora
+  •   Bob, Agent of Hydra                                                         •      Ghost Rider
+  •   Bullseye                                                                    •      Ghost-Spider
+  •   Cable                                                                       •      Gladiator
+  •   Captain America                                                             •      Gorgon
+  •   Captain America (Sam)                                                       •      Green Goblin
+
+
+                                                          Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                                          Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                                  © 2026 MARVEL           Actual components may vary from those shown.
+•   Groot                                                              •      Maximus the Mad
+•   Gwenom                                                             •      M’Baku
+•   Gwenpool                                                           •      Medusa
+•   Hand Ninjas                                                        •      Mephisto, Lord of Temptation
+•   Hawkeye                                                            •      Mister Sinister
+•   Heimdall, The All-Seeing                                           •      M.O.D.O.K.
+•   Hela, Queen of Hel                                                 •      M.O.D.O.K., Scientist Supreme
+•   Honey Badger                                                       •      Moon Knight
+•   Hood                                                               •      Moondragon
+•   Hulk                                                               •      Ms. Marvel
+•   Hulkbuster                                                         •      Mysterio
+•   Hydra Troopers                                                     •      Mystique
+•   Iceman                                                             •      Namor, the Sub-Mariner
+•   Invincible Iron Man                                                •      Nebula
+•   Iron Fist                                                          •      Nick Fury
+•   Iron Lad                                                           •      Nick Fury and the Howling Commandos
+•   Iron Man                                                           •      Nightcrawler
+•   Iron Monger                                                        •      N’Kantu, The Living Mummy
+•   Jean Grey                                                          •      Nova
+•   Juggernaut                                                         •      Okoye
+•   Kang the Conqueror                                                 •      Omega Red
+•   Karnak                                                             •      Phoenix
+•   Killmonger                                                         •      Professor X
+•   Killmonger, Usurper                                                •      Prowler
+•   King Black Bolt                                                    •      Proxima Midnight
+•   King T’Challa                                                      •      Psylocke
+•   Kingpin                                                            •      Punisher
+•   Klaw                                                               •      Pyro
+•   Kraven the Hunter                                                  •      Quasar
+•   Lady Mastermind                                                    •      Quicksilver
+•   Lady Sif                                                           •      Red Guardian
+•   Lizard                                                             •      Red Skull
+•   Lockjaw                                                            •      Red Skull, Master of Hydra
+•   Logan, The Wolverine                                               •      Red Skull, Master of the World
+•   Loki, God of Mischief                                              •      Rescue
+•   Loki, Prince of Lies                                               •      Rhino
+•   Luke Cage                                                          •      Rocket Raccoon
+•   Magik                                                              •      Rogue
+•   Magneto                                                            •      Ronan the Accuser
+•   Malekith the Accursed                                              •      Ronin
+•   Man-Thing                                                          •      Sabretooth
+•   Maverick                                                           •      Sabretooth, Apex Predator
+
+
+                                               Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                               Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                               © 2026 MARVEL   Actual components may vary from those shown.
+•   Sand Construct                                                    •      Tigra
+•   Sandman                                                           •      Toad
+•   Scarlet Spider                                                    •      Ulik
+•   Scarlet Witch                                                     •      Ultimate Spider-Man
+•   Sentinel MK4                                                      •      Ultron
+•   Sentinel Prime MK4                                                •      Ultron Drones
+•   Shadow King                                                       •      Ultron, Metal Tyrant
+•   Shadowcat                                                         •      Ursa Major
+•   Shadowland Daredevil                                              •      Valkyrie
+•   Shang-Chi                                                         •      Valkyrie & Elendil
+•   She-Hulk                                                          •      Venom
+•   S.H.I.E.L.D. Agents                                               •      Viper
+•   Shocker                                                           •      Vision
+•   Shuri                                                             •      Vulture
+•   Silk                                                              •      War Machine
+•   Silver Sable                                                      •      Warlock
+•   Sin                                                               •      Warriors Three
+•   Skurge, the Executioner                                           •      Wasp
+•   Spectacular Spider-Man                                            •      Weapon X
+•   Spectrum                                                          •      Werewolf By Night
+•   Spider-Ham                                                        •      Winter Soldier
+•   Spider-Man (Miles)                                                •      Winter Soldier, Operative
+•   Spider-Man (Peter)                                                •      Wolverine
+•   Spider-Man 2099                                                   •      Wong
+•   Spider-Man Noir                                                   •      X-23
+•   Spider-Woman                                                      •      Yondu
+•   Squirrel Girl
+                                                                   TEAM TACTIC CARDS:
+•   Star-Lord
+                                                                      •      Advanced R&D
+•   Steve Rogers, Captain America
+                                                                      •      Are You Sure You Want to Remember?
+•   Storm
+                                                                      •      Asteroid M
+•   Sunspot
+                                                                      •      Astral Ring
+•   Supergiant
+                                                                      •      Cloning Banks
+•   Taskmaster
+                                                                      •      Dark Empowerment
+•   Thanos, The Mad Titan
+                                                                      •      Daughters of Thanos
+•   The Black Widow
+                                                                      •      Doomed Prophecy
+•   The Blob
+                                                                      •      First of the Black Order
+•   The Immortal Hulk
+                                                                      •      Foreign Assignment
+•   The Mighty Thor
+                                                                      •      Gamma Launch
+•   The Original Human Torch
+                                                                      •      Iron-Bound Books Shuma-Gorath
+•   The Wrecking Crew
+                                                                      •      It’s Time Travel... Don’t Ask
+•   Thor, Hero of Midgard
+                                                                      •      Joint Effort
+•   Thor, Prince of Asgard
+
+
+                                              Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                              Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                              © 2026 MARVEL   Actual components may vary from those shown.
+ •   Last Minute-Save
+ •   Magnetic Crush
+ •   Meet My Executioner
+ •   Mothership
+ •   My Hellfire Club
+ •   Mutant Traitor
+ •   Online and Operational
+ •   Pentagram of Farallah
+ •   Professionals
+ •   Rainbow Bridge
+ •   Ricochet Blast
+ •   Seven Suns of Cinnibus
+ •   Spirit of Wakanda
+ •   The Initiative
+ •   This Is A Robbery
+ •   Thunderwave
+ •   Under Your Skin
+ •   Vapors of Valtorr
+ •   Versatile Strategy
+ •   World Domination
+ •   You Will Do As I Say, Monster
+
+INFINITY GEMS:
+ •   Infinity Gem: Reality
+ •   Infinity Gem: Space
+ •   Infinity Gem: Time
+
+HORSEMEN CARDS:
+ •   Death
+ •   Famine
+ •   Master of the Horsemen
+ •   Pestilence
+ •   War
+
+
+
+
+                                              Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                              Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                              © 2026 MARVEL   Actual components may vary from those shown.
+CORE RULE BOOK CHANGE LOG v 1.1                                                 CORE RULE BOOK CHANGE LOG v 1.4
+  •   Parts of a Team Tactic Card: Clarified how Active:                               •      Creating the Battlefield: Suggested Range between
+      Action Team Tactic Cards are played.                                                    terrain features and table edges removed.
+
+  •   Activating a Character: Added a bullet point for                                 •      Overhanging Terrain: Callout added.
+      playing Active: Action Team Tactic Cards.
+                                                                                       •      Objective Tokens: Default way to Interact with Asset
+  •   Activating a Character: Clarified timing of end of                                      and Civilian tokens added.
+      Activation effects.
+
+  •   Appendix G: Grunts: Clarified how Grunts are put
+      into play and how many a player may have at one time.
+
+  •   Appendix H: One-Shot Cards:
+      Added Apppendix H.
+
+
+CORE RULE BOOK CHANGE LOG v 1.2
+  •   Characters and Objects: Clarified characters are
+      represented by miniatures on a base.
+
+  •   Appendix E: Keywords: Added Peerless, Reserve, and
+      Stealth c superpowers.
+
+
+CORE RULE BOOK CHANGE LOG v 1.3
+  •   Rules Priority: Updated to give rules precedence to
+      Crisis Cards over other special rules.
+
+  •   Building a Roster: Updated Rosters to include 5
+      Secure Crisis Cards and 5 Extract Crisis Cards.
+
+  •   Building the Mission: Players now select 1 of 2
+      randomly drawn Crisis Cards from their opponent’s deck
+      to use for the Mission.
+
+  •   Deployment: Deployment language updated to put
+      characters within Range 3 of their deployment edge.
+      Additionally, a second priority roll is made after all
+      characters are deployed to determine which player will
+      start Round 1 with the Priority Token.
+
+  •   Passing: Updated to not count Grunts.
+
+  •   Beam Attacks and Area Attacks: Updated to not
+      damage allied characters.
+
+  •   Character Damage: Language updated so Dazed
+      characters never contribute to scoring VPs for just their
+      controlling player.
+
+  •   Dodging: Changed to 3 incoming damage instead of
+      being based on the size of the object being Thrown.
+
+  •   Appendix I: Additional Objective Types: Added
+      Appendix I.
+
+
+                                                           Atomic Mass Games and logo are TM of Atomic Mass Games. Atomic Mass Games, 1995 County
+                                                           Road B2 W, Roseville, MN, 55113, USA, 1-651-639-1905.
+                                 © 2026 MARVEL             Actual components may vary from those shown.
+

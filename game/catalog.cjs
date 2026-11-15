@@ -80,6 +80,65 @@ const presets = [
     ],
     crises: crisisIds,
   },
+  // Tournament lists from tournaments/data.js (Longshanks, Aug–Nov 2026).
+  {
+    id: "x-men-tournament",
+    name: "Uncanny X-Men · 4-0, 1st of 17",
+    characters: [
+      "cyclops",
+      "colossus",
+      "domino",
+      "emma-frost",
+      "gambit",
+      "magik",
+      "rogue",
+      "shadowcat",
+      "storm",
+      "quicksilver",
+    ],
+    tactics: [
+      "children-of-the-atom",
+      "first-class",
+      "headmistress",
+      "journey-through-limbo",
+      "patch-up-cp143",
+      "to-me-my-x-men",
+      "xaviers-dream",
+      "pardon-me-sugah",
+      "indomitable",
+      "hold-still",
+    ],
+    crises: crisisIds,
+  },
+  {
+    id: "brotherhood-tournament",
+    name: "Brotherhood of Mutants · 4-0, 1st of 11",
+    characters: [
+      "magneto",
+      "juggernaut",
+      "scarlet-witch",
+      "colossus",
+      "rogue",
+      "mystique",
+      "the-blob",
+      "pyro",
+      "toad",
+      "exodus",
+    ],
+    tactics: [
+      "asteroid-m",
+      "the-books-of-truth",
+      "the-pawns-go-first",
+      "genetic-superiority",
+      "pyrotechnics",
+      "no-more-mutants",
+      "do-you-know-who-i-am",
+      "magnetic-refraction",
+      "sacrifice-ca10",
+      "patch-up-cp143",
+    ],
+    crises: crisisIds,
+  },
 ];
 
 const selected = (cards, field, extra = []) => {
@@ -207,6 +266,7 @@ const grantedAttacks = {
   101: presentation.tactics["helios-laser-bombardment"].attacks[0],
   102: presentation.tactics["repulsor-refraction"].attacks[0],
   103: presentation.tactics["illicit-tech"].attacks[0],
+  104: presentation.tactics["hold-still"].attacks[0],
 };
 
 const pool = {

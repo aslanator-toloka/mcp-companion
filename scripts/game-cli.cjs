@@ -24,13 +24,13 @@ async function main() {
   if (verb === "snapshot") return request("state?full=1");
   if (verb === "finish") {
     const state = await request("state");
-    if (!state) throw Error("Нет активной партии.");
+    if (!state) throw Error("No active match.");
     return request("finish", { id: state.id });
   }
   if (verb === "new") return request("new", { p1: side, p2: args[0] });
   if (!isSide(side) || !["state", "take", "act", "reach"].includes(verb)) {
     throw Error(
-      "Команды: catalog | character <slug> | snapshot | finish | new avengers cabal | state p1|p2 | take p1|p2 | reach p1|p2 <position action> [fighter, power, or move mode] | act p1|p2 '<JSON>' [revision]",
+      "Commands: catalog | character <slug> | snapshot | finish | new avengers cabal | state p1|p2 | take p1|p2 | reach p1|p2 <position action> [fighter, power, or move mode] | act p1|p2 '<JSON>' [revision]",
     );
   }
   if (verb === "reach")
@@ -45,7 +45,7 @@ async function main() {
     );
   const state = await request("state?side=" + side);
   if (verb === "state") return state;
-  if (!state) throw Error("Создайте партию.");
+  if (!state) throw Error("Create a match first.");
   const action = verb === "take" ? { type: "take" } : JSON.parse(args[0]);
   return request("command", {
     side,
@@ -60,7 +60,7 @@ main()
   .catch((error) => {
     console.error(
       error.cause?.code === "ECONNREFUSED"
-        ? "Запустите локальный сервер: npm run serve"
+        ? "Start the local server: npm run serve"
         : error.message,
     );
     process.exitCode = 1;

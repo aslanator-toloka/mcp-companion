@@ -159,6 +159,12 @@ const profiles = {
     extra: "speed-of-sight",
   },
   "Optic Devastation": { afterDrain: true },
+  // Hold Still (Team Tactic Card) grants Shadowcat this attack.
+  "Phase Disruption": {
+    builder: "damage",
+    dropOn: "wild",
+    afterMove: { mode: "place", range: 1, required: true, on: "wild wild" },
+  },
   "Lightning Bolt": { builder: "damage", conditions: [["wild", "shock"]] },
   "Ice Blizzard": { conditions: [["damage", "stun"]] },
   Hurricane: { ignoreSight: true },
@@ -1464,6 +1470,7 @@ const addSample = (actor) => {
 function attackCard(actor, index) {
   return (
     actor.borrowedAttacks?.[index] ||
+    actor.extraAttacks?.[index] ||
     grantedAttacks[index] ||
     face(actor).attacks[index]
   );
@@ -1545,13 +1552,13 @@ function dodge(state, target, source, random, bonus = 0) {
     has(target, "hex") ? 0 : 1,
     random,
   );
-  const rolls = [{ label: "Уклонение", faces: rolled.slice() }];
+  const rolls = [{ label: "Dodge", faces: rolled.slice() }];
   if (isPower(target, "Spider-Sense")) {
     reroll(rolled, 2, random, "defense");
     if (rolled.some((value, index) => value !== rolls[0].faces[index]))
-      rolls.push({ label: "После переброса", faces: rolled });
+      rolls.push({ label: "After reroll", faces: rolled });
   }
-  log(state, "Уклонение · " + target.name, {
+  log(state, "Dodge · " + target.name, {
     side: target.side,
     fighter: target.id,
     rolls,
@@ -1842,7 +1849,7 @@ function collide(
       kind: "fixed-face",
       face: "critical",
       explode: !has(target, "hex"),
-      label: "Probability Manipulation · Уклонение",
+      label: "Probability Manipulation · Dodge",
       role: "defense",
       dice: rolled,
       max: Math.min(failures.length, luck),
@@ -1870,7 +1877,7 @@ function collide(
           ? "Keeper of the Eye of Agamotto"
           : isPower(target, "Tiny Superhero")
             ? "Tiny Superhero"
-            : "Supersonic Reflexes") + " · Уклонение",
+            : "Supersonic Reflexes") + " · Dodge",
     role: "defense",
     dice: rolled,
     max: Math.min(
@@ -1897,17 +1904,17 @@ function resolveDodge(state, effect, action, random) {
       new Set(indices).size !== indices.length ||
       !indices.every((index) => effect.eligible.includes(index)))
   )
-    throw Error("Выберите допустимые кубики.");
+    throw Error("Choose legal dice.");
   for (const index of indices) rolled[index] = effect.face || faces[random(8)];
   if (effect.explode) for (const _ of indices) rolled.push(faces[random(8)]);
   if (effect.variable && indices.length)
     spend(state, target, effect.cost + indices.length);
-  log(state, "Уклонение · " + target.name, {
+  log(state, "Dodge · " + target.name, {
     side: target.side,
     fighter: target.id,
     rolls: [
-      { label: "Уклонение", faces: effect.dice },
-      ...(indices.length ? [{ label: "После переброса", faces: rolled }] : []),
+      { label: "Dodge", faces: effect.dice },
+      ...(indices.length ? [{ label: "After reroll", faces: rolled }] : []),
     ],
   });
   const observers = failureObservers(state, target, [
@@ -1954,14 +1961,14 @@ function displacement(state, spec, action, random, geometry) {
             state,
             geometry,
           );
-    if (!allowed) throw Error("Недопустимая точка для эффекта.");
+    if (!allowed) throw Error("Invalid point for this effect.");
     Object.assign(mover, point);
     if (spec.damage && (mover.x !== before.x || mover.y !== before.y))
       damage(state, mover, spec.damage, source, { attackType: spec.cause });
     return point;
   }
   if (!allowedAngle(mover, spec.reference, spec.direction, action.angle))
-    throw Error("Недопустимое направление.");
+    throw Error("Invalid direction.");
   const result = toolEnd(
     mover,
     mover,
@@ -2051,7 +2058,7 @@ function beginVolley(state, actor, option, angle, damageType) {
   );
   if (option.shape === "area") return targets.map((t) => t.value);
   if (!Number.isFinite(angle))
-    throw Error("Укажите направление луча в градусах.");
+    throw Error("Specify the beam angle in degrees.");
   return targets
     .filter((t) =>
       beamReaches(
@@ -2119,9 +2126,9 @@ function condition(fighter, name) {
   if (!immune) (fighter.conditions ||= []).push(name);
 }
 
-function dropObjectives(state, target) {
+function dropObjectives(state, target, only) {
   for (const obj of state.objectives.filter(
-    (obj) => obj.holder === target.id,
+    (obj) => obj.holder === target.id && (!only || obj.id === only),
   )) {
     obj.holder = null;
     obj.x = target.x;
@@ -2230,10 +2237,22 @@ function damage(
   const dealt = Math.min(amount, maximum - (target.damage || 0));
   if (dealt && juggernautContact) (source.juggernautHit ||= []).push(target.id);
   target.damage = (target.damage || 0) + dealt;
+  if (dealt && enemy) {
+    const recipient = require("./tactics.cjs").geneticSuperiority(
+      state,
+      target,
+      source,
+    );
+    if (recipient)
+      log(state, "Genetic Superiority · " + recipient.name + " gains 1 Power", {
+        side: recipient.side,
+        fighter: recipient.id,
+      });
+  }
   if (ethereal && dealt) dropObjectives(state, target);
   if (dealt && enemy && attackType === "mystic" && target.projection) {
     delete target.projection;
-    log(state, "Astral Fiend · Projection снята", {
+    log(state, "Astral Fiend · Projection removed", {
       side: target.side,
       fighter: target.id,
     });
@@ -2542,7 +2561,7 @@ function resolveNicePunch(state, effect, use) {
       followAdvance: effect.followAdvance,
     },
   );
-  log(state, target.name + " · " + dealt + " урона", {
+  log(state, target.name + " · " + dealt + " damage", {
     side: target.side,
     fighter: target.id,
   });
@@ -2658,6 +2677,9 @@ function attacks(state, actor, previous) {
   for (const id of [101, 102, 103])
     if (previous?.kind !== "borrowed" && actor.grantedAttacks?.[id])
       entries.push([id, grantedAttacks[id]]);
+  if (previous?.kind !== "borrowed")
+    for (const [id, attack] of Object.entries(actor.extraAttacks || {}))
+      entries.push([Number(id), attack]);
   return entries.flatMap(([index, attack]) => {
     const rules = attackProfile(actor, attack);
     if (
@@ -2677,6 +2699,7 @@ function attacks(state, actor, previous) {
     const options = targets
       .filter((target) => {
         if (target.id === attack.borrowedFrom) return false;
+        if (attack.target && target.id !== attack.target) return false;
         if (previous?.kind === "eyebeam") return target.id === previous.target;
         if (isPower(target, "Telepathic Cloak") && !within(actor, target, 3))
           return false;
@@ -3003,7 +3026,7 @@ function payerFor(state, actor, cost, payer) {
         !within(actor, payerModel, 3))) ||
     payerModel.power < cost
   )
-    throw Error("Недостаточно Power у выбранного персонажа.");
+    throw Error("The chosen character does not have enough Power.");
   return payerModel;
 }
 function pay(state, actor, cost, payer) {
@@ -3045,7 +3068,7 @@ function xavierTargets(state, spender) {
 }
 
 function throwTerrain(state, effect, angle, random) {
-  if (!Number.isFinite(angle)) throw Error("Укажите направление броска.");
+  if (!Number.isFinite(angle)) throw Error("Specify the throw direction.");
   const piece = state.terrain.find((p) => p.id === effect.piece);
   const actor = fighter(state, effect.source);
   if (!piece || !usable(actor)) return;
@@ -3447,7 +3470,7 @@ function usePower(state, actor, selected, action, random) {
         " · −" +
         lost +
         " Power" +
-        (dealt == null ? "" : " · " + dealt + " урона"),
+        (dealt == null ? "" : " · " + dealt + " damage"),
       {
         side: actor.side,
         fighter: actor.id,
@@ -3680,10 +3703,25 @@ function dice(count, criticals, random, initial = rawDice(count, random)) {
   return initial.concat(Array.from({ length: bonus }, () => faces[random(8)]));
 }
 const sides = ["p1", "p2"];
+// Cover granted by Team Tactic Cards (Magnetic Refraction, Pardon Me, Sugah).
+function grantedCover(state, target) {
+  if (target.sugahCover === state.round) return true;
+  return (state.refraction || []).some((r) => {
+    const magneto = fighter(state, r.source);
+    return (
+      r.round === state.round &&
+      r.side === target.side &&
+      magneto &&
+      usable(magneto) &&
+      (magneto.id === target.id || within(magneto, target, 3))
+    );
+  });
+}
 function modEvent(state, pending, rolled, defense, actor, target, rules) {
   const reviewed = pending.reviewed || [];
   const candidate = (id, side, data) =>
     reviewed.includes(id) ||
+    (pending.sacrifice && side === target.side && data.role === "defense") ||
     (data.role === "rolled" &&
       side === actor.side &&
       isPower(target, "Superior Agility"))
@@ -4187,7 +4225,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       [
         isPower(model, "Eye of Agamotto"),
         "agamotto",
-        "Eye of Agamotto · все кубики",
+        "Eye of Agamotto · all dice",
         values.length,
         true,
         null,
@@ -4224,7 +4262,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       [
         role === "rolled" && rules.rerollAll,
         "darkforce",
-        "Darkforce Strike · все кубики",
+        "Darkforce Strike · all dice",
         values.length,
         true,
         null,
@@ -4334,7 +4372,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       [
         role === "rolled" && pending.reroll,
         "follow-up",
-        "Переброс дополнительной атаки",
+        "Reroll the extra attack",
         values.length,
         pending.reroll === "failures",
       ],
@@ -4412,7 +4450,7 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
     !(
       actor.trickShot && attackCard(actor, pending.index).name === "Arrow Shot"
     ) &&
-    lineOfSight(
+    (lineOfSight(
       attackCard(actor, pending.index).borrowedFrom
         ? attackOrigin(
             state,
@@ -4423,7 +4461,8 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
         : actor,
       target,
       state.terrain,
-    ).cover;
+    ).cover ||
+      grantedCover(state, target));
   if (cover) {
     const eligible = defense
       .map((d, i) => (!["failure", "block"].includes(d) ? i : -1))
@@ -4527,6 +4566,36 @@ function modEvent(state, pending, rolled, defense, actor, target, rules) {
       });
     if (option) return option;
   }
+  // The Books of Truth: end of the Modify Dice step, before success is calculated.
+  for (const [model, role, values] of [
+    [actor, "rolled", rolled],
+    [target, "defense", defense],
+  ]) {
+    if (
+      (role === "rolled" ? rules.fixedPool : rules.lockDefense) ||
+      model.grunt ||
+      model.power < 2 ||
+      !pool.characters[model.slug]?.affiliations.some(
+        (a) => a.name === "Brotherhood of Mutants",
+      ) ||
+      !state.squads?.[model.side]?.tactics?.includes("the-books-of-truth") ||
+      state.playedTactics?.[model.side]?.includes("the-books-of-truth")
+    )
+      continue;
+    const option = candidate("books-" + role, model.side, {
+      label: "The Books of Truth",
+      tactic: "the-books-of-truth",
+      dice: values,
+      max: values.length,
+      kind: "reroll",
+      cost: 2,
+      payer: model.id,
+      role,
+      eligible: values.map((_, i) => i),
+      exact: true,
+    });
+    if (option) return option;
+  }
   return null;
 }
 function applyModifier(state, event, action, random) {
@@ -4539,12 +4608,28 @@ function applyModifier(state, event, action, random) {
         action.amount < 1 ||
         action.amount > event.max
       )
-        throw Error("Укажите число сокращаемого урона.");
+        throw Error("Specify how much damage to reduce.");
+      if (event.id === "xaviers-dream") {
+        const chosen = action.payers || event.payers.map((p) => p.value);
+        const payers = chosen
+          .map((id) => fighter(state, id))
+          .filter(
+            (f) => f && event.payers.some((p) => p.value === f.id) && f.power,
+          )
+          .sort((a, b) => b.power - a.power)
+          .slice(0, action.amount);
+        if (payers.length < action.amount)
+          throw Error("Choose an ally to pay for each point of damage.");
+        for (const f of payers) f.power -= 1;
+        (state.playedTactics[event.side] ||= []).push(event.tactic);
+        pending.reduction = (pending.reduction || 0) + action.amount;
+      } else {
       const payer = fighter(state, event.payer);
       spend(state, payer, event.cost);
       if (event.id === "molecular")
         payer.samples = (payer.samples ?? 1) - action.amount;
-      pending.reduction = action.amount;
+      pending.reduction = (pending.reduction || 0) + action.amount;
+      }
       if (event.id === "tickles") pending.tickles = true;
     } else {
       const indices = action.indices;
@@ -4555,20 +4640,24 @@ function applyModifier(state, event, action, random) {
         new Set(indices).size !== indices.length ||
         !indices.every((i) => event.eligible.includes(i))
       )
-        throw Error("Выберите допустимые кубики.");
+        throw Error("Choose legal dice.");
       if (event.exact && indices.length !== event.eligible.length)
-        throw Error("Перебросьте все кубики.");
+        throw Error("Reroll all dice.");
       if (event.kind === "cabal") {
         pending.initial[indices[0]] = "critical";
         pending.cabal = true;
       } else {
         const payer = fighter(state, event.payer);
-        spend(
-          state,
-          payer,
-          event.cost + (event.variable ? indices.length : 0),
-          !leadershipRerolls.includes(event.id),
-        );
+        if (event.tactic) {
+          payer.power -= event.cost;
+          (state.playedTactics[event.side] ||= []).push(event.tactic);
+        } else
+          spend(
+            state,
+            payer,
+            event.cost + (event.variable ? indices.length : 0),
+            !leadershipRerolls.includes(event.id),
+          );
         if (event.usage) (state.reactionUses ||= []).push(event.usage);
         if (event.leadershipUse)
           (state.leadershipUses ||= { p1: [], p2: [] })[payer.side].push(
@@ -4579,7 +4668,7 @@ function applyModifier(state, event, action, random) {
           delete state.neural[event.clearNeural];
         const values = pending.rolls[event.role];
         if (event.kind === "change" && !faces.includes(action.face))
-          throw Error("Выберите грань.");
+          throw Error("Choose a die face.");
         for (const index of indices)
           values[index] =
             event.kind === "change"
@@ -4785,6 +4874,7 @@ function resolve(state, pending, block, random) {
         (pending.crushDice || 0) +
         (actor.momentumReady ? 3 : 0) +
         (pending.diceBonus || 0) +
+        (actor.sugahAttack || 0) +
         apexDice +
         (isPower(actor, "Wild Rage") ? actor.damage || 0 : 0) +
         (rules.powerDice ? Math.min(5, target.power) : 0) +
@@ -4882,11 +4972,17 @@ function resolve(state, pending, block, random) {
               (pending.defenseType || pending.damageType) + "Defense"
             ],
           )) +
-        (pending.block ? 2 : 0) +
-        (pending.defenseBonus || 0) +
-        (target.selfDiscovery ? 3 : 0) +
-        (hasDaniel(state, target) && target.slug === "doctor-voodoo" ? 2 : 0) +
-        (isPower(target, "Servant to the Sorcerer Supreme") &&
+        // Sacrifice: the new target cannot add defense dice.
+        (pending.sacrifice
+          ? 0
+          : (pending.block ? 2 : 0) +
+            (pending.defenseBonus || 0) +
+            (target.selfDiscovery ? 3 : 0) +
+            (hasDaniel(state, target) && target.slug === "doctor-voodoo"
+              ? 2
+              : 0)) +
+        (!pending.sacrifice &&
+        isPower(target, "Servant to the Sorcerer Supreme") &&
         state.fighters.some(
           (f) =>
             f.side === target.side &&
@@ -4897,7 +4993,8 @@ function resolve(state, pending, block, random) {
           ? 1
           : 0) -
         (savage(state, target) ? 1 : 0) +
-        (isPower(target, "Unstable Outline") &&
+        (!pending.sacrifice &&
+        isPower(target, "Unstable Outline") &&
         ["physical", "energy"].includes(pending.damageType) &&
         !within(actor, target, 3)
           ? 1
@@ -4964,6 +5061,7 @@ function resolve(state, pending, block, random) {
   }
   const matches = (test, dealt = 0) =>
     !test || (test === "damage" ? dealt > 0 : hasFaces(rolled, test));
+  if (rules.dropOn && matches(rules.dropOn)) dropObjectives(state, target);
   const befores = [].concat(rules.beforeMove || []);
   for (
     let i = pending.beforeIndex || 0;
@@ -5058,6 +5156,40 @@ function resolve(state, pending, block, random) {
         ],
       };
   }
+  const reduced = pending.reduction || 0;
+  const dreamers = state.fighters.filter(
+    (f) =>
+      f.side === target.side &&
+      f.id !== target.id &&
+      usable(f) &&
+      !f.grunt &&
+      f.power >= 1,
+  );
+  if (
+    !pending.reviewed?.includes("xaviers-dream") &&
+    incoming - reduced > 0 &&
+    dreamers.length &&
+    state.squads?.[target.side]?.tactics?.includes("xaviers-dream") &&
+    !state.playedTactics?.[target.side]?.includes("xaviers-dream")
+  )
+    return {
+      suspended: true,
+      events: [
+        {
+          type: "modify-dice",
+          kind: "reduce",
+          id: "xaviers-dream",
+          label: "Xavier’s Dream",
+          tactic: "xaviers-dream",
+          side: target.side,
+          cost: 0,
+          payer: target.id,
+          payers: dreamers.map((f) => ({ value: f.id, label: f.name })),
+          max: Math.min(dreamers.length, incoming - reduced),
+          resume: { ...pending, moved: true, rolls: { rolled, defense } },
+        },
+      ],
+    };
   if (rules.duelist) (state.duelTargets ||= []).push(target.id);
   if (rules.extra === "reality") (actor.realityTargets ||= []).push(target.id);
   for (const [test, ...values] of rules.before || [])
@@ -5266,6 +5398,8 @@ function resolve(state, pending, block, random) {
   }
   if (pending.index === 101 || pending.index === 103)
     delete actor.grantedAttacks[pending.index];
+  if (actor.extraAttacks?.[pending.index])
+    delete actor.extraAttacks[pending.index];
   if (pending.cabal) {
     if (actor.power) actor.power--;
     else damage(state, actor, 1);
@@ -5302,7 +5436,7 @@ function resolve(state, pending, block, random) {
         target: target.id,
         options: options.map((value) => ({
           value,
-          label: "Sinister Six · снять " + value,
+          label: "Sinister Six · remove " + value,
         })),
       });
   }

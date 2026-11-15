@@ -438,3 +438,18 @@ Metal Construct использует квадратный габарит 35 мм
 
 - [x] Код добавлен: превращения Ant-Man в Tiny и обратно (Change Size, Pym Particle Punch, Ant-Sized Uppercut, Pym Particle Control), Hitch a Ride, Tiny Superhero. Iron Man: Repulsor Blast, Unibeam, Friday AI, Invincible Iron Man. Sam Wilson: своя версия Shield Throw, Redwing Assault, Vibranium Shield. Steve Rogers: Flurry у Stars and Stripes Strike, I Don‘t Like Bullies, On Your Left, I've Knocked Out Tyrants.
 - [ ] Сценарии в тестах не написаны. All New, All Different и столкновения для Pym Particle Control не сделаны.
+
+## Тактики турнирных ростеров
+
+Пресеты `x-men-tournament` (Uncanny X-Men, 4-0, 1-е место из 17) и `brotherhood-tournament` (Brotherhood of Mutants, 4-0, 1-е из 11) взяты из `tournaments/data.js`. Для них добавлены 19 тактических карт, сценарии лежат в `tests/game-tournament-tactics.test.cjs`.
+
+| Карта | Где срабатывает | Упрощение |
+| --- | --- | --- |
+| Children of the Atom, Headmistress, To Me, My X-Men!, Journey Through Limbo, Hold Still, Pardon Me, Sugah, Patch Up, Pyrotechnics, Do You Know Who I Am?, Magnetic Refraction | активация (`tactic`) | Pyrotechnics сбрасывает один жетон. Активные карты разыгрываются только во время активации своего бойца |
+| Indomitable | реакция на Push/Throw врага | — |
+| Xavier's Dream | шаг снижения урона атаки | только урон от атак |
+| The Books of Truth | конец Modify Dice | — |
+| Sacrifice | реакция на выбор цели | — |
+| First Class, Asteroid M, Genetic Superiority | Power Phase | Genetic Superiority сама выбирает получателя с наименьшим Power |
+| The Pawns Go First | Cleanup | отказ одной пешки завершает розыгрыш |
+| No More Mutants | активная способность врага | реактивные способности не отменяются |

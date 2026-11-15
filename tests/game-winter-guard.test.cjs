@@ -138,7 +138,7 @@ test("Darkforce Strike may reroll every attack die, but only all of them", () =>
   while (s.pendingAttack)
     act(s, "p2", { type: "reaction", value: "skip" }, dice(5, 5));
   const option = actions(s)[0];
-  assert.equal(option.label, "Darkforce Strike · все кубики");
+  assert.equal(option.label, "Darkforce Strike · all dice");
   assert.throws(() => act(s, "p1", { type: "modify-dice", indices: [0] }));
   act(s, "p1", { type: "modify-dice", indices: [0, 1, 2, 3, 4] }, () => 2);
   skipDice(s);

@@ -38,7 +38,7 @@ function gameRouter(file) {
     ) {
       return res
         .status(403)
-        .json({ error: "Game доступна через локальный сервер." });
+        .json({ error: "Game is available only through the local server." });
     }
     res.set("Cache-Control", "no-store");
     next();
@@ -48,7 +48,7 @@ function gameRouter(file) {
   api.get("/character/:slug", (req, res) => {
     const slug = req.params.slug;
     if (!Object.hasOwn(details, slug))
-      return res.status(404).json({ error: "Персонаж не входит в Game." });
+      return res.status(404).json({ error: "This character is not in Game." });
     res.json({
       character: pool.characters[slug],
       statCard: details[slug].statCard,
@@ -98,7 +98,7 @@ function gameRouter(file) {
         !positioned) ||
       (type === "deploy" && !allowed.fighters.includes(fighter.id))
     )
-      return res.status(400).json({ error: "Движение сейчас недоступно." });
+      return res.status(400).json({ error: "Movement is not available now." });
     let move = null;
     let check;
     if (type === "deploy") {
@@ -175,7 +175,7 @@ function gameRouter(file) {
   api.post("/new", (req, res) => {
     try {
       if (state && state.phase !== "finished" && req.body.replace !== state.id)
-        return res.status(409).json({ error: "Уже есть активная партия." });
+        return res.status(409).json({ error: "A match is already in progress." });
       save(engine.create(req.body, (state?.revision || 0) + 1));
       res.json(engine.view(state, "p1"));
     } catch (error) {
@@ -185,7 +185,7 @@ function gameRouter(file) {
 
   api.post("/finish", (req, res) => {
     if (!state || req.body?.id !== state.id)
-      return res.status(409).json({ error: "Активная партия изменилась." });
+      return res.status(409).json({ error: "The active match changed." });
     if (state.phase !== "finished") {
       const next = structuredClone(state);
       engine.finish(next);
@@ -200,22 +200,22 @@ function gameRouter(file) {
     if (!engine.sides.includes(side) || !["cli", "browser"].includes(source))
       return res
         .status(400)
-        .json({ error: "Укажите сторону и источник команды." });
+        .json({ error: "Specify the side and command source." });
     if (!state || revision !== state.revision)
       return res
         .status(409)
-        .json({ error: "Партия изменилась. Обновите состояние." });
+        .json({ error: "The match changed. Refresh the state." });
     const next = structuredClone(state);
     try {
       if (action?.type === "take") {
         if (state.phase === "finished")
-          return res.status(409).json({ error: "Матч завершён." });
+          return res.status(409).json({ error: "The match is finished." });
         next.controllers[side] = source;
       } else {
         if (state.controllers[side] !== source)
           return res
             .status(409)
-            .json({ error: "Сторона сейчас под другим управлением." });
+            .json({ error: "This side is controlled elsewhere." });
         engine.act(next, side, action);
       }
       next.revision += 1;

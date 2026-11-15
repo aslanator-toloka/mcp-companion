@@ -253,7 +253,7 @@ function DiceLog({ state }) {
               <strong>
                 {entry.dealt == null
                   ? entry.text
-                  : entry.text.replace(/ · \d+ урона$/, "")}
+                  : entry.text.replace(/ · \d+ damage$/, "")}
               </strong>
               <LoggedDice pools={pools} />
               <AttackDamage

@@ -52,7 +52,7 @@ test("only Mystic attacks may measure to an enemy Projection, and Mystic damage 
   activate(s);
   const option = actions(s).find((a) => a.type === "attack").attacks[0];
   assert.deepEqual(option.targets[0].types, ["mystic"]);
-  assert.throws(() => attack(s, king, 0, "energy"), /цель/);
+  assert.throws(() => attack(s, king, 0, "energy"), /target/);
   attack(s, king, 0, "mystic", dice(2));
   assert.equal(king.damage, 1);
   assert.equal(king.projection, undefined);

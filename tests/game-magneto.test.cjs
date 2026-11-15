@@ -108,7 +108,7 @@ test("Master of Magnetism places up to two Size 2 constructs and grants Power fo
   assert.equal(action(s).type, "place-construct");
   assert.throws(
     () => act(s, "p1", { type: "place-construct", x: 8, y: 8 }),
-    /области/,
+    /placement area/,
   );
   act(s, "p1", { type: "place-construct", x: 8, y: 11 });
   assert.equal(s.terrain[0].size, 2);

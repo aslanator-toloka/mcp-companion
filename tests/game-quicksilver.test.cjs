@@ -47,7 +47,7 @@ test("Speedster drops held extracts before a Long Advance without spending an ac
   assert.equal(s.actionsLeft, 2);
   assert.throws(
     () => act(s, "p1", { type: "power", value: "Speedster" }),
-    /недоступн/,
+    /not available/,
   );
 });
 
@@ -65,7 +65,7 @@ test("Dash and Velocity can resolve in either order, and Velocity can chain to t
   attack(s, hawkeye, dice(0, 4, 1, 2));
   assert.deepEqual(
     view(s, "p1").actions.p1[0].options.map((o) => o.label),
-    ["Dash первым", "Velocity первым"],
+    ["Dash first", "Velocity first"],
   );
   act(s, "p1", { type: "strike-order", value: "0" });
   act(s, "p1", { type: "displace", x: 9, y: 8 });
@@ -169,7 +169,7 @@ test("Supersonic Reflexes rerolls selected defense and dodge dice", () => {
   });
   act(s, "p1", { type: "throw-terrain", angle: 0 }, dice(5));
   const dodge = view(s, "p2").actions.p2[0];
-  assert.equal(dodge.label, "Supersonic Reflexes · Уклонение");
+  assert.equal(dodge.label, "Supersonic Reflexes · Dodge");
   assert.ok(!dodge.eligible.includes(0));
   act(
     s,

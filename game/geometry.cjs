@@ -31,18 +31,18 @@ const bendOffsets = Array.from({ length: 19 }, (_, index) => {
 });
 
 const battlefield = [
-  { id: "car-1", name: "Автомобиль", size: 2, x: 7, y: 9.5, w: 3, h: 1.5 },
-  { id: "car-2", name: "Автомобиль", size: 2, x: 26, y: 25, w: 3, h: 1.5 },
-  { id: "truck-1", name: "Грузовик", size: 3, x: 24, y: 10, w: 4.5, h: 2 },
-  { id: "truck-2", name: "Грузовик", size: 3, x: 7.5, y: 24, w: 4.5, h: 2 },
-  { id: "building-1", name: "Здание", size: 4, x: 11, y: 11.5, w: 4, h: 3.5 },
-  { id: "building-2", name: "Здание", size: 4, x: 21, y: 21, w: 4, h: 3.5 },
-  { id: "wall-1", name: "Стена", size: 2, x: 3, y: 21, w: 2.5, h: 1 },
-  { id: "wall-2", name: "Стена", size: 2, x: 30.5, y: 14, w: 2.5, h: 1 },
-  { id: "bench-1", name: "Скамейка", size: 1, x: 16, y: 15, w: 1.5, h: 1 },
-  { id: "bench-2", name: "Скамейка", size: 1, x: 18.5, y: 20, w: 1.5, h: 1 },
-  { id: "tower", name: "Башня", size: 5, x: 15.75, y: 2, w: 4.5, h: 3.5 },
-  { id: "kiosk", name: "Киоск", size: 3, x: 16.5, y: 30.5, w: 3, h: 3 },
+  { id: "car-1", name: "Car", size: 2, x: 7, y: 9.5, w: 3, h: 1.5 },
+  { id: "car-2", name: "Car", size: 2, x: 26, y: 25, w: 3, h: 1.5 },
+  { id: "truck-1", name: "Truck", size: 3, x: 24, y: 10, w: 4.5, h: 2 },
+  { id: "truck-2", name: "Truck", size: 3, x: 7.5, y: 24, w: 4.5, h: 2 },
+  { id: "building-1", name: "Building", size: 4, x: 11, y: 11.5, w: 4, h: 3.5 },
+  { id: "building-2", name: "Building", size: 4, x: 21, y: 21, w: 4, h: 3.5 },
+  { id: "wall-1", name: "Wall", size: 2, x: 3, y: 21, w: 2.5, h: 1 },
+  { id: "wall-2", name: "Wall", size: 2, x: 30.5, y: 14, w: 2.5, h: 1 },
+  { id: "bench-1", name: "Bench", size: 1, x: 16, y: 15, w: 1.5, h: 1 },
+  { id: "bench-2", name: "Bench", size: 1, x: 18.5, y: 20, w: 1.5, h: 1 },
+  { id: "tower", name: "Tower", size: 5, x: 15.75, y: 2, w: 4.5, h: 3.5 },
+  { id: "kiosk", name: "Kiosk", size: 3, x: 16.5, y: 30.5, w: 3, h: 3 },
 ];
 
 function snap(point) {

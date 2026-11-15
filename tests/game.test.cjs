@@ -183,14 +183,14 @@ test("passing cancels an uncommitted fighter choice without spending an activati
   act(s, "p1", { type: "interact", value: "hammer" });
   assert.equal(s.actionsLeft, 2);
   assert.equal(canPass(), false);
-  assert.throws(() => act(s, "p1", { type: "pass" }), /недоступно/);
+  assert.throws(() => act(s, "p1", { type: "pass" }), /not available/);
   act(s, "p1", { type: "undo" });
   act(s, "p1", { type: "pass" });
   assert.equal(s.active, null);
   assert.equal(s.actionsLeft, 0);
   assert.equal(s.decisionSide, "p2");
   assert.equal(s.fighters[0].activated, false);
-  assert.equal(s.log.at(-1).text, "Пас");
+  assert.equal(s.log.at(-1).text, "Pass");
 });
 
 test("opponent reaction pauses attack, then damage resolves without undoing the roll", () => {
@@ -253,7 +253,7 @@ test("Calculated Risk rerolls selected dice once per incoming attack", () => {
   act(s, "p2", reroll, () => 4);
   assert.equal(widow.power, 4);
   assert.deepEqual(s.log.at(-1).defense, ["block", "block", "blank", "blank"]);
-  assert.throws(() => act(s, "p2", reroll), /недоступно/);
+  assert.throws(() => act(s, "p2", reroll), /not available/);
   assert.equal(widow.power, 4);
 
   attack();

@@ -53,11 +53,11 @@ test("Hex Bolt builds Power and Chaos Magic offers one choice per Failure", () =
   attack(s, hulk, "mystic", dice(5, 5, 2));
   assert.equal(witch.power, 6);
   const choose = (value) => act(s, "p1", { type: "choose-condition", value });
-  assert.throws(() => choose("slow"), /вариант/);
+  assert.throws(() => choose("slow"), /option/);
   choose("hex");
   choose("incinerate");
   assert.deepEqual(hulk.conditions, ["hex", "incinerate"]);
-  assert.throws(() => choose("bleed"), /недоступно/);
+  assert.throws(() => choose("bleed"), /not available/);
 });
 
 test("Cruel Twist suppresses defense Criticals and Reality Contortion blanks one defense die", () => {
@@ -74,7 +74,7 @@ test("Cruel Twist suppresses defense Criticals and Reality Contortion blanks one
   assert.equal(modifier.label, "Reality Contortion");
   assert.deepEqual(modifier.dice, ["critical", "block", "blank"]);
   assert.deepEqual(modifier.eligible, [0, 1]);
-  assert.throws(() => act(s, "p1", { type: "skip-effect" }), /недоступно/);
+  assert.throws(() => act(s, "p1", { type: "skip-effect" }), /not available/);
   act(s, "p1", { type: "modify-dice", indices: [1] });
   assert.equal(s.log.at(-1).rollSummary.defenseHits, 0);
   assert.equal(s.log.at(-1).dealt, 3);
@@ -133,7 +133,7 @@ test("Hex Field prevents shaking Hex, Judgment or Poison in range of a conscious
     if (!choices.includes("hex"))
       assert.throws(
         () => act(s, "p1", { type: "shake", value: "hex" }),
-        /вариант/,
+        /option/,
       );
     act(s, "p1", { type: "shake", value: "bleed" });
     assert.deepEqual(actor.conditions, ["hex", "judgment", "poison"]);

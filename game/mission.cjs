@@ -1,4 +1,5 @@
 const { within } = require("./geometry.cjs");
+const { pool } = require("./catalog.cjs");
 const combat = require("./combat.cjs");
 const log = require("./log.cjs");
 
@@ -13,8 +14,21 @@ const cards = {
 const onBoard = (o) => !o.holder;
 const held = (state, f) => state.objectives.filter((o) => o.holder === f.id);
 
+// First Class: an allied Uncanny X-Men character's first Interact this round is free.
+function freeInteract(state, actor) {
+  return (
+    state.firstClass?.[actor.side] === state.round &&
+    !state.firstClassUsed?.includes(actor.id) &&
+    pool.characters[actor.slug]?.affiliations.some(
+      (a) => a.name === "Uncanny X-Men",
+    )
+  );
+}
+
 function interacts(state, actor) {
-  const workforce = combat.isPower(actor, "X-Factor Investigations Workforce");
+  const workforce =
+    combat.isPower(actor, "X-Factor Investigations Workforce") ||
+    freeInteract(state, actor);
   if (
     (actor.grunt && !workforce) ||
     (actor.power < 1 && !workforce) ||
@@ -41,7 +55,7 @@ function interacts(state, actor) {
     )
       return [];
     if (combat.canHoldExtract(state, actor, o))
-      return [{ value: o.id, label: "Поднять " + o.name }];
+      return [{ value: o.id, label: "Pick up " + o.name }];
     if (
       o.role === "secure" &&
       combat.leadership(state, actor.side, "Freedom Force")
@@ -60,7 +74,7 @@ function consoleOptions(state, o) {
     .filter((f) => combat.usable(f) && f.damage > 0 && within(f, o, 2))
     .map((f) => ({ value: f.id, label: f.name }));
   return targets.length
-    ? [{ value: o.id, label: "Использовать " + o.name, targets }]
+    ? [{ value: o.id, label: "Use " + o.name, targets }]
     : [];
 }
 
@@ -201,7 +215,7 @@ function cleanup(state, random) {
       log(state, "Power Core · " + f.name, {
         side: f.side,
         fighter: f.id,
-        rolls: [{ label: "Бросок", faces: rolled }],
+        rolls: [{ label: "Roll", faces: rolled }],
       });
       const origin = { ...f };
       for (const target of state.fighters.filter(
@@ -220,4 +234,5 @@ module.exports = {
   cosmicEffects,
   cleanup,
   secureSide,
+  freeInteract,
 };

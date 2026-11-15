@@ -34,7 +34,7 @@ const hexFieldConditions = ["hex", "judgment", "poison"];
 function roster(input) {
   const preset = pool.presets.find((r) => r.id === input);
   if (preset) return preset;
-  expect(input && typeof input === "object", "Выберите ростер.");
+  expect(input && typeof input === "object", "Choose a roster.");
   for (const [field, catalog] of Object.entries({
     characters: pool.characters,
     tactics: pool.tactics,
@@ -46,12 +46,12 @@ function roster(input) {
         input[field].every(
           (id) => Object.hasOwn(catalog, id) && !catalog[id].isGrunt,
         ),
-      "Ростер должен включать 10 поддерживаемых карт в каждой категории.",
+      "A roster must include 10 supported cards in each category.",
     );
   }
   expect(
     input.crises.filter((id) => pool.crises[id].type === "Secure").length === 5,
-    "Нужно пять Secure и пять Extraction.",
+    "A roster needs five Secure and five Extraction crises.",
   );
   expect(
     new Set(
@@ -59,14 +59,14 @@ function roster(input) {
         (id) => pool.characters[id].name + pool.characters[id].alterEgo,
       ),
     ).size === 10,
-    "В ростере есть повтор персонажа.",
+    "The roster repeats a character.",
   );
   expect(
     new Set(input.tactics.map((id) => pool.tactics[id].name)).size === 10,
-    "В ростере есть повтор тактики.",
+    "The roster repeats a tactic.",
   );
   return {
-    name: String(input.name || "Ростер").slice(0, 100),
+    name: String(input.name || "Roster").slice(0, 100),
     characters: input.characters,
     tactics: input.tactics,
     crises: input.crises,
@@ -123,7 +123,7 @@ function finish(state) {
     pendingAttack: null,
     volley: null,
   });
-  log(state, "Матч завершён без результата");
+  log(state, "Match stopped without a result");
 }
 
 function priorityRoll(state, random) {
@@ -149,7 +149,7 @@ function priorityRoll(state, random) {
     state.roll = { dice, winner: delta ? (delta > 0 ? "p1" : "p2") : null };
     log(
       state,
-      delta ? "Priority · " + state.roll.winner : "Ничья · бросаем снова",
+      delta ? "Priority · " + state.roll.winner : "Tie · rolling again",
       state.roll,
     );
     if (delta) return state.roll.winner;
@@ -239,7 +239,7 @@ function beginActivation(state, active, locked = false) {
       side: active.side,
       target: active.id,
     });
-  log(state, "Активирован " + active.name, {
+  log(state, "Activated " + active.name, {
     side: active.side,
     fighter: active.id,
   });
@@ -365,6 +365,23 @@ function movementProtection(state, effect) {
           power: "Burning Resolve",
         });
     }
+  if (
+    source.side !== mover.side &&
+    ["push", "throw"].includes(effect.mode) &&
+    tactics.available(state, mover.side, "indomitable") &&
+    tactics.canSpend(state, mover, 2) &&
+    combat.reactiveAllowed(source, mover, state)
+  ) {
+    const cost = 2 + tactics.hammerTax(state, mover);
+    options.push({
+      value: "indomitable",
+      label: "Indomitable · " + cost + " Power",
+      protector: mover.id,
+      cost,
+      power: "Indomitable",
+      tactic: "indomitable",
+    });
+  }
   if (!options.length) return null;
   return {
     options,
@@ -535,7 +552,7 @@ function targetingReactions(state, pending) {
     reactions.push({
       value: "mental-lock",
       key: defender.id + ":mental-lock",
-      label: lock + " · предложить защиту Mystic",
+      label: lock + " · offer Mystic defense",
     });
   const logan =
     !pending.redirected &&
@@ -550,11 +567,32 @@ function targetingReactions(state, pending) {
         pool.characters[f.slug]?.alterEgo === "James Logan Howlett" &&
         geometry.within(defender, f, 2),
     );
+  if (
+    !pending.redirected &&
+    tactics.available(state, defender.side, "sacrifice-ca10") &&
+    tactics.canSpend(state, defender, 1) &&
+    combat.reactiveAllowed(attacker, defender, state)
+  )
+    for (const ally of state.fighters.filter(
+      (f) =>
+        f.side === defender.side &&
+        f.id !== defender.id &&
+        combat.usable(f) &&
+        !f.grunt &&
+        geometry.within(defender, f, 2) &&
+        tactics.canSpend(state, f, 1),
+    ))
+      reactions.push({
+        value: "sacrifice:" + ally.id,
+        key: defender.id + ":sacrifice:" + ally.id,
+        label: "Sacrifice · " + ally.name + " becomes the target",
+        cost: 1,
+      });
   if (logan)
     reactions.push({
       value: "wolverine-swap:" + logan.id,
       key: defender.id + ":wolverine-swap",
-      label: "Wolverine! · " + logan.name + " становится целью",
+      label: "Wolverine! · " + logan.name + " becomes the target",
       cost: combat.rootTax(defender),
     });
   for (const ally of state.fighters.filter(
@@ -799,7 +837,7 @@ function currentEffect(state, side) {
           type: "reaction",
           value: "mental-lock-pay",
           label:
-            "Заплатить 2 Power · " +
+            "Pay 2 Power · " +
             mindLock(
               state.fighters.find((f) => f.id === state.pendingAttack.target),
             ),
@@ -807,7 +845,7 @@ function currentEffect(state, side) {
         {
           type: "reaction",
           value: "mental-lock-accept",
-          label: "Разрешить защиту Mystic",
+          label: "Allow Mystic defense",
         },
       ];
     return [
@@ -815,13 +853,13 @@ function currentEffect(state, side) {
         ...option,
         type: "reaction",
       })),
-      { type: "reaction", value: "skip", label: "Пропустить реакцию" },
+      { type: "reaction", value: "skip", label: "Skip reaction" },
     ];
   }
   const effect = state.effects?.[0];
   if (effect) {
     const actor = actorOf(state);
-    const skip = { type: "skip-effect", label: "Пропустить эффект" };
+    const skip = { type: "skip-effect", label: "Skip effect" };
     if (effect.type === "place-construct") return [effect];
     if (effect.type === "move-reaction")
       return [
@@ -829,7 +867,7 @@ function currentEffect(state, side) {
           type: effect.type,
           options: [
             ...moveReactionOptions(state, actor),
-            { value: "skip", label: "Выполнить Move" },
+            { value: "skip", label: "Perform Move" },
           ],
         },
       ];
@@ -853,7 +891,7 @@ function currentEffect(state, side) {
     }
     if (effect.type === "diamond-dodge")
       return [
-        { type: "diamond-dodge", label: "Diamond Form · уклонение" },
+        { type: "diamond-dodge", label: "Diamond Form · dodge" },
         skip,
       ];
     if (effect.type === "acrobatic-dodge")
@@ -878,6 +916,15 @@ function currentEffect(state, side) {
         },
         skip,
       ];
+    if (effect.type === "no-more-mutants")
+      return [
+        {
+          type: "no-more-mutants",
+          label:
+            "No More Mutants · cancel " + effect.power + " · 3 Power",
+        },
+        skip,
+      ];
     if (effect.type === "nice-punch") {
       const target = state.fighters.find((f) => f.id === effect.target);
       return [
@@ -888,7 +935,7 @@ function currentEffect(state, side) {
                 label:
                   "Nice Punch... · " +
                   effect.amount +
-                  " урона · " +
+                  " damage · " +
                   effect.cost +
                   " Power",
               },
@@ -903,7 +950,7 @@ function currentEffect(state, side) {
           type: "juggernaut-contact",
           options: effect.targets.map((id) => ({
             value: id,
-            label: state.fighters.find((f) => f.id === id).name + " · 1 урон",
+            label: state.fighters.find((f) => f.id === id).name + " · 1 damage",
           })),
         },
       ];
@@ -914,9 +961,9 @@ function currentEffect(state, side) {
           options: [
             ...effect.pieces.map((piece) => ({
               value: piece.id,
-              label: "Уничтожить " + piece.name + " · Size " + piece.size,
+              label: "Destroy " + piece.name + " · Size " + piece.size,
             })),
-            { value: "", label: "Без террейна" },
+            { value: "", label: "No terrain" },
           ],
         },
       ];
@@ -929,7 +976,7 @@ function currentEffect(state, side) {
               value: piece.id,
               label: piece.name + " · Size " + piece.size,
             })),
-            { value: "", label: "Без основного террейна" },
+            { value: "", label: "No primary terrain" },
           ],
         },
       ];
@@ -1046,7 +1093,7 @@ function currentEffect(state, side) {
           type: "partner",
           label:
             effect.power +
-            " · активировать " +
+            " · activate " +
             state.fighters.find((f) => f.id === effect.partner).name,
         },
         skip,
@@ -1066,7 +1113,7 @@ function currentEffect(state, side) {
           type: "red-line",
           options: (target.conditions || []).map((value) => ({
             value,
-            label: "Unbreakable Red Line · снять " + value,
+            label: "Unbreakable Red Line · remove " + value,
           })),
         },
         skip,
@@ -1104,7 +1151,7 @@ function currentEffect(state, side) {
             effect.cost +
             " Power",
         },
-        { type: "skip-effect", label: "Разрешить лечение" },
+        { type: "skip-effect", label: "Allow healing" },
       ];
     if (effect.type === "frenzy")
       return [
@@ -1234,7 +1281,7 @@ function currentEffect(state, side) {
           type: "strike-order",
           options: effect.moves.map((move, index) => ({
             value: String(index),
-            label: move.name + " первым",
+            label: move.name + " first",
           })),
         },
       ];
@@ -1254,11 +1301,11 @@ function currentEffect(state, side) {
           type: "battle-plan",
           options: [
             ...((f.damage || 0) > 0
-              ? [{ value: "heal", label: "Восстановить 1 HP · " + f.name }]
+              ? [{ value: "heal", label: "Restore 1 HP · " + f.name }]
               : []),
             ...(f.conditions || []).map((c) => ({
               value: c,
-              label: "Снять " + c + " · " + f.name,
+              label: "Remove " + c + " · " + f.name,
             })),
             { value: "place", label: "Place · " + f.name },
           ],
@@ -1273,9 +1320,9 @@ function currentEffect(state, side) {
           type: "glory-choice",
           options: [
             ...(f.power > 0
-              ? [{ value: "pay", label: f.name + " платит 1 Power" }]
+              ? [{ value: "pay", label: f.name + " pays 1 Power" }]
               : []),
-            { value: "decline", label: f.name + " не платит" },
+            { value: "decline", label: f.name + " does not pay" },
           ],
         },
       ];
@@ -1318,14 +1365,14 @@ function currentEffect(state, side) {
                 type: shielding.type,
                 options: [
                   ...shielding.options,
-                  { value: "skip", label: "Пропустить реакцию" },
+                  { value: "skip", label: "Skip reaction" },
                 ],
               },
             ]
           : [
               {
                 type: "start-displacement",
-                label: "Переместить " + effect.name,
+                label: "Move " + effect.name,
               },
               skip,
             ];
@@ -1411,7 +1458,7 @@ function announceAttack(state, actor, target, option, attack, random) {
     side: target.side,
     ...(attack.volley && { volley: true }),
   };
-  log(state, actor.name + " объявляет " + option.name + " по " + target.name, {
+  log(state, actor.name + " declares " + option.name + " on " + target.name, {
     side: actor.side,
     fighter: actor.id,
     target: target.id,
@@ -1455,7 +1502,7 @@ function finishAttack(state, pending, block, random) {
       attack.name +
       " · " +
       dealt +
-      " урона",
+      " damage",
     {
       side: actor.side,
       fighter: actor.id,
@@ -1549,13 +1596,14 @@ function finishRound(state, side, random) {
   const gained = mission.points(state);
   state.score ||= { p1: 0, p2: 0 };
   for (const p of sides) state.score[p] += gained[p];
-  log(state, "Очки за миссию: P1 +" + gained.p1 + " · P2 +" + gained.p2);
+  log(state, "Mission VP: P1 +" + gained.p1 + " · P2 +" + gained.p2);
   const max = Math.max(state.score.p1, state.score.p2);
   if ((max >= 16 || state.round >= 6) && state.score.p1 !== state.score.p2) {
     declareWinner(state, state.score.p1 > state.score.p2 ? "p1" : "p2");
     return;
   }
   mission.cleanup(state, random);
+  (state.effects ||= []).push(...tactics.cleanupEffects(state));
   if (state.drops?.length || state.effects?.length)
     state.nextRoundPriority = other(side);
   else nextRound(state, other(side));
@@ -1572,7 +1620,7 @@ function declareWinner(state, side) {
   state.drops = [];
   state.volley = null;
   state.undo = [];
-  log(state, "Победа " + side.toUpperCase());
+  log(state, "Victory " + side.toUpperCase());
 }
 
 function nextRound(state, priority) {
@@ -1590,7 +1638,7 @@ function nextRound(state, priority) {
     if (f.slug === "hulk") {
       f.ko = true;
       f.x = f.y = null;
-      log(state, f.name + " · KO в Cleanup", { side: f.side, fighter: f.id });
+      log(state, f.name + " · KO in Cleanup", { side: f.side, fighter: f.id });
       continue;
     }
     f.injured = true;
@@ -1675,7 +1723,8 @@ function endActivation(state, side, random, applyBleed = true) {
         ? 2
         : combat.isPower(actor, "Healing Factor [1]")
           ? 1
-          : 0;
+          : actor.sugahHealing || 0;
+    actor.sugahHealing = 0;
     if (healing && combat.usable(actor)) combat.heal(state, actor, healing);
     if (
       combat.isPower(actor, "Like Herding Cats") &&
@@ -1727,8 +1776,11 @@ function endActivation(state, side, random, applyBleed = true) {
     actor.momentumUsed = false;
     actor.juggernautHit = [];
     actor.grantedAttacks = {};
+    actor.extraAttacks = {};
+    actor.sugahDice = 0;
+    actor.sugahAttack = 0;
     actor.montesiUsed = false;
-    log(state, actor.name + " завершает активацию", {
+    log(state, actor.name + " ends activation", {
       side,
       fighter: actor.id,
     });
@@ -1791,7 +1843,7 @@ function commandOptions(state, side) {
             type: "leadership",
             options: [
               ...leadersFor(state, side),
-              { value: "", label: "Без Leadership" },
+              { value: "", label: "No Leadership" },
             ],
           },
         ];
@@ -1988,7 +2040,7 @@ function beginRound(state) {
       )
       .map((side) => ({ type: "herb", side, remaining: 3 })),
   ];
-  log(state, "Раунд " + state.round);
+  log(state, "Round " + state.round);
 }
 
 function continueSingleTarget(state, random = randomInt) {
@@ -2021,11 +2073,11 @@ function act(state, side, action, random = randomInt) {
   const allowed = commandOptions(state, side).filter(
     (option) => option.type === type,
   );
-  expect(allowed.length, "Это действие сейчас недоступно.");
+  expect(allowed.length, "This action is not available now.");
   if (allowed[0].options)
     expect(
       allowed[0].options.some(({ value }) => value === action.value),
-      "Недопустимый вариант.",
+      "Invalid option.",
     );
   const { value } = action;
   switch (type) {
@@ -2079,25 +2131,25 @@ function act(state, side, action, random = randomInt) {
         unique(characters) &&
           characters.length &&
           characters.every((id) => selected.characters.includes(id)),
-        "Выберите персонажей из ростера.",
+        "Choose characters from the roster.",
       );
       const cards = characters.map((id) => pool.characters[id]);
       expect(
         cards.filter((card) => card.peerless).length <= 1,
-        "В отряде может быть только один персонаж с Peerless.",
+        "A squad may include only one Peerless character.",
       );
       expect(
         cards.reduce((sum, card) => sum + card.threatLevel, 0) <= state.threat,
-        "Превышен лимит Threat.",
+        "Threat limit exceeded.",
       );
       expect(
         new Set(cards.map((card) => card.alterEgo || card.slug)).size ===
           cards.length,
-        "В отряде повторяется Alter Ego.",
+        "The squad repeats an Alter Ego.",
       );
       expect(
         !affiliation || affiliations(characters).includes(affiliation),
-        "Больше половины отряда должны состоять в этой аффилиации.",
+        "More than half of the squad must belong to this affiliation.",
       );
       expect(
         unique(tactics) &&
@@ -2106,9 +2158,9 @@ function act(state, side, action, random = randomInt) {
             (id) =>
               selected.tactics.includes(id) &&
               (!pool.tactics[id].affiliation ||
-                pool.tactics[id].affiliation === affiliation),
+                pool.tactics[id].affiliation.name === affiliation),
           ),
-        "Выберите до пяти допустимых тактик.",
+        "Choose up to five legal tactics.",
       );
       state.commits[side] = {
         characters,
@@ -2123,7 +2175,7 @@ function act(state, side, action, random = randomInt) {
         );
         state.phase = "deployment";
         state.decisionSide = state.priority;
-        log(state, "Отряды и тактики раскрыты");
+        log(state, "Squads and tactics revealed");
       }
       break;
     }
@@ -2141,7 +2193,7 @@ function act(state, side, action, random = randomInt) {
             state.fighters,
             state.terrain,
           ),
-        "База должна помещаться на поле, в зоне расстановки, без пересечения с другими базами.",
+        "The base must fit on the battlefield, inside the deployment zone, without overlapping other bases.",
       );
       Object.assign(fighter, point);
       if (state.effects?.[0]?.type === "grunt-deploy") state.effects.shift();
@@ -2152,10 +2204,10 @@ function act(state, side, action, random = randomInt) {
         const drone = makeFighter(side, "ultron-drones-grunts");
         state.fighters.push(drone);
         state.effects.push({ type: "grunt-deploy", side, fighter: drone.id });
-        log(state, "Расставлен " + fighter.name, { side, point });
+        log(state, "Deployed " + fighter.name, { side, point });
         break;
       }
-      log(state, "Расставлен " + fighter.name, { side, point });
+      log(state, "Deployed " + fighter.name, { side, point });
       const undeployed = (p) =>
         state.fighters.some((f) => f.side === p && f.x == null);
       if (undeployed(other(side))) state.decisionSide = other(side);
@@ -2178,7 +2230,7 @@ function act(state, side, action, random = randomInt) {
             (id) =>
               !state.squads[p].tactics.includes(id) &&
               (!pool.tactics[id].affiliation ||
-                pool.tactics[id].affiliation === "Hydra"),
+                pool.tactics[id].affiliation.name === "Hydra"),
           );
           if (unused.length)
             state.effects.push({
@@ -2191,13 +2243,13 @@ function act(state, side, action, random = randomInt) {
             });
         }
         state.phase = "round-priority";
-        log(state, "Leadership раскрыты");
+        log(state, "Leaderships revealed");
       }
       break;
     case "activate":
       expect(
         allowed.some((option) => option.value === value),
-        "Нельзя активировать персонажа.",
+        "This character cannot activate.",
       );
       for (const phoenix of state.fighters.filter(
         (f) =>
@@ -2249,7 +2301,7 @@ function act(state, side, action, random = randomInt) {
             state.terrain,
           )
           .route(point),
-        "Сюда нельзя переместить базу выбранным действием.",
+        "The base cannot move here with this action.",
       );
       if (granted) {
         state.effects.shift();
@@ -2299,31 +2351,35 @@ function act(state, side, action, random = randomInt) {
       const option = allowed[0].attacks.find(
         (a) => a.index === action.index && a.types.includes(action.damageType),
       );
-      expect(option, "Выберите доступную атаку и тип урона.");
+      expect(option, "Choose an available attack and damage type.");
       const effect = state.effects?.[0];
       const extra = ["bonus-attack", "borrowed-attack"].includes(effect?.type);
       const granted = ["granted-attack", "flurry-attack"].includes(
         effect?.type,
       );
+      if (!extra && !granted) {
+        actor.sugahAttack = actor.sugahDice || 0;
+        actor.sugahDice = 0;
+      }
       const boost = action.boost || 0;
       expect(
         Number.isInteger(boost) &&
           boost >= 0 &&
           boost <= (option.boostMax || 0),
-        "Укажите допустимую доплату Power.",
+        "Specify a legal extra Power payment.",
       );
       const flares = action.flares || 0;
       expect(
         Number.isInteger(flares) &&
           flares >= 0 &&
           flares <= (option.flareMax || 0),
-        "Укажите допустимое число Flare.",
+        "Specify a legal number of Flare tokens.",
       );
       actor.flares = (actor.flares || 0) - flares;
       let decree = 0;
       if (action.decree) {
         const thanos = combat.decreeSource(state, actor);
-        expect(thanos && option.decree, "Death‘s Decree недоступен.");
+        expect(thanos && option.decree, "Death‘s Decree is not available.");
         const talons = combat.isPower(thanos, "Talons of Farallah");
         const ferocity = combat.isPower(thanos, "Ferocity of Cyttorak");
         const boostPower = combat.isPower(thanos, "Energy Boost");
@@ -2337,7 +2393,7 @@ function act(state, side, action, random = randomInt) {
           (talons ? "Talons of Farallah" : "Death‘s Decree") +
             " · +" +
             decree +
-            " куб.",
+            " dice",
           { side, fighter: thanos.id },
         );
       }
@@ -2363,7 +2419,7 @@ function act(state, side, action, random = randomInt) {
             combat.heal(state, ally, 1);
         expect(
           remaining.length,
-          "Шаблон должен накрыть хотя бы одну допустимую цель.",
+          "The template must cover at least one legal target.",
         );
         if (!extra) {
           combat.pay(state, actor, option.cost + boost, action.payer);
@@ -2390,9 +2446,9 @@ function act(state, side, action, random = randomInt) {
         log(
           state,
           actor.name +
-            " направляет " +
+            " aims " +
             option.name +
-            " · целей: " +
+            " · targets: " +
             remaining.length,
           { side, fighter: actor.id },
         );
@@ -2404,7 +2460,7 @@ function act(state, side, action, random = randomInt) {
             t.value === action.target &&
             (!t.types || t.types.includes(action.damageType)),
         ),
-        "Выберите допустимую цель.",
+        "Choose a legal target.",
       );
       const target = state.fighters.find((f) => f.id === action.target);
       if (extra || granted) state.effects.shift();
@@ -2453,7 +2509,7 @@ function act(state, side, action, random = randomInt) {
       const target = state.fighters.find((f) => f.id === value);
       expect(
         !action.sample || allowed[0].sampleBoost,
-        "Нет доступного Genetic Sample.",
+        "No Genetic Sample available.",
       );
       if (action.sample) actor.samples = (actor.samples ?? 1) - 1;
       const name = combat.attackCard(actor, volley.index).name;
@@ -2479,7 +2535,7 @@ function act(state, side, action, random = randomInt) {
     case "reaction": {
       expect(
         allowed.some((o) => o.value === value),
-        "Эта реакция недоступна.",
+        "This reaction is not available.",
       );
       const pending = state.pendingAttack;
       const chosenReaction = allowed.find((option) => option.value === value);
@@ -2632,6 +2688,30 @@ function act(state, side, action, random = randomInt) {
         continueTargeting(state, pending, random);
         break;
       }
+      if (value?.startsWith("sacrifice:")) {
+        const defender = state.fighters.find((f) => f.id === pending.target);
+        const ally = state.fighters.find(
+          (f) => f.id === value.split(":").slice(1).join(":"),
+        );
+        for (const f of [defender, ally])
+          f.power -= 1 + tactics.hammerTax(state, f);
+        tactics.use(state, side, "sacrifice-ca10");
+        Object.assign(pending, {
+          target: ally.id,
+          redirected: true,
+          sacrifice: true,
+          defenseBonus: 0,
+          block: false,
+        });
+        delete pending.quickDraw;
+        log(state, "Sacrifice · " + ally.name, {
+          side,
+          fighter: defender.id,
+          target: ally.id,
+        });
+        continueTargeting(state, pending, random);
+        break;
+      }
       if (value?.startsWith("wolverine-swap:")) {
         const jubilee = state.fighters.find((f) => f.id === pending.target);
         combat.spend(state, jubilee, chosenReaction.cost);
@@ -2723,7 +2803,7 @@ function act(state, side, action, random = randomInt) {
               : block
                 ? value
                 : "Rapid Phase";
-        log(state, target.name + " использует " + name, {
+        log(state, target.name + " uses " + name, {
           side,
           fighter: target.id,
           power: name,
@@ -2737,7 +2817,7 @@ function act(state, side, action, random = randomInt) {
       state.effects.shift();
       const payer = state.fighters.find((f) => f.id === value);
       combat.gain(payer, 1);
-      log(state, "Army of Evil · " + payer.name + " получает 1 Power", {
+      log(state, "Army of Evil · " + payer.name + " gains 1 Power", {
         side,
         fighter: payer.id,
       });
@@ -2923,7 +3003,7 @@ function act(state, side, action, random = randomInt) {
       combat.spend(state, witch, effect.cost);
       combat.condition(enemy, "judgment");
       state.undo = [];
-      log(state, "Curse · " + enemy.name + " получает Judgment", {
+      log(state, "Curse · " + enemy.name + " gains Judgment", {
         side,
         fighter: witch.id,
         target: enemy.id,
@@ -3019,7 +3099,7 @@ function act(state, side, action, random = randomInt) {
             target: source.id,
             options: source.conditions.map((value) => ({
               value,
-              label: "Снять " + value,
+              label: "Remove " + value,
             })),
           });
       }
@@ -3048,7 +3128,7 @@ function act(state, side, action, random = randomInt) {
           { ...point, radius: effect.model.radius },
           effect.range,
         ) && geometry.fits(point, effect.model, state.fighters, state.terrain),
-        "Точка вне области размещения.",
+        "The point is outside the placement area.",
       );
       if (type === "transform") {
         const f = state.fighters.find((item) => item.id === effect.mover);
@@ -3085,7 +3165,7 @@ function act(state, side, action, random = randomInt) {
                 ? " · Diamond"
                 : " · Binary"
               : " · Normal"
-            : " · размещение"),
+            : " · placement"),
         { side, point },
       );
       if (effect.attackAfterTransform)
@@ -3136,7 +3216,7 @@ function act(state, side, action, random = randomInt) {
       expect(
         !state.effects[0]?.exact ||
           action.indices?.length === state.effects[0].eligible.length,
-        "Перебросьте все кубики.",
+        "Reroll all dice.",
       );
       const effect = state.effects.shift();
       if (effect.collision) {
@@ -3156,9 +3236,9 @@ function act(state, side, action, random = randomInt) {
         ...(before?.length &&
           after && {
             rolls: [
-              { label: "До", faces: before },
+              { label: "Before", faces: before },
               {
-                label: "После",
+                label: "After",
                 faces: action.indices.map((index) => after[index]),
               },
             ],
@@ -3203,7 +3283,7 @@ function act(state, side, action, random = randomInt) {
       const { destroyed, resume } = state.effects.shift();
       const primary = destroyed.find((piece) => piece.id === value);
       resume.crushDice = destroyed.length + (primary ? primary.size - 1 : 0);
-      log(state, "Magnetic Crush · +" + resume.crushDice + " куб.", { side });
+      log(state, "Magnetic Crush · +" + resume.crushDice + " dice", { side });
       finishAttack(state, resume, false, random);
       break;
     }
@@ -3236,6 +3316,21 @@ function act(state, side, action, random = randomInt) {
       else finishAttack(state, resume, false, random);
       break;
     }
+    case "no-more-mutants": {
+      const effect = state.effects.shift();
+      const witch = state.fighters.find((f) => f.id === effect.witch);
+      const actor = state.fighters.find((f) => f.id === effect.actor);
+      witch.power -= 3 + tactics.hammerTax(state, witch);
+      tactics.use(state, side, "no-more-mutants");
+      actor.power -= effect.cost;
+      (state.usedPowers ||= []).push(effect.power);
+      log(state, "No More Mutants · " + effect.power + " has no effect", {
+        side,
+        fighter: witch.id,
+        target: actor.id,
+      });
+      break;
+    }
     case "nice-punch": {
       const effect = state.effects.shift();
       state.undo = [];
@@ -3255,7 +3350,7 @@ function act(state, side, action, random = randomInt) {
       (state.leadershipUses ||= { p1: [], p2: [] })[side].push(
         "blue:" + ally.id,
       );
-      log(state, "X-Men Blue · " + ally.name + " получает 1 Power", {
+      log(state, "X-Men Blue · " + ally.name + " gains 1 Power", {
         side,
         fighter: ally.id,
       });
@@ -3292,7 +3387,7 @@ function act(state, side, action, random = randomInt) {
       state.effects.shift();
       const ally = state.fighters.find((f) => f.id === value);
       combat.gain(ally, 1);
-      log(state, "Xavier's School · " + ally.name + " получает 1 Power", {
+      log(state, "Xavier's School · " + ally.name + " gains 1 Power", {
         side,
         fighter: ally.id,
       });
@@ -3335,7 +3430,7 @@ function act(state, side, action, random = randomInt) {
         )
       )
         state.effects.shift();
-      log(state, "From the Ruins · " + target.name + " получает 1 Power", {
+      log(state, "From the Ruins · " + target.name + " gains 1 Power", {
         side,
         fighter: target.id,
       });
@@ -3349,7 +3444,7 @@ function act(state, side, action, random = randomInt) {
         state.fighters,
         state.terrain,
       );
-      expect(rect, "Точка вне области размещения Metal Construct.");
+      expect(rect, "The point is outside the Metal Construct placement area.");
       state.effects.shift();
       state.terrain.push({
         ...rect,
@@ -3384,7 +3479,10 @@ function act(state, side, action, random = randomInt) {
         );
         const protector = state.fighters.find((f) => f.id === option.protector);
         state.effects.shift();
-        combat.spend(state, protector, option.cost);
+        if (option.tactic) {
+          protector.power -= option.cost;
+          tactics.use(state, protector.side, option.tactic);
+        } else combat.spend(state, protector, option.cost);
         log(state, option.power, {
           side,
           fighter: protector.id,
@@ -3407,7 +3505,7 @@ function act(state, side, action, random = randomInt) {
     case "tactic": {
       const actor = actorOf(state);
       const option = allowed[0].cards.find((c) => c.value === value);
-      expect(option, "Эта тактика недоступна.");
+      expect(option, "This tactic is not available.");
       checkpoint(state);
       tactics.activate(state, actor, option, action);
       if (state.effects?.some((e) => e.side !== side)) state.undo = [];
@@ -3476,7 +3574,7 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       combat.throwTerrain(state, effect, action.angle, random);
       state.undo = [];
-      log(state, "Бросок террейна · " + effect.name, { side });
+      log(state, "Terrain throw · " + effect.name, { side });
       break;
     }
     case "purge": {
@@ -3556,7 +3654,7 @@ function act(state, side, action, random = randomInt) {
         ))
           dealt += combat.damage(state, f, 1, dancer) || 0;
         combat.gain(dancer, dealt);
-        log(state, "Dance Party · " + dealt + " урона", {
+        log(state, "Dance Party · " + dealt + " damage", {
           side,
           fighter: dancer.id,
         });
@@ -3611,6 +3709,15 @@ function act(state, side, action, random = randomInt) {
     }
     case "skip-effect": {
       const effect = state.effects.shift();
+      if (effect.type === "no-more-mutants") {
+        act(
+          state,
+          effect.actorSide,
+          { ...effect.action, noMoreMutantsReviewed: true },
+          random,
+        );
+        return;
+      }
       if (effect.type === "partner") {
         endActivation(state, side, random, effect.applyBleed);
         break;
@@ -3672,7 +3779,7 @@ function act(state, side, action, random = randomInt) {
       const effect = state.effects.shift();
       const target = state.fighters.find((f) => f.id === effect.target);
       combat.condition(target, value);
-      log(state, target.name + " получает " + value, {
+      log(state, target.name + " gains " + value, {
         side,
         fighter: target.id,
       });
@@ -3699,11 +3806,11 @@ function act(state, side, action, random = randomInt) {
           state,
           geometry,
         ),
-        "Точка вне короткого Advance.",
+        "The point is outside a Short Advance.",
       );
       state.effects.shift();
       Object.assign(actor, point);
-      log(state, actor.name + " · бонусный Advance", {
+      log(state, actor.name + " · bonus Advance", {
         side,
         fighter: actor.id,
         point,
@@ -3713,7 +3820,7 @@ function act(state, side, action, random = randomInt) {
     case "power": {
       const actor = actorOf(state);
       const selected = allowed[0].powers.find((p) => p.value === value);
-      expect(selected, "Эта способность недоступна.");
+      expect(selected, "This superpower is not available.");
       powerMovement = selected.mode;
       const point = { x: action.x, y: action.y };
       const positioned =
@@ -3721,12 +3828,12 @@ function act(state, side, action, random = randomInt) {
       expect(
         !positioned ||
           combat.powerDestination(actor, selected, point, state, geometry),
-        "Недопустимая точка для способности.",
+        "Invalid point for this superpower.",
       );
       expect(
         !selected.targets ||
           selected.targets.some((t) => t.value === action.target),
-        "Эта цель недоступна.",
+        "This target is not available.",
       );
       let cost = selected.cost;
       if (selected.variableCost) {
@@ -3738,9 +3845,39 @@ function act(state, side, action, random = randomInt) {
           Number.isInteger(amount) &&
             amount >= minimum &&
             amount <= selected.maxPower,
-          "Укажите допустимое количество Power.",
+          "Specify a legal amount of Power.",
         );
         cost = amount + selected.tax;
+      }
+      const witch =
+        cost > 0 &&
+        !action.noMoreMutantsReviewed &&
+        tactics.available(state, other(side), "no-more-mutants") &&
+        state.fighters.find(
+          (f) =>
+            f.side !== side &&
+            f.slug === "scarlet-witch" &&
+            combat.usable(f) &&
+            geometry.within(f, actor, 5) &&
+            tactics.canSpend(state, f, 3),
+        );
+      if (witch) {
+        state.undo = [];
+        state.effects.unshift({
+          type: "no-more-mutants",
+          side: witch.side,
+          witch: witch.id,
+          actor: actor.id,
+          actorSide: side,
+          power: value,
+          cost,
+          action,
+        });
+        log(state, actor.name + " uses " + value + " · No More Mutants?", {
+          side,
+          fighter: actor.id,
+        });
+        break;
       }
       checkpoint(state);
       (state.usedPowers ||= []).push(value);
@@ -3749,7 +3886,7 @@ function act(state, side, action, random = randomInt) {
       if (selected.mode === "place" && selected.effect !== "projection")
         recordPlacement(state, actor.id);
       if (state.drops?.length) state.undo = [];
-      log(state, actor.name + " использует " + value, {
+      log(state, actor.name + " uses " + value, {
         side,
         fighter: actor.id,
         power: value,
@@ -3766,14 +3903,16 @@ function act(state, side, action, random = randomInt) {
         selected &&
           (!selected.targets ||
             selected.targets.some((t) => t.value === action.target)),
-        "Недопустимый Interact.",
+        "Invalid Interact.",
       );
       checkpoint(state);
       const freedom = value.startsWith("freedom|");
       const objective = state.objectives.find(
         (o) => o.id === (freedom ? value.split("|")[1] : value),
       );
-      if (!combat.isPower(actor, "X-Factor Investigations Workforce"))
+      if (mission.freeInteract(state, actor))
+        (state.firstClassUsed ||= []).push(actor.id);
+      else if (!combat.isPower(actor, "X-Factor Investigations Workforce"))
         actor.power -= 1;
       (state.interacted ||= []).push(objective.id);
       if (freedom) {
@@ -3789,7 +3928,7 @@ function act(state, side, action, random = randomInt) {
         combat.heal(state, target, 1);
         log(
           state,
-          actor.name + " · " + objective.name + " лечит " + target.name,
+          actor.name + " · " + objective.name + " heals " + target.name,
           { side, fighter: actor.id },
         );
       } else {
@@ -3801,7 +3940,7 @@ function act(state, side, action, random = randomInt) {
           combat.gain(actor, 1);
           (state.leadershipUses ||= { p1: [], p2: [] })[side].push("freedom");
         }
-        log(state, actor.name + " подбирает " + objective.name, {
+        log(state, actor.name + " picks up " + objective.name, {
           side,
           fighter: actor.id,
         });
@@ -3820,11 +3959,11 @@ function act(state, side, action, random = randomInt) {
           point.y >= 0 &&
           point.y <= 36 &&
           geometry.within(origin, point, 2),
-        "Положите жетон в пределах Range 2.",
+        "Place the token within Range 2.",
       );
       Object.assign(objective, { x: point.x, y: point.y });
       state.drops.shift();
-      log(state, "Размещён жетон " + objective.name, { side, point });
+      log(state, "Placed token " + objective.name, { side, point });
       if (!state.drops.length && state.afterDrops) {
         state.effects.push(state.afterDrops);
         delete state.afterDrops;
@@ -3847,7 +3986,7 @@ function act(state, side, action, random = randomInt) {
       const actor = actorOf(state);
       actor.conditions = actor.conditions.filter((c) => c !== value);
       state.actionsLeft -= 1;
-      log(state, actor.name + " снимает " + value, { side, fighter: actor.id });
+      log(state, actor.name + " removes " + value, { side, fighter: actor.id });
       break;
     }
     case "undo": {
@@ -3882,7 +4021,7 @@ function act(state, side, action, random = randomInt) {
         placements: {},
         decisionSide: other(side),
       });
-      log(state, "Пас", { side });
+      log(state, "Pass", { side });
       break;
   }
   if (state.phase === "finished") return;
@@ -4055,7 +4194,7 @@ function act(state, side, action, random = randomInt) {
             2,
             source,
           );
-          log(state, "Quick Draw · 2 урона", {
+          log(state, "Quick Draw · 2 damage", {
             side: source.side,
             fighter: source.id,
             target: effect.target,
@@ -4081,7 +4220,7 @@ function act(state, side, action, random = randomInt) {
       log(state, "Cosmic Vault · " + target.name + " · " + die, {
         side: target.side,
         fighter: target.id,
-        rolls: [{ label: "Бросок", faces: [die] }],
+        rolls: [{ label: "Roll", faces: [die] }],
       });
       if (die === "wild" || die === "critical") {
         combat.gain(target, 2);
@@ -4117,7 +4256,7 @@ function act(state, side, action, random = randomInt) {
           finishVolleyTarget(state, attack, attacker);
           if (!attack.volley && attack.coldSnapAction)
             state.effects.unshift(...coldSnapEvent(state, attacker));
-          log(state, "Can’t Catch Me · атака завершена", {
+          log(state, "Can’t Catch Me · attack ended", {
             side: target.side,
             fighter: target.id,
           });

@@ -217,7 +217,7 @@ test("Unglaublich Acrobatics adds two dice to a physical defense or a collision 
   act(dodge, "p1", { type: "throw-terrain", angle: 0 });
   act(dodge, "p2", { type: "acrobatic-dodge" }, () => 4);
   assert.equal(
-    dodge.log.find((e) => e.rolls?.[0].label === "Уклонение").rolls[0].faces
+    dodge.log.find((e) => e.rolls?.[0].label === "Dodge").rolls[0].faces
       .length,
     6,
   );
