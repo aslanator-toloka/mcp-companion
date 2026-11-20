@@ -17,7 +17,6 @@ function AlbumCard({ slot, compact = false }) {
           onError={() => setFailed(true)}
         />
       )}
-      <span className="album-card-group">{slot.group}</span>
       <span className="album-card-text">
         <span className="album-card-number">{slot.number}</span>
         <span className="album-card-name">{slot.name}</span>

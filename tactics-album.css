@@ -32,7 +32,7 @@
 .album-card-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
 .album-card-text{position:relative;margin-top:auto;display:flex;flex-direction:column;padding:28px 10px 10px;background:linear-gradient(to top,rgba(8,12,20,.92) 55%,rgba(8,12,20,0))}
 .album-card.compact .album-card-text{padding:22px 7px 7px}
-.album-card-group{position:relative;align-self:flex-start;max-width:calc(100% - 12px);margin:6px;padding:2px 6px;border-radius:4px;background:rgba(8,12,20,.78);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 .album-card-number{font-size:clamp(38px,6vw,64px);font-weight:800;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);font-variant-numeric:tabular-nums}
 .album-card.compact .album-card-number{font-size:32px}
 .album-card-name{margin-top:4px;font-size:13px;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
