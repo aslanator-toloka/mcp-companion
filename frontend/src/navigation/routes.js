@@ -108,6 +108,10 @@ export function createRoutes(s) {
       put("tab", purchases.tab, "wishlist");
       put("q", purchases.query);
     }
+    if (ui.screen === "album") {
+      put("page", s.album.page, 1);
+      put("q", s.album.query);
+    }
     if (ui.screen === "rosters") {
       put("q", rosters.filters.query);
       put("affiliation", rosters.filters.affiliation);
@@ -312,6 +316,7 @@ export function createRoutes(s) {
                 "battle",
                 "game",
                 "purchases",
+                "album",
                 "calculator",
               ],
               "tournaments",
@@ -345,6 +350,10 @@ export function createRoutes(s) {
           one(p.get("tab"), ["all", "purchased", "wishlist"], "wishlist"),
         );
         purchases.setQuery(p.get("q") || "");
+      }
+      if (screen === "album") {
+        s.album.setPage(p.get("page"));
+        s.album.setQuery(p.get("q") || "");
       }
       if (screen === "rosters") {
         for (const [field, key] of Object.entries({

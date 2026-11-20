@@ -10,6 +10,7 @@ import { PeerSessionStore } from "./peer.js";
 import { MapStore } from "./map.js";
 import { UIStore } from "./ui.js";
 import { PhotoImportStore } from "../photo-import/store.js";
+import { AlbumStore } from "./album.js";
 configure({ enforceActions: "always" });
 export const library = new LibraryStore();
 export const catalog = new CatalogStore(library);
@@ -34,6 +35,7 @@ export const photoImport = new PhotoImportStore({
   ui,
 });
 export const map = new MapStore(battle, catalog, ui);
+export const album = new AlbumStore(library, purchases, rosters, catalog);
 export const actions = new Proxy(
   {},
   {
@@ -54,5 +56,6 @@ window.MCPStores = {
   peer,
   photoImport,
   map,
+  album,
   ui,
 };

@@ -30,6 +30,7 @@ import {
   Screen,
 } from "./shell.jsx";
 import { ConnectedPurchases, ConnectedBoxDetail } from "./purchases.jsx";
+import { AlbumWorkspace } from "./album.jsx";
 // Persistent JSX shell; feature stores own state and route visibility.
 export const StaticShell = memo(function StaticShell() {
   return (
@@ -100,6 +101,9 @@ export const StaticShell = memo(function StaticShell() {
           </Screen>
           <Screen name="purchases" id="purchases-screen">
             <ConnectedPurchases />
+          </Screen>
+          <Screen name="album" id="album-screen">
+            <AlbumWorkspace />
           </Screen>
         </main>
       </div>

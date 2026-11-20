@@ -29,6 +29,7 @@ import {
   map,
   ui,
   photoImport,
+  album,
 } from "./stores/index.js";
 const KEY = "mcp-companion-catalog-v1";
 let navigation;
@@ -417,6 +418,7 @@ export async function initialize() {
       battle,
       peer,
       map,
+      album,
       ui,
     });
     navigation = new BrowserNavigation({ window, ...routes });

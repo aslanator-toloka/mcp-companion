@@ -20,6 +20,7 @@ export const Navigation = observer(function Navigation() {
       ? [["game", "10", "Game"]]
       : []),
     ["purchases", "09", "Запланированные покупки"],
+    ["album", "11", "Альбом тактик"],
   ];
   const selected =
     ui.screen === "catalog" ? (catalog.onlyOwned ? "mine" : "all") : ui.screen;
@@ -324,6 +325,7 @@ export const Screen = observer(function Screen({ name, children, ...props }) {
           game: "Game",
           tournaments: "Турнирный архив",
           purchases: "Запланированные покупки",
+          album: "Альбом тактик",
         }[name]
       }
       hidden={ui.screen !== name}

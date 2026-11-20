@@ -10,7 +10,8 @@
       "characters": [],
       "image": "assets/box-sets/ca09.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA09",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP162",
@@ -31,7 +32,29 @@
       ],
       "image": "assets/box-sets/cp162.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP162",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "gamma-burst",
+          "name": "Gamma Burst",
+          "amount": 1
+        },
+        {
+          "slug": "you-will-do-as-i-say-monster",
+          "name": "You Will Do As I Say, Monster",
+          "amount": 1
+        },
+        {
+          "slug": "mystic-menace",
+          "name": "Mystic Menace",
+          "amount": 1
+        },
+        {
+          "slug": "stronger-together",
+          "name": "Stronger Together",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP191",
@@ -57,7 +80,39 @@
       ],
       "image": "assets/box-sets/cp191.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP191",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "infinity-gem-bonded-soul",
+          "name": "Infinity Gem: Bonded Soul",
+          "amount": 1
+        },
+        {
+          "slug": "cosmic-awareness",
+          "name": "Cosmic Awareness",
+          "amount": 1
+        },
+        {
+          "slug": "power-couple",
+          "name": "Power Couple",
+          "amount": 1
+        },
+        {
+          "slug": "the-douglas-family",
+          "name": "The Douglas Family",
+          "amount": 1
+        },
+        {
+          "slug": "the-magus",
+          "name": "The Magus",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-mind",
+          "name": "Infinity Gem: Mind",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP100",
@@ -78,7 +133,29 @@
       ],
       "image": "assets/box-sets/cp100.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP100",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "on-patrol",
+          "name": "On Patrol",
+          "amount": 1
+        },
+        {
+          "slug": "foreign-assignment",
+          "name": "Foreign Assignment",
+          "amount": 1
+        },
+        {
+          "slug": "clean-up",
+          "name": "Clean Up",
+          "amount": 1
+        },
+        {
+          "slug": "double-agent",
+          "name": "Double Agent",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP37",
@@ -99,7 +176,24 @@
       ],
       "image": "assets/box-sets/cp37.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP37",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "spider-tracker",
+          "name": "Spider-Tracker",
+          "amount": 1
+        },
+        {
+          "slug": "the-cat-and-the-spider",
+          "name": "The Cat and the Spider",
+          "amount": 1
+        },
+        {
+          "slug": "aunt-mays-wheat-cakes",
+          "name": "Aunt May‘s Wheat Cakes",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP26",
@@ -109,7 +203,8 @@
       "characters": [],
       "image": "assets/box-sets/mcp26.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP26",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP152",
@@ -130,7 +225,29 @@
       ],
       "image": "assets/box-sets/cp152.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP152",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fallen",
+          "name": "Fallen",
+          "amount": 1
+        },
+        {
+          "slug": "battle-bound",
+          "name": "Battle Bound",
+          "amount": 1
+        },
+        {
+          "slug": "death-from-above",
+          "name": "Death From Above",
+          "amount": 1
+        },
+        {
+          "slug": "ultimate-sacrifice",
+          "name": "Ultimate Sacrifice",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP28",
@@ -151,7 +268,24 @@
       ],
       "image": "assets/box-sets/cp28.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP28",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "grievous-wounds",
+          "name": "Grievous Wounds",
+          "amount": 1
+        },
+        {
+          "slug": "rainbow-bridge",
+          "name": "Rainbow Bridge",
+          "amount": 1
+        },
+        {
+          "slug": "lovable-misfits",
+          "name": "Lovable Misfits",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP26",
@@ -172,7 +306,24 @@
       ],
       "image": "assets/box-sets/cp26.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP26",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "no-escape",
+          "name": "No Escape",
+          "amount": 1
+        },
+        {
+          "slug": "pym-particles",
+          "name": "Pym Particles",
+          "amount": 1
+        },
+        {
+          "slug": "reversal",
+          "name": "Reversal",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP107",
@@ -188,7 +339,24 @@
       ],
       "image": "assets/box-sets/cp107.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP107",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "immortal-servants",
+          "name": "Immortal Servants",
+          "amount": 1
+        },
+        {
+          "slug": "survival",
+          "name": "Survival",
+          "amount": 1
+        },
+        {
+          "slug": "the-first-one",
+          "name": "The First One",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP106",
@@ -198,7 +366,8 @@
       "characters": [],
       "image": "assets/box-sets/cp106.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP106",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP138",
@@ -229,7 +398,34 @@
       ],
       "image": "assets/box-sets/cp138.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP138",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "odins-blessing",
+          "name": "Odin's Blessing",
+          "amount": 1
+        },
+        {
+          "slug": "thunderwave",
+          "name": "Thunderwave",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-mind",
+          "name": "Infinity Gem: Mind",
+          "amount": 1
+        },
+        {
+          "slug": "doomed-prophecy",
+          "name": "Doomed Prophecy",
+          "amount": 1
+        },
+        {
+          "slug": "sibling-rivalry",
+          "name": "Sibling Rivalry",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP64",
@@ -290,7 +486,128 @@
       ],
       "image": "assets/box-sets/mcp64.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP64",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "brace-for-impact",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-2"
+        },
+        {
+          "slug": "meet-my-executioner",
+          "name": "Meet My Executioner",
+          "amount": 1,
+          "artwork": "meet-my-executioner"
+        },
+        {
+          "slug": "weapons-of-midgard",
+          "name": "Weapons of Midgard",
+          "amount": 1,
+          "artwork": "weapons-of-midgard"
+        },
+        {
+          "slug": "rainbow-bridge",
+          "name": "Rainbow Bridge",
+          "amount": 1,
+          "artwork": "rainbow-bridge-2"
+        },
+        {
+          "slug": "grievous-wounds",
+          "name": "Grievous Wounds",
+          "amount": 1,
+          "artwork": "grievous-wounds-5"
+        },
+        {
+          "slug": "odins-blessing",
+          "name": "Odin's Blessing",
+          "amount": 1,
+          "artwork": "odins-blessing-4"
+        },
+        {
+          "slug": "doomed-prophecy",
+          "name": "Doomed Prophecy",
+          "amount": 1,
+          "artwork": "doomed-prophecy-2"
+        },
+        {
+          "slug": "warriors-oath",
+          "name": "Warriors‘ Oath",
+          "amount": 1,
+          "artwork": "warriors-oath"
+        },
+        {
+          "slug": "freyjas-blessing",
+          "name": "Freyja‘s Blessing",
+          "amount": 1,
+          "artwork": "freyjas-blessing"
+        },
+        {
+          "slug": "heart-of-the-worthy",
+          "name": "Heart of the Worthy",
+          "amount": 1,
+          "artwork": "heart-of-the-worthy"
+        },
+        {
+          "slug": "giants-blood",
+          "name": "Giant‘s Blood",
+          "amount": 1,
+          "artwork": "giants-blood"
+        },
+        {
+          "slug": "for-a-limited-time-only",
+          "name": "For a Limited Time Only",
+          "amount": 1,
+          "artwork": "for-a-limited-time-only"
+        },
+        {
+          "slug": "tricksters-boon",
+          "name": "Trickster‘s Boon",
+          "amount": 1,
+          "artwork": "tricksters-boon"
+        },
+        {
+          "slug": "ride-of-the-valkyries",
+          "name": "Ride of the Valkyries",
+          "amount": 1,
+          "artwork": "ride-of-the-valkyries"
+        },
+        {
+          "slug": "warriors-frenzy",
+          "name": "Warrior‘s Frenzy",
+          "amount": 1,
+          "artwork": "warriors-frenzy"
+        },
+        {
+          "slug": "deeds-worthy-of-song",
+          "name": "Deeds Worthy of Song",
+          "amount": 1,
+          "artwork": "deeds-worthy-of-song"
+        },
+        {
+          "slug": "heavy-firepower",
+          "name": "Heavy Firepower",
+          "amount": 1,
+          "artwork": "heavy-firepower-6"
+        },
+        {
+          "slug": "recalibration-matrix",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-2"
+        },
+        {
+          "slug": "patch-up",
+          "name": "Patch Up",
+          "amount": 1,
+          "artwork": "patch-up-4"
+        },
+        {
+          "slug": "joint-effort",
+          "name": "Joint Effort",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP173",
@@ -316,7 +633,29 @@
       ],
       "image": "assets/box-sets/cp173.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP173",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fault-line",
+          "name": "Fault Line",
+          "amount": 1
+        },
+        {
+          "slug": "genetic-superiority",
+          "name": "Genetic Superiority",
+          "amount": 1
+        },
+        {
+          "slug": "mirage",
+          "name": "Mirage",
+          "amount": 1
+        },
+        {
+          "slug": "the-pawns-go-first",
+          "name": "The Pawns Go First",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP141",
@@ -347,7 +686,26 @@
       ],
       "image": "assets/box-sets/cp141.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP141",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "avengers-assemble-ca10",
+          "name": "Avengers Assemble",
+          "amount": 1
+        },
+        {
+          "slug": "ricochet-blast-cp141",
+          "name": "Ricochet Blast",
+          "amount": 1,
+          "artwork": "ricochet-blast-2"
+        },
+        {
+          "slug": "second-wind-cp141",
+          "name": "Second Wind",
+          "amount": 1,
+          "artwork": "second-wind-2"
+        }
+      ]
     },
     {
       "code": "MCP22",
@@ -378,7 +736,39 @@
       ],
       "image": "assets/box-sets/mcp22.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP22",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "gamma-launch",
+          "name": "Gamma Launch",
+          "amount": 1,
+          "artwork": "gamma-launch"
+        },
+        {
+          "slug": "anger-management",
+          "name": "Anger Management",
+          "amount": 1,
+          "artwork": "anger-management"
+        },
+        {
+          "slug": "till-the-end-of-the-line",
+          "name": "Till the End of the Line",
+          "amount": 1,
+          "artwork": "till-the-end-of-the-line"
+        },
+        {
+          "slug": "fall-back",
+          "name": "Fall Back",
+          "amount": 1,
+          "artwork": "fall-back"
+        },
+        {
+          "slug": "helios-laser-bombardment",
+          "name": "Helios Laser Bombardment",
+          "amount": 1,
+          "artwork": "helios-laser-bombardment"
+        }
+      ]
     },
     {
       "code": "CP76",
@@ -399,7 +789,19 @@
       ],
       "image": "assets/box-sets/cp76.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP76",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "scientific-method",
+          "name": "Scientific Method",
+          "amount": 1
+        },
+        {
+          "slug": "the-high-council",
+          "name": "The High Council",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP09",
@@ -425,7 +827,39 @@
       ],
       "image": "assets/box-sets/mcp09.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP09",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "a-perfect-future",
+          "name": "A Perfect Future",
+          "amount": 1
+        },
+        {
+          "slug": "building-the-mother-mold",
+          "name": "Building the Mother Mold",
+          "amount": 1
+        },
+        {
+          "slug": "extinction-event",
+          "name": "Extinction Event",
+          "amount": 1
+        },
+        {
+          "slug": "greater-than-the-sum",
+          "name": "Greater than the Sum",
+          "amount": 1
+        },
+        {
+          "slug": "know-thy-enemy",
+          "name": "Know Thy Enemy",
+          "amount": 1
+        },
+        {
+          "slug": "technological-jump-start",
+          "name": "Technological Jump-Start",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP95",
@@ -435,7 +869,8 @@
       "characters": [],
       "image": "assets/box-sets/cp95.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP95",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP130",
@@ -456,7 +891,24 @@
       ],
       "image": "assets/box-sets/cp130.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP130",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "rock-and-troll",
+          "name": "Rock and Troll",
+          "amount": 1
+        },
+        {
+          "slug": "skuttlebutt-on-me",
+          "name": "Skuttlebutt, on Me!",
+          "amount": 1
+        },
+        {
+          "slug": "brothers-in-arms",
+          "name": "Brothers in Arms",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP112",
@@ -477,7 +929,30 @@
       ],
       "image": "assets/box-sets/cp112.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP112",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "mass-transit",
+          "name": "Mass Transit",
+          "amount": 1
+        },
+        {
+          "slug": "mutant-traitor",
+          "name": "Mutant Traitor",
+          "amount": 1
+        },
+        {
+          "slug": "preserve-the-dream",
+          "name": "Preserve the Dream",
+          "amount": 1
+        },
+        {
+          "slug": "children-of-the-atom-cp112",
+          "name": "Children of the Atom",
+          "amount": 1,
+          "artwork": "children-of-the-atom-2"
+        }
+      ]
     },
     {
       "code": "CP34",
@@ -498,7 +973,29 @@
       ],
       "image": "assets/box-sets/cp34.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP34",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "inhuman-royal-family",
+          "name": "Inhuman Royal Family",
+          "amount": 1
+        },
+        {
+          "slug": "terrigenesis",
+          "name": "Terrigenesis",
+          "amount": 1
+        },
+        {
+          "slug": "attilan-rising",
+          "name": "Attilan Rising",
+          "amount": 1
+        },
+        {
+          "slug": "bitter-rivals",
+          "name": "Bitter Rivals",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP19",
@@ -519,7 +1016,29 @@
       ],
       "image": "assets/box-sets/cp19.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP19",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "marked-for-death",
+          "name": "Marked for Death",
+          "amount": 1
+        },
+        {
+          "slug": "mothership",
+          "name": "Mothership",
+          "amount": 1
+        },
+        {
+          "slug": "shhh",
+          "name": "Shhh...",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-space",
+          "name": "Infinity Gem: Space",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP159",
@@ -550,7 +1069,64 @@
       ],
       "image": "assets/box-sets/cp159.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP159",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "blood-to-spare-ca10",
+          "name": "Blood to Spare",
+          "amount": 1
+        },
+        {
+          "slug": "execute-ca10",
+          "name": "Execute",
+          "amount": 1
+        },
+        {
+          "slug": "price-of-failure-ca10",
+          "name": "Price of Failure",
+          "amount": 1
+        },
+        {
+          "slug": "marked-for-death-ca10",
+          "name": "Marked for Death",
+          "amount": 1
+        },
+        {
+          "slug": "mothership-ca10",
+          "name": "Mothership",
+          "amount": 1
+        },
+        {
+          "slug": "shhh-ca10",
+          "name": "Shhh...",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-space-ca10",
+          "name": "Infinity Gem: Space",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-time-ca10",
+          "name": "Infinity Gem: Time",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-mind-ca10",
+          "name": "Infinity Gem: Mind",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-reality-ca10",
+          "name": "Infinity Gem: Reality",
+          "amount": 1
+        },
+        {
+          "slug": "first-of-the-black-order-cp159",
+          "name": "First of the Black Order",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP07",
@@ -571,7 +1147,24 @@
       ],
       "image": "assets/box-sets/cp07.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP07",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "usurp-the-throne",
+          "name": "Usurp the Throne",
+          "amount": 1
+        },
+        {
+          "slug": "wakanda-forever",
+          "name": "Wakanda Forever",
+          "amount": 1
+        },
+        {
+          "slug": "battle-lust",
+          "name": "Battle Lust",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP158",
@@ -592,7 +1185,34 @@
       ],
       "image": "assets/box-sets/cp158.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP158",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "the-invaders",
+          "name": "The Invaders",
+          "amount": 1
+        },
+        {
+          "slug": "kings-command",
+          "name": "King‘s Command",
+          "amount": 1
+        },
+        {
+          "slug": "wisdom-of-the-ancestors",
+          "name": "Wisdom of the Ancestors",
+          "amount": 1
+        },
+        {
+          "slug": "strength-and-cunning",
+          "name": "Strength and Cunning",
+          "amount": 1
+        },
+        {
+          "slug": "princes-protection",
+          "name": "Prince‘s Protection",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP81",
@@ -613,7 +1233,24 @@
       ],
       "image": "assets/box-sets/cp81.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP81",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "first-of-the-black-order",
+          "name": "First of the Black Order",
+          "amount": 1
+        },
+        {
+          "slug": "psychic-shockwave",
+          "name": "Psychic Shockwave",
+          "amount": 1
+        },
+        {
+          "slug": "black-onslaught",
+          "name": "Black Onslaught",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP24",
@@ -623,7 +1260,27 @@
       "characters": [],
       "image": "assets/box-sets/mcp24.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP24",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "eye-for-an-eye",
+          "name": "Eye for an Eye",
+          "amount": 1,
+          "artwork": "eye-for-an-eye"
+        },
+        {
+          "slug": "dark-corruption",
+          "name": "Dark Corruption",
+          "amount": 1,
+          "artwork": "dark-corruption"
+        },
+        {
+          "slug": "unfinished-business",
+          "name": "Unfinished Business",
+          "amount": 1,
+          "artwork": "unfinished-business"
+        }
+      ]
     },
     {
       "code": "CP48",
@@ -644,7 +1301,24 @@
       ],
       "image": "assets/box-sets/cp48.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP48",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "banishment",
+          "name": "Banishment",
+          "amount": 1
+        },
+        {
+          "slug": "bats-the-ghost-hound",
+          "name": "Bats the Ghost Hound",
+          "amount": 1
+        },
+        {
+          "slug": "siege-of-darkness",
+          "name": "Siege of Darkness",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP129",
@@ -665,7 +1339,34 @@
       ],
       "image": "assets/box-sets/cp129.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP129",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "going-all-out",
+          "name": "Going All Out",
+          "amount": 1
+        },
+        {
+          "slug": "phase-manipulation",
+          "name": "Phase Manipulation",
+          "amount": 1
+        },
+        {
+          "slug": "strange-adventures",
+          "name": "Strange Adventures",
+          "amount": 1
+        },
+        {
+          "slug": "the-man-of-marvels",
+          "name": "The Man of Marvels",
+          "amount": 1
+        },
+        {
+          "slug": "the-ultimates",
+          "name": "The Ultimates",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP140",
@@ -696,7 +1397,50 @@
       ],
       "image": "assets/box-sets/cp140.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP140",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "weapon-x-program",
+          "name": "Weapon X Program",
+          "amount": 1
+        },
+        {
+          "slug": "magnetic-crush",
+          "name": "Magnetic Crush",
+          "amount": 1
+        },
+        {
+          "slug": "magnetic-refraction",
+          "name": "Magnetic Refraction",
+          "amount": 1
+        },
+        {
+          "slug": "the-books-of-truth",
+          "name": "The Books of Truth",
+          "amount": 1
+        },
+        {
+          "slug": "heave-ho-cp42",
+          "name": "Heave Ho",
+          "amount": 1,
+          "artwork": "heave-ho-2"
+        },
+        {
+          "slug": "asteroid-m",
+          "name": "Asteroid M",
+          "amount": 1
+        },
+        {
+          "slug": "deception",
+          "name": "Deception",
+          "amount": 1
+        },
+        {
+          "slug": "x-ceptional-healing",
+          "name": "X-Ceptional Healing",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP30",
@@ -717,7 +1461,24 @@
       ],
       "image": "assets/box-sets/cp30.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP30",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "acute-senses",
+          "name": "Acute Senses",
+          "amount": 1
+        },
+        {
+          "slug": "climbing-gear",
+          "name": "Climbing Gear",
+          "amount": 1
+        },
+        {
+          "slug": "cruelty",
+          "name": "Cruelty",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP142",
@@ -748,7 +1509,26 @@
       ],
       "image": "assets/box-sets/cp142.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP142",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "dark-reign-ca10",
+          "name": "Dark Reign",
+          "amount": 1
+        },
+        {
+          "slug": "the-age-of-ultron-cp142",
+          "name": "The Age of Ultron",
+          "amount": 1,
+          "artwork": "the-age-of-ultron-2"
+        },
+        {
+          "slug": "cosmic-invigoration-cp142",
+          "name": "Cosmic Invigoration",
+          "amount": 1,
+          "artwork": "cosmic-invigoration-2"
+        }
+      ]
     },
     {
       "code": "CP47",
@@ -769,7 +1549,30 @@
       ],
       "image": "assets/box-sets/cp47.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP47",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "dirty-work",
+          "name": "Dirty Work",
+          "amount": 1
+        },
+        {
+          "slug": "warpath",
+          "name": "Warpath",
+          "amount": 1
+        },
+        {
+          "slug": "recalibration-matrix-cp47",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-3"
+        },
+        {
+          "slug": "cat-and-mouse",
+          "name": "Cat and Mouse",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP05",
@@ -805,7 +1608,45 @@
       ],
       "image": "assets/box-sets/mcp05.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP05",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "the-air-force",
+          "name": "The Air Force",
+          "amount": 1,
+          "artwork": "the-air-force-2"
+        },
+        {
+          "slug": "pym-particles",
+          "name": "Pym Particles",
+          "amount": 1,
+          "artwork": "pym-particles-2"
+        },
+        {
+          "slug": "a-force-assemble",
+          "name": "A-Force Assemble!",
+          "amount": 1,
+          "artwork": "a-force-assemble-2"
+        },
+        {
+          "slug": "agents-of-smash",
+          "name": "Agents of S.M.A.S.H.",
+          "amount": 1,
+          "artwork": "agents-of-smash"
+        },
+        {
+          "slug": "special-delivery",
+          "name": "Special Delivery",
+          "amount": 1,
+          "artwork": "special-delivery-2"
+        },
+        {
+          "slug": "stalwart-determination",
+          "name": "Stalwart Determination",
+          "amount": 1,
+          "artwork": "stalwart-determination-2"
+        }
+      ]
     },
     {
       "code": "CP77",
@@ -826,7 +1667,19 @@
       ],
       "image": "assets/box-sets/cp77.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP77",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "a-new-age",
+          "name": "A New Age",
+          "amount": 1
+        },
+        {
+          "slug": "over-the-top",
+          "name": "Over The Top",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP38",
@@ -847,7 +1700,29 @@
       ],
       "image": "assets/box-sets/cp38.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP38",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "eyes-on-the-prize",
+          "name": "Eyes on the Prize",
+          "amount": 1
+        },
+        {
+          "slug": "tactical-maneuvers",
+          "name": "Tactical Maneuvers",
+          "amount": 1
+        },
+        {
+          "slug": "the-air-force",
+          "name": "The Air Force",
+          "amount": 1
+        },
+        {
+          "slug": "bird-of-prey",
+          "name": "Bird of Prey",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CA10",
@@ -857,7 +1732,409 @@
       "characters": [],
       "image": "assets/box-sets/ca10.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA10",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "a-force-assemble-ca10",
+          "name": "A-Force Assemble!",
+          "amount": 1
+        },
+        {
+          "slug": "advanced-r-and-d-ca10",
+          "name": "Advanced R&D",
+          "amount": 1
+        },
+        {
+          "slug": "agents-of-smash-ca10",
+          "name": "Agents of S.M.A.S.H.",
+          "amount": 1
+        },
+        {
+          "slug": "aim-lackeys-ca10",
+          "name": "A.I.M. Lackeys",
+          "amount": 1
+        },
+        {
+          "slug": "all-according-to-plan-ca10",
+          "name": "All According To Plan",
+          "amount": 1
+        },
+        {
+          "slug": "all-webbed-up-ca10",
+          "name": "All Webbed Up",
+          "amount": 1
+        },
+        {
+          "slug": "anger-management-ca10",
+          "name": "Anger Management",
+          "amount": 1
+        },
+        {
+          "slug": "attilan-rising-ca10",
+          "name": "Attilan Rising",
+          "amount": 1
+        },
+        {
+          "slug": "avengers-assemble-ca10",
+          "name": "Avengers Assemble",
+          "amount": 1
+        },
+        {
+          "slug": "blood-red-and-personal-ca10",
+          "name": "Blood Red and Personal",
+          "amount": 1
+        },
+        {
+          "slug": "blood-to-spare-ca10",
+          "name": "Blood to Spare",
+          "amount": 1
+        },
+        {
+          "slug": "brace-for-impact-ca10",
+          "name": "Brace for Impact",
+          "amount": 1
+        },
+        {
+          "slug": "cosmic-invigoration-ca10",
+          "name": "Cosmic Invigoration",
+          "amount": 1
+        },
+        {
+          "slug": "crew-of-the-milano-ca10",
+          "name": "Crew of the Milano",
+          "amount": 1
+        },
+        {
+          "slug": "cruelty-ca10",
+          "name": "Cruelty",
+          "amount": 1
+        },
+        {
+          "slug": "dark-reign-ca10",
+          "name": "Dark Reign",
+          "amount": 1
+        },
+        {
+          "slug": "daughters-of-thanos-ca10",
+          "name": "Daughters of Thanos",
+          "amount": 1
+        },
+        {
+          "slug": "deadly-duo-ca10",
+          "name": "Deadly Duo",
+          "amount": 1
+        },
+        {
+          "slug": "deal-with-the-devil-ca10",
+          "name": "Deal With the Devil",
+          "amount": 1
+        },
+        {
+          "slug": "disarm-ca10",
+          "name": "Disarm",
+          "amount": 1
+        },
+        {
+          "slug": "doomed-prophecy-ca10",
+          "name": "Doomed Prophecy",
+          "amount": 1
+        },
+        {
+          "slug": "elemental-infusion-ca10",
+          "name": "Elemental Infusion",
+          "amount": 1
+        },
+        {
+          "slug": "escort-to-safety-ca10",
+          "name": "Escort to Safety",
+          "amount": 1
+        },
+        {
+          "slug": "execute-ca10",
+          "name": "Execute",
+          "amount": 1
+        },
+        {
+          "slug": "face-me-ca10",
+          "name": "Face Me",
+          "amount": 1
+        },
+        {
+          "slug": "follow-me-ca10",
+          "name": "Follow Me",
+          "amount": 1
+        },
+        {
+          "slug": "gamma-launch-ca10",
+          "name": "Gamma Launch",
+          "amount": 1
+        },
+        {
+          "slug": "heave-ho-ca10",
+          "name": "Heave Ho",
+          "amount": 1
+        },
+        {
+          "slug": "heavy-firepower-ca10",
+          "name": "Heavy Firepower",
+          "amount": 1
+        },
+        {
+          "slug": "highway-to-hell-ca10",
+          "name": "Highway to Hell",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-mind-ca10",
+          "name": "Infinity Gem: Mind",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-power-ca10",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-reality-ca10",
+          "name": "Infinity Gem: Reality",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-soul-ca10",
+          "name": "Infinity Gem: Soul",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-space-ca10",
+          "name": "Infinity Gem: Space",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-time-ca10",
+          "name": "Infinity Gem: Time",
+          "amount": 1
+        },
+        {
+          "slug": "inspiring-monologue-ca10",
+          "name": "Inspiring Monologue",
+          "amount": 1
+        },
+        {
+          "slug": "last-minute-save-ca10",
+          "name": "Last-Minute Save",
+          "amount": 1
+        },
+        {
+          "slug": "lethal-protector-ca10",
+          "name": "Lethal Protector",
+          "amount": 1
+        },
+        {
+          "slug": "lovable-misfits-ca10",
+          "name": "Lovable Misfits",
+          "amount": 1
+        },
+        {
+          "slug": "marked-for-death-ca10",
+          "name": "Marked for Death",
+          "amount": 1
+        },
+        {
+          "slug": "mission-objective-ca10",
+          "name": "Mission Objective",
+          "amount": 1
+        },
+        {
+          "slug": "mothership-ca10",
+          "name": "Mothership",
+          "amount": 1
+        },
+        {
+          "slug": "no-matter-the-cost-ca10",
+          "name": "No Matter the Cost",
+          "amount": 1
+        },
+        {
+          "slug": "odins-blessing-ca10",
+          "name": "Odin‘s Blessing",
+          "amount": 1
+        },
+        {
+          "slug": "one-two-punch-ca10",
+          "name": "One-Two Punch",
+          "amount": 1
+        },
+        {
+          "slug": "patch-up-ca10",
+          "name": "Patch Up",
+          "amount": 1
+        },
+        {
+          "slug": "pentagram-of-farallah-ca10",
+          "name": "Pentagram of Farallah",
+          "amount": 1
+        },
+        {
+          "slug": "price-of-failure-ca10",
+          "name": "Price of Failure",
+          "amount": 1
+        },
+        {
+          "slug": "professionals-ca10",
+          "name": "Professionals",
+          "amount": 1
+        },
+        {
+          "slug": "psychic-fortress-ca10",
+          "name": "Psychic Fortress",
+          "amount": 1
+        },
+        {
+          "slug": "psychic-shielding-device-psd-ca10",
+          "name": "Psychic Shielding Device (P.S.D.)",
+          "amount": 1
+        },
+        {
+          "slug": "pym-particles-ca10",
+          "name": "Pym Particles",
+          "amount": 1
+        },
+        {
+          "slug": "rainbow-bridge-ca10",
+          "name": "Rainbow Bridge",
+          "amount": 1
+        },
+        {
+          "slug": "recalibration-matrix-ca10",
+          "name": "Recalibration Matrix",
+          "amount": 1
+        },
+        {
+          "slug": "ricochet-blast-ca10",
+          "name": "Ricochet Blast",
+          "amount": 1
+        },
+        {
+          "slug": "second-wind-ca10",
+          "name": "Second Wind",
+          "amount": 1
+        },
+        {
+          "slug": "seven-suns-of-cinnibus-ca10",
+          "name": "Seven Suns of Cinnibus",
+          "amount": 1
+        },
+        {
+          "slug": "shadow-organization-ca10",
+          "name": "Shadow Organization",
+          "amount": 1
+        },
+        {
+          "slug": "shhh-ca10",
+          "name": "Shhh...",
+          "amount": 1
+        },
+        {
+          "slug": "smash-ca10",
+          "name": "Smash",
+          "amount": 1
+        },
+        {
+          "slug": "special-delivery-ca10",
+          "name": "Special Delivery",
+          "amount": 1
+        },
+        {
+          "slug": "stalwart-determination-ca10",
+          "name": "Stalwart Determination",
+          "amount": 1
+        },
+        {
+          "slug": "sucker-ca10",
+          "name": "Sucker",
+          "amount": 1
+        },
+        {
+          "slug": "terrigenesis-ca10",
+          "name": "Terrigenesis",
+          "amount": 1
+        },
+        {
+          "slug": "the-age-of-ultron-ca10",
+          "name": "The Age of Ultron",
+          "amount": 1
+        },
+        {
+          "slug": "till-the-end-of-the-line-ca10",
+          "name": "Till the End of the Line",
+          "amount": 1
+        },
+        {
+          "slug": "trip-up-ca10",
+          "name": "Trip Up",
+          "amount": 1
+        },
+        {
+          "slug": "uneasy-allies-ca10",
+          "name": "Uneasy Allies",
+          "amount": 1
+        },
+        {
+          "slug": "usurp-the-throne-ca10",
+          "name": "Usurp the Throne",
+          "amount": 1
+        },
+        {
+          "slug": "vapors-of-valtorr-ca10",
+          "name": "Vapors of Valtorr",
+          "amount": 1
+        },
+        {
+          "slug": "vibranium-shielding-ca10",
+          "name": "Vibranium Shielding",
+          "amount": 1
+        },
+        {
+          "slug": "we-are-groot-ca10",
+          "name": "We Are Groot",
+          "amount": 1
+        },
+        {
+          "slug": "well-laid-plans-ca10",
+          "name": "Well-Laid Plans",
+          "amount": 1
+        },
+        {
+          "slug": "inhuman-royal-family-ca10",
+          "name": "Inhuman Royal Family",
+          "amount": 1
+        },
+        {
+          "slug": "power-of-the-cosmos-ca10",
+          "name": "Power of the Cosmos",
+          "amount": 1
+        },
+        {
+          "slug": "sacrifice-ca10",
+          "name": "Sacrifice",
+          "amount": 1
+        },
+        {
+          "slug": "sibling-rivalry-ca10",
+          "name": "Sibling Rivalry",
+          "amount": 1
+        },
+        {
+          "slug": "thunderwave-ca10",
+          "name": "Thunderwave",
+          "amount": 1
+        },
+        {
+          "slug": "wakanda-forever-ca10",
+          "name": "Wakanda Forever",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP57",
@@ -878,7 +2155,24 @@
       ],
       "image": "assets/box-sets/cp57.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP57",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fastball-special",
+          "name": "Fastball Special!",
+          "amount": 1
+        },
+        {
+          "slug": "indomitable",
+          "name": "Indomitable",
+          "amount": 1
+        },
+        {
+          "slug": "journey-through-limbo",
+          "name": "Journey Through Limbo",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP221",
@@ -909,7 +2203,53 @@
       ],
       "image": "assets/box-sets/cp221.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP221",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "plane-of-pohldahk",
+          "name": "Plane of Pohldahk",
+          "amount": 1
+        },
+        {
+          "slug": "astral-ring",
+          "name": "Astral Ring",
+          "amount": 1
+        },
+        {
+          "slug": "bane-of-damballah",
+          "name": "Bane of Damballah",
+          "amount": 1,
+          "artwork": "bane-of-damballah-2"
+        },
+        {
+          "slug": "orb-of-agamotto",
+          "name": "Orb of Agamotto",
+          "amount": 1,
+          "artwork": "orb-of-agamotto-2"
+        },
+        {
+          "slug": "book-of-cagliostro",
+          "name": "Book of Cagliostro",
+          "amount": 1,
+          "artwork": "book-of-cagliostro-2"
+        },
+        {
+          "slug": "iron-bound-books-of-shuma-gorath",
+          "name": "Iron-Bound Books of Shuma-Gorath",
+          "amount": 1
+        },
+        {
+          "slug": "the-bar-with-no-doors",
+          "name": "The Bar With No Doors",
+          "amount": 1
+        },
+        {
+          "slug": "wand-of-watoomb",
+          "name": "Wand of Watoomb",
+          "amount": 1,
+          "artwork": "wand-of-watoomb-2"
+        }
+      ]
     },
     {
       "code": "CP01",
@@ -970,7 +2310,109 @@
       ],
       "image": "assets/box-sets/cp01.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP01",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "disarm",
+          "name": "Disarm",
+          "amount": 1
+        },
+        {
+          "slug": "drop-off",
+          "name": "Drop Off",
+          "amount": 1
+        },
+        {
+          "slug": "escort-to-safety",
+          "name": "Escort to Safety",
+          "amount": 1
+        },
+        {
+          "slug": "follow-me",
+          "name": "Follow Me",
+          "amount": 1
+        },
+        {
+          "slug": "heave-ho",
+          "name": "Heave Ho",
+          "amount": 1
+        },
+        {
+          "slug": "inspiring-monologue",
+          "name": "Inspiring Monologue",
+          "amount": 1
+        },
+        {
+          "slug": "mission-objective",
+          "name": "Mission Objective",
+          "amount": 1
+        },
+        {
+          "slug": "one-two-punch",
+          "name": "One-Two Punch",
+          "amount": 1
+        },
+        {
+          "slug": "patch-up",
+          "name": "Patch Up",
+          "amount": 1
+        },
+        {
+          "slug": "second-wind",
+          "name": "Second Wind",
+          "amount": 1
+        },
+        {
+          "slug": "smash",
+          "name": "Smash",
+          "amount": 1
+        },
+        {
+          "slug": "sucker",
+          "name": "Sucker",
+          "amount": 1
+        },
+        {
+          "slug": "the-age-of-ultron",
+          "name": "The Age of Ultron",
+          "amount": 1
+        },
+        {
+          "slug": "trip-up",
+          "name": "Trip Up",
+          "amount": 1
+        },
+        {
+          "slug": "ricochet-blast",
+          "name": "Ricochet Blast",
+          "amount": 1
+        },
+        {
+          "slug": "avengers-assemble",
+          "name": "Avengers Assemble",
+          "amount": 1
+        },
+        {
+          "slug": "brace-for-impact",
+          "name": "Brace for Impact",
+          "amount": 1
+        },
+        {
+          "slug": "cosmic-invigoration",
+          "name": "Cosmic Invigoration",
+          "amount": 1
+        },
+        {
+          "slug": "dark-reign",
+          "name": "Dark Reign",
+          "amount": 1
+        },
+        {
+          "slug": "sacrifice",
+          "name": "Sacrifice",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP15",
@@ -991,7 +2433,29 @@
       ],
       "image": "assets/box-sets/cp15.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP15",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "execute",
+          "name": "Execute",
+          "amount": 1
+        },
+        {
+          "slug": "price-of-failure",
+          "name": "Price of Failure",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-time",
+          "name": "Infinity Gem: Time",
+          "amount": 1
+        },
+        {
+          "slug": "blood-to-spare",
+          "name": "Blood to Spare",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP90",
@@ -1007,7 +2471,24 @@
       ],
       "image": "assets/box-sets/cp90.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP90",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "galaxys-greatest",
+          "name": "Galaxy‘s Greatest",
+          "amount": 1
+        },
+        {
+          "slug": "its-time-travel-dont-ask",
+          "name": "It‘s Time Travel... Don‘t Ask",
+          "amount": 1
+        },
+        {
+          "slug": "servants-of-the-titan",
+          "name": "Servants of the Titan",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP187",
@@ -1017,7 +2498,8 @@
       "characters": [],
       "image": "assets/box-sets/cp187.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP187",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP22",
@@ -1027,7 +2509,8 @@
       "characters": [],
       "image": "assets/box-sets/cp22.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP22",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP44",
@@ -1037,7 +2520,8 @@
       "characters": [],
       "image": "assets/box-sets/cp44.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP44",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP214",
@@ -1068,7 +2552,37 @@
       ],
       "image": "assets/box-sets/cp214.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP214",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "psychic-fortress",
+          "name": "Psychic Fortress",
+          "amount": 1
+        },
+        {
+          "slug": "all-according-to-plan",
+          "name": "All According To Plan",
+          "amount": 1,
+          "artwork": "all-according-to-plan-2"
+        },
+        {
+          "slug": "shadow-organization",
+          "name": "Shadow Organization",
+          "amount": 1,
+          "artwork": "shadow-organization-2"
+        },
+        {
+          "slug": "hoods-gang",
+          "name": "Hood's Gang",
+          "amount": 1,
+          "artwork": "hoods-gang-2"
+        },
+        {
+          "slug": "cruelty",
+          "name": "Cruelty",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP20",
@@ -1099,7 +2613,45 @@
       ],
       "image": "assets/box-sets/mcp20.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP20",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "supersonic-annihilator",
+          "name": "Supersonic Annihilator",
+          "amount": 1,
+          "artwork": "supersonic-annihilator"
+        },
+        {
+          "slug": "shuriken-arashi",
+          "name": "Shuriken Arashi",
+          "amount": 1,
+          "artwork": "shuriken-arashi"
+        },
+        {
+          "slug": "vendetta",
+          "name": "Vendetta",
+          "amount": 1,
+          "artwork": "vendetta-2"
+        },
+        {
+          "slug": "bounty-hunters",
+          "name": "Bounty Hunters",
+          "amount": 1,
+          "artwork": "bounty-hunters-2"
+        },
+        {
+          "slug": "cruel-tutelage",
+          "name": "Cruel Tutelage",
+          "amount": 1,
+          "artwork": "cruel-tutelage-2"
+        },
+        {
+          "slug": "no-mercy",
+          "name": "No Mercy",
+          "amount": 1,
+          "artwork": "no-mercy-2"
+        }
+      ]
     },
     {
       "code": "CP88",
@@ -1120,7 +2672,24 @@
       ],
       "image": "assets/box-sets/cp88.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP88",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fusion-caster",
+          "name": "Fusion Caster",
+          "amount": 1
+        },
+        {
+          "slug": "winter-rush",
+          "name": "Winter Rush",
+          "amount": 1
+        },
+        {
+          "slug": "dark-aura-manifestation",
+          "name": "Dark Aura Manifestation",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP35",
@@ -1141,7 +2710,19 @@
       ],
       "image": "assets/box-sets/cp35.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP35",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "elemental-infusion",
+          "name": "Elemental Infusion",
+          "amount": 1
+        },
+        {
+          "slug": "last-minute-save",
+          "name": "Last-Minute Save",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP41",
@@ -1162,7 +2743,24 @@
       ],
       "image": "assets/box-sets/cp41.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP41",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "first-class",
+          "name": "First Class",
+          "amount": 1
+        },
+        {
+          "slug": "children-of-the-atom",
+          "name": "Children of the Atom",
+          "amount": 1
+        },
+        {
+          "slug": "to-me-my-x-men",
+          "name": "To Me My X-Men",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP12",
@@ -1172,7 +2770,8 @@
       "characters": [],
       "image": "assets/box-sets/mcp12.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP12",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP185",
@@ -1182,7 +2781,8 @@
       "characters": [],
       "image": "assets/box-sets/cp185.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP185",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP45",
@@ -1203,7 +2803,24 @@
       ],
       "image": "assets/box-sets/cp45.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP45",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "pretty-sneaky-sis",
+          "name": "Pretty Sneaky, Sis",
+          "amount": 1
+        },
+        {
+          "slug": "yoink",
+          "name": "Yoink",
+          "amount": 1
+        },
+        {
+          "slug": "chimichangas",
+          "name": "Chimichangas",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP219",
@@ -1239,7 +2856,56 @@
       ],
       "image": "assets/box-sets/cp219.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP219",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "heroes-for-hire",
+          "name": "Heroes for Hire",
+          "amount": 1
+        },
+        {
+          "slug": "pentagram-of-farallah",
+          "name": "Pentagram of Farallah",
+          "amount": 1,
+          "artwork": "pentagram-of-farallah-2"
+        },
+        {
+          "slug": "seven-suns-of-cinnibus",
+          "name": "Seven Suns of Cinnibus",
+          "amount": 1,
+          "artwork": "seven-suns-of-cinnibus-2"
+        },
+        {
+          "slug": "vapors-of-valtorr",
+          "name": "Vapors of Valtorr",
+          "amount": 1
+        },
+        {
+          "slug": "mystic-ward",
+          "name": "Mystic Ward",
+          "amount": 1
+        },
+        {
+          "slug": "street-smarts",
+          "name": "Street Smarts",
+          "amount": 1
+        },
+        {
+          "slug": "cover-me",
+          "name": "Cover Me",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-soul",
+          "name": "Infinity Gem: Soul",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-time",
+          "name": "Infinity Gem: Time",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP02",
@@ -1249,7 +2915,8 @@
       "characters": [],
       "image": "assets/box-sets/cp02.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP02",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP269",
@@ -1259,7 +2926,8 @@
       "characters": [],
       "image": "assets/box-sets/cp269.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP269",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "MCP11",
@@ -1269,7 +2937,8 @@
       "characters": [],
       "image": "assets/box-sets/mcp11.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP11",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP67",
@@ -1290,7 +2959,29 @@
       ],
       "image": "assets/box-sets/cp67.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP67",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "the-bar-with-no-doors",
+          "name": "The Bar With No Doors",
+          "amount": 1
+        },
+        {
+          "slug": "wand-of-watoomb",
+          "name": "Wand of Watoomb",
+          "amount": 1
+        },
+        {
+          "slug": "book-of-cagliostro",
+          "name": "Book of Cagliostro",
+          "amount": 1
+        },
+        {
+          "slug": "iron-bound-books-of-shuma-gorath",
+          "name": "Iron-Bound Books of Shuma-Gorath",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP23",
@@ -1311,7 +3002,29 @@
       ],
       "image": "assets/box-sets/cp23.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP23",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "seven-suns-of-cinnibus",
+          "name": "Seven Suns of Cinnibus",
+          "amount": 1
+        },
+        {
+          "slug": "vapors-of-valtorr",
+          "name": "Vapors of Valtorr",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-soul",
+          "name": "Infinity Gem: Soul",
+          "amount": 1
+        },
+        {
+          "slug": "pentagram-of-farallah",
+          "name": "Pentagram of Farallah",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP65",
@@ -1332,7 +3045,24 @@
       ],
       "image": "assets/box-sets/cp65.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP65",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "hoods-gang",
+          "name": "Hood's Gang",
+          "amount": 1
+        },
+        {
+          "slug": "plane-of-pohldahk",
+          "name": "Plane of Pohldahk",
+          "amount": 1
+        },
+        {
+          "slug": "seance",
+          "name": "Séance",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK09",
@@ -1342,7 +3072,8 @@
       "characters": [],
       "image": "assets/box-sets/ck09.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK09",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP33",
@@ -1358,7 +3089,19 @@
       ],
       "image": "assets/box-sets/cp33.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP33",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "dark-empowerment",
+          "name": "Dark Empowerment",
+          "amount": 1
+        },
+        {
+          "slug": "dark-restoration",
+          "name": "Dark Restoration",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP217",
@@ -1374,7 +3117,19 @@
       ],
       "image": "assets/box-sets/cp217.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP217",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "dark-empowerment",
+          "name": "Dark Empowerment",
+          "amount": 1
+        },
+        {
+          "slug": "dark-restoration",
+          "name": "Dark Restoration",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP20",
@@ -1395,7 +3150,24 @@
       ],
       "image": "assets/box-sets/cp20.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP20",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "no-matter-the-cost",
+          "name": "No Matter the Cost",
+          "amount": 1
+        },
+        {
+          "slug": "unearthly-rage",
+          "name": "Unearthly Rage",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-power",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP143",
@@ -1466,7 +3238,115 @@
       ],
       "image": "assets/box-sets/cp143.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP143",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "battle-plan",
+          "name": "Battle Plan",
+          "amount": 1
+        },
+        {
+          "slug": "cosmic-obliteration",
+          "name": "Cosmic Obliteration",
+          "amount": 1
+        },
+        {
+          "slug": "dig-in",
+          "name": "Dig In",
+          "amount": 1
+        },
+        {
+          "slug": "i-am-a-baron-after-all",
+          "name": "I Am A Baron, After All",
+          "amount": 1
+        },
+        {
+          "slug": "repulsor-refraction",
+          "name": "Repulsor Refraction",
+          "amount": 1
+        },
+        {
+          "slug": "reserve-members",
+          "name": "Reserve Members",
+          "amount": 1
+        },
+        {
+          "slug": "stark-armory",
+          "name": "Stark Armory",
+          "amount": 1
+        },
+        {
+          "slug": "this-is-our-day",
+          "name": "This Is Our Day",
+          "amount": 1
+        },
+        {
+          "slug": "vertical-assistance",
+          "name": "Vertical Assistance",
+          "amount": 1
+        },
+        {
+          "slug": "go-get-em-tiger",
+          "name": "Go Get ‘em Tiger",
+          "amount": 1
+        },
+        {
+          "slug": "overcharge",
+          "name": "Overcharge",
+          "amount": 1
+        },
+        {
+          "slug": "recalibration-matrix-cp143",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-2"
+        },
+        {
+          "slug": "patch-up-cp143",
+          "name": "Patch Up",
+          "amount": 1,
+          "artwork": "patch-up-2"
+        },
+        {
+          "slug": "dark-reign-cp143",
+          "name": "Dark Reign",
+          "amount": 1,
+          "artwork": "dark-reign-2"
+        },
+        {
+          "slug": "brace-for-impact-cp143",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-2"
+        },
+        {
+          "slug": "avengers-assemble-cp143",
+          "name": "Avengers Assemble",
+          "amount": 1,
+          "artwork": "avengers-assemble-2"
+        },
+        {
+          "slug": "glory-of-ultron",
+          "name": "Glory of Ultron",
+          "amount": 1
+        },
+        {
+          "slug": "soldat-activated",
+          "name": "Soldat Activated",
+          "amount": 1
+        },
+        {
+          "slug": "joint-effort",
+          "name": "Joint Effort",
+          "amount": 1
+        },
+        {
+          "slug": "heavy-firepower-cp143",
+          "name": "Heavy Firepower",
+          "amount": 1,
+          "artwork": "heavy-firepower-2"
+        }
+      ]
     },
     {
       "code": "CP168",
@@ -1492,7 +3372,29 @@
       ],
       "image": "assets/box-sets/cp168.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP168",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "extreme-measures",
+          "name": "Extreme Measures",
+          "amount": 1
+        },
+        {
+          "slug": "parts-of-a-hole",
+          "name": "Parts of a Hole",
+          "amount": 1
+        },
+        {
+          "slug": "totem-of-the-tiger-god",
+          "name": "Totem of the Tiger God",
+          "amount": 1
+        },
+        {
+          "slug": "the-night-life",
+          "name": "The Night Life",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP156",
@@ -1533,7 +3435,39 @@
       ],
       "image": "assets/box-sets/cp156.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP156",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "custom-upgrades",
+          "name": "Custom Upgrades",
+          "amount": 1
+        },
+        {
+          "slug": "founding-members",
+          "name": "Founding Members",
+          "amount": 1
+        },
+        {
+          "slug": "static-arc",
+          "name": "Static Arc",
+          "amount": 1
+        },
+        {
+          "slug": "surprise-webhead",
+          "name": "Surprise, Webhead",
+          "amount": 1
+        },
+        {
+          "slug": "rejuvenation",
+          "name": "Rejuvenation",
+          "amount": 1
+        },
+        {
+          "slug": "strategic-retreat",
+          "name": "Strategic Retreat",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP186",
@@ -1554,7 +3488,19 @@
       ],
       "image": "assets/box-sets/cp186.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP186",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "covering-fire",
+          "name": "Covering Fire",
+          "amount": 1
+        },
+        {
+          "slug": "dimensional-quagmire",
+          "name": "Dimensional Quagmire",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP103",
@@ -1575,7 +3521,40 @@
       ],
       "image": "assets/box-sets/cp103.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP103",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "headmistress",
+          "name": "Headmistress",
+          "amount": 1
+        },
+        {
+          "slug": "my-hellfire-club",
+          "name": "My Hellfire Club",
+          "amount": 1
+        },
+        {
+          "slug": "mind-transfer",
+          "name": "Mind Transfer",
+          "amount": 1
+        },
+        {
+          "slug": "psionic-constructs",
+          "name": "Psionic Constructs",
+          "amount": 1
+        },
+        {
+          "slug": "crimson-dawn",
+          "name": "Crimson Dawn",
+          "amount": 1
+        },
+        {
+          "slug": "grievous-wounds-cp103",
+          "name": "Grievous Wounds",
+          "amount": 1,
+          "artwork": "grievous-wounds-2"
+        }
+      ]
     },
     {
       "code": "CP16",
@@ -1596,7 +3575,19 @@
       ],
       "image": "assets/box-sets/cp16.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP16",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "medpack",
+          "name": "Medpack",
+          "amount": 1
+        },
+        {
+          "slug": "daughters-of-thanos",
+          "name": "Daughters of Thanos",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP27",
@@ -1612,7 +3603,19 @@
       ],
       "image": "assets/box-sets/cp27.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP27",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "highway-to-hell",
+          "name": "Highway to Hell",
+          "amount": 1
+        },
+        {
+          "slug": "deal-with-the-devil",
+          "name": "Deal With the Devil",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP21",
@@ -1628,7 +3631,19 @@
       ],
       "image": "assets/box-sets/cp21.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP21",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "well-laid-plans",
+          "name": "Well-Laid Plans",
+          "amount": 1
+        },
+        {
+          "slug": "blind-obsession",
+          "name": "Blind Obsession",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP222",
@@ -1659,7 +3674,39 @@
       ],
       "image": "assets/box-sets/cp222.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP222",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "deadly-duo",
+          "name": "Deadly Duo",
+          "amount": 1
+        },
+        {
+          "slug": "its-time-travel-dont-ask",
+          "name": "It‘s Time Travel... Don‘t Ask",
+          "amount": 1
+        },
+        {
+          "slug": "galaxys-greatest",
+          "name": "Galaxy‘s Greatest",
+          "amount": 1
+        },
+        {
+          "slug": "servants-of-the-titan",
+          "name": "Servants of the Titan",
+          "amount": 1
+        },
+        {
+          "slug": "we-are-groot",
+          "name": "We Are Groot",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-power-cp222",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP65",
@@ -1720,7 +3767,98 @@
       ],
       "image": "assets/box-sets/mcp65.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP65",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "veterans-of-the-annihilation-war",
+          "name": "Veterans of the Annihilation War",
+          "amount": 1,
+          "artwork": "veterans-of-the-annihilation-war"
+        },
+        {
+          "slug": "deadly-duo",
+          "name": "Deadly Duo",
+          "amount": 1,
+          "artwork": "deadly-duo-2"
+        },
+        {
+          "slug": "we-are-groot",
+          "name": "We Are Groot",
+          "amount": 1,
+          "artwork": "we-are-groot-2"
+        },
+        {
+          "slug": "plundered-goods",
+          "name": "Plundered Goods",
+          "amount": 1,
+          "artwork": "plundered-goods"
+        },
+        {
+          "slug": "call-for-backup",
+          "name": "Call for Backup",
+          "amount": 1,
+          "artwork": "call-for-backup"
+        },
+        {
+          "slug": "its-time-travel-dont-ask",
+          "name": "It‘s Time Travel... Don‘t Ask",
+          "amount": 1,
+          "artwork": "its-time-travel-dont-ask"
+        },
+        {
+          "slug": "servants-of-the-titan",
+          "name": "Servants of the Titan",
+          "amount": 1,
+          "artwork": "servants-of-the-titan"
+        },
+        {
+          "slug": "brace-for-impact",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-7"
+        },
+        {
+          "slug": "heavy-firepower",
+          "name": "Heavy Firepower",
+          "amount": 1,
+          "artwork": "heavy-firepower-6"
+        },
+        {
+          "slug": "recalibration-matrix",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-6"
+        },
+        {
+          "slug": "galaxys-greatest",
+          "name": "Galaxy‘s Greatest",
+          "amount": 1,
+          "artwork": "galaxys-greatest"
+        },
+        {
+          "slug": "lovable-misfits",
+          "name": "Lovable Misfits",
+          "amount": 1,
+          "artwork": "lovable-misfits-3"
+        },
+        {
+          "slug": "patch-up",
+          "name": "Patch Up",
+          "amount": 1,
+          "artwork": "patch-up-5"
+        },
+        {
+          "slug": "infinity-gem-power",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        },
+        {
+          "slug": "joint-effort",
+          "name": "Joint Effort",
+          "amount": 1,
+          "artwork": "joint-effort-4"
+        }
+      ]
     },
     {
       "code": "CP155",
@@ -1741,7 +3879,24 @@
       ],
       "image": "assets/box-sets/cp155.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP155",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "clone-saga",
+          "name": "Clone Saga",
+          "amount": 1
+        },
+        {
+          "slug": "venomized",
+          "name": "Venomized",
+          "amount": 1
+        },
+        {
+          "slug": "masked-menace",
+          "name": "Masked Menace",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP21",
@@ -1772,7 +3927,59 @@
       ],
       "image": "assets/box-sets/mcp21.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP21",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "wisdom-of-the-ancestors",
+          "name": "Wisdom of the Ancestors",
+          "amount": 1
+        },
+        {
+          "slug": "kings-command",
+          "name": "King‘s Command",
+          "amount": 1
+        },
+        {
+          "slug": "strength-and-cunning",
+          "name": "Strength and Cunning",
+          "amount": 1
+        },
+        {
+          "slug": "the-invaders",
+          "name": "The Invaders",
+          "amount": 1
+        },
+        {
+          "slug": "princes-protection",
+          "name": "Prince‘s Protection",
+          "amount": 1
+        },
+        {
+          "slug": "sable-international",
+          "name": "Sable International",
+          "amount": 1
+        },
+        {
+          "slug": "human-weapon",
+          "name": "Human Weapon",
+          "amount": 1
+        },
+        {
+          "slug": "mystic-ward",
+          "name": "Mystic Ward",
+          "amount": 1
+        },
+        {
+          "slug": "chi-mastery",
+          "name": "Chi Mastery",
+          "amount": 1
+        },
+        {
+          "slug": "cover-me",
+          "name": "Cover Me",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP24",
@@ -1793,7 +4000,19 @@
       ],
       "image": "assets/box-sets/cp24.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP24",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "heavy-firepower",
+          "name": "Heavy Firepower",
+          "amount": 1
+        },
+        {
+          "slug": "professionals",
+          "name": "Professionals",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP102",
@@ -1814,7 +4033,19 @@
       ],
       "image": "assets/box-sets/cp102.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP102",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "meet-my-executioner",
+          "name": "Meet My Executioner",
+          "amount": 1
+        },
+        {
+          "slug": "weapons-of-midgard",
+          "name": "Weapons of Midgard",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK14",
@@ -1824,7 +4055,8 @@
       "characters": [],
       "image": "assets/box-sets/ck14.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK14",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP04",
@@ -1840,7 +4072,24 @@
       ],
       "image": "assets/box-sets/cp04.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP04",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "gamma-launch",
+          "name": "Gamma Launch",
+          "amount": 1
+        },
+        {
+          "slug": "seeing-red",
+          "name": "Seeing Red",
+          "amount": 1
+        },
+        {
+          "slug": "anger-management",
+          "name": "Anger Management",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP52",
@@ -1856,7 +4105,19 @@
       ],
       "image": "assets/box-sets/cp52.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP52",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fall-back",
+          "name": "Fall Back",
+          "amount": 1
+        },
+        {
+          "slug": "helios-laser-bombardment",
+          "name": "Helios Laser Bombardment",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP25",
@@ -1866,7 +4127,8 @@
       "characters": [],
       "image": "assets/box-sets/mcp25.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP25",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP178",
@@ -1876,7 +4138,8 @@
       "characters": [],
       "image": "assets/box-sets/cp178.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP178",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP78",
@@ -1886,7 +4149,8 @@
       "characters": [],
       "image": "assets/box-sets/cp78.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP78",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP179",
@@ -1896,7 +4160,8 @@
       "characters": [],
       "image": "assets/box-sets/cp179.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP179",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP96",
@@ -1917,7 +4182,29 @@
       ],
       "image": "assets/box-sets/cp96.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP96",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "xaviers-dream",
+          "name": "Xavier‘s Dream",
+          "amount": 1
+        },
+        {
+          "slug": "faithful-companion",
+          "name": "Faithful Companion",
+          "amount": 1
+        },
+        {
+          "slug": "hold-still",
+          "name": "Hold Still",
+          "amount": 1
+        },
+        {
+          "slug": "untapped-potential",
+          "name": "Untapped Potential",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP180",
@@ -1927,7 +4214,8 @@
       "characters": [],
       "image": "assets/box-sets/cp180.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP180",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CK06",
@@ -1937,7 +4225,8 @@
       "characters": [],
       "image": "assets/box-sets/ck06.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK06",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP166",
@@ -1968,7 +4257,39 @@
       ],
       "image": "assets/box-sets/cp166.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP166",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "inhuman-queen",
+          "name": "Inhuman Queen",
+          "amount": 1
+        },
+        {
+          "slug": "plots-within-plots",
+          "name": "Plots Within Plots",
+          "amount": 1
+        },
+        {
+          "slug": "genetic-prophecy",
+          "name": "Genetic Prophecy",
+          "amount": 1
+        },
+        {
+          "slug": "inhomo-supremis",
+          "name": "Inhomo Supremis",
+          "amount": 1
+        },
+        {
+          "slug": "royal-guardians",
+          "name": "Royal Guardians",
+          "amount": 1
+        },
+        {
+          "slug": "the-great-refuge",
+          "name": "The Great Refuge",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP218",
@@ -1999,7 +4320,39 @@
       ],
       "image": "assets/box-sets/cp218.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP218",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "attilan-rising",
+          "name": "Attilan Rising",
+          "amount": 1,
+          "artwork": "attilan-rising-2"
+        },
+        {
+          "slug": "elemental-infusion",
+          "name": "Elemental Infusion",
+          "amount": 1,
+          "artwork": "elemental-infusion-2"
+        },
+        {
+          "slug": "inhuman-royal-family",
+          "name": "Inhuman Royal Family",
+          "amount": 1,
+          "artwork": "inhuman-royal-family-2"
+        },
+        {
+          "slug": "last-minute-save",
+          "name": "Last-Minute Save",
+          "amount": 1,
+          "artwork": "last-minute-save-2"
+        },
+        {
+          "slug": "terrigenesis",
+          "name": "Terrigenesis",
+          "amount": 1,
+          "artwork": "terrigenesis-2"
+        }
+      ]
     },
     {
       "code": "CP154",
@@ -2030,7 +4383,49 @@
       ],
       "image": "assets/box-sets/cp154.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP154",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "chronal-manipulation",
+          "name": "Chronal Manipulation",
+          "amount": 1
+        },
+        {
+          "slug": "steal-the-future",
+          "name": "Steal the Future",
+          "amount": 1
+        },
+        {
+          "slug": "corporate-espionage",
+          "name": "Corporate Espionage",
+          "amount": 1
+        },
+        {
+          "slug": "danger-management",
+          "name": "Danger Management",
+          "amount": 1
+        },
+        {
+          "slug": "data-backup",
+          "name": "Data Backup",
+          "amount": 1
+        },
+        {
+          "slug": "guns-blazin",
+          "name": "Guns Blazin‘",
+          "amount": 1
+        },
+        {
+          "slug": "the-best-defense",
+          "name": "The Best Defense",
+          "amount": 1
+        },
+        {
+          "slug": "trust-no-one-but-yourself",
+          "name": "Trust No One But Yourself",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP53",
@@ -2051,7 +4446,19 @@
       ],
       "image": "assets/box-sets/cp53.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP53",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "jean",
+          "name": "Jean!!!",
+          "amount": 1
+        },
+        {
+          "slug": "mental-domination",
+          "name": "Mental Domination",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP56",
@@ -2067,7 +4474,24 @@
       ],
       "image": "assets/box-sets/cp56.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP56",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "do-you-know-who-i-am",
+          "name": "Do You Know Who I Am?",
+          "amount": 1
+        },
+        {
+          "slug": "makin-a-ruckus",
+          "name": "Makin‘ A Ruckus",
+          "amount": 1
+        },
+        {
+          "slug": "versatile-strategy",
+          "name": "Versatile Strategy",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK18",
@@ -2077,7 +4501,8 @@
       "characters": [],
       "image": "assets/box-sets/ck18.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK18",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP59",
@@ -2087,7 +4512,8 @@
       "characters": [],
       "image": "assets/box-sets/cp59.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP59",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP29",
@@ -2103,7 +4529,24 @@
       ],
       "image": "assets/box-sets/cp29.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP29",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "hired-muscle",
+          "name": "Hired Muscle",
+          "amount": 1
+        },
+        {
+          "slug": "all-according-to-plan",
+          "name": "All According To Plan",
+          "amount": 1
+        },
+        {
+          "slug": "shadow-organization",
+          "name": "Shadow Organization",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP116",
@@ -2124,7 +4567,24 @@
       ],
       "image": "assets/box-sets/cp116.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP116",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "jabari-chieftain",
+          "name": "Jabari Chieftain",
+          "amount": 1
+        },
+        {
+          "slug": "supersonic-annihilator",
+          "name": "Supersonic Annihilator",
+          "amount": 1
+        },
+        {
+          "slug": "spirit-of-wakanda",
+          "name": "Spirit of Wakanda",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP58",
@@ -2145,7 +4605,29 @@
       ],
       "image": "assets/box-sets/cp58.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP58",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fearful-symmetry",
+          "name": "Fearful Symmetry",
+          "amount": 1
+        },
+        {
+          "slug": "monkey-brain-is-lizard-home",
+          "name": "Monkey Brain Is Lizard Home",
+          "amount": 1
+        },
+        {
+          "slug": "neogenetic-recombinator",
+          "name": "Neogenetic Recombinator",
+          "amount": 1
+        },
+        {
+          "slug": "sinister-traps",
+          "name": "Sinister Traps",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP12",
@@ -2166,7 +4648,24 @@
       ],
       "image": "assets/box-sets/cp12.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP12",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "doomed-prophecy",
+          "name": "Doomed Prophecy",
+          "amount": 1
+        },
+        {
+          "slug": "sibling-rivalry",
+          "name": "Sibling Rivalry",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-mind",
+          "name": "Infinity Gem: Mind",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP49",
@@ -2187,7 +4686,24 @@
       ],
       "image": "assets/box-sets/cp49.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP49",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "heroes-for-hire",
+          "name": "Heroes for Hire",
+          "amount": 1
+        },
+        {
+          "slug": "kick-em-while-theyre-down",
+          "name": "Kick ‘em While They‘re Down",
+          "amount": 1
+        },
+        {
+          "slug": "kun-lun-training",
+          "name": "K‘un-Lun Training",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP05",
@@ -2203,7 +4719,24 @@
       ],
       "image": "assets/box-sets/cp05.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP05",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "psychic-fortress",
+          "name": "Psychic Fortress",
+          "amount": 1
+        },
+        {
+          "slug": "recalibration-matrix",
+          "name": "Recalibration Matrix",
+          "amount": 1
+        },
+        {
+          "slug": "aim-lackeys",
+          "name": "A.I.M. Lackeys",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP145",
@@ -2219,7 +4752,19 @@
       ],
       "image": "assets/box-sets/cp145.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP145",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "mind-games",
+          "name": "Mind Games",
+          "amount": 1
+        },
+        {
+          "slug": "simpleton-i-ll-do-it-myself",
+          "name": "Simpleton! I‘ll Do It Myself!",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP42",
@@ -2240,7 +4785,30 @@
       ],
       "image": "assets/box-sets/cp42.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP42",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "heave-ho-cp42",
+          "name": "Heave Ho",
+          "amount": 1,
+          "artwork": "heave-ho-2"
+        },
+        {
+          "slug": "magnetic-crush",
+          "name": "Magnetic Crush",
+          "amount": 1
+        },
+        {
+          "slug": "magnetic-refraction",
+          "name": "Magnetic Refraction",
+          "amount": 1
+        },
+        {
+          "slug": "asteroid-m",
+          "name": "Asteroid M",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP93",
@@ -2256,7 +4824,19 @@
       ],
       "image": "assets/box-sets/cp93.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP93",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "the-black-bifrost",
+          "name": "The Black Bifrost",
+          "amount": 1
+        },
+        {
+          "slug": "midnight-phantasmagoria",
+          "name": "Midnight Phantasmagoria",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP15",
@@ -2287,7 +4867,8 @@
       ],
       "image": "assets/box-sets/mcp15.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP15",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP66",
@@ -2303,7 +4884,29 @@
       ],
       "image": "assets/box-sets/cp66.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP66",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "devils-reckoning",
+          "name": "Devil‘s Reckoning",
+          "amount": 1
+        },
+        {
+          "slug": "embrace-the-inferno",
+          "name": "Embrace the Inferno",
+          "amount": 1
+        },
+        {
+          "slug": "brand-new-day",
+          "name": "Brand New Day",
+          "amount": 1
+        },
+        {
+          "slug": "up-the-ante",
+          "name": "Up the Ante",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK51",
@@ -2320,7 +4923,8 @@
       ],
       "image": "assets/box-sets/ck51.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK51",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP220",
@@ -2351,7 +4955,42 @@
       ],
       "image": "assets/box-sets/cp220.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP220",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "bats-the-ghost-hound",
+          "name": "Bats the Ghost Hound",
+          "amount": 1,
+          "artwork": "bats-the-ghost-hound-2"
+        },
+        {
+          "slug": "banishment",
+          "name": "Banishment",
+          "amount": 1,
+          "artwork": "banishment-2"
+        },
+        {
+          "slug": "siege-of-darkness",
+          "name": "Siege of Darkness",
+          "amount": 1
+        },
+        {
+          "slug": "seance",
+          "name": "Séance",
+          "amount": 1,
+          "artwork": "seance-2"
+        },
+        {
+          "slug": "deal-with-the-devil",
+          "name": "Deal With the Devil",
+          "amount": 1
+        },
+        {
+          "slug": "highway-to-hell",
+          "name": "Highway to Hell",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP91",
@@ -2382,7 +5021,34 @@
       ],
       "image": "assets/box-sets/cp91.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP91",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "for-a-limited-time-only",
+          "name": "For a Limited Time Only",
+          "amount": 1
+        },
+        {
+          "slug": "freyjas-blessing",
+          "name": "Freyja‘s Blessing",
+          "amount": 1
+        },
+        {
+          "slug": "giants-blood",
+          "name": "Giant‘s Blood",
+          "amount": 1
+        },
+        {
+          "slug": "heart-of-the-worthy",
+          "name": "Heart of the Worthy",
+          "amount": 1
+        },
+        {
+          "slug": "tricksters-boon",
+          "name": "Trickster‘s Boon",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP08",
@@ -2418,7 +5084,49 @@
       ],
       "image": "assets/box-sets/mcp08.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP08",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "tactical-operation",
+          "name": "Tactical Operation",
+          "amount": 1
+        },
+        {
+          "slug": "mutant-x",
+          "name": "Mutant X",
+          "amount": 1
+        },
+        {
+          "slug": "confront-the-demon-bear",
+          "name": "Confront the Demon Bear",
+          "amount": 1
+        },
+        {
+          "slug": "blood-cursed",
+          "name": "Blood Cursed",
+          "amount": 1
+        },
+        {
+          "slug": "dangerous-business",
+          "name": "Dangerous Business",
+          "amount": 1
+        },
+        {
+          "slug": "light-up-the-sky",
+          "name": "Light Up the Sky",
+          "amount": 1
+        },
+        {
+          "slug": "multitasking",
+          "name": "Multitasking",
+          "amount": 1
+        },
+        {
+          "slug": "covert-operations",
+          "name": "Covert Operations",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP46",
@@ -2434,7 +5142,19 @@
       ],
       "image": "assets/box-sets/cp46.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP46",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "forced-extraction",
+          "name": "Forced Extraction",
+          "amount": 1
+        },
+        {
+          "slug": "cloning-banks",
+          "name": "Cloning Banks",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CA14",
@@ -2444,7 +5164,8 @@
       "characters": [],
       "image": "assets/box-sets/ca14.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA14",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP245",
@@ -2475,7 +5196,29 @@
       ],
       "image": "assets/box-sets/cp245.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP245",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "hideous-monster",
+          "name": "Hideous Monster",
+          "amount": 1
+        },
+        {
+          "slug": "phases-of-the-moon",
+          "name": "Phases of the Moon",
+          "amount": 1
+        },
+        {
+          "slug": "service-to-anubis",
+          "name": "Service to Anubis",
+          "amount": 1
+        },
+        {
+          "slug": "thralls-of-dracula",
+          "name": "Thralls of Dracula",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP64",
@@ -2496,7 +5239,24 @@
       ],
       "image": "assets/box-sets/cp64.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP64",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "orb-of-agamotto",
+          "name": "Orb of Agamotto",
+          "amount": 1
+        },
+        {
+          "slug": "astral-ring",
+          "name": "Astral Ring",
+          "amount": 1
+        },
+        {
+          "slug": "bane-of-damballah",
+          "name": "Bane of Damballah",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CA11",
@@ -2506,7 +5266,8 @@
       "characters": [],
       "image": "assets/box-sets/ca11.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA11",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP03",
@@ -2516,7 +5277,8 @@
       "characters": [],
       "image": "assets/box-sets/cp03.jpg",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP03",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP62",
@@ -2532,7 +5294,19 @@
       ],
       "image": "assets/box-sets/cp62.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP62",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fan-club",
+          "name": "Fan Club",
+          "amount": 1
+        },
+        {
+          "slug": "a-better-tomorrow",
+          "name": "A Better Tomorrow",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK08",
@@ -2542,7 +5316,8 @@
       "characters": [],
       "image": "assets/box-sets/ck08.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK08",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP50",
@@ -2563,7 +5338,24 @@
       ],
       "image": "assets/box-sets/cp50.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP50",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "there-will-be-carnage",
+          "name": "There Will Be Carnage",
+          "amount": 1
+        },
+        {
+          "slug": "carnage-rules",
+          "name": "Carnage Rules",
+          "amount": 1
+        },
+        {
+          "slug": "the-grand-illusion",
+          "name": "The Grand Illusion",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP43",
@@ -2584,7 +5376,25 @@
       ],
       "image": "assets/box-sets/cp43.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP43",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "advanced-r-and-d-cp43",
+          "name": "Advanced R&D",
+          "amount": 1,
+          "artwork": "advanced-r-and-d-2"
+        },
+        {
+          "slug": "the-books-of-truth",
+          "name": "The Books of Truth",
+          "amount": 1
+        },
+        {
+          "slug": "deception",
+          "name": "Deception",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP55",
@@ -2605,7 +5415,59 @@
       ],
       "image": "assets/box-sets/cp55.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP55",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "eye-in-the-sky",
+          "name": "Eye In The Sky",
+          "amount": 1
+        },
+        {
+          "slug": "hard-reset",
+          "name": "Hard Reset",
+          "amount": 1
+        },
+        {
+          "slug": "helicarrier-strike",
+          "name": "Helicarrier Strike",
+          "amount": 1
+        },
+        {
+          "slug": "life-model-decoy",
+          "name": "Life Model Decoy",
+          "amount": 1
+        },
+        {
+          "slug": "reposition",
+          "name": "Reposition",
+          "amount": 1
+        },
+        {
+          "slug": "sitrep",
+          "name": "Sitrep",
+          "amount": 1
+        },
+        {
+          "slug": "the-initiative",
+          "name": "The Initiative",
+          "amount": 1
+        },
+        {
+          "slug": "the-shieldmobile",
+          "name": "The Shieldmobile",
+          "amount": 1
+        },
+        {
+          "slug": "battlefield-medicine",
+          "name": "Battlefield Medicine",
+          "amount": 1
+        },
+        {
+          "slug": "defensive-prototype",
+          "name": "Defensive Prototype",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP75",
@@ -2621,7 +5483,19 @@
       ],
       "image": "assets/box-sets/cp75.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP75",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "infiltration",
+          "name": "Infiltration",
+          "amount": 1
+        },
+        {
+          "slug": "over-the-top",
+          "name": "Over The Top",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCA01",
@@ -2662,7 +5536,8 @@
       ],
       "image": "assets/box-sets/mca01.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCA01",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP126",
@@ -2683,7 +5558,24 @@
       ],
       "image": "assets/box-sets/cp126.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP126",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "call-for-backup",
+          "name": "Call for Backup",
+          "amount": 1
+        },
+        {
+          "slug": "veterans-of-the-annihilation-war",
+          "name": "Veterans of the Annihilation War",
+          "amount": 1
+        },
+        {
+          "slug": "plundered-goods",
+          "name": "Plundered Goods",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP36",
@@ -2693,7 +5585,8 @@
       "characters": [],
       "image": "assets/box-sets/cp36.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP36",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CPE06",
@@ -2703,7 +5596,8 @@
       "characters": [],
       "image": "assets/box-sets/cpe06.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE06",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP14",
@@ -2713,7 +5607,8 @@
       "characters": [],
       "image": "assets/box-sets/cp14.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP14",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP31",
@@ -2723,7 +5618,8 @@
       "characters": [],
       "image": "assets/box-sets/cp31.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP31",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP06",
@@ -2733,7 +5629,8 @@
       "characters": [],
       "image": "assets/box-sets/cp06.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP06",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP54",
@@ -2749,7 +5646,25 @@
       ],
       "image": "assets/box-sets/cp54.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP54",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "red-room-training",
+          "name": "Red Room Training",
+          "amount": 1
+        },
+        {
+          "slug": "carbonadium-synthesizer",
+          "name": "Carbonadium Synthesizer",
+          "amount": 1
+        },
+        {
+          "slug": "grievous-wounds-cp54",
+          "name": "Grievous Wounds",
+          "amount": 1,
+          "artwork": "grievous-wounds-3"
+        }
+      ]
     },
     {
       "code": "MCP07",
@@ -2765,7 +5680,29 @@
       ],
       "image": "assets/box-sets/mcp07.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP07",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "inquiring-minds",
+          "name": "Inquiring Minds",
+          "amount": 1
+        },
+        {
+          "slug": "stolen-power-of-cyttorak",
+          "name": "Stolen Power of Cyttorak",
+          "amount": 1
+        },
+        {
+          "slug": "traitor-to-the-cause",
+          "name": "Traitor to the Cause",
+          "amount": 1
+        },
+        {
+          "slug": "xavier-protocols",
+          "name": "Xavier Protocols",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CA23",
@@ -2786,7 +5723,8 @@
       ],
       "image": "assets/box-sets/ca23.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA23",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP83",
@@ -2802,7 +5740,24 @@
       ],
       "image": "assets/box-sets/cp83.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP83",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "i-am-reborn",
+          "name": "I am Reborn",
+          "amount": 1
+        },
+        {
+          "slug": "flames-of-life",
+          "name": "Flames of Life",
+          "amount": 1
+        },
+        {
+          "slug": "the-white-hot-room",
+          "name": "The White-Hot Room",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP151",
@@ -2823,7 +5778,24 @@
       ],
       "image": "assets/box-sets/cp151.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP151",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "cerebro",
+          "name": "Cerebro",
+          "amount": 1
+        },
+        {
+          "slug": "mind-wipe",
+          "name": "Mind Wipe",
+          "amount": 1
+        },
+        {
+          "slug": "astral-plane",
+          "name": "Astral Plane",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP169",
@@ -2849,7 +5821,34 @@
       ],
       "image": "assets/box-sets/cp169.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP169",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "brief-reprieve",
+          "name": "Brief Reprieve",
+          "amount": 1
+        },
+        {
+          "slug": "great-power",
+          "name": "Great Power",
+          "amount": 1
+        },
+        {
+          "slug": "high-tech-heist",
+          "name": "High-Tech Heist",
+          "amount": 1
+        },
+        {
+          "slug": "spider-men",
+          "name": "Spider-Men",
+          "amount": 1
+        },
+        {
+          "slug": "web-of-the-spider-verse",
+          "name": "Web of the Spider-Verse",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP32",
@@ -2870,7 +5869,24 @@
       ],
       "image": "assets/box-sets/cp32.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP32",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "extreme-conditioning",
+          "name": "Extreme Conditioning",
+          "amount": 1
+        },
+        {
+          "slug": "heavy-ordinance",
+          "name": "Heavy Ordinance",
+          "amount": 1
+        },
+        {
+          "slug": "blood-red-and-personal",
+          "name": "Blood Red and Personal",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP72",
@@ -2880,7 +5896,8 @@
       "characters": [],
       "image": "assets/box-sets/cp72.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP72",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP74",
@@ -2901,7 +5918,44 @@
       ],
       "image": "assets/box-sets/cp74.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP74",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "endless-legions",
+          "name": "Endless Legions",
+          "amount": 1
+        },
+        {
+          "slug": "inevitable-betrayal",
+          "name": "Inevitable Betrayal",
+          "amount": 1
+        },
+        {
+          "slug": "occult-research",
+          "name": "Occult Research",
+          "amount": 1
+        },
+        {
+          "slug": "sleeper-agent",
+          "name": "Sleeper Agent",
+          "amount": 1
+        },
+        {
+          "slug": "two-more-shall-rise",
+          "name": "Two More Shall Rise",
+          "amount": 1
+        },
+        {
+          "slug": "victory-assured",
+          "name": "Victory Assured",
+          "amount": 1
+        },
+        {
+          "slug": "world-domination",
+          "name": "World Domination",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP194",
@@ -2911,7 +5965,8 @@
       "characters": [],
       "image": "assets/box-sets/cp194.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP194",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP98",
@@ -2927,7 +5982,25 @@
       ],
       "image": "assets/box-sets/cp98.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP98",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "brace-for-impact-cp98",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-4"
+        },
+        {
+          "slug": "rhino-in-a-china-shop",
+          "name": "Rhino in a China Shop",
+          "amount": 1
+        },
+        {
+          "slug": "this-is-a-robbery",
+          "name": "This is a Robbery",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CPE04",
@@ -2948,7 +6021,29 @@
       ],
       "image": "assets/box-sets/cpe04.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE04",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "synthetic-heart-shaped-herbs",
+          "name": "Synthetic Heart-Shaped Herbs",
+          "amount": 1
+        },
+        {
+          "slug": "basts-blessing",
+          "name": "Bast‘s Blessing",
+          "amount": 1
+        },
+        {
+          "slug": "klilunas-glory",
+          "name": "K‘liluna‘s Glory",
+          "amount": 1
+        },
+        {
+          "slug": "trial-by-combat",
+          "name": "Trial by Combat",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CPE01",
@@ -2971,7 +6066,24 @@
       ],
       "image": "assets/box-sets/cpe01.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE01",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "well-laid-plans",
+          "name": "Well-Laid Plans",
+          "amount": 1
+        },
+        {
+          "slug": "all-webbed-up",
+          "name": "All Webbed Up",
+          "amount": 1
+        },
+        {
+          "slug": "blind-obsession",
+          "name": "Blind Obsession",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CPE03",
@@ -2992,7 +6104,40 @@
       ],
       "image": "assets/box-sets/cpe03.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE03",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "dossier",
+          "name": "Dossier",
+          "amount": 1
+        },
+        {
+          "slug": "gotta-get-some-air",
+          "name": "Gotta Get Some Air",
+          "amount": 1
+        },
+        {
+          "slug": "happy-birthday-runt",
+          "name": "Happy Birthday, Runt!",
+          "amount": 1
+        },
+        {
+          "slug": "are-you-sure-you-want-to-remember",
+          "name": "Are You Sure You Want To Remember?",
+          "amount": 1
+        },
+        {
+          "slug": "call-the-pack",
+          "name": "Call The Pack",
+          "amount": 1
+        },
+        {
+          "slug": "x-ceptional-healing",
+          "name": "X-Ceptional Healing",
+          "amount": 1,
+          "artwork": "x-ceptional-healing-2"
+        }
+      ]
     },
     {
       "code": "CP17",
@@ -3013,7 +6158,19 @@
       ],
       "image": "assets/box-sets/cp17.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP17",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "we-are-groot",
+          "name": "We Are Groot",
+          "amount": 1
+        },
+        {
+          "slug": "deadly-duo",
+          "name": "Deadly Duo",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP60",
@@ -3034,7 +6191,29 @@
       ],
       "image": "assets/box-sets/cp60.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP60",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "mind-if-i-cut-in",
+          "name": "Mind If I Cut In?",
+          "amount": 1
+        },
+        {
+          "slug": "pardon-me-sugah",
+          "name": "Pardon Me, Sugah",
+          "amount": 1
+        },
+        {
+          "slug": "charming-thief",
+          "name": "Charming Thief",
+          "amount": 1
+        },
+        {
+          "slug": "dark-past",
+          "name": "Dark Past",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP03",
@@ -3065,7 +6244,81 @@
       ],
       "image": "assets/box-sets/mcp03.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP03",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "battlefield-medicine",
+          "name": "Battlefield Medicine",
+          "amount": 1,
+          "artwork": "battlefield-medicine-2"
+        },
+        {
+          "slug": "defensive-prototype",
+          "name": "Defensive Prototype",
+          "amount": 1,
+          "artwork": "defensive-prototype-2"
+        },
+        {
+          "slug": "eye-in-the-sky",
+          "name": "Eye In The Sky",
+          "amount": 1,
+          "artwork": "eye-in-the-sky-2"
+        },
+        {
+          "slug": "hard-reset",
+          "name": "Hard Reset",
+          "amount": 1,
+          "artwork": "hard-reset"
+        },
+        {
+          "slug": "heavy-firepower",
+          "name": "Heavy Firepower",
+          "amount": 1,
+          "artwork": "heavy-firepower"
+        },
+        {
+          "slug": "helicarrier-strike",
+          "name": "Helicarrier Strike",
+          "amount": 1,
+          "artwork": "helicarrier-strike"
+        },
+        {
+          "slug": "life-model-decoy",
+          "name": "Life Model Decoy",
+          "amount": 1,
+          "artwork": "life-model-decoy-2"
+        },
+        {
+          "slug": "professionals",
+          "name": "Professionals",
+          "amount": 1,
+          "artwork": "professionals-3"
+        },
+        {
+          "slug": "reposition",
+          "name": "Reposition",
+          "amount": 1,
+          "artwork": "reposition-2"
+        },
+        {
+          "slug": "sitrep",
+          "name": "Sitrep",
+          "amount": 1,
+          "artwork": "sitrep-2"
+        },
+        {
+          "slug": "the-shieldmobile",
+          "name": "The Shieldmobile",
+          "amount": 1,
+          "artwork": "the-shieldmobile-2"
+        },
+        {
+          "slug": "the-initiative",
+          "name": "The Initiative",
+          "amount": 1,
+          "artwork": "the-initiative-2"
+        }
+      ]
     },
     {
       "code": "CP68",
@@ -3075,7 +6328,8 @@
       "characters": [],
       "image": "assets/box-sets/cp68.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP68",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP63",
@@ -3096,7 +6350,29 @@
       ],
       "image": "assets/box-sets/cp63.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP63",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "the-whims-of-chaos",
+          "name": "The Whims of Chaos",
+          "amount": 1
+        },
+        {
+          "slug": "can-i-borrow-that",
+          "name": "Can I Borrow That?",
+          "amount": 1
+        },
+        {
+          "slug": "difficult-to-please",
+          "name": "Difficult To Please",
+          "amount": 1
+        },
+        {
+          "slug": "no-more-mutants",
+          "name": "No More Mutants",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP160",
@@ -3112,7 +6388,19 @@
       ],
       "image": "assets/box-sets/cp160.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP160",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "online-and-operational",
+          "name": "Online and Operational",
+          "amount": 1
+        },
+        {
+          "slug": "under-your-skin",
+          "name": "Under Your Skin",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP236",
@@ -3138,7 +6426,45 @@
       ],
       "image": "assets/box-sets/cp236.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP236",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "directive-one",
+          "name": "Directive One",
+          "amount": 1,
+          "artwork": "directive-one"
+        },
+        {
+          "slug": "efficient-machines",
+          "name": "Efficient Machines",
+          "amount": 1,
+          "artwork": "efficient-machines-2"
+        },
+        {
+          "slug": "mental-domination",
+          "name": "Mental Domination",
+          "amount": 1,
+          "artwork": "mental-domination"
+        },
+        {
+          "slug": "online-and-operational",
+          "name": "Online and Operational",
+          "amount": 1,
+          "artwork": "online-and-operational"
+        },
+        {
+          "slug": "scrap-metal",
+          "name": "Scrap Metal",
+          "amount": 1,
+          "artwork": "scrap-metal-2"
+        },
+        {
+          "slug": "under-your-skin",
+          "name": "Under Your Skin",
+          "amount": 1,
+          "artwork": "under-your-skin"
+        }
+      ]
     },
     {
       "code": "CP51",
@@ -3154,7 +6480,24 @@
       ],
       "image": "assets/box-sets/cp51.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP51",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "directive-one",
+          "name": "Directive One",
+          "amount": 1
+        },
+        {
+          "slug": "efficient-machines",
+          "name": "Efficient Machines",
+          "amount": 1
+        },
+        {
+          "slug": "scrap-metal",
+          "name": "Scrap Metal",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK07",
@@ -3164,7 +6507,8 @@
       "characters": [],
       "image": "assets/box-sets/ck07.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK07",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP79",
@@ -3190,7 +6534,34 @@
       ],
       "image": "assets/box-sets/cp79.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP79",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "no-mercy",
+          "name": "No Mercy",
+          "amount": 1
+        },
+        {
+          "slug": "vendetta",
+          "name": "Vendetta",
+          "amount": 1
+        },
+        {
+          "slug": "bounty-hunters",
+          "name": "Bounty Hunters",
+          "amount": 1
+        },
+        {
+          "slug": "cruel-tutelage",
+          "name": "Cruel Tutelage",
+          "amount": 1
+        },
+        {
+          "slug": "shuriken-arashi",
+          "name": "Shuriken Arashi",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP69",
@@ -3211,7 +6582,39 @@
       ],
       "image": "assets/box-sets/cp69.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP69",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "mystic-ward",
+          "name": "Mystic Ward",
+          "amount": 1
+        },
+        {
+          "slug": "street-smarts",
+          "name": "Street Smarts",
+          "amount": 1
+        },
+        {
+          "slug": "cover-me",
+          "name": "Cover Me",
+          "amount": 1
+        },
+        {
+          "slug": "sable-international",
+          "name": "Sable International",
+          "amount": 1
+        },
+        {
+          "slug": "chi-mastery",
+          "name": "Chi Mastery",
+          "amount": 1
+        },
+        {
+          "slug": "human-weapon",
+          "name": "Human Weapon",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP39",
@@ -3227,7 +6630,29 @@
       ],
       "image": "assets/box-sets/cp39.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP39",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "special-delivery",
+          "name": "Special Delivery",
+          "amount": 1
+        },
+        {
+          "slug": "stalwart-determination",
+          "name": "Stalwart Determination",
+          "amount": 1
+        },
+        {
+          "slug": "a-force-assemble",
+          "name": "A-Force Assemble!",
+          "amount": 1
+        },
+        {
+          "slug": "agents-of-smash",
+          "name": "Agents of S.M.A.S.H.",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP110",
@@ -3237,7 +6662,8 @@
       "characters": [],
       "image": "assets/box-sets/cp110.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP110",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP08",
@@ -3258,7 +6684,19 @@
       ],
       "image": "assets/box-sets/cp08.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP08",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "vibranium-shielding",
+          "name": "Vibranium Shielding",
+          "amount": 1
+        },
+        {
+          "slug": "advanced-r-and-d",
+          "name": "Advanced R&D",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP170",
@@ -3284,7 +6722,29 @@
       ],
       "image": "assets/box-sets/cp170.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP170",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "caught-in-a-ham",
+          "name": "Caught In A Ham",
+          "amount": 1
+        },
+        {
+          "slug": "spider-sleuth",
+          "name": "Spider-Sleuth",
+          "amount": 1
+        },
+        {
+          "slug": "spider-totem-the-bride",
+          "name": "Spider Totem: The Bride",
+          "amount": 1
+        },
+        {
+          "slug": "protege",
+          "name": "Protegé",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP61",
@@ -3305,7 +6765,19 @@
       ],
       "image": "assets/box-sets/cp61.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP61",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "illicit-tech",
+          "name": "Illicit Tech",
+          "amount": 1
+        },
+        {
+          "slug": "to-ash-and-cinder",
+          "name": "To Ash and Cinder",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP148",
@@ -3336,7 +6808,39 @@
       ],
       "image": "assets/box-sets/cp148.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP148",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "fearful-symmetry-cp148",
+          "name": "Fearful Symmetry",
+          "amount": 1,
+          "artwork": "fearful-symmetry-2"
+        },
+        {
+          "slug": "monkey-brain-is-lizard-home-cp148",
+          "name": "Monkey Brain Is Lizard Home",
+          "amount": 1,
+          "artwork": "monkey-brain-is-lizard-home-2"
+        },
+        {
+          "slug": "neogenetic-recombinator-cp148",
+          "name": "Neogenetic Recombinator",
+          "amount": 1,
+          "artwork": "neogenetic-recombinator-2"
+        },
+        {
+          "slug": "sinister-traps-cp148",
+          "name": "Sinister Traps",
+          "amount": 1,
+          "artwork": "sinister-traps-2"
+        },
+        {
+          "slug": "well-laid-plans-cp148",
+          "name": "Well-Laid Plans",
+          "amount": 1,
+          "artwork": "well-laid-plans-2"
+        }
+      ]
     },
     {
       "code": "CP272",
@@ -3407,7 +6911,130 @@
       ],
       "image": "assets/box-sets/cp272.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP272",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "custom-upgrades",
+          "name": "Custom Upgrades",
+          "amount": 1
+        },
+        {
+          "slug": "rejuvenation",
+          "name": "Rejuvenation",
+          "amount": 1
+        },
+        {
+          "slug": "rhino-in-a-china-shop",
+          "name": "Rhino in a China Shop",
+          "amount": 1
+        },
+        {
+          "slug": "strategic-retreat",
+          "name": "Strategic Retreat",
+          "amount": 1
+        },
+        {
+          "slug": "surprise-webhead",
+          "name": "Surprise, Webhead",
+          "amount": 1
+        },
+        {
+          "slug": "brace-for-impact",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-5"
+        },
+        {
+          "slug": "carnage-rules",
+          "name": "Carnage Rules",
+          "amount": 1,
+          "artwork": "carnage-rules-2"
+        },
+        {
+          "slug": "fearful-symmetry",
+          "name": "Fearful Symmetry",
+          "amount": 1,
+          "artwork": "fearful-symmetry-2"
+        },
+        {
+          "slug": "founding-members",
+          "name": "Founding Members",
+          "amount": 1,
+          "artwork": "founding-members-2"
+        },
+        {
+          "slug": "heavy-firepower",
+          "name": "Heavy Firepower",
+          "amount": 1,
+          "artwork": "heavy-firepower-4"
+        },
+        {
+          "slug": "joint-effort",
+          "name": "Joint Effort",
+          "amount": 1,
+          "artwork": "joint-effort-2"
+        },
+        {
+          "slug": "monkey-brain-is-lizard-home",
+          "name": "Monkey Brain Is Lizard Home",
+          "amount": 1,
+          "artwork": "monkey-brain-is-lizard-home-3"
+        },
+        {
+          "slug": "neogenetic-recombinator",
+          "name": "Neogenetic Recombinator",
+          "amount": 1,
+          "artwork": "neogenetic-recombinator-2"
+        },
+        {
+          "slug": "patch-up",
+          "name": "Patch Up",
+          "amount": 1,
+          "artwork": "patch-up-2"
+        },
+        {
+          "slug": "recalibration-matrix",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-2"
+        },
+        {
+          "slug": "sinister-traps",
+          "name": "Sinister Traps",
+          "amount": 1,
+          "artwork": "sinister-traps-4"
+        },
+        {
+          "slug": "static-arc",
+          "name": "Static Arc",
+          "amount": 1,
+          "artwork": "static-arc-2"
+        },
+        {
+          "slug": "the-grand-illusion",
+          "name": "The Grand Illusion",
+          "amount": 1,
+          "artwork": "the-grand-illusion-2"
+        },
+        {
+          "slug": "there-will-be-carnage",
+          "name": "There Will Be Carnage",
+          "amount": 1,
+          "artwork": "there-will-be-carnage-2"
+        },
+        {
+          "slug": "this-is-a-robbery",
+          "name": "This is a Robbery",
+          "amount": 1,
+          "artwork": "this-is-a-robbery-2"
+        },
+        {
+          "slug": "well-laid-plans",
+          "name": "Well-Laid Plans",
+          "amount": 1,
+          "artwork": "well-laid-plans-2"
+        }
+      ]
     },
     {
       "code": "CP10",
@@ -3428,7 +7055,24 @@
       ],
       "image": "assets/box-sets/cp10.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP10",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "web-barrier",
+          "name": "Web Barrier",
+          "amount": 1
+        },
+        {
+          "slug": "all-webbed-up",
+          "name": "All Webbed Up",
+          "amount": 1
+        },
+        {
+          "slug": "all-youve-got",
+          "name": "All You‘ve Got",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP137",
@@ -3449,7 +7093,24 @@
       ],
       "image": "assets/box-sets/cp137.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP137",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "inexplicable-demise",
+          "name": "Inexplicable Demise",
+          "amount": 1
+        },
+        {
+          "slug": "no-try-this-one",
+          "name": "No, Try This One!",
+          "amount": 1
+        },
+        {
+          "slug": "they-say-keep-your-enemies-close",
+          "name": "They Say Keep Your Enemies Close...",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP18",
@@ -3465,7 +7126,24 @@
       ],
       "image": "assets/box-sets/cp18.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP18",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "rocket-boots",
+          "name": "Rocket Boots?!",
+          "amount": 1
+        },
+        {
+          "slug": "crew-of-the-milano",
+          "name": "Crew of the Milano",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-power",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP153",
@@ -3486,7 +7164,34 @@
       ],
       "image": "assets/box-sets/cp153.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP153",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "survive-the-night",
+          "name": "Survive the Night",
+          "amount": 1
+        },
+        {
+          "slug": "new-mutants",
+          "name": "New Mutants",
+          "amount": 1
+        },
+        {
+          "slug": "tomorrows-soldiers",
+          "name": "Tomorrow‘s Soldiers",
+          "amount": 1
+        },
+        {
+          "slug": "practice-round",
+          "name": "Practice Round",
+          "amount": 1
+        },
+        {
+          "slug": "self-help",
+          "name": "Self-Help",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP25",
@@ -3502,7 +7207,49 @@
       ],
       "image": "assets/box-sets/cp25.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP25",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "face-me",
+          "name": "Face Me",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-mind",
+          "name": "Infinity Gem: Mind",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-power",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-reality",
+          "name": "Infinity Gem: Reality",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-soul",
+          "name": "Infinity Gem: Soul",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-space",
+          "name": "Infinity Gem: Space",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-time",
+          "name": "Infinity Gem: Time",
+          "amount": 1
+        },
+        {
+          "slug": "power-of-the-cosmos",
+          "name": "Power of the Cosmos",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP23",
@@ -3518,7 +7265,8 @@
       ],
       "image": "assets/box-sets/mcp23.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP23",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP82",
@@ -3539,7 +7287,25 @@
       ],
       "image": "assets/box-sets/cp82.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP82",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "brace-for-impact-cp82",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-3"
+        },
+        {
+          "slug": "leapfrog",
+          "name": "Leapfrog",
+          "amount": 1
+        },
+        {
+          "slug": "pyrotechnics",
+          "name": "Pyrotechnics",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP223",
@@ -3570,7 +7336,24 @@
       ],
       "image": "assets/box-sets/cp223.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP223",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "lovable-misfits",
+          "name": "Lovable Misfits",
+          "amount": 1
+        },
+        {
+          "slug": "daughters-of-thanos",
+          "name": "Daughters of Thanos",
+          "amount": 1
+        },
+        {
+          "slug": "infinity-gem-power",
+          "name": "Infinity Gem: Power",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP144",
@@ -3586,7 +7369,19 @@
       ],
       "image": "assets/box-sets/cp144.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP144",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "one-below-all",
+          "name": "One Below All",
+          "amount": 1
+        },
+        {
+          "slug": "gamma-drain",
+          "name": "Gamma Drain",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP17",
@@ -3612,7 +7407,34 @@
       ],
       "image": "assets/box-sets/mcp17.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP17",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "my-latest-invention",
+          "name": "My Latest Invention",
+          "amount": 1
+        },
+        {
+          "slug": "shadow-brokers",
+          "name": "Shadow Brokers",
+          "amount": 1
+        },
+        {
+          "slug": "hostile-witness",
+          "name": "Hostile Witness",
+          "amount": 1
+        },
+        {
+          "slug": "vicious-cycle",
+          "name": "Vicious Cycle",
+          "amount": 1
+        },
+        {
+          "slug": "war-of-the-strongest",
+          "name": "War of the Strongest",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP11",
@@ -3633,7 +7455,19 @@
       ],
       "image": "assets/box-sets/cp11.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP11",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "odins-blessing",
+          "name": "Odin's Blessing",
+          "amount": 1
+        },
+        {
+          "slug": "thunderwave",
+          "name": "Thunderwave",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CPE05",
@@ -3643,7 +7477,8 @@
       "characters": [],
       "image": "assets/box-sets/cpe05.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CPE05",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "WEB01",
@@ -3653,7 +7488,8 @@
       "characters": [],
       "image": "assets/box-sets/web01.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/WEB01",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "WEB02",
@@ -3663,7 +7499,8 @@
       "characters": [],
       "image": "assets/box-sets/web02.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/WEB02",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "MCP13",
@@ -3694,7 +7531,65 @@
       ],
       "image": "assets/box-sets/mcp13.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP13",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "cerebro",
+          "name": "Cerebro",
+          "amount": 1
+        },
+        {
+          "slug": "mind-wipe",
+          "name": "Mind Wipe",
+          "amount": 1
+        },
+        {
+          "slug": "psionic-constructs",
+          "name": "Psionic Constructs",
+          "amount": 1
+        },
+        {
+          "slug": "crimson-dawn",
+          "name": "Crimson Dawn",
+          "amount": 1
+        },
+        {
+          "slug": "grievous-wounds",
+          "name": "Grievous Wounds",
+          "amount": 1,
+          "artwork": "grievous-wounds-2"
+        },
+        {
+          "slug": "my-hellfire-club",
+          "name": "My Hellfire Club",
+          "amount": 1,
+          "artwork": "my-hellfire-club-2"
+        },
+        {
+          "slug": "mind-transfer",
+          "name": "Mind Transfer",
+          "amount": 1,
+          "artwork": "mind-transfer-2"
+        },
+        {
+          "slug": "headmistress",
+          "name": "Headmistress",
+          "amount": 1,
+          "artwork": "headmistress-2"
+        },
+        {
+          "slug": "jean",
+          "name": "Jean!!!",
+          "amount": 1,
+          "artwork": "jean-2"
+        },
+        {
+          "slug": "mental-domination",
+          "name": "Mental Domination",
+          "amount": 1,
+          "artwork": "mental-domination-2"
+        }
+      ]
     },
     {
       "code": "CP139",
@@ -3725,7 +7620,46 @@
       ],
       "image": "assets/box-sets/cp139.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP139",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "weapon-x-program",
+          "name": "Weapon X Program",
+          "amount": 1
+        },
+        {
+          "slug": "x-ceptional-healing",
+          "name": "X-Ceptional Healing",
+          "amount": 1
+        },
+        {
+          "slug": "first-class",
+          "name": "First Class",
+          "amount": 1
+        },
+        {
+          "slug": "to-me-my-x-men",
+          "name": "To Me My X-Men",
+          "amount": 1
+        },
+        {
+          "slug": "one-two-punch-cp40",
+          "name": "One-Two Punch",
+          "amount": 1,
+          "artwork": "one-two-punch-2"
+        },
+        {
+          "slug": "children-of-the-atom",
+          "name": "Children of the Atom",
+          "amount": 1
+        },
+        {
+          "slug": "advanced-r-and-d-cp43",
+          "name": "Advanced R&D",
+          "amount": 1,
+          "artwork": "advanced-r-and-d-2"
+        }
+      ]
     },
     {
       "code": "CK10",
@@ -3735,7 +7669,8 @@
       "characters": [],
       "image": "assets/box-sets/ck10.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK10",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP89",
@@ -3756,7 +7691,24 @@
       ],
       "image": "assets/box-sets/cp89.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP89",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "sovereign-strike",
+          "name": "Sovereign Strike",
+          "amount": 1
+        },
+        {
+          "slug": "bear-hug",
+          "name": "Bear Hug",
+          "amount": 1
+        },
+        {
+          "slug": "comrades-keeper",
+          "name": "Comrade‘s Keeper",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP94",
@@ -3777,7 +7729,29 @@
       ],
       "image": "assets/box-sets/cp94.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP94",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "deeds-worthy-of-song",
+          "name": "Deeds Worthy of Song",
+          "amount": 1
+        },
+        {
+          "slug": "ride-of-the-valkyries",
+          "name": "Ride of the Valkyries",
+          "amount": 1
+        },
+        {
+          "slug": "warriors-frenzy",
+          "name": "Warrior‘s Frenzy",
+          "amount": 1
+        },
+        {
+          "slug": "warriors-oath",
+          "name": "Warriors‘ Oath",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP09",
@@ -3793,7 +7767,19 @@
       ],
       "image": "assets/box-sets/cp09.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP09",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "lethal-protector",
+          "name": "Lethal Protector",
+          "amount": 1
+        },
+        {
+          "slug": "uneasy-allies",
+          "name": "Uneasy Allies",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CK05",
@@ -3803,7 +7789,8 @@
       "characters": [],
       "image": "assets/box-sets/ck05.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CK05",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP13",
@@ -3824,7 +7811,29 @@
       ],
       "image": "assets/box-sets/cp13.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP13",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "field-dressing",
+          "name": "Field Dressing",
+          "amount": 1
+        },
+        {
+          "slug": "till-the-end-of-the-line",
+          "name": "Till the End of the Line",
+          "amount": 1
+        },
+        {
+          "slug": "psychic-shielding-device-psd",
+          "name": "Psychic Shielding Device (P.S.D.)",
+          "amount": 1
+        },
+        {
+          "slug": "tactical-analysis",
+          "name": "Tactical Analysis",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP147",
@@ -3855,7 +7864,29 @@
       ],
       "image": "assets/box-sets/cp147.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP147",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "advanced-r-and-d-ca10",
+          "name": "Advanced R&D",
+          "amount": 1
+        },
+        {
+          "slug": "usurp-the-throne-ca10",
+          "name": "Usurp the Throne",
+          "amount": 1
+        },
+        {
+          "slug": "vibranium-shielding-ca10",
+          "name": "Vibranium Shielding",
+          "amount": 1
+        },
+        {
+          "slug": "wakanda-forever-ca10",
+          "name": "Wakanda Forever",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CA13",
@@ -3871,7 +7902,19 @@
       ],
       "image": "assets/box-sets/ca13.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CA13",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "praetor-of-the-imperial-guard",
+          "name": "Praetor of the Imperial Guard",
+          "amount": 1
+        },
+        {
+          "slug": "protector-of-the-empire",
+          "name": "Protector of the Empire",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP225",
@@ -3902,7 +7945,31 @@
       ],
       "image": "assets/box-sets/cp225.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP225",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "grievous-wounds",
+          "name": "Grievous Wounds",
+          "amount": 1,
+          "artwork": "grievous-wounds-5"
+        },
+        {
+          "slug": "rainbow-bridge",
+          "name": "Rainbow Bridge",
+          "amount": 1,
+          "artwork": "rainbow-bridge-2"
+        },
+        {
+          "slug": "meet-my-executioner",
+          "name": "Meet My Executioner",
+          "amount": 1
+        },
+        {
+          "slug": "weapons-of-midgard",
+          "name": "Weapons of Midgard",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP109",
@@ -3923,7 +7990,19 @@
       ],
       "image": "assets/box-sets/cp109.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP109",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "implanted-memories",
+          "name": "Implanted Memories",
+          "amount": 1
+        },
+        {
+          "slug": "weapons-stash",
+          "name": "Weapons Stash",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP27",
@@ -3959,7 +8038,8 @@
       ],
       "image": "assets/box-sets/mcp27.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP27",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP146",
@@ -3990,7 +8070,34 @@
       ],
       "image": "assets/box-sets/cp146.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP146",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "sucker",
+          "name": "Sucker",
+          "amount": 1
+        },
+        {
+          "slug": "trip-up",
+          "name": "Trip Up",
+          "amount": 1
+        },
+        {
+          "slug": "uneasy-allies",
+          "name": "Uneasy Allies",
+          "amount": 1
+        },
+        {
+          "slug": "all-webbed-up",
+          "name": "All Webbed Up",
+          "amount": 1
+        },
+        {
+          "slug": "lethal-protector",
+          "name": "Lethal Protector",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP234",
@@ -4021,7 +8128,51 @@
       ],
       "image": "assets/box-sets/cp234.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP234",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "aunt-mays-wheat-cakes",
+          "name": "Aunt May‘s Wheat Cakes",
+          "amount": 1,
+          "artwork": "aunt-mays-wheat-cakes-2"
+        },
+        {
+          "slug": "clean-up",
+          "name": "Clean Up",
+          "amount": 1,
+          "artwork": "clean-up"
+        },
+        {
+          "slug": "double-agent",
+          "name": "Double Agent",
+          "amount": 1,
+          "artwork": "double-agent"
+        },
+        {
+          "slug": "foreign-assignment",
+          "name": "Foreign Assignment",
+          "amount": 1,
+          "artwork": "foreign-assignment"
+        },
+        {
+          "slug": "on-patrol",
+          "name": "On Patrol",
+          "amount": 1,
+          "artwork": "on-patrol"
+        },
+        {
+          "slug": "spider-tracker",
+          "name": "Spider-Tracker",
+          "amount": 1,
+          "artwork": "spider-tracker-2"
+        },
+        {
+          "slug": "the-cat-and-the-spider",
+          "name": "The Cat and the Spider",
+          "amount": 1,
+          "artwork": "the-cat-and-the-spider-2"
+        }
+      ]
     },
     {
       "code": "MCP19",
@@ -4052,7 +8203,39 @@
       ],
       "image": "assets/box-sets/mcp19.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP19",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "winter-rush",
+          "name": "Winter Rush",
+          "amount": 1
+        },
+        {
+          "slug": "sovereign-strike",
+          "name": "Sovereign Strike",
+          "amount": 1
+        },
+        {
+          "slug": "bear-hug",
+          "name": "Bear Hug",
+          "amount": 1
+        },
+        {
+          "slug": "dark-aura-manifestation",
+          "name": "Dark Aura Manifestation",
+          "amount": 1
+        },
+        {
+          "slug": "comrades-keeper",
+          "name": "Comrade‘s Keeper",
+          "amount": 1
+        },
+        {
+          "slug": "fusion-caster",
+          "name": "Fusion Caster",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "CP40",
@@ -4073,7 +8256,25 @@
       ],
       "image": "assets/box-sets/cp40.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP40",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "x-ceptional-healing",
+          "name": "X-Ceptional Healing",
+          "amount": 1
+        },
+        {
+          "slug": "weapon-x-program",
+          "name": "Weapon X Program",
+          "amount": 1
+        },
+        {
+          "slug": "one-two-punch-cp40",
+          "name": "One-Two Punch",
+          "amount": 1,
+          "artwork": "one-two-punch-2"
+        }
+      ]
     },
     {
       "code": "CP71",
@@ -4094,7 +8295,19 @@
       ],
       "image": "assets/box-sets/cp71.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP71",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "jonathan-the-unstoppable",
+          "name": "Jonathan the Unstoppable",
+          "amount": 1
+        },
+        {
+          "slug": "wolverines",
+          "name": "Wolverines",
+          "amount": 1
+        }
+      ]
     },
     {
       "code": "MCP14",
@@ -4125,7 +8338,8 @@
       ],
       "image": "assets/box-sets/mcp14.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP14",
-      "imageError": null
+      "imageError": null,
+      "tactics": []
     },
     {
       "code": "CP224",
@@ -4156,7 +8370,57 @@
       ],
       "image": "assets/box-sets/cp224.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP224",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "cat-and-mouse",
+          "name": "Cat and Mouse",
+          "amount": 1,
+          "artwork": "cat-and-mouse-2"
+        },
+        {
+          "slug": "instant-recovery",
+          "name": "Instant Recovery",
+          "amount": 1,
+          "artwork": "instant-recovery"
+        },
+        {
+          "slug": "jonathan-the-unstoppable",
+          "name": "Jonathan the Unstoppable",
+          "amount": 1,
+          "artwork": "jonathan-the-unstoppable-2"
+        },
+        {
+          "slug": "warpath",
+          "name": "Warpath",
+          "amount": 1,
+          "artwork": "warpath"
+        },
+        {
+          "slug": "wolverines",
+          "name": "Wolverines",
+          "amount": 1,
+          "artwork": "wolverines-3"
+        },
+        {
+          "slug": "preserve-the-dream",
+          "name": "Preserve the Dream",
+          "amount": 1,
+          "artwork": "preserve-the-dream-2"
+        },
+        {
+          "slug": "recalibration-matrix",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-3"
+        },
+        {
+          "slug": "dirty-work",
+          "name": "Dirty Work",
+          "amount": 1,
+          "artwork": "dirty-work-3"
+        }
+      ]
     },
     {
       "code": "CP271",
@@ -4217,7 +8481,123 @@
       ],
       "image": "assets/box-sets/cp271.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP271",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "recalibration-matrix",
+          "name": "Recalibration Matrix",
+          "amount": 1,
+          "artwork": "recalibration-matrix-5"
+        },
+        {
+          "slug": "joint-effort",
+          "name": "Joint Effort",
+          "amount": 1,
+          "artwork": "joint-effort-3"
+        },
+        {
+          "slug": "patch-up",
+          "name": "Patch Up",
+          "amount": 1,
+          "artwork": "patch-up-3"
+        },
+        {
+          "slug": "mind-if-i-cut-in",
+          "name": "Mind If I Cut In?",
+          "amount": 1,
+          "artwork": "mind-if-i-cut-in-3"
+        },
+        {
+          "slug": "pardon-me-sugah",
+          "name": "Pardon Me, Sugah",
+          "amount": 1,
+          "artwork": "pardon-me-sugah-2"
+        },
+        {
+          "slug": "brace-for-impact",
+          "name": "Brace for Impact",
+          "amount": 1,
+          "artwork": "brace-for-impact-6"
+        },
+        {
+          "slug": "heavy-firepower",
+          "name": "Heavy Firepower",
+          "amount": 1,
+          "artwork": "heavy-firepower-5"
+        },
+        {
+          "slug": "instant-recovery",
+          "name": "Instant Recovery",
+          "amount": 1,
+          "artwork": "instant-recovery"
+        },
+        {
+          "slug": "stolen-identity",
+          "name": "Stolen Identity",
+          "amount": 1,
+          "artwork": "stolen-identity"
+        },
+        {
+          "slug": "first-class",
+          "name": "First Class",
+          "amount": 1,
+          "artwork": "first-class-2"
+        },
+        {
+          "slug": "charming-thief",
+          "name": "Charming Thief",
+          "amount": 1,
+          "artwork": "charming-thief-2"
+        },
+        {
+          "slug": "dark-past",
+          "name": "Dark Past",
+          "amount": 1,
+          "artwork": "dark-past-2"
+        },
+        {
+          "slug": "magnetic-crush",
+          "name": "Magnetic Crush",
+          "amount": 1,
+          "artwork": "magnetic-crush-2"
+        },
+        {
+          "slug": "the-books-of-truth",
+          "name": "The Books of Truth",
+          "amount": 1,
+          "artwork": "the-books-of-truth-2"
+        },
+        {
+          "slug": "to-me-my-x-men",
+          "name": "To Me My X-Men",
+          "amount": 1,
+          "artwork": "to-me-my-x-men-3"
+        },
+        {
+          "slug": "weapon-x-program",
+          "name": "Weapon X Program",
+          "amount": 1,
+          "artwork": "weapon-x-program-2"
+        },
+        {
+          "slug": "children-of-the-atom",
+          "name": "Children of the Atom",
+          "amount": 1,
+          "artwork": "children-of-the-atom-4"
+        },
+        {
+          "slug": "asteroid-m",
+          "name": "Asteroid M",
+          "amount": 1,
+          "artwork": "asteroid-m-2"
+        },
+        {
+          "slug": "magnetic-refraction",
+          "name": "Magnetic Refraction",
+          "amount": 1,
+          "artwork": "magnetic-refraction-2"
+        }
+      ]
     },
     {
       "code": "CP226",
@@ -4248,7 +8628,45 @@
       ],
       "image": "assets/box-sets/cp226.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/CP226",
-      "imageError": null
+      "imageError": null,
+      "tactics": [
+        {
+          "slug": "indomitable",
+          "name": "Indomitable",
+          "amount": 1,
+          "artwork": "indomitable"
+        },
+        {
+          "slug": "preserve-the-dream",
+          "name": "Preserve the Dream",
+          "amount": 1,
+          "artwork": "preserve-the-dream"
+        },
+        {
+          "slug": "fastball-special",
+          "name": "Fastball Special!",
+          "amount": 1,
+          "artwork": "fastball-special-2"
+        },
+        {
+          "slug": "journey-through-limbo",
+          "name": "Journey Through Limbo",
+          "amount": 1,
+          "artwork": "journey-through-limbo-2"
+        },
+        {
+          "slug": "mass-transit",
+          "name": "Mass Transit",
+          "amount": 1,
+          "artwork": "mass-transit-2"
+        },
+        {
+          "slug": "mutant-traitor",
+          "name": "Mutant Traitor",
+          "amount": 1,
+          "artwork": "mutant-traitor-2"
+        }
+      ]
     }
   ]
 }

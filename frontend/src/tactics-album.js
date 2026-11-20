@@ -1,0 +1,122 @@
+// Physical binder for owned Team Tactics: one slot per printed card from purchased boxes.
+export const ALBUM_SHEETS = 20,
+  ALBUM_POCKETS = 8,
+  ALBUM_PAGES = ALBUM_SHEETS * 2;
+export const GENERAL_GROUP = "Общие карты";
+const characterKeys = [
+  "mandatory_character",
+  "mandatory_character_with_alter_ego",
+  "optional_character",
+];
+const alterEgoKeys = ["mandatory_alter_ego", "optional_alter_ego"];
+const slugOf = (value) =>
+  typeof value === "string"
+    ? value
+    : value?.character || value?.slug || Object.values(value || {})[0];
+// The first character a card names, with every catalog version of that character.
+function namedCharacter(requirements, characters) {
+  for (const key of characterKeys) {
+    const slug = slugOf(requirements[key]?.[0]);
+    if (!slug) continue;
+    const versions = characters.filter(
+      (c) => c.slug === slug || c.slug.startsWith(slug + "-"),
+    );
+    if (versions.length)
+      return { label: versions[0].name.split(",")[0], versions };
+  }
+  for (const key of alterEgoKeys) {
+    const alterEgo = requirements[key]?.[0];
+    if (!alterEgo) continue;
+    const versions = characters.filter((c) => c.alterEgo === alterEgo);
+    if (versions.length) return { label: alterEgo, versions };
+  }
+  return null;
+}
+export const pageLabel = (page) =>
+  `Лист ${Math.ceil(page / 2)} · сторона ${page % 2 ? "А" : "Б"}`;
+/**
+ * @param {string[]} codes purchased box codes
+ * @param {(code: string) => object|undefined} box box with `tactics: [{slug,name,amount,artwork}]`
+ * @param {(slug: string) => object|undefined} card Team Tactics card by printing slug
+ * @param {object[]} characters catalog rows with `affiliations`
+ */
+export function buildTacticsAlbum(codes, box, card, characters) {
+  const slots = [];
+  for (const code of codes) {
+    const set = box(code);
+    for (const t of set?.tactics || [])
+      for (let i = 0; i < (t.amount || 1); i++)
+        slots.push({
+          slug: t.slug,
+          name: card(t.slug)?.name || t.name,
+          card: card(t.slug) || null,
+          box: code,
+          boxName: set.name || "",
+          artwork: t.artwork || "",
+        });
+  }
+  // Character cards join the affiliation that already holds most of the owner's affiliation cards.
+  const weight = new Map();
+  for (const s of slots) {
+    const name = s.card?.affiliation?.name;
+    if (name) weight.set(name, (weight.get(name) || 0) + 1);
+  }
+  for (const s of slots) {
+    const c = s.card;
+    if (c?.affiliation) {
+      Object.assign(s, { group: c.affiliation.name, rank: 0, character: "" });
+      continue;
+    }
+    const named = c && namedCharacter(c.requirementsItems || {}, characters);
+    if (!named) {
+      Object.assign(s, { group: GENERAL_GROUP, rank: 2, character: "" });
+      continue;
+    }
+    const affiliations = [
+      ...new Set(
+        named.versions.flatMap((v) => (v.affiliations || []).map((a) => a.name)),
+      ),
+    ].sort(
+      (a, b) =>
+        (weight.get(b) || 0) - (weight.get(a) || 0) || a.localeCompare(b, "en"),
+    );
+    Object.assign(s, {
+      group: affiliations[0] || GENERAL_GROUP,
+      rank: 1,
+      character: named.label,
+    });
+  }
+  slots.sort(
+    (a, b) =>
+      (a.group === GENERAL_GROUP) - (b.group === GENERAL_GROUP) ||
+      a.group.localeCompare(b.group, "en") ||
+      a.rank - b.rank ||
+      a.character.localeCompare(b.character, "en") ||
+      a.name.localeCompare(b.name, "en") ||
+      a.box.localeCompare(b.box, "en") ||
+      a.artwork.localeCompare(b.artwork, "en"),
+  );
+  return slots.map(({ rank, ...s }, i) => {
+    const number = i + 1,
+      page = Math.ceil(number / ALBUM_POCKETS);
+    return {
+      ...s,
+      number,
+      page,
+      sheet: Math.ceil(page / 2),
+      side: page % 2 ? "А" : "Б",
+      pocket: ((number - 1) % ALBUM_POCKETS) + 1,
+    };
+  });
+}
+const fold = (text) =>
+  String(text)
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[‘’`´]/g, "'")
+    .trim();
+export function searchAlbum(slots, query) {
+  const term = fold(query);
+  return term ? slots.filter((s) => fold(s.name).includes(term)) : [];
+}

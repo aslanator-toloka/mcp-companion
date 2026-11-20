@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import { boxTactics } from "./box-tactics.mjs";
 const input = process.argv[2];
 if (!input) throw Error("Supply the public Jarvis capture directory");
 const read = (name) => JSON.parse(fs.readFileSync(path.join(input, name)));
@@ -191,6 +192,7 @@ const sets = read("boxes.json")
           name: c.name,
           amount: c.amount ?? 1,
         })),
+      tactics: boxTactics(detail),
       image: old?.image || null,
       sourceUrl: "https://www.jarvis-protocol.com/box-sets/" + row.code,
       imageError: old?.imageError || null,
