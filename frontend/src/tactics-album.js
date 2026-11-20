@@ -3,6 +3,8 @@ export const ALBUM_SHEETS = 20,
   ALBUM_POCKETS = 8,
   ALBUM_PAGES = ALBUM_SHEETS * 2;
 export const GENERAL_GROUP = "Общие карты";
+const ART_HOST = "https://d15s9aja3f2wkq.cloudfront.net/card_backs/";
+export const artUrl = (art) => (art ? ART_HOST + encodeURIComponent(art) + ".png" : "");
 const characterKeys = [
   "mandatory_character",
   "mandatory_character_with_alter_ego",
@@ -41,19 +43,26 @@ export const pageLabel = (page) =>
  * @param {object[]} characters catalog rows with `affiliations`
  */
 export function buildTacticsAlbum(codes, box, card, characters) {
-  const slots = [];
-  for (const code of codes) {
+  // One pocket per distinct artwork: copies with the same picture share a slot.
+  const slots = [],
+    seen = new Set();
+  for (const code of [...codes].sort()) {
     const set = box(code);
-    for (const t of set?.tactics || [])
-      for (let i = 0; i < (t.amount || 1); i++)
-        slots.push({
-          slug: t.slug,
-          name: card(t.slug)?.name || t.name,
-          card: card(t.slug) || null,
-          box: code,
-          boxName: set.name || "",
-          artwork: t.artwork || "",
-        });
+    for (const t of set?.tactics || []) {
+      const c = card(t.slug) || null,
+        art = t.artwork || c?.cardFamily || t.slug;
+      if (seen.has(art)) continue;
+      seen.add(art);
+      slots.push({
+        slug: t.slug,
+        name: c?.name || t.name,
+        card: c,
+        box: code,
+        boxName: set.name || "",
+        artwork: t.artwork || "",
+        art: artUrl(art),
+      });
+    }
   }
   // Character cards join the affiliation that already holds most of the owner's affiliation cards.
   const weight = new Map();

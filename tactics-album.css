@@ -27,13 +27,16 @@
 .album-pocket.highlighted .album-card{box-shadow:0 0 0 3px var(--ui-warning);animation:album-flash 1.8s ease-out 1}
 @keyframes album-flash{0%,35%{transform:scale(1.03)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){.album-pocket.highlighted .album-card{animation:none}}
-.album-card{flex:1;display:flex;flex-direction:column;min-width:0;padding:10px;border:1px solid var(--ui-border);border-radius:6px;background:var(--ui-surface);overflow:hidden}
-.album-card.compact{aspect-ratio:63/88;padding:8px}
-.album-card-group{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ui-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.album-card-number{margin:auto 0 6px;font-size:clamp(38px,6vw,64px);font-weight:800;line-height:1;color:var(--ui-accent);font-variant-numeric:tabular-nums}
+.album-card{position:relative;flex:1;display:flex;flex-direction:column;min-width:0;border:1px solid var(--ui-border);border-radius:6px;background:#1b2330;overflow:hidden;color:#fff}
+.album-card.compact{aspect-ratio:63/88}
+.album-card-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.album-card-text{position:relative;margin-top:auto;display:flex;flex-direction:column;padding:28px 10px 10px;background:linear-gradient(to top,rgba(8,12,20,.92) 55%,rgba(8,12,20,0))}
+.album-card.compact .album-card-text{padding:22px 7px 7px}
+.album-card-group{position:relative;align-self:flex-start;max-width:calc(100% - 12px);margin:6px;padding:2px 6px;border-radius:4px;background:rgba(8,12,20,.78);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.album-card-number{font-size:clamp(38px,6vw,64px);font-weight:800;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);font-variant-numeric:tabular-nums}
 .album-card.compact .album-card-number{font-size:32px}
-.album-card-name{font-size:13px;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
+.album-card-name{margin-top:4px;font-size:13px;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
 .album-card.compact .album-card-name{font-size:11px}
-.album-card-meta{margin-top:4px;font-size:11px;line-height:1.3;color:var(--ui-muted);overflow-wrap:anywhere}
+.album-card-meta{margin-top:3px;font-size:11px;line-height:1.3;color:rgba(255,255,255,.75);overflow-wrap:anywhere}
 .album-note{font-size:12px;color:var(--ui-muted);margin:14px 0 0}
 @media(max-width:700px){.album-tools{position:static}.album-pockets{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:100%}.album-page{padding:12px}.album-page-head h2{font-size:20px}.album-card-number{font-size:48px}.album-results{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}}

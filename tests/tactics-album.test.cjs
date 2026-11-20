@@ -19,24 +19,29 @@ const boxes = {
   B: { name: "Box B", tactics: [{ slug: "foes-plan", name: "Foes Plan", amount: 2 }, { slug: "trick", name: "Trick", amount: 1 }, { slug: "dig-in", name: "Dig In", amount: 1, artwork: "dig-in-2" }] },
 };
 const build = (codes) => A.buildTacticsAlbum(codes, (c) => boxes[c], (s) => cards[s], characters);
-test("every printed copy gets its own number, grouped by affiliation", () => {
-  const album = build(["A", "B"]);
+test("each distinct artwork gets its own number, grouped by affiliation", () => {
+  boxes.E = { name: "Box E", tactics: [{ slug: "dig-in", name: "Dig In", amount: 1 }] };
+  const album = build(["A", "B", "E"]);
   assert.deepEqual(
     album.map((s) => [s.number, s.group, s.name, s.box]),
     [
       [1, "Asgard", "Trick", "B"],
       [2, "Spider Foes", "Foes Plan", "B"],
-      [3, "Spider Foes", "Foes Plan", "B"],
-      [4, "Spider Foes", "Carnage Rules", "A"],
-      [5, A.GENERAL_GROUP, "Dig In", "A"],
-      [6, A.GENERAL_GROUP, "Dig In", "B"],
+      [3, "Spider Foes", "Carnage Rules", "A"],
+      [4, A.GENERAL_GROUP, "Dig In", "A"],
+      [5, A.GENERAL_GROUP, "Dig In", "B"],
     ],
   );
-  assert.equal(album[5].artwork, "dig-in-2");
-  assert.equal(album[3].character, "Carnage");
+  assert.equal(album[4].artwork, "dig-in-2");
+  assert.match(album[4].art, /card_backs\/dig-in-2\.png$/);
+  assert.match(album[3].art, /card_backs\/dig-in\.png$/);
+  assert.equal(album[2].character, "Carnage");
 });
 test("pages hold eight pockets, two pages per sheet", () => {
-  boxes.C = { name: "Big", tactics: [{ slug: "dig-in", name: "Dig In", amount: 17 }] };
+  boxes.C = {
+    name: "Big",
+    tactics: Array.from({ length: 17 }, (_, i) => ({ slug: "dig-in", name: "Dig In", amount: 1, artwork: "dig-in-" + (i + 10) })),
+  };
   const album = build(["C"]);
   assert.deepEqual(
     [album[0], album[7], album[8], album[16]].map((s) => [s.page, s.sheet, s.side, s.pocket]),

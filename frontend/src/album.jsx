@@ -1,25 +1,34 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { album, library, ui, actions } from "./stores/index.js";
 import { ALBUM_POCKETS, ALBUM_SHEETS, pageLabel } from "./tactics-album.js";
 import { count } from "./common.jsx";
 function AlbumCard({ slot, compact = false }) {
+  const [failed, setFailed] = useState(false);
   return (
     <span className={"album-card" + (compact ? " compact" : "")}>
-      <span className="album-card-group">{slot.group}</span>
-      <span className="album-card-number">{slot.number}</span>
-      <span className="album-card-name">{slot.name}</span>
-      {!compact && (
-        <span className="album-card-meta">
-          {[
-            slot.character,
-            slot.box + " " + slot.boxName,
-            slot.artwork && "арт: " + slot.artwork,
-          ]
-            .filter(Boolean)
-            .join(" · ")}
-        </span>
+      {slot.art && !failed && (
+        <img
+          className="album-card-art"
+          src={slot.art}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
       )}
+      <span className="album-card-group">{slot.group}</span>
+      <span className="album-card-text">
+        <span className="album-card-number">{slot.number}</span>
+        <span className="album-card-name">{slot.name}</span>
+        {!compact && (
+          <span className="album-card-meta">
+            {[slot.character, slot.box + " " + slot.boxName]
+              .filter(Boolean)
+              .join(" · ")}
+          </span>
+        )}
+      </span>
     </span>
   );
 }
@@ -228,9 +237,9 @@ export const AlbumWorkspace = observer(function AlbumWorkspace() {
           )}
           <AlbumPage />
           <p className="album-note">
-            Номера идут по аффилиациям, затем общие карты. Одинаковые карты из
-            разных наборов занимают отдельные кармашки. Новый купленный набор
-            сдвигает номера после своих карт.
+            Номера идут по аффилиациям, затем общие карты. Одна карта с разными
+            артами занимает отдельные кармашки, копии с той же картинкой — один.
+            Новый купленный набор сдвигает номера после своих карт.
           </p>
         </>
       )}
