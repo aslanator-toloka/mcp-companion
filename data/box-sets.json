@@ -8039,7 +8039,59 @@
       "image": "assets/box-sets/mcp27.png",
       "sourceUrl": "https://www.jarvis-protocol.com/box-sets/MCP27",
       "imageError": null,
-      "tactics": []
+      "tactics": [
+        {
+          "slug": "happy-birthday-runt",
+          "name": "Happy Birthday, Runt!",
+          "amount": 1
+        },
+        {
+          "slug": "gotta-get-some-air",
+          "name": "Gotta Get Some Air",
+          "amount": 1
+        },
+        {
+          "slug": "dossier",
+          "name": "Dossier",
+          "amount": 1
+        },
+        {
+          "slug": "call-the-pack",
+          "name": "Call The Pack",
+          "amount": 1
+        },
+        {
+          "slug": "are-you-sure-you-want-to-remember",
+          "name": "Are You Sure You Want To Remember?",
+          "amount": 1
+        },
+        {
+          "slug": "implanted-memories",
+          "name": "Implanted Memories",
+          "amount": 1
+        },
+        {
+          "slug": "weapons-stash",
+          "name": "Weapons Stash",
+          "amount": 1
+        },
+        {
+          "slug": "x-ceptional-healing",
+          "name": "X-Ceptional Healing",
+          "amount": 1
+        },
+        {
+          "slug": "chimichangas",
+          "name": "Chimichangas",
+          "amount": 1
+        },
+        {
+          "slug": "yoink",
+          "name": "Yoink",
+          "amount": 1
+        }
+      ],
+      "manualTactics": true
     },
     {
       "code": "CP146",

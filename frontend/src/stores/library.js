@@ -19,6 +19,7 @@ export class LibraryStore {
     groups: [],
     hobbyProgress: {},
     albumOrder: [],
+    looseTactics: [],
   };
   owned = observable.map({}, { deep: false });
   boxOwned = observable.map({}, { deep: false });
@@ -90,10 +91,23 @@ export class LibraryStore {
       })),
       groups: (value.groups || []).map((g) => ({ ...g })),
       albumOrder: unique(value.albumOrder),
+      looseTactics: unique(value.looseTactics),
     };
   }
   get albumOrder() {
     return this.snapshot.albumOrder || [];
+  }
+  get looseTactics() {
+    return this.snapshot.looseTactics || [];
+  }
+  /** A Team Tactics card owned without its box (promo, trade). */
+  setLooseTactic(slug, include) {
+    const list = this.looseTactics;
+    if (include === list.includes(slug)) return true;
+    return this.commit({
+      ...this.snapshot,
+      looseTactics: include ? [...list, slug] : list.filter((s) => s !== slug),
+    });
   }
   /** Give new tactics album cards the next free pockets; existing numbers never change. */
   appendAlbum(keys) {

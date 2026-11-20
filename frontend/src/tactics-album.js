@@ -54,7 +54,8 @@ function namedForSearch(requirements, characters) {
   return names.filter(Boolean).join(" ");
 }
 /** Owned Team Tactics in canonical order, one entry per distinct artwork (`key`). */
-export function collectTactics(codes, box, card, characters) {
+export const LOOSE_BOX = "Вне наборов";
+export function collectTactics(codes, box, card, characters, loose = []) {
   // One pocket per distinct artwork: copies with the same picture share a slot.
   const slots = [],
     seen = new Set();
@@ -76,6 +77,24 @@ export function collectTactics(codes, box, card, characters) {
         art: artUrl(art),
       });
     }
+  }
+  // Cards the owner has without the box (promo, trades) are added by hand.
+  for (const slug of loose) {
+    const c = card(slug) || null,
+      art = c?.cardFamily || slug;
+    if (seen.has(art)) continue;
+    seen.add(art);
+    slots.push({
+      key: art,
+      slug,
+      name: c?.name || slug,
+      card: c,
+      box: "",
+      boxName: LOOSE_BOX,
+      artwork: "",
+      art: artUrl(art),
+      loose: true,
+    });
   }
   // Character cards join the affiliation that already holds most of the owner's affiliation cards.
   const weight = new Map();
@@ -162,6 +181,10 @@ const fold = (text) =>
     .replace(/[̀-ͯ]/g, "")
     .replace(/[‘’`´]/g, "'")
     .trim();
+export const matchesQuery = (text, query) => {
+  const term = fold(query);
+  return !!term && fold(text).includes(term);
+};
 export function searchAlbum(slots, query) {
   const term = fold(query);
   return term

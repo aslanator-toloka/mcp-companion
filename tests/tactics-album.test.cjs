@@ -87,3 +87,8 @@ test("search also finds cards by the characters they name", () => {
   assert.deepEqual(A.searchAlbum(album, "cletus").map((s) => s.name), ["Fan Club"]);
   assert.deepEqual(A.searchAlbum(album, "carnage").map((s) => s.name), ["Fan Club"]);
 });
+test("cards owned without a box join like any other card", () => {
+  const sorted = A.collectTactics(["A"], (c) => boxes[c], (s) => cards[s], characters, ["foes-plan", "dig-in"]);
+  const loose = sorted.filter((s) => s.loose);
+  assert.deepEqual(loose.map((s) => [s.slug, s.boxName]), [["foes-plan", A.LOOSE_BOX]]);
+});

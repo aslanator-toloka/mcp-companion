@@ -192,7 +192,10 @@ const sets = read("boxes.json")
           name: c.name,
           amount: c.amount ?? 1,
         })),
-      tactics: boxTactics(detail),
+      // Jarvis lists new boxes before their cards; keep hand-entered contents until it does.
+      ...(boxTactics(detail).length || !old?.manualTactics
+        ? { tactics: boxTactics(detail) }
+        : { tactics: old.tactics, manualTactics: true }),
       image: old?.image || null,
       sourceUrl: "https://www.jarvis-protocol.com/box-sets/" + row.code,
       imageError: old?.imageError || null,

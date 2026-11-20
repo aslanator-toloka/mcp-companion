@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { album, library, ui, actions } from "./stores/index.js";
-import { ALBUM_POCKETS, ALBUM_SHEETS, pageLabel } from "./tactics-album.js";
+import {
+  ALBUM_POCKETS,
+  ALBUM_SHEETS,
+  artUrl,
+  pageLabel,
+} from "./tactics-album.js";
 import { count } from "./common.jsx";
 function AlbumCard({ slot, compact = false }) {
   const [failed, setFailed] = useState(false);
@@ -22,7 +27,7 @@ function AlbumCard({ slot, compact = false }) {
         <span className="album-card-name">{slot.name}</span>
         {!compact && (
           <span className="album-card-meta">
-            {[slot.character, slot.box + " " + slot.boxName]
+            {[slot.character, (slot.box + " " + slot.boxName).trim()]
               .filter(Boolean)
               .join(" · ")}
           </span>
@@ -59,27 +64,58 @@ const AlbumSearch = observer(function AlbumSearch() {
         role="list"
         aria-label="Найденные карты"
       >
-        {results.length ? (
-          results.map((slot) => (
-            <button
-              key={slot.number}
-              type="button"
-              role="listitem"
-              className="album-hit"
-              data-album-hit={slot.number}
-              onClick={() => album.jump(slot.number)}
-            >
-              <AlbumCard slot={slot} compact />
-              <span className="album-hit-where">
-                <b>№ {slot.number}</b>
-                стр. {slot.page} · {pageLabel(slot.page)}
-              </span>
-            </button>
-          ))
-        ) : (
+        {results.map((slot) => (
+          <button
+            key={slot.number}
+            type="button"
+            role="listitem"
+            className="album-hit"
+            data-album-hit={slot.number}
+            onClick={() => album.jump(slot.number)}
+          >
+            <AlbumCard slot={slot} compact />
+            <span className="album-hit-where">
+              <b>№ {slot.number}</b>
+              стр. {slot.page} · {pageLabel(slot.page)}
+            </span>
+          </button>
+        ))}
+        {!results.length && (
           <p className="album-empty">
-            Нет карт с «{album.query.trim()}» в названии
+            В альбоме нет карт с «{album.query.trim()}»
           </p>
+        )}
+        {album.addable.length > 0 && (
+          <>
+            <p className="album-add-title">
+              Есть карта без набора? Добавьте её — она встанет в конец альбома.
+            </p>
+            {album.addable.map((card) => (
+              <button
+                key={card.slug}
+                type="button"
+                role="listitem"
+                className="album-hit add"
+                data-album-add={card.slug}
+                onClick={() => {
+                  if (!album.addLoose(card.slug) && library.error)
+                    actions.notify(library.error);
+                }}
+              >
+                <AlbumCard
+                  slot={{
+                    name: card.name,
+                    number: "+",
+                    art: artUrl(card.cardFamily || card.slug),
+                  }}
+                  compact
+                />
+                <span className="album-hit-where">
+                  <b>Добавить</b>в альбом
+                </span>
+              </button>
+            ))}
+          </>
         )}
       </div>
     </div>
@@ -176,6 +212,7 @@ const AlbumPage = observer(function AlbumPage() {
               type="button"
               className={
                 "album-pocket" +
+                (slot.loose ? " loose" : "") +
                 (album.highlight === slot.number ? " highlighted" : "")
               }
               data-album-number={slot.number}
@@ -184,6 +221,27 @@ const AlbumPage = observer(function AlbumPage() {
               onClick={() => actions.showGameCard("tactics", slot.slug)}
             >
               <AlbumCard slot={slot} />
+              {slot.loose && (
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="album-remove"
+                  aria-label={"Убрать из альбома: " + slot.name}
+                  title="Убрать карту без набора"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    library.setLooseTactic(slot.slug, false);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key !== "Enter" && e.key !== " ") return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    library.setLooseTactic(slot.slug, false);
+                  }}
+                >
+                  ×
+                </span>
+              )}
             </button>
           ) : (
             <span key={i} className="album-pocket empty">

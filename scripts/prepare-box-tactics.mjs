@@ -13,7 +13,12 @@ for (const set of data.sets) {
     fs.readFileSync(path.join(capture, "boxes", set.code + ".json")),
   );
   if (detail.code !== set.code) throw Error("Invalid box " + set.code);
-  set.tactics = boxTactics(detail);
+  const tactics = boxTactics(detail);
+  // Keep hand-entered contents for boxes Jarvis has not filled in yet.
+  if (tactics.length || !set.manualTactics) {
+    set.tactics = tactics;
+    delete set.manualTactics;
+  }
 }
 fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
 console.log(
