@@ -57,3 +57,33 @@ test("search matches names case-insensitively and ignores curly quotes", () => {
   assert.deepEqual(A.searchAlbum(album, "giant's").map((s) => s.name), ["Giant‘s Blood"]);
   assert.deepEqual(A.searchAlbum(album, "  "), []);
 });
+test("saved order keeps numbers; new cards go to the end, missing ones leave holes", () => {
+  const sorted = (codes) => A.collectTactics(codes, (c) => boxes[c], (s) => cards[s], characters);
+  const first = A.numberAlbum(sorted(["B"]));
+  assert.deepEqual(first.added, first.order);
+  const later = A.numberAlbum(sorted(["A", "B"]), first.order);
+  assert.deepEqual(
+    later.slots.map((s) => [s.number, s.name, s.box]),
+    [
+      [1, "Trick", "B"],
+      [2, "Foes Plan", "B"],
+      [3, "Dig In", "B"],
+      [4, "Carnage Rules", "A"],
+      [5, "Dig In", "A"],
+    ],
+  );
+  assert.deepEqual(later.added, ["carnage-rules", "dig-in"]);
+  const without = A.numberAlbum(sorted(["A"]), later.order);
+  assert.deepEqual(without.slots.map((s) => s.number), [4, 5]);
+  assert.deepEqual(without.added, []);
+});
+test("search also finds cards by the characters they name", () => {
+  cards["fan"] = {
+    name: "Fan Club",
+    requirementsItems: { mandatory_character_with_alter_ego: ["carnage|Cletus Kasady"] },
+  };
+  boxes.F = { name: "F", tactics: [{ slug: "fan", name: "Fan Club", amount: 1 }] };
+  const album = build(["F"]);
+  assert.deepEqual(A.searchAlbum(album, "cletus").map((s) => s.name), ["Fan Club"]);
+  assert.deepEqual(A.searchAlbum(album, "carnage").map((s) => s.name), ["Fan Club"]);
+});

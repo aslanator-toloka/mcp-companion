@@ -1,7 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import {
   ALBUM_PAGES,
-  buildTacticsAlbum,
+  ALBUM_POCKETS,
+  collectTactics,
+  numberAlbum,
   searchAlbum,
 } from "../tactics-album.js";
 export class AlbumStore {
@@ -19,15 +21,26 @@ export class AlbumStore {
       { autoBind: true },
     );
   }
-  get slots() {
+  get layout() {
     // cardIndex is not observable; `cards` is replaced together with it on load.
-    if (!this.rosters.cards.tactics.length) return [];
-    return buildTacticsAlbum(
-      [...this.library.bought.keys()],
-      (code) => this.purchases.byCode.get(code),
-      (slug) => this.rosters.card("tactics", slug),
-      this.catalog.rows,
+    if (!this.rosters.cards.tactics.length)
+      return { slots: [], order: this.library.albumOrder, added: [] };
+    return numberAlbum(
+      collectTactics(
+        [...this.library.bought.keys()],
+        (code) => this.purchases.byCode.get(code),
+        (slug) => this.rosters.card("tactics", slug),
+        this.catalog.rows,
+      ),
+      this.library.albumOrder,
     );
+  }
+  get slots() {
+    return this.layout.slots;
+  }
+  /** Cards that have no saved pocket yet; bootstrap persists them at the end. */
+  get added() {
+    return this.layout.added;
   }
   get pageSlots() {
     return this.slots.filter((s) => s.page === this.page);
@@ -36,7 +49,7 @@ export class AlbumStore {
     return searchAlbum(this.slots, this.query);
   }
   get usedPages() {
-    return this.slots.length ? this.slots[this.slots.length - 1].page : 0;
+    return Math.ceil(this.layout.order.length / ALBUM_POCKETS);
   }
   get lastPage() {
     return Math.max(ALBUM_PAGES, this.usedPages);

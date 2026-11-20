@@ -41,7 +41,7 @@ const AlbumSearch = observer(function AlbumSearch() {
         <input
           id="album-search"
           type="search"
-          placeholder="Название карты тактики…"
+          placeholder="Название карты или персонаж…"
           autoComplete="off"
           value={album.query}
           aria-controls="album-results"
@@ -236,9 +236,9 @@ export const AlbumWorkspace = observer(function AlbumWorkspace() {
           )}
           <AlbumPage />
           <p className="album-note">
-            Номера идут по аффилиациям, затем общие карты. Одна карта с разными
-            артами занимает отдельные кармашки, копии с той же картинкой — один.
-            Новый купленный набор сдвигает номера после своих карт.
+            Номера закреплены: карты из новых наборов получают следующие номера в
+            конце альбома. Одна карта с разными артами занимает отдельные
+            кармашки, копии с той же картинкой — один.
           </p>
         </>
       )}

@@ -421,6 +421,15 @@ export async function initialize() {
       album,
       ui,
     });
+    // Freeze album pockets: cards seen for the first time get the next free numbers.
+    reaction(
+      () => (ui.ready ? album.added : []),
+      (keys) => {
+        if (keys.length && !library.appendAlbum(keys) && library.error)
+          ui.notify(library.error);
+      },
+      { fireImmediately: true },
+    );
     navigation = new BrowserNavigation({ window, ...routes });
     navigation.start();
     reaction(

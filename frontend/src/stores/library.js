@@ -18,6 +18,7 @@ export class LibraryStore {
     rosters: [],
     groups: [],
     hobbyProgress: {},
+    albumOrder: [],
   };
   owned = observable.map({}, { deep: false });
   boxOwned = observable.map({}, { deep: false });
@@ -88,7 +89,21 @@ export class LibraryStore {
         groups: [...(r.groups || [])],
       })),
       groups: (value.groups || []).map((g) => ({ ...g })),
+      albumOrder: unique(value.albumOrder),
     };
+  }
+  get albumOrder() {
+    return this.snapshot.albumOrder || [];
+  }
+  /** Give new tactics album cards the next free pockets; existing numbers never change. */
+  appendAlbum(keys) {
+    const known = new Set(this.albumOrder),
+      added = keys.filter((k) => !known.has(k));
+    if (!added.length) return true;
+    return this.commit({
+      ...this.snapshot,
+      albumOrder: [...this.albumOrder, ...added],
+    });
   }
   blockWrites() {
     this.blocked = true;

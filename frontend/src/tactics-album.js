@@ -42,7 +42,19 @@ export const pageLabel = (page) =>
  * @param {(slug: string) => object|undefined} card Team Tactics card by printing slug
  * @param {object[]} characters catalog rows with `affiliations`
  */
-export function buildTacticsAlbum(codes, box, card, characters) {
+// Characters a card names (for search): catalog names of required slugs plus alter egos.
+function namedForSearch(requirements, characters) {
+  const names = [];
+  for (const values of Object.values(requirements || {}))
+    for (const value of values || []) {
+      const [slug, alterEgo] = String(slugOf(value) || "").split("|");
+      const match = characters.find((c) => c.slug === slug);
+      names.push(match ? match.name : slug, alterEgo || "");
+    }
+  return names.filter(Boolean).join(" ");
+}
+/** Owned Team Tactics in canonical order, one entry per distinct artwork (`key`). */
+export function collectTactics(codes, box, card, characters) {
   // One pocket per distinct artwork: copies with the same picture share a slot.
   const slots = [],
     seen = new Set();
@@ -54,6 +66,7 @@ export function buildTacticsAlbum(codes, box, card, characters) {
       if (seen.has(art)) continue;
       seen.add(art);
       slots.push({
+        key: art,
         slug: t.slug,
         name: c?.name || t.name,
         card: c,
@@ -105,18 +118,42 @@ export function buildTacticsAlbum(codes, box, card, characters) {
       a.box.localeCompare(b.box, "en") ||
       a.artwork.localeCompare(b.artwork, "en"),
   );
-  return slots.map(({ rank, ...s }, i) => {
-    const number = i + 1,
-      page = Math.ceil(number / ALBUM_POCKETS);
-    return {
-      ...s,
-      number,
-      page,
-      sheet: Math.ceil(page / 2),
-      side: page % 2 ? "А" : "Б",
-      pocket: ((number - 1) % ALBUM_POCKETS) + 1,
-    };
-  });
+  return slots.map(({ rank, ...s }) => ({
+    ...s,
+    searchText: [
+      s.name,
+      s.character,
+      namedForSearch(s.card?.requirementsItems, characters),
+    ].join(" "),
+  }));
+}
+/**
+ * Numbers follow the saved order; cards not in it yet go to the end (in canonical order),
+ * so existing pockets never move. Saved keys that are no longer owned leave empty pockets.
+ */
+export function numberAlbum(sorted, order = []) {
+  const known = new Set(order),
+    added = sorted.map((s) => s.key).filter((k) => !known.has(k)),
+    full = [...order, ...added],
+    index = new Map(full.map((k, i) => [k, i + 1]));
+  const slots = sorted
+    .map((s) => {
+      const number = index.get(s.key),
+        page = Math.ceil(number / ALBUM_POCKETS);
+      return {
+        ...s,
+        number,
+        page,
+        sheet: Math.ceil(page / 2),
+        side: page % 2 ? "А" : "Б",
+        pocket: ((number - 1) % ALBUM_POCKETS) + 1,
+      };
+    })
+    .sort((a, b) => a.number - b.number);
+  return { slots, order: full, added };
+}
+export function buildTacticsAlbum(codes, box, card, characters, order = []) {
+  return numberAlbum(collectTactics(codes, box, card, characters), order).slots;
 }
 const fold = (text) =>
   String(text)
@@ -127,5 +164,7 @@ const fold = (text) =>
     .trim();
 export function searchAlbum(slots, query) {
   const term = fold(query);
-  return term ? slots.filter((s) => fold(s.name).includes(term)) : [];
+  return term
+    ? slots.filter((s) => fold(s.searchText || s.name).includes(term))
+    : [];
 }

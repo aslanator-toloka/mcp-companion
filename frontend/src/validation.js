@@ -67,6 +67,15 @@ export function validateLibrary(data, characters) {
       throw Error("Не удалось прочитать запланированные покупки.");
   }
   if (
+    data.albumOrder !== undefined &&
+    (!Array.isArray(data.albumOrder) ||
+      data.albumOrder.length > 5000 ||
+      data.albumOrder.some(
+        (key) => typeof key !== "string" || !/^[a-z0-9-]{1,120}$/.test(key),
+      ))
+  )
+    throw Error("Не удалось прочитать порядок альбома тактик.");
+  if (
     data.manuallyOwned !== undefined &&
     (!Array.isArray(data.manuallyOwned) ||
       data.manuallyOwned.length > 2000 ||
