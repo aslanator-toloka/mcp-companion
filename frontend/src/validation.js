@@ -67,24 +67,6 @@ export function validateLibrary(data, characters) {
       throw Error("Не удалось прочитать запланированные покупки.");
   }
   if (
-    data.albumOrder !== undefined &&
-    (!Array.isArray(data.albumOrder) ||
-      data.albumOrder.length > 5000 ||
-      data.albumOrder.some(
-        (key) => typeof key !== "string" || !/^[a-z0-9-]{1,120}$/.test(key),
-      ))
-  )
-    throw Error("Не удалось прочитать порядок альбома тактик.");
-  if (
-    data.looseTactics !== undefined &&
-    (!Array.isArray(data.looseTactics) ||
-      data.looseTactics.length > 2000 ||
-      data.looseTactics.some(
-        (slug) => typeof slug !== "string" || !/^[a-z0-9-]{1,120}$/.test(slug),
-      ))
-  )
-    throw Error("Не удалось прочитать карты тактик вне наборов.");
-  if (
     data.manuallyOwned !== undefined &&
     (!Array.isArray(data.manuallyOwned) ||
       data.manuallyOwned.length > 2000 ||

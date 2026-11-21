@@ -320,6 +320,11 @@ export async function initialize() {
         index.set(kind + ":" + c.slug, latest.get(c.cardFamily || c.name) || c);
     }
     await loadBoxes();
+    try {
+      album.load(await json("data/tactics-album.json", { cache: "no-cache" }));
+    } catch (e) {
+      album.load(null, e.message);
+    }
     library.configure({
       boxes: purchases.byCode,
       characters: catalog.byId,
@@ -421,15 +426,6 @@ export async function initialize() {
       album,
       ui,
     });
-    // Freeze album pockets: cards seen for the first time get the next free numbers.
-    reaction(
-      () => (ui.ready ? album.added : []),
-      (keys) => {
-        if (keys.length && !library.appendAlbum(keys) && library.error)
-          ui.notify(library.error);
-      },
-      { fireImmediately: true },
-    );
     navigation = new BrowserNavigation({ window, ...routes });
     navigation.start();
     reaction(

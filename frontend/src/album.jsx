@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { album, library, ui, actions } from "./stores/index.js";
+import { album, ui, actions } from "./stores/index.js";
 import {
   ALBUM_POCKETS,
   ALBUM_SHEETS,
-  artUrl,
   pageLabel,
 } from "./tactics-album.js";
 import { count } from "./common.jsx";
@@ -84,38 +83,6 @@ const AlbumSearch = observer(function AlbumSearch() {
           <p className="album-empty">
             В альбоме нет карт с «{album.query.trim()}»
           </p>
-        )}
-        {album.addable.length > 0 && (
-          <>
-            <p className="album-add-title">
-              Есть карта без набора? Добавьте её — она встанет в конец альбома.
-            </p>
-            {album.addable.map((card) => (
-              <button
-                key={card.slug}
-                type="button"
-                role="listitem"
-                className="album-hit add"
-                data-album-add={card.slug}
-                onClick={() => {
-                  if (!album.addLoose(card.slug) && library.error)
-                    actions.notify(library.error);
-                }}
-              >
-                <AlbumCard
-                  slot={{
-                    name: card.name,
-                    number: "+",
-                    art: artUrl(card.cardFamily || card.slug),
-                  }}
-                  compact
-                />
-                <span className="album-hit-where">
-                  <b>Добавить</b>в альбом
-                </span>
-              </button>
-            ))}
-          </>
         )}
       </div>
     </div>
@@ -221,27 +188,6 @@ const AlbumPage = observer(function AlbumPage() {
               onClick={() => actions.showGameCard("tactics", slot.slug)}
             >
               <AlbumCard slot={slot} />
-              {slot.loose && (
-                <span
-                  role="button"
-                  tabIndex={0}
-                  className="album-remove"
-                  aria-label={"Убрать из альбома: " + slot.name}
-                  title="Убрать карту без набора"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    library.setLooseTactic(slot.slug, false);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key !== "Enter" && e.key !== " ") return;
-                    e.preventDefault();
-                    e.stopPropagation();
-                    library.setLooseTactic(slot.slug, false);
-                  }}
-                >
-                  ×
-                </span>
-              )}
             </button>
           ) : (
             <span key={i} className="album-pocket empty">
@@ -263,7 +209,7 @@ export const AlbumWorkspace = observer(function AlbumWorkspace() {
           <span className="eyebrow">11 / Альбом</span>
           <h1>Альбом тактик</h1>
           <p>
-            Карты тактик из купленных наборов, по номерам в альбоме:{" "}
+            Ваш альбом карт тактик по номерам:{" "}
             {ALBUM_SHEETS} двусторонних листов по {ALBUM_POCKETS} кармашков.
           </p>
         </div>
@@ -272,13 +218,10 @@ export const AlbumWorkspace = observer(function AlbumWorkspace() {
           {ALBUM_SHEETS * 2} стр.
         </span>
       </div>
-      {!ui.ready ? null : !library.bought.size ? (
+      {!ui.ready ? null : album.error ? (
         <div className="empty">
-          <h3>Нет купленных наборов</h3>
-          <p>
-            Отметьте наборы купленными в «Запланированных покупках» — их карты
-            тактик появятся здесь.
-          </p>
+          <h3>Альбом не загрузился</h3>
+          <p>{album.error}</p>
         </div>
       ) : (
         <>
@@ -294,9 +237,9 @@ export const AlbumWorkspace = observer(function AlbumWorkspace() {
           )}
           <AlbumPage />
           <p className="album-note">
-            Номера закреплены: карты из новых наборов получают следующие номера в
-            конце альбома. Одна карта с разными артами занимает отдельные
-            кармашки, копии с той же картинкой — один.
+            Номера закреплены: новые карты всегда встают в конец альбома. Одна
+            карта с разными артами занимает отдельные кармашки, копии с той же
+            картинкой — один.
           </p>
         </>
       )}
